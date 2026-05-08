@@ -9,6 +9,13 @@ updated: 2026-05-08
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-05-08] update | AGENTS.md 락 대상 명시 항목 제거
+
+- `### 수정 금지 문서 (read-only)` 섹션에서 하드코딩된 "현재 락 대상" 두 항목 삭제
+- 사유: 여러 프로젝트에서 재사용되는 지침 문서이므로 특정 파일명 명시는 부적절
+- 대체: 락 대상은 `03_References/_locked/` 디렉토리의 실제 파일 목록을 그때그때 확인하라는 안내로 일반화
+- 수정 파일: `AGENTS.md`
+
 ## [2026-05-08] update | git 도입 + CLAUDE.md → AGENTS.md 이전 + Codex 검수 기준 신설
 
 - vault를 git 저장소로 초기화, 원격 `https://github.com/company-cellbig/kocca30.git` 연결
