@@ -9,6 +9,15 @@ updated: 2026-05-08
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-05-08] update | CLAUDE.md stub 삭제 (AGENTS.md 자동 로드 검증)
+
+- `CLAUDE.md` (`@AGENTS.md` import 1줄 stub) 제거 — Claude Code 최신 버전이 AGENTS.md를 직접 자동 로드하는지 검증
+- `AGENTS.md` 디렉토리 구조 도식에서 `CLAUDE.md` 라인 삭제, 주석을 "Claude Code, Codex 공용 자동 로드"로 갱신
+- `00_Index/MOC.md` 관련 문서에서 CLAUDE stub 항목 제거
+- 검증 방법: 다음 새 Claude Code 세션 시작 시 시스템 컨텍스트에 AGENTS.md 본문이 자동 인라인되는지 확인. 자동 로드 안 되면 `git revert HEAD`로 stub 복구
+- 삭제 파일: `CLAUDE.md`
+- 수정 파일: `AGENTS.md`, `00_Index/MOC.md`
+
 ## [2026-05-08] update | AGENTS.md 락 대상 명시 항목 제거
 
 - `### 수정 금지 문서 (read-only)` 섹션에서 하드코딩된 "현재 락 대상" 두 항목 삭제

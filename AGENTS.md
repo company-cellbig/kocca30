@@ -15,8 +15,7 @@ LLM 에이전트(Claude Code 작성, Codex 검수)가 직접 마크다운 문서
 
 ```
 /                     # vault root
-├── AGENTS.md         # 이 파일 — 에이전트 작업 지침 (Claude/Codex 공용)
-├── CLAUDE.md         # AGENTS.md 호환용 stub
+├── AGENTS.md         # 이 파일 — 에이전트 작업 지침 (Claude Code, Codex 공용 자동 로드)
 ├── 00_Index/         # 목차, 지도 문서 (MOC: Map of Content)
 ├── 01_Concepts/      # 개념 정리 (정의, 원리, 이론)
 ├── 02_HowTo/         # 실용 가이드, 레시피, 튜토리얼

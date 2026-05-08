@@ -28,4 +28,3 @@ updated: 2026-05-08
 
 ## 관련 문서
 - [[AGENTS|에이전트 작업 지침]] — Claude Code 작성, Codex 검수 워크플로우와 검수 기준 정의
-- [[CLAUDE|CLAUDE.md (stub)]] — Claude Code 호환용 stub, 본문은 AGENTS.md로 통합됨
