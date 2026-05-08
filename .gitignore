@@ -1,0 +1,27 @@
+# Claude Code — 로컬 사용자 설정
+.claude/settings.local.json
+
+# Obsidian — 사용자별 워크스페이스 상태는 추적하지 않음
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace.json.tmp.*
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# Obsidian 휴지통
+.trash/
+
+# OS / 편집기 임시파일
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# 변환 캐시 (PDF → PNG/텍스트 등 임시 산출물)
+*.tmp
+*.bak
