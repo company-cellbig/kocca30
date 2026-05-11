@@ -9,13 +9,21 @@ updated: 2026-05-11
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-05-11] review | C안 자기검수 결과 반영 — 포커스 텍스트 자체 결함 정정
+
+- 실증 비교 결과: (a) 기본 호출 1 finding [medium] vs (b) 포커스 첨부 호출 3 findings [high/medium/low]. 포커스 첨부 시 catch율 33% → 100%, 저장소 고유 규약 위반(파일명 underscore, 가운뎃점) 발견은 (b) 전용
+- 정정 1 [high → 해소]: `AGENTS.md` §검수 호출 방식의 호출 예시가 placeholder(`<[[codex_검수_포커스]] §표준 포커스 텍스트 블록 전체>`)였던 것을 실제 P1~P5 블록 전문으로 교체 — 복사-붙여넣기로 동작
+- 정정 2 [medium → 해소]: `02_HowTo/codex_검수_포커스.md` → `02_HowTo/codex 검수 포커스.md` (git mv). AGENTS.md L31 "공백 대신 언더스코어 사용 금지" 위반 해소. MOC, log 내 wikilink/경로 표기 갱신
+- 정정 3 [low → 해소]: 포커스 텍스트 P1~P4 헤더 및 본문의 `·` → `/`로 교체 (가운뎃점 금지 자가모순 해소). 단 L46의 `` `·` ``는 문자 자체 인용이므로 inline code로 유지 (AGENTS.md L73과 동일 패턴)
+- 결론: 자기검수 회로 작동 확인. 포커스 첨부 워크플로우가 자기 산출물 결함을 실제로 잡아냄
+
 ## [2026-05-11] create | Codex 검수 포커스 텍스트 표준화 (C안)
 
 - 배경: 외부 Claude 세션 피드백("검토 에이전트에 비판적 리뷰어 시스템 프롬프트를 명시적으로 줘야 catch율이 올라감") 반영
 - 진단: `/codex:adversarial-review`의 기본 attack surface가 코드 중심(auth/race/migration)으로 하드코딩 → 마크다운 저장소에는 부적합. 직전 commit(`4e28ed8`)에서 _locked 변경은 잡았으나 frontmatter `updated:` 누락 등 문서 규약 위반 미검출
-- 작성: `02_HowTo/codex_검수_포커스.md` 신규 — 5층 우선순위(P1 사실 오류 → P5 위키 정합성) 포커스 텍스트 정의
+- 작성: `02_HowTo/codex 검수 포커스.md` 신규 — 5층 우선순위(P1 사실 오류 → P5 위키 정합성) 포커스 텍스트 정의
 - 갱신: `AGENTS.md` §검수 호출 방식 — 모든 검수 호출에 포커스 텍스트 첨부 의무화. 호출 예시를 포커스 템플릿 참조 형태로 갱신
-- 갱신: `00_Index/MOC.md` 가이드 섹션에 `[[codex_검수_포커스]]` 등록, updated 갱신
+- 갱신: `00_Index/MOC.md` 가이드 섹션에 `[[codex 검수 포커스]]` 등록, updated 갱신
 - 정정: 로드맵 3종(`로드맵 전체`, `1년차`, `2년차`) frontmatter `updated: 2026-04-27` → `2026-05-11` (직전 commit `4e28ed8`에서 누락된 AGENTS.md L122 규칙 준수)
 - 후속: 동일 diff에 (a) 기본 호출 vs (b) 포커스 첨부 호출의 catch율 비교 실증 예정. 결과는 별도 로그 항목으로 기록
 
