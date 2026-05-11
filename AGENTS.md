@@ -210,10 +210,24 @@ PDF 자료(RFP, 보고서, 논문 등)를 분석할 때는 다음 순서로 처�
 - 최신 항목이 맨 위에 위치하는가
 - `## [YYYY-MM-DD] {유형} | {주제}` 형식 준수
 
-### 검수 호출 예시
+### 검수 호출 방식
+
+**모든 `/codex:adversarial-review` 호출 시 표준 포커스 텍스트를 인자로 첨부한다.** 코드 중심 attack surface로 하드코딩된 기본 프롬프트만으로는 문서 결함을 충분히 잡지 못함.
+
+- 표준 포커스 텍스트: [[codex_검수_포커스]] §표준 포커스 텍스트 블록을 그대로 복사하여 인자로 첨부
+- 특정 우선순위만 집중하려면 해당 `[P*]` 블록만 발췌 첨부 가능
+- 신규 결함 유형이 반복 발견되면 포커스 텍스트에 점검 항목 추가 (점진 보강)
+
+호출 예시:
 
 ```
-/codex:adversarial-review --background CLAUDE/AGENTS.md "Codex 검수 기준 (lint checklist)" 6개 항목 전수 점검
+/codex:adversarial-review --background <[[codex_검수_포커스]] §표준 포커스 텍스트 블록 전체>
+```
+
+또는 특정 우선순위만:
+
+```
+/codex:adversarial-review --background <[P1 사실 오류·출처 미스매치] 블록만>
 ```
 
 검수 결과 반영은 `review` 작업유형으로 별도 커밋한다.

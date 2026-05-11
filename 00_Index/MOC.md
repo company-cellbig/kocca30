@@ -2,7 +2,7 @@
 title: MOC (Map of Content)
 tags: [index, moc]
 created: 2026-04-27
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # MOC — Map of Content
@@ -13,7 +13,7 @@ updated: 2026-05-08
 - (아직 없음)
 
 ## 가이드 (02_HowTo)
-- (아직 없음)
+- [[codex_검수_포커스]] — `/codex:adversarial-review` 호출용 표준 비판적 검수 포커스 텍스트
 
 ## 참고자료 (03_References)
 - (아직 없음)
