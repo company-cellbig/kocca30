@@ -9,6 +9,23 @@ updated: 2026-05-11
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-05-11] create | DOCX 변환 파이프라인 구축
+
+- 목적: HWPX 제안서 등 문서를 AI 에이전트가 후속 작업에서 환각 없이 인용 가능한 MD 형태로 변환하는 표준 절차
+- 입력 경로: 사용자가 한컴에서 HWPX → DOCX로 직접 저장 (Pandoc DOCX 처리가 HWPX보다 안정적)
+- 컨벤션 확장: `AGENTS.md` 디렉토리 구조에 `_sources/`, `converted/`, `scripts/` 추가. 수정 금지 규칙을 `_xxx/` 접두 폴더 일반 패턴으로 갱신 (기존 `_locked/` 단일 폴더 → `_locked/` + `_sources/` + 향후 추가될 `_archive/` 등에 자동 적용)
+- 신규 파일:
+  - `scripts/import-doc.mjs` — Node.js 변환 스크립트. Pandoc 자동 탐색(PATH → env → winget → 일반 경로), DOCX → MD + figures/ + frontmatter + 검수 큐 사이드카
+  - `.claude/commands/import-doc.md` — 슬래시 커맨드 정의. 스크립트 호출 + 결과 사용자 안내 + MOC/log 자동 갱신 절차
+  - `02_HowTo/docx 변환 파이프라인.md` — 사용 가이드. 표 fallback 정책(4단), 이미지 처리 정책(Vision OFF 기본값), 환각 방지 원칙, 트러블슈팅
+- 스캐폴딩: `03_References/_sources/.gitkeep`, `03_References/converted/.gitkeep`
+- 정책 핵심:
+  - 텍스트(셀·본문·캡션)는 충실 전사, 시각(도표·차트)은 파일 보존만, 자동 해석 금지
+  - 변환물(`converted/`)은 정본 아님. 인용은 `_sources/` 원본 또는 `_locked/` 정본 기준
+  - 검수 큐 사이드카 도입으로 사람 검수 게이트 명시화
+- 메모리 반영: `reference_pandoc_path.md` 등록 (winget 설치 경로, PATH fallback용)
+- 다음 단계: 실제 DOCX로 end-to-end 테스트 → 표 fallback 정밀화 (V2)
+
 ## [2026-05-11] review | C안 자기검수 결과 반영 — 포커스 텍스트 자체 결함 정정
 
 - 실증 비교 결과: (a) 기본 호출 1 finding [medium] vs (b) 포커스 첨부 호출 3 findings [high/medium/low]. 포커스 첨부 시 catch율 33% → 100%, 저장소 고유 규약 위반(파일명 underscore, 가운뎃점) 발견은 (b) 전용

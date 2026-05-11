@@ -14,6 +14,7 @@ updated: 2026-05-11
 
 ## 가이드 (02_HowTo)
 - [[codex 검수 포커스]] — `/codex:adversarial-review` 호출용 표준 비판적 검수 포커스 텍스트
+- [[docx 변환 파이프라인]] — HWPX/DOCX → MD 변환 표준 절차 (`/import-doc` 슬래시 커맨드 + Pandoc 기반)
 
 ## 참고자료 (03_References)
 - (아직 없음)
