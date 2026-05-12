@@ -7,6 +7,14 @@
 .obsidian/workspace.json.tmp.*
 .obsidian/cache
 .obsidian/plugins/*/data.json
+.obsidian/graph.json
+
+# Python 캐시
+__pycache__/
+*.pyc
+
+# 한컴 원본 — GitHub 100MB 제한 초과 가능성 (외부 보관)
+*.hwpx
 
 # Obsidian 휴지통
 .trash/
