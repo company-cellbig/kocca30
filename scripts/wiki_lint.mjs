@@ -2,10 +2,17 @@
 // wiki_lint.mjs - LLM Wiki 정합성 자동 검증
 // 사용법: node scripts/wiki_lint.mjs [--json]
 //
-// 검증 항목 (v1):
-//   1. 깨진 wikilink — [[파일명]] 또는 [[파일명#anchor]]의 파일이 실재하는지
+// 검증 항목 (v2):
+//   1. 깨진 wikilink — [[파일명]]의 대상 파일이 실재하는지
+//      severity: warning (CONVENTIONS §3.마 "링크 대상 문서가 아직 없어도 괜찮음 — 나중에 생성" 허용)
 //   2. wikilink anchor 정합 — [[파일#anchor]]의 anchor가 헤딩 텍스트와 일치하는지
+//      severity: error (대상 파일 존재인데 anchor 매칭 안 됨 — 명백한 stale)
 //   3. 가운뎃점(·) 위배 — 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS §3.라 위배)
+//      severity: error
+//
+// exit code:
+//   - 0: error 0건 (warning은 표시만 하고 통과)
+//   - 1: error 1건 이상
 //
 // 검증 대상 외 (자동 검증의 본질적 한계):
 //   - 본문 § 참조 stale: 자연어 본문에 § 표시가 녹아있어 라벨 경계 정확 검출이 NLP 수준
@@ -188,9 +195,10 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
       if (!fileIndex.has(link.target)) {
         findings.push({
           type: 'broken_wikilink',
+          severity: 'warning',
           file: relPath,
           line: link.line,
-          message: `[[${link.target}]] — 대상 파일 없음`,
+          message: `[[${link.target}]] — 대상 파일 없음 (미작성 stub link로 간주)`,
         });
       }
     }
@@ -221,6 +229,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
       if (!matched) {
         findings.push({
           type: 'broken_anchor',
+          severity: 'error',
           file: relPath,
           line: link.line,
           message: `[[${link.target}#${link.anchor}]] — anchor가 ${link.target} 헤딩 텍스트와 매칭 안 됨`,
@@ -251,6 +260,7 @@ function checkGawundeotjeom(allMdFiles) {
       if (lineNoCode.includes('·')) {
         findings.push({
           type: 'gawundeotjeom',
+          severity: 'error',
           file: relPath,
           line: i + 1,
           message: `가운뎃점 \`·\` 사용 — CONVENTIONS §3.라 위배 (쉼표 또는 슬래시로 대체)`,
@@ -269,26 +279,30 @@ function main() {
     ...checkWikilinkAnchors(allMdFiles, fileIndex),
     ...checkGawundeotjeom(allMdFiles),
   ];
+  const errors = findings.filter(f => f.severity === 'error');
+  const warnings = findings.filter(f => f.severity === 'warning');
   if (JSON_OUT) {
     console.log(JSON.stringify({
-      ok: findings.length === 0,
-      count: findings.length,
+      ok: errors.length === 0,
+      errorCount: errors.length,
+      warningCount: warnings.length,
       scanned: allMdFiles.length,
       findings,
     }, null, 2));
   } else {
-    console.log(`Wiki lint v1 — ${allMdFiles.length}개 .md 스캔`);
+    console.log(`Wiki lint v2 — ${allMdFiles.length}개 .md 스캔`);
     if (findings.length === 0) {
       console.log('✓ 발견 0건');
     } else {
-      console.log(`✗ 발견 ${findings.length}건:\n`);
+      console.log(`✗ error ${errors.length}건 / warning ${warnings.length}건\n`);
       const byType = {};
       for (const f of findings) {
         byType[f.type] = byType[f.type] || [];
         byType[f.type].push(f);
       }
       for (const type of Object.keys(byType)) {
-        console.log(`[${type}] ${byType[type].length}건`);
+        const sev = byType[type][0].severity;
+        console.log(`[${type}] (${sev}) ${byType[type].length}건`);
         for (const f of byType[type]) {
           console.log(`  ${f.file}:${f.line} — ${f.message}`);
         }
@@ -296,7 +310,7 @@ function main() {
       }
     }
   }
-  process.exit(findings.length === 0 ? 0 : 1);
+  process.exit(errors.length === 0 ? 0 : 1);
 }
 
 main();
