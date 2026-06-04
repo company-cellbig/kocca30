@@ -33,6 +33,13 @@ updated: 2026-06-04
 - 면제: 1줄 정정
 - lint: error 0건
 
+## [2026-06-04] update | CONVENTIONS §1에 LLM Wiki 패턴/철학 명문화
+
+- §1 핵심 원칙 상단에 LLM Wiki 패턴(ingest 컴파일, compounding, 위키 에디터) + "프로젝트 지식 베이스"(개인 아님) + 변형(정본 재대조/엄격 인용/다각도 검증) 명시 (사용자)
+- §1 원칙 4개 em dash → 콜론 (만지는 김에)
+- 면제: 운영 메타 변경 (cycle-exempt, [[AGENTS]] §라.3)
+- lint: error 0건
+
 ## [2026-06-04] update | em dash 금지 규칙 추가 + 덜미 프로젝트 문서 em dash 정리
 
 - [[CONVENTIONS]] §3.라에 "em dash(`—`) 사용 금지" 추가(가운뎃점 옆), §3.라 문체 불릿 자체 em dash 5개도 콜론으로 (사용자)
