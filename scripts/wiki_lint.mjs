@@ -217,6 +217,22 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
       if (!link.anchor) continue;
       const targetPath = fileIndex.get(link.target);
       if (!targetPath) continue;
+      // 블록 ID anchor (#^id): 헤딩이 아니라 블록 참조(Obsidian transclusion) — 헤딩이 아니라 블록 ID 존재로 검증
+      if (link.anchor.startsWith('^')) {
+        const blockContent = readFileSync(join(REPO_ROOT, targetPath), 'utf8');
+        const blockId = link.anchor.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const blockRe = new RegExp('\\^' + blockId + '\\s*$', 'm');
+        if (!blockRe.test(blockContent)) {
+          findings.push({
+            type: 'broken_anchor',
+            severity: 'error',
+            file: relPath,
+            line: link.line,
+            message: `[[${link.target}#${link.anchor}]] — 블록 ID가 ${link.target}에 없음`,
+          });
+        }
+        continue;
+      }
       let targetHeadings;
       if (headingsCache.has(targetPath)) {
         targetHeadings = headingsCache.get(targetPath);
