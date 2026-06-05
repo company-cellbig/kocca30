@@ -2,12 +2,17 @@
 title: 작업 로그
 tags: [log]
 created: 2026-04-27
-updated: 2026-06-04
+updated: 2026-06-05
 ---
 
 # 작업 로그
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
+
+## [2026-06-05] update | 덜미 무응답 타임아웃 sub-step 단위 한정구 추가
+
+- 공용 기능 표 무응답 타임아웃 항목이 Step 누적으로 오독될 여지 있음(사용자 확인) → "각 대기 sub-step의 비활성 시간 기준(sub-step 전환 시 리셋, 세션/Step 누적 아님)" 한정구 추가. §2.나.1 공용 기능 표 1지점. frontmatter updated 동반 갱신
+- 면제: 1줄급 정정 (cycle-exempt, 의미 명확화). lint: error 0건
 
 ## [2026-06-04] update | 덜미 STT "전사 텍스트" → "변환 텍스트" 평이화
 
