@@ -9,6 +9,14 @@ updated: 2026-06-05
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-05] update | AGENTS 셀프체크에 쉽게 쓰기/표기 정확성 항목 추가 (D1)
+
+- 3개 정본 문서(CLAUDE/AGENTS/CONVENTIONS) 역할/겹침/누락 점검 결과 발견 D1 반영
+- 직전 CONVENTIONS §3.라 확장(쉽게 쓰기/표기 정확성)을 AGENTS §2.나.1 셀프체크 체크리스트가 반영 못 하던 정합 공백을 닫음. 신규 체크 항목 1줄 추가 + 기존 문체 항목 anchor를 H3 [[CONVENTIONS#1) 기본 문체]]로 정밀화
+- 점검 종합: 역할 경계 선언/정본 단일화/import 체인 견고, 정본 중복 없음. D2(PDF 읽기 위치 모호)는 현 상태 유지 결정
+- 수정: AGENTS.md. lint: error 0건 (H3 anchor 3개 정합 통과, #라. 문체 잔여 참조 0건)
+- 면제: 운영 메타 변경(셀프체크 규칙 자체) (cycle-exempt)
+
 ## [2026-06-05] update | CONVENTIONS §3.라 문체에 "쉽게 쓰기" + "표기 정확성" 추가
 
 - 외부 WRITING_GUIDE.md(00_RnD/03_LLM_WIKI_20260601, 국립국어원 「쉬운 공문서 쓰기 길잡이」 2022 기반) 확인 → 우리 CONVENTIONS와 비교해 신규 항목 취사
