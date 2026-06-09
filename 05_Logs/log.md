@@ -9,6 +9,16 @@ updated: 2026-06-09
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-09] review | 덧뵈기 RFP 인용 anchor 오류 정정 (Codex P1/P5 검수)
+
+- Codex 사실/정합 검수(P1+P5, --base 609e137). verdict needs-attention, P1 high 1건. G2 수용
+- 1차 검수는 변경이 이미 커밋돼 working-tree diff가 비어 무위. --base 609e137로 재실행해 재설계 diff 포착
+- F-P1 [high] RFP 인용 anchor가 근거 문구 없는 절을 가리킴: [[ref_제안요청서#라. 단계별 주요 결과물]]로 "디지털 도제/학습"을 인용했으나 해당 절은 결과물 목록뿐. 실제 문구는 # 3. 활용방안 예시(82~85행)에 있음. 정본 직접 대조로 확인
+- 정정: 16행, 356행 anchor를 #3. 활용방안 예시로 교체. 357행 아동·학교 정책의 인용 협소화("학교, 문화원 공공 교육" → 원문 "학교‧문화원 등 공공 체험/교육" 복원: "학교, 문화원 등 공공 체험과 교육") + wikilink 추가
+- 원인: grep 결과(83~85행)만 보고 76행 헤딩 아래라 단정. 사이 # 3. 활용방안 예시 헤딩 미확인. 인용 시 헤딩 경계 grep 점검 필요 (FACT 계열)
+- 검증: wiki_lint error 0건, #3. 활용방안 예시 anchor resolve, 옛 anchor 잔류 없음
+- 수정 파일: 덧뵈기 - 나만의 탈춤 기획서.md
+
 ## [2026-06-09] review | 덧뵈기 학습 도구 재설계 Codex 적대 검수 3건 반영
 
 - Codex 적대 검수(verdict: needs-attention, high 2/medium 1). 3건 모두 사용자 중점 의심과 일치, G2에서 전부 수용
