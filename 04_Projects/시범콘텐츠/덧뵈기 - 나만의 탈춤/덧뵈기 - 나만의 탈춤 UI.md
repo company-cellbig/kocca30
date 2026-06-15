@@ -224,10 +224,11 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 ### 1) 화면 변수 (슬롯 값)
 
 - **화면 목적**: 사용자가 배역 탈 양식을 바탕으로 자기 탈을 디자인함
-- **레이아웃과 구도**: 중앙 탈 도안 캔버스, 측면 도구 패널, 하단 완료 버튼
+- **레이아웃과 구도**: 중앙 탈 도안 캔버스, 측면 도구 패널, 한쪽에 경량 3D 미리보기, 하단 완료 버튼
 - **핵심 UI 컴포넌트**
-	- 탈 도안 캔버스: 디자인 중인 전통 탈
+	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
 	- 도구 패널: 배역 탈 템플릿과 프리셋, 제한 팔레트, 도형과 전통 문양 스탬프, 대칭 모드 토글
+	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널 (작게, 정식 변환은 Step 3)
 	- "완료" 버튼
 - **말뚝이 호스트**: 모서리에 작게 또는 생략 (선택)
 - **배경과 분위기**: 작업 집중용 차분한 배경
@@ -238,8 +239,9 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 ```
 세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
 한국 전통 탈춤(덧뵈기) 체험의 탈 디자인 도구 화면.
-중앙: 디자인 중인 전통 탈 도안 캔버스.
-측면: 배역 탈 템플릿과 프리셋, 색과 문양을 고르는 도구 패널.
+중앙: 배역 탈 템플릿을 바탕으로 디자인 중인 전통 탈 도안 캔버스 (고해상도 드로잉, 도트 픽셀 아님).
+측면 도구 패널: 배역 탈 템플릿과 프리셋, 제한된 전통 색 팔레트, 도형 그리기, 전통 문양 스탬프, 좌우 대칭(미러) 모드 토글.
+한쪽: 그린 도안을 3D 탈에 입힌 작은 실시간 미리보기 패널.
 하단: '완료' 버튼.
 작업 집중을 위한 차분한 레이아웃, 모서리에 작은 말뚝이 탈 호스트(생략 가능).
 아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
@@ -252,8 +254,9 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The mask design tool screen of a Korean traditional mask dance (talchum) experience.
-Center: a canvas with a Korean traditional mask being designed.
-Side: a tool panel with traditional role-mask templates and presets, colors, and patterns.
+Center: a high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template.
+Side tool panel: role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
+To one side: a small live 3D preview pane showing the design applied to a 3D mask.
 Bottom: a 'Done' button.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
