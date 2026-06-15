@@ -11,9 +11,9 @@ updated: 2026-06-15
 
 - **목적**: 화면별 ChatGPT 이미지 생성 프롬프트를 정리해 UI 예시 이미지를 만듦
 - **대상 화면**: 11개 (기획서 [[덧뵈기 - 나만의 탈춤 기획서#8) 키오스크 UI와 화면 그래픽]], 잠정값)
-- **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 한국어와 영어 프롬프트 병기
+- **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 영어 프롬프트 (이미지 내 UI 텍스트는 한글로 렌더링)
 - **사용법**: §2 공통 양식을 앞부분에 두고, §3 화면별 변수를 채워 한 프롬프트로 합침
-- **텍스트 주의**: 이미지 생성기가 한글을 자주 깨뜨려서, 정확한 UI 카피는 이미지 생성 뒤 디자인 단계에서 오버레이함. 프롬프트에는 자리표시나 짧은 라벨만 둠
+- **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
 # 2. 공통 프롬프트 양식
 
@@ -24,10 +24,10 @@ updated: 2026-06-15
 - **매체와 형식**: 키오스크 터치스크린 UI 화면 목업, 풀스크린, 실사풍 고해상도
 - **화면비와 규격**: 9:16 세로 (1080x1920 기준)
 - **아트 디렉션 (제안, 확정 필요)**: 한국 전통 탈춤(덧뵈기) 모티프와 현대 키오스크 UI의 결합. 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용
-- **전통 정합성**: 한국 탈춤 탈 양식 유지, 일본 노멘이나 중국 가면과 혼동 금지 (기획서 [[덧뵈기 - 나만의 탈춤 기획서#나. 탈과 춤사위 고증]])
+- **전통 정합성**: 한국 탈춤 탈 양식 유지, 일본 노멘(일본 가면극 가면)이나 중국 가면과 혼동 금지 (기획서 [[덧뵈기 - 나만의 탈춤 기획서#나. 탈과 춤사위 고증]])
 - **톤과 무드**: 마당놀이 축제의 신명, 밝고 활기차며 친근함
 - **UI 원칙**: 큰 터치 타깃, 명확한 시각 위계, 노년층 포함 가독성
-- **화면 내 텍스트**: 정확한 한글 카피는 후공정 오버레이 전제, 이미지에는 자리표시나 짧은 라벨만 둠
+- **화면 내 텍스트**: 정확한 한글 카피를 영어 프롬프트에 명시해 이미지에 한글로 렌더링함
 
 ## 나. 화면별 변수 슬롯
 
@@ -38,15 +38,16 @@ updated: 2026-06-15
 3. **핵심 UI 컴포넌트**: 이 화면 고유 요소
 4. **말뚝이 호스트**: 위치, 상태, 표정 (없으면 생략)
 5. **배경과 분위기**: 무대와 무드
-6. **화면 내 텍스트**: 자리표시 카피
+6. **화면 내 텍스트**: 이미지에 한글로 렌더링할 정확한 문구
 
 ## 다. 부정 프롬프트
 
 모든 화면에 공통 적용함.
 
-- 깨진 글자, 기형 손과 얼굴, 워터마크와 서명
+- 깨지거나 왜곡된 한글, UI 내 영어 텍스트
+- 기형 손과 얼굴, 워터마크와 서명
 - 저작권 캐릭터
-- 일본 노멘이나 중국 가면과 혼동되는 형태
+- 일본 노멘(일본 가면극 가면)이나 중국 가면과 혼동되는 형태
 
 # 3. 화면별 프롬프트
 
@@ -66,36 +67,22 @@ updated: 2026-06-15
 	- 신명(興) 게이지: 채점이 쌓일수록 차오르는 상승형 게이지
 - **말뚝이 호스트**: 화면 모서리에서 추임새로 호응하는 말뚝이 탈 캐릭터, 활기찬 표정 (구체 비주얼은 기획서 [[덧뵈기 - 나만의 탈춤 기획서#가. 진행 호스트 (말뚝이)]]에서 미확정, 확인 필요)
 - **배경과 분위기**: 전통 마당놀이 무대, 신명 나는 축제 분위기
-- **화면 내 텍스트**: "춤사위를 따라 해보세요" 류 자리표시, 게이지 라벨 "신명"
+- **화면 내 텍스트**: 게이지 라벨 "신명", 안내 "춤사위를 따라 해보세요"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) AR 체험 화면.
-중앙: 사용자가 직접 디자인한 한국 전통 탈이 얼굴에 오버레이된 실시간 AR 카메라 뷰, 춤추는 모습.
-하단: 따라 출 탈춤 동작을 보여주는 시연 아바타(실루엣).
-우상단: 차오르는 '신명' 게이지, 축제 느낌.
-한쪽 모서리: 추임새로 호응하는 말뚝이 탈 호스트 캐릭터, 활기찬 표정.
-배경: 전통 마당놀이 무대, 신명 나는 축제 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 Korean traditional mask dance (talchum) AR experience screen.
 Center: a live AR camera view of a participant wearing a hand-designed Korean traditional mask overlaid on their face, dancing.
-Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move.
-Top-right: a rising excitement gauge filling up, festive.
+Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'.
+Top-right: a rising excitement gauge labeled '신명', filling up, festive.
 A corner: a Korean Maldukki mask host character cheering with a lively expression.
 Background: a traditional madang (outdoor courtyard) stage, lively festival mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 나. Step 1. 시작 화면
@@ -109,32 +96,20 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 - **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 보조 "이어하기" 버튼 (재방문 옵트인 학습자의 학습 토큰 QR 스캔 진입), 콘텐츠 타이틀, 탈춤 대표 비주얼
 - **말뚝이 호스트**: 중앙이나 한쪽에서 손짓하며 환영, 밝은 표정
 - **배경과 분위기**: 화려한 전통 마당놀이 무대, 축제 어트랙트 분위기
-- **화면 내 텍스트**: 타이틀 "나만의 탈춤" 자리표시, 버튼 "시작하기"와 "이어하기"
+- **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"와 "이어하기"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험 키오스크의 시작(어트랙트) 화면.
-중앙: 큰 '시작하기' 터치 버튼과 콘텐츠 타이틀, 그 아래 작은 '이어하기' 보조 버튼.
-한쪽: 손짓하며 관람객을 맞이하는 말뚝이 탈 호스트 캐릭터, 환영하는 밝은 표정.
-배경: 화려한 전통 마당놀이 무대, 축제 어트랙트 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The start (attract) screen of a Korean traditional mask dance (talchum) experience kiosk.
-Center: a large 'Start' touch button and a content title, with a small secondary 'Continue' button below.
+Center: a large primary touch button labeled '시작하기' and a content title '나만의 탈춤', with a small secondary button labeled '이어하기' below.
 To one side: a Korean Maldukki mask host character welcoming visitors with a beckoning gesture and a bright expression.
 Background: a vibrant traditional madang stage, festive attract mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 다. Step 1. 가이드 화면
@@ -148,32 +123,21 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 - **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(탈 디자인, AR 춤, 촬영, 공유), "다음" 버튼
 - **말뚝이 호스트**: 화자로 등장해 설명, 재담하는 표정
 - **배경과 분위기**: 전통 마당 무대, 친근하고 활기찬 분위기
-- **화면 내 텍스트**: 인사말 자리표시, 버튼 "다음"
+- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 가이드(안내) 화면.
-중앙: 진행 흐름을 보여주는 안내 일러스트(탈 디자인, AR 춤, 촬영, 공유 순서)와 '다음' 버튼.
-앞쪽: 화자로 등장해 설명하는 말뚝이 탈 호스트 캐릭터, 재담하는 활기찬 표정.
-배경: 전통 마당놀이 무대, 친근한 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The guide (onboarding) screen of a Korean traditional mask dance (talchum) experience.
-Center: an instructional illustration of the flow (mask design, AR dance, photo, share) and a 'Next' button.
+Center: an instructional illustration of the flow (mask design, AR dance, photo, share) and a button labeled '다음'.
+Top: a greeting '어서 오세요'.
 Front: a Korean Maldukki mask host character acting as the narrator, with a lively storytelling expression.
 Background: a traditional madang stage, friendly mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 라. Step 1. 동의 약관 화면
@@ -182,39 +146,28 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 
 ### 1) 화면 변수 (슬롯 값)
 
-- **화면 목적**: 카메라 촬영(필수)과 영상 산출물, 학습 프로필(선택) 동의를 받음
-- **레이아웃과 구도**: 약관 텍스트 영역과 동의 토글 목록, 하단 동의와 거부 버튼
+- **화면 목적**: 카메라 촬영(필수)과 영상 산출물, 학습 프로필(선택) 동의를 받음. 필수 카메라 동의 시에만 진행 버튼이 활성화됨
+- **레이아웃과 구도**: 약관 텍스트 영역과 동의 토글 목록, 하단 동의하고 시작 버튼과 그만두기 보조 버튼
 - **핵심 UI 컴포넌트**
 	- 동의 항목 토글: 필수 카메라 촬영, 선택 영상 녹화와 생성, 선택 학습 프로필
-	- 동의와 거부 버튼
+	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨 (꺼져 있으면 비활성)
+	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **말뚝이 호스트**: 모서리에 작게 또는 생략 (선택)
 - **배경과 분위기**: 차분한 마당, 폼 가독성 우선
-- **화면 내 텍스트**: 약관 자리표시, 항목 라벨, 버튼 "동의" "거부"
+- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)" "영상 생성 (선택)" "학습 기록 (선택)"(표본), 버튼 "동의하고 시작", "그만두기"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 동의 약관 화면.
-구성: 약관 텍스트 영역, 동의 토글 목록(필수 카메라 촬영, 선택 영상 생성, 선택 학습 프로필), 하단 '동의'와 '거부' 버튼.
-폼 가독성을 우선한 차분한 레이아웃, 모서리에 작은 말뚝이 탈 호스트(생략 가능).
-배경: 차분한 전통 마당 무대.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The consent screen of a Korean traditional mask dance (talchum) experience.
-Layout: a terms text area, a list of consent toggles (required camera capture, optional video creation, optional learning profile), bottom 'Agree' and 'Decline' buttons.
+Layout: a title '이용 동의', a terms text area, a list of consent toggles labeled '카메라 촬영 (필수)' (shown ON), '영상 생성 (선택)', '학습 기록 (선택)', a primary bottom button labeled '동의하고 시작' (active), and a small secondary button labeled '그만두기'.
 A calm, form-readable layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Background: a calm traditional madang stage.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 마. Step 2. 탈 디자인 도구 화면
@@ -224,7 +177,7 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 ### 1) 화면 변수 (슬롯 값)
 
 - **화면 목적**: 사용자가 배역 탈 양식을 바탕으로 자기 탈을 디자인함
-- **레이아웃과 구도**: 중앙 탈 도안 캔버스, 측면 도구 패널, 한쪽에 경량 3D 미리보기, 하단 완료 버튼
+- **레이아웃과 구도**: 2개 로우. 1번 로우는 2칼럼으로 왼쪽에 좁은 경량 3D 미리보기, 오른쪽에 넓은 탈 도안 캔버스 (약 1:3, 캔버스 우세, 1:1 아님). 2번 로우는 전체 폭 1칼럼으로 도구 패널 전체. 최하단에 완료 버튼 고정
 - **핵심 UI 컴포넌트**
 	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
 	- 도구 패널: 배역 탈 템플릿과 프리셋, 제한 팔레트, 도형과 전통 문양 스탬프, 대칭 모드 토글
@@ -232,36 +185,22 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 	- "완료" 버튼
 - **말뚝이 호스트**: 모서리에 작게 또는 생략 (선택)
 - **배경과 분위기**: 작업 집중용 차분한 배경
-- **화면 내 텍스트**: "탈을 꾸며보세요" 자리표시, 버튼 "완료"
+- **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 탈 디자인 도구 화면.
-중앙: 배역 탈 템플릿을 바탕으로 디자인 중인 전통 탈 도안 캔버스 (고해상도 드로잉, 도트 픽셀 아님).
-측면 도구 패널: 배역 탈 템플릿과 프리셋, 제한된 전통 색 팔레트, 도형 그리기, 전통 문양 스탬프, 좌우 대칭(미러) 모드 토글.
-한쪽: 그린 도안을 3D 탈에 입힌 작은 실시간 미리보기 패널.
-하단: '완료' 버튼.
-작업 집중을 위한 차분한 레이아웃, 모서리에 작은 말뚝이 탈 호스트(생략 가능).
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The mask design tool screen of a Korean traditional mask dance (talchum) experience.
-Center: a high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template.
-Side tool panel: role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
-To one side: a small live 3D preview pane showing the design applied to a 3D mask.
-Bottom: a 'Done' button.
+Two-row layout.
+Top row, two columns: left, a narrow live 3D preview pane showing the design applied to a 3D mask; right, a wide high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, with a caption '탈을 꾸며보세요'. The canvas column is clearly wider than the preview (about 1:3, not 1:1).
+Bottom row, one full-width column: a tool panel with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
+At the very bottom: a fixed button labeled '완료'.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 바. Step 3. 변환 대기 화면
@@ -275,115 +214,78 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 - **핵심 UI 컴포넌트**: 진행 인디케이터(원형이나 바), 변환 중인 탈 비주얼, 안내 문구
 - **말뚝이 호스트**: 대기 동안 추임새로 흥을 돋움 (선택)
 - **배경과 분위기**: 전통 마당, 기대감 있는 대기 분위기
-- **화면 내 텍스트**: "탈을 빚는 중" 자리표시, 진행률
+- **화면 내 텍스트**: 안내 "탈을 빚는 중", 진행률
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 3D 변환 대기 화면.
-중앙: 진행 인디케이터(원형 또는 바)와 3D로 변환되는 중인 전통 탈 프리뷰.
-한쪽: 대기 동안 흥을 돋우는 말뚝이 탈 호스트(생략 가능).
-배경: 전통 마당놀이 무대, 기대감 있는 대기 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The 3D conversion loading screen of a Korean traditional mask dance (talchum) experience.
-Center: a progress indicator (circular or bar) and a preview of a Korean traditional mask being converted into 3D.
+Center: a progress indicator (circular or bar) and a preview of a Korean traditional mask being converted into 3D, with a status caption '탈을 빚는 중'.
 To one side: a Korean Maldukki mask host keeping up the mood during the wait (can be omitted).
 Background: a traditional madang stage, an anticipatory waiting mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 사. Step 5. 포즈 챌린지 촬영 화면
+## 사. Step 5. 기념 촬영 화면
 
-기획서 근거: [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영 (포즈 챌린지)]]. 탈춤 정지 포즈를 따라 하고 베스트샷을 촬영함.
+기획서 근거: [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]]. 2D 탈 캐릭터와 사용자가 같이 포즈를 잡아 기념 사진을 촬영함.
 
 ### 1) 화면 변수 (슬롯 값)
 
-- **화면 목적**: 제한 시간 안에 탈춤 정지 포즈를 따라 하고 기념 베스트샷을 촬영함
-- **레이아웃과 구도**: 중앙 카메라 뷰, 포즈 가이드 오버레이, 카운트다운 타이머
+- **화면 목적**: 2D 탈 캐릭터가 탈춤 포즈를 취한 가운데, AR로 자기 탈을 쓴 사용자가 옆에서 같이 포즈를 잡아 기념 사진을 촬영함
+- **레이아웃과 구도**: 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 함께 보여줌, 하단에 촬영 버튼과 카운트다운
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: AR 탈을 쓴 사용자
-	- 목표 포즈 가이드: 따라 할 정지 포즈 실루엣
-	- 제한 시간 카운트다운과 촬영 인디케이터
-- **말뚝이 호스트**: 챌린지를 진행하며 응원 (선택)
-- **배경과 분위기**: 전통 마당 무대, 긴장감 있는 챌린지 분위기
-- **화면 내 텍스트**: "포즈를 따라 해보세요" 자리표시, 카운트다운 숫자
+	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
+	- 촬영 버튼과 카운트다운 인디케이터
+- **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택)
+- **배경과 분위기**: 전통 마당 무대, 흥겹고 기념하는 분위기
+- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 버튼 "촬영", 카운트다운 숫자
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 포즈 챌린지 촬영 화면.
-중앙: AR 전통 탈을 쓴 사용자가 보이는 카메라 뷰.
-오버레이: 따라 할 탈춤 정지 포즈 가이드 실루엣과 제한 시간 카운트다운.
-한쪽: 챌린지를 응원하는 말뚝이 탈 호스트(생략 가능).
-배경: 전통 마당놀이 무대, 긴장감 있는 챌린지 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
-The pose challenge capture screen of a Korean traditional mask dance (talchum) experience.
-Center: a camera view of a user wearing an AR Korean traditional mask.
-Overlay: a target talchum still-pose guide silhouette and a countdown timer.
-To one side: a Korean Maldukki mask host cheering on the challenge (can be omitted).
-Background: a traditional madang stage, a tense challenge mood.
+The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
+A single composite frame: a live camera view of a user wearing an AR Korean traditional mask, with a 2D mask character (wearing the user-designed mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot.
+Bottom: a capture button and a numeric countdown, with a caption '같이 포즈를 잡아 보세요'.
+To one side: a Korean Maldukki mask host helping with the photo (can be omitted).
+Background: a traditional madang stage, a festive celebratory mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 아. Step 5. 생성 대기 화면
 
-기획서 근거: [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영 (포즈 챌린지)]]. 기념 사진과 리플레이 영상을 만드는 동안 노출함.
+기획서 근거: [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]]. 기념 사진과 리플레이 영상을 만드는 동안 노출함.
 
 ### 1) 화면 변수 (슬롯 값)
 
-- **화면 목적**: 기념 사진과 리플레이 영상 생성과 인코딩이 끝날 때까지 기다리게 함
+- **화면 목적**: 기념 사진과 (영상 동의 시) 숏폼 영상 생성과 인코딩이 끝날 때까지 기다리게 함
 - **레이아웃과 구도**: 중앙 진행 표시와 생성 중 안내
 - **핵심 UI 컴포넌트**: 진행 인디케이터, 사진과 영상 생성 중 안내, 대기 콘텐츠
 - **말뚝이 호스트**: 대기 동안 흥을 돋움 (선택)
 - **배경과 분위기**: 전통 마당, 기대감 있는 대기 분위기
-- **화면 내 텍스트**: "결과물을 만드는 중" 자리표시, 진행률
+- **화면 내 텍스트**: 안내 "결과물을 만드는 중", 진행률
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 결과물 생성 대기 화면.
-중앙: 진행 인디케이터와 기념 사진, 숏폼 영상을 만드는 중이라는 안내.
-한쪽: 대기 동안 흥을 돋우는 말뚝이 탈 호스트(생략 가능).
-배경: 전통 마당놀이 무대, 기대감 있는 대기 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The result generation loading screen of a Korean traditional mask dance (talchum) experience.
-Center: a progress indicator and a note that a commemorative photo and a short-form video are being created.
+Center: a progress indicator and a status caption '결과물을 만드는 중' indicating a commemorative photo and a short-form video are being created.
 To one side: a Korean Maldukki mask host keeping up the mood during the wait (can be omitted).
 Background: a traditional madang stage, an anticipatory waiting mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 자. Step 6. 결과물 미리보기 화면
@@ -395,37 +297,26 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 - **화면 목적**: 완성된 기념 사진과 리플레이 영상을 미리 보여줌
 - **레이아웃과 구도**: 기념 사진 카드와 리플레이 영상 카드를 나란히 또는 상하 배치, 하단 다음 버튼
 - **핵심 UI 컴포넌트**
-	- 기념 사진 미리보기: 탈 쓴 캐릭터와 사용자, 신명 게이지 점수와 등급 스탬프
-	- 리플레이 영상 미리보기: 세로형 숏폼 재생 썸네일
+	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (점수 스탬프 없음)
+	- 리플레이 영상 미리보기: 세로형 숏폼 재생 썸네일 (신명 게이지 점수와 등급 스탬프 포함)
 	- "다음" 버튼
 - **말뚝이 호스트**: 모서리에서 결과를 자랑하듯 (선택)
 - **배경과 분위기**: 전통 마당, 결과를 뽐내는 분위기
-- **화면 내 텍스트**: "결과물 미리보기" 자리표시, 버튼 "다음"
+- **화면 내 텍스트**: 타이틀 "결과물 미리보기", 버튼 "다음"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 결과물 미리보기 화면.
-구성: 기념 사진 카드(전통 탈을 쓴 캐릭터와 사용자, 신명 점수와 등급 스탬프)와 세로형 숏폼 리플레이 영상 카드를 나란히 배치, 하단 '다음' 버튼.
-한쪽: 결과를 자랑하듯 호응하는 말뚝이 탈 호스트(생략 가능).
-배경: 전통 마당놀이 무대, 결과를 뽐내는 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The result preview screen of a Korean traditional mask dance (talchum) experience.
-Layout: a commemorative photo card (a character and the user wearing a traditional mask, with an excitement score and grade stamp) next to a vertical short-form replay video card, with a 'Next' button at the bottom.
+Title: '결과물 미리보기'.
+Layout: a commemorative photo card (a 2D mask character and the user posing together, no score stamp) next to a vertical short-form replay video card (with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
 To one side: a Korean Maldukki mask host reacting proudly to the result (can be omitted).
 Background: a traditional madang stage, a proud showcase mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 차. Step 6. 연락처 입력과 전송 화면
@@ -443,32 +334,20 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 	- 학습 토큰(QR) 발급 안내 (옵트인 시)
 - **말뚝이 호스트**: 모서리에 작게 또는 생략 (선택)
 - **배경과 분위기**: 차분한 마당, 폼 가독성 우선
-- **화면 내 텍스트**: "연락처를 입력하면 링크를 보내드려요" 자리표시, 버튼 "전송" "받지 않기"
+- **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 버튼 "전송" "받지 않기"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 연락처 입력과 전송 화면.
-구성: 전화번호 입력 필드와 숫자 키패드, 전송 동의 토글, 하단 '전송'과 '받지 않기' 버튼, 한쪽에 학습 토큰 QR 발급 영역.
-폼 가독성을 우선한 차분한 레이아웃, 모서리에 작은 말뚝이 탈 호스트(생략 가능).
-배경: 차분한 전통 마당 무대.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The contact entry and send screen of a Korean traditional mask dance (talchum) experience.
-Layout: a phone number input field with a numeric keypad, a send-consent toggle, bottom 'Send' and 'No thanks' buttons, and a learning-token QR issuing area to one side.
+Layout: a caption '연락처를 입력하면 링크를 보내드려요', a phone number input field with a numeric keypad, a send-consent toggle, bottom buttons labeled '전송' and '받지 않기', and a learning-token QR issuing area to one side.
 A calm, form-readable layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Background: a calm traditional madang stage.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 ## 카. Step 7. 마무리 인사 화면
@@ -482,30 +361,19 @@ Avoid: broken text, deformed hands and faces, watermark, copyrighted characters,
 - **핵심 UI 컴포넌트**: 마무리 인사 메시지, 말뚝이 작별 연출
 - **말뚝이 호스트**: 중심에서 정겹게 작별 인사
 - **배경과 분위기**: 전통 마당, 따뜻한 마무리 분위기
-- **화면 내 텍스트**: "또 만나요" 자리표시
+- **화면 내 텍스트**: 인사 "또 만나요"
 
-### 2) 프롬프트 (한국어)
-
-```
-세로 9:16 키오스크 터치스크린 풀스크린 UI 목업, 실사풍 고해상도.
-한국 전통 탈춤(덧뵈기) 체험의 마무리 인사 화면.
-중앙: 정겹게 작별 인사를 하는 말뚝이 탈 호스트 캐릭터와 마무리 메시지.
-배경: 전통 마당놀이 무대, 따뜻한 마무리 분위기.
-아트 디렉션: 전통 탈춤 모티프와 현대 키오스크 UI 결합, 오방색과 단청 포인트 컬러, 한지와 목재 질감 절제.
-큰 터치 타깃, 명확한 시각 위계, 높은 가독성.
-제외: 깨진 글자, 손과 얼굴 왜곡, 워터마크, 저작권 캐릭터, 일본 노멘이나 중국 가면.
-```
-
-### 3) 프롬프트 (영어)
+### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The closing farewell screen of a Korean traditional mask dance (talchum) experience.
-Center: a Korean Maldukki mask host character giving a warm farewell, with a closing message.
+Center: a Korean Maldukki mask host character giving a warm farewell, with a closing message '또 만나요'.
 Background: a traditional madang stage, a warm closing mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-Avoid: broken text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
 # 4. 관련 문서
