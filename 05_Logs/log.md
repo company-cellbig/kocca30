@@ -2,12 +2,30 @@
 title: 작업 로그
 tags: [log]
 created: 2026-04-27
-updated: 2026-06-09
+updated: 2026-06-16
 ---
 
 # 작업 로그
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
+
+## [2026-06-16] update | AGENTS/CONVENTIONS를 Karpathy LLM Wiki 패턴에 정렬 (cycle-exempt)
+
+- 배경: `00_RnD` LLM Wiki 정본 매뉴얼과 본 저장소 AGENTS/CONVENTIONS를 비교. 거버넌스(3역할/게이트)는 정본을 능가하나, Karpathy 패턴의 핵심 운영 루프(수집 cascade, 질의 환원, 정기 점검)와 위키 그래프 장치(엔티티 1급, 링크 하한선, Overview, 모순 블록, type/status)가 빠져 있어 보강
+- AGENTS.md:
+	- 신설 §2.아 위키 운영 워크플로 (수집/질의/유지): 소스 1개의 연쇄 갱신(Ingest), 답의 페이지 환원(Query), 주기적 건강성 점검(Maintenance) 정의
+	- 셀프체크에 링크 하한선(최소 2링크), `type`/`status` 점검 항목 추가
+	- frontmatter `type: reference`/`status: stable` 부여, `updated` 갱신
+- CONVENTIONS.md:
+	- §1 핵심 원칙에 엔티티 1급(5), 링크 하한선(6) 추가
+	- §3.나 프론트매터에 `type`/`status`/`sources` 필드 + type 값 표 신설
+	- §3.마에 링크 하한선 규칙, §3.자 Overview(종합) 페이지, §3.차 모순(contradiction) 처리 신설
+	- §5.가 생성 절차에 type/status 지정 명시, §7 로그 접두사에 `maint` 추가 + 접두사 목록 em dash를 콜론으로 정렬(§3.라 준수)
+	- frontmatter `type`/`status` 부여, `updated` 갱신
+- 검수: 자동 lint error 0건. 신규 정본 산문은 깨끗한 컨텍스트 서브에이전트로 맥락 독립 검토(의도 미제공). 발견 정정 3건 반영 — "안정)로"→"안정)으로" 조사, "강조점이 모호하면"→"어느 엔티티나 주장이 핵심인지 모호하면" 명료화, type 값 나열 비병렬을 표로 재구조화
+- cycle-exempt 사유: 운영 메타와 위키 작성 표준 자체 변경(역할/사이클/규칙 정의)이라 Codex 외부 검토 부적합 (§2.라.3). 맥락 독립 검토는 서브에이전트로 대체 수행
+- 잔여 (G1 보고): ① 기존 28개 문서 frontmatter `type`/`status` 백필은 스키마 G1 승인 후 진행 ② AGENTS/CONVENTIONS 본문에 남은 pre-existing em dash(약 54건) 일괄 정리 여부 결정 필요
+- 수정 파일: AGENTS.md, CONVENTIONS.md, 05_Logs/log.md
 
 ## [2026-06-15] update | Step 5 확인 필요 해소 (합성 방식 하이브리드, 포즈 컷 1장)
 
