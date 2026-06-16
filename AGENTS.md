@@ -9,6 +9,8 @@ updated: 2026-06-16
 
 @CONVENTIONS.md
 
+> `@import`는 Claude Code 전용 기능임. Codex 등 import를 자동으로 펼치지 않는 도구로 본 문서를 읽을 때는 [[CONVENTIONS|위키 작성 규칙]]을 함께 읽을 것.
+
 AI 에이전트(Claude Code, Codex)가 다각도 교차검증 워크플로(3역할: 작성자/외부 검토자/중재자)로 마크다운 문서를 작성/편집/연결/검수하는 운영 규칙. 위키 작성 자체의 표준(디렉토리 구조, 문체, 인용 원칙, 로그 양식 등)은 [[CONVENTIONS|위키 작성 규칙]]에서 정의 — 본 문서가 자동 import 함.
 
 # 1. 핵심 원칙

@@ -9,6 +9,12 @@ updated: 2026-06-16
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-16] update | AGENTS.md에 Codex용 CONVENTIONS 동반 읽기 안내 한 줄 추가 (cycle-exempt)
+
+- `@import`는 Claude Code 전용이라 Codex가 AGENTS.md를 직접 읽으면 CONVENTIONS가 안 펼쳐짐. 상단에 함께 읽으라는 안내 한 줄 추가
+- cycle-exempt 사유: 운영 메타 1줄 추가 (AGENTS §2.라.3). 자동 lint error 0건
+- 수정 파일: AGENTS.md
+
 ## [2026-06-16] review | 타임아웃 분리 Codex 외부 검토 반영 (G2)
 
 - 외부 검토: Codex 적대 발췌(P2/P3) + 사실/정합 발췌(P1/P5) 병렬 호출. 대상 diff = 커밋 ff10ada, d657742
