@@ -2,12 +2,21 @@
 title: 작업 로그
 tags: [log]
 created: 2026-04-27
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # 작업 로그
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
+
+## [2026-06-17] update | 04_Projects 프론트매터 type/status 보강 (cycle-exempt)
+
+- 배경: 04_Projects 하위 12개 문서 중 `플랫폼 사양` 1개만 `type`/`status` 보유, 나머지 11개 누락 (CONVENTIONS §3.나 위반). 사용자 확인 후 권장값 일괄 부여
+- 부여값: 로드맵 3종 `project`/`stable`, 덜미·덧뵈기 기획서/결정사항/백로그/UI `project`/`draft`, 마당 사건 풀과 공통 사양 `reference`/`draft`, 콘셉트 정리 `overview`/`draft`
+- 사양 2종은 `플랫폼 사양`(기존 `reference`)과 동류로 맞춰 `reference` 일관화. 콘셉트 정리는 6종목 종합 서술이라 `overview`
+- 11개 문서 모두 `updated` 2026-06-17로 갱신. 자동 lint 0건
+- 면제: 프론트매터 단독 추가 → 외부 검토 면제 (§2.라.3)
+- 수정 파일: 04_Projects 하위 11개 .md
 
 ## [2026-06-16] review | 공통 사양 Codex 외부 검토 G2 반영
 

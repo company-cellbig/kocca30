@@ -1,8 +1,10 @@
 ---
 title: 덧뵈기 - 나만의 탈춤 UI
+type: project
+status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 > 덧뵈기 AR 탈춤 체험의 키오스크 UI 예시 이미지를 ChatGPT 이미지 생성으로 만들기 위한 프롬프트 모음. [[덧뵈기 - 나만의 탈춤 기획서]]의 Step별 명세와 화면 구성을 근거로 작성함. 화면 총 11개이며, Step 4를 기준으로 양식을 잡고 나머지를 채워나감.
