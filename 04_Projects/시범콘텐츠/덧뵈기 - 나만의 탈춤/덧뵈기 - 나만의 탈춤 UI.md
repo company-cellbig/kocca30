@@ -287,14 +287,14 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 Korean traditional mask dance (talchum) AR experience screen.
 Center: a live AR camera view of a participant wearing a hand-designed Korean traditional mask overlaid on their face, dancing.
-Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'.
+Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'. The bottom area contains only this dance-move guide; this is a hands-free experience screen with no bottom toolbar, no action buttons, and no extra UI controls.
 Top-right: a rising excitement gauge labeled '신명', filling up, festive.
 A corner: a Korean Maldukki mask host character cheering with a lively expression.
 Background: a traditional madang (outdoor courtyard) stage, lively festival mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, any bottom toolbar or action buttons not specified (e.g. sound, camera-switch, dance, retry, home).
 ```
 
 ## 아. Step 5. 기념 촬영 화면
