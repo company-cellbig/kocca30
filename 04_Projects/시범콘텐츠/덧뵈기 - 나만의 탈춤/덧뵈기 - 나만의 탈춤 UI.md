@@ -13,8 +13,8 @@ updated: 2026-06-19
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 9:16 영역 골격을 따름
-- **대상 화면**: 11개. Step 순으로 배열함(§2.가 화면 목록)
-- **공용과 고유**: 공용 화면 7개는 §5 공통 화면 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
+- **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
+- **공용과 고유**: 공용 화면 7개는 §5 공통 화면 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 덧뵈기 고유 화면 5개는 레이아웃을 상세 설계함
 - **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: §2.다 공통 프롬프트 양식을 앞에 두고, 각 화면의 프롬프트를 이어 붙여 한 프롬프트로 합침
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
@@ -23,21 +23,22 @@ updated: 2026-06-19
 
 ## 가. 화면 목록과 분류
 
-11개 화면을 Step 순으로 정리함. 분류는 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 공통 화면(공용)과 덧뵈기 고유로 나눔.
+12개 화면을 Step 순으로 정리함. 분류는 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 공통 화면(공용)과 덧뵈기 고유로 나눔.
 
 | 순서 | 화면 | Step | 분류 | 기획서 근거 |
 | --- | --- | --- | --- | --- |
 | 가 | 시작 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
-| 나 | 가이드 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
-| 다 | 동의 약관 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
-| 라 | 탈 디자인 도구 화면 | Step 2 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#2) Step 2. 탈 디자인]] |
-| 마 | 변환 대기 화면 | Step 3 | 공용 (대기, §5.다) | [[덧뵈기 - 나만의 탈춤 기획서#3) Step 3. 3D 변환 + 대기 화면]] |
-| 바 | AR 춤사위 체험 화면 | Step 4 | 덧뵈기 고유 (핵심) | [[덧뵈기 - 나만의 탈춤 기획서#4) Step 4. AR 착용 + 춤사위 따라하기 (핵심 체험)]] |
-| 사 | 기념 촬영 화면 | Step 5 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]] |
-| 아 | 생성 대기 화면 | Step 5 | 공용 (대기, §5.다) | [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]] |
-| 자 | 결과물 미리보기 화면 | Step 6 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
-| 차 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
-| 카 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덧뵈기 - 나만의 탈춤 기획서#7) Step 7. 종료와 리셋]] |
+| 나 | 학습 토큰 스캔 화면 | Step 1 | 덧뵈기 고유 (이어하기 경로) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
+| 다 | 가이드 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
+| 라 | 동의 약관 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
+| 마 | 탈 디자인 도구 화면 | Step 2 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#2) Step 2. 탈 디자인]] |
+| 바 | 변환 대기 화면 | Step 3 | 공용 (대기, §5.다) | [[덧뵈기 - 나만의 탈춤 기획서#3) Step 3. 3D 변환 + 대기 화면]] |
+| 사 | AR 춤사위 체험 화면 | Step 4 | 덧뵈기 고유 (핵심) | [[덧뵈기 - 나만의 탈춤 기획서#4) Step 4. AR 착용 + 춤사위 따라하기 (핵심 체험)]] |
+| 아 | 기념 촬영 화면 | Step 5 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]] |
+| 자 | 생성 대기 화면 | Step 5 | 공용 (대기, §5.다) | [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]] |
+| 차 | 결과물 미리보기 화면 | Step 6 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
+| 카 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
+| 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덧뵈기 - 나만의 탈춤 기획서#7) Step 7. 종료와 리셋]] |
 
 ## 나. 공통 레이아웃
 
@@ -106,7 +107,39 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 나. Step 1. 가이드 화면
+## 나. Step 1. 학습 토큰 스캔 화면
+
+덧뵈기 고유 화면(이어하기 경로). 재방문 옵트인 학습자가 시작 화면에서 이어하기를 누르면, 카메라로 학습 토큰(QR)을 비춰 진척과 동의 기록을 복원함. 유효 토큰이면 처음 시작 경로(가이드, 동의)를 건너뛰고 Step 2로 직행함. 무효이거나 스캔에 실패하면 처음 시작 경로로 안내함 (기획서 Step 1 sub-step 3과 4, [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]]). 사용자를 촬영하는 카메라를 토큰 판독에만 쓰는 점에서 AR 체험 화면과 구분됨.
+
+### 1) 화면 설계
+
+- **레이아웃** (고유, 9:16 골격 위 카메라 스캔 구성)
+	- 헤더: 안내 카피 한 줄
+	- 본문(최대 비중): 카메라 프리뷰와 QR 조준 가이드(스캔 영역 프레임)
+	- 액션 하단: 처음부터 시작 보조 버튼(이어하기를 포기하고 처음 시작 경로로)
+- **핵심 UI 컴포넌트**
+	- 카메라 프리뷰: 학습 토큰 QR을 비추는 실시간 화면(토큰 판독 용도)
+	- QR 조준 가이드: 스캔 영역 프레임과 안내
+	- 무효와 실패 처리: 무효 토큰이거나 스캔에 실패하면 처음 시작 경로(가이드, 동의)로 안내하는 fallback
+- **말뚝이 호스트**: 모서리에 작게 두거나 숨김(스캔 집중)
+- **화면 내 텍스트**: 안내 "학습 코드를 비춰 주세요", 보조 버튼 "처음부터 시작"
+
+### 2) 프롬프트 (영어)
+
+```
+A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
+The learning-token QR scan screen of a Korean traditional mask dance (talchum) experience (the return-user path).
+Center: a live camera preview with a QR scan guide frame, prompting the user to hold up their learning-token QR code, with a caption '학습 코드를 비춰 주세요'.
+Bottom: a small secondary button labeled '처음부터 시작' to fall back to the first-time flow.
+A small Korean Maldukki mask host in a corner (can be omitted).
+Background: a traditional madang stage, a focused scanning mood.
+Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
+Large touch targets, clear visual hierarchy, high readability.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
+```
+
+## 다. Step 1. 가이드 화면
 
 공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 말뚝이가 인사하고 체험 흐름을 안내함.
 
@@ -132,7 +165,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 다. Step 1. 동의 약관 화면
+## 라. Step 1. 동의 약관 화면
 
 공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수와 선택 동의를 받음. 학습 토큰 복원 스캔은 시작 화면의 이어하기에서 처리함.
 
@@ -160,7 +193,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 라. Step 2. 탈 디자인 도구 화면
+## 마. Step 2. 탈 디자인 도구 화면
 
 덧뵈기 고유 화면. 사용자가 배역 탈 양식을 바탕으로 자기 탈을 디자인함. 디자인 방식은 드로잉형(배역 탈 템플릿 시작점)이며, 상세는 [[덧뵈기 - 나만의 탈춤 기획서#나. 탈 디자인 도구 (Step 2)]].
 
@@ -195,7 +228,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 마. Step 3. 변환 대기 화면
+## 바. Step 3. 변환 대기 화면
 
 공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 2D 도안을 3D 탈로 변환하는 동안 진행을 보여줌.
 
@@ -220,7 +253,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 바. Step 4. AR 춤사위 체험 화면
+## 사. Step 4. AR 춤사위 체험 화면
 
 덧뵈기 고유 화면(핵심 체험). 사용자가 자기 탈을 AR로 쓰고 풍물 장단에 맞춰 춤사위를 따라 추며, 자세와 타이밍을 실시간 채점받아 신명 게이지로 보상받음.
 
@@ -231,7 +264,6 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 본문(최대 비중): AR 카메라 뷰. 사용자 얼굴에 사용자가 디자인한 탈이 오버레이된 실시간 화면
 	- 본문 하단: 춤사위 가이드(시연 아바타나 실루엣)
 	- 액션: 별도 버튼 없음(체험 중). 자동으로 진행하며, 화면 타임아웃이 발동하면 정상 진행으로 다음 단계로 넘어감
-	- 말뚝이: 한쪽 모서리에서 추임새로 호응
 - **핵심 UI 컴포넌트**
 	- AR 카메라 뷰: 사용자 얼굴에 사용자 디자인 탈이 오버레이된 실시간 화면
 	- 춤사위 가이드: 따라 출 동작을 보여주는 시연 아바타나 실루엣
@@ -255,7 +287,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 사. Step 5. 기념 촬영 화면
+## 아. Step 5. 기념 촬영 화면
 
 덧뵈기 고유 화면. 2D 탈 캐릭터가 탈춤 포즈를 취한 가운데, AR로 자기 탈을 쓴 사용자가 옆에서 같이 포즈를 잡아 기념 사진을 촬영함.
 
@@ -264,7 +296,6 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 9:16 골격 위 합성 카메라 구성)
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 함께 보여줌
 	- 액션 하단: 촬영 버튼과 카운트다운 인디케이터
-	- 말뚝이: 촬영을 거들며 분위기를 돋움(선택, 작업 집중이라 작게)
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: AR 탈을 쓴 사용자
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
@@ -287,7 +318,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 아. Step 5. 생성 대기 화면
+## 자. Step 5. 생성 대기 화면
 
 공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 기념 사진과 (영상 동의 시) 리플레이 영상을 만드는 동안 노출함.
 
@@ -312,7 +343,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 자. Step 6. 결과물 미리보기 화면
+## 차. Step 6. 결과물 미리보기 화면
 
 덧뵈기 고유 화면. 완성된 기념 사진과 리플레이 영상을 미리 봄.
 
@@ -322,7 +353,6 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 헤더: 타이틀
 	- 본문: 기념 사진 카드와 리플레이 영상 카드를 상하 또는 좌우로 나란히 배치
 	- 액션 하단: 다음 버튼
-	- 말뚝이: 모서리에서 결과를 자랑하듯 (선택)
 - **핵심 UI 컴포넌트**
 	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (점수 스탬프 없음)
 	- 리플레이 영상 미리보기: 세로형 숏폼 재생 썸네일 (신명 게이지 점수와 등급 스탬프 포함)
@@ -345,7 +375,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 차. Step 6. 연락처 입력과 전송 화면
+## 카. Step 6. 연락처 입력과 전송 화면
 
 공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 연락처를 받아 결과물 링크를 SMS로 보냄.
 
@@ -374,7 +404,7 @@ All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks.
 ```
 
-## 카. Step 7. 마무리 인사 화면
+## 타. Step 7. 마무리 인사 화면
 
 공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 마무리 인사 뒤 시작 화면으로 복귀함.
 
