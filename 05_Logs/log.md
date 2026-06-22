@@ -9,6 +9,14 @@ updated: 2026-06-19
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-22] maint | PROCESS-001 + 셀프체크 [전수] 보강 (맵/목차/개수/frontmatter 포함)
+
+- 이번 세션에서 [전수] 누락이 두 번 더 재발(생성 방식 잔재 line 72, 문서 맵 line 38, frontmatter updated 3종). 모두 "본문은 고치고 요약/메타 진술을 놓침" 패턴
+- PROCESS-001 권고 점검 (1)과 AGENTS.md 셀프체크 [전수]에 "본문뿐 아니라 문서 맵, 목차, 개수 요약 행, frontmatter 같은 요약/메타 진술까지 포함" 문구 보강
+- 운영 메타 + 카탈로그 정비라 외부 검토 면제 (cycle-exempt, §2.라.3)
+- 수정 파일: `AGENTS.md`, `02_HowTo/반복 결함 카탈로그.md`
+- 자동 lint 0건
+
 ## [2026-06-22] review | §12 이어하기 예시 추가 Codex 검수 반영 (문서 맵 stale + 중립 카피 규칙)
 
 - §12 다.7 추가 커밋(2038e58) 대상 Codex 적대 검수(--base 327d92a, verdict needs-attention) 발견 2건 사용자 G2 모두 수용
