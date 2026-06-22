@@ -301,19 +301,19 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 아. Step 5. 기념 촬영 화면
 
-덧뵈기 고유 화면. 사용자가 만든 탈을 쓴 2D 탈 캐릭터가 탈춤 포즈를 취한 옆에서, 맨 얼굴의 사용자가 같이 포즈를 잡아 한 장의 기념 사진을 촬영함. 탈을 쓴 쪽은 캐릭터뿐이고 사용자는 맨 얼굴이라 둘이 구별됨.
+덧뵈기 고유 화면. 사용자가 만든 탈을 쓴 2D 탈 캐릭터가 탈춤 포즈를 취한 옆에서, 맨 얼굴의 사용자가 같이 포즈를 잡아 기념 사진을 촬영함. 탈을 쓴 쪽은 캐릭터뿐이고 사용자는 맨 얼굴이라 둘이 구별됨. 촬영은 버튼 없이 컷마다 주어진 시간이 카운트다운돼 0이 되면 자동으로 찍히고(찰칵), 정해진 촬영 횟수만큼 반복함 (기획서 "카운트다운 촬영", [[덧뵈기 - 나만의 탈춤 기획서#5) Step 5. 기념 촬영]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 9:16 골격 위 합성 카메라 구성)
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 함께 보여줌
-	- 액션 하단: 촬영 버튼과 카운트다운 인디케이터, 잔여 촬영 횟수
+	- 액션 하단: 잔여 촬영 횟수와 촬영까지 남은 시간(카운트다운) 두 인디케이터. 촬영 버튼 없음 (시간 0에 자동 촬영)
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: 맨 얼굴의 사용자 (탈을 쓰지 않음)
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
-	- 촬영 버튼과 카운트다운 인디케이터: 잔여 촬영 횟수를 함께 표시
+	- 카운트다운 인디케이터: 잔여 촬영 횟수와 촬영까지 남은 시간(초)을 각각 표시. 시간이 0이 되면 자동 촬영(찰칵)하고 다음 컷으로, 별도 촬영 버튼 없음
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김). 사진 합성 프레임 밖 UI 요소로만 두고 카메라 뷰 안에 탈 쓴 사람을 더 넣지 않음 (사용자와 2D 캐릭터 구분 보존)
-- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 버튼 "촬영", 카운트다운 숫자, 잔여 촬영 횟수
+- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자, 잔여 촬영 횟수(예 "3장 남음")
 
 ### 2) 프롬프트 (영어)
 
@@ -321,13 +321,13 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
 A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
-Bottom: a capture button and a numeric countdown indicator that also shows the remaining number of shots, with a caption '같이 포즈를 잡아 보세요'.
+Bottom: NO capture button or shutter button anywhere (the photo auto-fires when the per-shot timer reaches zero). Show two distinct numeric indicators: (1) a large per-shot countdown timer showing the seconds remaining until the automatic capture, and (2) a separate remaining-shots counter labeled '장 남음' (e.g. '3장 남음'). Caption '같이 포즈를 잡아 보세요'.
 Optionally, a small non-photographic Maldukki mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a masked person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 2D mask character. No additional masked people or faces anywhere in the camera view.
 Background: a traditional madang stage, a festive celebratory mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a mask on the real user's face, any extra masked person or face in the camera view besides the single 2D mask character, and any UI buttons, toolbars, or controls not specified in this prompt.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a mask on the real user's face, any extra masked person or face in the camera view besides the single 2D mask character, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
 ## 자. Step 5. 생성 대기 화면
