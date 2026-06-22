@@ -398,25 +398,25 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 전송 동의 토글을 둠. 액션에 전송 버튼과 받지 않기 보조 버튼을 둠. 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김. 옵트인 시 학습 토큰(QR) 발급 안내를 한쪽에 둠
+- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 안내 문구(번호는 링크 발송에만 쓰고 발송 즉시 파기)를 둠. 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김. 옵트인 시 학습 토큰(QR) 발급 안내를 한쪽에 둠
 - **핵심 UI 컴포넌트**
 	- 전화번호 입력 필드와 숫자 키패드
-	- 전송 동의 토글
+	- 개인정보 안내 문구: 번호는 안내 링크 발송에만 쓰고 발송 즉시 파기 (기획서 Step 6 sub-step 4). 전송/받지 않기 버튼이 동의/거부를 담아 별도 동의 토글 없음
 	- "전송"과 "받지 않기" 버튼
 	- 학습 토큰(QR) 발급 안내 (옵트인 시)
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
-- **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 버튼 "전송" "받지 않기"
+- **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기", 버튼 "전송" "받지 않기"
 
 ### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, send-consent toggle, send/decline buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
 - add a learning-token QR issuing area to one side
-Keep caption '연락처를 입력하면 링크를 보내드려요', buttons '전송' and '받지 않기'.
+Keep caption '연락처를 입력하면 링크를 보내드려요', the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
