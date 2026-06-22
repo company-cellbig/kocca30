@@ -300,27 +300,27 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 아. Step 5. 기념 촬영 화면
 
-덧뵈기 고유 화면. 2D 탈 캐릭터가 탈춤 포즈를 취한 가운데, AR로 자기 탈을 쓴 사용자가 옆에서 같이 포즈를 잡아 기념 사진을 촬영함.
+덧뵈기 고유 화면. 사용자가 만든 탈을 쓴 2D 탈 캐릭터가 탈춤 포즈를 취한 옆에서, 맨 얼굴의 사용자가 같이 포즈를 잡아 한 장의 기념 사진을 촬영함. 탈을 쓴 쪽은 캐릭터뿐이고 사용자는 맨 얼굴이라 둘이 구별됨.
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 9:16 골격 위 합성 카메라 구성)
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 함께 보여줌
-	- 액션 하단: 촬영 버튼과 카운트다운 인디케이터
+	- 액션 하단: 촬영 버튼과 카운트다운 인디케이터, 잔여 촬영 횟수
 - **핵심 UI 컴포넌트**
-	- 카메라 뷰: AR 탈을 쓴 사용자
+	- 카메라 뷰: 맨 얼굴의 사용자 (탈을 쓰지 않음)
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
-	- 촬영 버튼과 카운트다운 인디케이터
+	- 촬영 버튼과 카운트다운 인디케이터: 잔여 촬영 횟수를 함께 표시
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김)
-- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 버튼 "촬영", 카운트다운 숫자
+- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 버튼 "촬영", 카운트다운 숫자, 잔여 촬영 횟수
 
 ### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
-A single composite frame: a live camera view of a user wearing an AR Korean traditional mask, with a 2D mask character (wearing the user-designed mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot.
-Bottom: a capture button and a numeric countdown, with a caption '같이 포즈를 잡아 보세요'.
+A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
+Bottom: a capture button and a numeric countdown indicator that also shows the remaining number of shots, with a caption '같이 포즈를 잡아 보세요'.
 To one side: a Korean Maldukki mask host helping with the photo (can be omitted).
 Background: a traditional madang stage, a festive celebratory mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
