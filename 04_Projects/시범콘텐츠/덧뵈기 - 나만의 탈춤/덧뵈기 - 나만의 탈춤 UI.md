@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-06-19
+updated: 2026-06-22
 ---
 
 > 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(9:16 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양]] §5.다를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
@@ -16,7 +16,7 @@ updated: 2026-06-19
 - **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
 - **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을, 학습 토큰 스캔 화면 1개는 [[플랫폼 사양]] §5.다 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
 - **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §12에 중립 레이아웃 이미지가 있는 화면은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(학습 토큰 스캔, 덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다)
+- **사용법**: §12에 중립 레이아웃 이미지가 있는 화면(공용 7개와 학습 토큰 스캔)은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다)
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
 # 2. 공통 설계
@@ -52,10 +52,10 @@ updated: 2026-06-19
 
 모든 화면 프롬프트가 공유하는 고정부(제약과 부정 프롬프트)와, 화면마다 채우는 변수 슬롯을 정의함.
 
-생성 방식은 §12 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임. 학습 토큰 스캔은 공용이지만 §12 중립 이미지가 없어 단독 프롬프트로 생성함.
+생성 방식은 §12 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
-- **단독 프롬프트** (학습 토큰 스캔, 탈 디자인, AR 춤사위, 기념 촬영, 결과): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 학습 토큰 스캔, 대기, 전송, 종료): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **단독 프롬프트** (탈 디자인, AR 춤사위, 기념 촬영, 결과): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
 
@@ -131,16 +131,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김(스캔 집중)
 - **화면 내 텍스트**: 안내 "학습 코드를 비춰 주세요", 보조 버튼 "처음부터 시작"
 
-### 2) 프롬프트 (영어)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.7) 이어하기 토큰 스캔 중립 레이아웃 이미지
 
 ```
-A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
-The learning-token QR scan screen of a Korean traditional mask dance (talchum) experience (the return-user path).
-Center: a live camera preview with a QR scan guide frame, prompting the user to hold up their learning-token QR code, with a caption '학습 코드를 비춰 주세요'.
-Bottom: a small secondary button labeled '처음부터 시작' to fall back to the first-time flow.
-A small Korean Maldukki mask host in a corner (can be omitted).
-Background: a traditional madang stage, a focused scanning mood.
-Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
+Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, camera-preview with QR guide frame, secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+- the generic host silhouette -> a small Korean Maldukki mask host character in a corner, not blocking the scan frame (can be omitted)
+- the background -> subtle Korean talchum motifs over a traditional madang stage, a focused scanning mood
+Keep the live camera preview with the centered QR scan guide frame as the main body (for reading the learning-token QR).
+Keep caption '학습 코드를 비춰 주세요', secondary button '처음부터 시작'.
+Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
