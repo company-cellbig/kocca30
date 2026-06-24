@@ -9,6 +9,14 @@ updated: 2026-06-24
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-24] maint | 히스토리에서 음성 m4a blob 제거 (용량 정리)
+
+- 사용자 지시. 추적 제외만으로는 기존 히스토리 blob이 남아 리포 용량 유지 → 히스토리 재작성으로 m4a 완전 제거
+- git-filter-repo 설치, m4a 2개 경로를 --invert-paths로 전 히스토리에서 제거. .git 467MB→154MB(약 313MB 절감)
+- 안전 백업: 재작성 전 전체 번들 생성(../kocca30-backup-pre-cleanup.bundle, 266MB, HEAD df1aacf)
+- origin 재등록 후 main 강제 푸시(df1aacf→c59b71b, forced). 작업 파일(assets m4a)은 유지
+- 주의: 협업자는 재클론 또는 하드 리셋 필요(공유 main 히스토리 변경). GitHub 서버측 용량은 server gc 후 반영
+
 ## [2026-06-24] maint | 음성 녹취 원본 git 추적 제외
 
 - 사용자 지시. m4a 음성 원본이 GitHub 권장 50MB 초과(68MB 등)로 리포 비대화 → 추적 제외
