@@ -16,6 +16,11 @@ __pycache__/
 # 한컴 원본 — GitHub 100MB 제한 초과 가능성 (외부 보관)
 *.hwpx
 
+# 음성 녹취 원본 — 대용량 (GitHub 50MB 권장 초과, assets에 로컬 보관)
+*.m4a
+*.mp3
+*.wav
+
 # Obsidian 휴지통
 .trash/
 
