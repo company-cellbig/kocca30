@@ -9,6 +9,15 @@ updated: 2026-06-26
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-26] maint | _archive 위치 문서화 (CONVENTIONS)
+
+- 배경: 사용자가 `04_Projects/_archive/` 위치 정합성 질문. 기존 `_xxx/`(read-only)가 모두 섹션 종속(03_References 하위)인 선례와 일관됨을 확인. 위치는 유지하되 미문서화 상태 해소
+- CONVENTIONS [[CONVENTIONS#2. 디렉토리 구조]] 트리에 `04_Projects/_archive/` 추가
+- CONVENTIONS [[CONVENTIONS#6. 수정 금지 영역]] 적용 대상 목록에 `04_Projects/_archive/` 추가 (폐기 문서, 이력 보존용). 같은 목록 4행의 em dash 구분자를 콜론으로 통일(표준 em dash 금지), "향후 _archive 등" 예시는 실재화돼 제거
+- 잔여: CONVENTIONS 본문 다른 위치에 기존 em dash 18개 잔존 (이번 범위 밖, 별도 정리 후보)
+- 외부 검토: 운영 메타(표준 문서) 변경이라 사이클 면제 (cycle-exempt)
+- 수정 파일: [[CONVENTIONS]]
+
 ## [2026-06-26] maint | 로드맵 3종 봉인(아카이브) + 참조 차단
 
 - 배경: 로드맵 3종은 사용자가 초반에 만든 미승인 초기 문서. 6/22 개발 회의 이후 효력 상실. 다른 문서가 이를 참조하며 내용이 꼬이는 문제 반복. 사용자 승인으로 봉인 + 참조 차단 진행
