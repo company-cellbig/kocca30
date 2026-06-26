@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-06-22
+updated: 2026-06-26
 ---
 
 > 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(9:16 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
@@ -16,7 +16,7 @@ updated: 2026-06-22
 - **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
 - **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을, 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
 - **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §12에 중립 레이아웃 이미지가 있는 화면(공용 7개와 학습 토큰 스캔)은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다)
+- **사용법**: §13에 중립 레이아웃 이미지가 있는 화면(공용 7개와 학습 토큰 스캔)은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다)
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
 # 2. 공통 설계
@@ -52,9 +52,9 @@ updated: 2026-06-22
 
 모든 화면 프롬프트가 공유하는 고정부(제약과 부정 프롬프트)와, 화면마다 채우는 변수 슬롯을 정의함.
 
-생성 방식은 §12 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
+생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 학습 토큰 스캔, 대기, 전송, 종료): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 학습 토큰 스캔, 대기, 전송, 종료): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
 - **단독 프롬프트** (탈 디자인, AR 춤사위, 기념 촬영, 결과): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
@@ -69,7 +69,7 @@ updated: 2026-06-22
 
 ### 2) 화면별 변수 슬롯
 
-화면마다 아래 항목을 채움. 단독 프롬프트는 §2.다 1) 공통 제약 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 §12 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
+화면마다 아래 항목을 채움. 단독 프롬프트는 §2.다 1) 공통 제약 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 §13 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
 
 1. **레이아웃**: 9:16 영역(헤더, 본문, 액션) 배치. 공용 화면은 §5 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, §5 세션 목록 밖이라 직접 설계)
 2. **핵심 UI 컴포넌트**: 이 화면 고유 요소
@@ -99,9 +99,9 @@ updated: 2026-06-22
 - **말뚝이 호스트**: 중앙이나 한쪽에서 손짓하며 환영, 밝은 표정
 - **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"와 "이어하기"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (title, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -131,9 +131,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김(스캔 집중)
 - **화면 내 텍스트**: 안내 "학습 코드를 비춰 주세요", 보조 버튼 "처음부터 시작"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.7) 이어하기 토큰 스캔 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.7) 이어하기 토큰 스캔 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, camera-preview with QR guide frame, secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -158,9 +158,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 화자로 등장해 설명, 재담하는 표정
 - **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -188,9 +188,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)" "영상 생성 (선택)" "학습 기록 (선택)"(표본), 버튼 "동의하고 시작", "그만두기"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -249,9 +249,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 대기 동안 추임새로 흥을 돋움 (선택 노출)
 - **화면 내 텍스트**: 안내 "탈을 빚는 중", 진행률
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -345,9 +345,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 대기 동안 흥을 돋움 (선택 노출)
 - **화면 내 텍스트**: 안내 "결과물을 만드는 중", 진행률
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -407,9 +407,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
 - **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
@@ -434,9 +434,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **말뚝이 호스트**: 중심에서 정겹게 작별 인사
 - **화면 내 텍스트**: 인사 "또 만나요"
 
-### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.6) 종료 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.6) 종료 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
