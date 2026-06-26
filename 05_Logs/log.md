@@ -9,6 +9,17 @@ updated: 2026-06-26
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-06-26] maint | 로드맵 3종 em dash 제거
+
+- 배경: em dash 정리 연장. 사용자 지시로 로드맵 문서군까지 정리
+- 정정: 로드맵 전체, 1단계 1년차, 1단계 2년차의 em dash 제거. 두 종류로 분기 처리
+	- 표 빈 셀 placeholder(`| — |`)는 하이픈(`| - |`)으로 (전체 5곳, 2년차 2곳)
+	- 라벨과 구분자(`X — Y`, 헤딩 `# N. 제목 — 부제`, 인라인 절)는 콜론으로
+- 화살표(`→`)와 물결(`~` 범위)은 em dash가 아니라 유지
+- 검증: 로드맵 3종 em dash와 가운뎃점 0, 자동 lint 0건(헤딩 변경 따른 앵커 깨짐 없음)
+- 잔여: 다른 문서군의 em dash/가운뎃점은 대부분 CONVENTIONS/AGENTS/CLAUDE의 금지문자 예시 인용이거나 `_locked`/`converted` 수정 금지 영역이라 범위 밖
+- 수정 파일: 04_Projects/Roadmap/로드맵 전체.md, 04_Projects/Roadmap/로드맵 1단계 1년차.md, 04_Projects/Roadmap/로드맵 1단계 2년차.md
+
 ## [2026-06-26] maint | 콘셉트 정리 em dash 제거
 
 - 배경: 파급 정합 점검 중 발견한 기존 em dash. 사용자 지시로 함께 정리
