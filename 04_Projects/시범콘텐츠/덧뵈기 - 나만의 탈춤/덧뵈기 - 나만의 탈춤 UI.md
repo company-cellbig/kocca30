@@ -7,15 +7,15 @@ created: 2026-06-15
 updated: 2026-06-26
 ---
 
-> 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(9:16 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
+> 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
 
 # 1. 개요
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
-- **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 9:16 영역 골격을 따름
+- **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
 - **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
 - **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을, 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
-- **공통 규격**: 9:16 세로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
+- **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: §13에 중립 레이아웃 이미지가 있는 화면(공용 7개와 학습 토큰 스캔)은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다)
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
@@ -42,10 +42,10 @@ updated: 2026-06-26
 
 ## 나. 공통 레이아웃
 
-모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(9:16 세로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임.
+모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임.
 
-- **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 §5 세션 화면 목록 밖이라 9:16 골격 위에서 레이아웃을 직접 설계함
-- **고유 화면**: 같은 9:16 영역 골격 위에서 덧뵈기 메커닉(탈 디자인, AR 춤사위, 기념 촬영, 결과)에 맞춰 레이아웃을 상세 설계함
+- **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 §5 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
+- **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(탈 디자인, AR 춤사위, 기념 촬영, 결과)에 맞춰 레이아웃을 상세 설계함
 - **덧뵈기 공통 요소**: 진행 호스트는 말뚝이임(역할은 [[덧뵈기 - 나만의 탈춤 기획서#바. 말뚝이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "말뚝이 탈 호스트 캐릭터"로만 묘사). 작업 집중 화면(탈 디자인, 촬영, 폼)에서는 작게 두거나 숨김 (§5 호스트 슬롯)
 
 ## 다. 공통 프롬프트 양식
@@ -60,7 +60,7 @@ updated: 2026-06-26
 ### 1) 공통 제약 (모든 화면 공유)
 
 - **매체와 형식**: 키오스크 터치스크린 UI 화면 목업, 풀스크린, 실사풍 고해상도
-- **화면비와 규격**: 9:16 세로 (1080x1920 기준)
+- **화면비와 규격**: 16:9 가로 (1920x1080 기준)
 - **아트 디렉션 (제안, 확정 필요)**: 한국 전통 탈춤(덧뵈기) 모티프와 현대 키오스크 UI의 결합. 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용
 - **전통 정합성**: 한국 탈춤 탈 양식 유지, 일본 노멘(일본 가면극 가면)이나 중국 가면과 혼동 금지 ([[덧뵈기 - 나만의 탈춤 기획서#나. 탈 디자인 도구 (Step 2)]])
 - **톤과 무드**: 마당놀이 축제의 신명, 밝고 활기차며 친근함
@@ -71,7 +71,7 @@ updated: 2026-06-26
 
 화면마다 아래 항목을 채움. 단독 프롬프트는 §2.다 1) 공통 제약 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 §13 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
 
-1. **레이아웃**: 9:16 영역(헤더, 본문, 액션) 배치. 공용 화면은 §5 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, §5 세션 목록 밖이라 직접 설계)
+1. **레이아웃**: 16:9 영역(헤더, 본문, 액션) 배치. 공용 화면은 §5 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, §5 세션 목록 밖이라 직접 설계)
 2. **핵심 UI 컴포넌트**: 이 화면 고유 요소
 3. **말뚝이 호스트**: 위치, 상태, 노출 여부 (작업 집중 화면은 작게 두거나 숨김)
 4. **화면 내 텍스트**: 이미지에 한글로 렌더링할 정확한 문구
@@ -104,7 +104,7 @@ updated: 2026-06-26
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (title, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host character welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean talchum motifs over a vibrant traditional madang stage, festive attract mood
 Keep title '나만의 탈춤', primary button '시작하기', secondary button '이어하기'.
@@ -120,7 +120,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (플랫폼 이어하기, 9:16 골격 위 카메라 스캔 구성)
+- **레이아웃** (플랫폼 이어하기, 16:9 골격 위 카메라 스캔 구성)
 	- 헤더: 안내 카피 한 줄
 	- 본문(최대 비중): 카메라 프리뷰와 QR 조준 가이드(스캔 영역 프레임)
 	- 액션 하단: 처음부터 시작 보조 버튼(이어하기를 포기하고 처음 시작 경로로)
@@ -136,7 +136,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.7) 이어하기 토큰 스캔 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, camera-preview with QR guide frame, secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, camera-preview with QR guide frame, secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host character in a corner, not blocking the scan frame (can be omitted)
 - the background -> subtle Korean talchum motifs over a traditional madang stage, a focused scanning mood
 Keep the live camera preview with the centered QR scan guide frame as the main body (for reading the learning-token QR).
@@ -163,7 +163,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host character acting as the narrator with a lively storytelling expression
 - the flow-illustration placeholder -> an instructional illustration of the flow (mask design, AR dance, photo, share) in talchum styling
 - background -> a traditional madang stage, friendly mood
@@ -193,7 +193,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
 Keep title '이용 동의', consent toggles '카메라 촬영 (필수)' (shown ON), '영상 생성 (선택)', '학습 기록 (선택)', primary button '동의하고 시작' (active), secondary button '그만두기'.
@@ -209,10 +209,11 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 9:16 골격 위 2로우 구성)
+- **레이아웃** (고유, 16:9 골격 위 좌우 분할 구성)
 	- 헤더: 안내 카피 한 줄
-	- 본문 상단 로우(2칼럼): 왼쪽에 좁은 경량 3D 미리보기, 오른쪽에 넓은 탈 도안 캔버스. 캔버스가 미리보기보다 확연히 넓음(미리보기 대 캔버스 약 1:3, 1:1 아님)
-	- 본문 하단 로우(전체 폭 1칼럼): 도구 패널 전체
+	- 본문 좌측 칼럼: 도구 패널 전체 (탈 템플릿과 프리셋, 팔레트, 스탬프, 대칭 토글)
+	- 본문 중앙 칼럼: 넓은 탈 도안 캔버스 (가장 큰 비중)
+	- 본문 우측 칼럼: 좁은 경량 3D 미리보기 (캔버스가 미리보기보다 확연히 넓음, 약 1:3)
 	- 액션: 최하단에 완료 버튼 고정
 - **핵심 UI 컴포넌트**
 	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
@@ -225,11 +226,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ### 2) 프롬프트 (영어)
 
 ```
-A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
+A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The mask design tool screen of a Korean traditional mask dance (talchum) experience.
-Two-row layout.
-Top row, two columns: left, a narrow live 3D preview pane showing the design applied to a 3D mask; right, a wide high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, with a caption '탈을 꾸며보세요'. The canvas column is clearly wider than the preview (about 1:3, not 1:1).
-Bottom row, one full-width column: a tool panel with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
+Three-column layout.
+Left column: a tool panel with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
+Center column: a wide high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, with a caption '탈을 꾸며보세요'. This canvas is the largest area, clearly wider than the preview (about 1:3, not 1:1).
+Right column: a narrow live 3D preview pane showing the design applied to a 3D mask.
 At the very bottom: a fixed button labeled '완료'.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -254,7 +256,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the progress/visual placeholder -> a progress indicator with a preview of a Korean traditional mask being converted into 3D
 - the generic host silhouette -> a Korean Maldukki mask host keeping up the mood during the wait (can be omitted)
 - background -> a traditional madang stage, an anticipatory waiting mood
@@ -271,7 +273,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 9:16 골격 위 카메라 우세 구성)
+- **레이아웃** (고유, 16:9 골격 위 카메라 우세 구성)
 	- 헤더 모서리(우상단): 신명 게이지를 상태 표시로 얹음
 	- 본문(최대 비중): AR 카메라 뷰. 사용자 얼굴에 사용자가 디자인한 탈이 오버레이된 실시간 화면
 	- 본문 하단: 춤사위 가이드(시연 아바타나 실루엣)
@@ -286,7 +288,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ### 2) 프롬프트 (영어)
 
 ```
-A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
+A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 Korean traditional mask dance (talchum) AR experience screen.
 Center: a live AR camera view of a participant wearing a hand-designed Korean traditional mask overlaid on their face, dancing.
 Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'. The bottom area contains only this dance-move guide; this is a hands-free experience screen with no bottom toolbar, no action buttons, and no extra UI controls.
@@ -305,7 +307,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 9:16 골격 위 합성 카메라 구성)
+- **레이아웃** (고유, 16:9 골격 위 합성 카메라 구성)
 	- 헤더 상단: 안내 카피 배너 "같이 포즈를 잡아 보세요"와 잔여 촬영 횟수 배지(예 "3장 남음")를 상단 모서리에
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 보여주고, 그 위에 촬영까지 남은 시간을 큰 카운트다운 숫자로 오버레이(포즈 잡는 유저가 바로 봄)
 	- 액션 하단: 비움 (촬영 버튼 없이 시간 0에 자동 촬영). 카운트다운은 본문 오버레이로, 잔여 횟수는 상단 배지로 분산
@@ -320,7 +322,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ### 2) 프롬프트 (영어)
 
 ```
-A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
+A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
 A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
 Top header: a caption banner '같이 포즈를 잡아 보세요' across the top, and a small remaining-shots badge in a top corner labeled '장 남음' (e.g. '3장 남음').
@@ -350,7 +352,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host keeping up the mood during the wait (can be omitted)
 - background -> a traditional madang stage, an anticipatory waiting mood
 Keep the status caption '결과물을 만드는 중' indicating a commemorative photo and a short-form video are being created.
@@ -366,7 +368,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 9:16 골격 위 카드 구성)
+- **레이아웃** (고유, 16:9 골격 위 카드 구성)
 	- 헤더: 타이틀
 	- 본문: 기념 사진 카드와 리플레이 영상 카드를 상하 또는 좌우로 나란히 배치
 	- 액션 하단: 다음 버튼
@@ -380,7 +382,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ### 2) 프롬프트 (영어)
 
 ```
-A high-fidelity, photorealistic UI mockup of a vertical 9:16 kiosk touchscreen, full screen.
+A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The result preview screen of a Korean traditional mask dance (talchum) experience.
 Title: '결과물 미리보기'.
 Layout: a commemorative photo card (a 2D mask character and the user posing together, no score stamp) next to a vertical short-form replay video card (with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
@@ -412,7 +414,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
 - add a learning-token QR issuing area to one side
@@ -439,7 +441,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.6) 종료 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 9:16 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host character giving a warm farewell
 - background -> a traditional madang stage, a warm closing mood
 Keep the closing message '또 만나요'.
