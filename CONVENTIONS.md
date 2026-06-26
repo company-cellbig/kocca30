@@ -4,7 +4,7 @@ type: reference
 status: stable
 tags: [convention, wiki]
 created: 2026-04-27
-updated: 2026-06-16
+updated: 2026-06-26
 ---
 
 이 위키의 디렉토리 구조, 문서 작성 규칙, 메타데이터, 인용 원칙, 수정 금지 영역, 로그 양식을 정의함. AI 운영 규칙(역할, 사이클, 게이트, 검수)은 별도 [[AGENTS|에이전트 작업 지침]]에서 다룸. 본 문서는 AI/사람 누구든 위키에 글을 쓸 때 따르는 표준임. AGENTS.md가 본 문서를 `@CONVENTIONS.md`로 import 함.
@@ -60,7 +60,7 @@ updated: 2026-06-16
 ---
 title: 문서 제목
 type: entity | concept | overview | howto | reference | project | index | answer | log
-status: stub | draft | stable
+status: stub | draft | stable | deprecated
 tags: [태그1, 태그2]
 sources: [출처페이지명, ...]
 created: YYYY-MM-DD
@@ -71,7 +71,7 @@ updated: YYYY-MM-DD
 **필드 설명**
 
 - **type**: 문서의 종류. `title`이나 폴더와 별개로 문서 성격을 분류함. `entity`는 주로 `01_Concepts/`에 두고 type으로 구분. 값은 아래 표 참조
-- **status**: 성숙도. `stub`(껍데기)에서 `draft`(초안)을 거쳐 `stable`(안정)으로 올림. 오래 `stub`이나 `draft`에 머물면 유지보수 점검 대상 ([[AGENTS#아. 위키 운영 워크플로 (수집/질의/유지)]] 3)
+- **status**: 성숙도. `stub`(껍데기)에서 `draft`(초안)을 거쳐 `stable`(안정)으로 올림. 오래 `stub`이나 `draft`에 머물면 유지보수 점검 대상 ([[AGENTS#아. 위키 운영 워크플로 (수집/질의/유지)]] 3). `deprecated`는 폐기된 문서로, 더는 참조 대상이 아니며 이력 보존용으로만 남김 (주로 `_archive/`에 둠). 폐기 사유와 정본 안내는 본문 상단 `> [폐기]` 블록에 적음
 - **sources** (선택): 이 페이지가 인용한 정본이나 변환본 페이지명을 나열함 (예: `[1. 연구개발의 필요성]`). 본문 출처 wikilink(§3.바)를 frontmatter에서 한눈에 보게 하는 보조 색인임. 별도 source-id 레지스트리를 두지 않고 기존 wikilink 인용 모델을 따름
 - **tags**: 자유 주제 태그. 문서 종류의 정본은 type이고, tags는 보조 분류임
 
