@@ -157,7 +157,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
-- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)" "학습 기록 (선택)"(표본), 버튼 "동의하고 시작", "그만두기"
+- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
@@ -167,7 +167,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
-Keep title '이용 동의', consent toggles '카메라 촬영 (필수)' (shown ON), '학습 기록 (선택)', primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의', consent toggle '카메라 촬영 (필수)' (shown ON), primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
@@ -386,7 +386,6 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
-- add a learning-token QR issuing area to one side
 Keep caption '연락처를 입력하면 링크를 보내드려요', the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
