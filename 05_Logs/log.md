@@ -2,12 +2,51 @@
 title: 작업 로그
 tags: [log]
 created: 2026-04-27
-updated: 2026-06-26
+updated: 2026-06-30
 ---
 
 # 작업 로그
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
+
+## [2026-06-30] maint | Claude Code 주력 기준 진입점 3문서 점검 + frontmatter 정정
+
+- 배경: 사용자가 본 저장소 주력 관리 도구를 Claude Code로 확정. [[CLAUDE]], [[AGENTS]], [[CONVENTIONS]]가 Claude Code 운영에 적절한지 점검
+- 점검 결과(양호): ① import 체인 무결(`CLAUDE.md` 끝 `@AGENTS.md`, `AGENTS.md` 상단 `@CONVENTIONS.md`)이라 세션마다 정본 자동 로드 ② em dash 스윕이 규칙 텍스트 훼손 없음(공백+콜론/이중콜론 0건, 백틱 금지문자 예시만 보존) ③ 작성자=Claude Code, 외부 검토자=Codex(`/codex:adversarial-review`) 운영 모델 정합
+- 발견/정정: 오늘 스윕으로 AGENTS/CONVENTIONS 본문이 바뀌었으나 frontmatter `updated`가 stale(각 06-19, 06-26). [[CONVENTIONS#5. 문서 작성/갱신 절차]] 위반이라 둘 다 2026-06-30으로 정정
+- 검증: `wiki_lint` 0건
+- 외부 검토 면제(cycle-exempt): frontmatter only 정정
+- 수정 파일: [[AGENTS]], [[CONVENTIONS]]
+
+## [2026-06-30] maint | .gitattributes 줄바꿈 정규화 정책 추가
+
+- 배경: Cowork 리눅스 샌드박스는 LF로 입출력하고 저장소는 CRLF라, 샌드박스에서 커밋하면 파일 전체가 LF로 치환되는 노이즈 diff 발생. 사용자 결정으로 정규화 정책 도입
+- 정책: `* text=auto`로 저장소(index)를 LF 통일, 체크아웃 시 플랫폼별 변환. 텍스트 자산(md/mjs/py/json/xml) 명시, 바이너리 자산(png/bmp/jpg/jpeg/m4a/hwpx/pyc)은 binary 지정. Windows는 working tree CRLF 유지 위해 core.autocrlf=true 권장
+- 일회성 적용(네이티브 git 권장): `git add .gitattributes` 후 `git add --renormalize .` 후 commit. 이후 샌드박스와 Windows 줄바꿈 일치
+- 검증: `wiki_lint` 0건
+- 외부 검토 면제(cycle-exempt): 운영 메타/설정 변경
+- 수정 파일: `.gitattributes`(신설)
+
+## [2026-06-30] maint | 저장소 전역 em dash 스윕 (구분자 콜론화)
+
+- 배경: CONVENTIONS는 em dash(`—`) 금지지만 MOC 등 다수 문서가 `[[링크]] — 설명` 구분자로 U+2014 사용 중. 직전 CLAUDE.md 항목의 미결을 사용자 결정으로 해소
+- 규칙(선례 준수): 구분자/라벨/헤딩 부제/`[[링크]] — 설명`은 콜론(`:`)으로, 표 빈 셀 `| — |`은 하이픈으로, 백틱 안 금지문자 예시(`—`)는 보존, 화살표(→)와 물결(~)은 유지
+- 범위: 작성 문서 14개에서 구분자 233건 콜론화(AGENTS 37, 스크립트 2차 193, CLAUDE 3). 제외: 읽기전용(_locked/_sources/_figures/_reviews), 변환본(converted/), 폐기(_archive/), append-only 이력 log.md(과거 스윕도 미적용 선례)
+- 방법: 백틱 코드 스팬 보호 스크립트(`scripts/` 외 임시 실행). 마운트 레이스 회피 위해 Claude 도구로 쓴 CLAUDE.md/log.md는 스크립트 제외하고 Edit로 직접 처리
+- 잔여(의도적 보존): 금지문자 예시 2곳([[CONVENTIONS]] 라.1, [[CLAUDE]] 라)
+- frontmatter: 본문 바뀐 스윕 대상 문서 전체의 `updated`를 2026-06-30으로 동기화([[CONVENTIONS#5. 문서 작성/갱신 절차]])
+- 검증: `wiki_lint` 0건. 스윕 대상 em dash 0건(백틱 예시 제외)
+- 외부 검토: 대규모 다중 파일 변경이라 codex-verify 수동 루프 적용 권장(사용자 판단)
+- 수정 파일: [[AGENTS]], [[CONVENTIONS]], [[CLAUDE]], [[MOC]], [[덜미]], [[버나]], [[살판]], [[한국 전통 인형극]], [[덜미의 각본 재미 요소]], [[codex 검수 포커스]], [[반복 결함 카탈로그]], [[docx 변환 파이프라인]], `03_References/converted_모순점.md`, `.claude/commands/import-doc.md`
+
+## [2026-06-30] maint | CLAUDE.md 린 진입점 유지 (Cowork 호환 보강 미채택)
+
+- 배경: Cowork 이관 검토 시점에 CLAUDE.md를 Cowork 호환용으로 확장(도구별 정본 로드/핵심 규율 요약 안전망/Cowork 운영 메모)했으나, 같은 날 주력 관리 도구가 Claude Code로 확정되며 전제 소멸. 사용자 검토로 미채택 결정
+- 판단: ① Cowork 운영 메모와 도구별 로드 안내는 Cowork 전용이라 효용 없음 ② 핵심 규율 요약은 Claude Code가 `@import`로 [[AGENTS]]/[[CONVENTIONS]] 정본을 통째로 자동 로드하므로 중복이고 drift 위험만 남음
+- 조치: CLAUDE.md를 Claude Code 전용 린 진입점으로 환원(TL;DR 한 줄 + `@AGENTS.md` 스텁). 제목은 원본의 em dash 제거해 `Claude Code 진입점 (CLAUDE)`로 정리
+- 검증: `wiki_lint` 0건
+- 외부 검토 면제(cycle-exempt): 운영 메타 변경(진입점 문서)
+- 수정 파일: [[CLAUDE]], [[log]]
 
 ## [2026-06-26] update | 덜미 기획서 §4.나 H3 분리 (개인정보 처리 / 사용자 모델과 연속성)
 
