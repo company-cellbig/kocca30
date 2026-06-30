@@ -153,11 +153,11 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 - **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트와 동의 토글 목록, 액션에 동의하고 시작 버튼(필수 카메라 동의 시 활성)과 그만두기 보조 버튼을 둠. 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김
 - **핵심 UI 컴포넌트**
-	- 동의 항목 토글: 필수 카메라 촬영, 선택 영상 녹화와 생성
+	- 동의 항목 토글: 필수 카메라 촬영
 	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
-- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)" "영상 생성 (선택)" "학습 기록 (선택)"(표본), 버튼 "동의하고 시작", "그만두기"
+- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)" "학습 기록 (선택)"(표본), 버튼 "동의하고 시작", "그만두기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
@@ -167,7 +167,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
 - background -> a calm traditional madang stage
-Keep title '이용 동의', consent toggles '카메라 촬영 (필수)' (shown ON), '영상 생성 (선택)', '학습 기록 (선택)', primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의', consent toggles '카메라 촬영 (필수)' (shown ON), '학습 기록 (선택)', primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
@@ -309,12 +309,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 자. Step 5. 생성 대기 화면
 
-공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 기념 사진과 (영상 동의 시) 리플레이 영상을 만드는 동안 노출함.
+공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 기념 사진을 만드는 동안 노출함.
 
 ### 1) 화면 설계
 
 - **레이아웃**: 공통 사양 §5.다 대기 준용. 본문 중앙에 진행 인디케이터와 생성 중 안내, 대기 콘텐츠를 둠. 헤더와 액션은 비움. 두 타임아웃 미적용. 말뚝이는 선택 노출
-- **핵심 UI 컴포넌트**: 진행 인디케이터, 사진과 영상 생성 중 안내, 대기 콘텐츠
+- **핵심 UI 컴포넌트**: 진행 인디케이터, 기념 사진 생성 중 안내, 대기 콘텐츠
 - **말뚝이 호스트**: 대기 동안 흥을 돋움 (선택 노출)
 - **화면 내 텍스트**: 안내 "결과물을 만드는 중", 진행률
 
@@ -326,7 +326,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host keeping up the mood during the wait (can be omitted)
 - background -> a traditional madang stage, an anticipatory waiting mood
-Keep the status caption '결과물을 만드는 중' indicating a commemorative photo and a short-form video are being created.
+Keep the status caption '결과물을 만드는 중' indicating a commemorative photo is being created.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
@@ -335,17 +335,16 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 차. Step 6. 결과물 미리보기 화면
 
-덧뵈기 고유 화면. 완성된 기념 사진과 리플레이 영상을 미리 봄.
+덧뵈기 고유 화면. 완성된 기념 사진을 미리 봄.
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 카드 구성)
 	- 헤더: 타이틀
-	- 본문: 기념 사진 카드와 리플레이 영상 카드를 상하 또는 좌우로 나란히 배치
+	- 본문: 기념 사진 카드를 중앙에 배치
 	- 액션 하단: 다음 버튼
 - **핵심 UI 컴포넌트**
-	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (점수 스탬프 없음)
-	- 리플레이 영상 미리보기: 세로형 숏폼 재생 썸네일 (신명 게이지 점수와 등급 스탬프 포함)
+	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (신명 게이지 점수와 등급을 스탬프로 표기)
 	- "다음" 버튼
 - **말뚝이 호스트**: 모서리에서 결과를 자랑하듯 (선택)
 - **화면 내 텍스트**: 타이틀 "결과물 미리보기", 버튼 "다음"
@@ -356,7 +355,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The result preview screen of a Korean traditional mask dance (talchum) experience.
 Title: '결과물 미리보기'.
-Layout: a commemorative photo card (a 2D mask character and the user posing together, no score stamp) next to a vertical short-form replay video card (with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
+Layout: a commemorative photo card (a 2D mask character and the user posing together, with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
 To one side: a Korean Maldukki mask host reacting proudly to the result (can be omitted).
 Background: a traditional madang stage, a proud showcase mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
