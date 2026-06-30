@@ -1,0 +1,23 @@
+# 줄바꿈 정규화 정책
+# 저장소(index)는 LF로 통일하고, 체크아웃 시 플랫폼별로 변환함.
+# 목적: Cowork 리눅스 샌드박스(LF 입출력)와 Windows 네이티브 git 혼용 시
+#       파일 전체가 줄바꿈만으로 바뀌는 대량 노이즈 diff를 막음.
+# Windows 사용자는 working tree를 CRLF로 유지하려면 core.autocrlf=true 권장(보통 기본값).
+
+* text=auto
+
+# 텍스트 자산 (명시)
+*.md   text
+*.mjs  text
+*.py   text
+*.json text
+*.xml  text
+
+# 바이너리 자산 (줄바꿈 변환/병합 금지)
+*.png  binary
+*.bmp  binary
+*.jpg  binary
+*.jpeg binary
+*.m4a  binary
+*.hwpx binary
+*.pyc  binary
