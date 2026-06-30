@@ -4,7 +4,7 @@ argument-hint: '<path-to-hwpx-or-docx>'
 allowed-tools: Bash, Read, Edit, Glob
 ---
 
-HWPX 또는 DOCX 파일을 LLM Wiki 표준 위치로 변환·통합한다. **HWPX 직접 변환을 권장** — 한컴오피스 export 단계가 필요 없고 헤딩 구조가 손실 없이 보존된다.
+HWPX 또는 DOCX 파일을 LLM Wiki 표준 위치로 변환·통합한다. **HWPX 직접 변환을 권장**: 한컴오피스 export 단계가 필요 없고 헤딩 구조가 손실 없이 보존된다.
 
 Raw 인자: `$ARGUMENTS`
 
@@ -66,9 +66,9 @@ Raw 인자: `$ARGUMENTS`
 ## 주의
 
 - 스크립트는 원본 파일을 `03_References/_sources/`로 **복사**한다. 사용자의 원래 파일은 그대로 유지됨
-- 같은 이름의 파일이 `_sources/`에 이미 있으면 덮어쓰기 — 충돌이 우려되면 호출 전 사용자에게 확인 후 진행
+- 같은 이름의 파일이 `_sources/`에 이미 있으면 덮어쓰기: 충돌이 우려되면 호출 전 사용자에게 확인 후 진행
 - 사이드카는 사람 검수용. 검수 완료 후 사용자가 삭제하거나 본문에 흡수
-- 이미지 자동 설명(Vision)은 OFF — 환각 방지. 시각 해석이 필요하면 별도 명령으로 명시 호출
+- 이미지 자동 설명(Vision)은 OFF: 환각 방지. 시각 해석이 필요하면 별도 명령으로 명시 호출
 - HWPX 경로는 Python 표준 라이브러리만 사용 (외부 의존성 없음). DOCX 경로는 Pandoc 바이너리 필요
 
 ## HWPX vs DOCX 선택 가이드
