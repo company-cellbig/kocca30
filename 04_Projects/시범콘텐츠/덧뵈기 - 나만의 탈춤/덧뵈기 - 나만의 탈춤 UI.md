@@ -23,12 +23,12 @@ updated: 2026-06-26
 
 ## 가. 화면 목록과 분류
 
-12개 화면을 Step 순으로 정리함. 분류는 공용(공유 화면)과 덧뵈기 고유로 나눔. 공용은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면과 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기(학습 토큰 스캔)를 포함함.
+화면을 Step 순으로 정리함. 분류는 공용(공유 화면)과 덧뵈기 고유로 나눔. 공용은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면을 포함함. 이어하기(학습 토큰 스캔)는 2차연도 전방 설계라 1차연도 미적용이며([[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]) 참고로만 표에 둠.
 
 | 순서 | 화면 | Step | 분류 | 기획서 근거 |
 | --- | --- | --- | --- | --- |
 | 가 | 시작 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
-| 나 | 학습 토큰 스캔 화면 | Step 1 | 공용 (플랫폼 이어하기) | [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] |
+| 나 | 학습 토큰 스캔 화면 | Step 1 | 공용 (플랫폼 이어하기, 2차연도 전방 설계, 1차연도 미적용) | [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] |
 | 다 | 가이드 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
 | 라 | 동의 약관 화면 | Step 1 | 공용 (인트로, §5.나) | [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]] |
 | 마 | 탈 디자인 도구 화면 | Step 2 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#2) Step 2. 탈 디자인]] |
@@ -94,10 +94,10 @@ updated: 2026-06-26
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 탈춤 대표 비주얼, 액션에 큰 시작 버튼과 보조 이어하기 버튼을 둠. 말뚝이가 환영하며 등장함
-- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 보조 "이어하기" 버튼(재방문 옵트인 학습자가 학습 토큰 QR을 카메라에 비춰 진척과 동의 기록을 복원해 진입), 콘텐츠 타이틀, 탈춤 대표 비주얼
+- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 탈춤 대표 비주얼, 액션에 큰 시작 버튼을 둠. 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, §6)
+- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 탈춤 대표 비주얼
 - **말뚝이 호스트**: 중앙이나 한쪽에서 손짓하며 환영, 밝은 표정
-- **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"와 "이어하기"
+- **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
@@ -107,45 +107,16 @@ updated: 2026-06-26
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the generic host silhouette -> a Korean Maldukki mask host character welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean talchum motifs over a vibrant traditional madang stage, festive attract mood
-Keep title '나만의 탈춤', primary button '시작하기', secondary button '이어하기'.
+Keep title '나만의 탈춤', primary button '시작하기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 나. Step 1. 학습 토큰 스캔 화면
+## 나. Step 1. 학습 토큰 스캔 화면 (2차연도 전방 설계, 1차연도 미적용)
 
-공용 화면(플랫폼 이어하기 경로). 학습 토큰 스캔은 덧뵈기 메커닉이 아니라 콘텐츠 무관 플랫폼 기능으로, 정본은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]](subject_id 기반 복원)임. 화면에는 덧뵈기 고유분(말뚝이, 한글 카피)만 얹음. 재방문 옵트인 학습자가 시작 화면에서 이어하기를 누르면, 카메라로 학습 토큰(QR)을 비춰 진척과 동의 기록을 복원함. 유효 토큰이면 처음 시작 경로(가이드, 동의)를 건너뛰고 Step 2로 직행함. 무효이거나 스캔에 실패하면 처음 시작 경로로 안내함 (기획서 Step 1 sub-step 3과 4, [[덧뵈기 - 나만의 탈춤 기획서#1) Step 1. 인트로 (시작 + 동의)]]). 사용자를 촬영하는 카메라를 토큰 판독에만 쓰는 점에서 AR 체험 화면과 구분됨.
-
-### 1) 화면 설계
-
-- **레이아웃** (플랫폼 이어하기, 16:9 골격 위 카메라 스캔 구성)
-	- 헤더: 안내 카피 한 줄
-	- 본문(최대 비중): 카메라 프리뷰와 QR 조준 가이드(스캔 영역 프레임)
-	- 액션 하단: 처음부터 시작 보조 버튼(이어하기를 포기하고 처음 시작 경로로)
-- **핵심 UI 컴포넌트**
-	- 카메라 프리뷰: 학습 토큰 QR을 비추는 실시간 화면(토큰 판독 용도)
-	- QR 조준 가이드: 스캔 영역 프레임과 안내
-	- 무효와 실패 처리: 무효 토큰이거나 스캔에 실패하면 처음 시작 경로(가이드, 동의)로 안내하는 fallback
-- **말뚝이 호스트**: 모서리에 작게 두거나 숨김(스캔 집중)
-- **화면 내 텍스트**: 안내 "학습 코드를 비춰 주세요", 보조 버튼 "처음부터 시작"
-
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
-
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.7) 이어하기 토큰 스캔 중립 레이아웃 이미지
-
-```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, camera-preview with QR guide frame, secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a small Korean Maldukki mask host character in a corner, not blocking the scan frame (can be omitted)
-- the background -> subtle Korean talchum motifs over a traditional madang stage, a focused scanning mood
-Keep the live camera preview with the centered QR scan guide frame as the main body (for reading the learning-token QR).
-Keep caption '학습 코드를 비춰 주세요', secondary button '처음부터 시작'.
-Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
-```
+이 화면은 2차연도 전방 설계이며 1차연도 UI는 구현하지 않음. 재방문 옵트인 학습자가 학습 토큰(QR)을 스캔해 진척과 동의를 복원하는 플랫폼 이어하기 화면으로, 정본은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]](subject_id 기반 복원)임. 상세 레이아웃과 프롬프트는 2차연도 설계에서 확정함.
 
 ## 다. Step 1. 가이드 화면
 
@@ -176,13 +147,13 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 라. Step 1. 동의 약관 화면
 
-공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수와 선택 동의를 받음. 학습 토큰 복원 스캔은 시작 화면의 이어하기에서 처리함.
+공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수와 선택 동의를 받음.
 
 ### 1) 화면 설계
 
 - **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트와 동의 토글 목록, 액션에 동의하고 시작 버튼(필수 카메라 동의 시 활성)과 그만두기 보조 버튼을 둠. 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김
 - **핵심 UI 컴포넌트**
-	- 동의 항목 토글: 필수 카메라 촬영, 선택 영상 녹화와 생성, 선택 학습 프로필
+	- 동의 항목 토글: 필수 카메라 촬영, 선택 영상 녹화와 생성
 	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
@@ -314,7 +285,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: 맨 얼굴의 사용자 (탈을 쓰지 않음)
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
-	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 다음 컷으로. 컷당 예 3초에서 0까지(확인 필요, [[덧뵈기 - 나만의 탈춤 기획서]] §4 파라미터). 별도 촬영 버튼 없음
+	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 다음 컷으로. 컷당 예 3초에서 0까지(확인 필요, [[덧뵈기 - 나만의 탈춤 기획서]] §3.라 운영 파라미터). 별도 촬영 버튼 없음
 	- 잔여 촬영 횟수 배지 (상단 모서리): "N장 남음". 카운트다운 숫자와 분리해 혼동 방지
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김). 사진 합성 프레임 밖 UI 요소로만 두고 카메라 뷰 안에 탈 쓴 사람을 더 넣지 않음 (사용자와 2D 캐릭터 구분 보존)
 - **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자, 잔여 촬영 횟수(예 "3장 남음")
@@ -400,12 +371,11 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김. 옵트인 시 학습 토큰(QR) 발급 안내를 한쪽에 둠
+- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김
 - **핵심 UI 컴포넌트**
 	- 전화번호 입력 필드와 숫자 키패드
 	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
 	- "전송"과 "받지 않기" 버튼
-	- 학습 토큰(QR) 발급 안내 (옵트인 시)
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
 - **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
 
