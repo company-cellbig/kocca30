@@ -207,7 +207,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ```
 A rich premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Pure white (#FFFFFF) background so it drops cleanly onto a white slide. Do NOT draw a slide title or header text (the presentation already provides it). Organize the six cards into two labeled device categories so the layout reads clearly at a glance, with no scattered colors.
-Layout: a top category with a colored group header "케이브 콘텐츠 5종" holding a row of five cards; below it a category with a colored group header "키오스크 콘텐츠 1종" holding one card. Within the cave group, order the three 관람 cards first then the two 체험 cards so the type-tag colors are grouped. Each card has a colored header strip with the content name and a type tag ("관람" or "체험" in different colors), a small 종목 sub-label, one concise concept line, and a semi-realistic Namsadang thumbnail on the right portion.
+Layout: a top category with a colored group header "케이브 콘텐츠 5종" holding a row of five cards; below it a category with a colored group header "키오스크 콘텐츠 1종" holding one card. Each card has a colored header strip with the content name and a type tag ("관람" or "체험" in different colors), a small 종목 sub-label, one concise concept line, and a semi-realistic Namsadang thumbnail on the right portion.
 Card thumbnails: 곤두질 한 판 a ground-acrobatics tumbler mid-flip across a 4-wall immersive screen; 외줄 위의 어름산이 a tightrope walker performing above a reacting crowd; 탈춤 군무 한마당 masked avatars dancing inside a large screen before an audience; 다함께 풍물 한바탕 several hands playing virtual pungmul instruments in XR; 빛의 상모놀이 a spinning sangmo hat drawing a glowing light trail; 어름산이 되기 a person balancing on a floor-projected rope line with a real-time coaching pose-overlay.
 Render ONLY these exact Korean texts, nothing else:
 group header "케이브 콘텐츠 5종"
@@ -458,23 +458,47 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 ### 슬라이드
 
-2차연도의 마무리는 현장 실증과 상용 수준(TRL 7) 달성임 ([[2. 연구개발의 목표 및 내용]]).
+2차연도의 마무리는 현장 실증과 상용 수준(TRL 7) 달성임. 국내외 수요처 2개소 이상에 설치, 운영해 TRL 7을 검증함 ([[2. 연구개발의 목표 및 내용]]).
 
-- **국내 실증 [확정]**: 서울랜드. 미디어 케이브(살판)와 키오스크. 셀빅이 협의 선행. 실증 영상 확보가 결과 보고의 핵심 ([[큐랩셀빅 사전회의 - 2026-06-22#마. 실증]])
+실증 장소별 기간, 대상 인원, 투입 시스템을 정리함.
+
+| 장소 | 기간 | 대상과 인원 | 투입 시스템 | 상태 |
+|---|---|---|---|---|
+| 서울랜드 (국내) | 27.5 ~ 27.8 | 일반 관람객 400명 | 미디어 케이브(살판), 키오스크 | 확정 |
+| 해외 1곳 (태국 또는 베트남) | 27.8 ~ 27.12 | 현지 학생 100명 | 키오스크 | 미결 |
+
+- **성과 목표 지표 [방향]**: 계획서 성능지표 기준, TRL 7 달성의 정량 근거임 ([[2. 연구개발의 목표 및 내용]])
+	- 현장 실증 운영: 400명 (2차연도, 평가 가중치 20%)
+	- 참여자 만족도(CSAT): 85점 이상 (참여자 100인 이상 설문, 공인인증기관 시험)
+	- 무형유산 특성 분류 정확도: 95% 이상 (1차연도 85%에서 향상)
+	- 동작 분석 정밀도(MPJPE): 35mm 이하 (1차연도 45mm에서 향상)
+	- 4D 콘텐츠 생성 품질(FID): 4.0 이하 (1차연도 6.0에서 향상)
+- **실증 검증 항목 [방향]**: 실증 현장에서 측정할 지표임 ([[2. 연구개발의 목표 및 내용]])
+	- 사용자 편의성(UI/UX 만족도)
+	- 콘텐츠 몰입도(체험 시간, 재방문율)
+	- 하드웨어 안정성(장애 발생률)
+- **국내 실증 [확정]**: 서울랜드. 셀빅이 협의 선행. 실증 영상 확보가 결과 보고의 핵심 ([[큐랩셀빅 사전회의 - 2026-06-22#마. 실증]])
 - **해외 실증 [미결]**: 한 곳. 태국과 베트남을 비교해 선정(계획서의 필리핀은 6/22 회의에서 빠짐). 준비가 오래 걸려 8월부터 착수 ([[컨소시엄 회의록 - 2026-06-22#바. 실증과 거버넌스]])
-- **만족도 목표 [확정]**: 실증 참여자 시스템 만족도(CSAT) 85점 이상 ([[2. 연구개발의 목표 및 내용]])
+- **기술 성숙도 [확정]**: 착수 시점 TRL 5단계에서 2차연도 종료 시점 TRL 7단계 목표 ([[rfp_제안요청서]], [[2. 연구개발의 목표 및 내용]])
 
-> **발표 노트**: 해외 실증지 확정이 선행임. 준비 기간이 길어 늦어지면 가을 실증 일정이 흔들림.
+> **발표 노트**: 해외 실증지 확정이 선행임. 준비 기간이 길어 늦어지면 가을 실증 일정이 흔들림. 서울랜드 인원은 정본 KPI 400명 기준임(사전회의 녹취 500명은 미확정). 성능지표(정확도, MPJPE, FID)는 3부 기술 트랙 목표와 연동됨. 성과물 건수(특허, SW, 매출 등)는 6부 가에서 다룸.
 
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape. On the left, a stylized map motif with two location markers; on the right, a semicircular gauge and a badge. Densely filled with meaningful content, no decorative filler; clean and legible.
+A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape, split into a left "실증 추진 계획" panel and a right "성과 목표 (TRL 7)" panel.
+Left panel: a clean flat regional map of East and Southeast Asia (show the Korean peninsula AND mainland Southeast Asia, not just Korea). One emphasized red pin on Seoul, Korea labeled 서울랜드, and one gold dashed pin over the Thailand/Vietnam area of Southeast Asia labeled 해외 1곳. Do NOT draw any travel route or dashed line connecting the two pins. Below the map, two info cards side by side summarizing each site (date, headcount, system). The domestic pin and card are solid/emphasized (확정); the overseas pin and card are dashed/muted (미결).
+Right panel: a compact KPI dashboard. A semicircular gauge on top showing a TRL progression from 5 to 7. Below it, a row of four small metric cards, then a wide badge. Every metric maps to its concept with a tiny flat icon.
+A slim annotation bar spans the full width at the bottom under both panels.
 Render ONLY these exact Korean texts, nothing else:
-left markers "서울랜드 (국내, 확정)", "해외 1곳 (태국 또는 베트남, 미결)"
-right gauge "CSAT 85점 이상", badge "TRL 7 달성"
-bottom label "실증 영상 확보가 결과 보고 핵심"
-Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; ink-navy elements, vermilion-red and gold accents, flat map and gauge icons, domestic marker emphasized. 2:1 landscape.
+left map pins "서울랜드", "해외 1곳"
+left card 1 "서울랜드 (국내, 확정)" lines "27.5~27.8", "관람객 400명", "미디어 케이브, 키오스크"
+left card 2 "해외 1곳 (미결)" lines "27.8~27.12", "현지 학생 100명", "태국 또는 베트남, 키오스크"
+right gauge "TRL 5에서 7로"
+right metric cards "CSAT 85점 이상", "특성 분류 정확도 95%", "동작 분석 MPJPE 35mm", "4D 생성 FID 4.0"
+right badge "국내외 수요처 2개소 이상 설치, 운영"
+bottom annotation "실증 영상 확보가 결과 보고 핵심"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; ink-navy elements, vermilion-red and gold accents, flat map and gauge icons, domestic site emphasized in red, overseas site muted with a gold dashed outline. 2:1 landscape.
 ```
 
 # 6. 사업 관리
