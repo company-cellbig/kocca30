@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-06-26
+updated: 2026-07-01
 ---
 
 > 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
@@ -42,11 +42,11 @@ updated: 2026-06-26
 
 ## 나. 공통 레이아웃
 
-모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임.
+모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 공용 화면은 §13 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
 - **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 §5 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
 - **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(탈 디자인, AR 춤사위, 기념 촬영, 결과)에 맞춰 레이아웃을 상세 설계함
-- **덧뵈기 공통 요소**: 진행 호스트는 말뚝이임(역할은 [[덧뵈기 - 나만의 탈춤 기획서#바. 말뚝이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "말뚝이 탈 호스트 캐릭터"로만 묘사). 작업 집중 화면(탈 디자인, 촬영, 폼)에서는 작게 두거나 숨김 (§5 호스트 슬롯)
+- **덧뵈기 공통 요소**: 진행 호스트는 말뚝이임(역할은 [[덧뵈기 - 나만의 탈춤 기획서#바. 말뚝이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "말뚝이 탈 호스트 캐릭터"로만 묘사). 공통 화면에서는 말뚝이를 중앙 조작 존 옆 여유 공간에 또렷한 안내 캐릭터로 두고 유저를 향해 안내하는 포즈로 함(실사 행인이나 다른 사용자로 오인되지 않게, §5.가 호스트 슬롯). 본문이 화면 전체를 쓰는 고유 화면(탈 디자인 캔버스, AR 카메라 뷰, 촬영)에서만 작게 두거나 숨김
 
 ## 다. 공통 프롬프트 양식
 
@@ -73,7 +73,7 @@ updated: 2026-06-26
 
 1. **레이아웃**: 16:9 영역(헤더, 본문, 액션) 배치. 공용 화면은 §5 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, §5 세션 목록 밖이라 직접 설계)
 2. **핵심 UI 컴포넌트**: 이 화면 고유 요소
-3. **말뚝이 호스트**: 위치, 상태, 노출 여부 (작업 집중 화면은 작게 두거나 숨김)
+3. **말뚝이 호스트**: 위치, 상태, 안내 포즈. 공통 화면은 측면에 또렷한 안내 캐릭터, 본문 전체를 쓰는 고유 화면(창작 캔버스, 카메라 뷰)만 작게 두거나 숨김
 4. **화면 내 텍스트**: 이미지에 한글로 렌더링할 정확한 문구
 
 ### 3) 부정 프롬프트 (모든 화면 공통)
@@ -81,6 +81,7 @@ updated: 2026-06-26
 - 깨지거나 왜곡된 한글, UI 내 영어 텍스트
 - 기형 손과 얼굴, 워터마크와 서명
 - 저작권 캐릭터
+- 말뚝이 호스트가 실사 행인이나 옆에 선 다른 사용자로 오인되는 형태 (화면 속 안내 캐릭터로 명확히)
 - 일본 노멘(일본 가면극 가면)이나 중국 가면과 혼동되는 형태
 - 프롬프트에 지정하지 않은 임의 UI 버튼, 툴바, 컨트롤 (생성기가 키오스크 맥락에서 임의로 채우는 환각 방지)
 
@@ -96,7 +97,7 @@ updated: 2026-06-26
 
 - **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 탈춤 대표 비주얼, 액션에 큰 시작 버튼을 둠. 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, §6)
 - **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 탈춤 대표 비주얼
-- **말뚝이 호스트**: 중앙이나 한쪽에서 손짓하며 환영, 밝은 표정
+- **말뚝이 호스트**: 한쪽 측면에서 유저를 향해 손짓하며 환영, 밝은 표정(중앙은 타이틀과 시작 버튼 자리)
 - **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -104,8 +105,8 @@ updated: 2026-06-26
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a Korean Maldukki mask host character welcoming with a beckoning gesture and a bright expression
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean talchum motifs over a vibrant traditional madang stage, festive attract mood
 Keep title '나만의 탈춤', primary button '시작하기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -135,7 +136,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a Korean Maldukki mask host character acting as the narrator with a lively storytelling expression
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character acting as the narrator with a lively storytelling expression
 - the flow-illustration placeholder -> an instructional illustration of the flow (mask design, AR dance, photo, share) in talchum styling
 - background -> a traditional madang stage, friendly mood
 Keep greeting '어서 오세요', button '다음'.
@@ -151,12 +152,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트와 동의 토글 목록, 액션에 동의하고 시작 버튼(필수 카메라 동의 시 활성)과 그만두기 보조 버튼을 둠. 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김
+- **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트와 동의 토글 목록, 액션에 동의하고 시작 버튼(필수 카메라 동의 시 활성)과 그만두기 보조 버튼을 둠. 화면 타임아웃 미적용. 말뚝이는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
 	- 동의 항목 토글: 필수 카메라 촬영
 	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
-- **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
+- **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -165,7 +166,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
 Keep title '이용 동의', consent toggle '카메라 촬영 (필수)' (shown ON), primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -217,9 +218,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.다 대기 준용. 본문 중앙에 진행 인디케이터와 변환 중 탈 프리뷰, 상태 문구를 둠. 헤더와 액션은 비움(입력받지 않음). 두 타임아웃 미적용. 말뚝이는 선택 노출
+- **레이아웃**: 공통 사양 §5.다 대기 준용. 본문 중앙에 진행 인디케이터와 변환 중 탈 프리뷰, 상태 문구를 둠. 헤더와 액션은 비움(입력받지 않음). 두 타임아웃 미적용. 말뚝이는 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**: 진행 인디케이터(원형이나 바), 변환 중인 탈 비주얼, 안내 문구
-- **말뚝이 호스트**: 대기 동안 추임새로 흥을 돋움 (선택 노출)
+- **말뚝이 호스트**: 대기 동안 추임새로 흥을 돋움 (측면 또렷한 안내 캐릭터)
 - **화면 내 텍스트**: 안내 "탈을 빚는 중", 진행률
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -229,7 +230,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the progress/visual placeholder -> a progress indicator with a preview of a Korean traditional mask being converted into 3D
-- the generic host silhouette -> a Korean Maldukki mask host keeping up the mood during the wait (can be omitted)
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide keeping up the mood during the wait, as a clear side presence (an on-screen guide character, not a realistic bystander)
 - background -> a traditional madang stage, an anticipatory waiting mood
 Keep status caption '탈을 빚는 중'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -313,9 +314,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.다 대기 준용. 본문 중앙에 진행 인디케이터와 생성 중 안내, 대기 콘텐츠를 둠. 헤더와 액션은 비움. 두 타임아웃 미적용. 말뚝이는 선택 노출
+- **레이아웃**: 공통 사양 §5.다 대기 준용. 본문 중앙에 진행 인디케이터와 생성 중 안내, 대기 콘텐츠를 둠. 헤더와 액션은 비움. 두 타임아웃 미적용. 말뚝이는 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**: 진행 인디케이터, 기념 사진 생성 중 안내, 대기 콘텐츠
-- **말뚝이 호스트**: 대기 동안 흥을 돋움 (선택 노출)
+- **말뚝이 호스트**: 대기 동안 흥을 돋움 (측면 또렷한 안내 캐릭터)
 - **화면 내 텍스트**: 안내 "결과물을 만드는 중", 진행률
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -324,7 +325,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a Korean Maldukki mask host keeping up the mood during the wait (can be omitted)
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide keeping up the mood during the wait, as a clear side presence (an on-screen guide character, not a realistic bystander)
 - background -> a traditional madang stage, an anticipatory waiting mood
 Keep the status caption '결과물을 만드는 중' indicating a commemorative photo is being created.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -346,7 +347,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **핵심 UI 컴포넌트**
 	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (신명 게이지 점수와 등급을 스탬프로 표기)
 	- "다음" 버튼
-- **말뚝이 호스트**: 모서리에서 결과를 자랑하듯 (선택)
+- **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯
 - **화면 내 텍스트**: 타이틀 "결과물 미리보기", 버튼 "다음"
 
 ### 2) 프롬프트 (영어)
@@ -356,7 +357,7 @@ A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen
 The result preview screen of a Korean traditional mask dance (talchum) experience.
 Title: '결과물 미리보기'.
 Layout: a commemorative photo card (a 2D mask character and the user posing together, with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
-To one side: a Korean Maldukki mask host reacting proudly to the result (can be omitted).
+To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence (an on-screen guide character, not a realistic bystander or a second user).
 Background: a traditional madang stage, a proud showcase mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
@@ -370,12 +371,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 말뚝이는 작게 두거나 숨김
+- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 말뚝이는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
 	- 전화번호 입력 필드와 숫자 키패드
 	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
 	- "전송"과 "받지 않기" 버튼
-- **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (폼 가독성 우선)
+- **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -384,7 +385,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a small Korean Maldukki mask host in a corner (can be omitted)
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
 Keep caption '연락처를 입력하면 링크를 보내드려요', the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -410,7 +411,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the generic host silhouette -> a Korean Maldukki mask host character giving a warm farewell
+- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character giving a warm farewell
 - background -> a traditional madang stage, a warm closing mood
 Keep the closing message '또 만나요'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
