@@ -8,21 +8,52 @@ created: 2026-07-01
 updated: 2026-07-01
 ---
 
-> 셀빅 사내 킥오프 발표 문서. 무형문화유산 AI 과제가 무엇이고, 셀빅이 2년(1단계)에 걸쳐 무엇을 어떤 기술로 언제 만들지를 부(部)로 묶어 정리함. H1이 부(그룹), H2 하나가 슬라이드 한 장임. 6부 구성: 1부 과제 개관, 2부 콘텐츠 로드맵, 3부 기술 트랙, 4부 개발 기반과 전제(데이터, 설계 전제, 디바이스), 5부 언제 어떻게 검증(일정과 실증), 6부 사업 관리. 연차(1차/2차)는 칸막이가 아니라 각 콘텐츠와 기술 안에서 발전 단계로 엮고, 순수 타임라인은 로드맵(1부 다)과 일정(5부)에서만 다룸. 각 항목은 **[확정]**(정본, 6/22 회의 합의), **[방향]**(잠정, RFP 계획이나 미승인 초안 근거), **[미결]**(결정 필요), **[리스크]**, **[참고]**로 상태를 구분함. 2차연도 기술은 RFP 계획 기준이라 1차연도 결과와 후속 협의로 조정될 수 있음.
+> 셀빅 사내 킥오프 발표 문서. 무형문화유산 AI 과제가 무엇이고, 셀빅이 2년(1단계)에 걸쳐 무엇을 어떤 기술로 언제 만들지를 부(部)로 묶어 정리함. H1이 부(그룹), H2 하나가 슬라이드 한 장이며, 각 슬라이드는 「슬라이드」(발표 내용)와 「프롬프트」(2:1 인포그래픽 이미지 생성 프롬프트) 두 H3로 나뉨. 6부 구성: 1부 과제 개관, 2부 콘텐츠 로드맵, 3부 기술 트랙, 4부 개발 기반과 전제(데이터, 설계 전제, 디바이스), 5부 언제 어떻게 검증(일정과 실증), 6부 사업 관리. 연차(1차/2차)는 칸막이가 아니라 각 콘텐츠와 기술 안에서 발전 단계로 엮고, 순수 타임라인은 로드맵(1부 다)과 일정(5부)에서만 다룸. 각 항목은 **[확정]**(6/22 회의 합의), **[방향]**(잠정, 연구개발계획서나 미승인 초안 근거), **[미결]**(결정 필요), **[리스크]**, **[참고]**로 상태를 구분함. 근거로 삼는 「1~5. 연구개발의...」 문서는 컨소시엄이 지원 시 작성한 연구개발계획서(제안서)이지 RFP(제안요청서)가 아님. 프롬프트 블록은 이미지 생성 도구에 넣는 기계 대상 입력임. 2차연도 기술은 계획서 기준이라 1차연도 결과와 후속 협의로 조정될 수 있음.
 
 # 1. 과제 개관
 
 ## 가. 과제 개요
 
-- **과제**: 무형문화유산 AI 콘텐츠 연구개발. KOCCA(한국콘텐츠진흥원) 지원 ([[컨소시엄 회의록 - 2026-06-22#2. 핵심 합의]])
-- **최종 목표**: 「지능형 4D 디지털 도제(Digital Apprentice) 서비스 플랫폼」 개발과 실증, 기술성숙도(TRL, Technology Readiness Level) 7단계 달성 ([[2. 연구개발의 목표 및 내용]])
-	- 암묵지(명인의 미세 동작, 호흡, 리듬)를 정량화하고, AI 동작 분석과 코칭으로 전승 교육을 지원함
-- **대상 무형유산**: 택견, 남사당놀이 두 종목. **택견은 큐랩, 남사당놀이는 셀빅 전담** ([[컨소시엄 구성 개요]])
-- **기간 구조**: 사업 1단계(2년 과정)가 1차연도(2026)와 2차연도(2027)로 나뉨 ([[4. 마일스톤 체계 및 수행계획]])
+### 슬라이드
 
-> **발표 노트**: 이 과제의 핵심 단어는 "디지털 도제"임. 1회성 체험이 아니라 배우고 다시 오는 학습 도구를 지향함. 셀빅의 남사당 콘텐츠도 이 전제로 설계함.
+> 핵심 요소 기술을 만들고, 플랫폼 장치에 담아, 지능형 4D 디지털 도제 플랫폼으로 통합해, 실증과 서비스로 확산함.
+
+- **무엇을 만드나 [확정]**: 무형문화유산(암묵지)을 4D로 디지털화하고 AI 동작 분석과 코칭으로 배우는 「지능형 4D 디지털 도제(Digital Apprentice) 서비스 플랫폼」을 개발하고 실증함(TRL 7 목표, 1단계 2년 2026-2027). KOCCA 지원, 대상은 택견(큐랩)과 남사당놀이(셀빅) ([[2. 연구개발의 목표 및 내용]], [[컨소시엄 구성 개요]])
+- **핵심 요소 기술**: 과제가 개발하는 3대 원천 기술
+	- 동작 분석과 정량화: 3D 포즈 추정, LMA 기반 숙련도 평가
+	- 초실감 4D 콘텐츠 생성: 4D 가우시안 스플래팅(4DGS), 모션 생성
+	- 지능형 AI 인터랙션: LLM 도슨트, 실시간 코칭
+- **플랫폼 구축**: 기술을 담는 장치와 시스템
+	- 키오스크: 모션 인식 뎁스 카메라, 바닥 프로젝션
+	- 미디어 케이브: 3면과 바닥 스크린 몰입 공간
+	- 통합 플랫폼: 런처, 서버, 콘텐츠 관리(CMS)
+- **지능형 4D 디지털 도제 플랫폼**: 위 기술과 장치를 엮어 체험과 학습, 양방향 코칭을 제공함
+- **서비스 [방향]**: 국내외 수요처 실증(서울랜드, 해외 문화원 등)과 디지털 도제 체험 서비스 ([[2. 연구개발의 목표 및 내용]]), K-컬처 글로벌 확산 ([[5. 연구개발성과의 활용방안 및 기대효과]])
+
+> **발표 노트**: 이 과제의 핵심 단어는 "디지털 도제"임. 1회성 체험이 아니라 배우고 다시 오는 학습 도구를 지향함. 흐름은 핵심 기술을 만들고, 플랫폼에 담아, 지능형 4D 디지털 도제 플랫폼으로 통합해, 실증과 서비스로 확산하는 것. 셀빅은 남사당 콘텐츠와 생성형 서사, 아바타를 맡음.
+
+### 프롬프트
+
+```
+A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape aspect ratio. Densely filled with meaningful content, no decorative filler; clean, organized and highly legible. Pure white (#FFFFFF) background so it drops cleanly onto a white slide; structure comes from color-headed section panels (ink-navy headers, vermilion-red and gold accents) with outlined cards, thin connectors and bold left-to-right arrows. Use small semi-realistic thumbnail illustrations for the domain items described below, and flat vector icons for abstract items. Every picture must map to its concept; add no decorative filler icons. Strong typographic hierarchy, corporate keynote quality.
+Layout (left to right flow): a slim mission banner on top. On the left, two stacked section panels "핵심 요소 기술" (three items) and "플랫폼 구축" (three items). A bold arrow points right to a large center hero panel "지능형 4D 디지털 도제 플랫폼". Another bold arrow points right to a "서비스" panel (two items). A small tag top-left, a badge top-right.
+Picture for each element (make each meaningful):
+- 핵심 요소 기술: "동작 분석과 정량화" = a Namsadang performer overlaid with a 3D pose skeleton and joint points; "초실감 4D 콘텐츠 생성" = a Namsadang pungmul performer spinning a sangmo hat ribbon, reconstructed as a 4D volumetric point-cloud capture; "지능형 AI 인터랙션" = a traditional master figure with a speech bubble (AI docent dialogue).
+- 플랫폼 구축: "키오스크" = a horizontal landscape-screen white kiosk with a floor-projection mat in front; "미디어 케이브" = a three-wall-and-floor immersive projection room; "통합 플랫폼" = a launcher/server hub linking content tiles.
+- center hero "지능형 4D 디지털 도제 플랫폼" = a semi-realistic scene of a person experiencing the platform on a horizontal kiosk over a glowing floor projection in a museum-like hall, the kiosk screen showing colorful Namsadang pungmul dancers.
+- 서비스: "국내외 실증 (서울랜드, 해외)" = a map with location markers and a theme-park/culture-center thumbnail; "디지털 도제 체험, K-컬처 확산" = a split thumbnail showing a Namsadang performer and a Taekkyeon practitioner in the digital-apprentice experience, with a globe and spread arrows.
+Render ONLY these exact Korean texts, nothing else:
+top-left tag "KOCCA 연구과제", top-right badge "TRL 7"
+mission banner "지능형 4D 디지털 도제 플랫폼 개발과 실증, 2026-2027"
+"핵심 요소 기술": "동작 분석과 정량화", "초실감 4D 콘텐츠 생성", "지능형 AI 인터랙션"
+"플랫폼 구축": "키오스크", "미디어 케이브", "통합 플랫폼"
+center "지능형 4D 디지털 도제 플랫폼"
+"서비스": "국내외 실증 (서울랜드, 해외)", "디지털 도제 체험, K-컬처 확산"
+```
 
 ## 나. 컨소시엄과 역할
+
+### 슬라이드
 
 5개 연구기관과 외부 데이터 권리자로 구성됨. 셀빅은 남사당놀이를 전담하되, 핵심 AI 일부는 다른 기관이 만든 결과를 받아 씀 ([[컨소시엄 구성 개요]]).
 
@@ -40,22 +71,55 @@ updated: 2026-07-01
 
 > **발표 노트**: 강조점은 "전담이지만 전부는 아니다"임. 연세대와 KETI 인도물이 늦으면 셀빅 콘텐츠도 밀리니, 이 연계 지점의 인도 시점을 일정에 반영할 것.
 
+### 프롬프트
+
+```
+A premium editorial consortium diagram, 2:1 landscape aspect ratio, in the same rich keynote infographic style as the overview slide. Pure white (#FFFFFF) background. Do NOT draw the slide title or any header text (the presentation already provides it). Fill the width densely with large cards and avoid big empty margins.
+Top area (about two thirds of height): a single row of six tall rounded institution cards, evenly spaced edge to edge. Each card has a colored header strip across its top (deep navy), a clear institution icon inside a colored circle, a bold name, and a one-line role. The 셀빅 card uses a vermilion-red header strip and red outline for emphasis.
+Bottom area (about one third of height): a wide colored callout panel with a navy header, holding two clean short straight arrows drawn INSIDE the panel (provider on the left, arrow pointing right to 셀빅). Keep the dependency entirely inside this bottom panel; do NOT draw any arrows floating over or above the card row.
+Render ONLY these exact Korean texts, nothing else:
+card 1 "㈜큐랩 (주관)" role "플랫폼 통합, 택견 전담"
+card 2 "㈜셀빅 (공동1)" role "남사당 전담, 생성과 아바타"
+card 3 "KETI (공동2)" role "데이터, 4D, 모션, LLM"
+card 4 "연세대 (공동3)" role "3D 스켈레톤, 경량화"
+card 5 "용인대 (공동4)" role "택견 IP, 데이터셋"
+card 6 "남사당놀이보존회 (외부)" role "원천 데이터 권리자"
+bottom panel header "셀빅이 받는 핵심 AI"
+inside bottom panel, row 1 "연세대 → 셀빅: 3D 스켈레톤 제공", row 2 "KETI → 셀빅: 모션 생성 제공"
+Style: ink-navy text and flat institution icons, vermilion-red accent on the 셀빅 card, gold accents, rich rounded cards with colored header strips, dense layout matching the overview slide. 2:1 landscape.
+```
+
 ## 다. 개발 로드맵
+
+### 슬라이드
 
 1단계는 2년 과정임. 1차연도에 프로토타입과 데이터셋으로 기반을 만들고, 2차연도에 상용 수준(TRL 7)으로 고도화하며 현장 실증까지 감 ([[2. 연구개발의 목표 및 내용]], [[4. 마일스톤 체계 및 수행계획]]).
 
-| 연차 | 기간 | 셀빅 핵심 목표 | 대표 산출 |
-|---|---|---|---|
-| 1차연도 | 2026 | 키오스크 콘텐츠 5종, 통합 플랫폼, 데이터셋 구축 | 시범 콘텐츠 프로토타입, 코칭용 정답 데이터셋 |
-| 2차연도 | 2027 | 콘텐츠 고도화와 확장, 미디어 케이브, LLM 통합, 현장 실증 | 상용 수준 플랫폼, TRL 7, 실증 결과 |
+| 연차   | 기간   | 셀빅 핵심 목표                            | 대표 산출                     |
+| ---- | ---- | ----------------------------------- | ------------------------- |
+| 1차연도 | 2026 | 키오스크 콘텐츠 5종, 통합 플랫폼, 데이터셋 구축        | 시범 콘텐츠 프로토타입, 코칭용 정답 데이터셋 |
+| 2차연도 | 2027 | 키오스크 5종 고도화, 미디어 케이브 콘텐츠 6종, LLM 통합, 현장 실증 | 상용 수준 플랫폼, TRL 7, 실증 결과   |
 
 - 오늘 발표는 이 로드맵을 **콘텐츠(2부) → 기술(3부) → 개발 기반과 전제(4부) → 일정과 실증(5부) → 관리(6부)** 순으로 풂
 
 > **발표 노트**: 오늘의 뼈대임. 1차연도는 "돌아가는 것을 만든다", 2차연도는 "상용 수준으로 올리고 현장에서 검증한다"로 기억할 것. 다음 부부터는 연차가 아니라 콘텐츠와 기술로 묶어 봄.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial timeline infographic in a tech-diagram style, 2:1 landscape aspect ratio. Densely filled with meaningful content, no decorative filler; clean, organized and highly legible. Pure white (#FFFFFF) background so it drops cleanly onto a white slide, a bold horizontal spine arrow running left to right, two large phase panels packed with content. Ink-navy elements, one vermilion-red accent at the phase-transition point, thin gold hairlines. Each chip has its own flat vector icon plus small milestone ticks along the spine. Strong hierarchy, corporate keynote quality.
+Layout: a left phase panel and a right phase panel along the spine, each with a bold year header, a goal subtitle, labeled icon chips (left panel 3 chips, right panel 4 chips), and one output tag at the bottom. A labeled marker sits on the transition arrow between the two panels.
+Render ONLY these exact Korean texts, nothing else:
+left block header "1차연도 2026", subtitle "프로토타입과 데이터셋", chips "키오스크 콘텐츠 5종", "통합 플랫폼", "데이터셋 구축", output tag "산출: 시범 프로토타입, 정답 데이터셋"
+right block header "2차연도 2027", subtitle "고도화와 실증", chips "키오스크 5종 고도화", "미디어 케이브 콘텐츠 6종", "LLM 통합", "현장 실증", output tag "산출: 상용 플랫폼, TRL 7"
+transition label: "돌아가는 것에서 상용 수준으로"
+```
+
 # 2. 콘텐츠 로드맵
 
 ## 가. 남사당 콘텐츠 로드맵
+
+### 슬라이드
 
 남사당 6종목을 2년에 걸쳐 콘텐츠로 만듦. 종목마다 진입 시점과 형태가 다름: 1차연도는 덜미, 덧뵈기, 버나의 키오스크 콘텐츠이고, 2차연도에 살판, 어름, 풍물이 더해지고 덧뵈기가 미디어 케이브 관람형으로 확장됨 ([[2. 연구개발의 목표 및 내용]]).
 
@@ -70,7 +134,24 @@ updated: 2026-07-01
 
 > **발표 노트**: 1차연도는 덜미, 덧뵈기, 버나의 키오스크 콘텐츠 5종에 집중. 2차연도에 살판, 어름, 풍물이 더해지고 덧뵈기는 관람형으로 확장됨. 덧뵈기가 두 해에 걸친다는 점을 놓치지 말 것.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial matrix infographic in a tech-diagram style, 2:1 landscape. A 6-row by 2-column grid mapping the six Namsadang disciplines to their content across two years. The 덧뵈기 row is highlighted to show it spans both years. Each row label carries a small semi-realistic thumbnail of its Namsadang discipline: 덜미 a wooden puppet, 덧뵈기 a mask, 버나 a spinning dish on a stick, 살판 a ground-acrobatics tumble, 어름 a tightrope walk, 풍물 a spinning sangmo hat. Densely filled with meaningful content, no decorative filler; clean and highly legible.
+Render ONLY these exact Korean texts, nothing else:
+column headers "1차연도 키오스크", "2차연도 확장"
+row "덜미": "유람기, 꼭두각시" and "고도화"
+row "덧뵈기": "탈춤, 양반 놀리기 4컷" and "덧뵈기 관람"
+row "버나": "버나잡이 한 판" and "고도화"
+row "살판": "1차 없음" and "살판 관람"
+row "어름": "1차 없음" and "어름 체험, 관람"
+row "풍물": "1차 없음" and "풍물 합주, 디지털 상모"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cells and a colored header bar, ink-navy text, vermilion-red and gold accents, semi-realistic discipline thumbnails. 2:1 landscape.
+```
+
 ## 나. 1차연도 콘텐츠 5종과 개발 순서
+
+### 슬라이드
 
 1차연도 키오스크 콘텐츠 5종을 개발 순서대로 정리함. 체험형(실시간 동작과 조작이 핵심) 3종과 생성형(입력에서 결과물 산출이 핵심) 2종임 ([[1차연도 셀빅 개발 준비자료#2. 2026년 셀빅 개발 콘텐츠]], [[1차연도 셀빅 개발 준비자료#나. 콘텐츠 개발 순서]]).
 
@@ -84,18 +165,34 @@ updated: 2026-07-01
 
 - **순서 논리 [방향]**: 생성형이 쉬워 유람기를 먼저 둠. 단 체험형 첫 주자 탈춤을 2번으로 앞당겨 실시간 동작, 3D, 채점 스택을 세우고 나머지 체험형에 전파. 최난도 꼭두각시(손 인식 한계)를 마지막에 둠
 - **전략 [방향]**: 공용 시스템을 먼저 붙들지 않고 첫 콘텐츠(유람기)가 구체적 요구로 끌어내게 함. 앞 단계가 끝없이 늘어지는 것을 막음
-- **선행 조건 [미결]**: 디바이스 규격 확정과 데이터 확보가 콘텐츠 개발에 앞섬 (4부 가. 데이터, 4부 다. 디바이스)
+- **선행 조건 [미결]**: 디바이스 규격 확정과 데이터 확보가 콘텐츠 개발에 앞섬 (4부 가. 데이터셋 확보와 구축, 4부 다. 디바이스)
 - 각 콘텐츠 상세 기획서는 작성 중인 초안임(미승인). 킥오프에서는 콘셉트 수준으로만 공유함
 
 > **발표 노트**: 이 5종이 3부 기술 트랙을 실제로 끌어냄. 순서의 핵심은 쉬운 것으로 공용 시스템을 세우고, 체험형 첫 주자를 앞당겨 기술을 전파하는 것.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial numbered-flow infographic in a tech-diagram style, 2:1 landscape. Five content cards left to right in development order 1 to 5, connected by arrows. Each card shows a large order number, the content name, a small discipline sub-label, a type tag, and a small semi-realistic Namsadang thumbnail of its content. "생성" and "체험" tags use different colors. Card thumbnails: 나만의 유람기 a Deolmi wooden puppet with a storybook page, 나만의 탈춤 a Deotboegi mask with a dancing figure, 양반 놀리기 4컷 a yangban-mask four-panel cartoon, 버나잡이 한 판 a spinning buna dish on a stick, 나만의 꼭두각시 a carved wooden-puppet face avatar. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+card 1 "나만의 유람기" sub "덜미" tag "생성"
+card 2 "나만의 탈춤" sub "덧뵈기" tag "체험"
+card 3 "양반 놀리기 4컷" sub "덧뵈기" tag "생성"
+card 4 "버나잡이 한 판" sub "버나" tag "체험"
+card 5 "나만의 꼭두각시" sub "덜미" tag "체험"
+bottom strip label "생성형 먼저, 체험형 첫 주자 탈춤 앞당김"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, bold order numbers, ink-navy text, vermilion-red and gold accents, flat icons. 2:1 landscape.
+```
+
 ## 다. 2차연도 심화 콘텐츠 6종
 
-2차연도 심화 서비스 콘텐츠는 미디어 케이브 관람형 중심임. **개수는 6종 목표이나 두 정본의 구성 표기가 다름 [미결]**: 마일스톤 5.3은 살판, 어름, 군중, 대련, 풍물을 열거하고, 목표와 내용 문서는 아래 6항목으로 구성됨. 최종 구성은 큐랩과 확인 필요 ([[4. 마일스톤 체계 및 수행계획]] 5.3 2차연도 심화 서비스 콘텐츠(6종) 개발, [[2. 연구개발의 목표 및 내용]]).
+### 슬라이드
 
-아래는 목표와 내용 문서 기준 후보 6항목임.
+2차연도 심화 서비스 콘텐츠는 미디어 케이브 관람형 중심이며, 아래 6종으로 확정함 [확정]. 이 6종을 2차연도에 개발함. 마일스톤 5.3은 살판, 어름, 군중, 대련, 풍물로 달리 표기했으나, 최종 구성은 이 6종으로 정리됨 ([[4. 마일스톤 체계 및 수행계획]] 5.3 2차연도 심화 서비스 콘텐츠(6종) 개발, [[2. 연구개발의 목표 및 내용]]).
 
-| 콘텐츠(목표와 내용 기준) | 종목 | 형태 | 한 줄 콘셉트 |
+6종의 종목, 형태, 한 줄 콘셉트를 정리함.
+
+| 콘텐츠 | 종목 | 형태 | 한 줄 콘셉트 |
 |---|---|---|---|
 | 살판 관람 | 살판 | 관람(미디어 케이브) | 살판쇠의 텀블링을 4DGS로 4면에 고실감 투사 |
 | 어름 체험 | 어름 | 체험 | 롤러 보드 연동 줄 출렁임과 가상 어름산이 실시간 자세 코칭 |
@@ -104,11 +201,27 @@ updated: 2026-07-01
 | 풍물 합주 | 풍물 | 체험(미디어 케이브) | 핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블 |
 | 디지털 상모 | 풍물 | 체험 | 무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동 |
 
-> **발표 노트**: 개수 6종은 마일스톤과 일치하나 구성 표기가 갈림. 목표와 내용 기준으로는 어름이 체험과 관람 둘, 풍물이 합주와 디지털 상모 둘로 6항목임. 마일스톤 5.3은 군중과 대련을 넣어 표기가 다르니, 발표 전 큐랩과 6종 구성을 맞출 것.
+> **발표 노트**: 2차연도에 개발할 확정 6종임. 어름이 체험과 관람 둘, 풍물이 합주와 디지털 상모 둘로 6항목을 이룸. 미디어 케이브 관람형이 중심이며, 6종 구성은 큐랩과 이미 확인 완료. 마일스톤 5.3의 군중, 대련 표기는 이 6종으로 대체됨.
+
+### 프롬프트
+
+```
+A rich, densely filled premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Six content cards in a 2-row by 3-column grid, evenly spaced edge to edge, filling the full width with no large empty margins. Do NOT draw a title bar, banner, or any header text (the presentation slide already provides the title). Each card has a colored header strip carrying the content name and a type tag ("관람" or "체험" in different colors), a small discipline sub-label, one concise concept line under the name, and a semi-realistic Namsadang thumbnail filling the right portion of the card. Card thumbnails: 살판 관람 a ground-acrobatics tumbler mid-flip projected across a 4-wall immersive screen, 어름 체험 a person balancing on a roller board learning a tightrope pose with a coaching pose-overlay, 어름 관람 a tightrope walker performing above a reacting crowd, 덧뵈기 관람 a masked avatar dancing inside a large screen before an audience, 풍물 합주 several hands playing virtual pungmul instruments in XR, 디지털 상모 a spinning sangmo hat drawing a glowing light trail. Every picture must map to its concept; no decorative filler; clean and highly legible.
+Render ONLY these exact Korean texts, nothing else:
+card 1 name "살판 관람" sub "살판" tag "관람" concept "살판쇠의 텀블링을 4DGS로 4면에 고실감 투사"
+card 2 name "어름 체험" sub "어름" tag "체험" concept "롤러 보드 연동 줄 출렁임과 가상 어름산이 실시간 자세 코칭"
+card 3 name "어름 관람" sub "어름" tag "관람" concept "관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기"
+card 4 name "덧뵈기 관람" sub "덧뵈기" tag "관람" concept "관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연"
+card 5 name "풍물 합주" sub "풍물" tag "체험" concept "핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블"
+card 6 name "디지털 상모" sub "풍물" tag "체험" concept "무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards with colored header strips, ink-navy text, vermilion-red and gold accents, semi-realistic discipline thumbnails. 2:1 landscape.
+```
 
 # 3. 기술 트랙
 
 ## 가. 생성형 서사와 이미지 생성
+
+### 슬라이드
 
 생성 콘텐츠(유람기, 양반 놀리기 4컷)의 엔진임. 1차연도에 기본 생성을 세우고 2차연도에 서사 일관성을 고도화함.
 
@@ -118,7 +231,20 @@ updated: 2026-07-01
 
 > **발표 노트**: 1차의 유람기와 4컷이 이 엔진을 먼저 만들고, 2차 고도화가 전 콘텐츠 서사 품질을 끌어올림. LLM 통합 자체는 2차연도(3부 라).
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel and a right "2차연도" panel with a bold progression arrow between them. Each panel holds labeled icon chips. A bottom strip shows input-data icons. Include a small semi-realistic Namsadang thumbnail illustrating the content: a Deolmi wooden puppet with a picture-book illustration. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left panel "1차연도" chips "LLM 서사 생성", "이미지 생성", "전자책과 4컷 조립"
+right panel "2차연도" chips "양방향 RAG", "서사 일관성", "장면 연속성"
+bottom input-data labels "재담과 플롯 텍스트", "삽화 레퍼런스"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined panels, ink-navy text, vermilion-red and gold accents, flat icons, right panel slightly brighter to signal advancement. 2:1 landscape.
+```
+
 ## 나. 실시간 동작 인식, 코칭, 아바타
+
+### 슬라이드
 
 체험 콘텐츠(탈춤, 꼭두각시, 버나)의 엔진임. 1차연도에 인식과 채점, 아바타 제어를 세우고 2차연도에 정밀 교정과 다중 참여로 확장함.
 
@@ -128,7 +254,20 @@ updated: 2026-07-01
 
 > **발표 노트**: 탈춤을 2번에 앞당겨 이 스택을 먼저 세우는 이유임. 손 인식이 손목까지라 꼭두각시 양손 조작이 이 범위 안에 들어와야 함(4부 나. 설계 전제).
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel and a right "2차연도" panel with a bold progression arrow between them, and a callout banner at the bottom. Pose-skeleton icons. Include a small semi-realistic Namsadang thumbnail: a Deotboegi mask-dance performer and a buna performer with pose points. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left panel "1차연도" chips "포즈 추정과 채점", "아바타 제어", "물리 시뮬레이션"
+right panel "2차연도" chips "정밀 교정", "참여자 동작 동기화", "합주와 대련 타이밍"
+bottom callout "핵심 AI 제공: 연세대 3D 스켈레톤, KETI 모션 생성"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined panels, ink-navy text, vermilion-red and gold accents, flat pose-skeleton icons. 2:1 landscape.
+```
+
 ## 다. 실감 표현: AR, 4D, 미디어 케이브
+
+### 슬라이드
 
 콘텐츠를 화면과 공간에 실감으로 올리는 트랙임. 1차연도 AR에서 2차연도 4D와 미디어 케이브로 무게가 넘어감.
 
@@ -139,7 +278,20 @@ updated: 2026-07-01
 
 > **발표 노트**: 미디어 케이브는 해외에 못 가져가므로 서울랜드 전시 효과용임. 그래서 사업성 판단상 관람형으로 최소화함.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel with a kiosk showing an AR mask-dance scene and a right "2차연도" panel with a 3-wall-and-floor immersive media-cave illustration showing a Namsadang pungmul performance, a bold progression arrow between them, and a small annotation. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left panel "1차연도" chips "탈춤 AR 착용", "2D 탈 캐릭터 합성"
+right panel "2차연도" chips "4DGS 초고속 렌더링", "미디어 케이브", "VR과 햅틱"
+annotation "무거운 3D 지양, 핵심 아바타와 탈은 3D"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined panels, ink-navy text, vermilion-red and gold accents, isometric immersive-space icon. 2:1 landscape.
+```
+
 ## 라. 공용 플랫폼과 시스템
+
+### 슬라이드
 
 콘텐츠 5종이 함께 쓰는 기반임. 콘텐츠와 따로 먼저 완성하지 않고 첫 콘텐츠가 끌어내 만든 뒤 재사용하며 확장함 ([[1차연도 셀빅 개발 준비자료#4. 공용 시스템]]).
 
@@ -149,9 +301,21 @@ updated: 2026-07-01
 
 > **발표 노트**: 서버의 1차연도 범위는 익명 결과물 다운로드까지임. 이어하기와 학습 기록 저장은 2차연도(디지털 도제)로 넘어가나, 2차 연속성을 지금부터 전방 설계할지가 논점임.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial layered-stack diagram in a tech-diagram style, 2:1 landscape. On the left, a "1차연도" stack of six layered blocks stacked bottom to top; on the right, a "2차연도" set of added layer blocks connected by an expansion arrow. Each block has a small icon. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left stack header "1차연도", blocks bottom to top "서버", "결과물 전송과 호스팅", "음성 입출력 STT/TTS", "디지털 휴먼", "런처", "통합 플랫폼 아키텍처"
+right added header "2차연도", blocks "플랫폼 고도화", "CX 관리", "LLM 통합", "학습 기록과 이어하기"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined layer blocks, ink-navy text, vermilion-red and gold accents, flat icons. 2:1 landscape.
+```
+
 # 4. 개발 기반과 전제
 
 ## 가. 데이터셋 확보와 구축
+
+### 슬라이드
 
 AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Truth) 중심 소규모**임. 보존회 실연자가 소수라 규모가 작음 ([[큐랩셀빅 사전회의 - 2026-06-22#2. 핵심 합의]]).
 
@@ -162,7 +326,22 @@ AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Trut
 
 > **발표 노트**: 데이터가 1순위 선행임. 보존회 컨택이 늦어지면 체험형 콘텐츠의 채점 정답을 못 만들어 개발 전체가 밀림.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial flow diagram in a tech-diagram style, 2:1 landscape. A left start node flows by arrow to a central cluster of five source-data icons, then by arrow to a right result node. A banner on top and two small tags at the bottom. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+top banner "대규모 학습용 아님, 코칭 GT 중심 소규모"
+left start node "남사당놀이보존회"
+center cluster labels "춤사위 모션", "탈과 인형 이미지", "재담 텍스트", "장단 음원", "정답 동작"
+right result node "코칭용 정답 데이터셋 GT"
+bottom tags "폼과 형식 미결", "아카이브 라이선스 검토"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined nodes, ink-navy text, vermilion-red and gold accents, flat data icons. 2:1 landscape.
+```
+
 ## 나. 설계 전제
+
+### 슬라이드
 
 기술 트랙 설계가 지켜야 할 전제임. 설계가 이 범위 안에서 이뤄져야 함.
 
@@ -172,7 +351,20 @@ AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Trut
 
 > **발표 노트**: 손목까지만 인식되는 점이 꼭두각시 양손 조작 설계의 상한임. 이 전제가 3부 나(동작 인식) 트랙의 설계 범위를 정함.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial diagram of three constraint cards in a tech-diagram style, 2:1 landscape. Three large cards side by side, each with a bold title, a clear icon, and a label. Card 1 shows a hand with a dashed wrist boundary line. No decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+card 1 title "손 인식 범위" label "손목까지, 손가락은 별도 과제"
+card 2 title "인식 인원과 연령" label "동시 1인, 청소년 이상"
+card 3 title "LLM 방식" label "상용 또는 오픈소스, 미결"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red and gold accents, dashed boundary emphasis, flat icons. 2:1 landscape.
+```
+
 ## 다. 디바이스
+
+### 슬라이드
 
 콘텐츠가 도는 하드웨어임. 규격은 큐랩이 정하고 셀빅이 맞춤. 정본은 [[디바이스 사양]] ([[1차연도 셀빅 개발 준비자료#6. 디바이스]]).
 
@@ -183,11 +375,25 @@ AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Trut
 
 > **발표 노트**: 규격은 큐랩이 정하고 셀빅이 맞추는 구조라, 규격 확정이 늦으면 콘텐츠 개발이 함께 밀림. 버나 센서 막대는 도입 자체가 미정임.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial hardware infographic in an isometric flat-vector style, 2:1 landscape. On the left, an upright horizontal kiosk illustration with callout labels; on the right, a 3-wall-and-floor immersive media-cave illustration. A bottom row of undecided-item tags and a small annotation. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left kiosk callouts "가로형 키오스크", "모션 인식 뎁스 카메라", "바닥 프로젝션", tag "1차연도"
+right cave label "미디어 케이브", tag "2차연도"
+bottom undecided tags "65인치", "센서 모델", "라이다", "버나 센서 막대"
+annotation "규격은 큐랩 주도, 셀빅 맞춤"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; isometric flat vector, ink-navy line work, vermilion-red and gold accents. 2:1 landscape.
+```
+
 # 5. 일정과 실증
 
 ## 가. 1차연도 일정과 마일스톤
 
-RFP 명목 일정 기준 셀빅 관련 1차연도 마일스톤임(번호는 [[4. 마일스톤 체계 및 수행계획]]의 마일스톤 코드).
+### 슬라이드
+
+계획서 명목 일정 기준 셀빅 관련 1차연도 마일스톤임(번호는 [[4. 마일스톤 체계 및 수행계획]]의 마일스톤 코드).
 
 | 번호 | 마일스톤 | 목표 일정 | 핵심 수행기관 |
 |---|---|---|---|
@@ -200,11 +406,23 @@ RFP 명목 일정 기준 셀빅 관련 1차연도 마일스톤임(번호는 [[4.
 | 4.2 | 시범 서비스 콘텐츠 프로토타입 | 26.07 ~ 26.11 | 셀빅 |
 | 4.3 | 통합 실증 및 기술 검증 | 26.07 ~ 26.12 | 셀빅 |
 
-> **발표 노트**: RFP 명목 착수는 26.04이나 실제 착수는 늦음. 6부 나. 중점 관리 사항의 압축 리스크와 함께 봐야 함.
+> **발표 노트**: 계획서 명목 착수는 26.04이나 실제 착수는 늦음. 6부 나. 중점 관리 사항의 압축 리스크와 함께 봐야 함.
+
+### 프롬프트
+
+```
+A rich, densely filled premium editorial Gantt chart in a tech-diagram style, 2:1 landscape. A horizontal month axis from 26.04 to 26.12. Eight labeled horizontal bars, each with a small icon, spanning their months on a clean grid. Densely filled with meaningful content, no decorative filler; clean and highly legible.
+Render ONLY these exact Korean texts, nothing else:
+month axis "26.04" to "26.12"
+bars: "1.2 통합 플랫폼 아키텍처" 26.05 to 26.08, "1.3 키오스크 프로토타입" 26.06 to 26.12, "1.4 플랫폼 안정화" 26.09 to 26.10, "2.1 실시간 동작 인식" 26.04 to 26.11, "3.3 아바타 제어" 26.07 to 26.09, "3.4 생성형 서사와 텍스처" 26.07 to 26.11, "4.2 시범 콘텐츠 프로토타입" 26.07 to 26.11, "4.3 통합 실증과 검증" 26.07 to 26.12
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; light-gray grid, ink-navy labels, vermilion-red and gold bars, bold Korean sans-serif. 2:1 landscape.
+```
 
 ## 나. 2차연도 일정과 마일스톤
 
-RFP 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일스톤 체계 및 수행계획]]).
+### 슬라이드
+
+계획서 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일스톤 체계 및 수행계획]]).
 
 | 번호 | 마일스톤 | 목표 일정 | 핵심 수행기관 |
 |---|---|---|---|
@@ -221,21 +439,46 @@ RFP 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일�
 
 > **발표 노트**: 상반기에 렌더링과 서사 고도화, 하반기에 실증과 글로벌 패키징으로 마무리됨.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial Gantt chart in a tech-diagram style, 2:1 landscape. A horizontal month axis from 27.01 to 27.12. Ten labeled horizontal bars, each with a small icon, spanning their months on a clean grid. Densely filled with meaningful content, no decorative filler; clean and highly legible.
+Render ONLY these exact Korean texts, nothing else:
+month axis "27.01" to "27.12"
+bars: "2.1 생성형 서사 고도화" 27.01 to 27.04, "4.2 플랫폼 고도화와 CX" 27.01 to 27.10, "5.1 4D 렌더링과 햅틱 VR" 27.03 to 27.06, "5.2 다중 참여 시뮬과 합주 대련" 27.03 to 27.07, "4.1 고실감 4D 콘텐츠" 27.03 to 27.12, "2.5 AI 동작 인식과 의미" 27.04 to 27.08, "5.3 심화 콘텐츠 6종" 27.05 to 27.11, "1.4 참여자 동작 동기화" 27.08 to 27.11, "4.3 현장 실증과 검증" 27.08 to 27.12, "5.4 글로벌 실증과 패키징" 27.09 to 27.12
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; light-gray grid, ink-navy labels, vermilion-red and gold bars. 2:1 landscape.
+```
+
 ## 다. 실증과 TRL 7
+
+### 슬라이드
 
 2차연도의 마무리는 현장 실증과 상용 수준(TRL 7) 달성임 ([[2. 연구개발의 목표 및 내용]]).
 
 - **국내 실증 [확정]**: 서울랜드. 미디어 케이브(살판)와 키오스크. 셀빅이 협의 선행. 실증 영상 확보가 결과 보고의 핵심 ([[큐랩셀빅 사전회의 - 2026-06-22#마. 실증]])
-- **해외 실증 [미결]**: 한 곳. 태국과 베트남을 비교해 선정(RFP의 필리핀은 빠짐). 준비가 오래 걸려 8월부터 착수 ([[컨소시엄 회의록 - 2026-06-22#바. 실증과 거버넌스]])
+- **해외 실증 [미결]**: 한 곳. 태국과 베트남을 비교해 선정(계획서의 필리핀은 6/22 회의에서 빠짐). 준비가 오래 걸려 8월부터 착수 ([[컨소시엄 회의록 - 2026-06-22#바. 실증과 거버넌스]])
 - **만족도 목표 [확정]**: 실증 참여자 시스템 만족도(CSAT) 85점 이상 ([[2. 연구개발의 목표 및 내용]])
 
 > **발표 노트**: 해외 실증지 확정이 선행임. 준비 기간이 길어 늦어지면 가을 실증 일정이 흔들림.
+
+### 프롬프트
+
+```
+A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape. On the left, a stylized map motif with two location markers; on the right, a semicircular gauge and a badge. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+left markers "서울랜드 (국내, 확정)", "해외 1곳 (태국 또는 베트남, 미결)"
+right gauge "CSAT 85점 이상", badge "TRL 7 달성"
+bottom label "실증 영상 확보가 결과 보고 핵심"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; ink-navy elements, vermilion-red and gold accents, flat map and gauge icons, domestic marker emphasized. 2:1 landscape.
+```
 
 # 6. 사업 관리
 
 ## 가. 성과물 목표
 
-6/22 회의에서 PD(과제 점검 전문가) 요구로 컨소시엄이 통일한 2년 전체 목표임. RFP 원문과 일부 다름(특허는 등록이 아닌 출원, SW 10건) ([[컨소시엄 회의록 - 2026-06-22#가. 성과물 목표 (PD 요구로 컨소시엄 통일)]]).
+### 슬라이드
+
+6/22 회의에서 PD(과제 점검 전문가) 요구로 컨소시엄이 통일한 2년 전체 목표임. 계획서 원문과 일부 다름(특허는 등록이 아닌 출원, SW 10건) ([[컨소시엄 회의록 - 2026-06-22#가. 성과물 목표 (PD 요구로 컨소시엄 통일)]]).
 
 | 성과물 | 목표 | 셀빅 관여 |
 |---|---|---|
@@ -251,17 +494,41 @@ RFP 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일�
 
 > **발표 노트**: 성과물은 개발과 별도 트랙이 아님. 콘텐츠 개발 초기에 SW 등록과 특허 대상을 정해두면 연말에 몰리지 않음.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial KPI dashboard in a tech-diagram style, 2:1 landscape. Seven metric cards, each with a large number, an icon, and a label. The three cards that 셀빅 directly bears ("SW 등록", "특허 출원", "사업화") get an emphasized border. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+cards "특허 출원 6건", "SW 등록 10건", "사업화 6건", "매출 1억 원", "고용 4명", "시제품 3건", "SCI 논문"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, big bold numbers, ink-navy text, vermilion-red and gold accents. 2:1 landscape.
+```
+
 ## 나. 중점 관리 사항
+
+### 슬라이드
 
 낙관 편향을 막기 위해 킥오프에서 명시함.
 
-- **1차연도 일정 압축 [리스크]**: 오늘 기준 1차연도 실질 잔여가 약 5~6개월임. RFP 명목 착수(26.04)와 달리 첫 컨소시엄 회의가 6/22였고, 그 안에 콘텐츠 5종, 데이터 확보, 통합 플랫폼을 해야 함 (5부 가. 1차연도 일정과 마일스톤)
+- **1차연도 일정 압축 [리스크]**: 오늘 기준 1차연도 실질 잔여가 약 5~6개월임. 계획서 명목 착수(26.04)와 달리 첫 컨소시엄 회의가 6/22였고, 그 안에 콘텐츠 5종, 데이터 확보, 통합 플랫폼을 해야 함 (5부 가. 1차연도 일정과 마일스톤)
 - **2차연도 선행 [리스크]**: 해외 실증지 선정과 미디어 케이브 사업성 판단이 2차연도 전개를 좌우함. 실증지는 준비가 길어 8월부터 착수 필요
 - **선행 미결 항목 [미결]**: 데이터 확보 시점, 키오스크 규격, 연산 배치(현장 GPU와 서버 오프로드 중 택일), 버나 센서 막대, LLM 방식, 회원 정보 관리 ([[1차연도 셀빅 개발 준비자료#7. 미결과 결정 요청]])
 
 > **발표 노트**: 가장 큰 제약은 시간임. 데이터와 규격이라는 두 선행이 늦으면 1차연도 5종 전체가 밀리므로, 이 둘을 즉시 착수함.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial risk board in a tech-diagram style, 2:1 landscape. Three item rows, each with a warning icon, a bold title, and a label. Item 1 has an hourglass icon. No decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+item 1 title "1차연도 일정 압축" label "실질 잔여 5에서 6개월"
+item 2 title "2차연도 선행" label "해외 실증지 선정, 미디어 케이브 사업성"
+item 3 title "선행 미결" label "데이터, 규격, 연산 배치, 센서 막대, LLM, 회원 정보"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red warning accents and gold, flat warning icons. 2:1 landscape.
+```
+
 ## 다. 후속 조치
+
+### 슬라이드
 
 킥오프 직후 착수할 선행 작업임. 데이터와 규격이 1순위 선행임.
 
@@ -276,7 +543,24 @@ RFP 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일�
 
 > **발표 노트**: 데이터(보존회 컨택)와 키오스크 규격이 1순위 선행임. 이 둘이 풀려야 첫 콘텐츠가 굴러감.
 
+### 프롬프트
+
+```
+A rich, densely filled premium editorial checklist table in a tech-diagram style, 2:1 landscape. Three columns and six rows. Each row has a check icon; the top (1순위) row is emphasized. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+column headers "액션", "담당", "시점"
+row 1 "남사당보존회 컨택과 데이터 확보" | "셀빅" | "즉시 (1순위)"
+row 2 "키오스크 규격 확정" | "큐랩 주도, 셀빅 맞춤" | "콘텐츠 개발 선행"
+row 3 "첫 콘텐츠 유람기 착수" | "셀빅" | "규격과 병렬"
+row 4 "LLM 방식 프로토타입" | "큐랩, 셀빅, KETI" | "프로토타입 후 통합 회의"
+row 5 "데이터 폼과 형식 실무 회의" | "전체" | "데이터 구축 전"
+row 6 "해외 실증지 선정 준비" | "큐랩, 용인대" | "8월 착수"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined table, colored header bar, ink-navy text, vermilion-red and gold accents, check icons. 2:1 landscape.
+```
+
 ## 라. 관련 문서
+
+### 슬라이드
 
 - [[1차연도 셀빅 개발 준비자료]]: 셀빅 1차연도 개발 계획 정리(초안). 본 발표의 1차연도 실행 근거
 - [[컨소시엄 회의록 - 2026-06-22]]: 성과지표, 역할 분담, 데이터와 LLM, 도제 설계 근거
@@ -287,3 +571,13 @@ RFP 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일�
 - [[디바이스 사양]]: 키오스크와 미디어 케이브 하드웨어 정본
 
 > **발표 노트**: 발표 중 근거를 묻는 질문이 나오면 이 문서들로 되짚을 수 있음.
+
+### 프롬프트
+
+```
+A rich, densely filled premium editorial document-grid infographic in a tech-diagram style, 2:1 landscape. Seven document cards in a grid, each with a document icon and a title. A label on top. Densely filled with meaningful content, no decorative filler; clean and legible.
+Render ONLY these exact Korean texts, nothing else:
+top label "근거 문서"
+cards "1차연도 셀빅 개발 준비자료", "컨소시엄 회의록 2026-06-22", "큐랩셀빅 사전회의 2026-06-22", "컨소시엄 구성 개요", "연구개발의 목표와 내용", "마일스톤 체계와 수행계획", "디바이스 사양"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red and gold accents, flat document icons. 2:1 landscape.
+```
