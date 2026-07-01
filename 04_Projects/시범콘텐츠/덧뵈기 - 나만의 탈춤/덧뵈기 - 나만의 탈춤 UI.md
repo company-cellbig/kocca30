@@ -54,7 +54,7 @@ updated: 2026-07-01
 
 생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 학습 토큰 스캔, 대기, 전송, 종료): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
 - **단독 프롬프트** (탈 디자인, AR 춤사위, 기념 촬영, 결과): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
@@ -165,10 +165,10 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, consent toggles, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, a single consent toggle, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
-Keep title '이용 동의', consent toggle '카메라 촬영 (필수)' (shown ON), primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의'. Use exactly one consent toggle '카메라 촬영 (필수)' (shown ON); if the reference mockup shows two toggle rows, keep only this one and do not render a second toggle (this content has a single required consent). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
@@ -181,16 +181,16 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 16:9 골격 위 좌우 분할 구성)
-	- 헤더: 안내 카피 한 줄
-	- 본문 좌측 칼럼: 도구 패널 전체 (탈 템플릿과 프리셋, 팔레트, 스탬프, 대칭 토글)
-	- 본문 중앙 칼럼: 넓은 탈 도안 캔버스 (가장 큰 비중)
-	- 본문 우측 칼럼: 좁은 경량 3D 미리보기 (캔버스가 미리보기보다 확연히 넓음, 약 1:3)
-	- 액션: 최하단에 완료 버튼 고정
+- **레이아웃** (고유, 16:9 골격, 작업 영역을 중앙 도달 존에 집약)
+	- 헤더: 안내 카피 한 줄 (상단 표시)
+	- 본문 중앙: 넓은 탈 도안 캔버스를 중앙 도달 존에 크게 둠 (주기능, 손 닿는 범위)
+	- 도구 패널: 캔버스 바로 아래(또는 캔버스에 인접한 도달 존 안쪽)에 툴바로 둠. 탈 템플릿과 프리셋, 팔레트, 스탬프, 대칭 토글은 모두 터치 조작이라 도달 존 안에 모으고 좌우 끝에 두지 않음 (§5.가 도달성)
+	- 3D 미리보기: 표시 전용(비조작)이라 한쪽 측면 가장자리에 작게 둠 (캔버스보다 확연히 작음)
+	- 액션: 완료 버튼을 화면 물리 최하단이 아니라 중앙 도달 존 아래쪽(허리 높이 안)에 둠
 - **핵심 UI 컴포넌트**
 	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
 	- 도구 패널: 배역 탈 템플릿과 프리셋, 제한 팔레트, 도형과 전통 문양 스탬프, 대칭 모드 토글
-	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널(작게, 정식 변환은 Step 3)
+	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널(표시 전용, 측면에 작게. 정식 변환은 Step 3)
 	- "완료" 버튼
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (작업 집중 우선)
 - **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료"
@@ -200,11 +200,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The mask design tool screen of a Korean traditional mask dance (talchum) experience.
-Three-column layout.
-Left column: a tool panel with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle.
-Center column: a wide high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, with a caption '탈을 꾸며보세요'. This canvas is the largest area, clearly wider than the preview (about 1:3, not 1:1).
-Right column: a narrow live 3D preview pane showing the design applied to a 3D mask.
-At the very bottom: a fixed button labeled '완료'.
+Large-screen kiosk where a person stands centered and touches: keep all interactive tools within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
+Top header: a one-line caption '탈을 꾸며보세요'.
+Center: a large high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, the main focus within the central reachable zone.
+Directly below the canvas and within reach: a tool bar with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle. These are touch tools, so they stay in the central reachable zone, not on the far left or right edge.
+To one side, display-only (non-touch): a small live 3D preview pane showing the design applied to a 3D mask, clearly smaller than the canvas.
+A primary button labeled '완료' in the lower part of the central reachable zone, not at the physical bottom edge.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
@@ -327,7 +328,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide keeping up the mood during the wait, as a clear side presence (an on-screen guide character, not a realistic bystander)
 - background -> a traditional madang stage, an anticipatory waiting mood
-Keep the status caption '결과물을 만드는 중' indicating a commemorative photo is being created.
+The body center shows a progress indicator with light talchum-themed waiting content while a commemorative photo is being created. Keep the status caption '결과물을 만드는 중'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
@@ -343,7 +344,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 16:9 골격 위 카드 구성)
 	- 헤더: 타이틀
 	- 본문: 기념 사진 카드를 중앙에 배치
-	- 액션 하단: 다음 버튼
+	- 액션: 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (신명 게이지 점수와 등급을 스탬프로 표기)
 	- "다음" 버튼
@@ -356,7 +357,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The result preview screen of a Korean traditional mask dance (talchum) experience.
 Title: '결과물 미리보기'.
-Layout: a commemorative photo card (a 2D mask character and the user posing together, with an excitement score and grade stamp), with a button labeled '다음' at the bottom.
+Layout: a commemorative photo card (a 2D mask character and the user posing together, with an excitement score and grade stamp) in the center, with a primary button labeled '다음' in the lower part of the central reachable zone (not at the physical bottom edge).
 To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence (an on-screen guide character, not a realistic bystander or a second user).
 Background: a traditional madang stage, a proud showcase mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -387,7 +388,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
-Keep caption '연락처를 입력하면 링크를 보내드려요', the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
+Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
