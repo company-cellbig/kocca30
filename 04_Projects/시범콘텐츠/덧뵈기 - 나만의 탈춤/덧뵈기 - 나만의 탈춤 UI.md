@@ -16,7 +16,7 @@ updated: 2026-07-01
 - **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
 - **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을, 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §13에 중립 레이아웃 이미지가 있는 화면(공용 7개와 학습 토큰 스캔)은 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
+- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
 # 2. 공통 설계
@@ -193,6 +193,8 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널(표시 전용, 측면에 작게. 정식 변환은 Step 3)
 	- "완료" 버튼
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (작업 집중 우선)
+- **상태별 안내 (기획서 준용)**: 입력 유효성 검증, 가드레일 실패 시 차단과 재입력 안내, 한도 초과 처리는 기획서 Step 2 분기를 준용함(목업은 정상 편집 상태만)
+- **치수 (확인 필요)**: 캔버스 높이와 툴바 터치 폭 등 도달 존 안 배분 치수는 설계 단계에서 확정(§5.가 도달성)
 - **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료"
 
 ### 2) 프롬프트 (영어)
@@ -256,6 +258,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 춤사위 가이드: 따라 출 동작을 보여주는 시연 아바타나 실루엣
 	- 신명(興) 게이지: 채점이 쌓일수록 차오르는 상승형 게이지
 - **말뚝이 호스트**: 화면 모서리에서 추임새로 호응, 활기찬 표정
+- **상태별 안내 (기획서 준용)**: 포즈 미검출이나 저신뢰 시 재시도 안내는 기획서 Step 4 분기를 준용함(목업은 정상 체험 상태만)
 - **화면 내 텍스트**: 게이지 라벨 "신명", 안내 "춤사위를 따라 해보세요"
 
 ### 2) 프롬프트 (영어)
@@ -290,6 +293,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 다음 컷으로. 컷당 예 3초에서 0까지(확인 필요, [[덧뵈기 - 나만의 탈춤 기획서]] §3.라 운영 파라미터). 별도 촬영 버튼 없음
 	- 잔여 촬영 횟수 배지 (상단 모서리): "N장 남음". 카운트다운 숫자와 분리해 혼동 방지
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김). 사진 합성 프레임 밖 UI 요소로만 두고 카메라 뷰 안에 탈 쓴 사람을 더 넣지 않음 (사용자와 2D 캐릭터 구분 보존)
+- **상태별 안내 (기획서 준용)**: 카메라에 사람이 안 잡히면 다시 서도록 안내하는 상태는 기획서 Step 5 분기를 준용함(목업은 정상 촬영 상태만)
 - **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자, 잔여 촬영 횟수(예 "3장 남음")
 
 ### 2) 프롬프트 (영어)
@@ -298,7 +302,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
 A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
-Top header: a caption banner '같이 포즈를 잡아 보세요' across the top, and a small remaining-shots badge in a top corner labeled '장 남음' (e.g. '3장 남음').
+Top header: a caption banner '같이 포즈를 잡아 보세요' across the top, and a small remaining-shots badge in a top corner showing a count with '장 남음' (render the example '3장 남음').
 Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the posing user can see it and visually distinct from the remaining-shots badge.
 Bottom action area: empty, with NO capture button or shutter button anywhere (the photo auto-fires when the countdown reaches zero).
 Optionally, a small non-photographic Maldukki mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a masked person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 2D mask character. No additional masked people or faces anywhere in the camera view.
@@ -378,6 +382,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
 	- "전송"과 "받지 않기" 버튼
 - **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 수신처 영구 실패 시 재입력 1회 허용 등 실패 안내는 기획서 Step 6과 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 입력 상태만)
 - **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -388,7 +393,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
-Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기', buttons '전송' and '받지 않기'.
+Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
@@ -412,7 +417,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character giving a warm farewell
+- the guide-host placeholder (keep its central position and farewell pose from the reference; on this closing screen the host is centered, not to the side) -> a Korean Maldukki mask host character giving a warm farewell
 - background -> a traditional madang stage, a warm closing mood
 Keep the closing message '또 만나요'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
