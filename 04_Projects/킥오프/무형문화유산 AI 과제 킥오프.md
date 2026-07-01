@@ -98,7 +98,7 @@ Style: ink-navy text and flat institution icons, vermilion-red accent on the 셀
 | 연차   | 기간   | 셀빅 핵심 목표                            | 대표 산출                     |
 | ---- | ---- | ----------------------------------- | ------------------------- |
 | 1차연도 | 2026 | 키오스크 콘텐츠 5종, 통합 플랫폼, 데이터셋 구축        | 시범 콘텐츠 프로토타입, 코칭용 정답 데이터셋 |
-| 2차연도 | 2027 | 키오스크 5종 고도화, 미디어 케이브 콘텐츠 6종, LLM 통합, 현장 실증 | 상용 수준 플랫폼, TRL 7, 실증 결과   |
+| 2차연도 | 2027 | 키오스크 1종 추가와 고도화, 케이브 콘텐츠 5종, LLM 통합, 현장 실증 | 상용 수준 플랫폼, TRL 7, 실증 결과   |
 
 - 오늘 발표는 이 로드맵을 **콘텐츠(2부) → 기술(3부) → 개발 기반과 전제(4부) → 일정과 실증(5부) → 관리(6부)** 순으로 풂
 
@@ -111,7 +111,7 @@ A rich, densely filled premium editorial timeline infographic in a tech-diagram 
 Layout: a left phase panel and a right phase panel along the spine, each with a bold year header, a goal subtitle, labeled icon chips (left panel 3 chips, right panel 4 chips), and one output tag at the bottom. A labeled marker sits on the transition arrow between the two panels.
 Render ONLY these exact Korean texts, nothing else:
 left block header "1차연도 2026", subtitle "프로토타입과 데이터셋", chips "키오스크 콘텐츠 5종", "통합 플랫폼", "데이터셋 구축", output tag "산출: 시범 프로토타입, 정답 데이터셋"
-right block header "2차연도 2027", subtitle "고도화와 실증", chips "키오스크 5종 고도화", "미디어 케이브 콘텐츠 6종", "LLM 통합", "현장 실증", output tag "산출: 상용 플랫폼, TRL 7"
+right block header "2차연도 2027", subtitle "고도화와 실증", chips "키오스크 1종 추가와 고도화", "케이브 콘텐츠 5종", "LLM 통합", "현장 실증", output tag "산출: 상용 플랫폼, TRL 7"
 transition label: "돌아가는 것에서 상용 수준으로"
 ```
 
@@ -192,14 +192,14 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 6종의 종목, 형태, 한 줄 콘셉트를 정리함.
 
-| 콘텐츠 | 종목 | 형태 | 한 줄 콘셉트 |
-|---|---|---|---|
-| 살판 관람 | 살판 | 관람(미디어 케이브) | 살판쇠의 텀블링을 4DGS로 4면에 고실감 투사 |
-| 어름 체험 | 어름 | 체험 | 롤러 보드 연동 줄 출렁임과 가상 어름산이 실시간 자세 코칭 |
-| 어름 관람 | 어름 | 관람 | 관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기 공연 |
-| 덧뵈기 관람 | 덧뵈기 | 관람(미디어 케이브) | 관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연 |
-| 풍물 합주 | 풍물 | 체험(미디어 케이브) | 핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블 |
-| 디지털 상모 | 풍물 | 체험 | 무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동 |
+| 콘텐츠        | 종목  | 형태          | 한 줄 콘셉트                                           |
+| ---------- | --- | ----------- | ------------------------------------------------- |
+| 곤두질 한 판    | 살판  | 관람(미디어 케이브) | 살판쇠의 텀블링을 4DGS로 4면에 고실감 투사                        |
+| 어름산이 되기    | 어름  | 체험          | 바닥에 줄과 배경을 투사하여 줄 출렁임과 이동을 표현하며 가상 어름산이 실시간 자세 코칭 |
+| 외줄 위의 어름산이 | 어름  | 관람          | 관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기 공연               |
+| 탈춤 군무 한마당  | 덧뵈기 | 관람(미디어 케이브) | 관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연               |
+| 다함께 풍물 한바탕 | 풍물  | 체험(미디어 케이브) | 핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블                |
+| 빛의 상모놀이    | 풍물  | 체험          | 무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동               |
 
 > **발표 노트**: 2차연도에 개발할 확정 6종임. 어름이 체험과 관람 둘, 풍물이 합주와 디지털 상모 둘로 6항목을 이룸. 미디어 케이브 관람형이 중심이며, 6종 구성은 큐랩과 이미 확인 완료. 마일스톤 5.3의 군중, 대련 표기는 이 6종으로 대체됨.
 
@@ -272,7 +272,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 콘텐츠를 화면과 공간에 실감으로 올리는 트랙임. 1차연도 AR에서 2차연도 4D와 미디어 케이브로 무게가 넘어감.
 
 - **1차연도 [방향]**: 탈춤의 AR 착용과 2D 탈 캐릭터 합성(키오스크)
-- **2차연도 [방향]**: 4D 가우시안 스플래팅(4DGS) 초고속 렌더링(최대 80fps), 햅틱과 VR 핵심 기술, 미디어 케이브 관람 콘텐츠(2부 다. 2차연도 심화 콘텐츠) ([[2. 연구개발의 목표 및 내용]], [[4. 마일스톤 체계 및 수행계획]] 5.1 초고속 4D 렌더링 및 햅틱, VR 핵심 기술)
+- **2차연도 [방향]**: 4D 가우시안 스플래팅(4DGS) 초고속 렌더링(최대 80fps), 미디어 케이브 관람 콘텐츠(2부 다. 2차연도 심화 콘텐츠) ([[2. 연구개발의 목표 및 내용]], [[4. 마일스톤 체계 및 수행계획]] 5.1 초고속 4D 렌더링 및 햅틱, VR 핵심 기술)
 - **미디어 케이브 [확정]**: 셀빅이 구축. 3면과 바닥 스크린 몰입 공간. 공수 대비 사업성 판단으로 관람형으로 최소화 ([[컨소시엄 회의록 - 2026-06-22#2. 핵심 합의]], [[큐랩셀빅 사전회의 - 2026-06-22#가. 플랫폼과 하드웨어]])
 - **비주얼 방향 [방향]**: 배경과 무거운 3D 모델링은 지양하고 2D 영상과 AI 생성 위주. 단 콘텐츠 핵심인 아바타와 탈의 3D 변환은 사용함 ([[큐랩셀빅 사전회의 - 2026-06-22#2. 핵심 합의]], [[2. 연구개발의 목표 및 내용]])
 
@@ -284,7 +284,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel with a kiosk showing an AR mask-dance scene and a right "2차연도" panel with a 3-wall-and-floor immersive media-cave illustration showing a Namsadang pungmul performance, a bold progression arrow between them, and a small annotation. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
 Render ONLY these exact Korean texts, nothing else:
 left panel "1차연도" chips "탈춤 AR 착용", "2D 탈 캐릭터 합성"
-right panel "2차연도" chips "4DGS 초고속 렌더링", "미디어 케이브", "VR과 햅틱"
+right panel "2차연도" chips "4DGS 초고속 렌더링", "미디어 케이브"
 annotation "무거운 3D 지양, 핵심 아바타와 탈은 3D"
 Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined panels, ink-navy text, vermilion-red and gold accents, isometric immersive-space icon. 2:1 landscape.
 ```
