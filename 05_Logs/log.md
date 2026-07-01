@@ -9,6 +9,14 @@ updated: 2026-06-30
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-01] review | §13 호스트 플레이스홀더를 안내 캐릭터로 정정 (생성 이미지 피드백)
+
+- 사용자가 전송 화면 생성 이미지 확인: 우측 호스트가 실사풍 일반 인물로 나와 "옆에 선 다른 사용자"로 오인됨. 원인은 프롬프트가 호스트를 "neutral, generic character silhouette (no specific motif)"로 지시해 호스트다움을 잃은 것
+- 정정(호스트 유지, 외형만 안내 캐릭터로): §13 7개 프롬프트 host 플레이스홀더를 "stylized guide-host character (clearly an on-screen guide/presenter, not a realistic bystander or a second user)"로. 시작·가이드 호스트는 유저를 향해 안내/제시하는 포즈로. 부정 프롬프트와 Avoid에 "realistic bystander or second user figure" 추가. §13.가 중립 원칙도 "양식화된 안내 캐릭터(가이드로 읽히게, 행인/다른 사용자 오인 방지)"로. 종목 모티프 배제는 유지(중립)
+- 처음에 프라이버시/제거로 오독했다가 사용자 교정으로 방향 수정
+- lint error 0
+- 수정 파일: 시범콘텐츠 공통 사양
+
 ## [2026-07-01] update | 킥오프 헤더와 용어 순화 (사용자 편집 + 참조 정합)
 
 - 사용자 수동 편집: 부/절 제목 간결화(2부 "콘텐츠 로드맵", 3부 "기술 트랙", 1부 다 "개발 로드맵", 4부 가 "데이터"에서 비유 "기술의 연료" 제거 등), 6부 나 "리스크와 미결"→"중점 관리 사항", 다 "다음 액션"→"후속 조치"
