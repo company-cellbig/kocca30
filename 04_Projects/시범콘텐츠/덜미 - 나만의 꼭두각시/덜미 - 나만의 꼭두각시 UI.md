@@ -158,6 +158,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 주 버튼 "동의하고 시작": 필수 카메라 촬영 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **산받이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **개인정보 고지 (기획서 §5.나 준용)**: 약관과 안내 문구에 카메라 촬영(얼굴)뿐 아니라, 기념 사진(얼굴 포함)을 생성하고 저장하며 결과 페이지로 48시간 제공하는 처리 범위를 포함함(정확한 고지 문구와 동의 범위는 규정 검토 확정, 확인 필요)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
@@ -202,7 +203,7 @@ Center: a live front-facing camera view of a single real user, with a face-align
 Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the user can see it.
 Top header: a one-line caption '얼굴을 맞춰 주세요'.
 Bottom action area: empty, with NO capture button or shutter button anywhere (the photo auto-fires when the countdown reaches zero).
-Optionally, a small non-photographic Sanbaji mascot icon may appear as a UI element outside the camera frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly one figure: the single real user. No puppets or extra faces anywhere in the camera view.
+Optionally, a small non-photographic Sanbaji narrator host UI element may appear outside the camera frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly one figure: the single real user. No puppets or extra faces anywhere in the camera view.
 Background: a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
@@ -247,14 +248,14 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 헤더 모서리(우상단): 신명 게이지를 상태 표시로 얹음
 	- 본문(최대 비중): 3D 인형 무대. 사용자 얼굴로 만든 목각 인형 아바타가 남사당 포장막 무대 위에서 양손 조작에 반응해 놀이함
 	- 본문 하단: 장단 타이밍 가이드(리듬 인디케이터)와 양손 조작 힌트(손 실루엣)
-	- 절정: 골계 반전 시 결정적 빠른 입력 프롬프트를 오버레이로 띄움(홍동지 등장, 이시미 퇴치)
+	- 절정: 골계 반전 시 결정적 빠른 입력 프롬프트를 오버레이로 띄움(홍동지 등장, 이시미 퇴치). 입력은 핸드 트래킹 제스처(터치 버튼 없음)
 	- 액션: 별도 버튼 없음(핸드 트래킹 체험). 화면 타임아웃 발동 시 정상 진행으로 다음 단계로 넘어감
 - **핵심 UI 컴포넌트**
 	- 3D 인형 무대: 사용자 얼굴 목각 인형 아바타가 포장막 무대에서 조작에 반응
 	- 양손 핸드 트래킹 힌트: 양손으로 인형을 놀림을 나타내는 손 실루엣이나 인디케이터
 	- 장단 타이밍 가이드: 풍물 장단에 맞춰 누를 리듬 인디케이터
 	- 신명(興) 게이지: 채점이 쌓일수록 차오르는 상승형 게이지
-	- 골계 반전 빠른 입력 프롬프트(절정): 홍동지 등장과 이시미 퇴치를 맞춰 누르는 오버레이. 놓치면 산받이가 눙치는 대체 연출(§4.라 골계 반전 연출)
+	- 골계 반전 빠른 입력 프롬프트(절정, 필수): 홍동지 등장과 이시미 퇴치를 장단에 맞춰 손동작(핸드 트래킹 제스처, 터치 버튼 아님)으로 맞추는 오버레이. 놓치면 산받이가 눙치는 대체 연출(§4.라 골계 반전 연출)
 - **산받이 호스트**: 무대 옆이나 모서리에서 재담과 추임새로 호응, 활기찬 표정
 - **상태별 안내 (기획서 준용)**: 입력이나 손 미검출, 저신뢰 시 재시도 안내와 구간 점수 보류, 골계 반전 실패 시 대체 연출은 기획서 Step 4 분기를 준용함(목업은 정상 놀이 상태만)
 - **화면 내 텍스트**: 게이지 라벨 "신명", 안내 "장단에 맞춰 인형을 놀려 보세요", 골계 반전 프롬프트 "지금!"(표본)
@@ -268,7 +269,7 @@ Center (main focus): a 3D wooden-puppet (mokgak) avatar made from the user's fac
 Along the bottom: subtle hand-tracking indicators (two faint hand silhouettes) showing the user controls the puppet with both hands, and a rhythm/beat guide for the pungmul percussion timing, with a caption '장단에 맞춰 인형을 놀려 보세요'. This is a hands/motion experience screen with no touch buttons and no bottom toolbar.
 Top-right: a rising excitement gauge labeled '신명', filling up, festive.
 To one side / a corner: a stylized Korean Sanbaji narrator host character (the deolmi puppet-play storyteller who banters with the puppets, an on-screen guide character, not a realistic bystander) reacting with lively banter.
-Optionally, a comic-climax quick-time prompt overlay labeled '지금!' may appear where 홍동지 (a strong wooden puppet) strikes down 이시미 (a serpent/imugi puppet); this overlay can be omitted.
+At the comic climax, a required quick-time prompt overlay labeled '지금!' appears where 홍동지 (a strong wooden puppet) strikes down 이시미 (a serpent/imugi puppet); the user responds with a timed hand gesture (hand tracking, not a touch button).
 Background: a namsadang booth-curtain puppet stage, lively festival mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
@@ -304,7 +305,7 @@ A single composite frame: a live camera view of a real user with a bare face and
 Top header: a caption banner '인형이랑 같이 포즈를 잡아 보세요' across the top, and a small remaining-shots badge in a top corner showing a count with '장 남음' (render the example '3장 남음').
 Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the posing user can see it and visually distinct from the remaining-shots badge.
 Bottom action area: empty, with NO capture button or shutter button anywhere (the photo auto-fires when the countdown reaches zero).
-Optionally, a small non-photographic Sanbaji mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 3D puppet character. No additional people or faces anywhere in the camera view.
+Optionally, a small non-photographic Sanbaji narrator host UI element may appear outside the camera/composite frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 3D puppet character. No additional people or faces anywhere in the camera view.
 Background: a namsadang booth-curtain puppet stage, a festive celebratory mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
@@ -378,7 +379,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 산받이는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
 	- 전화번호 입력 필드와 숫자 키패드
-	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
+	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 기념 사진(얼굴 포함)을 결과 페이지로 48시간 제공하는 처리도 고지 범위에 포함함(기획서 §5.나 개인정보와 연속성). 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
 	- "전송"과 "받지 않기" 버튼
 - **산받이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 수신처 영구 실패 시 재입력 1회 허용 등 실패 안내는 기획서 Step 6과 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 입력 상태만)
