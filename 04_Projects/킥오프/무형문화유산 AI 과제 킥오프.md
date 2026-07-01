@@ -207,17 +207,16 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ```
 A rich premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Pure white (#FFFFFF) background so it drops cleanly onto a white slide. Do NOT draw a slide title or header text (the presentation already provides it). Organize the six cards into two labeled device categories so the layout reads clearly at a glance, with no scattered colors.
-Layout: a top category with a colored group header "케이브 콘텐츠 5종" holding a row of five cards; below it a category with a colored group header "키오스크 콘텐츠 1종" holding one card. Each card has a colored header strip with the content name and a type tag ("관람" or "체험" in different colors), a small 종목 sub-label, one concise concept line, and a semi-realistic Namsadang thumbnail on the right portion.
+Layout: a clean 3-column by 2-row grid of six equal-sized cards, evenly spaced, filling the full width with no large empty margins. Do NOT draw a top banner or group-title band. Device grouping reads by header color: the five 케이브(media-cave) cards use a vermilion-red header strip, and the one 키오스크(kiosk) card uses a gold header strip. Fill the grid row-major with the five cave cards first (row 1 has three cards, row 2 has the remaining two cave cards) and the single kiosk card in the last cell (bottom-right). Each card has a colored header strip with the content name and a type tag ("관람" or "체험" in different colors), a small 종목 sub-label, one concise concept line, and a semi-realistic Namsadang thumbnail on the right portion. A slim legend bar at the very bottom shows a red swatch labeled 케이브 콘텐츠 5종 and a gold swatch labeled 키오스크 콘텐츠 1종.
 Card thumbnails: 곤두질 한 판 a ground-acrobatics tumbler mid-flip across a 4-wall immersive screen; 외줄 위의 어름산이 a tightrope walker performing above a reacting crowd; 탈춤 군무 한마당 masked avatars dancing inside a large screen before an audience; 다함께 풍물 한바탕 several hands playing virtual pungmul instruments in XR; 빛의 상모놀이 a spinning sangmo hat drawing a glowing light trail; 어름산이 되기 a person balancing on a floor-projected rope line with a real-time coaching pose-overlay.
 Render ONLY these exact Korean texts, nothing else:
-group header "케이브 콘텐츠 5종"
-card "곤두질 한 판" sub "살판" tag "관람" concept "살판쇠의 텀블링을 4DGS로 4면에 고실감 투사"
-card "외줄 위의 어름산이" sub "어름" tag "관람" concept "관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기"
-card "탈춤 군무 한마당" sub "덧뵈기" tag "관람" concept "관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연"
-card "다함께 풍물 한바탕" sub "풍물" tag "체험" concept "핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블"
-card "빛의 상모놀이" sub "풍물" tag "체험" concept "무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동"
-group header "키오스크 콘텐츠 1종"
-card "어름산이 되기" sub "어름" tag "체험" concept "바닥에 줄과 배경을 투사, 가상 어름산이 실시간 자세 코칭"
+(케이브, 빨강 헤더) card "곤두질 한 판" sub "살판" tag "관람" concept "살판쇠의 텀블링을 4DGS로 4면에 고실감 투사"
+(케이브, 빨강 헤더) card "외줄 위의 어름산이" sub "어름" tag "관람" concept "관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기"
+(케이브, 빨강 헤더) card "탈춤 군무 한마당" sub "덧뵈기" tag "관람" concept "관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연"
+(케이브, 빨강 헤더) card "다함께 풍물 한바탕" sub "풍물" tag "체험" concept "핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블"
+(케이브, 빨강 헤더) card "빛의 상모놀이" sub "풍물" tag "체험" concept "무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동"
+(키오스크, 금색 헤더, 마지막 칸) card "어름산이 되기" sub "어름" tag "체험" concept "바닥에 줄과 배경을 투사, 가상 어름산이 실시간 자세 코칭"
+bottom legend "케이브 콘텐츠 5종", "키오스크 콘텐츠 1종"
 Style: outlined cards with colored header strips, ink-navy text, vermilion-red and gold accents, semi-realistic discipline thumbnails, dense but clean. 2:1 landscape.
 ```
 
@@ -478,7 +477,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 	- 콘텐츠 몰입도(체험 시간, 재방문율)
 	- 하드웨어 안정성(장애 발생률)
 - **국내 실증 [확정]**: 서울랜드. 셀빅이 협의 선행. 실증 영상 확보가 결과 보고의 핵심 ([[큐랩셀빅 사전회의 - 2026-06-22#마. 실증]])
-- **해외 실증 [미결]**: 한 곳. 태국과 베트남을 비교해 선정(계획서의 필리핀은 6/22 회의에서 빠짐). 준비가 오래 걸려 8월부터 착수 ([[컨소시엄 회의록 - 2026-06-22#바. 실증과 거버넌스]])
+- **해외 실증 [미결]**: 한 곳. 태국과 베트남을 비교해 선정(계획서의 필리핀은 6/22 회의에서 빠짐). 용인대 장경태 교수가 2026년 7월 5일 베트남을 방문해 진행 가능 여부를 확인한 뒤 선정하며, 실증은 2027년 가을 ([[컨소시엄 회의록 - 2026-06-22#바. 실증과 거버넌스]])
 - **기술 성숙도 [확정]**: 착수 시점 TRL 5단계에서 2차연도 종료 시점 TRL 7단계 목표 ([[rfp_제안요청서]], [[2. 연구개발의 목표 및 내용]])
 
 > **발표 노트**: 해외 실증지 확정이 선행임. 준비 기간이 길어 늦어지면 가을 실증 일정이 흔들림. 서울랜드 인원은 정본 KPI 400명 기준임(사전회의 녹취 500명은 미확정). 성능지표(정확도, MPJPE, FID)는 3부 기술 트랙 목표와 연동됨. 성과물 건수(특허, SW, 매출 등)는 6부 가에서 다룸.
@@ -487,15 +486,18 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 ```
 A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape, split into a left "실증 추진 계획" panel and a right "성과 목표 (TRL 7)" panel.
-Left panel: a clean flat regional map of East and Southeast Asia (show the Korean peninsula AND mainland Southeast Asia, not just Korea). One emphasized red pin on Seoul, Korea labeled 서울랜드, and one gold dashed pin over the Thailand/Vietnam area of Southeast Asia labeled 해외 1곳. Do NOT draw any travel route or dashed line connecting the two pins. Below the map, two info cards side by side summarizing each site (date, headcount, system). The domestic pin and card are solid/emphasized (확정); the overseas pin and card are dashed/muted (미결).
-Right panel: a compact KPI dashboard. A semicircular gauge on top showing a TRL progression from 5 to 7. Below it, a row of four small metric cards, then a wide badge. Every metric maps to its concept with a tiny flat icon.
-A slim annotation bar spans the full width at the bottom under both panels.
+Left panel: a clean flat regional map of East and Southeast Asia (show the Korean peninsula AND mainland Southeast Asia, not just Korea). One emphasized solid red pin on Seoul, Korea labeled 서울랜드, and one muted gold dashed pin over the Thailand/Vietnam area labeled 해외 1곳. Do NOT draw any travel route or line connecting the two pins. Below the map, two site cards side by side, each with a title, a date line, a headcount line, and a system line; the domestic card is solid/emphasized (확정), the overseas card is dashed/muted (미결). Directly under the overseas card, one small caption line stating how the overseas site is selected.
+Right panel, top to bottom: a semicircular gauge showing TRL progressing from 5 to 7; a row of four KPI metric cards, each with a tiny flat icon; a slim sub-strip headed 실증 검증 항목 holding three small check items; and a wide badge at the bottom.
+A slim annotation bar spans the full width under both panels.
 Render ONLY these exact Korean texts, nothing else:
 left map pins "서울랜드", "해외 1곳"
-left card 1 "서울랜드 (국내, 확정)" lines "27.5~27.8", "관람객 400명", "미디어 케이브, 키오스크"
+left card 1 "서울랜드 (국내, 확정)" lines "27.5~27.8", "관람객 400명", "미디어 케이브(살판), 키오스크"
 left card 2 "해외 1곳 (미결)" lines "27.8~27.12", "현지 학생 100명", "태국 또는 베트남, 키오스크"
+left caption "용인대 2026.7.5 베트남 방문 후 선정"
 right gauge "TRL 5에서 7로"
-right metric cards "CSAT 85점 이상", "특성 분류 정확도 95%", "동작 분석 MPJPE 35mm", "4D 생성 FID 4.0"
+right KPI cards "CSAT 85점 이상", "특성 분류 정확도 95%", "동작 분석 MPJPE 35mm", "4D 생성 FID 4.0"
+right sub-strip title "실증 검증 항목"
+right sub-strip items "사용자 편의성(UI/UX)", "콘텐츠 몰입도(체험 시간, 재방문율)", "하드웨어 안정성(장애 발생률)"
 right badge "국내외 수요처 2개소 이상 설치, 운영"
 bottom annotation "실증 영상 확보가 결과 보고 핵심"
 Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; ink-navy elements, vermilion-red and gold accents, flat map and gauge icons, domestic site emphasized in red, overseas site muted with a gold dashed outline. 2:1 landscape.
@@ -509,15 +511,15 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 6/22 회의에서 PD(과제 점검 전문가) 요구로 컨소시엄이 통일한 2년 전체 목표임. 계획서 원문과 일부 다름(특허는 등록이 아닌 출원, SW 10건) ([[컨소시엄 회의록 - 2026-06-22#가. 성과물 목표 (PD 요구로 컨소시엄 통일)]]).
 
-| 성과물 | 목표 | 셀빅 관여 |
-|---|---|---|
-| 특허 | 출원 6건 | KETI 2건, 나머지 큐랩과 셀빅 |
-| SW 등록 | 10건 | 큐랩과 셀빅 반반 |
-| 사업화 건수 | 6건 | 큐랩, 셀빅 |
-| 사업화 매출 | 1억 원 | 큐랩과 셀빅 반반 |
-| 고용 창출 | 4명 | 큐랩 |
-| 시제품 제작 | 3건 | 큐랩 |
-| SCI(과학기술논문 인용색인) 논문 | 건수 미명시 | 대학교 |
+| 성과물                 | 전체 목표  | 셀빅 몫   | 배분                     |
+| ------------------- | ------ | ------ | ---------------------- |
+| 특허                  | 출원 6건  | 2건     | KETI 2건, 나머지 큐랩과 셀빅 반반 |
+| SW 등록               | 10건    | 5건     | 큐랩과 셀빅 반반              |
+| 사업화 건수              | 6건     | 분담(미정) | 큐랩, 셀빅                 |
+| 사업화 매출              | 1억 원   | 5천만 원  | 큐랩과 셀빅 반반              |
+| 고용 창출               | 4명     | 없음     | 큐랩                     |
+| 시제품 제작              | 3건     | 없음     | 큐랩                     |
+| SCI(과학기술논문 인용색인) 논문 | 건수 미명시 | 없음     | 대학교                    |
 
 - 셀빅은 SW 등록과 특허 출원, 사업화가 직접 부담임. 개발 산출물을 성과물로 연결할 계획이 필요함
 
@@ -526,10 +528,16 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial KPI dashboard in a tech-diagram style, 2:1 landscape. Seven metric cards, each with a large number, an icon, and a label. The three cards that 셀빅 directly bears ("SW 등록", "특허 출원", "사업화") get an emphasized border. Densely filled with meaningful content, no decorative filler; clean and legible.
+A rich, densely filled premium editorial KPI dashboard in a tech-diagram style, 2:1 landscape. Seven metric cards, each with a large project-total number, an icon, and a label. Below each card's label, a small secondary sub-line inside a muted gray pill showing 셀빅's share. The three cards that 셀빅 directly bears ("특허 출원", "SW 등록", "사업화") get an emphasized red border. Densely filled with meaningful content, no decorative filler; clean and legible.
 Render ONLY these exact Korean texts, nothing else:
-cards "특허 출원 6건", "SW 등록 10건", "사업화 6건", "매출 1억 원", "고용 4명", "시제품 3건", "SCI 논문"
-Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, big bold numbers, ink-navy text, vermilion-red and gold accents. 2:1 landscape.
+card 1 label "특허 출원 6건" sub-pill "셀빅 2건"
+card 2 label "SW 등록 10건" sub-pill "셀빅 5건"
+card 3 label "사업화 6건" sub-pill "셀빅 분담(미정)"
+card 4 label "매출 1억 원" sub-pill "셀빅 5천만 원"
+card 5 label "고용 4명" sub-pill "셀빅 없음"
+card 6 label "시제품 3건" sub-pill "셀빅 없음"
+card 7 label "SCI 논문" sub-pill "셀빅 없음"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, big bold numbers, ink-navy text, vermilion-red and gold accents, 셀빅 sub-pill in a small muted gray rounded badge. 2:1 landscape.
 ```
 
 ## 나. 중점 관리 사항
@@ -539,7 +547,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 낙관 편향을 막기 위해 킥오프에서 명시함.
 
 - **1차연도 일정 압축 [리스크]**: 오늘 기준 1차연도 실질 잔여가 약 5~6개월임. 계획서 명목 착수(26.04)와 달리 첫 컨소시엄 회의가 6/22였고, 그 안에 콘텐츠 5종, 데이터 확보, 통합 플랫폼을 해야 함 (5부 가. 1차연도 일정과 마일스톤)
-- **2차연도 선행 [리스크]**: 해외 실증지 선정과 미디어 케이브 사업성 판단이 2차연도 전개를 좌우함. 실증지는 준비가 길어 8월부터 착수 필요
+- **2차연도 선행 [리스크]**: 해외 실증지 선정과 미디어 케이브 사업성 판단이 2차연도 전개를 좌우함. 실증지는 용인대 2026년 7월 5일 베트남 방문 결과로 선정하며, 지연되면 2027년 가을 실증이 흔들림
 - **선행 미결 항목 [미결]**: 데이터 확보 시점, 키오스크 규격, 연산 배치(현장 GPU와 서버 오프로드 중 택일), 버나 센서 막대, LLM 방식, 회원 정보 관리 ([[1차연도 셀빅 개발 준비자료#7. 미결과 결정 요청]])
 
 > **발표 노트**: 가장 큰 제약은 시간임. 데이터와 규격이라는 두 선행이 늦으면 1차연도 5종 전체가 밀리므로, 이 둘을 즉시 착수함.
@@ -547,12 +555,13 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial risk board in a tech-diagram style, 2:1 landscape. Three item rows, each with a warning icon, a bold title, and a label. Item 1 has an hourglass icon. No decorative filler; clean and legible.
+A rich, densely filled premium editorial risk board in a tech-diagram style, 2:1 landscape. Three stacked full-width rows, each a rounded card with, from left to right: a warning icon, a bold title with a small status badge beside it ("리스크" in red, "미결" in gold), a bold core-value line, and one smaller supporting note line below in muted gray. Row 1 icon an hourglass, row 2 icon a warning triangle, row 3 icon a siren. A slim full-width callout bar sits at the very bottom under the three rows. Densely filled with meaningful content, no decorative filler; clean and highly legible.
 Render ONLY these exact Korean texts, nothing else:
-item 1 title "1차연도 일정 압축" label "실질 잔여 5에서 6개월"
-item 2 title "2차연도 선행" label "해외 실증지 선정, 미디어 케이브 사업성"
-item 3 title "선행 미결" label "데이터, 규격, 연산 배치, 센서 막대, LLM, 회원 정보"
-Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red warning accents and gold, flat warning icons. 2:1 landscape.
+row 1 badge "리스크" title "1차연도 일정 압축" value "실질 잔여 5~6개월" note "명목 착수 26.04, 첫 회의 6/22, 콘텐츠 5종과 데이터와 통합 플랫폼을 압축 수행"
+row 2 badge "리스크" title "2차연도 선행" value "해외 실증지 선정, 미디어 케이브 사업성" note "용인대 2026.7.5 베트남 방문 후 선정, 지연 시 2027 가을 실증 흔들림"
+row 3 badge "미결" title "선행 미결" value "6개 항목" note "데이터, 규격, 연산 배치(GPU/서버), 센서 막대, LLM, 회원 정보"
+bottom callout "즉시 착수: 데이터 확보, 키오스크 규격 (지연 시 1차연도 5종 전체 밀림)"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red risk accents and gold, flat warning icons, muted gray note lines. 2:1 landscape.
 ```
 
 ## 다. 후속 조치
@@ -568,7 +577,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 | 첫 콘텐츠(유람기) 착수와 공용 시스템 도출 | 셀빅 | 규격 확정과 병렬 |
 | LLM 방식 프로토타입 | 큐랩, 셀빅, KETI | 각자 프로토타입 후 통합 회의 |
 | 데이터 폼과 형식, 취득 항목 실무 회의 | 전체 | 데이터 구축 전 |
-| 해외 실증지 선정 준비 | 큐랩, 용인대 | 8월 착수 (2차연도 실증 선행) |
+| 해외 실증지 선정 | 큐랩, 용인대 | 용인대 2026년 7월 5일 방문 후 선정 (2027년 가을 실증 선행) |
 
 > **발표 노트**: 데이터(보존회 컨택)와 키오스크 규격이 1순위 선행임. 이 둘이 풀려야 첫 콘텐츠가 굴러감.
 
@@ -583,7 +592,7 @@ row 2 "키오스크 규격 확정" | "큐랩 주도, 셀빅 맞춤" | "콘텐츠
 row 3 "첫 콘텐츠 유람기 착수" | "셀빅" | "규격과 병렬"
 row 4 "LLM 방식 프로토타입" | "큐랩, 셀빅, KETI" | "프로토타입 후 통합 회의"
 row 5 "데이터 폼과 형식 실무 회의" | "전체" | "데이터 구축 전"
-row 6 "해외 실증지 선정 준비" | "큐랩, 용인대" | "8월 착수"
+row 6 "해외 실증지 선정" | "큐랩, 용인대" | "용인대 2026.7.5 방문 후 선정"
 Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined table, colored header bar, ink-navy text, vermilion-red and gold accents, check icons. 2:1 landscape.
 ```
 
