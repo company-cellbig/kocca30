@@ -206,15 +206,19 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Six content cards in a 2-row by 3-column grid, evenly spaced edge to edge, filling the full width with no large empty margins. Do NOT draw a title bar, banner, or any header text (the presentation slide already provides the title). Each card has a colored header strip carrying the content name and a type tag ("관람" or "체험" in different colors), a small discipline sub-label, one concise concept line under the name, and a semi-realistic Namsadang thumbnail filling the right portion of the card. Card thumbnails: 살판 관람 a ground-acrobatics tumbler mid-flip projected across a 4-wall immersive screen, 어름 체험 a person balancing on a roller board learning a tightrope pose with a coaching pose-overlay, 어름 관람 a tightrope walker performing above a reacting crowd, 덧뵈기 관람 a masked avatar dancing inside a large screen before an audience, 풍물 합주 several hands playing virtual pungmul instruments in XR, 디지털 상모 a spinning sangmo hat drawing a glowing light trail. Every picture must map to its concept; no decorative filler; clean and highly legible.
+A rich premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Pure white (#FFFFFF) background so it drops cleanly onto a white slide. Do NOT draw a slide title or header text (the presentation already provides it). Organize the six cards into two labeled device categories so the layout reads clearly at a glance, with no scattered colors.
+Layout: a top category with a colored group header "케이브 콘텐츠 5종" holding a row of five cards; below it a category with a colored group header "키오스크 콘텐츠 1종" holding one card. Within the cave group, order the three 관람 cards first then the two 체험 cards so the type-tag colors are grouped. Each card has a colored header strip with the content name and a type tag ("관람" or "체험" in different colors), a small 종목 sub-label, one concise concept line, and a semi-realistic Namsadang thumbnail on the right portion.
+Card thumbnails: 곤두질 한 판 a ground-acrobatics tumbler mid-flip across a 4-wall immersive screen; 외줄 위의 어름산이 a tightrope walker performing above a reacting crowd; 탈춤 군무 한마당 masked avatars dancing inside a large screen before an audience; 다함께 풍물 한바탕 several hands playing virtual pungmul instruments in XR; 빛의 상모놀이 a spinning sangmo hat drawing a glowing light trail; 어름산이 되기 a person balancing on a floor-projected rope line with a real-time coaching pose-overlay.
 Render ONLY these exact Korean texts, nothing else:
-card 1 name "살판 관람" sub "살판" tag "관람" concept "살판쇠의 텀블링을 4DGS로 4면에 고실감 투사"
-card 2 name "어름 체험" sub "어름" tag "체험" concept "롤러 보드 연동 줄 출렁임과 가상 어름산이 실시간 자세 코칭"
-card 3 name "어름 관람" sub "어름" tag "관람" concept "관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기"
-card 4 name "덧뵈기 관람" sub "덧뵈기" tag "관람" concept "관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연"
-card 5 name "풍물 합주" sub "풍물" tag "체험" concept "핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블"
-card 6 name "디지털 상모" sub "풍물" tag "체험" concept "무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동"
-Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards with colored header strips, ink-navy text, vermilion-red and gold accents, semi-realistic discipline thumbnails. 2:1 landscape.
+group header "케이브 콘텐츠 5종"
+card "곤두질 한 판" sub "살판" tag "관람" concept "살판쇠의 텀블링을 4DGS로 4면에 고실감 투사"
+card "외줄 위의 어름산이" sub "어름" tag "관람" concept "관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기"
+card "탈춤 군무 한마당" sub "덧뵈기" tag "관람" concept "관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연"
+card "다함께 풍물 한바탕" sub "풍물" tag "체험" concept "핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블"
+card "빛의 상모놀이" sub "풍물" tag "체험" concept "무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동"
+group header "키오스크 콘텐츠 1종"
+card "어름산이 되기" sub "어름" tag "체험" concept "바닥에 줄과 배경을 투사, 가상 어름산이 실시간 자세 코칭"
+Style: outlined cards with colored header strips, ink-navy text, vermilion-red and gold accents, semi-realistic discipline thumbnails, dense but clean. 2:1 landscape.
 ```
 
 # 3. 기술 트랙
@@ -354,12 +358,13 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial diagram of three constraint cards in a tech-diagram style, 2:1 landscape. Three large cards side by side, each with a bold title, a clear icon, and a label. Card 1 shows a hand with a dashed wrist boundary line. No decorative filler; clean and legible.
+A rich, densely filled premium editorial diagram of three constraint panels in a tech-diagram style, 2:1 landscape. Three tall rounded cards side by side, filling the full width with no large empty margins. Do NOT draw a title bar, banner, or header text at the top. Each card has a colored header strip carrying the constraint title and a small status badge ("확정" in navy, "미결" in gold), a clear central icon, one bold key-value line under the icon, and two short supporting lines (a reason line, then an implication line) stacked below. A slim annotation bar spans the full width at the bottom under the three cards. Card 1 icon: a hand with a dashed red boundary line drawn across the wrist. Card 2 icon: a single-person silhouette with a "13+" age badge. Card 3 icon: an AI chip and a code file branching to a shopping cart (commercial), an open padlock (open source), and a question mark (undecided). No decorative filler; clean and highly legible.
 Render ONLY these exact Korean texts, nothing else:
-card 1 title "손 인식 범위" label "손목까지, 손가락은 별도 과제"
-card 2 title "인식 인원과 연령" label "동시 1인, 청소년 이상"
-card 3 title "LLM 방식" label "상용 또는 오픈소스, 미결"
-Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards, ink-navy text, vermilion-red and gold accents, dashed boundary emphasis, flat icons. 2:1 landscape.
+card 1 title "손 인식 범위" badge "확정" value "손목까지 인식" reason "전신 단일 카메라의 현실적 한계" implication "손가락 추적은 별도 R&D 과제"
+card 2 title "인식 인원과 연령" badge "확정" value "동시 1인 인식" reason "정확도와 속도에 유리" implication "대상은 청소년 이상, 성인 포함"
+card 3 title "LLM 방식" badge "미결" value "상용 또는 오픈소스" reason "자체 구축 여부와 프레임워크 미정" implication "각 기관 프로토타입 후 결정"
+bottom annotation "세 전제가 기술 트랙 설계 범위를 규정, 손 인식 상한이 꼭두각시 양손 조작 설계를 좌우"
+Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; outlined cards with colored header strips, ink-navy text, vermilion-red and gold accents, dashed boundary emphasis on card 1, flat icons. 2:1 landscape.
 ```
 
 ## 다. 디바이스
