@@ -195,11 +195,11 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 | 콘텐츠        | 종목  | 형태          | 한 줄 콘셉트                                           |
 | ---------- | --- | ----------- | ------------------------------------------------- |
 | 곤두질 한 판    | 살판  | 관람(미디어 케이브) | 살판쇠의 텀블링을 4DGS로 4면에 고실감 투사                        |
-| 어름산이 되기    | 어름  | 체험          | 바닥에 줄과 배경을 투사하여 줄 출렁임과 이동을 표현하며 가상 어름산이 실시간 자세 코칭 |
-| 외줄 위의 어름산이 | 어름  | 관람          | 관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기 공연               |
+| 어름산이 되기    | 어름  | 체험(키오스크)    | 바닥에 줄과 배경을 투사하여 줄 출렁임과 이동을 표현하며 가상 어름산이 실시간 자세 코칭 |
+| 외줄 위의 어름산이 | 어름  | 관람(미디어 케이브) | 관객 반응에 따라 곡예 난이도가 달라지는 인터랙티브 줄타기 공연               |
 | 탈춤 군무 한마당  | 덧뵈기 | 관람(미디어 케이브) | 관객이 디자인한 탈 아바타가 화면 속에서 함께 춤추는 참여 공연               |
 | 다함께 풍물 한바탕 | 풍물  | 체험(미디어 케이브) | 핸드 트래킹으로 가상 악기를 여럿이 함께 연주하는 XR 앙상블                |
-| 빛의 상모놀이    | 풍물  | 체험          | 무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동               |
+| 빛의 상모놀이    | 풍물  | 체험(미디어 케이브) | 무선 센서 모자로 고개를 돌려 상모꾼 아바타와 빛의 궤적을 연동               |
 
 > **발표 노트**: 2차연도에 개발할 확정 6종임. 어름이 체험과 관람 둘, 풍물이 합주와 디지털 상모 둘로 6항목을 이룸. 미디어 케이브 관람형이 중심이며, 6종 구성은 큐랩과 이미 확인 완료. 마일스톤 5.3의 군중, 대련 표기는 이 6종으로 대체됨.
 
@@ -376,18 +376,18 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 - **1차연도 [확정]**: 가로형 키오스크(모션 인식 뎁스 카메라, 바닥 프로젝션)
 - **2차연도 [방향]**: 미디어 케이브 추가(3면과 바닥 스크린 몰입 공간)
 - **규격 주체 [확정]**: 큐랩이 센서와 규격을 정하고 셀빅이 맞춤. 셀빅 포토부스(세로형)와 큐랩 케이팝 키오스크(가로형) 자산을 단일 규격으로 통합
-- **미결 항목 [미결]**: 65인치, 뎁스 카메라 모델(키넥트나 오르벡), 라이다 채택, 버나 센서 막대 도입
+- **미결 항목 [미결]**: 65인치, 뎁스 카메라 모델(키넥트나 오르벡), 라이다 센서 채택, 콘텐츠 적용 하드웨어(버나 센서 막대) 도입
 
-> **발표 노트**: 규격은 큐랩이 정하고 셀빅이 맞추는 구조라, 규격 확정이 늦으면 콘텐츠 개발이 함께 밀림. 버나 센서 막대는 도입 자체가 미정임.
+> **발표 노트**: 규격은 큐랩이 정하고 셀빅이 맞추는 구조라, 규격 확정이 늦으면 콘텐츠 개발이 함께 밀림. 버나 센서 막대 같은 콘텐츠 적용 하드웨어는 도입 자체가 미정임.
 
 ### 프롬프트
 
 ```
-A rich, densely filled premium editorial hardware infographic in an isometric flat-vector style, 2:1 landscape. On the left, an upright horizontal kiosk illustration with callout labels; on the right, a 3-wall-and-floor immersive media-cave illustration. A bottom row of undecided-item tags and a small annotation. Densely filled with meaningful content, no decorative filler; clean and legible.
+A rich, densely filled premium editorial hardware infographic in an isometric flat-vector style, 2:1 landscape. On the left, an upright horizontal kiosk illustration with callout labels; on the right, a 3-wall-and-floor immersive media-cave illustration. A bottom row of undecided-item tags and a small annotation. Each bottom tag carries a small flat icon: 65인치 a diagonally measured monitor, 뎁스 카메라 모델 a stereo depth camera, 라이다 센서 a lidar sensor puck with scan rings, 콘텐츠 적용 하드웨어 a buna spinning-stick prop. Densely filled with meaningful content, no decorative filler; clean and legible.
 Render ONLY these exact Korean texts, nothing else:
 left kiosk callouts "가로형 키오스크", "모션 인식 뎁스 카메라", "바닥 프로젝션", tag "1차연도"
 right cave label "미디어 케이브", tag "2차연도"
-bottom undecided tags "65인치", "센서 모델", "라이다", "버나 센서 막대"
+bottom undecided tags "65인치", "뎁스 카메라 모델", "라이다 센서", "콘텐츠 적용 하드웨어"
 annotation "규격은 큐랩 주도, 셀빅 맞춤"
 Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; isometric flat vector, ink-navy line work, vermilion-red and gold accents. 2:1 landscape.
 ```
@@ -400,16 +400,16 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 계획서 명목 일정 기준 셀빅 관련 1차연도 마일스톤임(번호는 [[4. 마일스톤 체계 및 수행계획]]의 마일스톤 코드).
 
-| 번호 | 마일스톤 | 목표 일정 | 핵심 수행기관 |
-|---|---|---|---|
-| 1.2 | 통합 플랫폼 아키텍처 및 인프라 구축 | 26.05 ~ 26.08 | 큐랩, 셀빅 |
-| 1.3 | 하드웨어 인터페이스 및 키오스크 프로토타입 | 26.06 ~ 26.12 | 큐랩, 셀빅 |
-| 1.4 | 통합 플랫폼 최적화 및 안정화 | 26.09 ~ 26.10 | 셀빅 |
-| 2.1 | 실시간 동작 인식 및 분석 | 26.04 ~ 26.11 | 큐랩, 셀빅 |
-| 3.3 | 아바타 제어 및 인터랙션 기술 | 26.07 ~ 26.09 | 셀빅 |
-| 3.4 | 생성형 전통 서사 및 텍스처 기술 | 26.07 ~ 26.11 | 셀빅 |
-| 4.2 | 시범 서비스 콘텐츠 프로토타입 | 26.07 ~ 26.11 | 셀빅 |
-| 4.3 | 통합 실증 및 기술 검증 | 26.07 ~ 26.12 | 셀빅 |
+| 번호  | 마일스톤                    | 목표 일정         | 핵심 수행기관 |
+| --- | ----------------------- | ------------- | ------- |
+| 1.2 | 통합 플랫폼 아키텍처 및 인프라 구축    | 26.05 ~ 26.08 | 큐랩, 셀빅  |
+| 1.3 | 하드웨어 인터페이스 및 키오스크 프로토타입 | 26.06 ~ 26.12 | 큐랩, 셀빅  |
+| 1.4 | 통합 플랫폼 최적화 및 안정화        | 26.09 ~ 26.10 | 셀빅      |
+| 2.1 | 실시간 동작 인식 및 분석          | 26.04 ~ 26.11 | 큐랩, 셀빅  |
+| 3.3 | 아바타 제어 및 인터랙션 기술        | 26.07 ~ 26.09 | 셀빅      |
+| 3.4 | 생성형 전통 서사 및 텍스처 기술      | 26.07 ~ 26.11 | 셀빅      |
+| 4.2 | 시범 서비스 콘텐츠 프로토타입        | 26.07 ~ 26.11 | 셀빅      |
+| 4.3 | 통합 실증 및 기술 검증           | 26.07 ~ 26.12 | 셀빅      |
 
 > **발표 노트**: 계획서 명목 착수는 26.04이나 실제 착수는 늦음. 6부 나. 중점 관리 사항의 압축 리스크와 함께 봐야 함.
 
@@ -540,7 +540,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 | 액션 | 담당 | 시점 |
 |---|---|---|
 | 남사당보존회 컨택과 데이터 확보 협의 | 셀빅 | 즉시 착수 (1순위) |
-| 키오스크 규격 확정(65인치, 센서 모델) | 큐랩 주도, 셀빅 맞춤 | 콘텐츠 개발 선행 |
+| 키오스크 규격 확정(65인치, 뎁스 카메라 모델) | 큐랩 주도, 셀빅 맞춤 | 콘텐츠 개발 선행 |
 | 첫 콘텐츠(유람기) 착수와 공용 시스템 도출 | 셀빅 | 규격 확정과 병렬 |
 | LLM 방식 프로토타입 | 큐랩, 셀빅, KETI | 각자 프로토타입 후 통합 회의 |
 | 데이터 폼과 형식, 취득 항목 실무 회의 | 전체 | 데이터 구축 전 |
