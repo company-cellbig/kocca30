@@ -39,7 +39,7 @@ updated: 2026-07-01
 | 차 | 결과물 미리보기 화면 | Step 6 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#6) Step 6. 결과물 전송]] |
 | 카 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 꼭두각시 기획서#6) Step 6. 결과물 전송]] |
 | 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덜미 - 나만의 꼭두각시 기획서#7) Step 7. 종료와 리셋]] |
-| 파 | 실패 안내 화면 | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]] |
+| 파 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]] |
 
 ## 나. 공통 레이아웃
 
@@ -62,7 +62,7 @@ updated: 2026-07-01
 
 - **매체와 형식**: 키오스크 터치스크린 UI 화면 목업, 풀스크린, 실사풍 고해상도
 - **화면비와 규격**: 16:9 가로 (해상도는 디바이스 규격 확정 후, 예: 1920x1080, 확인 필요)
-- **아트 디렉션 (제안, 확정 필요)**: 한국 남사당 인형극(덜미, 꼭두각시놀음) 모티프와 현대 키오스크 UI의 결합. 목각 인형 질감과 포장막(인형이 오르는 막 무대) 배경, 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용
+- **아트 디렉션 (제안, 확정 필요)**: 한국 남사당 인형극(덜미, 꼭두각시놀음) 모티프와 현대 키오스크 UI의 결합. 목각 인형 질감과 포장막(인형이 오르는 막 무대) 배경, 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용. 진행 호스트(산받이)는 2D 플랫 일러스트 스타일로 통일함(3D 아님, 2026-07-02 결정)
 - **전통 정합성**: 한국 남사당 목각 인형(꼭두각시) 양식 유지, 일본 분라쿠 인형이나 서양 마리오네트와 혼동 금지 ([[덜미 - 나만의 꼭두각시 기획서#가. 인형과 조작 고증 (공통 레퍼런스)]])
 - **톤과 무드**: 마당놀이 축제의 신명, 밝고 활기차며 친근함
 - **UI 원칙**: 큰 터치 타깃, 명확한 시각 위계, 노년층 포함 가독성
@@ -111,7 +111,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the content-area and background placeholders -> Korean wooden-puppet (mokgak) motifs over a vibrant namsadang booth-curtain (pojangmak) puppet stage, festive attract mood
 Keep title '나만의 꼭두각시', primary button '시작하기'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -142,7 +142,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a namsadang booth-curtain (pojangmak) puppet stage, friendly mood
 Keep greeting '어서 오세요', button '다음'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -173,7 +173,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a calm namsadang booth-curtain puppet stage
 Keep title '이용 동의'. Use exactly one consent toggle '카메라 촬영 (필수)' (shown ON); if the reference mockup shows two toggle rows, keep only this one and do not render a second toggle (this content has a single required consent). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -208,7 +208,7 @@ Bottom action area: empty, with NO capture button or shutter button anywhere (th
 Optionally, a small non-photographic Sanbaji narrator host UI element may appear outside the camera frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly one figure: the single real user. No puppets or extra faces anywhere in the camera view.
 Background: a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, any extra person or face in the camera view besides the single user, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -235,7 +235,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a namsadang booth-curtain puppet stage, an anticipatory waiting mood
 Keep status caption '인형을 빚는 중'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -274,7 +274,7 @@ To one side / a corner: a stylized Korean Sanbaji narrator host character (the d
 At the comic climax, a required quick-time prompt overlay labeled '지금!' appears where 홍동지 (a strong wooden puppet) strikes down 이시미 (a serpent/imugi puppet); the user responds with a timed hand gesture (hand tracking, not a touch button).
 Background: a namsadang booth-curtain puppet stage, lively festival mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, any bottom toolbar or action buttons not specified (e.g. sound, camera-switch, retry, home), and any UI controls not specified in this prompt.
 ```
@@ -310,7 +310,7 @@ Bottom action area: empty, with NO capture button or shutter button anywhere (th
 Optionally, a small non-photographic Sanbaji narrator host UI element may appear outside the camera/composite frame (can be omitted); it must NOT be a person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 3D puppet character. No additional people or faces anywhere in the camera view.
 Background: a namsadang booth-curtain puppet stage, a festive celebratory mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, a mask or puppet on the real user's face, any extra person or face in the camera view besides the single 3D puppet character, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -336,7 +336,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a namsadang booth-curtain puppet stage, an anticipatory waiting mood
 The body center shows a progress indicator with light namsadang puppet-play themed waiting content while a commemorative photo is being created. Keep the status caption '결과물을 만드는 중'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -367,7 +367,7 @@ Layout: a commemorative photo card (a 3D wooden-puppet character and the user po
 To one side: a stylized Korean Sanbaji narrator host guide reacting proudly to the result, as a clear side presence (an on-screen guide character, not a realistic bystander or a second user).
 Background: a namsadang booth-curtain puppet stage, a proud showcase mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -397,7 +397,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a calm namsadang booth-curtain puppet stage
 Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -423,18 +423,18 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a namsadang booth-curtain puppet stage, a warm closing mood
 Keep the closing message '또 만나요'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 파. 실패 안내 화면 (실패 분기 공통)
+## 파. 실패 안내 (모달 팝업, 실패 분기 공통)
 
-공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]]). 생성이나 변환, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
+공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]]). 생성이나 변환, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 본문 중앙에 사과 메시지와 짧은 안내를 크게 두고, 액션은 기본 비움(자동 종료 진행). 오류 코드나 기술 세부는 노출하지 않음. 산받이는 다독이는 모습으로 둠
+- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 전체 화면이 아니라 직전 화면을 어둡게 깐 위에 중앙 모달 다이얼로그 카드를 띄우고, 카드 안에 경고 아이콘, 사과 메시지, 짧은 안내, (선택) 처음으로 보조 버튼을 둠. 액션은 기본 비움(자동 종료 진행), 오류 코드나 기술 세부는 노출하지 않음. 산받이는 카드 옆에서 다독이는 모습으로 둠
 - **핵심 UI 컴포넌트**: 사과 메시지, 선택적 "처음으로" 보조 버튼(두면 중앙 도달 존)
 - **산받이 호스트**: 측면이나 중앙에서 다독이는 표정
 - **화면 내 텍스트**: 사과 "문제가 생겼어요"(표본), 선택 버튼 "처음으로"
@@ -444,12 +444,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (apology message, optional secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
+Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, optional secondary button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear presence and reassuring pose from the reference) -> a stylized Korean Sanbaji narrator host character (the deolmi puppet-play storyteller who banters with the puppets, an on-screen guide character, not a realistic bystander) reassuring the user warmly
 - background -> a calm namsadang booth-curtain (pojangmak) puppet stage, a reassuring mood
 Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, error codes or technical error details, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```

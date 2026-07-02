@@ -39,7 +39,7 @@ updated: 2026-07-01
 | 차 | 결과물 미리보기 화면 | Step 6 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
 | 카 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덧뵈기 - 나만의 탈춤 기획서#6) Step 6. 결과물 전송]] |
 | 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덧뵈기 - 나만의 탈춤 기획서#7) Step 7. 종료와 리셋]] |
-| 파 | 실패 안내 화면 | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]] |
+| 파 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]] |
 
 ## 나. 공통 레이아웃
 
@@ -62,7 +62,7 @@ updated: 2026-07-01
 
 - **매체와 형식**: 키오스크 터치스크린 UI 화면 목업, 풀스크린, 실사풍 고해상도
 - **화면비와 규격**: 16:9 가로 (해상도는 디바이스 규격 확정 후, 예: 1920x1080, 확인 필요)
-- **아트 디렉션 (제안, 확정 필요)**: 한국 전통 탈춤(덧뵈기) 모티프와 현대 키오스크 UI의 결합. 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용
+- **아트 디렉션 (제안, 확정 필요)**: 한국 전통 탈춤(덧뵈기) 모티프와 현대 키오스크 UI의 결합. 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용. 진행 호스트(말뚝이)는 2D 플랫 일러스트 스타일로 통일함(3D 아님, 2026-07-02 결정)
 - **전통 정합성**: 한국 탈춤 탈 양식 유지, 일본 노멘(일본 가면극 가면)이나 중국 가면과 혼동 금지 ([[덧뵈기 - 나만의 탈춤 기획서#나. 탈 디자인 도구 (Step 2)]])
 - **톤과 무드**: 마당놀이 축제의 신명, 밝고 활기차며 친근함
 - **UI 원칙**: 큰 터치 타깃, 명확한 시각 위계, 노년층 포함 가독성
@@ -111,7 +111,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the content-area and background placeholders -> Korean talchum motifs over a vibrant traditional madang stage, festive attract mood
 Keep title '나만의 탈춤', primary button '시작하기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -142,7 +142,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a traditional madang stage, friendly mood
 Keep greeting '어서 오세요', button '다음'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -173,7 +173,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a calm traditional madang stage
 Keep title '이용 동의'. Use exactly one consent toggle '카메라 촬영 (필수)' (shown ON); if the reference mockup shows two toggle rows, keep only this one and do not render a second toggle (this content has a single required consent). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -213,7 +213,7 @@ To one side, display-only (non-touch): a small live 3D preview pane showing the 
 A primary button labeled '완료' in the lower part of the central reachable zone, not at the physical bottom edge.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -240,7 +240,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a traditional madang stage, an anticipatory waiting mood
 Keep status caption '탈을 빚는 중'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -275,7 +275,7 @@ Top-right: a rising excitement gauge labeled '신명', filling up, festive.
 A corner: a Korean Maldukki mask host character cheering with a lively expression.
 Background: a traditional madang (outdoor courtyard) stage, lively festival mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, any bottom toolbar or action buttons not specified (e.g. sound, camera-switch, dance, retry, home).
 ```
@@ -311,7 +311,7 @@ Bottom action area: empty, with NO capture button or shutter button anywhere (th
 Optionally, a small non-photographic Maldukki mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a masked person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 2D mask character. No additional masked people or faces anywhere in the camera view.
 Background: a traditional madang stage, a festive celebratory mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a mask on the real user's face, any extra masked person or face in the camera view besides the single 2D mask character, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -337,7 +337,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a traditional madang stage, an anticipatory waiting mood
 The body center shows a progress indicator with light talchum-themed waiting content while a commemorative photo is being created. Keep the status caption '결과물을 만드는 중'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -368,7 +368,7 @@ Layout: a commemorative photo card (a 2D mask character and the user posing toge
 To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence (an on-screen guide character, not a realistic bystander or a second user).
 Background: a traditional madang stage, a proud showcase mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -398,7 +398,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a calm traditional madang stage
 Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
@@ -424,18 +424,18 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - background -> a traditional madang stage, a warm closing mood
 Keep the closing message '또 만나요'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 파. 실패 안내 화면 (실패 분기 공통)
+## 파. 실패 안내 (모달 팝업, 실패 분기 공통)
 
-공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]]). 변환이나 생성, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
+공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]]). 변환이나 생성, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 본문 중앙에 사과 메시지와 짧은 안내를 크게 두고, 액션은 기본 비움(자동 종료 진행). 오류 코드나 기술 세부는 노출하지 않음. 말뚝이는 다독이는 모습으로 둠
+- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 전체 화면이 아니라 직전 화면을 어둡게 깐 위에 중앙 모달 다이얼로그 카드를 띄우고, 카드 안에 경고 아이콘, 사과 메시지, 짧은 안내, (선택) 처음으로 보조 버튼을 둠. 액션은 기본 비움(자동 종료 진행), 오류 코드나 기술 세부는 노출하지 않음. 말뚝이는 카드 옆에서 다독이는 모습으로 둠
 - **핵심 UI 컴포넌트**: 사과 메시지, 선택적 "처음으로" 보조 버튼(두면 중앙 도달 존)
 - **말뚝이 호스트**: 측면이나 중앙에서 다독이는 표정
 - **화면 내 텍스트**: 사과 "문제가 생겼어요"(표본), 선택 버튼 "처음으로"
@@ -445,12 +445,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (apology message, optional secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, optional secondary button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear presence and reassuring pose from the reference) -> a stylized Korean Maldukki mask host character (the talchum servant, an on-screen guide character, not a realistic bystander) reassuring the user warmly
 - background -> a calm traditional madang stage, a reassuring mood
 Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability.
+Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, error codes or technical error details, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
