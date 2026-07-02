@@ -180,21 +180,21 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 마. Step 2. 이름 입력 화면
 
-덧뵈기 고유 화면. 유저가 주인공(자기 탈 캐릭터)의 이름을 지어 입력함. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덧뵈기 - 양반 놀리기 4컷 기획서#2) Step 2. 캐릭터 정보 입력]]).
+덧뵈기 고유 화면. 유저가 주인공(자기 탈 캐릭터)의 이름을 가상 키보드나 음성(STT)으로 지어 입력함. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덧뵈기 - 양반 놀리기 4컷 기획서#2) Step 2. 캐릭터 정보 입력]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격, 조작 요소를 중앙 도달 존에 집약)
 	- 헤더: 안내 카피 한 줄
-	- 본문 중앙: 이름 입력 필드와 가상 키보드를 중앙 도달 존에 크게 둠(터치 조작이라 좌우 끝에 두지 않음)
+	- 본문 중앙: 이름 입력 필드와 가상 키보드, 음성 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음). 키보드는 하단에 한정해 안내와 입력 필드가 위에 보이게 함
 	- 액션: 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 이름 입력 필드
-	- 가상 키보드(한글)
+	- 가상 키보드(한글)와 "음성으로 입력" 버튼(STT). 두 입력 수단 병행 ([[시범콘텐츠 공통 사양#사. 텍스트 입력]])
 	- "다음" 버튼
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로, 유저를 향해 이름을 청하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 비속어 검출 시 팝업 안내와 재입력, 백엔드 재검증, 터치 미입력 타임아웃 시 종료 Step 직행은 기획서 Step 2와 §5.나 개인정보와 연속성을 준용함(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "다음"
+- **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "음성으로 입력", "다음"
 
 ### 2) 프롬프트 (영어)
 
@@ -203,7 +203,7 @@ A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen
 The name input screen of a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience.
 Large-screen kiosk where a person stands centered and touches: keep all interactive elements within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '이름을 지어 주세요'.
-Center, within reach: a single text input field and a Korean (Hangul) on-screen keyboard, the main focus in the central reachable zone.
+Center, within reach: a single text input field, a Korean (Hangul) on-screen keyboard confined to a lower band (not filling the screen), and a '음성으로 입력' voice-input button; these are the touch/voice controls, kept in the central reachable zone. The caption and input field stay clearly visible above the keyboard.
 A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
 To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) inviting the user to name their hero, not blocking the central controls.
 Background: a traditional madang stage, warm inviting mood.
