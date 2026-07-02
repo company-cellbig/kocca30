@@ -56,8 +56,8 @@ updated: 2026-07-02
 
 생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
-- **단독 프롬프트** (이름 입력, 캐릭터 카드, 세부 유형 선택, 말뚝이 문답, 결과물 감상): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 이름 입력, 말뚝이 문답, 대기, 전송, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함. 이름 입력과 말뚝이 문답은 텍스트 입력 화면이라 §13.다 9) 텍스트 입력 중립 이미지를 씀
+- **단독 프롬프트** (캐릭터 카드, 세부 유형 선택, 결과물 감상): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
 
@@ -196,18 +196,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **상태별 안내 (기획서 준용)**: 비속어 검출 시 팝업 안내와 재입력, 백엔드 재검증, 터치 미입력 타임아웃 시 종료 Step 직행은 기획서 Step 2와 §5.나 개인정보와 연속성을 준용함(목업은 정상 입력 상태만)
 - **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "음성으로 입력", "다음"
 
-### 2) 프롬프트 (영어)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.9) 텍스트 입력 중립 레이아웃 이미지
 
 ```
-A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The name input screen of a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience.
-Large-screen kiosk where a person stands centered and touches: keep all interactive elements within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
-Top header: a one-line caption '이름을 지어 주세요'.
-Center, within reach: a single text input field, a Korean (Hangul) on-screen keyboard confined to a lower band (not filling the screen), and a '음성으로 입력' voice-input button; these are the touch/voice controls, kept in the central reachable zone. The caption and input field stay clearly visible above the keyboard.
-A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
-To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) inviting the user to name their hero, not blocking the central controls.
-Background: a traditional madang stage, warm inviting mood.
-Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience, without moving or resizing them:
+- the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
+- the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
+- the background placeholders -> a traditional madang stage, warm inviting mood
+Keep caption '이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음'. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
+Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
@@ -303,18 +302,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **상태별 안내 (기획서 준용)**: 가드레일 위반 시 팝업 안내와 재입력, 터치 미입력 타임아웃은 기획서 Step 3 분기를 준용함(목업은 정상 문답 상태만)
 - **화면 내 텍스트**: 컷 라벨 "기"/"승"/"전"/"결", 질문 예시 "양반이 뭐라고 뻐기던가요?"(표본, 사전 생성 고정 질문), 버튼 "음성으로 답하기", "다음"
 
-### 2) 프롬프트 (영어)
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.9) 텍스트 입력 중립 레이아웃 이미지
 
 ```
-A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The Maldukki question-and-answer screen of a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience.
-Large-screen kiosk where a person stands centered and touches: keep the answer input within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
-Top header: a 4-stage progress indicator '기', '승', '전', '결' with the current stage marked.
-Upper body: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) as the narrator, with a speech bubble showing a fixed question '양반이 뭐라고 뻐기던가요?'.
-Center, within reach: a text answer field, a Korean (Hangul) on-screen keyboard, and a '음성으로 답하기' voice-input button; these are the touch/voice controls, kept in the central reachable zone.
-A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
-Background: a traditional madang stage, satirical storytelling mood.
-Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/progress area, prompt/question area, text answer field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience, without moving or resizing them:
+- the header placeholder -> a 4-stage progress indicator '기', '승', '전', '결' with the current stage marked
+- the host placeholder and the prompt/question area -> a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) as the narrator posing the question, with a speech bubble showing a fixed question '양반이 뭐라고 뻐기던가요?', kept in the upper area and not blocking the central controls
+- the background placeholders -> a traditional madang stage, satirical storytelling mood
+Keep progress labels '기'/'승'/'전'/'결', question '양반이 뭐라고 뻐기던가요?', voice-input button '음성으로 답하기', primary button '다음'. The on-screen keyboard stays confined to a lower band and the question and answer field remain clearly visible above it.
+Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
