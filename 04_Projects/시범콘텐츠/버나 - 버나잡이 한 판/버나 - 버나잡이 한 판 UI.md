@@ -18,7 +18,7 @@ updated: 2026-07-02
 - **입력 특성**: 카메라를 쓰지 않고 센서 막대 주변기기와 터치, 음향을 씀([[버나 - 버나잡이 한 판 기획서]] §5.다 2) 하드웨어). 버나 돌리기 화면은 센서 막대 모션 화면이라 시뮬 뷰가 화면을 크게 쓰되, 터치 조작 요소(대거리 선택지)는 중앙 도달 존(§5.가 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 6개(시작, 가이드, 동의, 전송, 종료, 실패 안내)는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성. 대기 이미지는 본 콘텐츠에 해당 화면이 없어 미사용), 중립 이미지가 없는 화면(버나 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
-- **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
+- **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
 
 # 2. 공통 설계
 
@@ -64,7 +64,7 @@ updated: 2026-07-02
 - **전통 정합성**: 한국 남사당 버나(접시돌리기) 양식 유지, 중국 접시돌리기 곡예나 서양 서커스 저글링과 혼동 금지 ([[버나 - 버나잡이 한 판 기획서#가. 버나와 재담 고증 (공통 레퍼런스)]])
 - **톤과 무드**: 남사당 놀이판의 신명, 밝고 활기차며 친근함
 - **UI 원칙**: 큰 터치 타깃, 명확한 시각 위계, 노년층 포함 가독성
-- **화면 내 텍스트**: 정확한 한글 카피를 영어 프롬프트에 명시해 이미지에 한글로 렌더링함
+- **화면 내 텍스트 (후편집)**: 이미지에 텍스트를 렌더링하지 않음. 텍스트 영역은 빈 플레이스홀더로 두고 문구는 후편집(Figma)으로 넣음. 프롬프트와 각 화면 "화면 내 텍스트"의 한글 문구는 참조 카피임
 
 ### 2) 화면별 변수 슬롯
 
@@ -110,7 +110,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Keep title '버나잡이 한 판', primary button '시작하기'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -141,7 +141,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Keep greeting '어서 오세요', button '다음'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -171,7 +171,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Keep title '이용 동의'. Use exactly one consent toggle '이용 약관 (필수)' (shown ON); if the reference mockup shows two toggle rows, keep only this one and do not render a second toggle (this content has a single required consent and no camera consent). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -210,7 +210,7 @@ No always-on action buttons (the play advances by sensor-stick motion and banter
 Background: a namsadang outdoor play-yard (madang) stage, lively festival mood.
 Art direction: Korean traditional namsadang buna plate-spinning motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt (no always-on toolbar).
 ```
 
@@ -240,7 +240,7 @@ No action buttons (it auto-advances to the record preview).
 Background: a namsadang outdoor play-yard stage, a celebratory mood.
 Art direction: Korean traditional namsadang buna plate-spinning motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -273,7 +273,7 @@ To one side: a stylized Korean Maehossi host character (the buna banter partner,
 Background: a namsadang outdoor play-yard stage, a proud showcase mood.
 Art direction: Korean traditional namsadang buna plate-spinning motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -303,7 +303,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; numbers stay numeric; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -329,7 +329,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Keep the closing message '또 만나요'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -355,7 +355,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability.
-All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, error codes or technical error details, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 

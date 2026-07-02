@@ -9,6 +9,15 @@ updated: 2026-07-01
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-02] update | 이미지 프롬프트 텍스트 렌더 금지 전환 (Figma 후편집, 사용자 결정)
+
+- 사용자 결정: 화면 카피는 이미지에 박지 않고 빈 자리로 두어 후편집(Figma)으로 넣음. 범위는 "모든 UI 텍스트"(기능 버튼 포함)
+- 6개 문서(공통 사양 §13 + 5개 UI) 프롬프트의 텍스트 지시 줄 전수 치환: "rendered exactly as the quoted strings"/"Korean labels exactly as quoted" → "Do NOT draw any text, leave text areas as blank placeholder boxes, quoted Korean is post-production reference only". 숫자 키패드는 빈 키패드 그래픽 허용
+- 정책 명시: 각 UI 텍스트 주의 + §2.다 공통 제약 화면 내 텍스트 + 공통 사양 §13.가 카피 원칙 + §13.나 텍스트/부정 프롬프트를 "텍스트 미렌더, 후편집 참조"로 갱신
+- 효과: 문서의 한글 문구는 후편집 참조 카피로 보존(삭제 아님), AI 한글 렌더 불안정 문제 회피
+- 검증: 구 지시 잔재 0, Do NOT draw 6개 문서, 가운뎃점 0, em dash 0, lint error 0
+- 수정 파일: 시범콘텐츠 공통 사양, 유람기/4컷/꼭두각시/탈춤/버나 UI
+
 ## [2026-07-02] review | 실패 안내 화면 5개 UI 배선 (Codex 유람기 #2 종결)
 
 - 공통 사양 §5.바 + §13.다 8)에 신설한 실패 안내 화면을 5개 UI 전체에 배선(사용자 "전부 배선해" 지시)
