@@ -13,11 +13,11 @@ updated: 2026-07-01
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
-- **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
-- **공용과 고유**: 공용 화면 7개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(박첨지, 인형 비주얼, 카피)만 더함. 이 중 6개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을, 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덜미 고유 화면 5개는 레이아웃을 상세 설계함
+- **대상 화면**: 13개. Step 순으로 배열함(§2.가 화면 목록)
+- **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(박첨지, 인형 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덜미 고유 화면 5개는 레이아웃을 상세 설계함
 - **입력 특성**: 카메라를 쓰지 않고 터치와 음성(STT)만 씀([[덜미 - 나만의 유람기 기획서]] §5.다 2) 하드웨어). 따라서 카메라/모션 화면 예외가 없고, 전 화면에서 터치 조작 요소를 중앙 도달 존(§5.가 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 6개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덜미 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
+- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덜미 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
 - **텍스트 주의**: 이미지 안 모든 UI 텍스트를 한글로 렌더링하도록 영어 프롬프트에 정확한 문구를 명시함. 한글 렌더링이 불완전할 수 있어 필요 시 재생성하거나 디자인 단계에서 보정함
 
 # 2. 공통 설계
@@ -40,6 +40,7 @@ updated: 2026-07-01
 | 차 | 결과물 감상 화면 | Step 5 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#5) Step 5. 결과물 표시]] |
 | 카 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 유람기 기획서#6) Step 6. 결과물 전송]] |
 | 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덜미 - 나만의 유람기 기획서#7) Step 7. 종료와 리셋]] |
+| 파 | 실패 안내 화면 | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]] |
 
 ## 나. 공통 레이아웃
 
@@ -55,7 +56,7 @@ updated: 2026-07-01
 
 생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(박첨지, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(박첨지, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
 - **단독 프롬프트** (이름 입력, 캐릭터 카드, 마당 선택, 박첨지 문답, 결과물 감상): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
@@ -436,6 +437,32 @@ Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet te
 Large touch targets, clear visual hierarchy, high readability.
 All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
+```
+
+## 파. 실패 안내 화면 (실패 분기 공통)
+
+공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 화면)]]). 생성이나 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
+
+### 1) 화면 설계
+
+- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 본문 중앙에 사과 메시지와 짧은 안내를 크게 두고, 액션은 기본 비움(자동 종료 진행). 오류 코드나 기술 세부는 노출하지 않음. 박첨지는 다독이는 모습으로 둠
+- **핵심 UI 컴포넌트**: 사과 메시지, 선택적 "처음으로" 보조 버튼(두면 중앙 도달 존)
+- **박첨지 호스트**: 측면이나 중앙에서 다독이는 표정
+- **화면 내 텍스트**: 사과 "문제가 생겼어요"(표본), 선택 버튼 "처음으로"
+
+### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+
+첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
+
+```
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (apology message, optional secondary button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+- the guide-host placeholder (keep its clear presence and reassuring pose from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander) reassuring the user warmly
+- background -> a calm namsadang booth-curtain (pojangmak) puppet stage, a reassuring mood
+Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
+Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
+Large touch targets, clear visual hierarchy, high readability.
+All on-screen UI text in Korean (Hangul), rendered exactly as the quoted strings; no English text in the UI.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, error codes or technical error details, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
 # 4. 관련 문서
