@@ -38,3 +38,6 @@ desktop.ini
 # 변환 캐시 (PDF → PNG/텍스트 등 임시 산출물)
 *.tmp
 *.bak
+
+# md_to_docx 생성 산출물 (MD에서 언제든 재생성 가능, 추적 안 함)
+export/
