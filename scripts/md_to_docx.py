@@ -89,6 +89,43 @@ def cut_before_first_h1(text):
     return text  # H1 없으면 원문 유지
 
 
+def drop_h1_sections(text, numbers):
+    """지정한 번호의 H1 절(# N. …)을 통째로 제거. numbers 예: {'11','12','13'}."""
+    if not numbers:
+        return text
+    out = []
+    skip = False
+    for ln in text.split("\n"):
+        if re.match(r"^#\s+\S", ln):  # H1 경계마다 skip 재판정
+            m = re.match(r"^#\s+(\d+)\.\s", ln)
+            skip = bool(m and m.group(1) in numbers)
+        if not skip:
+            out.append(ln)
+    return "\n".join(out)
+
+
+def drop_excluded_refs(text, numbers):
+    """제외 절을 가리키는 댕글링 참조 정리(변환 시에만, 소스 MD 불변).
+
+    (1) 문서맵 표에서 첫 셀이 제외 절인 행(`| §N …`) 삭제.
+    (2) 줄 끝 괄호절에 제외 절 §참조가 들어 있으면 그 괄호절 삭제.
+        예: `…정함(예시는 §13.다 8) 실패 안내)` -> `…정함`.
+        괄호절 안 한글 서수의 `8)` 닫는 괄호와 충돌하지 않게 줄 끝(`$`)에만 적용.
+    """
+    if not numbers:
+        return text
+    alt = "|".join(sorted(numbers, key=len, reverse=True))
+    row_re = re.compile(r"^\s*\|\s*§(?:" + alt + r")(?![0-9])\b")
+    paren_re = re.compile(r"\s*\([^(]*§(?:" + alt + r")(?![0-9])[^(]*\)\s*$")
+    out = []
+    for ln in text.split("\n"):
+        if row_re.match(ln):
+            continue
+        ln = paren_re.sub("", ln)
+        out.append(ln)
+    return "\n".join(out)
+
+
 # 레벨별 한국 공문서 헤딩 번호 접두 패턴 (선행 토큰만)
 _HEAD_NUM = {
     1: re.compile(r"^\d+\.\s+"),        # 1. 개요
@@ -293,14 +330,55 @@ def convert_section_refs(text):
     return _SEC_RE.sub(repl, text)
 
 
-def preprocess(md_path):
+def flatten_native_callouts(text):
+    """문서 자체 본문의 > [!note] 콜아웃을 평탄화(임베드 아닌 원본 콜아웃 대상).
+
+    임베드된 콜아웃은 resolve_embeds 에서 이미 평탄화됨. 소스 문서(공통 사양 등)를
+    직접 변환할 때는 자체 콜아웃도 같은 방식(제목 H3 + 불릿)으로 풀어야 함.
+    """
+    lines = text.split("\n")
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        if re.match(r"^\s*>\s*\[!\w+\]", lines[i]):
+            j = i
+            block = []
+            while j < n and lines[j].lstrip().startswith(">"):
+                block.append(lines[j])
+                j += 1
+            out.append("")
+            out.append(_flatten_callout("\n".join(block)))
+            out.append("")
+            i = j
+        else:
+            out.append(lines[i])
+            i += 1
+    return "\n".join(out)
+
+
+def strip_block_ids(text):
+    """Obsidian 블록 ID 마커 제거: 독립 줄 `^id` 와 문단 끝 ` ^id`."""
+    out = []
+    for ln in text.split("\n"):
+        if re.match(r"^\s*\^[A-Za-z0-9_-]+\s*$", ln):
+            continue  # 독립 블록 ID 줄
+        ln = re.sub(r"\s+\^[A-Za-z0-9_-]+\s*$", "", ln)  # 문단 끝 블록 ID
+        out.append(ln)
+    return "\n".join(out)
+
+
+def preprocess(md_path, exclude=None):
     with open(md_path, encoding="utf-8") as f:
         text = f.read()
     text = strip_frontmatter(text)
     text = cut_before_first_h1(text)
-    text = resolve_embeds(text)      # 임베드 먼저 (![[ ]])
-    text = strip_wikilinks(text)     # 그다음 위키링크 ([[ ]])
-    text = convert_section_refs(text)  # § 참조 번호 십진화
+    text = drop_h1_sections(text, exclude)   # 제외 절 제거(임베드 처리 전)
+    text = drop_excluded_refs(text, exclude)  # 제외 절 댕글링 참조 정리
+    text = resolve_embeds(text)              # 임베드 평탄화 (![[ ]])
+    text = flatten_native_callouts(text)     # 자체 콜아웃 평탄화 (> [!note])
+    text = strip_block_ids(text)             # 블록 ID 마커 제거 (^id)
+    text = strip_wikilinks(text)             # 위키링크 표시텍스트화 ([[ ]])
+    text = convert_section_refs(text)        # § 참조 번호 십진화
     text = strip_heading_numbers(text)
     return text
 
@@ -376,17 +454,34 @@ def assemble(content_docx, out_docx):
 # ---------------------------------------------------------------------------
 
 def main():
-    if len(sys.argv) < 2:
-        fail("사용법: python scripts/md_to_docx.py <입력.md> [출력.docx]")
-    md_path = os.path.abspath(sys.argv[1])
+    # --exclude "11,12,13" : 해당 번호의 H1 절 제외
+    argv = sys.argv[1:]
+    exclude = set()
+    rest = []
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a == "--exclude" and i + 1 < len(argv):
+            exclude = {t.strip() for t in argv[i + 1].split(",") if t.strip()}
+            i += 2
+        elif a.startswith("--exclude="):
+            exclude = {t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()}
+            i += 1
+        else:
+            rest.append(a)
+            i += 1
+
+    if not rest:
+        fail("사용법: python scripts/md_to_docx.py <입력.md> [출력.docx] [--exclude 11,12,13]")
+    md_path = os.path.abspath(rest[0])
     if not os.path.isfile(md_path):
         fail("입력 파일 없음: " + md_path)
     if not os.path.isfile(TEMPLATE):
         fail("양식 파일 없음: " + TEMPLATE)
 
     base = os.path.splitext(os.path.basename(md_path))[0]
-    if len(sys.argv) >= 3:
-        out_docx = os.path.abspath(sys.argv[2])
+    if len(rest) >= 2:
+        out_docx = os.path.abspath(rest[1])
     else:
         export_dir = os.path.join(VAULT, "export")
         os.makedirs(export_dir, exist_ok=True)
@@ -394,7 +489,7 @@ def main():
     os.makedirs(os.path.dirname(out_docx), exist_ok=True)
 
     pandoc = find_pandoc()
-    cleaned = preprocess(md_path)
+    cleaned = preprocess(md_path, exclude=exclude)
 
     with tempfile.TemporaryDirectory() as td:
         clean_md = os.path.join(td, "clean.md")
