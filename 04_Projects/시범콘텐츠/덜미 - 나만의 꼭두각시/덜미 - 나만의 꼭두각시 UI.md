@@ -209,7 +209,7 @@ Optionally, a small non-photographic Sanbaji narrator host UI element may appear
 Background: a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, any extra person or face in the camera view besides the single user, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -311,7 +311,7 @@ Optionally, a small non-photographic Sanbaji narrator host UI element may appear
 Background: a namsadang booth-curtain puppet stage, a festive celebratory mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, a mask or puppet on the real user's face, any extra person or face in the camera view besides the single 3D puppet character, any capture or shutter button (capture is automatic on the countdown), and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -398,7 +398,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; a numeric keypad may remain as a blank keypad graphic. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. Exception: render the digits 0-9 on the numeric keypad buttons (as in the attached reference); no other text is rendered. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
