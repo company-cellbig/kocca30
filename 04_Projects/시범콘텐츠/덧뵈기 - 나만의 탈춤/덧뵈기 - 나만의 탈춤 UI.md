@@ -149,7 +149,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 라. Step 1. 동의 약관 화면
 
-공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수와 선택 동의를 받음.
+공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수 동의를 받음.
 
 ### 1) 화면 설계
 
