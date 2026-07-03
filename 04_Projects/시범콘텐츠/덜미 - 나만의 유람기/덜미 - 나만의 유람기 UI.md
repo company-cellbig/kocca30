@@ -154,10 +154,10 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트와 동의 토글, 액션에 동의하고 시작 버튼(필수 동의 시 활성)과 그만두기 보조 버튼을 둠. 화면 타임아웃 미적용. 박첨지는 넓은 측면에 또렷한 안내 캐릭터로 둠
+- **레이아웃**: 공통 사양 §5.나 인트로 동의 약관 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼과 그만두기 보조 버튼을 둠(동의하고 시작이 곧 약관 동의, 그만두기가 미동의. 1차연도는 선택 동의가 없어 별도 토글을 두지 않음). 화면 타임아웃 미적용. 박첨지는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
-	- 동의 항목 토글: 필수 이용 약관 동의 (카메라 동의 없음, 문구는 규정 검토 확정)
-	- 주 버튼 "동의하고 시작": 필수 토글이 켜져야 활성화됨(꺼져 있으면 비활성)
+	- 약관 텍스트 영역 (필수 이용 약관, 문구는 규정 검토 확정)
+	- 주 버튼 "동의하고 시작": 약관 동의를 담음(별도 토글 없음, 항상 활성)
 	- 보조 "그만두기" 버튼: 동의하지 않고 Step 7로 종료함
 - **박첨지 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치, 미동의, 터치 미입력 타임아웃 시 미동의로 간주해 종료 Step 직행은 기획서 Step 1과 공통 사양 §5.나를 준용함(목업은 정상 동의 상태만)
@@ -168,10 +168,10 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, a single consent toggle, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang booth-curtain puppet stage
-Keep title '이용 동의'. Use exactly one consent toggle '이용 약관 (필수)' (shown ON); if the reference mockup shows two toggle rows, keep only this one and do not render a second toggle (this content has a single required consent and no camera consent). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의'. Do NOT render any consent toggle; consent is expressed by the buttons (this content has a single required 약관 consent and no camera consent, so there is no toggle row; if the reference mockup shows toggle rows, omit them). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
