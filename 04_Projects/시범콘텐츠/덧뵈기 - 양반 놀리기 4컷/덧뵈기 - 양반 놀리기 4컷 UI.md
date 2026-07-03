@@ -256,14 +256,15 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 16:9 골격, 카드를 중앙 도달 존에 집약)
 	- 헤더: 안내 카피 한 줄
 	- 본문 중앙: 양반 놀리기 세부 유형 카드(병렬)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
-	- 액션: 선택 즉시 진행하거나 다음 버튼을 중앙 도달 존 아래쪽에 둠
+	- 액션: 선택 후 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 세부 유형 카드(표본 3종: 허세, 탐욕, 무능). 구체 로스터와 카드 수는 확인 필요([[덧뵈기 - 양반 놀리기 4컷 기획서]] §4.가 1) 세분화)
 	- 각 카드의 짧은 소개 문구와 탈춤 양식 일러스트
 	- 선택 표시(하이라이트)
+	- "다음" 버튼
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로, 어떤 양반을 놀릴지 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 터치 미입력 타임아웃 등은 기획서 Step 3 분기를 준용함(목업은 정상 선택 상태만)
-- **화면 내 텍스트**: 안내 "어떤 양반을 놀려 볼까요"(표본), 카드 라벨 "허세"/"탐욕"/"무능"(표본, 로스터 확인 필요)
+- **화면 내 텍스트**: 안내 "어떤 양반을 놀려 볼까요"(표본), 카드 라벨 "허세"/"탐욕"/"무능"(표본, 로스터 확인 필요), 버튼 "다음"
 
 ### 2) 프롬프트 (영어)
 
@@ -273,6 +274,7 @@ The yangban-satire subtype selection screen of a Korean traditional mask dance (
 Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '어떤 양반을 놀려 볼까요'.
 Center, within reach: three selectable subtype cards side by side (sample roster), each with a short intro line and a talchum styled illustration, labeled '허세', '탐욕', '무능'. One card is highlighted as selected.
+A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
 To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) inviting the user to pick a subtype, not blocking the central controls.
 Background: a traditional madang stage, festive mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
