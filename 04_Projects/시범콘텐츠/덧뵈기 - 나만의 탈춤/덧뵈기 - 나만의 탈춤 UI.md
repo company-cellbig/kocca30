@@ -459,4 +459,5 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 - [[덧뵈기 - 나만의 탈춤 기획서]]: 콘텐츠 로직과 Step 명세 정본
 - [[시범콘텐츠 공통 사양]]: 공통 화면 레이아웃(§5)과 진행 호스트(§6) 골격 정본
+- [[공통 UI 컴포넌트]]: 본 문서 화면 요소의 위젯 단위 공통 컴포넌트 색인
 - [[덜미 - 나만의 꼭두각시 UI]]: 자매 UI 문서 (체험형 화면 설계 방식 공유)
