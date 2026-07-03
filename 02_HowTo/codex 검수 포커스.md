@@ -1,8 +1,10 @@
 ---
 title: Codex 검수 포커스 텍스트
+type: howto
+status: stable
 tags: [howto, codex, review, workflow]
 created: 2026-05-11
-updated: 2026-06-30
+updated: 2026-07-03
 ---
 
 > `/codex:adversarial-review` 호출 시 인자로 첨부하는 표준 비판적 검수 프롬프트. 코드 중심 attack surface를 문서 검수용으로 재정의.

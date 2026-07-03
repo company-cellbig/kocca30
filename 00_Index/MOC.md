@@ -1,8 +1,10 @@
 ---
 title: MOC (Map of Content)
+type: index
+status: stable
 tags: [index, moc]
 created: 2026-04-27
-updated: 2026-06-30
+updated: 2026-07-03
 ---
 
 > 위키 전체의 진입점. 주제별로 핵심 문서를 모아둔 목차임.

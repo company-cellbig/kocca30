@@ -1,8 +1,10 @@
 ---
 title: HWPX/DOCX 변환 파이프라인
+type: howto
+status: stable
 tags: [howto, pipeline, hwpx, docx, pandoc, ingest]
 created: 2026-05-11
-updated: 2026-06-30
+updated: 2026-07-03
 ---
 
 > 제안서/보고서 등 한컴 HWPX 또는 Word DOCX 문서를 LLM Wiki에 통합 가능한 MD로 변환하는 표준 절차. AI 에이전트가 후속 작업에서 환각 없이 인용할 수 있는 수준의 구조 보존이 목표.

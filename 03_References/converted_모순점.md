@@ -1,9 +1,11 @@
 ---
 title: converted/ RFP 변환본 모순점 정리
+type: reference
+status: draft
 tags: [reference, review, contradictions]
 source: 03_References/converted/*.md
 created: 2026-05-12
-updated: 2026-06-30
+updated: 2026-07-03
 ---
 
 > `03_References/converted/` 5개 RFP 변환본의 자체 모순(한 문서 내) + 교차 모순(문서 간) 정리. 총 14건(자기모순 7 + 교차 모순 7) 식별. 각 항목에 파일:줄 인용 + 본문 발췌.
