@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 버나, UI]
 created: 2026-07-02
-updated: 2026-07-03
+updated: 2026-07-07
 ---
 
 > 버나(접시돌리기) 묘기와 매호씨 재담 대결 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 버나 고유분만 더하며, 고유 화면(버나 돌리기, 마무리 연출, 기록증 미리보기)은 레이아웃을 상세 설계함. 캐릭터 입력과 생성 대기가 없어 설계 화면이 9개(학습 토큰 스캔 제외)로 자매 콘텐츠보다 적음. 기획은 [[버나 - 버나잡이 한 판 기획서]].
@@ -35,7 +35,7 @@ updated: 2026-07-03
 | 마 | 버나 돌리기 화면 (재담 대결) | Step 2~3 | 버나 고유 (핵심) | [[버나 - 버나잡이 한 판 기획서#3) Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]] |
 | 바 | 마무리 연출 화면 | Step 4 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#4) Step 4. 마무리와 기록증 생성]] |
 | 사 | 기록증 미리보기 화면 | Step 5 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#5) Step 5. 결과물 전송]] |
-| 아 | 연락처 입력과 전송 화면 | Step 5 | 공용 (전송, §5.라) | [[버나 - 버나잡이 한 판 기획서#5) Step 5. 결과물 전송]] |
+| 아 | 결과물 QR 화면 | Step 5 | 공용 (전송, §5.라) | [[버나 - 버나잡이 한 판 기획서#5) Step 5. 결과물 전송]] |
 | 자 | 마무리 인사 화면 | Step 6 | 공용 (종료, §5.마) | [[버나 - 버나잡이 한 판 기획서#6) Step 6. 종료와 리셋]] |
 | 차 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]] |
 
@@ -147,7 +147,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 라. Step 1. 동의 약관 화면
 
-공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수 동의를 받음. 본 콘텐츠는 카메라를 쓰지 않아 필수 동의 항목은 이용 약관 동의임(카메라 동의 없음, 연락처는 Step 5에서 별도 고지). 정확한 동의 항목과 문구는 규정 검토 확정(확인 필요).
+공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수 동의를 받음. 본 콘텐츠는 카메라를 쓰지 않아 필수 동의 항목은 이용 약관 동의임(카메라 동의 없음, 연락처 미수집). 정확한 동의 항목과 문구는 규정 검토 확정(확인 필요).
 
 ### 1) 화면 설계
 
@@ -246,20 +246,20 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 사. Step 5. 기록증 미리보기 화면
 
-버나 고유 화면. 완성된 기념 기록증(성적표)을 미리 봄. 신명 게이지 점수와 등급, 묘기 통계를 사전 제작 템플릿에 얹은 이미지임. 감상 뒤 전송 버튼이 나옴 ([[버나 - 버나잡이 한 판 기획서#5) Step 5. 결과물 전송]], §4.마 기념 기록증 생성).
+버나 고유 화면. 완성된 기념 기록증(성적표)을 미리 봄. 신명 게이지 점수와 등급, 묘기 통계를 사전 제작 템플릿에 얹은 이미지임. 감상 뒤 받기 버튼이 나옴 ([[버나 - 버나잡이 한 판 기획서#5) Step 5. 결과물 전송]], §4.마 기념 기록증 생성).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 기록증 카드 구성)
 	- 헤더: 타이틀
 	- 본문 중앙: 기념 기록증(성적표) 카드를 중앙에 크게 배치
-	- 액션: "전송" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+	- 액션: "받기" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 기념 기록증 미리보기: 신명 게이지 점수와 등급, 묘기 통계를 얹은 성적표 이미지(버나 양식 배경, 등급 스탬프). 사용자 얼굴이나 영상은 없음
-	- "전송" 버튼
+	- "받기" 버튼
 - **매호씨 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 전송 URL 발급으로 정상 진행은 기획서 Step 5 분기를 준용함(목업은 정상 미리보기 상태만)
-- **화면 내 텍스트**: 타이틀 "나의 버나 기록증", 버튼 "전송"
+- **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 다운로드 URL 발급으로 정상 진행은 기획서 Step 5 분기를 준용함(목업은 정상 미리보기 상태만)
+- **화면 내 텍스트**: 타이틀 "나의 버나 기록증", 버튼 "받기"
 
 ### 2) 프롬프트 (영어)
 
@@ -268,7 +268,7 @@ A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen
 The record-certificate preview screen of a Korean traditional namsadang buna (plate-spinning) experience.
 Title: '나의 버나 기록증'.
 Center: a commemorative record certificate (a report card) shown large in the middle, with an excitement-gauge score and grade, trick statistics, a grade stamp, and a buna-styled background. It contains NO user face or photo.
-A primary button labeled '전송' in the lower part of the central reachable zone, not at the physical bottom edge.
+A primary button labeled '받기' in the lower part of the central reachable zone, not at the physical bottom edge.
 To one side: a stylized Korean Maehossi host character (the buna banter partner, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls.
 Background: a namsadang outdoor play-yard stage, a proud showcase mood.
 Art direction: Korean traditional namsadang buna plate-spinning motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -277,33 +277,33 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 아. Step 5. 연락처 입력과 전송 화면
+## 아. Step 5. 결과물 QR 화면
 
-공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 연락처를 받아 기록증 링크를 SMS로 보냄. 본 콘텐츠 개인정보는 휴대폰 번호 단일이며 얼굴 정보는 없음([[버나 - 버나잡이 한 판 기획서#나. 개인정보와 연속성]]).
+공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 기념 기록증 결과물을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음([[버나 - 버나잡이 한 판 기획서#나. 개인정보와 연속성]]).
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 매호씨는 넓은 측면에 또렷한 안내 캐릭터로 둠. 조작 요소는 중앙 도달 존에 둠
+- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문 중앙에 QR 코드를 크게 두고, 그 위나 아래에 스캔 안내와 다운로드 가능 기간 문구를 둠. 액션에 마침 버튼을 둠. 연락처 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지는 두지 않음. 화면 타임아웃 적용(감상 성격). 매호씨는 넓은 측면에 또렷한 안내 캐릭터로 둠. 조작 요소는 중앙 도달 존에 둠
 - **핵심 UI 컴포넌트**
-	- 전화번호 입력 필드와 숫자 키패드
-	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 5와 §5.나
-	- "전송"과 "받지 않기" 버튼
-- **매호씨 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 수신처 영구 실패 시 재입력 1회 허용, 터치 미입력 타임아웃 시 연락처 즉시 파기 후 종료 Step 직행 등 실패 안내는 기획서 Step 5와 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
+	- 결과물 QR 코드(다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내와 다운로드 가능 기간 문구
+	- "마침" 버튼
+- **매호씨 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, QR을 가리키며 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 결과물 업로드나 호스팅 실패 시 사과 후 종료 Step, 화면 타임아웃 발동 시 종료 Step 정상 진행 등은 기획서 Step 5와 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 표시 상태만)
+- **화면 내 텍스트**: 안내 "휴대폰으로 스캔해 받으세요", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (guide caption, large QR code, finish button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Maehossi host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang outdoor play-yard stage
-Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
+Keep the large QR-code placeholder (a generic decorative square pattern that encodes nothing) centered, add a guide caption '휴대폰으로 스캔해 받으세요', and a single button '마침'.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. Exception: render the digits 0-9 on the numeric keypad buttons (as in the attached reference); no other text is rendered. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 

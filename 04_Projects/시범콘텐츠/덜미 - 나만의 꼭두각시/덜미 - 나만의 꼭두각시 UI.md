@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덜미, UI]
 created: 2026-07-01
-updated: 2026-07-03
+updated: 2026-07-07
 ---
 
 > 덜미(꼭두각시놀음) 인형놀음 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덜미 고유분만 더하며, 고유 화면(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덜미 - 나만의 꼭두각시 기획서]].
@@ -37,7 +37,7 @@ updated: 2026-07-03
 | 아 | 기념 촬영 화면 | Step 5 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#5) Step 5. 기념 촬영]] |
 | 자 | 생성 대기 화면 (기념 사진) | Step 5 | 공용 (대기, §5.다) | [[덜미 - 나만의 꼭두각시 기획서#5) Step 5. 기념 촬영]] |
 | 차 | 결과물 미리보기 화면 | Step 6 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#6) Step 6. 결과물 전송]] |
-| 카 | 연락처 입력과 전송 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 꼭두각시 기획서#6) Step 6. 결과물 전송]] |
+| 카 | 결과물 QR 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 꼭두각시 기획서#6) Step 6. 결과물 전송]] |
 | 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덜미 - 나만의 꼭두각시 기획서#7) Step 7. 종료와 리셋]] |
 | 파 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]] |
 
@@ -372,33 +372,33 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 카. Step 6. 연락처 입력과 전송 화면
+## 카. Step 6. 결과물 QR 화면
 
-공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 연락처를 받아 결과물 링크를 SMS로 보냄.
+공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 기념 사진 결과물을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 전송용으로 수집하는 개인정보는 없음(얼굴이 담긴 결과물 처리는 [[덜미 - 나만의 꼭두각시 기획서#나. 개인정보와 연속성]]).
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문에 연락처 입력 필드와 숫자 키패드, 개인정보 수집과 이용 안내 문구를 둠(고지 요소는 핵심 UI 컴포넌트 참조). 액션에 전송 버튼과 받지 않기 보조 버튼을 두며, 전송이 곧 발송 동의, 받지 않기가 거부임(별도 동의 토글 없음). 화면 타임아웃 미적용. 산받이는 넓은 측면에 또렷한 안내 캐릭터로 둠
+- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문 중앙에 QR 코드를 크게 두고, 그 위나 아래에 스캔 안내와 다운로드 가능 기간 문구를 둠. 액션에 마침 버튼을 둠. 연락처 입력 필드와 키패드, 전송이나 받지 않기 버튼, 전송용 개인정보 수집 고지는 두지 않음. 화면 타임아웃 적용(감상 성격). 산받이는 넓은 측면에 또렷한 안내 캐릭터로 둠. 조작 요소는 중앙 도달 존에 둠
 - **핵심 UI 컴포넌트**
-	- 전화번호 입력 필드와 숫자 키패드
-	- 개인정보 수집과 이용 안내 문구: 별도 동의 토글 대신 고지 요소를 노출 (수집 항목 휴대폰 번호, 이용 목적 결과 링크 발송, 발송 즉시 파기, 받지 않기로 거부 가능). 전송/받지 않기 버튼이 동의/거부를 담음. 기념 사진(얼굴 포함)을 결과 페이지로 48시간 제공하는 처리도 고지 범위에 포함함(기획서 §5.나 개인정보와 연속성). 처리 주체와 정확한 문구는 규정 검토 단계 확정(확인 필요). 파기 정본은 기획서 Step 6 sub-step 4
-	- "전송"과 "받지 않기" 버튼
-- **산받이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 수신처 영구 실패 시 재입력 1회 허용, 터치 미입력 타임아웃 시 연락처 즉시 파기 후 종료 Step 직행 등 실패 안내는 기획서 Step 6과 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 안내 "연락처를 입력하면 링크를 보내드려요", 개인정보 안내 "번호는 링크 발송에만 쓰고 발송 즉시 파기"(예시, 정확한 고지 문구는 규정 검토 확정), 버튼 "전송" "받지 않기"
+	- 결과물 QR 코드(다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내와 다운로드 가능 기간 문구
+	- "마침" 버튼
+- **산받이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, QR을 가리키며 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 결과물 업로드나 호스팅 실패 시 사과 후 종료 Step, 화면 타임아웃 발동 시 종료 Step 정상 진행 등은 기획서 Step 6과 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 표시 상태만)
+- **화면 내 텍스트**: 안내 "휴대폰으로 스캔해 받으세요", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (caption, phone-number field, numeric keypad, one-line privacy notice, send/decline buttons, host). There is no consent toggle. Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (guide caption, large QR code, finish button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Sanbaji narrator host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang booth-curtain puppet stage
-Add a top-header caption '연락처를 입력하면 링크를 보내드려요' in the header area; keep the placeholder privacy notice '번호는 링크 발송에만 쓰고 발송 즉시 파기' (example wording, to be finalized after policy review), buttons '전송' and '받지 않기'.
+Keep the large QR-code placeholder (a generic decorative square pattern that encodes nothing) centered, add a guide caption '휴대폰으로 스캔해 받으세요', and a single button '마침'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. Exception: render the digits 0-9 on the numeric keypad buttons (as in the attached reference); no other text is rendered. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
@@ -430,7 +430,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 파. 실패 안내 (모달 팝업, 실패 분기 공통)
 
-공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]]). 생성이나 변환, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
+공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]]). 생성이나 변환, 호스팅 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 사과 안내를 보이고 종료 Step으로 자동 진행함.
 
 ### 1) 화면 설계
 
