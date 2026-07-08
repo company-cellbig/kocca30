@@ -7,7 +7,7 @@ created: 2026-07-01
 updated: 2026-07-08
 ---
 
-> 덜미(꼭두각시놀음) 그림동화 전자책 생성 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덜미 고유분만 더하며, 고유 화면(이름 입력, 캐릭터 카드, 마당 선택, 박첨지 문답, 결과물 감상)은 레이아웃을 상세 설계함. 카메라를 쓰지 않아 전 화면이 터치라 도달 존을 엄격히 적용함. 기획은 [[덜미 - 나만의 유람기 기획서]].
+> 덜미(꼭두각시놀음) 전자책 생성 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덜미 고유분만 더하며, 고유 화면(이름 입력, 캐릭터 카드, 마당 선택, 박첨지 문답, 결과물 감상)은 레이아웃을 상세 설계함. 카메라를 쓰지 않아 전 화면이 터치라 도달 존을 엄격히 적용함. 기획은 [[덜미 - 나만의 유람기 기획서]].
 
 # 1. 개요
 
@@ -38,7 +38,7 @@ updated: 2026-07-08
 | 아 | 박첨지 문답 화면 | Step 3 | 덜미 고유 (핵심) | [[덜미 - 나만의 유람기 기획서#다. Step 3. 마당 선택과 플롯 문답 (거리별 반복)]] |
 | 자 | 생성 대기 화면 | Step 4 | 공용 (대기, §5.다) | [[덜미 - 나만의 유람기 기획서#라. Step 4. 결과물 생성과 대기 화면 (병행)]] |
 | 차 | 결과물 감상 화면 | Step 5 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#마. Step 5. 결과물 표시]] |
-| 카 | 결과물 QR 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 유람기 기획서#바. Step 6. 결과물 전송]] |
+| 카 | 결과물 QR 화면 | Step 6 | 공용 (전송, §5.라) | [[덜미 - 나만의 유람기 기획서#바. Step 6. 결과물 다운로드 안내]] |
 | 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덜미 - 나만의 유람기 기획서#사. Step 7. 종료와 리셋]] |
 | 파 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (사과 모달 팝업)]] |
 
@@ -107,7 +107,7 @@ updated: 2026-07-08
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean wooden-puppet (mokgak) motifs over a vibrant namsadang booth-curtain (pojangmak) puppet stage, festive attract mood
 Keep title '나만의 유람기', primary button '시작하기'.
@@ -128,7 +128,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ### 1) 화면 설계
 
 - **레이아웃**: 공통 사양 §5.나 인트로 가이드 화면 준용. 본문에 진행 흐름 안내 일러스트, 액션에 다음 버튼을 둠. 박첨지가 화자로 등장함
-- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(이름 짓기, 마당 고르기, 박첨지와 문답, 그림동화 받기), "다음" 버튼
+- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(이름 짓기, 마당 고르기, 박첨지와 문답, 전자책 받기), "다음" 버튼
 - **박첨지 호스트**: 화자로 등장해 설명, 재담하는 표정
 - **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
@@ -137,9 +137,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander) acting as the narrator with a lively storytelling expression
-- the flow-illustration placeholder -> an instructional illustration of the flow (name your hero, choose a madang, answer Bak Cheomji, receive a picture book) in namsadang puppet-play styling
+- the flow-illustration placeholder -> an instructional illustration of the flow (name your hero, choose a madang, answer Bak Cheomji, receive an e-book) in namsadang puppet-play styling
 - background -> a namsadang booth-curtain (pojangmak) puppet stage, friendly mood
 Keep greeting '어서 오세요', button '다음'.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
@@ -168,7 +168,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang booth-curtain puppet stage
 Keep title '이용 동의'. Do NOT render any consent toggle; consent is expressed by the buttons (this content has a single required 약관 consent and no camera consent, so there is no toggle row; if the reference mockup shows toggle rows, omit them). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
@@ -201,7 +201,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.9) 텍스트 입력 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
 - the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
 - the background placeholders -> a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood
@@ -214,7 +214,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 바. Step 2. 캐릭터 카드 선택 화면
 
-덜미 고유 화면. 유저가 주인공 캐릭터 카드 1개를 고름. 카드는 연령대(아이/청소년/청년/장년)와 성별(남/여)을 곱한 8종임 ([[덜미 - 나만의 유람기 기획서#나. Step 2. 캐릭터 정보 입력]]).
+덜미 고유 화면. 유저가 주인공 캐릭터 카드 1개를 고름. 카드는 연령대(아이/청소년/어른)와 성별(남/여)을 곱한 6종임 ([[덜미 - 나만의 유람기 기획서#나. Step 2. 캐릭터 정보 입력]]).
 
 ### 1) 화면 설계
 
@@ -223,7 +223,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 본문 중앙: 8개 캐릭터 카드 그리드(예: 4열 2행)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
 	- 액션: 선택 후 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
-	- 캐릭터 카드 8종: 연령대(아이/청소년/청년/장년) × 성별(남/여). 각 카드는 인형극 양식의 인물 일러스트
+	- 캐릭터 카드 6종: 연령대(아이/청소년/어른) × 성별(남/여). 각 카드는 인형극 양식의 인물 일러스트
 	- 선택 표시(하이라이트)
 	- "다음" 버튼
 - **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 유저에게 고르라고 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
@@ -234,7 +234,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The character card selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience.
+The character card selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
 Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '주인공을 골라 주세요'.
 Center, within reach: a grid of 8 selectable character cards (for example 4 columns by 2 rows), each card a puppet-play styled figure of a hero, labeled by age and gender '아이 남', '아이 여', '청소년 남', '청소년 여', '청년 남', '청년 여', '장년 남', '장년 여'. One card is highlighted as selected.
@@ -270,7 +270,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The madang (episode-type) selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience.
+The madang (episode-type) selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
 Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '어떤 마당으로 놀아 볼까요'.
 Center, within reach: four selectable madang-type cards side by side, each with a short intro line and a puppet-play styled illustration, labeled '위험을 물리치기', '뻐기는 자 골리기', '위선 들추기', '욕심의 끝'. One card is highlighted as selected.
@@ -309,7 +309,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.9) 텍스트 입력 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/progress area, prompt/question area, text answer field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/progress area, prompt/question area, text answer field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the header placeholder -> a 4-stage progress indicator '도입', '전개', '절정', '마무리' with the current stage marked
 - the host placeholder and the prompt/question area -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) as the narrator posing the question, with a speech bubble showing a fixed question '길에서 누구를 만났나요?', kept in the upper area and not blocking the central controls
 - the background placeholders -> a namsadang booth-curtain (pojangmak) puppet stage, storytelling mood
@@ -322,7 +322,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 자. Step 4. 생성 대기 화면
 
-공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 그림동화를 생성하는 동안 대기 콘텐츠를 노출함.
+공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 결과물을 생성하는 동안 대기 콘텐츠를 노출함.
 
 ### 1) 화면 설계
 
@@ -336,8 +336,8 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
-- the progress/visual placeholder -> a progress indicator with light namsadang puppet-play themed waiting content while a picture book is being generated
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
+- the progress/visual placeholder -> a progress indicator with light namsadang puppet-play themed waiting content while the e-book is being generated
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host guide keeping up the mood during the wait, as a clear side presence (an on-screen guide character, not a realistic bystander)
 - background -> a namsadang booth-curtain puppet stage, an anticipatory waiting mood
 Keep status caption '이야기를 짓는 중'.
@@ -349,18 +349,18 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 차. Step 5. 결과물 감상 화면
 
-덜미 고유 화면. 완성된 그림동화 전자책을 페이지를 넘기며 감상하고, 페이지마다 박첨지 낭독 음성이 재생됨. 마지막 페이지에서 받기 버튼이 나옴 ([[덜미 - 나만의 유람기 기획서#마. Step 5. 결과물 표시]]).
+덜미 고유 화면. 완성된 전자책을 페이지를 넘기며 감상하고, 페이지마다 박첨지 낭독 음성이 재생됨. 마지막 페이지에서 받기 버튼이 나옴 ([[덜미 - 나만의 유람기 기획서#마. Step 5. 결과물 표시]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 전자책 뷰어. 결과물 이미지는 세로 형식이라 가로 화면 중앙에 배치)
 	- 헤더: 타이틀
-	- 본문 중앙: 세로 형식 그림동화 페이지 1장을 중앙에 크게 배치(양옆은 여백). 결과물은 세로이며 화면 방향(가로)과 별개임([[덜미 - 나만의 유람기 기획서]] §1 개요 산출물)
+	- 본문 중앙: 세로 형식 전자책 페이지 1장을 중앙에 크게 배치(양옆은 여백). 결과물은 세로이며 화면 방향(가로)과 별개임([[덜미 - 나만의 유람기 기획서]] §1 개요 산출물)
 	- 페이지 넘김: 좌우 넘김 버튼을 페이지 양옆 중앙 도달 존 안에 둠(화면 물리 좌우 끝이 아니라 손 닿는 범위). 스와이프 병행 가능
 	- 낭독 재생: 페이지 아래 중앙 도달 존 안에 재생과 일시정지 컨트롤을 둠. 페이지를 열면 그 페이지 낭독이 자동 재생되고, 페이지를 넘기면 이전 낭독을 멈춤
 	- 액션: 마지막 페이지 도달 시 "받기" 버튼을 중앙 도달 존 아래쪽에 노출
 - **핵심 UI 컴포넌트**
-	- 세로 그림동화 페이지 뷰어(인형극 양식 일러스트 + 서사 텍스트)
+	- 세로 전자책 페이지 뷰어(인형극 양식 일러스트 + 서사 텍스트)
 	- 좌우 페이지 넘김 컨트롤(도달 존 안)
 	- 낭독 음성 재생 컨트롤(재생과 일시정지)
 	- 마지막 페이지 "받기" 버튼
@@ -372,9 +372,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The result viewer (picture-book reader) screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience.
+The result viewer (e-book reader) screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
 Title: '나의 유람기'.
-Center: a single portrait-oriented picture-book page (a puppet-play styled illustration with narrative text) displayed large in the middle, with side margins (the result image is portrait, independent of the landscape screen).
+Center: a single portrait-oriented e-book page (a puppet-play styled illustration with narrative text) displayed large in the middle, with side margins (the result image is portrait, independent of the landscape screen).
 Page-turn: left and right page-turn controls placed just beside the page, within the central reachable zone (not at the physical left/right screen edges).
 Narration playback: a compact play/pause control for the page narration audio, placed below the page inside the central reachable zone.
 When on the last page, a primary button labeled '받기' appears in the lower part of the central reachable zone (not at the physical bottom edge).
@@ -388,7 +388,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 카. Step 6. 결과물 QR 화면
 
-공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 결과물(그림동화 전자책과 낭독 음성 파일)을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음([[덜미 - 나만의 유람기 기획서#나. 개인정보 처리]]).
+공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 결과물(전자책과 낭독 음성 파일)을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음([[덜미 - 나만의 유람기 기획서#나. 개인정보 처리]]).
 
 ### 1) 화면 설계
 
@@ -406,7 +406,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (guide caption, large QR code, finish button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (guide caption, large QR code, finish button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Bak Cheomji host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang booth-curtain puppet stage
 Keep the large QR-code placeholder (a generic decorative square pattern that encodes nothing) centered, add a guide caption '휴대폰으로 스캔해 받으세요', and a single button '마침'.
@@ -432,7 +432,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.6) 종료 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its central position and farewell pose from the reference; on this closing screen the host is centered, not to the side) -> a stylized Korean Bak Cheomji host character giving a warm farewell
 - background -> a namsadang booth-curtain puppet stage, a warm closing mood
 Keep the closing message '또 만나요'.
@@ -458,7 +458,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
 
 ```
-Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, optional secondary button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) picture-book experience, without moving or resizing them:
+Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, optional secondary button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear presence and reassuring pose from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander) reassuring the user warmly
 - background -> a calm namsadang booth-curtain (pojangmak) puppet stage, a reassuring mood
 Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
