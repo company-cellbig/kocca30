@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덜미, UI]
 created: 2026-07-01
-updated: 2026-07-07
+updated: 2026-07-08
 ---
 
 > 덜미(꼭두각시놀음) 그림동화 전자책 생성 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덜미 고유분만 더하며, 고유 화면(이름 입력, 캐릭터 카드, 마당 선택, 박첨지 문답, 결과물 감상)은 레이아웃을 상세 설계함. 카메라를 쓰지 않아 전 화면이 터치라 도달 존을 엄격히 적용함. 기획은 [[덜미 - 나만의 유람기 기획서]].
@@ -349,21 +349,23 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 차. Step 5. 결과물 감상 화면
 
-덜미 고유 화면. 완성된 그림동화 전자책을 페이지를 넘기며 감상함. 마지막 페이지에서 받기 버튼이 나옴 ([[덜미 - 나만의 유람기 기획서#마. Step 5. 결과물 표시]]).
+덜미 고유 화면. 완성된 그림동화 전자책을 페이지를 넘기며 감상하고, 페이지마다 박첨지 낭독 음성이 재생됨. 마지막 페이지에서 받기 버튼이 나옴 ([[덜미 - 나만의 유람기 기획서#마. Step 5. 결과물 표시]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 전자책 뷰어. 결과물 이미지는 세로 형식이라 가로 화면 중앙에 배치)
 	- 헤더: 타이틀
-	- 본문 중앙: 세로 형식 그림동화 페이지 1장을 중앙에 크게 배치(양옆은 여백). 결과물은 세로이며 화면 방향(가로)과 별개임(기획서 §6 산출물)
+	- 본문 중앙: 세로 형식 그림동화 페이지 1장을 중앙에 크게 배치(양옆은 여백). 결과물은 세로이며 화면 방향(가로)과 별개임([[덜미 - 나만의 유람기 기획서]] §1 개요 산출물)
 	- 페이지 넘김: 좌우 넘김 버튼을 페이지 양옆 중앙 도달 존 안에 둠(화면 물리 좌우 끝이 아니라 손 닿는 범위). 스와이프 병행 가능
+	- 낭독 재생: 페이지 아래 중앙 도달 존 안에 재생과 일시정지 컨트롤을 둠. 페이지를 열면 그 페이지 낭독이 자동 재생되고, 페이지를 넘기면 이전 낭독을 멈춤
 	- 액션: 마지막 페이지 도달 시 "받기" 버튼을 중앙 도달 존 아래쪽에 노출
 - **핵심 UI 컴포넌트**
 	- 세로 그림동화 페이지 뷰어(인형극 양식 일러스트 + 서사 텍스트)
 	- 좌우 페이지 넘김 컨트롤(도달 존 안)
+	- 낭독 음성 재생 컨트롤(재생과 일시정지)
 	- 마지막 페이지 "받기" 버튼
 - **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 다음 단계로 정상 진행은 기획서 Step 5 분기를 준용함(목업은 정상 열람 상태만)
+- **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 다음 단계로 정상 진행, 낭독 음성 합성 실패 시 재생 컨트롤 없이 페이지만 표시는 기획서 Step 5 분기를 준용함(목업은 낭독 포함 정상 열람 상태만)
 - **화면 내 텍스트**: 타이틀 "나의 유람기", 버튼 "받기"
 
 ### 2) 프롬프트 (영어)
@@ -374,6 +376,7 @@ The result viewer (picture-book reader) screen of a Korean traditional namsadang
 Title: '나의 유람기'.
 Center: a single portrait-oriented picture-book page (a puppet-play styled illustration with narrative text) displayed large in the middle, with side margins (the result image is portrait, independent of the landscape screen).
 Page-turn: left and right page-turn controls placed just beside the page, within the central reachable zone (not at the physical left/right screen edges).
+Narration playback: a compact play/pause control for the page narration audio, placed below the page inside the central reachable zone.
 When on the last page, a primary button labeled '받기' appears in the lower part of the central reachable zone (not at the physical bottom edge).
 To one side: a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls.
 Background: a namsadang booth-curtain puppet stage, a proud showcase mood.
@@ -385,7 +388,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 카. Step 6. 결과물 QR 화면
 
-공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 결과물을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음([[덜미 - 나만의 유람기 기획서#나. 개인정보 처리]]).
+공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 결과물(그림동화 전자책과 낭독 음성 파일)을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음([[덜미 - 나만의 유람기 기획서#나. 개인정보 처리]]).
 
 ### 1) 화면 설계
 
