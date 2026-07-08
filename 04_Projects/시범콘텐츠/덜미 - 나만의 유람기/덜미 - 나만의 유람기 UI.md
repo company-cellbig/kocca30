@@ -180,12 +180,12 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 마. Step 2. 이름 입력 화면
 
-덜미 고유 화면. 유저가 주인공(자기 자신)의 이름을 가상 키보드나 음성(STT)으로 지어 입력함. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덜미 - 나만의 유람기 기획서#나. Step 2. 캐릭터 정보 입력]]).
+덜미 고유 화면. 유저가 주인공 캐릭터의 이름을 가상 키보드나 음성(STT)으로 지어 입력함. 실명이 아니라 주인공에게 붙이는 이름이라 화면이 "주인공 이름 입력"으로 물음. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덜미 - 나만의 유람기 기획서#나. Step 2. 캐릭터 정보 입력]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격, 조작 요소를 중앙 도달 존에 집약)
-	- 헤더: 안내 카피 한 줄
+	- 헤더: 타이틀 "주인공 이름 입력"과 안내 카피 한 줄
 	- 본문 중앙: 이름 입력 필드와 가상 키보드, 음성 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음). 키보드는 하단에 한정해 안내와 입력 필드가 위에 보이게 함
 	- 액션: 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
@@ -194,7 +194,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- "다음" 버튼
 - **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 유저를 향해 이름을 청하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 비속어 검출 시 팝업 안내와 재입력, 백엔드 재검증, 터치 미입력 타임아웃 시 종료 Step 직행은 기획서 Step 2와 §5.나 개인정보와 연속성을 준용함(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "음성으로 입력", "다음"
+- **화면 내 텍스트**: 타이틀 "주인공 이름 입력", 안내 "주인공 이름을 지어 주세요", 버튼 "음성으로 입력", "다음"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
@@ -205,7 +205,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
 - the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
 - the background placeholders -> a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood
-Keep caption '이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음'. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
+Keep title '주인공 이름 입력', caption '주인공 이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음'. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
