@@ -35,7 +35,7 @@ import subprocess
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(SCRIPT_DIR)  # scripts/ 의 상위 = vault root
 TEMPLATE = os.path.join(
-    VAULT, "assets", "무형문화유산 전승_기획서 양식_ver.0.0.0_20260702.docx"
+    VAULT, "assets", "무형문화유산 전승_기획서 양식_ver.0.0.1_20260713.docx"
 )
 
 
@@ -389,8 +389,64 @@ def preprocess(md_path, exclude=None):
 # docx 조립
 # ---------------------------------------------------------------------------
 
+# 목록 들여쓰기: 양식이 글자 수 기준(leftChars)이라 pandoc의 인치 기준(720/360 twips)을
+# 글자 수 기준으로 바꿈. 한 단계당 2글자씩 들여쓰고, 글머리표는 2글자 내어쓰기로 매닮.
+LIST_STEP_CHARS = 200   # 1/100 글자 단위 = 2글자
+LIST_STEP_TWIPS = 440   # 11pt 기준 2글자 근사치 (leftChars 미지원 뷰어용 폴백)
+
+
+def normalize_list_indent(pan_num):
+    """pandoc 리스트 numbering 의 들여쓰기를 양식의 글자 수 기준으로 교체.
+
+    글머리표 문자와 폰트(Symbol •, Courier New o, Wingdings ▪)는 그대로 둠.
+    """
+    def fix_lvl(m):
+        lvl = m.group(0)
+        ilvl = int(re.search(r'w:ilvl="(\d+)"', lvl).group(1))
+        left_chars = LIST_STEP_CHARS * (ilvl + 1)
+        left = LIST_STEP_TWIPS * (ilvl + 1)
+        ind = (
+            '<w:ind w:leftChars="%d" w:left="%d" '
+            'w:hangingChars="%d" w:hanging="%d"/>'
+            % (left_chars, left, LIST_STEP_CHARS, LIST_STEP_TWIPS)
+        )
+        return re.sub(r"<w:ind\b[^/>]*/>", ind, lvl)
+
+    return re.sub(r"<w:lvl\b.*?</w:lvl>", fix_lvl, pan_num, flags=re.S)
+
+
+# pandoc 이 본문에서 참조하지만 양식 styles.xml 에는 없는 스타일. 정의가 없으면 워드가
+# 기본 단락으로 떨어뜨려 불릿마다 문단 간격(8pt)이 붙음. 양식 Normal(a) 기반으로 채움.
+PANDOC_STYLES = """\
+<w:style w:type="paragraph" w:styleId="Compact">
+<w:name w:val="Compact"/><w:basedOn w:val="a"/><w:qFormat/>
+<w:pPr><w:spacing w:after="0" w:line="259" w:lineRule="auto"/><w:contextualSpacing/></w:pPr>
+</w:style>
+<w:style w:type="paragraph" w:styleId="FirstParagraph">
+<w:name w:val="First Paragraph"/><w:basedOn w:val="a"/><w:qFormat/>
+</w:style>
+<w:style w:type="paragraph" w:styleId="BodyText">
+<w:name w:val="Body Text"/><w:basedOn w:val="a"/><w:qFormat/>
+</w:style>
+"""
+
+
+def inject_pandoc_styles(styles_xml):
+    """pandoc 이 쓰는 단락 스타일 중 정의가 빠진 것을 양식 스타일 기반으로 추가."""
+    add = "".join(
+        blk for blk in re.findall(r"<w:style\b.*?</w:style>", PANDOC_STYLES, re.S)
+        if 'w:styleId="%s"' % re.search(r'w:styleId="([^"]+)"', blk).group(1)
+        not in styles_xml
+    )
+    if not add:
+        return styles_xml
+    close = styles_xml.rfind("</w:styles>")
+    return styles_xml[:close] + add + styles_xml[close:]
+
+
 def merge_numbering(tpl_num, pan_num):
     """양식 numbering + pandoc 리스트 numbering 병합 (ID 충돌 없음 전제)."""
+    pan_num = normalize_list_indent(pan_num)
     pan_abs = re.findall(r"<w:abstractNum\b.*?</w:abstractNum>", pan_num, re.S)
     pan_nums = re.findall(r"<w:num\s.*?</w:num>", pan_num, re.S)
     merged = tpl_num
@@ -413,8 +469,10 @@ def assemble(content_docx, out_docx):
 
     with zipfile.ZipFile(content_docx) as z:
         pan_doc = z.read("word/document.xml").decode("utf-8")
-        pan_styles = z.read("word/styles.xml")
+        pan_styles = z.read("word/styles.xml").decode("utf-8")
         pan_num = z.read("word/numbering.xml").decode("utf-8")
+
+    pan_styles = inject_pandoc_styles(pan_styles)
 
     # 양식 앞부분: 첫 <w:sectPr(섹션 나누기)를 담은 문단 끝까지.
     # 단, 그 문단이 목차 <w:sdt> 안 마지막 문단이면 sdt 닫는 태그까지 포함해야
@@ -443,7 +501,7 @@ def assemble(content_docx, out_docx):
 
     new_doc = head + body + tail
     datas["word/document.xml"] = new_doc.encode("utf-8")
-    datas["word/styles.xml"] = pan_styles
+    datas["word/styles.xml"] = pan_styles.encode("utf-8")
     datas["word/numbering.xml"] = merge_numbering(tpl_num, pan_num).encode("utf-8")
 
     with zipfile.ZipFile(out_docx, "w", zipfile.ZIP_DEFLATED) as z:

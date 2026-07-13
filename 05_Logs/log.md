@@ -9,6 +9,17 @@ updated: 2026-07-13
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-13] maint | md_to_docx 목록 서식 정합 + 신양식(ver.0.0.1) 적용
+
+- **기본 양식 교체**: 변환기 기본 템플릿을 `무형문화유산 전승_기획서 양식_ver.0.0.1_20260713.docx`로 올림 (`scripts/md_to_docx.py`)
+- **목록이 양식과 따로 노는 문제 해결**: pandoc은 `--reference-doc`을 줘도 목록 numbering을 자기 것으로 새로 만들고, 목록 단락에 쓰는 스타일(`Compact`, `First Paragraph`) 정의를 최종 styles.xml에 넣지 않음. 정의 없는 스타일이라 워드가 기본 단락으로 떨어뜨려 불릿마다 문단 간격 8pt가 붙었음
+	- `inject_pandoc_styles()`: 빠진 pandoc 단락 스타일을 양식 Normal 기반으로 정의해 채움. `Compact`는 간격 0 + contextualSpacing이라 목록 안에서 항목이 붙음
+	- `normalize_list_indent()`: pandoc의 인치 기준 들여쓰기(720/360 twips)를 양식의 글자 수 기준(leftChars)으로 교체. 단계당 2글자 들여쓰기, 글머리표 2글자 내어쓰기
+	- 글머리표 문자는 워드 기본 유지(1단계 •, 2단계 ○, 3단계 ▪, 사용자 결정)
+- 산출물: `export/덜미 - 나만의 유람기 기획서.docx` (export/는 gitignore 대상이라 커밋 제외)
+- 미검증: 워드 렌더링은 사용자 확인 필요. 들여쓰기 폭은 `LIST_STEP_CHARS`로 조정 가능
+- 수정 파일: `scripts/md_to_docx.py`, `assets/무형문화유산 전승_기획서 양식_ver.0.0.1_20260713.docx`(신규 추적)
+
 ## [2026-07-13] update | 유람기 에러 케이스 표 전수화 + 내부 정합 검수 반영
 
 - **검수 발견 반영** (사용자 결정 후):
