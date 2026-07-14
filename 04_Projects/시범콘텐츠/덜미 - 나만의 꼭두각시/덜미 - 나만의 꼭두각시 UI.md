@@ -16,7 +16,7 @@ updated: 2026-07-14
 - **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
 - **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(산받이, 인형 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덜미 고유 화면 4개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 공통 사양 §5.라 전송 공용 화면은 쓰지 않음
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덜미 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
+- **사용법**: §12에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §12에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덜미 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
 - **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
 
 # 2. 공통 설계
@@ -42,7 +42,7 @@ updated: 2026-07-14
 
 ## 나. 공통 레이아웃
 
-모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 공용 화면은 §13 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
+모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 공용 화면은 §12 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
 - **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덜미 고유분(산받이, 인형 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 §5 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
 - **고유 화면**: 같은 16:9 영역 골격 위에서 덜미 메커닉(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 결과물 감상과 받기는 QR을 함께 담으므로 QR을 손 닿는 높이에 둠
@@ -52,9 +52,9 @@ updated: 2026-07-14
 
 모든 화면 프롬프트가 공유하는 고정부(제약과 부정 프롬프트)와, 화면마다 채우는 변수 슬롯을 정의함.
 
-생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
+생성 방식은 §12 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(산받이, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(산받이, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
 - **단독 프롬프트** (얼굴 촬영, 인형 조작, 기념 촬영, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
@@ -69,7 +69,7 @@ updated: 2026-07-14
 
 ### 2) 화면별 변수 슬롯
 
-화면마다 아래 항목을 채움. 단독 프롬프트는 §2.다 1) 공통 제약 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 §13 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
+화면마다 아래 항목을 채움. 단독 프롬프트는 §2.다 1) 공통 제약 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 §12 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
 
 1. **레이아웃**: 16:9 영역(헤더, 본문, 액션) 배치. 공용 화면은 §5 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, §5 세션 목록 밖이라 직접 설계)
 2. **핵심 UI 컴포넌트**: 이 화면 고유 요소
@@ -100,9 +100,9 @@ updated: 2026-07-14
 - **산받이 호스트**: 한쪽 측면에서 유저를 향해 손짓하며 환영, 밝은 표정(중앙은 타이틀과 시작 버튼 자리)
 - **화면 내 텍스트**: 타이틀 "나만의 꼭두각시", 버튼 "시작하기"
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -130,9 +130,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **산받이 호스트**: 화자로 등장해 설명, 재담하는 표정
 - **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -162,9 +162,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#아. 그만두기 확인 팝업]]) 확정 시 미동의, 카메라 촬영 미동의나 터치 미입력 타임아웃도 미동의로 간주해 종료 Step 직행은 기획서 Step 1과 공통 사양 §5.나를 준용함(목업은 정상 동의 상태만)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -223,9 +223,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **산받이 호스트**: 대기 동안 추임새로 흥을 돋움 (측면 또렷한 안내 캐릭터)
 - **화면 내 텍스트**: 안내 "인형을 빚는 중", 진행률
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -324,9 +324,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **산받이 호스트**: 대기 동안 흥을 돋움 (측면 또렷한 안내 캐릭터)
 - **화면 내 텍스트**: 안내 "결과물을 만드는 중", 진행률
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -390,9 +390,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **산받이 호스트**: 중심에서 정겹게 작별 인사
 - **화면 내 텍스트**: 인사 "또 만나요"
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.6) 종료 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.5) 종료 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
@@ -416,9 +416,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **산받이 호스트**: 측면이나 중앙에서 다독이는 표정
 - **화면 내 텍스트**: 안내 "문제가 생겼어요"(표본, 케이스마다 문구를 달리함), 버튼 "확인"
 
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
+### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.7) 실패 안내 중립 레이아웃 이미지
 
 ```
 Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, a single confirm button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
