@@ -9,15 +9,14 @@
 //      severity: error (대상 파일 존재인데 anchor 매칭 안 됨: 명백한 stale)
 //   3. 가운뎃점(·) 위배: 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS 3.4 문체 위배)
 //      severity: error
+//   4. § 절 참조 사용: 2026-07-14에 폐기된 표기 (CONVENTIONS 3.5 Wikilink 규칙)
+//      severity: error. 절 참조는 wikilink anchor로만 씀
+//      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그,
+//            검수 기록 3종)과 폐지 정책 자체를 설명하는 CONVENTIONS 본문
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
 //   - 1: error 1건 이상
-//
-// 검증 대상 외 (자동 검증의 본질적 한계):
-//   - 본문 § 참조: 2026-07-14에 폐기됨. 절 참조는 wikilink anchor로만 씀
-//     (CONVENTIONS 3.5 Wikilink 규칙). log.md와 _archive/, 반복 결함 카탈로그의 § 는
-//     당시 문서 상태를 인용한 이력이라 그대로 보존함
 //
 // 별도 스크립트:
 //   - 헤딩 넘버링 정합 (H1 `1.` / H2 `1.1` / H3 `1.1.1` / H4 `1)` / H5 `(1)`) → scripts/wiki_number.mjs
@@ -64,6 +63,16 @@ const ALLOW_GAWUNDEOTJEOM = new Set([
   '02_HowTo/codex 검수 포커스.md',
   '03_References/converted_모순점.md', // 변환본 인용 컨텍스트
 ]);
+
+// § 표기가 허용되는 곳. 모두 "당시 문서 상태"를 인용한 기록이라 고치면 기록이 왜곡됨
+const ALLOW_SECTION_MARK = new Set([
+  'CONVENTIONS.md',                                          // § 폐지 정책을 설명하는 본문
+  '02_HowTo/반복 결함 카탈로그.md',                            // 과거 결함 사례 인용
+  '06_작업노트/위키 정합성 검수 2026-07-02.md',                 // 검수 시점 문서 상태 인용
+  '06_작업노트/시범콘텐츠 신규 3종 기획서 야간 작성 검토 패킷.md',  // 검토 시점 문서 상태 인용
+  '06_작업노트/시범콘텐츠 신규 3종 UI 야간 작성 검토 패킷.md',     // 검토 시점 문서 상태 인용
+]);
+const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, 이력 보존
 
 // fileIndex 빌드 시 read-only 영역도 포함 (link target 매칭용)
 // 다만 검사 대상은 EXCLUDED_PATHS 제외한 일반 위키만
@@ -291,6 +300,39 @@ function checkGawundeotjeom(allMdFiles) {
   return findings;
 }
 
+// § 절 참조는 2026-07-14에 폐기됨. 절 참조는 wikilink anchor로만 씀
+function checkSectionMark(allMdFiles) {
+  const findings = [];
+  for (const relPath of allMdFiles) {
+    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (ALLOW_SECTION_MARK.has(relPath)) continue;
+    if (ALLOW_SECTION_MARK_PREFIX.some(p => relPath.startsWith(p))) continue;
+    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
+    const lines = content.split('\n');
+    let inCodeBlock = false;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^```/.test(line)) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+      // 인라인 백틱 안 § 는 무시 (표기 자체를 예시로 드는 경우)
+      const lineNoCode = line.replace(/`[^`]*`/g, '');
+      if (lineNoCode.includes('§')) {
+        findings.push({
+          type: 'section_mark',
+          severity: 'error',
+          file: relPath,
+          line: i + 1,
+          message: `§ 절 참조 사용: 폐기된 표기임 (CONVENTIONS 3.5 Wikilink 규칙). wikilink anchor로 씀`,
+        });
+      }
+    }
+  }
+  return findings;
+}
+
 function main() {
   const allMdFiles = collectMd(REPO_ROOT);
   const fileIndex = buildFileIndex(allMdFiles);
@@ -298,6 +340,7 @@ function main() {
     ...checkBrokenWikilinks(allMdFiles, fileIndex),
     ...checkWikilinkAnchors(allMdFiles, fileIndex),
     ...checkGawundeotjeom(allMdFiles),
+    ...checkSectionMark(allMdFiles),
   ];
   const errors = findings.filter(f => f.severity === 'error');
   const warnings = findings.filter(f => f.severity === 'warning');

@@ -40,9 +40,9 @@ updated: 2026-07-14
 
 ## 2.2 공통 레이아웃
 
-모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 조작하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 버나 돌리기 화면은 센서 막대 모션 화면이라 시뮬 뷰가 화면을 크게 쓰는 예외이되, 그 안의 터치 조작(대거리 선택지)은 도달 존에 둠. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
+모든 화면은 [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]]을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 조작하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성). 버나 돌리기 화면은 센서 막대 모션 화면이라 시뮬 뷰가 화면을 크게 쓰는 예외이되, 그 안의 터치 조작(대거리 선택지)은 도달 존에 둠. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
-- **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 버나 고유분(매호씨, 버나 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
+- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 버나 고유분(매호씨, 버나 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
 - **고유 화면**: 같은 16:9 영역 골격 위에서 버나 메커닉(버나 돌리기와 재담 대결, 마무리 연출, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 결과물 감상과 받기는 QR을 함께 담으므로 QR을 손 닿는 높이에 둠
 - **버나 공통 요소**: 진행 호스트는 매호씨임(역할은 [[버나 - 버나잡이 한 판 기획서#3.3 매호씨 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "매호씨 진행 호스트 캐릭터"로만 묘사). 매호씨는 다른 콘텐츠의 안내형 호스트와 달리 유저와 겨루는 재담 대결 상대를 겸함([[버나 - 버나잡이 한 판 기획서#4.3 Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]]). 공통 화면에서는 매호씨를 중앙 조작 존 옆 여유 공간에 화면 속 안내 캐릭터로 또렷이 두고 유저를 향해 안내하는 포즈로 하며(실사 행인이나 다른 사용자로 오인되지 않게, [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 호스트 슬롯), 버나 돌리기 화면에서는 도발 재담을 던지는 대결 상대로 측면에 둠
 
@@ -100,7 +100,7 @@ updated: 2026-07-14
 
 ### 3.1.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.1 시작 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
@@ -130,7 +130,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.2 가이드 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
@@ -161,7 +161,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.4.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.3 동의 약관 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
@@ -296,7 +296,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.8.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.5) 종료 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
@@ -322,7 +322,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.9.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.7) 실패 안내 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.7 실패 안내 (모달 팝업)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, a single confirm button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:

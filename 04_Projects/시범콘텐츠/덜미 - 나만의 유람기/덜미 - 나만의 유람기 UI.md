@@ -15,7 +15,7 @@ updated: 2026-07-14
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
 - **대상 화면**: 12개. Step 순으로 배열함([[#2.1 화면 목록과 분류]])
 - **공용과 고유**: 공용 화면 7개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(박첨지, 인형 비주얼, 카피)만 더함. 이 중 6개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덜미 고유 화면 5개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음
-- **입력 특성**: 카메라를 쓰지 않고 터치와 음성(STT)만 씀(하드웨어 정본은 [[디바이스 사양]]). 따라서 카메라/모션 화면 예외가 없고, 전 화면에서 터치 조작 요소를 중앙 도달 존([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성)에 둠
+- **입력 특성**: 카메라를 쓰지 않고 터치와 음성(STT)만 씀(하드웨어 정본은 [[디바이스 사양]]). 따라서 카메라/모션 화면 예외가 없고, 전 화면에서 터치 조작 요소를 중앙 도달 존([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 6개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면 3개(캐릭터 카드, 마당 선택, 결과물 감상과 받기)는 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
 - **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
@@ -43,9 +43,9 @@ updated: 2026-07-14
 
 ## 2.2 공통 레이아웃
 
-모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 본 콘텐츠는 카메라를 쓰지 않아 모션/카메라 화면 예외가 없으므로 전 화면에 도달 존을 그대로 적용함. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
+모든 화면은 [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]]을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성). 본 콘텐츠는 카메라를 쓰지 않아 모션/카메라 화면 예외가 없으므로 전 화면에 도달 존을 그대로 적용함. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
-- **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덜미 고유분(박첨지, 인형 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
+- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 덜미 고유분(박첨지, 인형 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
 - **고유 화면**: 같은 16:9 영역 골격 위에서 덜미 메커닉(이름 입력, 캐릭터 카드, 마당 선택, 박첨지 문답, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 전부 터치 화면이라 입력 필드, 가상 키보드, 카드, 페이지 넘김 등 조작 요소를 중앙 도달 존에 둠
 - **덜미 공통 요소**: 진행 호스트는 박첨지임(역할은 [[덜미 - 나만의 유람기 기획서#3.4 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "진행 호스트 캐릭터"로만 묘사). 박첨지는 떠돌이 노인 해설자 인형이라 실사 행인이나 다른 사용자로 오인되지 않게, 공통 화면에서는 박첨지를 중앙 조작 존 옆 여유 공간에 화면 속 안내 캐릭터로 또렷이 두고 유저를 향해 안내하는 포즈로 함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 호스트 슬롯). 박첨지 문답 화면은 박첨지가 화자로 전면에 서는 고유 화면임
 
@@ -103,7 +103,7 @@ updated: 2026-07-14
 
 ### 3.1.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.1) 시작 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.1 시작 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -133,7 +133,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.2) 가이드 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.2 가이드 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (flow illustration, next button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -164,7 +164,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.4.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.3) 동의 약관 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.3 동의 약관 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -198,7 +198,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.5.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.8) 텍스트 입력 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -250,7 +250,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 3.7 Step 3. 마당 유형 선택 화면
 
-덜미 고유 화면. 유저가 마당 유형 4종 중 하나를 고름. 시스템은 그 유형 풀에서 랜덤 마당 1개를 배정함 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]], 유형 정의는 같은 문서 [[덜미 - 나만의 유람기 기획서#3.12 서사 구조 (규칙과 틀)]] 2) 다) 마당 유형 (4종)).
+덜미 고유 화면. 유저가 마당 유형 4종 중 하나를 고름. 시스템은 그 유형 풀에서 랜덤 마당 1개를 배정함 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]], 유형 정의는 같은 문서 [[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]).
 
 ### 3.7.1 화면 설계
 
@@ -259,7 +259,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 본문 중앙: 마당 유형 4종 카드(병렬)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
 	- 액션: 선택 후 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
-	- 마당 유형 카드 4종: 위협-구원형, 권력 풍자형, 위선 폭로형, 욕심과 다툼형 ([[덜미 - 나만의 유람기 기획서#3.12 서사 구조 (규칙과 틀)]] 2) 다) 마당 유형 (4종)). 유저 대면 카드 라벨은 친근한 표본이며 정확한 카피는 확인 필요
+	- 마당 유형 카드 4종: 위협-구원형, 권력 풍자형, 위선 폭로형, 욕심과 다툼형 ([[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]). 유저 대면 카드 라벨은 친근한 표본이며 정확한 카피는 확인 필요
 	- 각 카드의 짧은 소개 문구와 인형극 양식 일러스트
 	- 선택 표시(하이라이트)
 	- "다음" 버튼
@@ -309,7 +309,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.8.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.8) 텍스트 입력 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/progress area, prompt/question area, text answer field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -336,7 +336,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.9.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.4) 대기 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.4 대기 (생성과 변환 대기 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (progress indicator, status caption, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -408,7 +408,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.11.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.5) 종료 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
@@ -434,7 +434,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.12.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
-첨부: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 다.7) 실패 안내 중립 레이아웃 이미지
+첨부: [[시범콘텐츠 공통 사양#12.3.7 실패 안내 (모달 팝업)]] 중립 레이아웃 이미지
 
 ```
 Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, a single confirm button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
