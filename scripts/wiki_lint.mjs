@@ -4,10 +4,10 @@
 //
 // 검증 항목 (v2):
 //   1. 깨진 wikilink: [[파일명]]의 대상 파일이 실재하는지
-//      severity: warning (CONVENTIONS §3.마 "링크 대상 문서가 아직 없어도 괜찮음: 나중에 생성" 허용)
+//      severity: warning (CONVENTIONS 3.5 Wikilink 규칙 "링크 대상 문서가 아직 없어도 괜찮음(나중에 생성)" 허용)
 //   2. wikilink anchor 정합: [[파일#anchor]]의 anchor가 헤딩 텍스트와 일치하는지
 //      severity: error (대상 파일 존재인데 anchor 매칭 안 됨: 명백한 stale)
-//   3. 가운뎃점(·) 위배: 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS §3.라 위배)
+//   3. 가운뎃점(·) 위배: 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS 3.4 문체 위배)
 //      severity: error
 //
 // exit code:
@@ -15,12 +15,12 @@
 //   - 1: error 1건 이상
 //
 // 검증 대상 외 (자동 검증의 본질적 한계):
-//   - 본문 § 참조 stale: 자연어 본문에 § 표시가 녹아있어 라벨 경계 정확 검출이 NLP 수준
-//     필요. 정규식 단순 매칭은 false positive 과다: 정책으로 보완 (CONVENTIONS §3.마):
-//     절 라벨 변경 시 본문 grep 의무. 더 안전하려면 § 표시 대신 wikilink anchor 사용
+//   - 본문 § 참조: 2026-07-14에 폐기됨. 절 참조는 wikilink anchor로만 씀
+//     (CONVENTIONS 3.5 Wikilink 규칙). log.md와 _archive/, 반복 결함 카탈로그의 § 는
+//     당시 문서 상태를 인용한 이력이라 그대로 보존함
 //
 // 별도 스크립트:
-//   - 헤딩 넘버링 정합 (H1 1./H2 가./H3 1)/H4 가) 끊김/중복) → scripts/wiki_number.mjs
+//   - 헤딩 넘버링 정합 (H1 `1.` / H2 `1.1` / H3 `1.1.1` / H4 `1)` / H5 `(1)`) → scripts/wiki_number.mjs
 //     점검은 `node scripts/wiki_number.mjs --check`, 정정은 `--write` (anchor 연쇄 갱신 포함)
 //
 // 예외 영역:
@@ -129,7 +129,7 @@ function extractHeadings(content) {
 function extractWikilinks(content) {
   const links = [];
   // [[파일명#anchor|별칭]]: | escape도 처리 (\|)
-  // 파일명이 비면([[#anchor]]) 자기 문서 참조 (CONVENTIONS §3.마가 허용하는 형식)
+  // 파일명이 비면([[#anchor]]) 자기 문서 참조 (CONVENTIONS 3.5 Wikilink 규칙이 정한 형식)
   const regex = /\[\[([^\[\]\|#]*)(?:#([^\[\]\|]+?))?(?:\\?\|([^\[\]]+?))?\]\]/g;
   const lines = content.split('\n');
   let inCodeBlock = false;
@@ -283,7 +283,7 @@ function checkGawundeotjeom(allMdFiles) {
           severity: 'error',
           file: relPath,
           line: i + 1,
-          message: `가운뎃점 \`·\` 사용: CONVENTIONS §3.라 위배 (쉼표 또는 슬래시로 대체)`,
+          message: `가운뎃점 \`·\` 사용: CONVENTIONS 3.4 문체 위배 (쉼표 또는 슬래시로 대체)`,
         });
       }
     }

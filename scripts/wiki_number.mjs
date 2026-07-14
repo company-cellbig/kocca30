@@ -14,16 +14,16 @@
 //      상위 레벨이 올라가면 하위 카운터는 1로 리셋. 기존 번호는 떼고 다시 매김 (멱등)
 //   2. wikilink anchor 연쇄 갱신: 번호가 바뀐 헤딩을 가리키는 [[파일#헤딩]], ![[파일#헤딩]],
 //      [[파일#헤딩|별칭]], 자기 문서 [[#헤딩]]를 저장소 전체에서 새 텍스트로 치환
-//      (CONVENTIONS §4.다가 수동 grep 의무로 두던 작업)
+//      (옛 CONVENTIONS가 수동 grep 의무로 두던 작업)
 //
 // 안 하는 일 (수동 확인 필요):
-//   - 본문 § 참조 (§4.가 같은 자연어 표기): 번호가 바뀐 헤딩이 있으면 목록으로 경고만 함.
-//     자연어에 녹아 있어 자동 치환이 위험 (wiki_lint.mjs가 § 검증을 폐기한 것과 같은 이유)
+//   - 본문 § 참조: 2026-07-14에 폐기됨. 남은 § 는 이력 인용이라 건드리지 않음.
+//     혹시 번호가 바뀐 헤딩이 있으면 목록으로 경고만 함
 //
 // 예외 영역 (넘버링 안 함):
-//   - 05_Logs/log.md: CONVENTIONS §4.나 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
+//   - 05_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
 //   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
-//   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS §6)
+//   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
 //   - .obsidian/, .claude/, scripts/, assets/, export/, node_modules/, .git/
 //
 // exit code: 0 = 정상 / 1 = --check 모드에서 어긋난 헤딩 발견, 또는 처리 불가 오류
@@ -187,7 +187,7 @@ function renumberFile(relPath, content) {
     const oldText = m[2].trim();
 
     if (level === 6) {
-      problems.push({ file: relPath, line: i + 1, kind: 'h6', message: `H6 사용: CONVENTIONS §4.가는 H5까지만 허용. 번호 안 매기고 넘어감: "${oldText}"` });
+      problems.push({ file: relPath, line: i + 1, kind: 'h6', message: `H6 사용: CONVENTIONS 4.1 헤딩 레벨 사용 규칙은 H5까지만 허용. 번호 안 매기고 넘어감: "${oldText}"` });
       continue;
     }
 

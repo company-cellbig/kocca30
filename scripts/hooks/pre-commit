@@ -1,0 +1,46 @@
+#!/bin/sh
+# 커밋 전 위키 정합 점검. 어긋나면 커밋을 막고 고치는 명령을 알려줌.
+#
+# 설치 (클론마다 한 번):
+#   git config core.hooksPath scripts/hooks
+#
+# 점검 항목:
+#   1. 헤딩 넘버링 (wiki_number --check): CONVENTIONS 4.2 규칙과 어긋나는 헤딩
+#   2. 위키 정합 (wiki_lint): 깨진 wikilink anchor, 가운뎃점
+#
+# 파일을 자동으로 고치지는 않음. 스테이징하지 않은 변경까지 끌려 들어가는 사고를
+# 막기 위해, 고치는 것은 사람이나 에이전트가 명령을 직접 돌리게 함.
+
+set -e
+
+if ! command -v node > /dev/null 2>&1; then
+	echo "pre-commit: node를 찾지 못해 위키 점검을 건너뜀"
+	exit 0
+fi
+
+fail=0
+
+if ! node scripts/wiki_number.mjs --check > /dev/null 2>&1; then
+	echo ""
+	echo "✗ 헤딩 넘버링이 규칙과 어긋납니다 (CONVENTIONS 4.2 헤딩 넘버링)"
+	node scripts/wiki_number.mjs --check 2>&1 | sed 's/^/    /'
+	echo ""
+	echo "  고치기:  node scripts/wiki_number.mjs --write"
+	echo "  (헤딩 번호와 그걸 가리키는 anchor를 함께 고칩니다)"
+	fail=1
+fi
+
+if ! node scripts/wiki_lint.mjs > /dev/null 2>&1; then
+	echo ""
+	echo "✗ 위키 정합성 error"
+	node scripts/wiki_lint.mjs 2>&1 | sed 's/^/    /'
+	fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+	echo ""
+	echo "  점검을 건너뛰고 커밋하려면: git commit --no-verify"
+	exit 1
+fi
+
+exit 0
