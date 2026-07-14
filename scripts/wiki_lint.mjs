@@ -3,11 +3,11 @@
 // 사용법: node scripts/wiki_lint.mjs [--json]
 //
 // 검증 항목 (v2):
-//   1. 깨진 wikilink — [[파일명]]의 대상 파일이 실재하는지
-//      severity: warning (CONVENTIONS §3.마 "링크 대상 문서가 아직 없어도 괜찮음 — 나중에 생성" 허용)
-//   2. wikilink anchor 정합 — [[파일#anchor]]의 anchor가 헤딩 텍스트와 일치하는지
-//      severity: error (대상 파일 존재인데 anchor 매칭 안 됨 — 명백한 stale)
-//   3. 가운뎃점(·) 위배 — 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS §3.라 위배)
+//   1. 깨진 wikilink: [[파일명]]의 대상 파일이 실재하는지
+//      severity: warning (CONVENTIONS §3.마 "링크 대상 문서가 아직 없어도 괜찮음: 나중에 생성" 허용)
+//   2. wikilink anchor 정합: [[파일#anchor]]의 anchor가 헤딩 텍스트와 일치하는지
+//      severity: error (대상 파일 존재인데 anchor 매칭 안 됨: 명백한 stale)
+//   3. 가운뎃점(·) 위배: 일반 위키 영역에 가운뎃점 사용 (CONVENTIONS §3.라 위배)
 //      severity: error
 //
 // exit code:
@@ -16,15 +16,16 @@
 //
 // 검증 대상 외 (자동 검증의 본질적 한계):
 //   - 본문 § 참조 stale: 자연어 본문에 § 표시가 녹아있어 라벨 경계 정확 검출이 NLP 수준
-//     필요. 정규식 단순 매칭은 false positive 과다 — 정책으로 보완 (CONVENTIONS §3.마):
+//     필요. 정규식 단순 매칭은 false positive 과다: 정책으로 보완 (CONVENTIONS §3.마):
 //     절 라벨 변경 시 본문 grep 의무. 더 안전하려면 § 표시 대신 wikilink anchor 사용
 //
-// 향후 추가 예정:
-//   - 헤딩 넘버링 정합 (H1 1./H2 가./H3 1)/H4 가) 끊김/중복)
+// 별도 스크립트:
+//   - 헤딩 넘버링 정합 (H1 1./H2 가./H3 1)/H4 가) 끊김/중복) → scripts/wiki_number.mjs
+//     점검은 `node scripts/wiki_number.mjs --check`, 정정은 `--write` (anchor 연쇄 갱신 포함)
 //
 // 예외 영역:
 //   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
-//   - 05_Logs/log.md (이력 보존 — 가운뎃점/문체 검사 제외)
+//   - 05_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
@@ -127,7 +128,7 @@ function extractHeadings(content) {
 
 function extractWikilinks(content) {
   const links = [];
-  // [[파일명#anchor|별칭]] — | escape도 처리 (\|)
+  // [[파일명#anchor|별칭]]: | escape도 처리 (\|)
   const regex = /\[\[([^\[\]\|#]+?)(?:#([^\[\]\|]+?))?(?:\\?\|([^\[\]]+?))?\]\]/g;
   const lines = content.split('\n');
   let inCodeBlock = false;
@@ -190,7 +191,7 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
     const links = extractWikilinks(content);
     for (const link of links) {
-      // log.md는 이력 — wikilink 검사 제외 (과거 참조 보존)
+      // log.md는 이력: wikilink 검사 제외 (과거 참조 보존)
       if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
       if (!fileIndex.has(link.target)) {
         findings.push({
@@ -198,7 +199,7 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
           severity: 'warning',
           file: relPath,
           line: link.line,
-          message: `[[${link.target}]] — 대상 파일 없음 (미작성 stub link로 간주)`,
+          message: `[[${link.target}]]: 대상 파일 없음 (미작성 stub link로 간주)`,
         });
       }
     }
@@ -217,7 +218,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
       if (!link.anchor) continue;
       const targetPath = fileIndex.get(link.target);
       if (!targetPath) continue;
-      // 블록 ID anchor (#^id): 헤딩이 아니라 블록 참조(Obsidian transclusion) — 헤딩이 아니라 블록 ID 존재로 검증
+      // 블록 ID anchor (#^id): 헤딩이 아니라 블록 참조(Obsidian transclusion): 헤딩이 아니라 블록 ID 존재로 검증
       if (link.anchor.startsWith('^')) {
         const blockContent = readFileSync(join(REPO_ROOT, targetPath), 'utf8');
         const blockId = link.anchor.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -228,7 +229,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
             severity: 'error',
             file: relPath,
             line: link.line,
-            message: `[[${link.target}#${link.anchor}]] — 블록 ID가 ${link.target}에 없음`,
+            message: `[[${link.target}#${link.anchor}]]: 블록 ID가 ${link.target}에 없음`,
           });
         }
         continue;
@@ -248,7 +249,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
           severity: 'error',
           file: relPath,
           line: link.line,
-          message: `[[${link.target}#${link.anchor}]] — anchor가 ${link.target} 헤딩 텍스트와 매칭 안 됨`,
+          message: `[[${link.target}#${link.anchor}]]: anchor가 ${link.target} 헤딩 텍스트와 매칭 안 됨`,
         });
       }
     }
@@ -279,7 +280,7 @@ function checkGawundeotjeom(allMdFiles) {
           severity: 'error',
           file: relPath,
           line: i + 1,
-          message: `가운뎃점 \`·\` 사용 — CONVENTIONS §3.라 위배 (쉼표 또는 슬래시로 대체)`,
+          message: `가운뎃점 \`·\` 사용: CONVENTIONS §3.라 위배 (쉼표 또는 슬래시로 대체)`,
         });
       }
     }
@@ -306,7 +307,7 @@ function main() {
       findings,
     }, null, 2));
   } else {
-    console.log(`Wiki lint v2 — ${allMdFiles.length}개 .md 스캔`);
+    console.log(`Wiki lint v2: ${allMdFiles.length}개 .md 스캔`);
     if (findings.length === 0) {
       console.log('✓ 발견 0건');
     } else {
@@ -320,7 +321,7 @@ function main() {
         const sev = byType[type][0].severity;
         console.log(`[${type}] (${sev}) ${byType[type].length}건`);
         for (const f of byType[type]) {
-          console.log(`  ${f.file}:${f.line} — ${f.message}`);
+          console.log(`  ${f.file}:${f.line}: ${f.message}`);
         }
         console.log('');
       }

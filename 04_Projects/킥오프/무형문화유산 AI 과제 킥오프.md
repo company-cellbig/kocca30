@@ -14,7 +14,7 @@ updated: 2026-07-01
 
 ## 가. 과제 개요
 
-### 슬라이드
+### 1) 슬라이드
 
 > 핵심 요소 기술을 만들고, 플랫폼 장치에 담아, 지능형 4D 디지털 도제 플랫폼으로 통합해, 실증과 서비스로 확산함.
 
@@ -32,7 +32,7 @@ updated: 2026-07-01
 
 > **발표 노트**: 이 과제의 핵심 단어는 "디지털 도제"임. 1회성 체험이 아니라 배우고 다시 오는 학습 도구를 지향함. 흐름은 핵심 기술을 만들고, 플랫폼에 담아, 지능형 4D 디지털 도제 플랫폼으로 통합해, 실증과 서비스로 확산하는 것. 셀빅은 남사당 콘텐츠와 생성형 서사, 아바타를 맡음.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape aspect ratio. Densely filled with meaningful content, no decorative filler; clean, organized and highly legible. Pure white (#FFFFFF) background so it drops cleanly onto a white slide; structure comes from color-headed section panels (ink-navy headers, vermilion-red and gold accents) with outlined cards, thin connectors and bold left-to-right arrows. Use small semi-realistic thumbnail illustrations for the domain items described below, and flat vector icons for abstract items. Every picture must map to its concept; add no decorative filler icons. Strong typographic hierarchy, corporate keynote quality.
@@ -53,7 +53,7 @@ center "지능형 4D 디지털 도제 플랫폼"
 
 ## 나. 컨소시엄과 역할
 
-### 슬라이드
+### 1) 슬라이드
 
 5개 연구기관과 외부 데이터 권리자로 구성됨. 셀빅은 남사당놀이를 전담하되, 핵심 AI 일부는 다른 기관이 만든 결과를 받아 씀 ([[컨소시엄 구성 개요]]).
 
@@ -71,7 +71,7 @@ center "지능형 4D 디지털 도제 플랫폼"
 
 > **발표 노트**: 강조점은 "전담이지만 전부는 아니다"임. 연세대와 KETI 인도물이 늦으면 셀빅 콘텐츠도 밀리니, 이 연계 지점의 인도 시점을 일정에 반영할 것.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A premium editorial consortium diagram, 2:1 landscape aspect ratio, in the same rich keynote infographic style as the overview slide. Pure white (#FFFFFF) background. Do NOT draw the slide title or any header text (the presentation already provides it). Fill the width densely with large cards and avoid big empty margins.
@@ -91,7 +91,7 @@ Style: ink-navy text and flat institution icons, vermilion-red accent on the 셀
 
 ## 다. 개발 로드맵
 
-### 슬라이드
+### 1) 슬라이드
 
 1단계는 2년 과정임. 1차연도에 프로토타입과 데이터셋으로 기반을 만들고, 2차연도에 상용 수준(TRL 7)으로 고도화하며 현장 실증까지 감 ([[2. 연구개발의 목표 및 내용]], [[4. 마일스톤 체계 및 수행계획]]).
 
@@ -104,7 +104,7 @@ Style: ink-navy text and flat institution icons, vermilion-red accent on the 셀
 
 > **발표 노트**: 오늘의 뼈대임. 1차연도는 "돌아가는 것을 만든다", 2차연도는 "상용 수준으로 올리고 현장에서 검증한다"로 기억할 것. 다음 부부터는 연차가 아니라 콘텐츠와 기술로 묶어 봄.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial timeline infographic in a tech-diagram style, 2:1 landscape aspect ratio. Densely filled with meaningful content, no decorative filler; clean, organized and highly legible. Pure white (#FFFFFF) background so it drops cleanly onto a white slide, a bold horizontal spine arrow running left to right, two large phase panels packed with content. Ink-navy elements, one vermilion-red accent at the phase-transition point, thin gold hairlines. Each chip has its own flat vector icon plus small milestone ticks along the spine. Strong hierarchy, corporate keynote quality.
@@ -119,7 +119,7 @@ transition label: "돌아가는 것에서 상용 수준으로"
 
 ## 가. 남사당 콘텐츠 로드맵
 
-### 슬라이드
+### 1) 슬라이드
 
 남사당 6종목을 2년에 걸쳐 콘텐츠로 만듦. 종목마다 진입 시점과 형태가 다름: 1차연도는 덜미, 덧뵈기, 버나의 키오스크 콘텐츠이고, 2차연도에 살판, 어름, 풍물이 더해지고 덧뵈기가 미디어 케이브 관람형으로 확장됨 ([[2. 연구개발의 목표 및 내용]]).
 
@@ -134,7 +134,7 @@ transition label: "돌아가는 것에서 상용 수준으로"
 
 > **발표 노트**: 1차연도는 덜미, 덧뵈기, 버나의 키오스크 콘텐츠 5종에 집중. 2차연도에 살판, 어름, 풍물이 더해지고 덧뵈기는 관람형으로 확장됨. 덧뵈기가 두 해에 걸친다는 점을 놓치지 말 것.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial matrix infographic in a tech-diagram style, 2:1 landscape. A 6-row by 2-column grid mapping the six Namsadang disciplines to their content across two years. The 덧뵈기 row is highlighted to show it spans both years. Each row label carries a small semi-realistic thumbnail of its Namsadang discipline: 덜미 a wooden puppet, 덧뵈기 a mask, 버나 a spinning dish on a stick, 살판 a ground-acrobatics tumble, 어름 a tightrope walk, 풍물 a spinning sangmo hat. Densely filled with meaningful content, no decorative filler; clean and highly legible.
@@ -151,7 +151,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 나. 1차연도 콘텐츠 5종과 개발 순서
 
-### 슬라이드
+### 1) 슬라이드
 
 1차연도 키오스크 콘텐츠 5종을 개발 순서대로 정리함. 체험형(실시간 동작과 조작이 핵심) 3종과 생성형(입력에서 결과물 산출이 핵심) 2종임 ([[1차연도 셀빅 개발 준비자료#2. 2026년 셀빅 개발 콘텐츠]], [[1차연도 셀빅 개발 준비자료#나. 콘텐츠 개발 순서]]).
 
@@ -170,7 +170,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 이 5종이 3부 기술 트랙을 실제로 끌어냄. 순서의 핵심은 쉬운 것으로 공용 시스템을 세우고, 체험형 첫 주자를 앞당겨 기술을 전파하는 것.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial numbered-flow infographic in a tech-diagram style, 2:1 landscape. Five content cards left to right in development order 1 to 5, connected by arrows. Each card shows a large order number, the content name, a small discipline sub-label, a type tag, and a small semi-realistic Namsadang thumbnail of its content. "생성" and "체험" tags use different colors. Card thumbnails: 나만의 유람기 a Deolmi wooden puppet with a storybook page, 나만의 탈춤 a Deotboegi mask with a dancing figure, 양반 놀리기 4컷 a yangban-mask four-panel cartoon, 버나잡이 한 판 a spinning buna dish on a stick, 나만의 꼭두각시 a carved wooden-puppet face avatar. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -186,7 +186,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 다. 2차연도 심화 콘텐츠 6종
 
-### 슬라이드
+### 1) 슬라이드
 
 2차연도 심화 서비스 콘텐츠는 미디어 케이브 관람형 중심이며, 아래 6종으로 확정함 [확정]. 이 6종을 2차연도에 개발함. 마일스톤 5.3은 살판, 어름, 군중, 대련, 풍물로 달리 표기했으나, 최종 구성은 이 6종으로 정리됨 ([[4. 마일스톤 체계 및 수행계획]] 5.3 2차연도 심화 서비스 콘텐츠(6종) 개발, [[2. 연구개발의 목표 및 내용]]).
 
@@ -203,7 +203,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 2차연도에 개발할 확정 6종임. 어름이 체험과 관람 둘, 풍물이 합주와 디지털 상모 둘로 6항목을 이룸. 미디어 케이브 관람형이 중심이며, 6종 구성은 큐랩과 이미 확인 완료. 마일스톤 5.3의 군중, 대련 표기는 이 6종으로 대체됨.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich premium editorial card-grid infographic in a tech-diagram style, 2:1 landscape. Pure white (#FFFFFF) background so it drops cleanly onto a white slide. Do NOT draw a slide title or header text (the presentation already provides it). Organize the six cards into two labeled device categories so the layout reads clearly at a glance, with no scattered colors.
@@ -224,7 +224,7 @@ Style: outlined cards with colored header strips, ink-navy text, vermilion-red a
 
 ## 가. 생성형 서사와 이미지 생성
 
-### 슬라이드
+### 1) 슬라이드
 
 생성 콘텐츠(유람기, 양반 놀리기 4컷)의 엔진임. 1차연도에 기본 생성을 세우고 2차연도에 서사 일관성을 고도화함.
 
@@ -234,7 +234,7 @@ Style: outlined cards with colored header strips, ink-navy text, vermilion-red a
 
 > **발표 노트**: 1차의 유람기와 4컷이 이 엔진을 먼저 만들고, 2차 고도화가 전 콘텐츠 서사 품질을 끌어올림. LLM 통합 자체는 2차연도(3부 라).
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel and a right "2차연도" panel with a bold progression arrow between them. Each panel holds labeled icon chips. A bottom strip shows input-data icons. Include a small semi-realistic Namsadang thumbnail illustrating the content: a Deolmi wooden puppet with a picture-book illustration. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
@@ -247,7 +247,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 나. 실시간 동작 인식, 코칭, 아바타
 
-### 슬라이드
+### 1) 슬라이드
 
 체험 콘텐츠(탈춤, 꼭두각시, 버나)의 엔진임. 1차연도에 인식과 채점, 아바타 제어를 세우고 2차연도에 정밀 교정과 다중 참여로 확장함.
 
@@ -257,7 +257,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 탈춤을 2번에 앞당겨 이 스택을 먼저 세우는 이유임. 손 인식이 손목까지라 꼭두각시 양손 조작이 이 범위 안에 들어와야 함(4부 나. 설계 전제).
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel and a right "2차연도" panel with a bold progression arrow between them, and a callout banner at the bottom. Pose-skeleton icons. Include a small semi-realistic Namsadang thumbnail: a Deotboegi mask-dance performer and a buna performer with pose points. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
@@ -270,7 +270,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 다. 실감 표현: AR, 4D, 미디어 케이브
 
-### 슬라이드
+### 1) 슬라이드
 
 콘텐츠를 화면과 공간에 실감으로 올리는 트랙임. 1차연도 AR에서 2차연도 4D와 미디어 케이브로 무게가 넘어감.
 
@@ -281,7 +281,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 미디어 케이브는 해외에 못 가져가므로 서울랜드 전시 효과용임. 그래서 사업성 판단상 관람형으로 최소화함.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial evolution diagram in a tech-diagram style, 2:1 landscape. A left "1차연도" panel with a kiosk showing an AR mask-dance scene and a right "2차연도" panel with a 3-wall-and-floor immersive media-cave illustration showing a Namsadang pungmul performance, a bold progression arrow between them, and a small annotation. Do NOT draw a title bar or header text (the presentation slide already provides the title). Clean and legible.
@@ -294,7 +294,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 라. 공용 플랫폼과 시스템
 
-### 슬라이드
+### 1) 슬라이드
 
 콘텐츠 5종이 함께 쓰는 기반임. 콘텐츠와 따로 먼저 완성하지 않고 첫 콘텐츠가 끌어내 만든 뒤 재사용하며 확장함 ([[1차연도 셀빅 개발 준비자료#4. 공용 시스템]]).
 
@@ -304,7 +304,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 서버의 1차연도 범위는 익명 결과물 다운로드까지임. 이어하기와 학습 기록 저장은 2차연도(디지털 도제)로 넘어가나, 2차 연속성을 지금부터 전방 설계할지가 논점임.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial layered-stack diagram in a tech-diagram style, 2:1 landscape. On the left, a "1차연도" stack of six layered blocks stacked bottom to top; on the right, a "2차연도" set of added layer blocks connected by an expansion arrow. Each block has a small icon. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -318,7 +318,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 가. 데이터셋 확보와 구축
 
-### 슬라이드
+### 1) 슬라이드
 
 AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Truth) 중심 소규모**임. 보존회 실연자가 소수라 규모가 작음 ([[큐랩셀빅 사전회의 - 2026-06-22#2. 핵심 합의]]).
 
@@ -329,7 +329,7 @@ AI 학습용 대규모가 아니라 **코칭용 정답 데이터(GT, Ground Trut
 
 > **발표 노트**: 데이터가 1순위 선행임. 보존회 컨택이 늦어지면 체험형 콘텐츠의 채점 정답을 못 만들어 개발 전체가 밀림.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial flow diagram in a tech-diagram style, 2:1 landscape. A left start node flows by arrow to a central cluster of five source-data icons, then by arrow to a right result node. A banner on top and two small tags at the bottom. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -344,7 +344,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 나. 설계 전제
 
-### 슬라이드
+### 1) 슬라이드
 
 기술 트랙 설계가 지켜야 할 전제임. 설계가 이 범위 안에서 이뤄져야 함.
 
@@ -354,7 +354,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 손목까지만 인식되는 점이 꼭두각시 양손 조작 설계의 상한임. 이 전제가 3부 나(동작 인식) 트랙의 설계 범위를 정함.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial diagram of three constraint panels in a tech-diagram style, 2:1 landscape. Three tall rounded cards side by side, filling the full width with no large empty margins. Do NOT draw a title bar, banner, or header text at the top. Each card has a colored header strip carrying the constraint title and a small status badge ("확정" in navy, "미결" in gold), a clear central icon, one bold key-value line under the icon, and two short supporting lines (a reason line, then an implication line) stacked below. A slim annotation bar spans the full width at the bottom under the three cards. Card 1 icon: a hand with a dashed red boundary line drawn across the wrist. Card 2 icon: a single-person silhouette with a "13+" age badge. Card 3 icon: an AI chip and a code file branching to a shopping cart (commercial), an open padlock (open source), and a question mark (undecided). No decorative filler; clean and highly legible.
@@ -368,7 +368,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 다. 디바이스
 
-### 슬라이드
+### 1) 슬라이드
 
 콘텐츠가 도는 하드웨어임. 규격은 큐랩이 정하고 셀빅이 맞춤. 정본은 [[디바이스 사양]] ([[1차연도 셀빅 개발 준비자료#6. 디바이스]]).
 
@@ -379,7 +379,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 규격은 큐랩이 정하고 셀빅이 맞추는 구조라, 규격 확정이 늦으면 콘텐츠 개발이 함께 밀림. 버나 센서 막대 같은 콘텐츠 적용 하드웨어는 도입 자체가 미정임.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial hardware infographic in an isometric flat-vector style, 2:1 landscape. On the left, an upright horizontal kiosk illustration with callout labels; on the right, a 3-wall-and-floor immersive media-cave illustration. A bottom row of undecided-item tags and a small annotation. Each bottom tag carries a small flat icon: 65인치 a diagonally measured monitor, 뎁스 카메라 모델 a stereo depth camera, 라이다 센서 a lidar sensor puck with scan rings, 콘텐츠 적용 하드웨어 a buna spinning-stick prop. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -395,7 +395,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 ## 가. 1차연도 일정과 마일스톤
 
-### 슬라이드
+### 1) 슬라이드
 
 계획서 명목 일정 기준 셀빅 관련 1차연도 마일스톤임(번호는 [[4. 마일스톤 체계 및 수행계획]]의 마일스톤 코드).
 
@@ -412,7 +412,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 > **발표 노트**: 계획서 명목 착수는 26.04이나 실제 착수는 늦음. 6부 나. 중점 관리 사항의 압축 리스크와 함께 봐야 함.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial Gantt chart in a tech-diagram style, 2:1 landscape. A horizontal month axis from 26.04 to 26.12. Eight labeled horizontal bars, each with a small icon, spanning their months on a clean grid. Densely filled with meaningful content, no decorative filler; clean and highly legible.
@@ -424,7 +424,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 ## 나. 2차연도 일정과 마일스톤
 
-### 슬라이드
+### 1) 슬라이드
 
 계획서 명목 일정 기준 셀빅 관련 2차연도 마일스톤임 ([[4. 마일스톤 체계 및 수행계획]]).
 
@@ -443,7 +443,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 > **발표 노트**: 상반기에 렌더링과 서사 고도화, 하반기에 실증과 글로벌 패키징으로 마무리됨.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial Gantt chart in a tech-diagram style, 2:1 landscape. A horizontal month axis from 27.01 to 27.12. Ten labeled horizontal bars, each with a small icon, spanning their months on a clean grid. Densely filled with meaningful content, no decorative filler; clean and highly legible.
@@ -455,7 +455,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 ## 다. 실증과 TRL 7
 
-### 슬라이드
+### 1) 슬라이드
 
 2차연도의 마무리는 현장 실증과 상용 수준(TRL 7) 달성임. 국내외 수요처 2개소 이상에 설치, 운영해 TRL 7을 검증함 ([[2. 연구개발의 목표 및 내용]]).
 
@@ -482,7 +482,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; l
 
 > **발표 노트**: 해외 실증지 확정이 선행임. 준비 기간이 길어 늦어지면 가을 실증 일정이 흔들림. 서울랜드 인원은 정본 KPI 400명 기준임(사전회의 녹취 500명은 미확정). 성능지표(정확도, MPJPE, FID)는 3부 기술 트랙 목표와 연동됨. 성과물 건수(특허, SW, 매출 등)는 6부 가에서 다룸.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial infographic in a tech-diagram style, 2:1 landscape, split into a left "실증 추진 계획" panel and a right "성과 목표 (TRL 7)" panel.
@@ -507,7 +507,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 ## 가. 성과물 목표
 
-### 슬라이드
+### 1) 슬라이드
 
 6/22 회의에서 PD(과제 점검 전문가) 요구로 컨소시엄이 통일한 2년 전체 목표임. 계획서 원문과 일부 다름(특허는 등록이 아닌 출원, SW 10건) ([[컨소시엄 회의록 - 2026-06-22#가. 성과물 목표 (PD 요구로 컨소시엄 통일)]]).
 
@@ -525,7 +525,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; i
 
 > **발표 노트**: 성과물은 개발과 별도 트랙이 아님. 콘텐츠 개발 초기에 SW 등록과 특허 대상을 정해두면 연말에 몰리지 않음.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial KPI dashboard in a tech-diagram style, 2:1 landscape. Seven metric cards, each with a large project-total number, an icon, and a label. Below each card's label, a small secondary sub-line inside a muted gray pill showing 셀빅's share. The three cards that 셀빅 directly bears ("특허 출원", "SW 등록", "사업화") get an emphasized red border. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -542,7 +542,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 나. 중점 관리 사항
 
-### 슬라이드
+### 1) 슬라이드
 
 낙관 편향을 막기 위해 킥오프에서 명시함.
 
@@ -552,7 +552,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 가장 큰 제약은 시간임. 데이터와 규격이라는 두 선행이 늦으면 1차연도 5종 전체가 밀리므로, 이 둘을 즉시 착수함.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial risk board in a tech-diagram style, 2:1 landscape. Three stacked full-width rows, each a rounded card with, from left to right: a warning icon, a bold title with a small status badge beside it ("리스크" in red, "미결" in gold), a bold core-value line, and one smaller supporting note line below in muted gray. Row 1 icon an hourglass, row 2 icon a warning triangle, row 3 icon a siren. A slim full-width callout bar sits at the very bottom under the three rows. Densely filled with meaningful content, no decorative filler; clean and highly legible.
@@ -566,7 +566,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 다. 후속 조치
 
-### 슬라이드
+### 1) 슬라이드
 
 킥오프 직후 착수할 선행 작업임. 데이터와 규격이 1순위 선행임.
 
@@ -581,7 +581,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 데이터(보존회 컨택)와 키오스크 규격이 1순위 선행임. 이 둘이 풀려야 첫 콘텐츠가 굴러감.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial checklist table in a tech-diagram style, 2:1 landscape. Three columns and six rows. Each row has a check icon; the top (1순위) row is emphasized. Densely filled with meaningful content, no decorative filler; clean and legible.
@@ -598,7 +598,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 ## 라. 관련 문서
 
-### 슬라이드
+### 1) 슬라이드
 
 - [[1차연도 셀빅 개발 준비자료]]: 셀빅 1차연도 개발 계획 정리(초안). 본 발표의 1차연도 실행 근거
 - [[컨소시엄 회의록 - 2026-06-22]]: 성과지표, 역할 분담, 데이터와 LLM, 도제 설계 근거
@@ -610,7 +610,7 @@ Style: pure white (#FFFFFF) background so it drops cleanly onto a white slide; o
 
 > **발표 노트**: 발표 중 근거를 묻는 질문이 나오면 이 문서들로 되짚을 수 있음.
 
-### 프롬프트
+### 2) 프롬프트
 
 ```
 A rich, densely filled premium editorial document-grid infographic in a tech-diagram style, 2:1 landscape. Seven document cards in a grid, each with a document icon and a title. A label on top. Densely filled with meaningful content, no decorative filler; clean and legible.

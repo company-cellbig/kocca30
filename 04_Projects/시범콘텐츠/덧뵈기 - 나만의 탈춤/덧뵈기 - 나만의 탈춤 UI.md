@@ -406,7 +406,7 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 파. 실패 안내 (모달 팝업, 실패 분기 공통)
+## 타. 실패 안내 (모달 팝업, 실패 분기 공통)
 
 공용 화면(실패 안내, [[시범콘텐츠 공통 사양#바. 실패 안내 (상황 안내 모달 팝업)]]). 변환이나 생성, 전송 실패, 상태 조회 무응답 등 실패 분기가 모이는 공통 화면임. 상황 안내를 보이고 종료 Step으로 자동 진행함.
 
