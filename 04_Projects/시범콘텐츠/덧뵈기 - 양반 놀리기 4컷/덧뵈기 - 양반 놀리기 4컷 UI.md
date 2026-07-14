@@ -96,10 +96,10 @@ updated: 2026-07-14
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 4컷 만화 대표 비주얼, 액션에 큰 시작 버튼을 둠. 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, §2.가 나. 학습 토큰 스캔)
-- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 양반 풍자 만화 대표 비주얼
+- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 4컷 만화 대표 비주얼, 액션에 큰 시작 버튼을 두며, 헤더 한쪽 모서리에 언어 선택 요소를 둠(고른 언어가 세션 전체에 적용됨). 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, §2.가 나. 학습 토큰 스캔)
+- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 양반 풍자 만화 대표 비주얼, 언어 선택 요소(한국어와 영어, [[시범콘텐츠 공통 사양#나. 인트로 (시작 + 동의)]])
 - **말뚝이 호스트**: 한쪽 측면에서 유저를 향해 손짓하며 환영, 밝은 표정(중앙은 타이틀과 시작 버튼 자리)
-- **화면 내 텍스트**: 타이틀 "양반 놀리기 4컷", 버튼 "시작하기"
+- **화면 내 텍스트**: 타이틀 "양반 놀리기 4컷", 버튼 "시작하기", 언어 선택 "한국어"/"English"(표본)
 
 ### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
@@ -109,7 +109,7 @@ updated: 2026-07-14
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean talchum mask motifs over a vibrant traditional madang stage, festive attract mood
-Keep title '양반 놀리기 4컷', primary button '시작하기'.
+Keep title '양반 놀리기 4컷', primary button '시작하기'. Also keep a small language-selector control in a top corner of the header (two options, Korean and English), clearly display-and-touch but visually secondary to the start button.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -186,14 +186,15 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 16:9 골격, 조작 요소를 중앙 도달 존에 집약)
 	- 헤더: 안내 카피 한 줄
 	- 본문 중앙: 이름 입력 필드와 가상 키보드, 음성 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음). 키보드는 하단에 한정해 안내와 입력 필드가 위에 보이게 함
-	- 액션: 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+	- 액션: 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 이름 입력 필드
 	- 가상 키보드(한글)와 "음성으로 입력" 버튼(STT). 두 입력 수단 병행 ([[시범콘텐츠 공통 사양#사. 텍스트 입력]])
 	- "다음" 버튼
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로, 유저를 향해 이름을 청하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 비속어 검출 시 팝업 안내와 재입력, 백엔드 재검증, 터치 미입력 타임아웃 시 종료 Step 직행은 기획서 Step 2와 §3.나 개인정보 처리를 준용함(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "음성으로 입력", "다음"
+- **화면 내 텍스트**: 안내 "이름을 지어 주세요", 버튼 "음성으로 입력", "다음", "그만두기"
 
 ### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
@@ -204,7 +205,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
 - the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
 - the background placeholders -> a traditional madang stage, warm inviting mood
-Keep caption '이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음'. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
+Keep caption '이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음', and a smaller secondary button '그만두기' beside it. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -220,14 +221,15 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 16:9 골격, 카드 그리드를 중앙 도달 존에 집약)
 	- 헤더: 안내 카피 한 줄
 	- 본문 중앙: 6개 캐릭터 카드 그리드(예: 3열 2행)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
-	- 액션: 선택 후 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+	- 액션: 선택 후 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 캐릭터 카드 6종: 연령대(아이/청소년/어른) × 성별(남/여). 각 카드는 덧뵈기 배역 탈 양식의 인물
 	- 선택 표시(하이라이트)
 	- "다음" 버튼
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로, 유저에게 고르라고 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 카드 미선택 시 다음 비활성, 터치 미입력 타임아웃 등은 기획서 Step 2 분기를 준용함(목업은 정상 선택 상태만)
-- **화면 내 텍스트**: 안내 "주인공을 골라 주세요", 카드 라벨 "아이 남"/"아이 여"/"청소년 남"/"청소년 여"/"어른 남"/"어른 여"(표본), 버튼 "다음"
+- **화면 내 텍스트**: 안내 "주인공을 골라 주세요", 카드 라벨 "아이 남"/"아이 여"/"청소년 남"/"청소년 여"/"어른 남"/"어른 여"(표본), 버튼 "다음", "그만두기"
 
 ### 2) 프롬프트 (영어)
 
@@ -237,7 +239,7 @@ The character card selection screen of a Korean traditional mask dance (talchum/
 Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '주인공을 골라 주세요'.
 Center, within reach: a grid of 6 selectable character cards (for example 3 columns by 2 rows), each card a Korean talchum role-mask styled hero figure, labeled by age and gender '아이 남', '아이 여', '청소년 남', '청소년 여', '어른 남', '어른 여'. One card is highlighted as selected.
-A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
+A primary button labeled '다음' with a smaller secondary button '그만두기' beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
 To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) encouraging the choice, not blocking the central controls.
 Background: a traditional madang stage, warm inviting mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -255,15 +257,16 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **레이아웃** (고유, 16:9 골격, 카드를 중앙 도달 존에 집약)
 	- 헤더: 안내 카피 한 줄
 	- 본문 중앙: 양반 놀리기 세부 유형 카드(병렬)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
-	- 액션: 선택 후 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+	- 액션: 선택 후 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
 	- 세부 유형 카드(표본 3종: 허세, 탐욕, 무능). 구체 로스터와 카드 수는 확인 필요([[덧뵈기 - 양반 놀리기 4컷 기획서#카. 풍자 플롯 구조 (규칙과 틀)]] 2) 다) 세부 유형)
 	- 각 카드의 짧은 소개 문구와 탈춤 양식 일러스트
 	- 선택 표시(하이라이트)
 	- "다음" 버튼
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로, 어떤 양반을 놀릴지 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 터치 미입력 타임아웃 등은 기획서 Step 3 분기를 준용함(목업은 정상 선택 상태만)
-- **화면 내 텍스트**: 안내 "어떤 양반을 놀려 볼까요"(표본), 카드 라벨 "허세"/"탐욕"/"무능"(표본, 로스터 확인 필요), 버튼 "다음"
+- **화면 내 텍스트**: 안내 "어떤 양반을 놀려 볼까요"(표본), 카드 라벨 "허세"/"탐욕"/"무능"(표본, 로스터 확인 필요), 버튼 "다음", "그만두기"
 
 ### 2) 프롬프트 (영어)
 
@@ -273,7 +276,7 @@ The yangban-satire subtype selection screen of a Korean traditional mask dance (
 Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
 Top header: a one-line caption '어떤 양반을 놀려 볼까요'.
 Center, within reach: three selectable subtype cards side by side (sample roster), each with a short intro line and a talchum styled illustration, labeled '허세', '탐욕', '무능'. One card is highlighted as selected.
-A primary button labeled '다음' in the lower part of the central reachable zone, not at the physical bottom edge.
+A primary button labeled '다음' with a smaller secondary button '그만두기' beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
 To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander) inviting the user to pick a subtype, not blocking the central controls.
 Background: a traditional madang stage, festive mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -292,16 +295,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 헤더: 컷 진행 표시(기 → 승 → 전 → 결 중 현재 위치)
 	- 본문 상단: 말뚝이 캐릭터와 질문 말풍선(사전 생성 고정 질문)
 	- 본문 중앙: 응답 입력 필드와 가상 키보드, 음성 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음)
-	- 액션: 다음(제출) 버튼을 중앙 도달 존 아래쪽에 둠
+	- 액션: 다음(제출) 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠
 - **핵심 UI 컴포넌트**
 	- 말뚝이 캐릭터와 질문 말풍선
 	- 응답 입력 필드
 	- 가상 키보드(한글)와 "음성으로 답하기" 버튼(STT). 두 입력 수단 병행
 	- 컷 진행 인디케이터(기/승/전/결 4컷)
 	- "다음" 버튼
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **말뚝이 호스트**: 본문 상단에 화자로 전면 등장(질문을 던지는 주역). 본 화면은 말뚝이가 조작을 가리지 않는 상단 영역에 서고 응답 입력이 중앙 도달 존을 차지함
 - **상태별 안내 (기획서 준용)**: 가드레일 위반 시 팝업 안내와 재입력, 터치 미입력 타임아웃은 기획서 Step 3 분기를 준용함(목업은 정상 문답 상태만)
-- **화면 내 텍스트**: 컷 라벨 "기"/"승"/"전"/"결", 질문 예시 "양반이 뭐라고 뻐기던가요?"(표본, 사전 생성 고정 질문), 버튼 "음성으로 답하기", "다음"
+- **화면 내 텍스트**: 컷 라벨 "기"/"승"/"전"/"결", 질문 예시 "양반이 뭐라고 뻐기던가요?"(표본, 사전 생성 고정 질문), 버튼 "음성으로 답하기", "다음", "그만두기"
 
 ### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
@@ -312,7 +316,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the header placeholder -> a 4-stage progress indicator '기', '승', '전', '결' with the current stage marked
 - the host placeholder and the prompt/question area -> a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) as the narrator posing the question, with a speech bubble showing a fixed question '양반이 뭐라고 뻐기던가요?', kept in the upper area and not blocking the central controls
 - the background placeholders -> a traditional madang stage, satirical storytelling mood
-Keep progress labels '기'/'승'/'전'/'결', question '양반이 뭐라고 뻐기던가요?', voice-input button '음성으로 답하기', primary button '다음'. The on-screen keyboard stays confined to a lower band and the question and answer field remain clearly visible above it.
+Keep progress labels '기'/'승'/'전'/'결', question '양반이 뭐라고 뻐기던가요?', voice-input button '음성으로 답하기', primary button '다음', and a smaller secondary button '그만두기' beside it. The on-screen keyboard stays confined to a lower band and the question and answer field remain clearly visible above it.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.

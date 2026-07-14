@@ -95,10 +95,10 @@ updated: 2026-07-14
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 탈춤 대표 비주얼, 액션에 큰 시작 버튼을 둠. 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]])
-- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 탈춤 대표 비주얼
+- **레이아웃**: 공통 사양 §5.나 인트로 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 탈춤 대표 비주얼, 액션에 큰 시작 버튼을 두며, 헤더 한쪽 모서리에 언어 선택 요소를 둠(고른 언어가 세션 전체에 적용됨). 말뚝이가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 전방 설계라 1차연도 미배치, [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]])
+- **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 탈춤 대표 비주얼, 언어 선택 요소(한국어와 영어, [[시범콘텐츠 공통 사양#나. 인트로 (시작 + 동의)]])
 - **말뚝이 호스트**: 한쪽 측면에서 유저를 향해 손짓하며 환영, 밝은 표정(중앙은 타이틀과 시작 버튼 자리)
-- **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기"
+- **화면 내 텍스트**: 타이틀 "나만의 탈춤", 버튼 "시작하기", 언어 선택 "한국어"/"English"(표본)
 
 ### 2) 프롬프트 (영어, §12 중립 이미지 첨부)
 
@@ -108,7 +108,7 @@ updated: 2026-07-14
 Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character welcoming with a beckoning gesture and a bright expression
 - the content-area and background placeholders -> Korean talchum motifs over a vibrant traditional madang stage, festive attract mood
-Keep title '나만의 탈춤', primary button '시작하기'.
+Keep title '나만의 탈춤', primary button '시작하기'. Also keep a small language-selector control in a top corner of the header (two options, Korean and English), clearly display-and-touch but visually secondary to the start button.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -188,16 +188,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 본문 중앙: 넓은 탈 도안 캔버스를 중앙 도달 존에 크게 둠 (주기능, 손 닿는 범위)
 	- 도구 패널: 캔버스 바로 아래(또는 캔버스에 인접한 도달 존 안쪽)에 툴바로 둠. 탈 템플릿과 프리셋, 팔레트, 스탬프, 대칭 토글은 모두 터치 조작이라 도달 존 안에 모으고 좌우 끝에 두지 않음 (§5.가 도달성)
 	- 3D 미리보기: 표시 전용(비조작)이라 한쪽 측면 가장자리에 작게 둠 (캔버스보다 확연히 작음)
-	- 액션: 완료 버튼을 화면 물리 최하단이 아니라 중앙 도달 존 아래쪽(허리 높이 안)에 둠
+	- 액션: 완료 버튼과 그만두기 보조 버튼을 화면 물리 최하단이 아니라 중앙 도달 존 아래쪽(허리 높이 안)에 둠
 - **핵심 UI 컴포넌트**
 	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
 	- 도구 패널: 배역 탈 템플릿과 프리셋, 제한 팔레트, 도형과 전통 문양 스탬프, 대칭 모드 토글
 	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널(표시 전용, 측면에 작게. 정식 변환은 Step 3)
 	- "완료" 버튼
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (작업 집중 우선)
 - **상태별 안내 (기획서 준용)**: 입력 유효성 검증, 가드레일 실패 시 차단과 재입력 안내, 한도 초과 처리는 기획서 Step 2 분기를 준용함(목업은 정상 편집 상태만)
 - **치수 (확인 필요)**: 캔버스 높이와 툴바 터치 폭 등 도달 존 안 배분 치수는 설계 단계에서 확정(§5.가 도달성)
-- **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료"
+- **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료", "그만두기"
 
 ### 2) 프롬프트 (영어)
 
@@ -209,7 +210,7 @@ Top header: a one-line caption '탈을 꾸며보세요'.
 Center: a large high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, the main focus within the central reachable zone.
 Directly below the canvas and within reach: a tool bar with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle. These are touch tools, so they stay in the central reachable zone, not on the far left or right edge.
 To one side, display-only (non-touch): a small live 3D preview pane showing the design applied to a 3D mask, clearly smaller than the canvas.
-A primary button labeled '완료' in the lower part of the central reachable zone, not at the physical bottom edge.
+A primary button labeled '완료' with a smaller secondary button '그만두기' beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
