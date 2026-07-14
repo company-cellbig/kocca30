@@ -102,7 +102,7 @@ Claude Code는 추가로:
 
 HWPX 본문은 `Contents/section0.xml`, `section1.xml`, ... N개의 section 파일로 분리될 수 있음. V2는 모든 `Contents/section*.xml`을 ZIP에서 발견 → 숫자 정렬 → 순서대로 walk. section 경계에서는 list block을 끊어(`last_bullet_indent = -1`) 다음 section 첫 paragraph가 직전 bullet 흐름에 종속되지 않게 함.
 
-stats에 `sections` 수 보고. section0만 하드코딩하면 multi-section 문서에서 section1+ 콘텐츠가 silent data loss됨 (Codex 검수 지적, §8.카 패턴 12 참고).
+stats에 `sections` 수 보고. section0만 하드코딩하면 multi-section 문서에서 section1+ 콘텐츠가 silent data loss됨 (Codex 검수 지적, [[#카. 패턴 12: 다중 section HWPX silent data loss]] 참고).
 
 ## 나. 헤딩 자동 부여
 
@@ -129,7 +129,7 @@ HWPX의 paragraph는 대부분 `styleIDRef="0"` (Normal): 한컴 원본이 Word 
 
 본문 첫 비어있지 않은 줄이 `**N / 챕터제목**` 형태의 bold 단락(한컴 원본의 1행 표 챕터 헤더)이면 후처리 단계에서 제거: 파일명 + frontmatter title과 중복.
 
-`^[○●◇■]\s` 패턴은 헤딩이 아니라 **1단 bullet**으로 처리 (이유는 §8 문제 패턴 사전 참고).
+`^[○●◇■]\s` 패턴은 헤딩이 아니라 **1단 bullet**으로 처리 (이유는 [[#8. 문제 패턴 사전]] 참고).
 
 ## 다. Bullet 들여쓰기
 
@@ -225,9 +225,9 @@ frontmatter `---` 종료 직후 빈 줄 없이 본문 시작 (변환물 일관�
 3. **원본 충실 전사**: 가운뎃점, 괄호, 특수문자 보존. 의역/요약은 검수 단계 또는 별도 명령에서
 4. **시각 콘텐츠는 파일 보존만**: 도표/차트는 figures/로 추출, 자동 해석 금지
 5. **변환물은 정본 아님**: `converted/`는 사본. 인용 기준은 `_sources/`/`_locked/`
-6. **추출 단계에서 메타데이터 폐기 금지**: 텍스트 옆의 구조 정보(스타일, 들여쓰기, 정렬, 셀 병합 등)는 출력 단계에서 안 쓰더라도 추출 결과에 보존. 추후 단순화는 출력 단계 책임. 한 번 폐기된 메타데이터는 복원 불가 (§8.아/차 사례)
-7. **AI 인용 안전성**: 변환물의 한 줄을 떼어내 다른 문서에 붙여넣어도 의미가 살아 있도록 self-contained 구조 우선. cross-product 평탄화(§8.사), 변환 한계 메모(§8.자), hierarchy 보존(§8.차) 모두 같은 원리에서 도출
-8. **fail-safe 휴리스틱**: 문서마다 다른 구조적 가정(헤딩 패턴 등)은 가정 실패 시 정보 손실보다 약간의 노이즈가 낫다 (§8.바 사례)
+6. **추출 단계에서 메타데이터 폐기 금지**: 텍스트 옆의 구조 정보(스타일, 들여쓰기, 정렬, 셀 병합 등)는 출력 단계에서 안 쓰더라도 추출 결과에 보존. 추후 단순화는 출력 단계 책임. 한 번 폐기된 메타데이터는 복원 불가 ([[#아. 패턴 8: 표 셀 병합 무시로 row 한 칸씩 밀림 (인용 신뢰성 fatal)]]/차 사례)
+7. **AI 인용 안전성**: 변환물의 한 줄을 떼어내 다른 문서에 붙여넣어도 의미가 살아 있도록 self-contained 구조 우선. cross-product 평탄화([[#사. 패턴 7: bullet block 안 pipe_table 미렌더 + AI 인용 안전성]]), 변환 한계 메모([[#자. 패턴 9: 의미 보존 불가능한 표(월별 그리드 등) 자동 메모 처리]]), hierarchy 보존([[#차. 패턴 10: 셀 안 paragraph hierarchy 손실 (paraPr 메타데이터 폐기)]]) 모두 같은 원리에서 도출
+8. **fail-safe 휴리스틱**: 문서마다 다른 구조적 가정(헤딩 패턴 등)은 가정 실패 시 정보 손실보다 약간의 노이즈가 낫다 ([[#바. 패턴 6: 헤딩 패턴 부재 문서에서 본문 전체 삼킴]] 사례)
 
 # 8. 문제 패턴 사전
 
@@ -251,7 +251,7 @@ frontmatter `---` 종료 직후 빈 줄 없이 본문 시작 (변환물 일관�
 - **원인**: 마크다운 list는 같은 paragraph 흐름 안에서만 부모-자식 관계 유지. 빈 줄 + 들여쓰기 0 콘텐츠(이미지, 평문)가 사이에 끼면 list 끊김. 이후 들여쓰기된 bullet은 부모 없는 들여쓰기가 되어 마크다운 파서가 별도 블록으로 처리
 - **대처**: list block 상태 추적(`last_bullet_indent` 등).
   - **이미지/캡션/빈 paragraph**: 마지막 bullet의 자식 들여쓰기로 inline. last_bullet_indent 보존
-  - **표**: §8.사 패턴 7 참고 (들여쓰기된 pipe_table은 렌더 안 되므로 별도 처리)
+  - **표**: [[#사. 패턴 7: bullet block 안 pipe_table 미렌더 + AI 인용 안전성]] 참고 (들여쓰기된 pipe_table은 렌더 안 되므로 별도 처리)
   - **헤딩/평문 paragraph**: list block 명시적 끊음(last_bullet_indent = -1): 의미적 단위 분리가 필요한 경우만
 
 ## 라. 패턴 4: "라벨 ↔ 긴 내용" 표가 grid에 욱여넣어짐
@@ -392,8 +392,8 @@ V2 파서는 `\d+-\d+\.` 패턴에 의존. 원본이 "제1장", "I.", "가." 등
 
 # 13. 관련 문서
 
-- [[CONVENTIONS|위키 작성 규칙]] §2 디렉토리 구조 / §6 수정 금지 영역
-- [[AGENTS|에이전트 작업 지침]] §2.바 수정 금지 영역 준수
+- [[CONVENTIONS#2. 디렉토리 구조]] / [[CONVENTIONS#6. 수정 금지 영역]]
+- [[AGENTS#바. 수정 금지 영역 준수]]
 - HWPX 파서: `assets/extract_hwpx.py`
 - 통합 스크립트: `scripts/import-doc.mjs`
 - 슬래시 커맨드: `.claude/commands/import-doc.md`

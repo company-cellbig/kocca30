@@ -129,7 +129,8 @@ function extractHeadings(content) {
 function extractWikilinks(content) {
   const links = [];
   // [[파일명#anchor|별칭]]: | escape도 처리 (\|)
-  const regex = /\[\[([^\[\]\|#]+?)(?:#([^\[\]\|]+?))?(?:\\?\|([^\[\]]+?))?\]\]/g;
+  // 파일명이 비면([[#anchor]]) 자기 문서 참조 (CONVENTIONS §3.마가 허용하는 형식)
+  const regex = /\[\[([^\[\]\|#]*)(?:#([^\[\]\|]+?))?(?:\\?\|([^\[\]]+?))?\]\]/g;
   const lines = content.split('\n');
   let inCodeBlock = false;
   for (let i = 0; i < lines.length; i++) {
@@ -193,6 +194,7 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
     for (const link of links) {
       // log.md는 이력: wikilink 검사 제외 (과거 참조 보존)
       if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+      if (link.target === '') continue; // [[#anchor]] 자기 문서 참조: 대상 파일이 자기 자신
       if (!fileIndex.has(link.target)) {
         findings.push({
           type: 'broken_wikilink',
@@ -216,7 +218,8 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
     const links = extractWikilinks(content);
     for (const link of links) {
       if (!link.anchor) continue;
-      const targetPath = fileIndex.get(link.target);
+      // [[#anchor]]는 자기 문서 헤딩 참조
+      const targetPath = link.target === '' ? relPath : fileIndex.get(link.target);
       if (!targetPath) continue;
       // 블록 ID anchor (#^id): 헤딩이 아니라 블록 참조(Obsidian transclusion): 헤딩이 아니라 블록 ID 존재로 검증
       if (link.anchor.startsWith('^')) {
