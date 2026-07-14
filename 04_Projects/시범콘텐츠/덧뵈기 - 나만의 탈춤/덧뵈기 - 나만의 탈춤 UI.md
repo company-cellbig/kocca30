@@ -4,19 +4,19 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-07-08
+updated: 2026-07-14
 ---
 
-> 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 전송, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
+> 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
 
 # 1. 개요
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
-- **대상 화면**: 13개. Step 순으로 배열함(§2.가 화면 목록)
-- **공용과 고유**: 공용 화면 9개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 8개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함
+- **대상 화면**: 12개. Step 순으로 배열함(§2.가 화면 목록)
+- **공용과 고유**: 공용 화면 8개는 콘텐츠 무관 표준을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 이 중 7개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 덧뵈기 고유 화면 4개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 공통 사양 §5.라 전송 공용 화면은 쓰지 않음
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 8개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
+- **사용법**: §13에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 §13에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성), 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 §2.다 공통 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 §2.다 공통 프롬프트 양식)
 - **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
 
 # 2. 공통 설계
@@ -36,17 +36,16 @@ updated: 2026-07-08
 | 사 | AR 춤사위 체험 화면 | Step 4 | 덧뵈기 고유 (핵심) | [[덧뵈기 - 나만의 탈춤 기획서#라. Step 4. AR 착용과 춤사위 따라하기 (핵심 체험)]] |
 | 아 | 기념 촬영 화면 | Step 5 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]] |
 | 자 | 생성 대기 화면 | Step 5 | 공용 (대기, §5.다) | [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]] |
-| 차 | 결과물 미리보기 화면 | Step 6 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#바. Step 6. 결과물 감상과 받기]] |
-| 카 | 결과물 QR 화면 | Step 6 | 공용 (전송, §5.라) | [[덧뵈기 - 나만의 탈춤 기획서#바. Step 6. 결과물 감상과 받기]] |
-| 타 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덧뵈기 - 나만의 탈춤 기획서#사. Step 7. 종료와 리셋]] |
-| 파 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (상황 안내 모달 팝업)]] |
+| 차 | 결과물 감상과 받기 화면 | Step 6 | 덧뵈기 고유 | [[덧뵈기 - 나만의 탈춤 기획서#바. Step 6. 결과물 감상과 받기]] |
+| 카 | 마무리 인사 화면 | Step 7 | 공용 (종료, §5.마) | [[덧뵈기 - 나만의 탈춤 기획서#사. Step 7. 종료와 리셋]] |
+| 타 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, §5.바) | [[시범콘텐츠 공통 사양#바. 실패 안내 (상황 안내 모달 팝업)]] |
 
 ## 나. 공통 레이아웃
 
 모든 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 공통 영역 골격(16:9 가로)을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5. 공통 화면]] 가. 도달성). 공용 화면은 §13 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
 - **공용 화면**: §5 나~마의 동작별 표준 레이아웃을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 전방 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 §5 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
-- **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(탈 디자인, AR 춤사위, 기념 촬영, 결과)에 맞춰 레이아웃을 상세 설계함
+- **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(탈 디자인, AR 춤사위, 기념 촬영, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 결과물 감상과 받기는 QR을 함께 담으므로 QR을 손 닿는 높이에 둠
 - **덧뵈기 공통 요소**: 진행 호스트는 말뚝이임(역할은 [[덧뵈기 - 나만의 탈춤 기획서#다. 말뚝이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "말뚝이 탈 호스트 캐릭터"로만 묘사). 공통 화면에서는 말뚝이를 중앙 조작 존 옆 여유 공간에 또렷한 안내 캐릭터로 두고 유저를 향해 안내하는 포즈로 함(실사 행인이나 다른 사용자로 오인되지 않게, §5.가 호스트 슬롯). 본문이 화면 전체를 쓰는 고유 화면(탈 디자인 캔버스, AR 카메라 뷰, 촬영)에서만 작게 두거나 숨김
 
 ## 다. 공통 프롬프트 양식
@@ -55,8 +54,8 @@ updated: 2026-07-08
 
 생성 방식은 §13 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 전송, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
-- **단독 프롬프트** (탈 디자인, AR 춤사위, 기념 촬영, 결과): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 대기, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성): [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **단독 프롬프트** (탈 디자인, AR 춤사위, 기념 촬영, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 1) 공통 제약 (모든 화면 공유)
 
@@ -159,7 +158,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 주 버튼 "동의하고 시작": 약관과 카메라 촬영 동의를 담음(별도 토글 없음, 항상 활성)
 	- 보조 "그만두기" 버튼: 터치 시 확인 팝업을 거쳐 확정 시 동의하지 않고 Step 7로 종료함
 - **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **개인정보 고지 (기획서 §5.나 준용)**: 약관과 안내 문구에 카메라 촬영(얼굴과 신체)뿐 아니라, 기념 사진(얼굴과 신체 포함)을 생성하고 저장하며 결과 페이지로 48시간 제공하는 처리 범위를 포함함(정확한 고지 문구와 동의 범위는 규정 검토 확정, 확인 필요)
+- **개인정보 고지 (기획서 §3.나 개인정보 처리 준용)**: 약관과 안내 문구에 카메라 촬영(얼굴과 신체)뿐 아니라, 기념 사진(얼굴과 신체 포함)을 생성하고 저장하며 결과 페이지로 48시간 제공하는 처리 범위를 포함함(정확한 고지 문구와 동의 범위는 규정 검토 확정, 확인 필요)
 - **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#아. 그만두기 확인 팝업]]) 확정 시 미동의, 카메라 촬영 미동의나 터치 미입력 타임아웃도 미동의로 간주해 종료 Step 직행은 기획서 Step 1과 공통 사양 §5.나를 준용함(목업은 정상 동의 상태만)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
 
@@ -282,22 +281,21 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ## 아. Step 5. 기념 촬영 화면
 
-덧뵈기 고유 화면. 사용자가 만든 탈을 쓴 2D 탈 캐릭터가 탈춤 포즈를 취한 옆에서, 맨 얼굴의 사용자가 같이 포즈를 잡아 기념 사진을 촬영함. 탈을 쓴 쪽은 캐릭터뿐이고 사용자는 맨 얼굴이라 둘이 구별됨. 촬영은 버튼 없이 컷마다 주어진 시간이 카운트다운돼 0이 되면 자동으로 찍히고(찰칵), 정해진 촬영 횟수만큼 반복함 (기획서 "카운트다운 촬영", [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]]).
+덧뵈기 고유 화면. 사용자가 만든 탈을 쓴 2D 탈 캐릭터가 탈춤 포즈를 취한 옆에서, 맨 얼굴의 사용자가 같이 포즈를 잡아 기념 사진을 촬영함. 탈을 쓴 쪽은 캐릭터뿐이고 사용자는 맨 얼굴이라 둘이 구별됨. 촬영은 버튼 없이 주어진 시간이 카운트다운돼 0이 되면 자동으로 한 컷 찍힘(찰칵). 1컷만 찍고 끝내므로 재촬영이나 컷 선택 단계가 없음 (기획서 "카운트다운 촬영", [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]]).
 
 ### 1) 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 합성 카메라 구성)
-	- 헤더 상단: 안내 카피 배너 "같이 포즈를 잡아 보세요"와 잔여 촬영 횟수 배지(예 "3장 남음")를 상단 모서리에
+	- 헤더 상단: 안내 카피 배너 "같이 포즈를 잡아 보세요"를 둠. 1컷만 찍으므로 잔여 횟수 배지는 두지 않음
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 보여주고, 그 위에 촬영까지 남은 시간을 큰 카운트다운 숫자로 오버레이(포즈 잡는 유저가 바로 봄)
-	- 액션 하단: 비움 (촬영 버튼 없이 시간 0에 자동 촬영). 카운트다운은 본문 오버레이로, 잔여 횟수는 상단 배지로 분산
+	- 액션 하단: 비움 (촬영 버튼 없이 시간 0에 자동 촬영). 카운트다운은 본문 오버레이로 둠
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: 맨 얼굴의 사용자 (탈을 쓰지 않음)
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
-	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 다음 컷으로. 컷당 예 3초에서 0까지(확인 필요, [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]] 카운트다운 촬영). 별도 촬영 버튼 없음
-	- 잔여 촬영 횟수 배지 (상단 모서리): "N장 남음". 카운트다운 숫자와 분리해 혼동 방지
+	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 생성으로 넘어감. 3초에서 0까지(잠정, [[덧뵈기 - 나만의 탈춤 기획서#마. Step 5. 기념 촬영과 생성 (병행)]] 카운트다운 촬영). 별도 촬영 버튼 없음
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김). 사진 합성 프레임 밖 UI 요소로만 두고 카메라 뷰 안에 탈 쓴 사람을 더 넣지 않음 (사용자와 2D 캐릭터 구분 보존)
-- **상태별 안내 (기획서 준용)**: 카메라에 사람이 안 잡히면 다시 서도록 안내하는 상태는 기획서 Step 5 분기를 준용함(목업은 정상 촬영 상태만)
-- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자, 잔여 촬영 횟수(예 "3장 남음")
+- **상태별 안내 (기획서 준용)**: 카메라에 사람이 안 잡히면 촬영 타임아웃(10초, 잠정)까지 다시 서도록 안내하고, 유효 촬영 0회로 타임아웃되면 상황 안내 뒤 종료 Step으로 감. 기획서 Step 5 분기를 준용함(목업은 정상 촬영 상태만)
+- **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자
 
 ### 2) 프롬프트 (영어)
 
@@ -305,9 +303,9 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
 A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
-Top header: a caption banner '같이 포즈를 잡아 보세요' across the top, and a small remaining-shots badge in a top corner showing a count with '장 남음' (render the example '3장 남음').
-Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the posing user can see it and visually distinct from the remaining-shots badge.
-Bottom action area: empty, with NO capture button or shutter button anywhere (the photo auto-fires when the countdown reaches zero).
+Top header: a caption banner '같이 포즈를 잡아 보세요' across the top. Only one shot is taken, so there is no remaining-shots badge.
+Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the posing user can see it.
+Bottom action area: empty, with NO capture button or shutter button anywhere (the single photo auto-fires when the countdown reaches zero).
 Optionally, a small non-photographic Maldukki mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a masked person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 2D mask character. No additional masked people or faces anywhere in the camera view.
 Background: a traditional madang stage, a festive celebratory mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
@@ -342,68 +340,46 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 차. Step 6. 결과물 미리보기 화면
+## 차. Step 6. 결과물 감상과 받기 화면
 
-덧뵈기 고유 화면. 완성된 기념 사진을 미리 봄.
+덧뵈기 고유 화면. 완성된 기념 사진을 크게 감상하고, 같은 화면 아래쪽 QR을 본인 휴대폰으로 스캔해 결과물을 받고 마침으로 끝냄. 감상과 받기를 한 화면에서 끝내므로 별도 전송 화면이 없음. 호스팅과 다운로드 URL 발급은 Step 5 생성 파이프라인에서 이미 끝났고, 이 화면은 그 URL을 QR로 그리기만 함. 연락처를 받지 않아 이 화면에서 전송용으로 수집하는 개인정보는 없음. 얼굴과 신체가 담긴 결과물의 호스팅과 파기는 [[덧뵈기 - 나만의 탈춤 기획서#나. 개인정보 처리]]에서 다룸 (화면 근거는 [[덧뵈기 - 나만의 탈춤 기획서#바. Step 6. 결과물 감상과 받기]]).
 
 ### 1) 화면 설계
 
-- **레이아웃** (고유, 16:9 골격 위 카드 구성)
+- **레이아웃** (고유, 16:9 골격 위 사진 카드와 QR을 세로로 쌓음)
 	- 헤더: 타이틀
-	- 본문: 기념 사진 카드를 중앙에 배치
-	- 액션: 다음 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+	- 본문 중앙: 기념 사진 카드를 크게 배치(신명 게이지 점수와 등급을 스탬프로 표기). 아래 QR 띠와 액션이 자리를 차지하므로 카드 높이를 그만큼 낮춰 잡음
+	- QR 띠: 사진 카드 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임. 화면에 들어온 순간부터 보이며 별도 버튼으로 여는 단계가 없음
+	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 그만두기 버튼을 두지 않음
 - **핵심 UI 컴포넌트**
-	- 기념 사진 미리보기: 2D 탈 캐릭터와 사용자가 같이 포즈 (신명 게이지 점수와 등급을 스탬프로 표기)
-	- "다음" 버튼
-- **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯
-- **화면 내 텍스트**: 타이틀 "결과물 미리보기", 버튼 "다음"
+	- 기념 사진 카드: 2D 탈 캐릭터와 사용자가 같이 포즈(신명 게이지 점수와 등급 스탬프)
+	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내와 다운로드 가능 기간 문구
+	- "마침" 버튼
+- **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작과 QR은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 종료 Step 정상 진행은 기획서 Step 6 분기를 준용함. 호스팅 실패는 이 화면에 닿기 전 Step 5 대기 화면에서 상황 안내 뒤 종료 Step으로 갈림(목업은 정상 열람 상태만)
+- **화면 내 텍스트**: 타이틀 "나의 탈춤 한 판", 안내 "QR 코드를 스캔하면 기념 사진을 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
+- **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 연락처 수집 고지를 두지 않음
 
 ### 2) 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The result preview screen of a Korean traditional mask dance (talchum) experience.
-Title: '결과물 미리보기'.
-Layout: a commemorative photo card (a 2D mask character and the user posing together, with an excitement score and grade stamp) in the center, with a primary button labeled '다음' in the lower part of the central reachable zone (not at the physical bottom edge).
-To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence (an on-screen guide character, not a realistic bystander or a second user).
+The single result screen (view and receive in one screen) of a Korean traditional mask dance (talchum) experience.
+Title: '나의 탈춤 한 판'.
+Layout, stacked vertically in the body: a large commemorative photo card in the center (a 2D mask character and the user posing together, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no secondary quit button on this screen).
+The QR code is visible from the moment the screen opens; there is no separate send or share screen and no step that opens the QR.
+Guide caption: 'QR 코드를 스캔하면 기념 사진을 받을 수 있습니다', with a short download-availability note.
+To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence that does not cover the central reachable zone or the QR (an on-screen guide character, not a realistic bystander or a second user).
 Background: a traditional madang stage, a proud showcase mood.
+No contact-input field, keypad, send button, or contact-collection notice anywhere on the screen.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a contact input field or keypad, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 카. Step 6. 결과물 QR 화면
-
-공용 화면(전송, [[시범콘텐츠 공통 사양#5. 공통 화면]] 라). 기념 사진을 웹에 호스팅하고 그 다운로드 주소를 QR로 화면에 표시해 유저가 본인 휴대폰으로 스캔해 받게 함. 연락처를 받지 않아 본 화면에서 수집하는 연락처는 없음([[덧뵈기 - 나만의 탈춤 기획서#나. 개인정보 처리]]).
-
-### 1) 화면 설계
-
-- **레이아웃**: 공통 사양 §5.라 전송 준용. 본문 중앙에 QR 코드를 크게 두고, 그 위나 아래에 스캔 안내와 다운로드 가능 기간 문구를 둠. 액션에 마침 버튼을 둠. 연락처 입력 필드와 키패드, 전송이나 받지 않기 버튼, 연락처 수집 고지는 두지 않음. 화면 타임아웃 적용(감상 성격). 말뚝이는 넓은 측면에 또렷한 안내 캐릭터로 둠. 조작 요소는 중앙 도달 존에 둠
-- **핵심 UI 컴포넌트**
-	- 기념 사진 QR 코드(다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
-	- 스캔 안내와 다운로드 가능 기간 문구
-	- "마침" 버튼
-- **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, QR을 가리키며 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 기념 사진 업로드나 호스팅 실패 시 상황 안내 뒤 종료 Step, 화면 타임아웃 발동 시 종료 Step 정상 진행 등은 기획서 Step 6과 공통 사양 §5.라 결과물 전송을 준용함(목업은 정상 표시 상태만)
-- **화면 내 텍스트**: 안내 "휴대폰으로 스캔해 받으세요", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
-
-### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
-
-첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.5) 전송 중립 레이아웃 이미지
-
-```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (guide caption, large QR code, finish button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
-- the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
-- background -> a calm traditional madang stage
-Keep the large QR-code placeholder (a generic decorative square pattern that encodes nothing) centered, add a guide caption '휴대폰으로 스캔해 받으세요', and a single button '마침'.
-Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
-Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
-```
-
-## 타. Step 7. 마무리 인사 화면
+## 카. Step 7. 마무리 인사 화면
 
 공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 마무리 인사 뒤 시작 화면으로 복귀함.
 
@@ -435,17 +411,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 1) 화면 설계
 
-- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 전체 화면이 아니라 직전 화면을 어둡게 깐 위에 중앙 모달 다이얼로그 카드를 띄우고, 카드 안에 경고 아이콘, 상황 안내 메시지, 짧은 안내, (선택) 처음으로 보조 버튼을 둠. 액션은 기본 비움(자동 종료 진행), 오류 코드나 기술 세부는 노출하지 않음. 말뚝이는 카드 옆에서 다독이는 모습으로 둠
-- **핵심 UI 컴포넌트**: 상황 안내 메시지, 선택적 "처음으로" 보조 버튼(두면 중앙 도달 존)
+- **레이아웃**: 공통 사양 §5.바 실패 안내 준용. 전체 화면이 아니라 직전 화면을 어둡게 깐 위에 중앙 모달 다이얼로그 카드를 띄우고, 카드 안에 경고 아이콘, 상황 안내 메시지, 확인 버튼 하나를 둠. 확인을 누르면 즉시 종료 Step으로 가고, 누르지 않아도 잠깐 뒤 자동으로 진행함. 오류 코드나 기술 세부는 노출하지 않음. 말뚝이는 카드 옆에서 다독이는 모습으로 둠
+- **핵심 UI 컴포넌트**: 상황 안내 메시지, "확인" 버튼(중앙 도달 존)
 - **말뚝이 호스트**: 측면이나 중앙에서 다독이는 표정
-- **화면 내 텍스트**: 안내 "문제가 생겼어요"(표본), 선택 버튼 "처음으로"
+- **화면 내 텍스트**: 안내 "문제가 생겼어요"(표본, 케이스마다 문구를 달리함), 버튼 "확인"
 
 ### 2) 프롬프트 (영어, §13 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#13. 공용 화면 예시 이미지]] 다.8) 실패 안내 중립 레이아웃 이미지
 
 ```
-Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, optional secondary button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral modal-popup mockup as the structural reference. Keep its centered modal dialog card over a dimmed background and the position and size of every element (warning icon, apology message, a single confirm button, host beside the card). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear presence and reassuring pose from the reference) -> a stylized Korean Maldukki mask host character (the talchum servant, an on-screen guide character, not a realistic bystander) reassuring the user warmly
 - background -> a calm traditional madang stage, a reassuring mood
 Keep the apology message '문제가 생겼어요'; do not show error codes or technical details.
