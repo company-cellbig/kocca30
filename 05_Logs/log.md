@@ -9,6 +9,15 @@ updated: 2026-07-14
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-14] create | Obsidian 헤딩 스타일 스니펫 (headings.css)
+
+- `.obsidian/snippets/headings.css` 신규. 사용자가 직접 조정한 헤딩 스타일임
+- 출발점은 기본 테마 값을 그대로 옮겨 적은 baseline이었음. 값은 기억이 아니라 로컬 설치본(`Obsidian/resources/obsidian.asar`)의 기본 테마 CSS에서 실제 선언을 추출해 씀
+- 이후 사용자가 H1부터 H5까지 크기와 굵기, 장식(H1 채움 박스와 그림자, H2 밑줄)을 조정하고, 어두운 테마 대비와 콜아웃/표 안 헤딩 예외를 더함
+- 이 변수들은 읽기 모드(`.markdown-rendered`), 편집 모드(`.HyperMD-header-*`), 파일 제목(`.inline-title`)이 공통으로 읽어 한 번에 반영됨
+- `.obsidian/appearance.json`에 스니펫 활성화 상태(`enabledCssSnippets: ["headings"]`)를 함께 커밋함. 다른 클론에서도 켜진 채로 열림
+- 파일: `.obsidian/snippets/headings.css`(신규), `.obsidian/appearance.json`
+
 ## [2026-07-14] maint | 남은 작업 일괄 처리 (오변환 6건, 중첩 anchor 지원, em dash 정리, stale 미결 정정)
 
 - **오변환 6건 추가 정정 (다섯 번째 신호로 발견)**: `콘텐츠 기획서 양식 시스템 단위 재구성 계획.md`가 통째로 어긋나 있었음
