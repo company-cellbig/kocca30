@@ -8,8 +8,9 @@
 //   node scripts/wiki_number.mjs 04_Projects/x.md  # 특정 파일만 (anchor 갱신은 저장소 전체)
 //
 // 하는 일:
-//   1. 헤딩 번호 재부여: CONVENTIONS §4.나 한국 공문서 넘버링 규칙대로
-//      H1 `1.` / H2 `가.` / H3 `1)` / H4 `가)` / H5 `(1)`
+//   1. 헤딩 번호 재부여: CONVENTIONS 4.2 헤딩 넘버링 규칙대로
+//      H1 `1.` / H2 `1.1` / H3 `1.1.1` / H4 `1)` / H5 `(1)`
+//      H1~H3은 경로를 품어 헤딩만 보고 위치를 알 수 있고, H4 이하는 지역 열거라 경로를 끊음
 //      상위 레벨이 올라가면 하위 카운터는 1로 리셋. 기존 번호는 떼고 다시 매김 (멱등)
 //   2. wikilink anchor 연쇄 갱신: 번호가 바뀐 헤딩을 가리키는 [[파일#헤딩]], ![[파일#헤딩]],
 //      [[파일#헤딩|별칭]], 자기 문서 [[#헤딩]]를 저장소 전체에서 새 텍스트로 치환
@@ -40,7 +41,6 @@ const EXCLUDED_PATHS = new Set([
   '03_References/_figures',
   '03_References/_reviews',
   '03_References/converted',
-  '04_Projects/_archive',
   '.claude',
   '.git',
   '.obsidian',
@@ -50,29 +50,48 @@ const EXCLUDED_PATHS = new Set([
   'scripts',
 ]);
 
-// 넘버링 대상 외 (본문은 스캔하되 헤딩 번호는 안 건드림)
+// 헤딩 번호를 안 매기는 곳. 본문은 스캔하므로 anchor 연쇄 갱신 대상에는 들어감
+//   - 05_Logs/log.md: CONVENTIONS 4.2 명시 예외
+//   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
+//     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
 const NO_NUMBER = new Set([
   '05_Logs/log.md',
 ]);
+const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 
-// H2/H4에 쓰는 한글 기호. 이 목록에 있는 글자만 기존 번호로 인정하고 떼어냄
+function skipNumbering(file) {
+  return NO_NUMBER.has(file) || NO_NUMBER_PREFIX.some(p => file.startsWith(p));
+}
+
+// anchor 갱신도 안 하는 곳 (이력 보존: 과거 참조를 그대로 둠)
+const NO_ANCHOR_REWRITE = new Set([
+  '05_Logs/log.md',
+]);
+
+// 옛 넘버링(한국 공문서 체계)에 쓰던 한글 기호. 기존 번호를 떼어낼 때만 씀
 const KO = ['가', '나', '다', '라', '마', '바', '사', '아', '자', '차', '카', '타', '파', '하'];
 
-// 레벨별 번호 형식
-function marker(level, n) {
+// 레벨별 번호 형식. counters는 [H1,H2,H3,H4,H5] 현재 값
+//   H1 `1.`  H2 `1.1`  H3 `1.1.1`  H4 `1)`  H5 `(1)`
+// H1~H3은 경로를 그대로 품어 헤딩만 보고 위치를 알 수 있음. H4 이하는 지역 열거라 경로를 끊음
+function marker(level, c) {
   switch (level) {
-    case 1: return `${n}. `;
-    case 2: return KO[n - 1] ? `${KO[n - 1]}. ` : null;
-    case 3: return `${n}) `;
-    case 4: return KO[n - 1] ? `${KO[n - 1]}) ` : null;
-    case 5: return `(${n}) `;
+    case 1: return `${c[0]}. `;
+    case 2: return `${c[0]}.${c[1]} `;
+    case 3: return `${c[0]}.${c[1]}.${c[2]} `;
+    case 4: return `${c[3]}) `;
+    case 5: return `(${c[4]}) `;
     default: return null;
   }
 }
 
-// 기존 번호 접두사 제거. 5개 형식 모두 인정 (레벨이 바뀐 헤딩도 다시 매기려면 형식 무관하게 떼야 함)
+// 기존 번호 접두사 제거. 새 형식과 옛 형식을 모두 인정함
+//   새: `1.` `1.1` `1.1.1` `1)` `(1)`   옛: `1.` `가.` `1)` `가)` `(1)`
+// 점 번호를 먼저 시도해야 "1.1"이 "1."로 잘리지 않음
 const KO_CLASS = `[${KO.join('')}]`;
-const PREFIX_RE = new RegExp(`^(?:\\(\\d+\\)|\\d+\\.|\\d+\\)|${KO_CLASS}\\.|${KO_CLASS}\\))\\s+`);
+const PREFIX_RE = new RegExp(
+  `^(?:\\(\\d+\\)|\\d+(?:\\.\\d+){1,2}|\\d+\\.|\\d+\\)|${KO_CLASS}\\.|${KO_CLASS}\\))\\s+`
+);
 
 function stripMarker(text) {
   return text.replace(PREFIX_RE, '');
@@ -175,12 +194,13 @@ function renumberFile(relPath, content) {
     counters[level - 1] += 1;
     for (let d = level; d < 5; d++) counters[d] = 0;
 
-    const mk = marker(level, counters[level - 1]);
-    if (mk === null) {
-      problems.push({ file: relPath, line: i + 1, kind: 'overflow', message: `H${level} 형제 항목이 ${counters[level - 1]}개: 한글 기호(가~하) 14개를 넘김. 번호 안 매기고 넘어감: "${oldText}"` });
+    // H2 `1.1` / H3 `1.1.1`은 상위 번호를 품으므로 상위 헤딩이 있어야 함
+    if (level >= 2 && level <= 3 && counters.slice(0, level - 1).some(v => v === 0)) {
+      problems.push({ file: relPath, line: i + 1, kind: 'orphan', message: `H${level}인데 상위 헤딩이 없어 경로 번호를 못 만듦(레벨 건너뜀). 번호 안 매기고 넘어감: "${oldText}"` });
       continue;
     }
 
+    const mk = marker(level, counters);
     const bare = stripMarker(oldText);
     const newText = mk + bare;
     if (newText !== oldText) {
@@ -215,7 +235,7 @@ function rewriteAnchors(allFiles, contents, renamesByFile, fileIndex) {
   const LINK_RE = /(!?\[\[)([^\[\]|#]*?)#([^\[\]|]+?)((?:\\?\|[^\[\]]+?)?\]\])/g;
 
   for (const file of allFiles) {
-    if (NO_NUMBER.has(file)) continue; // log.md는 이력 보존: 과거 anchor 그대로 둠
+    if (NO_ANCHOR_REWRITE.has(file)) continue; // log.md는 이력 보존: 과거 anchor 그대로 둠
     const lines = contents.get(file).split('\n');
     const isBody = bodyLineFlags(lines);
     let changed = false;
@@ -258,7 +278,7 @@ function main() {
   const touched = new Set();
 
   for (const file of scope) {
-    if (NO_NUMBER.has(file)) continue;
+    if (skipNumbering(file)) continue;
     const { newLines, renames, problems: p } = renumberFile(file, contents.get(file));
     problems.push(...p);
     if (renames.length > 0) {
