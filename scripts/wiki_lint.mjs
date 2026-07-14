@@ -218,6 +218,39 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
   return findings;
 }
 
+// anchor가 헤딩과 맞는지 봄. 중첩 경로(`#부모#자식`)도 지원함
+//   Obsidian은 `[[파일#부모#자식]]`으로 부모 아래의 자식 헤딩을 콕 집을 수 있음. 시스템마다
+//   반복되는 명세 항목 헤더(동작과 규칙 등)를 가리킬 때 씀. 통짜 텍스트로 비교하면 broken으로
+//   오판정하므로, `#`로 나눠 부모에서 자식으로 내려가는 헤딩 경로가 실재하는지 순서대로 확인함
+function matchHeadingPath(headings, anchor) {
+  const segs = anchor.split('#').map(s => s.trim()).filter(Boolean);
+  if (segs.length === 0) return false;
+  if (segs.length === 1) return headings.some(h => h.text === segs[0]);
+
+  // 부모 후보마다, 그 부모의 하위 구간(더 깊은 레벨이 이어지는 동안) 안에서 다음 조각을 찾음
+  const search = (from, to, depth, si) => {
+    for (let i = from; i < to; i++) {
+      const h = headings[i];
+      if (h.level <= depth) continue;          // 형제나 상위는 하위 구간이 아님
+      if (h.text !== segs[si]) continue;
+      if (si === segs.length - 1) return true;
+      // 이 헤딩의 하위 구간 끝을 찾음
+      let end = i + 1;
+      while (end < to && headings[end].level > h.level) end++;
+      if (search(i + 1, end, h.level, si + 1)) return true;
+    }
+    return false;
+  };
+
+  for (let i = 0; i < headings.length; i++) {
+    if (headings[i].text !== segs[0]) continue;
+    let end = i + 1;
+    while (end < headings.length && headings[end].level > headings[i].level) end++;
+    if (search(i + 1, end, headings[i].level, 1)) return true;
+  }
+  return false;
+}
+
 function checkWikilinkAnchors(allMdFiles, fileIndex) {
   const findings = [];
   const headingsCache = new Map();
@@ -254,8 +287,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
         targetHeadings = extractHeadings(targetContent);
         headingsCache.set(targetPath, targetHeadings);
       }
-      const matched = targetHeadings.some(h => h.text === link.anchor);
-      if (!matched) {
+      if (!matchHeadingPath(targetHeadings, link.anchor)) {
         findings.push({
           type: 'broken_anchor',
           severity: 'error',

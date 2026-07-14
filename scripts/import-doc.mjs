@@ -8,8 +8,8 @@
 //   03_References/converted/<name>/<name>_review_pending.md   (검수 큐 사이드카)
 //
 // 분기:
-//   .hwpx → Python(assets/extract_hwpx.py) 호출 — 헤딩/표/이미지 직접 파싱 (권장)
-//   .docx → Pandoc 호출 — 한컴 export 한계로 헤딩 손실 가능
+//   .hwpx → Python(assets/extract_hwpx.py) 호출: 헤딩/표/이미지 직접 파싱 (권장)
+//   .docx → Pandoc 호출: 한컴 export 한계로 헤딩 손실 가능
 //
 // JSON 결과를 stdout으로 출력. 호출자(슬래시 커맨드 등)가 파싱하여 사용자에게 안내.
 
@@ -123,9 +123,9 @@ const refRoot = join(REPO_ROOT, '03_References');
 const sourcesDir = join(refRoot, '_sources');
 const sourcePath = join(sourcesDir, `${sourceName}${ext}`);
 // 분리 구조:
-//   converted/   — 본문 .md만 (1차 탐색 대상)
-//   _figures/    — 이미지 (영구 자산, 문서별 서브폴더)
-//   _reviews/    — 검수 큐 사이드카 (일시 자산)
+//   converted/  : 본문 .md만 (1차 탐색 대상)
+//   _figures/   : 이미지 (영구 자산, 문서별 서브폴더)
+//   _reviews/   : 검수 큐 사이드카 (일시 자산)
 const convertedRoot = join(refRoot, 'converted');
 const figuresRoot = join(refRoot, '_figures');
 const reviewsRoot = join(refRoot, '_reviews');
@@ -274,14 +274,14 @@ const stats = {
 };
 
 const sidecar = `---
-title: ${sourceName} — 검수 큐
+title: ${sourceName} 검수 큐
 tags: [review-queue, converted]
 source: ${relSource}
 created: ${dateStr}
 updated: ${dateStr}
 ---
 
-# ${sourceName} — 검수 큐
+# ${sourceName} 검수 큐
 
 > 변환 과정의 자동 통계와 사람 검수가 필요한 항목 목록. 항목별 확인 후 본 줄에 \`[x]\` 체크. 모두 완료되면 본 사이드카 파일 삭제 가능.
 
@@ -316,7 +316,7 @@ updated: ${dateStr}
 ### 이미지
 ${figures.length === 0
   ? '- (추출된 이미지 없음)'
-  : figures.map(f => `- [ ] \`${relative(refRoot, f).replace(/\\/g, '/')}\` — 본문 참조 위치 확인, 캡션 보존 여부 확인`).join('\n')}
+  : figures.map(f => `- [ ] \`${relative(refRoot, f).replace(/\\/g, '/')}\`: 본문 참조 위치 확인, 캡션 보존 여부 확인`).join('\n')}
 
 ### 본문 일관성
 - [ ] 페이지/문단 누락 없음
