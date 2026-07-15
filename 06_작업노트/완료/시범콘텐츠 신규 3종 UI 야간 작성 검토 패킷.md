@@ -1,10 +1,10 @@
 ---
 title: 시범콘텐츠 신규 3종 UI 야간 작성 검토 패킷
 type: agentnote
-status: draft
+status: stable
 tags: [agentnote, kocca, 시범콘텐츠, UI, 검토패킷]
 created: 2026-07-01
-updated: 2026-07-02
+updated: 2026-07-15
 ---
 
 > 2026-07-01 야간 자율 작성분 아침 검토용 패킷. 유람기/4컷/버나 UI 3종을 탈춤/꼭두각시 UI 방식으로 작성하고 자기검수 + Codex 외부 검토를 돌린 결과와 사용자 결정 대기 항목을 정리함. 이 문서는 결과물이 아니라 작업 노트임(`06_작업노트/`). 정본은 각 UI 문서.

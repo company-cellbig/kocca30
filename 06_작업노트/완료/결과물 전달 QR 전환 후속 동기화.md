@@ -1,10 +1,10 @@
 ---
 title: 결과물 전달 QR 전환 후속 동기화
 type: agentnote
-status: draft
+status: stable
 tags: [agentnote, 시범콘텐츠, 전송, qr, 후속작업]
 created: 2026-07-07
-updated: 2026-07-08
+updated: 2026-07-15
 ---
 
 > 결과물 전달을 SMS(전화번호) → 화면 QR + 스캔 다운로드로 바꾼 공유 정본 개정(2026-07-07)의 **개별 문서 후속 동기화 백로그**. 공유 정본 5개는 개정 완료, 개별 기획서 5 + UI 5(총 10개)의 하드코딩 서술은 아직 SMS/휴대폰 번호 상태라 동기화 필요.
