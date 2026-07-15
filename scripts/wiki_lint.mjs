@@ -81,6 +81,12 @@ const INDEX_INCLUDED_DIRS = [
   '03_References/converted',
 ];
 
+// 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)
+const ATTACHMENT_DIRS = [
+  'assets',
+  '03_References/_figures',
+];
+
 const args = process.argv.slice(2);
 const JSON_OUT = args.includes('--json');
 
@@ -189,6 +195,26 @@ function buildFileIndex(allMdFiles) {
         if (!index.has(name)) {
           index.set(name, `${inclDir}/${e}`);
         }
+      }
+    }
+  }
+  // 첨부(이미지 등) 인덱싱: assets/, _figures/ 하위 비-.md 파일을 경로 접미사 형태로 등록
+  // Obsidian은 ![[유람기/1_1.png]]를 경로 접미사로 해석하므로 모든 접미사 키를 등록함
+  for (const attachDir of ATTACHMENT_DIRS) {
+    let entries;
+    try {
+      entries = readdirSync(join(REPO_ROOT, attachDir), { recursive: true });
+    } catch {
+      continue;
+    }
+    for (const entry of entries) {
+      const e = (typeof entry === 'string' ? entry : entry.name).replace(/\\/g, '/');
+      if (extname(e) === '' || extname(e) === '.md') continue; // 디렉토리/확장자 없음/.md 제외
+      const rel = `${attachDir}/${e}`;
+      const segs = rel.split('/');
+      for (let i = segs.length - 1; i >= 0; i--) {
+        const suffix = segs.slice(i).join('/');
+        if (!index.has(suffix)) index.set(suffix, rel);
       }
     }
   }
