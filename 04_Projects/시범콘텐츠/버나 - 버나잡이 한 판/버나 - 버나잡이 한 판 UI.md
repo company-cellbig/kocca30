@@ -4,45 +4,44 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 버나, UI]
 created: 2026-07-02
-updated: 2026-07-15
+updated: 2026-07-20
 ---
 
-> 버나(접시돌리기) 묘기와 매호씨 재담 대결 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을, 이어하기 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 따르고 버나 고유분만 더하며, 고유 화면(버나 돌리기, 마무리 연출, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 캐릭터 입력과 생성 대기가 없어 설계 화면이 8개(학습 토큰 스캔 제외)로 자매 콘텐츠보다 적음. 기획은 [[버나 - 버나잡이 한 판 기획서]].
+> 버나(접시돌리기) 묘기와 매호씨 재담 대결 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고 버나 고유분만 더하며, 고유 화면(버나 돌리기, 마무리 연출, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 캐릭터 입력과 생성 대기가 없어 설계 화면이 8개로 자매 콘텐츠보다 적음. 기획은 [[버나 - 버나잡이 한 판 기획서]].
 
 # 1. 개요
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
-- **대상 화면**: 9개. Step 순으로 배열함([[#2.1 화면 목록과 분류]]). 캐릭터 정보 입력과 생성 대기 화면이 없어 자매 콘텐츠(12화면)보다 적음
-- **공용과 고유**: 공용 화면 6개는 콘텐츠 무관 표준을 참조하고 버나 고유분(매호씨, 버나 비주얼, 카피)만 더함. 이 중 5개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을(실패 안내 화면 포함), 학습 토큰 스캔 화면 1개는 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]] 이어하기 복원(콘텐츠 횡단 학습 기능)을 정본으로 함. 버나 고유 화면 3개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음. 생성 대기 화면도 없음(기념 기록증이 사전 제작 템플릿에 세션 수치를 얹는 결정적 합성이라 실시간 완료됨, [[버나 - 버나잡이 한 판 기획서#2) 기념 기록증 생성]])
+- **대상 화면**: 8개. Step 순으로 배열함([[#2.1 화면 목록과 분류]]). 캐릭터 정보 입력과 생성 대기 화면이 없어 자매 콘텐츠(12화면)보다 적음
+- **공용과 고유**: 공용 화면 5개는 콘텐츠 무관 표준을 참조하고 버나 고유분(매호씨, 버나 비주얼, 카피)만 더함. 5개 모두 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을 정본으로 함(실패 안내 화면 포함). 버나 고유 화면 3개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음. 생성 대기 화면도 없음(기념 기록증이 사전 제작 템플릿에 세션 수치를 얹는 결정적 합성이라 실시간 완료됨, [[버나 - 버나잡이 한 판 기획서#2) 기념 기록증 생성]])
 - **입력 특성**: 카메라를 쓰지 않고 센서 막대 주변기기와 터치, 음향을 씀(하드웨어 정본은 [[디바이스 사양]], 센서 막대 선택지는 [[버나 - 버나잡이 한 판 기획서#3.11 버나 물리 시뮬레이션]]). 버나 돌리기 화면은 센서 막대 모션 화면이라 시뮬 뷰가 화면을 크게 쓰되, 터치 조작 요소(대거리 선택지)는 중앙 도달 존([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
-- **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 5개(시작, 가이드, 동의, 종료, 실패 안내)는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(학습 토큰 스캔은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 이어하기 예시 이미지가 있으나 2차연도라 1차연도 UI는 미작성. 대기 이미지는 본 콘텐츠에 해당 화면이 없어 미사용), 중립 이미지가 없는 화면(버나 고유 화면)은 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
+- **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 5개(시작, 가이드, 동의, 종료, 실패 안내)는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고(대기 이미지는 본 콘텐츠에 해당 화면이 없어 미사용), 중립 이미지가 없는 화면(버나 고유 화면)은 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
 - **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
 
 # 2. 공통 설계
 
 ## 2.1 화면 목록과 분류
 
-화면을 Step 순으로 정리함. 분류는 공용(공유 화면)과 버나 고유로 나눔. 공용은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면을 포함함. 이어하기(학습 토큰 스캔)는 2차연도 확장 설계라 1차연도 미적용이며([[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]]) 참고로만 표에 둠.
+화면을 Step 순으로 정리함. 분류는 공용(공유 화면)과 버나 고유로 나눔. 공용은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면을 포함함.
 
 | 순서 | 화면 | Step | 분류 | 기획서 근거 |
 | --- | --- | --- | --- | --- |
 | 가 | 시작 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[버나 - 버나잡이 한 판 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 나 | 학습 토큰 스캔 화면 | Step 1 | 공용 (플랫폼 이어하기, 2차연도 확장 설계, 1차연도 미적용) | [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]] |
-| 다 | 가이드 화면 (센서 막대 사용법) | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[버나 - 버나잡이 한 판 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 라 | 동의 약관 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[버나 - 버나잡이 한 판 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 마 | 버나 돌리기 화면 (재담 대결) | Step 2~3 | 버나 고유 (핵심) | [[버나 - 버나잡이 한 판 기획서#4.3 Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]] |
-| 바 | 마무리 연출 화면 | Step 4 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#4.4 Step 4. 마무리와 기록증 생성 (병행)]] |
-| 사 | 결과물 감상과 받기 화면 | Step 5 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#4.5 Step 5. 결과물 감상과 받기]] |
-| 아 | 마무리 인사 화면 | Step 6 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[버나 - 버나잡이 한 판 기획서#4.6 Step 6. 종료와 리셋]] |
-| 자 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]) | [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] |
+| 나 | 가이드 화면 (센서 막대 사용법) | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[버나 - 버나잡이 한 판 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
+| 다 | 동의 약관 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[버나 - 버나잡이 한 판 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
+| 라 | 버나 돌리기 화면 (재담 대결) | Step 2~3 | 버나 고유 (핵심) | [[버나 - 버나잡이 한 판 기획서#4.3 Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]] |
+| 마 | 마무리 연출 화면 | Step 4 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#4.4 Step 4. 마무리와 기록증 생성 (병행)]] |
+| 바 | 결과물 감상과 받기 화면 | Step 5 | 버나 고유 | [[버나 - 버나잡이 한 판 기획서#4.5 Step 5. 결과물 감상과 받기]] |
+| 사 | 마무리 인사 화면 | Step 6 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[버나 - 버나잡이 한 판 기획서#4.6 Step 6. 종료와 리셋]] |
+| 아 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]) | [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] |
 
 ## 2.2 공통 레이아웃
 
 모든 화면은 [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]]을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 조작하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성). 버나 돌리기 화면은 센서 막대 모션 화면이라 시뮬 뷰가 화면을 크게 쓰는 예외이되, 그 안의 터치 조작(대거리 선택지)은 도달 존에 둠. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
-- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 버나 고유분(매호씨, 버나 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함. 단 학습 토큰 스캔은 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]]를 정본으로 하되 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 화면 목록 밖이라 16:9 골격 위에서 레이아웃을 직접 설계함
+- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 버나 고유분(매호씨, 버나 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함
 - **고유 화면**: 같은 16:9 영역 골격 위에서 버나 메커닉(버나 돌리기와 재담 대결, 마무리 연출, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 결과물 감상과 받기는 QR을 함께 담으므로 QR을 손 닿는 높이에 둠
 - **버나 공통 요소**: 진행 호스트는 매호씨임(역할은 [[버나 - 버나잡이 한 판 기획서#3.3 매호씨 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "매호씨 진행 호스트 캐릭터"로만 묘사). 매호씨는 다른 콘텐츠의 안내형 호스트와 달리 유저와 겨루는 재담 대결 상대를 겸함([[버나 - 버나잡이 한 판 기획서#4.3 Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]]). 공통 화면에서는 매호씨를 중앙 조작 존 옆 여유 공간에 화면 속 안내 캐릭터로 또렷이 두고 유저를 향해 안내하는 포즈로 하며(실사 행인이나 다른 사용자로 오인되지 않게, [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 호스트 슬롯), 버나 돌리기 화면에서는 도발 재담을 던지는 대결 상대로 측면에 둠
 
@@ -52,7 +51,7 @@ updated: 2026-07-15
 
 생성 방식은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 종료, 실패 안내. 학습 토큰 스캔은 2차연도라 1차연도 프롬프트 미작성. 대기 화면은 본 콘텐츠에 없음): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 버나 고유 요소(매호씨, 버나 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
+- **참조 이미지 기반** (시작, 가이드, 동의 약관, 종료, 실패 안내. 대기 화면은 본 콘텐츠에 없음): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 버나 고유 요소(매호씨, 버나 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
 - **단독 프롬프트** (버나 돌리기, 마무리 연출, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 2.3.1 공통 제약 (모든 화면 공유)
@@ -69,7 +68,7 @@ updated: 2026-07-15
 
 화면마다 아래 항목을 채움. 단독 프롬프트는 [[#2.3.1 공통 제약 (모든 화면 공유)]] 뒤에 화면별 내용을 이어 붙이고, 참조 이미지 기반 프롬프트는 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 중립 이미지를 첨부함(위 생성 방식 구분, 분류와 별개 축).
 
-1. **레이아웃**: 16:9 영역(헤더, 본문, 액션) 배치. 공용 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 준용 절을 밝힘(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본, [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 목록 밖이라 직접 설계)
+1. **레이아웃**: 16:9 영역(헤더, 본문, 액션) 배치. 공용 화면은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 준용 절을 밝힘
 2. **핵심 UI 컴포넌트**: 이 화면 고유 요소
 3. **매호씨 호스트**: 위치, 상태, 안내 포즈. 공통 화면은 측면에 또렷한 안내 캐릭터, 버나 돌리기 화면은 도발 재담을 던지는 대결 상대로 측면에 둠
 4. **화면 내 텍스트**: 이미지에 한글로 렌더링할 정확한 문구
@@ -85,7 +84,7 @@ updated: 2026-07-15
 
 # 3. 화면별 설계
 
-각 화면을 [[#2.3.2 화면별 변수 슬롯]] 슬롯으로 설계하고, 그 뒤에 영어 프롬프트를 둠. 공용 화면은 레이아웃에서 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 준용하고 버나 고유분만 더함(이어하기 토큰 스캔은 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]] 정본이라 직접 설계). 고유 화면은 레이아웃을 상세히 설계함.
+각 화면을 [[#2.3.2 화면별 변수 슬롯]] 슬롯으로 설계하고, 그 뒤에 영어 프롬프트를 둠. 공용 화면은 레이아웃에서 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 준용하고 버나 고유분만 더함. 고유 화면은 레이아웃을 상세히 설계함.
 
 ## 3.1 Step 1. 시작 화면
 
@@ -93,7 +92,7 @@ updated: 2026-07-15
 
 ### 3.1.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 버나 대표 비주얼, 액션에 큰 시작 버튼을 두며, 헤더 한쪽 모서리에 언어 선택 요소를 둠(고른 언어가 세션 전체에 적용됨). 매호씨가 환영하며 등장함 (보조 이어하기 버튼은 2차연도 확장 설계라 1차연도 미배치, [[#2.1 화면 목록과 분류]] 나. 학습 토큰 스캔)
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 시작 화면 준용. 헤더에 콘텐츠 타이틀, 본문에 버나 대표 비주얼, 액션에 큰 시작 버튼을 두며, 헤더 한쪽 모서리에 언어 선택 요소를 둠(고른 언어가 세션 전체에 적용됨). 매호씨가 환영하며 등장함
 - **핵심 UI 컴포넌트**: 큰 "시작하기" 터치 버튼, 콘텐츠 타이틀, 버나 돌리기 대표 비주얼, 언어 선택 요소(한국어와 영어, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]])
 - **매호씨 호스트**: 한쪽 측면에서 유저를 향해 손짓하며 환영, 활기찬 표정(중앙은 타이틀과 시작 버튼 자리)
 - **화면 내 텍스트**: 타이틀 "버나잡이 한 판", 버튼 "시작하기", 언어 선택 "한국어"/"English"(표본)
@@ -103,7 +102,7 @@ updated: 2026-07-15
 첨부: [[시범콘텐츠 공통 사양#12.3.1 시작 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button (the resume/이어하기 button is a 2nd-year feature and is not placed in year 1). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, primary start button, host). There is no secondary button. Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang buna (plate-spinning) performance experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Maehossi host character (the buna banter partner and playful sparring opponent, an on-screen guide character, not a realistic bystander or a second user) welcoming with a beckoning gesture and a lively expression
 - the content-area and background placeholders -> Korean namsadang buna plate-spinning motifs over a vibrant outdoor play-yard (madang) stage, festive attract mood
 Keep title '버나잡이 한 판', primary button '시작하기'. Also keep a small language-selector control in a top corner of the header (two options, Korean and English), clearly display-and-touch but visually secondary to the start button.
@@ -113,22 +112,19 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.2 Step 1. 학습 토큰 스캔 화면 (2차연도 확장 설계, 1차연도 미적용)
-
-이 화면은 2차연도 확장 설계이며 1차연도 UI는 구현하지 않음. 재방문 옵트인 학습자가 학습 토큰(QR)을 스캔해 진척과 동의를 복원하는 플랫폼 이어하기 화면으로, 정본은 [[플랫폼 사양#6. 2차연도 확장 설계 (디지털 도제 연속성, 현재 구현 밖)]](subject_id 기반 복원)임. 상세 레이아웃과 프롬프트는 2차연도 설계에서 확정함.
-
-## 3.3 Step 1. 가이드 화면 (센서 막대 사용법)
+## 3.2 Step 1. 가이드 화면 (센서 막대 사용법)
 
 공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 매호씨가 인사하고 체험 흐름과 센서 막대 잡는 법을 안내함.
 
-### 3.3.1 화면 설계
+### 3.2.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름과 센서 막대 사용법 안내 일러스트, 액션에 다음 버튼을 둠. 매호씨가 화자로 등장함
-- **핵심 UI 컴포넌트**: 진행 흐름과 센서 막대 사용법 안내 일러스트(센서 막대 잡기, 버나 돌리기, 매호씨와 재담, 기록증 받기), "다음" 버튼
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름과 센서 막대 사용법 안내 일러스트, 액션에 다음 버튼과 그만두기 보조 버튼을 둠. 매호씨가 화자로 등장함
+- **핵심 UI 컴포넌트**: 진행 흐름과 센서 막대 사용법 안내 일러스트(센서 막대 잡기, 버나 돌리기, 매호씨와 재담, 기록증 받기), "다음" 버튼, "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **매호씨 호스트**: 화자로 등장해 설명, 재담하는 표정
-- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
+- **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]), 터치 미입력 타임아웃은 종료 처리. 기획서 Step 1 가이드 화면 분기를 준용함(목업은 정상 안내 상태만)
+- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음", "그만두기"
 
-### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.2.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.2 가이드 (인트로 화면)]] 중립 레이아웃 이미지
 
@@ -137,18 +133,18 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Maehossi host character (the buna banter partner, an on-screen guide character, not a realistic bystander) acting as the narrator with a lively storytelling expression
 - the flow-illustration placeholder -> an instructional illustration of the flow (hold the sensor stick, spin the buna plate, banter with Maehossi, receive a record certificate) in namsadang buna styling
 - background -> a namsadang outdoor play-yard (madang) stage, friendly mood
-Keep greeting '어서 오세요', button '다음'.
+Keep greeting '어서 오세요', primary button '다음', and add a secondary '그만두기' button beside it.
 Art direction: Korean traditional namsadang buna plate-spinning motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.4 Step 1. 동의 약관 화면
+## 3.3 Step 1. 동의 약관 화면
 
 공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수 동의를 받음. 본 콘텐츠는 카메라를 쓰지 않아 필수 동의 항목은 이용 약관 동의임(카메라 동의 없음, 연락처 미수집). 정확한 동의 항목과 문구는 규정 검토 확정(확인 필요).
 
-### 3.4.1 화면 설계
+### 3.3.1 화면 설계
 
 - **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 동의 약관 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼과 그만두기 보조 버튼을 둠(동의하고 시작이 곧 약관 동의, 그만두기는 확인 팝업을 거쳐 확정 시 미동의. 1차연도는 선택 동의가 없어 별도 토글을 두지 않음). 화면 타임아웃 미적용. 매호씨는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
@@ -159,7 +155,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 미동의, 터치 미입력 타임아웃도 미동의로 간주해 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])는 기획서 Step 1과 [[시범콘텐츠 공통 사양#5. 공통 화면]]나를 준용함(목업은 정상 동의 상태만)
 - **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 약관 라벨 "이용 약관 (필수)"(표본, 문구는 규정 검토 확정), 버튼 "동의하고 시작", "그만두기"
 
-### 3.4.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.3 동의 약관 (인트로 화면)]] 중립 레이아웃 이미지
 
@@ -174,11 +170,11 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.5 Step 2~3. 버나 돌리기 화면 (재담 대결)
+## 3.4 Step 2~3. 버나 돌리기 화면 (재담 대결)
 
 버나 고유 화면(핵심 체험). 유저가 센서 막대로 버나(접시)를 돌리는 묘기를 유지하면서, 매호씨가 도발 재담으로 끼어들면 반응 윈도우 안에 대거리 선택지를 골라 받아침. 묘기 유지와 재담 적절성을 함께 채점해 신명 게이지로 보상하고 난이도를 올림. Step 2(돌리기 도입)와 Step 3(재담 대결)이 한 화면에서 이어짐 ([[버나 - 버나잡이 한 판 기획서#4.3 Step 3. 매호씨 재담 대결 (핵심 체험, 돌리기와 동시)]]).
 
-### 3.5.1 화면 설계
+### 3.4.1 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 버나 시뮬 우세 + 센서 막대 모션 화면)
 	- 헤더 모서리(우상단): 신명 게이지와 난이도 단계를 상태 표시로 얹음
@@ -196,7 +192,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **상태별 안내 (기획서 준용)**: 센서 막대 입력 미검출 재시도 안내와 타임아웃, 무응답(윈도우 초과) 판정은 기획서 Step 2~3 분기를 준용함(목업은 정상 묘기와 재담 상태만)
 - **화면 내 텍스트**: 게이지 라벨 "신명", 안내 "장단에 맞춰 버나를 돌려요"(표본), 매호씨 도발 예시 "그 솜씨로 밥은 벌겠나?"(표본), 대거리 선택지 예시 "얼씨구 봐라"/"어이쿠 잠깐"(표본)
 
-### 3.5.2 프롬프트 (영어)
+### 3.4.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
@@ -213,11 +209,11 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt (no always-on toolbar).
 ```
 
-## 3.6 Step 4. 마무리 연출 화면
+## 3.5 Step 4. 마무리 연출 화면
 
-버나 고유 화면. 한 판을 맺는 게이지 결과 연출임. 달성 시 환호 사운드로 완성하고, 미달 시 매호씨가 눙치며 마무리함. 기념 기록증은 백그라운드에서 결정적 템플릿 합성으로 실시간 만들어지므로 별도 생성 대기 화면이 없음 ([[버나 - 버나잡이 한 판 기획서#4.4 Step 4. 마무리와 기록증 생성 (병행)]]). 화면 흐름 명칭(마무리 연출 화면)을 화면 단위 정본으로 삼되, 기획서 프로세스의 "UI(버나 돌리기 화면)" 표기는 이 연출을 그리는 렌더러가 버나 돌리기 화면 컴포넌트를 재사용함을 뜻함(별도 화면과 모순 아님).
+버나 고유 화면. 한 판을 맺는 게이지 결과 연출임. 달성 시 환호 사운드로 완성하고, 미달 시 매호씨가 눙치며 마무리함. 기념 기록증은 백그라운드에서 결정적 템플릿 합성으로 실시간 만들어지므로 별도 생성 대기 화면이 없음 ([[버나 - 버나잡이 한 판 기획서#4.4 Step 4. 마무리와 기록증 생성 (병행)]]). 화면 흐름 명칭(마무리 연출 화면)이 기획서 Step 4 포그라운드 표기(UI(마무리 연출 화면), [[버나 - 버나잡이 한 판 기획서#4.4 Step 4. 마무리와 기록증 생성 (병행)]])와 일치함. 이 화면은 별도 생성 대기 화면 없이 버나 돌리기 화면 컴포넌트를 재사용해 결과 연출을 그림.
 
-### 3.6.1 화면 설계
+### 3.5.1 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 결과 연출 구성)
 	- 헤더: 결과 타이틀
@@ -227,7 +223,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **매호씨 호스트**: 중앙 근처에서 결과에 반응(달성이면 함께 환호, 미달이면 짓궂게 눙침)
 - **화면 내 텍스트**: 안내 "한 판 끝!"(표본), 게이지 라벨 "신명"
 
-### 3.6.2 프롬프트 (영어)
+### 3.5.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
@@ -243,11 +239,11 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.7 Step 5. 결과물 감상과 받기 화면
+## 3.6 Step 5. 결과물 감상과 받기 화면
 
 버나 고유 화면. 완성된 기념 기록증(성적표)을 크게 감상하고, 같은 화면 아래쪽 QR을 본인 휴대폰으로 스캔해 결과물을 받고 마침으로 끝냄. 감상과 받기를 한 화면에서 끝내므로 별도 전송 화면이 없음. 호스팅과 다운로드 URL 발급은 Step 4 기록증 생성 파이프라인에서 이미 끝났고, 이 화면은 그 URL을 QR로 그리기만 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음 ([[버나 - 버나잡이 한 판 기획서#4.5 Step 5. 결과물 감상과 받기]], [[버나 - 버나잡이 한 판 기획서#3.2 개인정보 처리]]).
 
-### 3.7.1 화면 설계
+### 3.6.1 화면 설계
 
 - **레이아웃** (고유, 16:9 골격 위 기록증 카드와 QR을 세로로 쌓음)
 	- 헤더: 타이틀
@@ -264,7 +260,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 - **화면 내 텍스트**: 타이틀 "나의 버나 기록증", 안내 "QR 코드를 스캔하면 기록증을 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
 - **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음
 
-### 3.7.2 프롬프트 (영어)
+### 3.6.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
@@ -283,18 +279,18 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 ```
 
 
-## 3.8 Step 6. 마무리 인사 화면
+## 3.7 Step 6. 마무리 인사 화면
 
 공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 5에서 마침 터치)로 진입한 경우에만 표시하는 완주 전용 화면임. 마무리 인사 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 미동의, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
 
-### 3.8.1 화면 설계
+### 3.7.1 화면 설계
 
 - **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용. 본문 중앙에 매호씨의 작별 인사와 마무리 메시지를 크게 둠. 액션은 없음(자동으로 시작 화면 복귀). 매호씨가 중심
 - **핵심 UI 컴포넌트**: 마무리 인사 메시지, 매호씨 작별 연출
 - **매호씨 호스트**: 중심에서 정겹게 작별 인사
 - **화면 내 텍스트**: 인사 "또 만나요"
 
-### 3.8.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.7.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
@@ -309,18 +305,18 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Chinese acrobatic plate-spinning or Western circus juggling, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.9 실패 안내 (모달 팝업, 실패 분기 공통)
+## 3.8 실패 안내 (모달 팝업, 실패 분기 공통)
 
 공용 화면(실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]). 기록증 조립 실패, 호스팅 실패, 상태 조회 무응답, 센서 막대 장애 등 실패 분기가 모이는 공통 화면임. 상황 안내를 보이고, 마무리 인사 화면을 건너뛴 종료로 자동 진행함(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
 
-### 3.9.1 화면 설계
+### 3.8.1 화면 설계
 
 - **레이아웃**: [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] 준용. 전체 화면이 아니라 직전 화면을 어둡게 깐 위에 중앙 모달 다이얼로그 카드를 띄우고, 카드 안에 경고 아이콘, 상황 안내 메시지, 확인 버튼 하나를 둠. 확인을 누르면 즉시 마무리 인사 화면을 건너뛴 종료로 가고, 누르지 않아도 잠깐 뒤 자동으로 진행함. 오류 코드나 기술 세부는 노출하지 않음. 매호씨는 카드 옆에서 다독이는 모습으로 둠
 - **핵심 UI 컴포넌트**: 상황 안내 메시지, "확인" 버튼(중앙 도달 존)
 - **매호씨 호스트**: 측면이나 중앙에서 다독이는 표정
 - **화면 내 텍스트**: 안내 "문제가 생겼어요"(표본, 케이스마다 문구를 달리함), 버튼 "확인"
 
-### 3.9.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.8.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.7 실패 안내 (모달 팝업)]] 중립 레이아웃 이미지
 
