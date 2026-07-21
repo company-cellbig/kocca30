@@ -9,6 +9,14 @@ updated: 2026-07-20
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-21] maint | md_to_docx 표 서식 지정 + %% 주석 제외
+
+- 계기: 사용자 지시. (1) 변환 시 Obsidian 주석 %%...%% 제외 (2) 표에 양식 표 스타일·헤더 색·정렬 지정
+- 주석: `strip_comments` 추가(preprocess 초기). 인라인/블록 %%...%% 제거, 짝 없는 홀수 %% 는 보존
+- 표 서식(`style_tables`, `assemble` 본문 단계): 내용 표에 ① 양식 표 스타일 10(눈금 표 1 밝게) ② 헤더(첫 행) 배경 #BDD6EE + 흰 글씨 제거해 검정 상속(볼드는 style firstRow가 부여) ③ 전 셀 가로 중앙(jc)·세로 중앙(vAlign) ④ 폭 100%. head(양식 표지·버전·목차) 표는 미대상
+- OOXML 자식 순서 준수: tcPr 는 tcW/gridSpan/vMerge/tcBorders/shd/tcMar/vAlign 순으로 재구성, jc 는 문단부호 rPr 앞에 삽입. 자기닫힘 `<w:tcPr/>`·`<w:pPr/>` 도 교체해 속성 중복(스키마 위반, "읽을 수 없음" 유발) 방지
+- 검증(scratchpad): WF OK, tcPr/pPr 중복 0, 내용 표 7개 헤더 BDD6EE·전 셀 중앙 적용. export 파일 Word 점유로 실제 재생성은 잠금 해제 후
+
 ## [2026-07-21] maint | md_to_docx 변환기 3건 수정 (docx 손상·리스트 이미지·이미지 폭)
 
 - 계기: 유람기 기획서 docx 변환에서 (1) 열 때 "일부 콘텐츠 읽을 수 없음" 오류 (2) 이미지가 붙은 블릿이 깨짐 (3) 이미지 폭 조정이 지면에 과대 반영. 사용자 지시로 원인 규명·수정

@@ -80,6 +80,12 @@ def strip_frontmatter(text):
     return text
 
 
+def strip_comments(text):
+    """Obsidian 주석 %%...%% 구간 제거(인라인/블록 모두). 비탐욕 매칭이라
+    가장 가까운 %% 쌍끼리 묶음. 짝이 안 맞는 홀수 %% 는 건드리지 않음."""
+    return re.sub(r"%%.*?%%", "", text, flags=re.S)
+
+
 def cut_before_first_h1(text):
     """첫 번째 H1(# ) 앞 내용(TL;DR 등) 절단. 첫 H1부터 옮김."""
     lines = text.split("\n")
@@ -463,6 +469,7 @@ def preprocess(md_path, exclude=None):
     with open(md_path, encoding="utf-8") as f:
         text = f.read()
     text = strip_frontmatter(text)
+    text = strip_comments(text)              # Obsidian 주석 %%...%% 제거
     text = cut_before_first_h1(text)
     text = drop_h1_sections(text, exclude)   # 제외 절 제거(임베드 처리 전)
     text = drop_excluded_refs(text, exclude)  # 제외 절 댕글링 참조 정리
@@ -551,6 +558,103 @@ def merge_numbering(tpl_num, pan_num):
     return merged
 
 
+# ---------------------------------------------------------------------------
+# 표 서식 (양식 스타일 + 헤더 색 + 중앙 정렬)
+# ---------------------------------------------------------------------------
+
+# 표에 적용할 양식 내장 표 스타일과 헤더(첫 행) 배경색.
+# 10 = "Grid Table 1 Light"(눈금 표 1 밝게). firstRow 조건서식이 헤더를 굵게 함.
+TABLE_STYLE_ID = "10"
+TABLE_HEADER_FILL = "BDD6EE"
+
+_NEW_TBLPR = (
+    '<w:tblPr><w:tblStyle w:val="%s"/>'
+    '<w:tblW w:w="5000" w:type="pct"/>'
+    '<w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" '
+    'w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr>'
+) % TABLE_STYLE_ID
+
+
+def _grab(inner, tag):
+    m = re.search(
+        r"<w:%s\b[^>]*/>|<w:%s\b[^>]*>.*?</w:%s>" % (tag, tag, tag), inner, re.S
+    )
+    return m.group(0) if m else ""
+
+
+def _rebuild_tcpr(tc, header):
+    """셀 tcPr 를 CT_TcPr 스키마 순서로 재구성. 헤더면 배경색(shd), 전 셀 vAlign 중앙.
+
+    OOXML 은 자식 순서가 엄격함: tcW, gridSpan, vMerge, tcBorders, shd, tcMar, vAlign.
+    순서가 어긋나면 Word 가 "일부 콘텐츠 읽을 수 없음"을 냄. 그래서 기존 조각을
+    빼내 정해진 순서로 다시 씀."""
+    # 자기닫힘 <w:tcPr/> 와 일반 <w:tcPr>...</w:tcPr> 를 모두 잡음.
+    # 자기닫힘을 못 잡으면 원본이 남아 tcPr 가 둘이 되어 스키마 위반이 됨.
+    m = re.search(r"<w:tcPr\b[^>]*/>|<w:tcPr>(.*?)</w:tcPr>", tc, re.S)
+    inner = m.group(1) if (m and m.group(1) is not None) else ""
+    shd = (
+        '<w:shd w:val="clear" w:color="auto" w:fill="%s"/>' % TABLE_HEADER_FILL
+    ) if header else ""
+    new = (
+        "<w:tcPr>"
+        + _grab(inner, "tcW") + _grab(inner, "gridSpan") + _grab(inner, "vMerge")
+        + _grab(inner, "tcBorders") + shd + _grab(inner, "tcMar")
+        + '<w:vAlign w:val="center"/></w:tcPr>'
+    )
+    if m:
+        return tc[:m.start()] + new + tc[m.end():]
+    return tc.replace("<w:tc>", "<w:tc>" + new, 1)
+
+
+def _center_paras(tc, header):
+    """셀 안 문단을 가로 중앙(jc). 헤더면 흰 글씨(color) 제거해 검정 상속.
+
+    jc 는 CT_PPr 에서 문단부호 rPr 앞에 와야 함: rPr 있으면 그 앞, 없으면 pPr 끝.
+    볼드는 style 10 firstRow 조건서식이 부여하므로 여기서 넣지 않음."""
+    jc = '<w:jc w:val="center"/>'
+
+    def fix_p(pm):
+        p = pm.group(0)
+        # 자기닫힘 <w:pPr/> 는 통째로 교체(안 그러면 pPr 가 둘이 됨).
+        selfc = re.search(r"<w:pPr\b[^>]*/>", p)
+        prm = None if selfc else re.search(r"<w:pPr>(.*?)</w:pPr>", p, re.S)
+        if selfc:
+            p = p[:selfc.start()] + "<w:pPr>" + jc + "</w:pPr>" + p[selfc.end():]
+        elif prm:
+            pin = re.sub(r"<w:jc\b[^>]*/>", "", prm.group(1))  # 기존 jc 제거
+            idx = pin.rfind("<w:rPr>")
+            if idx != -1 and pin.rstrip().endswith("</w:rPr>"):
+                pin = pin[:idx] + jc + pin[idx:]
+            else:
+                pin = pin + jc
+            p = p[:prm.start()] + "<w:pPr>" + pin + "</w:pPr>" + p[prm.end():]
+        else:
+            p = re.sub(r"(<w:p\b[^>]*>)", r"\1<w:pPr>" + jc + "</w:pPr>", p, count=1)
+        if header:
+            p = re.sub(r"<w:color\b[^>]*/>", "", p)  # 흰 글씨 제거 -> 검정
+        return p
+
+    return re.sub(r"<w:p\b[^>]*>.*?</w:p>", fix_p, tc, flags=re.S)
+
+
+def style_tables(body):
+    """pandoc 본문의 표에 양식 표 스타일(10), 헤더 배경색, 전 셀 중앙 정렬 적용.
+
+    head/tail(양식 표지·목차)의 표는 건드리지 않음(body 만 대상)."""
+    def do_tbl(tm):
+        tbl = re.sub(r"<w:tblPr>.*?</w:tblPr>", _NEW_TBLPR, tm.group(0),
+                     count=1, flags=re.S)
+        hdr_end = tbl.find("</w:tr>")  # 첫 행 끝 = 헤더 경계
+
+        def do_tc(cm):
+            header = cm.start() < hdr_end
+            return _center_paras(_rebuild_tcpr(cm.group(0), header), header)
+
+        return re.sub(r"<w:tc>.*?</w:tc>", do_tc, tbl, flags=re.S)
+
+    return re.sub(r"<w:tbl>.*?</w:tbl>", do_tbl, body, flags=re.S)
+
+
 def assemble(content_docx, out_docx):
     with zipfile.ZipFile(TEMPLATE) as z:
         names = list(z.namelist())
@@ -635,6 +739,8 @@ def assemble(content_docx, out_docx):
                 cl = ct.rfind("</Types>")
                 ct = ct[:cl] + ('<Default Extension="%s" ContentType="%s"/>' % (ext, ctype)) + ct[cl:]
         datas[ct_name] = ct.encode("utf-8")
+
+    body = style_tables(body)  # 표에 양식 스타일·헤더 색·중앙 정렬 적용
 
     new_doc = head + body + tail
 
