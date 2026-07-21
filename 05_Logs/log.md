@@ -19,6 +19,13 @@ updated: 2026-07-21
 - 검증: `wiki_number --check` 0건, `wiki_lint` 0건, 잔여 옛 모델 패턴 grep 0건, em dash 0건. frontmatter updated 2026-07-21 반영(공통 사양은 updated 필드 없음)
 - 비고: 외부 가독성(Codex) 검토는 미실시. `홈 버튼` 신규 정본 문장(공통 UI/공통 사양/UI 5종)은 맥락 독립 검토 전. 커밋은 사용자 확인 후 편집 파일만 개별 스테이징 예정
 
+## [2026-07-21] maint | md_to_docx 표지 부제를 문서 title 로 치환
+
+- 계기: 사용자 지시. 양식 표지 부제 자리("덜미 전자책 변환")를 변환 문서의 frontmatter title 로 바꿈
+- `extract_frontmatter_title` 추가: md frontmatter 의 title 파싱(따옴표 제거). `assemble(title=...)` 인자로 전달
+- 표지 부제는 단일 `<w:t>`, 문서 전체 1회 등장이라 head 영역에서 문자열 1회 치환(XML 이스케이프 적용). 못 찾으면 경고 후 원문 유지
+- 검증(scratchpad): 표지 부제가 "덜미 - 나만의 유람기 기획서"(title)로 치환, 자리표시 제거, WF OK. export 는 Word 점유로 재생성은 잠금 해제 후
+
 ## [2026-07-21] maint | md_to_docx 이미지 rId 충돌로 이미지 뒤바뀜 수정
 
 - 계기: 사용자 보고. Step 1 시작 이미지(유람기/1_1.png)가 변환 후 플로우 이미지로 나옴

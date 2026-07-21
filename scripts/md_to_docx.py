@@ -80,6 +80,29 @@ def strip_frontmatter(text):
     return text
 
 
+# 양식 표지의 부제 자리표시(변환 시 문서 title 로 치환). 문서 전체에 1회만 등장.
+COVER_SUBTITLE_PLACEHOLDER = "덜미 전자책 변환"
+
+
+def extract_frontmatter_title(md_path):
+    """md frontmatter 의 title 값을 반환(없으면 None). 표지 부제 치환용."""
+    with open(md_path, encoding="utf-8") as f:
+        text = f.read()
+    if not text.startswith("---"):
+        return None
+    m = re.match(r"^---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
+    if not m:
+        return None
+    for line in m.group(1).split("\n"):
+        tm = re.match(r"\s*title\s*:\s*(.+?)\s*$", line)
+        if tm:
+            t = tm.group(1).strip()
+            if len(t) >= 2 and t[0] in "\"'" and t[-1] == t[0]:
+                t = t[1:-1]  # 따옴표 제거
+            return t
+    return None
+
+
 def strip_comments(text):
     """Obsidian 주석 %%...%% 구간 제거(인라인/블록 모두). 비탐욕 매칭이라
     가장 가까운 %% 쌍끼리 묶음. 짝이 안 맞는 홀수 %% 는 건드리지 않음."""
@@ -655,7 +678,7 @@ def style_tables(body):
     return re.sub(r"<w:tbl>.*?</w:tbl>", do_tbl, body, flags=re.S)
 
 
-def assemble(content_docx, out_docx):
+def assemble(content_docx, out_docx, title=None):
     with zipfile.ZipFile(TEMPLATE) as z:
         names = list(z.namelist())
         datas = {n: z.read(n) for n in names}
@@ -687,6 +710,15 @@ def assemble(content_docx, out_docx):
     closer = re.match(r"\s*(?:</w:sdtContent>\s*</w:sdt>\s*)*", tpl_doc[head_end:])
     head_end += closer.end()
     head = tpl_doc[:head_end]
+    # 표지 부제를 변환 문서 title 로 치환(단일 <w:t>, 표지 영역 내 1회)
+    if title:
+        esc = (title.replace("&", "&amp;").replace("<", "&lt;")
+               .replace(">", "&gt;"))
+        if COVER_SUBTITLE_PLACEHOLDER in head:
+            head = head.replace(COVER_SUBTITLE_PLACEHOLDER, esc, 1)
+        else:
+            print("[경고] 표지 부제 문구를 못 찾음: "
+                  + COVER_SUBTITLE_PLACEHOLDER, file=sys.stderr)
     # 양식 최종 sectPr(본문 섹션 = 페이지 -1- 설정)
     last_sect = tpl_doc.rfind("<w:sectPr")
     tail = tpl_doc[last_sect:]
@@ -823,7 +855,7 @@ def main():
         )
         if r.returncode != 0:
             fail("pandoc 실패:\n" + r.stderr)
-        assemble(content_docx, out_docx)
+        assemble(content_docx, out_docx, title=extract_frontmatter_title(md_path))
 
     print("[완료] " + out_docx)
 
