@@ -19,6 +19,13 @@ updated: 2026-07-21
 - 검증: `wiki_number --check` 0건, `wiki_lint` 0건, 잔여 옛 모델 패턴 grep 0건, em dash 0건. frontmatter updated 2026-07-21 반영(공통 사양은 updated 필드 없음)
 - 비고: 외부 가독성(Codex) 검토는 미실시. `홈 버튼` 신규 정본 문장(공통 UI/공통 사양/UI 5종)은 맥락 독립 검토 전. 커밋은 사용자 확인 후 편집 파일만 개별 스테이징 예정
 
+## [2026-07-21] maint | 표지 부제 치환을 core.xml dc:subject 까지 확장 (바인딩 정본)
+
+- 계기: 앞 커밋 후에도 표지에 옛 부제("덜미 전자책 변환")가 계속 표시됨
+- 원인: 표지 부제(alias "부제")는 `/coreProperties/subject` 에 바인딩된 콘텐츠 컨트롤. 정본은 docProps/core.xml 의 <dc:subject>. document.xml 캐시 텍스트만 바꾸면 Word 가 열 때 core.xml 에서 다시 읽어 되돌림
+- 수정: `assemble()` 에서 core.xml <dc:subject> 도 title 로 갱신(캐시 텍스트 갱신은 유지)
+- 검증: dc:subject=title, 표지 P2=title, 패키지 전체에 "덜미 전자책 변환" 0건
+
 ## [2026-07-21] maint | md_to_docx 표지 부제를 문서 title 로 치환
 
 - 계기: 사용자 지시. 양식 표지 부제 자리("덜미 전자책 변환")를 변환 문서의 frontmatter title 로 바꿈

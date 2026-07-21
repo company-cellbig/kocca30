@@ -710,14 +710,28 @@ def assemble(content_docx, out_docx, title=None):
     closer = re.match(r"\s*(?:</w:sdtContent>\s*</w:sdt>\s*)*", tpl_doc[head_end:])
     head_end += closer.end()
     head = tpl_doc[:head_end]
-    # 표지 부제를 변환 문서 title 로 치환(단일 <w:t>, 표지 영역 내 1회)
+    # 표지 부제를 변환 문서 title 로 치환. 부제는 dc:subject 에 바인딩된 콘텐츠
+    # 컨트롤이라, 정본은 docProps/core.xml 의 <dc:subject>. Word 가 열 때 여기서
+    # 다시 읽어 표시하므로 core.xml 을 바꿔야 함(document.xml 캐시 텍스트만 바꾸면
+    # 열 때 되돌아감). 캐시 표시 텍스트도 함께 갱신함.
     if title:
         esc = (title.replace("&", "&amp;").replace("<", "&lt;")
                .replace(">", "&gt;"))
+        core_name = "docProps/core.xml"
+        if core_name in datas:
+            core = datas[core_name].decode("utf-8")
+            new_core = re.sub(
+                r"<dc:subject>.*?</dc:subject>",
+                lambda _m: "<dc:subject>" + esc + "</dc:subject>",
+                core, count=1, flags=re.S)
+            if new_core != core:
+                datas[core_name] = new_core.encode("utf-8")
+            else:
+                print("[경고] core.xml 의 dc:subject 를 못 바꿈", file=sys.stderr)
         if COVER_SUBTITLE_PLACEHOLDER in head:
             head = head.replace(COVER_SUBTITLE_PLACEHOLDER, esc, 1)
         else:
-            print("[경고] 표지 부제 문구를 못 찾음: "
+            print("[경고] 표지 부제 캐시 텍스트를 못 찾음: "
                   + COVER_SUBTITLE_PLACEHOLDER, file=sys.stderr)
     # 양식 최종 sectPr(본문 섹션 = 페이지 -1- 설정)
     last_sect = tpl_doc.rfind("<w:sectPr")
