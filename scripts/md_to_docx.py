@@ -286,11 +286,14 @@ def resolve_image_embeds(text):
             continue
         lead = ln[: len(ln) - len(ln.lstrip())]
         standalone = _IMG_EMBED_RE.sub("", ln).strip() == ""  # 그 줄이 이미지뿐
-        if lead == "" and standalone:
-            # 최상위 단독 이미지: 독립 그림 문단(앞뒤 빈 줄)
-            out.extend(["", replaced.strip(), ""])
+        if standalone:
+            # 단독 이미지는 앞뒤 빈 줄로 독립 문단화해 자기 줄에 옴.
+            # 리스트 안(들여쓰기)이면 들여쓰기를 유지해 리스트 항목 내부 문단이
+            # 되어 리스트를 안 깨고 새 줄에 옴(들여쓰기 없이 열 0으로 내보내면
+            # 리스트가 끊김). 최상위면 그림 문단이 됨.
+            out.extend(["", replaced if lead else replaced.strip(), ""])
         else:
-            # 리스트 안(들여쓰기) 또는 텍스트와 동거: 인라인, 들여쓰기 보존
+            # 텍스트와 한 줄에 섞여 있으면 인라인 유지(들여쓰기 보존)
             out.append(replaced)
     return "\n".join(out)
 
