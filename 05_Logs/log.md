@@ -48,6 +48,14 @@ updated: 2026-07-21
 - 검증: `wiki_number --check` 0건, `wiki_lint` 0건, 잔여 옛 모델 패턴 grep 0건, em dash 0건. frontmatter updated 2026-07-21 반영(공통 사양은 updated 필드 없음)
 - 비고: 외부 가독성(Codex) 검토는 미실시. `홈 버튼` 신규 정본 문장(공통 UI/공통 사양/UI 5종)은 맥락 독립 검토 전. 커밋은 사용자 확인 후 편집 파일만 개별 스테이징 예정
 
+## [2026-07-21] review | 시범콘텐츠 이미지 프롬프트 정합 (Codex 적대 검토 반영)
+
+- 계기: 공통 사양 12.3 화면별 프롬프트와 탈춤 UI 프롬프트 검수 지시. 자기검수 F1~F3 후 Codex 적대 검토로 확대 결함 발견, G2 사용자 수용
+- F1 (언어 선택): 공통 12.3.1 시작 중립에 언어 선택 자리표시 추가 + "blank option boxes, no rendered text"로 명확화(English 금지와 상충 제거). 유람기 시작 위치 next-to-start-button -> top corner of header 정렬. 5개 콘텐츠 시작 keep-요소 목록에 language selector 포함
+- F2 (탈춤 3.7.2): 다른 프롬프트에 있던 "treat any keep/label/caption instruction above as reference" 절 추가
+- F3 (홈버튼 전면 정리): 공통 12.3.2 가이드 중립에 홈버튼 추가(12.3.3과 대칭). 5개 콘텐츠 가이드/이용동의 프롬프트에서 홈버튼을 keep-목록으로만 유지하고 중복 "Add a small circular home button" 줄 제거(생성기 이중 홈버튼 위험 해소). 꼭두각시·버나·양반 가이드 keep-목록에 home button 전이(누락분 보완)
+- 수정 6파일: 시범콘텐츠 공통 사양, 덧뵈기 - 나만의 탈춤 UI, 덜미 - 나만의 유람기 UI, 덜미 - 나만의 꼭두각시 UI, 버나 - 버나잡이 한 판 UI, 덧뵈기 - 양반 놀리기 4컷 UI. lint 0건, Add 잔존 0, 가이드/시작 keep-목록 정합 5/5 확인
+
 ## [2026-07-21] maint | 변환기 기준 양식을 ver.0.0.2 로 교체
 
 - 계기: 사용자가 `무형문화유산 전승_기획서 양식_ver.0.0.2_20260721.docx` 추가, 이 양식 기준으로 변환 지시
