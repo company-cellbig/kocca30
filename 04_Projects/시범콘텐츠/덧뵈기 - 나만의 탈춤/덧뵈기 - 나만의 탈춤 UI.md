@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덧뵈기, UI]
 created: 2026-06-15
-updated: 2026-07-20
+updated: 2026-07-21
 ---
 
 > 덧뵈기 AR 탈춤 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고 덧뵈기 고유분만 더하며, 고유 화면(탈 디자인, AR 춤사위, 기념 촬영, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 기획은 [[덧뵈기 - 나만의 탈춤 기획서]].
@@ -120,11 +120,11 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.2.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름 안내 일러스트, 액션에 다음 버튼과 그만두기 보조 버튼을 둠. 말뚝이가 화자로 등장함
-- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(탈 디자인, AR 춤, 촬영, 받기), "다음" 버튼, "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름 안내 일러스트, 액션에 다음 버튼을 두고, 헤더 좌상단에 홈 버튼을 상시 둠(진행 중 종료). 말뚝이가 화자로 등장함
+- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(탈 디자인, AR 춤, 촬영, 받기), "다음" 버튼, 홈 버튼(헤더 좌상단 원형, 진행 중 종료, [[공통 UI 컴포넌트]] 홈 버튼)
 - **말뚝이 호스트**: 화자로 등장해 설명, 재담하는 표정
-- **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]), 터치 미입력 타임아웃은 종료 처리. 기획서 Step 1 가이드 화면 분기를 준용함(목업은 정상 안내 상태만)
-- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음", "그만두기"
+- **상태별 안내 (기획서 준용)**: 홈 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]), 터치 미입력 타임아웃은 종료 처리. 기획서 Step 1 가이드 화면 분기를 준용함(목업은 정상 안내 상태만)
+- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
 ### 3.2.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
@@ -135,7 +135,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host character acting as the narrator with a lively storytelling expression
 - the flow-illustration placeholder -> an instructional illustration of the flow (mask design, AR dance, photo, receive via QR) in talchum styling
 - background -> a traditional madang stage, friendly mood
-Keep greeting '어서 오세요', primary button '다음', and add a secondary '그만두기' button beside it.
+Keep greeting '어서 오세요', primary button '다음'. Add a small circular home button in the top-left corner of the header (icon only, no text label).
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -148,25 +148,25 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.3.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 이용 동의 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼과 그만두기 보조 버튼을 둠(동의하고 시작이 곧 동의, 그만두기는 확인 팝업을 거쳐 확정 시 미동의. 카메라 촬영 동의는 약관에 포함하며 별도 토글을 두지 않음. 생체나 영상정보 별도 명시 동의 여부와 형태는 규정 검토로 확정). 화면 타임아웃 미적용. 말뚝이는 넓은 측면에 또렷한 안내 캐릭터로 둠
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 이용 동의 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼만 두고, 헤더 좌상단에 홈 버튼을 상시 둠(진행 중 종료). 동의하고 시작이 곧 동의이며, 카메라 촬영 동의는 약관에 포함하고 별도 토글과 미동의 버튼을 두지 않음. 생체나 영상정보 별도 명시 동의 여부와 형태는 규정 검토로 확정. 화면 타임아웃 미적용. 말뚝이는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
 	- 약관 텍스트 영역 (필수 이용 약관과 카메라 촬영 고지 포함, 문구는 규정 검토 확정)
-	- 주 버튼 "동의하고 시작": 약관과 카메라 촬영 동의를 담음(별도 토글 없음, 항상 활성)
-	- 보조 "그만두기" 버튼: 터치 시 확인 팝업을 거쳐 확정 시 동의하지 않고 종료함(비완주라 마무리 인사 화면을 건너뛰고 시작 화면으로 복귀, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])
+	- 주 버튼 "동의하고 시작": 약관과 카메라 촬영 동의를 담음(별도 토글 없음, 항상 활성). 액션 영역의 유일한 버튼임(별도 미동의 버튼 없음)
+	- 홈 버튼(헤더 좌상단 원형, 진행 중 종료, [[공통 UI 컴포넌트]] 홈 버튼): 터치 시 그만두기 확인 팝업을 거쳐 확정 시 동의하지 않고 종료함(미동의, 시작 화면 리셋)
 - **말뚝이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **개인정보 고지 (기획서 [[덧뵈기 - 나만의 탈춤 기획서#3.2 개인정보 처리]] 준용)**: 약관과 안내 문구에 카메라 촬영(얼굴과 신체)뿐 아니라, 기념 사진(얼굴과 신체 포함)을 생성하고 저장하며 결과 페이지로 48시간 제공하는 처리 범위를 포함함(정확한 고지 문구와 동의 범위는 규정 검토 확정, 확인 필요)
-- **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 미동의, 카메라 촬영 미동의나 터치 미입력 타임아웃도 미동의로 간주해 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])는 기획서 Step 1과 [[시범콘텐츠 공통 사양#5. 공통 화면]]나를 준용함(목업은 정상 동의 상태만)
-- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
+- **상태별 안내 (기획서 준용)**: 홈 버튼 터치 시 그만두기 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 미동의로 간주해 시작 화면으로 리셋함(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]). 카메라 촬영 미동의나 터치 미입력 타임아웃도 팝업 없이 미동의 리셋. 액션 영역에는 별도 미동의 버튼을 두지 않음. 기획서 Step 1과 [[시범콘텐츠 공통 사양#5. 공통 화면]]나를 준용함(목업은 정상 동의 상태만)
+- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작"
 
 ### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.3 이용 동의 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary button, host, home button). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a Korean Maldukki mask host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm traditional madang stage
-Keep title '이용 동의'. Do NOT render any consent toggle; consent (including camera capture) is expressed by the buttons and covered by the terms (if the reference mockup shows toggle rows, omit them). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의'. Do NOT render any consent toggle; consent (including camera capture) is expressed by the single button and covered by the terms (if the reference mockup shows toggle rows, omit them). Keep the primary button '동의하고 시작' (active) as the only action-area button (no separate decline button). Add a small circular home button in the top-left corner of the header (icon only, no text).
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -184,17 +184,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 본문 중앙: 넓은 탈 도안 캔버스를 중앙 도달 존에 크게 둠 (주기능, 손 닿는 범위)
 	- 도구 패널: 캔버스 바로 아래(또는 캔버스에 인접한 도달 존 안쪽)에 툴바로 둠. 탈 템플릿과 프리셋, 팔레트, 스탬프, 대칭 토글은 모두 터치 조작이라 도달 존 안에 모으고 좌우 끝에 두지 않음 ([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)
 	- 3D 미리보기: 표시 전용(비조작)이라 한쪽 측면 가장자리에 작게 둠 (캔버스보다 확연히 작음)
-	- 액션: 완료 버튼과 그만두기 보조 버튼을 화면 물리 최하단이 아니라 중앙 도달 존 아래쪽(허리 높이 안)에 둠
+	- 액션: 완료 버튼을 화면 물리 최하단이 아니라 중앙 도달 존 아래쪽(허리 높이 안)에 둠. 진행 중 종료는 헤더 좌상단 홈 버튼으로 함
 - **핵심 UI 컴포넌트**
 	- 탈 도안 캔버스: 고해상도 드로잉으로 디자인 중인 전통 탈 (도트 픽셀 아님)
 	- 도구 패널: 배역 탈 템플릿과 프리셋, 제한 팔레트, 도형과 전통 문양 스탬프, 대칭 모드 토글
 	- 경량 3D 미리보기: 그린 도안을 3D 탈에 입힌 실시간 미리보기 패널(표시 전용, 측면에 작게. 정식 변환은 Step 3)
 	- "완료" 버튼
-	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
+	- 홈 버튼(헤더 좌상단 원형, 진행 중 종료, [[공통 UI 컴포넌트]] 홈 버튼)
 - **말뚝이 호스트**: 모서리에 작게 두거나 숨김 (작업 집중 우선)
 - **상태별 안내 (기획서 준용)**: 입력 유효성 검증, 가드레일 실패 시 차단과 재입력 안내, 한도 초과 처리는 기획서 Step 2 분기를 준용함(목업은 정상 편집 상태만)
 - **치수 (확인 필요)**: 캔버스 높이와 툴바 터치 폭 등 도달 존 안 배분 치수는 설계 단계에서 확정([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)
-- **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료", "그만두기"
+- **화면 내 텍스트**: 안내 "탈을 꾸며보세요", 버튼 "완료"
 
 ### 3.4.2 프롬프트 (영어)
 
@@ -206,7 +206,7 @@ Top header: a one-line caption '탈을 꾸며보세요'.
 Center: a large high-resolution drawing canvas (not pixel/dot art) with a Korean traditional mask being designed from a role-mask template, the main focus within the central reachable zone.
 Directly below the canvas and within reach: a tool bar with role-mask templates and presets, a limited traditional color palette, shape tools, traditional-pattern stamps, and a left-right symmetry (mirror) toggle. These are touch tools, so they stay in the central reachable zone, not on the far left or right edge.
 To one side, display-only (non-touch): a small live 3D preview pane showing the design applied to a 3D mask, clearly smaller than the canvas.
-A primary button labeled '완료' with a smaller secondary button '그만두기' beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
+A primary button labeled '완료' in the lower part of the central reachable zone, not at the physical bottom edge. A small circular home button sits in the top-left corner of the header (icon only, no text).
 A calm, focused working layout with a small Korean Maldukki mask host in a corner (can be omitted).
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
@@ -249,17 +249,17 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 - **레이아웃** (고유, 16:9 골격 위 카메라 우세 구성)
 	- 헤더 모서리(우상단): 신명 게이지를 상태 표시로 얹음
-	- 헤더 모서리(좌상단): 중지 버튼(원형 아이콘)을 상시 둠. 카메라 우세 화면이라 하단 액션 버튼을 두지 않고, 진행 중 종료는 이 좌상단 중지 버튼으로 함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 모션과 카메라 화면 예외)
+	- 헤더 모서리(좌상단): 홈 버튼(원형 아이콘)을 상시 둠. 카메라 우세 화면이라 하단 액션 버튼을 두지 않고, 진행 중 종료는 이 좌상단 홈 버튼으로 함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 모션과 카메라 화면 예외)
 	- 본문(최대 비중): AR 카메라 뷰. 사용자 얼굴에 사용자가 디자인한 탈이 오버레이된 실시간 화면
 	- 본문 하단: 춤사위 가이드(시연 아바타나 실루엣)
-	- 액션: 하단 별도 버튼 없음(체험 중, 진행 중 종료는 위 좌상단 중지 버튼). 자동으로 진행하며, 화면 타임아웃이 발동하면 정상 진행으로 다음 단계로 넘어감
+	- 액션: 하단 별도 버튼 없음(체험 중, 진행 중 종료는 위 좌상단 홈 버튼). 자동으로 진행하며, 화면 타임아웃이 발동하면 정상 진행으로 다음 단계로 넘어감
 - **핵심 UI 컴포넌트**
 	- AR 카메라 뷰: 사용자 얼굴에 사용자 디자인 탈이 오버레이된 실시간 화면
 	- 춤사위 가이드: 따라 출 동작을 보여주는 시연 아바타나 실루엣
 	- 신명(興) 게이지: 채점이 쌓일수록 차오르는 상승형 게이지
-	- 중지 버튼(좌상단 원형 아이콘): 카메라 화면의 진행 중 종료 버튼. 터치 시 그만두기 확인 팝업을 띄움([[공통 UI 컴포넌트]] 그만두기 버튼)
+	- 홈 버튼(좌상단 원형 아이콘): 카메라 화면의 진행 중 종료 버튼. 터치 시 그만두기 확인 팝업을 띄움([[공통 UI 컴포넌트]] 홈 버튼)
 - **말뚝이 호스트**: 화면 모서리에서 추임새로 호응, 활기찬 표정
-- **상태별 안내 (기획서 준용)**: 포즈 미검출이나 저신뢰 시 재시도 안내, 그리고 중지 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])는 기획서 Step 4 분기를 준용함(목업은 정상 체험 상태만)
+- **상태별 안내 (기획서 준용)**: 포즈 미검출이나 저신뢰 시 재시도 안내, 그리고 홈 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])는 기획서 Step 4 분기를 준용함(목업은 정상 체험 상태만)
 - **화면 내 텍스트**: 게이지 라벨 "신명", 안내 "춤사위를 따라 해보세요"
 
 ### 3.6.2 프롬프트 (영어)
@@ -268,15 +268,15 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 Korean traditional mask dance (talchum) AR experience screen.
 Center: a live AR camera view of a participant wearing a hand-designed Korean traditional mask overlaid on their face, dancing.
-Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'. The bottom area contains only this dance-move guide; this is a hands-free experience screen with no bottom toolbar, no action buttons, and no extra UI controls other than the top-left stop button described below.
-Top-left corner: a small circular stop button (the on-screen quit control for this camera screen).
+Bottom: a dance-move guide with a demonstrator silhouette performing a talchum move, with a caption '춤사위를 따라 해보세요'. The bottom area contains only this dance-move guide; this is a hands-free experience screen with no bottom toolbar, no action buttons, and no extra UI controls other than the top-left home button described below.
+Top-left corner: a small circular home button (the on-screen quit control for this camera screen).
 Top-right: a rising excitement gauge labeled '신명', filling up, festive.
 A corner: a Korean Maldukki mask host character cheering with a lively expression.
 Background: a traditional madang (outdoor courtyard) stage, lively festival mood.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, any bottom toolbar or action buttons not specified (e.g. sound, camera-switch, dance, retry, home).
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, any bottom toolbar or action buttons not specified (e.g. sound, camera-switch, dance, retry). The only control is the top-left home button described above.
 ```
 
 ## 3.7 Step 5. 기념 촬영 화면
@@ -287,16 +287,16 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 - **레이아웃** (고유, 16:9 골격 위 합성 카메라 구성)
 	- 헤더 상단: 안내 카피 배너 "같이 포즈를 잡아 보세요"를 둠. 1컷만 찍으므로 잔여 횟수 배지는 두지 않음
-	- 헤더 좌상단: 중지 버튼(원형 아이콘)을 상시 둠. 카메라 화면이라 하단 촬영 버튼을 두지 않고, 진행 중 종료는 이 좌상단 중지 버튼으로 함
+	- 헤더 좌상단: 홈 버튼(원형 아이콘)을 상시 둠. 카메라 화면이라 하단 촬영 버튼을 두지 않고, 진행 중 종료는 이 좌상단 홈 버튼으로 함
 	- 본문(최대 비중): 사용자 카메라 뷰에 2D 탈 캐릭터를 옆에 합성해 한 장 사진 구도로 보여주고, 그 위에 촬영까지 남은 시간을 큰 카운트다운 숫자로 오버레이(포즈 잡는 유저가 바로 봄)
-	- 액션 하단: 비움 (촬영 버튼 없이 시간 0에 자동 촬영, 진행 중 종료는 위 좌상단 중지 버튼). 카운트다운은 본문 오버레이로 둠
+	- 액션 하단: 비움 (촬영 버튼 없이 시간 0에 자동 촬영, 진행 중 종료는 위 좌상단 홈 버튼). 카운트다운은 본문 오버레이로 둠
 - **핵심 UI 컴포넌트**
 	- 카메라 뷰: 맨 얼굴의 사용자 (탈을 쓰지 않음)
 	- 2D 탈 캐릭터: 사용자가 만든 탈을 쓰고 덧뵈기 탈옷을 입은 채 탈춤 포즈를 취함
 	- 카운트다운 오버레이 (본문 위 큰 숫자): 촬영까지 남은 시간을 표시, 0이 되면 자동 촬영(찰칵)하고 생성으로 넘어감. 3초에서 0까지(잠정, [[덧뵈기 - 나만의 탈춤 기획서#4.5 Step 5. 기념 촬영과 생성 (병행)]] 카운트다운 촬영). 별도 촬영 버튼 없음
-	- 중지 버튼(좌상단 원형 아이콘): 카메라 화면의 진행 중 종료 버튼. 터치 시 그만두기 확인 팝업을 띄움([[공통 UI 컴포넌트]] 그만두기 버튼)
+	- 홈 버튼(좌상단 원형 아이콘): 카메라 화면의 진행 중 종료 버튼. 터치 시 그만두기 확인 팝업을 띄움([[공통 UI 컴포넌트]] 홈 버튼)
 - **말뚝이 호스트**: 촬영을 거들며 분위기를 돋움 (선택, 작게 두거나 숨김). 사진 합성 프레임 밖 UI 요소로만 두고 카메라 뷰 안에 탈 쓴 사람을 더 넣지 않음 (사용자와 2D 캐릭터 구분 보존)
-- **상태별 안내 (기획서 준용)**: 카메라에 사람이 안 잡히면 촬영 타임아웃(10초, 잠정)까지 다시 서도록 안내하고, 유효 촬영 0회로 타임아웃되면 상황 안내 뒤 마무리 인사 화면을 건너뛴 종료로 감(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]). 중지 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 진행 중인 카운트다운이나 촬영을 취소하고 종료함(비완주). 기획서 Step 5 분기를 준용함(목업은 정상 촬영 상태만)
+- **상태별 안내 (기획서 준용)**: 카메라에 사람이 안 잡히면 촬영 타임아웃(10초, 잠정)까지 다시 서도록 안내하고, 유효 촬영 0회로 타임아웃되면 상황 안내 뒤 마무리 인사 화면을 건너뛴 종료로 감(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]). 홈 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 진행 중인 카운트다운이나 촬영을 취소하고 종료함(비완주). 기획서 Step 5 분기를 준용함(목업은 정상 촬영 상태만)
 - **화면 내 텍스트**: 안내 "같이 포즈를 잡아 보세요", 촬영까지 남은 시간 카운트다운 숫자
 
 ### 3.7.2 프롬프트 (영어)
@@ -306,7 +306,7 @@ A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen
 The commemorative photo capture screen of a Korean traditional mask dance (talchum) experience.
 A single composite frame: a live camera view of a real user with a bare face and NO mask, posing next to a 2D mask character (the character wears the user-designed Korean traditional mask and a deotboegi talchum costume, striking a talchum pose) composited right beside the user so they pose together in one shot. Only the 2D character wears a mask; the real user's face is bare and clearly human, so the two are easy to tell apart.
 Top header: a caption banner '같이 포즈를 잡아 보세요' across the top. Only one shot is taken, so there is no remaining-shots badge.
-Top-left corner: a small circular stop button (the on-screen quit control for this camera screen).
+Top-left corner: a small circular home button (the on-screen quit control for this camera screen).
 Overlaid on the camera view, a single large prominent countdown number (example '3', ticking 3 -> 2 -> 1 -> 0) for the seconds until the automatic capture, placed where the posing user can see it.
 Bottom action area: empty, with NO capture button or shutter button anywhere (the single photo auto-fires when the countdown reaches zero).
 Optionally, a small non-photographic Maldukki mascot icon may appear as a UI element outside the camera/composite frame (can be omitted); it must NOT be a masked person inside the camera view. The camera view contains exactly two figures: the bare-faced user and the single 2D mask character. No additional masked people or faces anywhere in the camera view.
@@ -353,7 +353,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 헤더: 타이틀
 	- 본문 중앙: 기념 사진 카드를 크게 배치(신명 게이지 점수와 등급을 스탬프로 표기). 아래 QR 띠와 액션이 자리를 차지하므로 카드 높이를 그만큼 낮춰 잡음
 	- QR 띠: 사진 카드 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임. 화면에 들어온 순간부터 보이며 별도 버튼으로 여는 단계가 없음
-	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 그만두기 버튼을 두지 않음
+	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음
 - **핵심 UI 컴포넌트**
 	- 기념 사진 카드: 2D 탈 캐릭터와 사용자가 같이 포즈한 사진에 테두리 프레임을 두르고 신명 게이지 점수와 등급을 스탬프로 표기 (기획서 [[덧뵈기 - 나만의 탈춤 기획서#4.5 Step 5. 기념 촬영과 생성 (병행)]] 기념 사진 프레임)
 	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
@@ -370,7 +370,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The single result screen (view and receive in one screen) of a Korean traditional mask dance (talchum) experience.
 Title: '나의 탈춤 한 판'.
-Layout, stacked vertically in the body: a large commemorative photo card in the center (a 2D mask character and the user posing together, enclosed in a decorative border frame, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no secondary quit button on this screen).
+Layout, stacked vertically in the body: a large commemorative photo card in the center (a 2D mask character and the user posing together, enclosed in a decorative border frame, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
 The QR code is visible from the moment the screen opens; there is no separate send or share screen and no step that opens the QR.
 Guide caption: 'QR 코드를 스캔하면 기념 사진을 받을 수 있습니다', with a short download-availability note.
 To one side: a Korean Maldukki mask host guide reacting proudly to the result, as a clear side presence that does not cover the central reachable zone or the QR (an on-screen guide character, not a realistic bystander or a second user).

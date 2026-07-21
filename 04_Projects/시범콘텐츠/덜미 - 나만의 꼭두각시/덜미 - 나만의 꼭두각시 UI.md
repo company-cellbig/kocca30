@@ -4,7 +4,7 @@ type: project
 status: draft
 tags: [project, kocca, 시범콘텐츠, 덜미, UI]
 created: 2026-07-01
-updated: 2026-07-20
+updated: 2026-07-21
 ---
 
 > 덜미(꼭두각시놀음) 인형놀음 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고, 고유 화면(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 기획은 [[덜미 - 나만의 꼭두각시 기획서]].
@@ -120,11 +120,11 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.2.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름 안내 일러스트, 액션에 다음 버튼과 그만두기 보조 버튼을 둠. 산받이가 화자로 등장함
-- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(얼굴 촬영, 인형 놀이, 기념 촬영, 공유), "다음" 버튼, "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]가이드 화면 준용. 본문에 진행 흐름 안내 일러스트, 액션에 다음 버튼을 두고, 헤더 좌상단에 홈 버튼을 상시 둠(진행 중 종료). 산받이가 화자로 등장함
+- **핵심 UI 컴포넌트**: 진행 흐름 안내 일러스트(얼굴 촬영, 인형 놀이, 기념 촬영, 공유), "다음" 버튼, 홈 버튼(헤더 좌상단 원형, 진행 중 종료, [[공통 UI 컴포넌트]] 홈 버튼)
 - **산받이 호스트**: 화자로 등장해 설명, 재담하는 표정
-- **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]), 터치 미입력 타임아웃은 종료 처리. 기획서 Step 1 가이드 화면 분기를 준용함(목업은 정상 안내 상태만)
-- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음", "그만두기"
+- **상태별 안내 (기획서 준용)**: 홈 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]), 터치 미입력 타임아웃은 종료 처리. 기획서 Step 1 가이드 화면 분기를 준용함(목업은 정상 안내 상태만)
+- **화면 내 텍스트**: 인사말 "어서 오세요"(표본 카피), 버튼 "다음"
 
 ### 3.2.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
@@ -135,7 +135,7 @@ Use the attached neutral layout mockup as the structural reference. Keep its 16:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Sanbaji narrator host character (the deolmi puppet-play storyteller, an on-screen guide character, not a realistic bystander) acting as the narrator with a lively storytelling expression
 - the flow-illustration placeholder -> an instructional illustration of the flow (face capture, puppet play, photo, share) in namsadang puppet-play styling
 - background -> a namsadang booth-curtain (pojangmak) puppet stage, friendly mood
-Keep greeting '어서 오세요', primary button '다음', and add a secondary '그만두기' button beside it.
+Keep greeting '어서 오세요', primary button '다음'. Add a small circular home button in the top-left corner of the header (icon only, no text label).
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -148,25 +148,25 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 
 ### 3.3.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 이용 동의 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼과 그만두기 보조 버튼을 둠(동의하고 시작이 곧 동의, 그만두기는 확인 팝업을 거쳐 확정 시 미동의. 카메라 촬영 동의는 약관에 포함하며 별도 토글을 두지 않음. 생체나 영상정보 별도 명시 동의 여부와 형태는 규정 검토로 확정). 화면 타임아웃 미적용. 산받이는 넓은 측면에 또렷한 안내 캐릭터로 둠
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]] 이용 동의 화면 준용. 본문에 약관 텍스트, 액션에 동의하고 시작 버튼만 두고, 헤더 좌상단에 홈 버튼을 상시 둠(진행 중 종료). 동의하고 시작이 곧 동의이며, 카메라 촬영 동의는 약관에 포함하고 별도 토글과 미동의 버튼을 두지 않음. 생체나 영상정보 별도 명시 동의 여부와 형태는 규정 검토로 확정. 화면 타임아웃 미적용. 산받이는 넓은 측면에 또렷한 안내 캐릭터로 둠
 - **핵심 UI 컴포넌트**
 	- 약관 텍스트 영역 (필수 이용 약관과 카메라 촬영 고지 포함, 문구는 규정 검토 확정)
-	- 주 버튼 "동의하고 시작": 약관과 카메라 촬영 동의를 담음(별도 토글 없음, 항상 활성)
-	- 보조 "그만두기" 버튼: 터치 시 확인 팝업을 거쳐 확정 시 동의하지 않고 종료함(비완주라 마무리 인사 화면을 건너뛰고 시작 화면으로 복귀, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])
+	- 주 버튼 "동의하고 시작": 약관과 카메라 촬영 동의를 담음(별도 토글 없음, 항상 활성). 액션 영역의 유일한 버튼임(별도 미동의 버튼 없음)
+	- 홈 버튼(헤더 좌상단 원형, 진행 중 종료, [[공통 UI 컴포넌트]] 홈 버튼): 터치 시 그만두기 확인 팝업을 거쳐 확정 시 동의하지 않고 종료함(미동의, 시작 화면 리셋)
 - **산받이 호스트**: 넓은 측면에 또렷한 안내 캐릭터로, 유저를 향해 안내하는 포즈(중앙 도달 존 조작은 가리지 않음)
 - **개인정보 고지 (기획서 [[덜미 - 나만의 꼭두각시 기획서#3.2 개인정보 처리]] 준용)**: 약관과 안내 문구에 카메라 촬영(얼굴)뿐 아니라, 기념 사진(얼굴 포함)을 생성하고 저장하며 결과 페이지로 48시간 제공하는 처리 범위를 포함함(정확한 고지 문구와 동의 범위는 규정 검토 확정, 확인 필요)
-- **상태별 안내 (기획서 준용)**: 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 미동의, 카메라 촬영 미동의나 터치 미입력 타임아웃도 미동의로 간주해 마무리 인사 화면을 건너뛴 종료(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]])는 기획서 Step 1과 [[시범콘텐츠 공통 사양#5. 공통 화면]]나를 준용함(목업은 정상 동의 상태만)
-- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작", "그만두기"
+- **상태별 안내 (기획서 준용)**: 홈 버튼 터치 시 그만두기 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 미동의로 간주해 시작 화면으로 리셋함(비완주, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]). 카메라 촬영 미동의나 터치 미입력 타임아웃도 팝업 없이 미동의 리셋. 액션 영역에는 별도 미동의 버튼을 두지 않음. 기획서 Step 1과 [[시범콘텐츠 공통 사양#5. 공통 화면]]나를 준용함(목업은 정상 동의 상태만)
+- **화면 내 텍스트**: 타이틀 "이용 동의"(표본), 항목 "카메라 촬영 (필수)"(표본), 버튼 "동의하고 시작"
 
 ### 3.3.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.3 이용 동의 (인트로 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary/secondary buttons, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (title, terms area, primary button, host, home button). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
 - the guide-host placeholder (keep its clear side presence and presenting pose from the reference) -> a stylized Korean Sanbaji narrator host guide as a clear side presence in a presenting pose (an on-screen guide character, not a realistic bystander or a second user)
 - background -> a calm namsadang booth-curtain puppet stage
-Keep title '이용 동의'. Do NOT render any consent toggle; consent (including camera capture) is expressed by the buttons and covered by the terms (if the reference mockup shows toggle rows, omit them). Keep primary button '동의하고 시작' (active), secondary button '그만두기'.
+Keep title '이용 동의'. Do NOT render any consent toggle; consent (including camera capture) is expressed by the single button and covered by the terms (if the reference mockup shows toggle rows, omit them). Keep the primary button '동의하고 시작' (active) as the only action-area button (no separate decline button). Add a small circular home button in the top-left corner of the header (icon only, no text).
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
@@ -345,7 +345,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- 헤더: 타이틀
 	- 본문 중앙: 기념 사진 카드를 크게 배치(신명 게이지 점수와 등급을 스탬프로 표기). 아래 QR 띠와 액션이 자리를 차지하므로 카드 높이를 그만큼 낮춰 잡음
 	- QR 띠: 사진 카드 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임. 화면에 들어온 순간부터 보이며 별도 버튼으로 여는 단계가 없음
-	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 그만두기 버튼을 두지 않음
+	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음
 - **핵심 UI 컴포넌트**
 	- 기념 사진 카드: 3D 인형 아바타와 사용자가 같이 포즈(신명 게이지 점수와 등급 스탬프)
 	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
@@ -362,7 +362,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
 The single result screen (view and receive in one screen) of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience.
 Title: '나의 꼭두각시 한 판'.
-Layout, stacked vertically in the body: a large commemorative photo card in the center (a 3D wooden-puppet character and the user posing together, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no secondary quit button on this screen).
+Layout, stacked vertically in the body: a large commemorative photo card in the center (a 3D wooden-puppet character and the user posing together, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
 The QR code is visible from the moment the screen opens; there is no separate send or share screen and no step that opens the QR.
 Guide caption: 'QR 코드를 스캔하면 기념 사진을 받을 수 있습니다', with a short download-availability note.
 To one side: a stylized Korean Sanbaji narrator host guide reacting proudly to the result, as a clear side presence that does not cover the central reachable zone or the QR (an on-screen guide character, not a realistic bystander or a second user).
