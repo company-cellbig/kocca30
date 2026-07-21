@@ -703,7 +703,12 @@ def assemble(content_docx, out_docx):
     # 병합하면 중복·댕글링(comments.xml 미포함)이 생겨 Word가 "일부 콘텐츠를
     # 읽을 수 없음"을 띄움.
     body_refs = set(re.findall(r'r:(?:embed|id)="(rId\d+)"', body))
+    # 새 rId 는 양식 것뿐 아니라 pandoc 것까지 포함한 전체 최대+1 부터 매김.
+    # 양식 것만 기준(예: 13부터)으로 하면, 아직 재매핑 전인 pandoc old id(예: rId19)와
+    # 겹쳐 전역 문자열 치환이 서로를 덮어씀(이미지 뒤바뀜). old id 는 모두 이 값 미만이라
+    # 위에서 시작하면 충돌이 없음.
     existing = [int(x) for x in re.findall(r'Id="rId(\d+)"', tpl_rels)]
+    existing += [int(x) for x in re.findall(r'Id="rId(\d+)"', pan_rels)]
     next_id = (max(existing) + 1) if existing else 1
     new_rel, img_added = [], False
     for rel in re.findall(r"<Relationship\b[^>]*?/>", pan_rels):
