@@ -35,7 +35,7 @@ import subprocess
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(SCRIPT_DIR)  # scripts/ 의 상위 = vault root
 TEMPLATE = os.path.join(
-    VAULT, "assets", "무형문화유산 전승_기획서 양식_ver.0.0.1_20260713.docx"
+    VAULT, "assets", "무형문화유산 전승_기획서 양식_ver.0.0.2_20260721.docx"
 )
 
 
