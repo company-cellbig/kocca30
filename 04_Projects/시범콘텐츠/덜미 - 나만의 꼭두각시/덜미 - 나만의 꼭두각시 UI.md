@@ -7,14 +7,14 @@ created: 2026-07-01
 updated: 2026-07-21
 ---
 
-> 덜미(꼭두각시놀음) 인형놀음 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고, 고유 화면(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 기획은 [[덜미 - 나만의 꼭두각시 기획서]].
+> 덜미(꼭두각시놀음) 인형놀음 체험 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고, 고유 화면(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상)은 레이아웃을 상세 설계함. 기획은 [[덜미 - 나만의 꼭두각시 기획서]].
 
 # 1. 개요
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
 - **대상 화면**: 11개. Step 순으로 배열함([[#2.1 화면 목록과 분류]])
-- **공용과 고유**: 공용 화면 7개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(산받이, 인형 비주얼, 카피)만 더함. 7개 모두 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을 정본으로 함(실패 안내 화면 포함). 덜미 고유 화면 4개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음
+- **공용과 고유**: 공용 화면 7개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(산받이, 인형 비주얼, 카피)만 더함. 7개 모두 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을 정본으로 함(실패 안내 화면 포함). 덜미 고유 화면 4개는 레이아웃을 상세 설계함. 결과물 받기(QR)는 감상 화면이 아니라 완주 시 마무리 인사 화면에서 하므로 [[시범콘텐츠 공통 사양#5.4 결과물 감상]] 전송 공용 화면은 쓰지 않음
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 7개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덜미 고유 화면)은 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
 - **텍스트 주의 (후편집)**: 이미지에는 UI 텍스트를 렌더링하지 않음. 타이틀, 버튼, 카피 등 모든 텍스트 영역을 빈 자리로 두고 실제 문구는 후편집(Figma)으로 넣음(2026-07-02 결정). 문서와 프롬프트의 한글 문구는 후편집용 참조 카피이며 이미지에 박지 않음. AI 한글 렌더 불안정 문제도 이로써 회피함
@@ -35,7 +35,7 @@ updated: 2026-07-21
 | 바 | 인형 조작 체험 화면 | Step 4 | 덜미 고유 (핵심) | [[덜미 - 나만의 꼭두각시 기획서#4.4 Step 4. 아바타 조작 한 판 (핵심 체험)]] |
 | 사 | 기념 촬영 화면 | Step 5 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#4.5 Step 5. 기념 촬영과 생성 (병행)]] |
 | 아 | 생성 대기 화면 (기념 사진) | Step 5 | 공용 (대기, [[시범콘텐츠 공통 사양#5.3 생성과 변환 대기]]) | [[덜미 - 나만의 꼭두각시 기획서#4.5 Step 5. 기념 촬영과 생성 (병행)]] |
-| 자 | 결과물 감상과 받기 화면 | Step 6 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#4.6 Step 6. 결과물 감상과 받기]] |
+| 자 | 결과물 감상 화면 | Step 6 | 덜미 고유 | [[덜미 - 나만의 꼭두각시 기획서#4.6 Step 6. 결과물 감상]] |
 | 차 | 마무리 인사 화면 | Step 7 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[덜미 - 나만의 꼭두각시 기획서#4.7 Step 7. 종료와 리셋]] |
 | 카 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]) | [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] |
 
@@ -43,8 +43,8 @@ updated: 2026-07-21
 
 모든 화면은 [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]]을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성). 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
-- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 덜미 고유분(산받이, 인형 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함
-- **고유 화면**: 같은 16:9 영역 골격 위에서 덜미 메커닉(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 결과물 감상과 받기는 QR을 함께 담으므로 QR을 손 닿는 높이에 둠
+- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상, 종료)을 그대로 따르고, 덜미 고유분(산받이, 인형 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함
+- **고유 화면**: 같은 16:9 영역 골격 위에서 덜미 메커닉(얼굴 촬영, 인형 조작 한 판, 기념 촬영, 결과물 감상)에 맞춰 레이아웃을 상세 설계함. 받기 QR은 감상 화면이 아니라 마무리 인사 화면에 담으며, 유저가 폰을 들어 스캔하므로 손 닿는 높이에 둠
 - **덜미 공통 요소**: 진행 호스트는 산받이임(역할은 [[덜미 - 나만의 꼭두각시 기획서#3.3 산받이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "산받이 진행 호스트 캐릭터"로만 묘사). 산받이는 가면을 쓰지 않는 재담 화자라 실사 행인이나 다른 사용자로 오인될 위험이 더 크므로, 공통 화면에서는 산받이를 중앙 조작 존 옆 여유 공간에 화면 속 안내 캐릭터로 또렷이 두고 유저를 향해 안내하는 포즈로 함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 호스트 슬롯). 본문이 화면 전체를 쓰는 고유 화면(얼굴 촬영 카메라 뷰, 인형 조작 무대, 기념 촬영)에서만 작게 두거나 숨김
 
 ## 2.3 공통 프롬프트 양식
@@ -54,7 +54,7 @@ updated: 2026-07-21
 생성 방식은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
 - **참조 이미지 기반** (시작, 가이드, 이용 동의, 대기, 종료, 실패 안내): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(산받이, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함
-- **단독 프롬프트** (얼굴 촬영, 인형 조작, 기념 촬영, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
+- **단독 프롬프트** (얼굴 촬영, 인형 조작, 기념 촬영, 결과물 감상): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 2.3.1 공통 제약 (모든 화면 공유)
 
@@ -335,69 +335,73 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.9 Step 6. 결과물 감상과 받기 화면
+## 3.9 Step 6. 결과물 감상 화면
 
-덜미 고유 화면. 완성된 기념 사진을 크게 감상하고, 같은 화면 아래쪽 QR을 본인 휴대폰으로 스캔해 결과물을 받고 마침으로 끝냄. 감상과 받기를 한 화면에서 끝내므로 별도 전송 화면이 없음. 호스팅과 다운로드 URL 발급은 Step 5 생성 파이프라인에서 이미 끝났고, 이 화면은 그 URL을 QR로 그리기만 함. 연락처를 받지 않아 이 화면에서 전송용으로 수집하는 개인정보는 없음. 얼굴이 담긴 결과물의 호스팅과 파기는 [[덜미 - 나만의 꼭두각시 기획서#3.2 개인정보 처리]]에서 다룸 (화면 근거는 [[덜미 - 나만의 꼭두각시 기획서#4.6 Step 6. 결과물 감상과 받기]]).
+덜미 고유 화면. 완성된 기념 사진을 크게 감상하고 마침으로 완주해 마무리 인사 화면(Step 7)으로 감. 결과물 받기(QR)는 이 화면이 아니라 마무리 인사 화면에서 함. 호스팅과 다운로드 URL 발급은 Step 5 생성 파이프라인에서 이미 끝남. 얼굴이 담긴 결과물의 호스팅과 파기는 [[덜미 - 나만의 꼭두각시 기획서#3.2 개인정보 처리]]에서 다룸 (화면 근거는 [[덜미 - 나만의 꼭두각시 기획서#4.6 Step 6. 결과물 감상]]).
 
 ### 3.9.1 화면 설계
 
-- **레이아웃** (고유, 16:9 골격 위 사진 카드와 QR을 세로로 쌓음)
+- **레이아웃** (고유, 16:9 골격 위 사진 카드 중심)
 	- 헤더: 타이틀
-	- 본문 중앙: 기념 사진 카드를 크게 배치(신명 게이지 점수와 등급을 스탬프로 표기). 아래 QR 띠와 액션이 자리를 차지하므로 카드 높이를 그만큼 낮춰 잡음
-	- QR 띠: 사진 카드 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임. 화면에 들어온 순간부터 보이며 별도 버튼으로 여는 단계가 없음
-	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음
+	- 본문 중앙: 기념 사진 카드를 크게 배치(신명 게이지 점수와 등급을 스탬프로 표기)
+	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음. 받기 QR은 이 화면에 두지 않고 마무리 인사 화면에 둠([[#3.10 Step 7. 마무리 인사 화면]])
 - **핵심 UI 컴포넌트**
 	- 기념 사진 카드: 3D 인형 아바타와 사용자가 같이 포즈(신명 게이지 점수와 등급 스탬프)
-	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
-	- 스캔 안내와 다운로드 가능 기간 문구
 	- "마침" 버튼
-- **산받이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작과 QR은 가리지 않음)
+- **산받이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 마무리 인사 화면을 건너뛴 종료 진행(마침을 누르지 않아 완주 아님)은 기획서 Step 6 분기를 준용함. 호스팅 실패는 이 화면에 닿기 전 대기 화면에서 상황 안내 뒤 마무리 인사 화면을 건너뛴 종료로 갈림([[시범콘텐츠 공통 사양#5.5 종료와 리셋]], 목업은 정상 열람 상태만)
-- **화면 내 텍스트**: 타이틀 "나의 꼭두각시 한 판", 안내 "QR 코드를 스캔하면 기념 사진을 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
+- **화면 내 텍스트**: 타이틀 "나의 꼭두각시 한 판", 버튼 "마침"
 - **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 연락처 수집 고지를 두지 않음
 
 ### 3.9.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The single result screen (view and receive in one screen) of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience.
+The result viewing screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience. This screen has NO QR code (the download QR is on the later closing screen).
 Title: '나의 꼭두각시 한 판'.
-Layout, stacked vertically in the body: a large commemorative photo card in the center (a 3D wooden-puppet character and the user posing together, with an excitement score and grade stamp); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
-The QR code is visible from the moment the screen opens; there is no separate send or share screen and no step that opens the QR.
-Guide caption: 'QR 코드를 스캔하면 기념 사진을 받을 수 있습니다', with a short download-availability note.
-To one side: a stylized Korean Sanbaji narrator host guide reacting proudly to the result, as a clear side presence that does not cover the central reachable zone or the QR (an on-screen guide character, not a realistic bystander or a second user).
+Layout: a large commemorative photo card in the center of the body (a 3D wooden-puppet character and the user posing together, with an excitement score and grade stamp); in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
+To one side: a stylized Korean Sanbaji narrator host guide reacting proudly to the result, as a clear side presence that does not cover the central reachable zone (an on-screen guide character, not a realistic bystander or a second user).
 Background: a namsadang booth-curtain puppet stage, a proud showcase mood.
 No contact-input field, keypad, send button, or contact-collection notice anywhere on the screen.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, a contact input field or keypad, and any UI buttons, toolbars, or controls not specified in this prompt.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, a contact input field or keypad, any QR code, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
 
 ## 3.10 Step 7. 마무리 인사 화면
 
-공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 6 마침)로 진입한 경우에만 표시하는 완주 전용 화면임. 마무리 인사 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
+공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(결과물 감상 화면에서 마침 터치)로 진입한 경우에만 표시하는 완주 전용 화면임. 산받이 마무리 인사와 함께 결과물 받기 QR을 보여주고, "처음으로" 버튼 터치나 화면 타임아웃 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
 
 ### 3.10.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용. 본문 중앙에 산받이의 작별 인사와 마무리 메시지를 크게 둠. 액션은 없음(자동으로 시작 화면 복귀). 산받이가 중심
-- **핵심 UI 컴포넌트**: 마무리 인사 메시지, 산받이 작별 연출
-- **산받이 호스트**: 중심에서 정겹게 작별 인사
-- **화면 내 텍스트**: 인사 "또 만나요"
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용에 결과물 받기 QR을 더함. 헤더에 타이틀 "꼭두각시 한 판 완성", 본문 중앙에 결과물 QR과 스캔 안내를 두고, 그 아래 "처음으로" 버튼을 둠. 산받이가 측면에서 작별 인사를 함. "처음으로" 터치나 화면 타임아웃(기본 60초, 잠정) 뒤 시작 화면에 복귀함
+	- QR: QR 코드 아래에 스캔 안내 문구를 두고, 유저가 폰을 들어 스캔하므로 손 닿는 높이에 둠
+- **핵심 UI 컴포넌트**
+	- 타이틀 "꼭두각시 한 판 완성", 산받이 작별 말풍선("또 만나요")
+	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내 문구
+	- "처음으로" 버튼(시작 화면 복귀)
+- **산받이 호스트**: 측면에서 정겹게 작별 인사(QR은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 완주로 진입한 경우에만 표시하고, "처음으로" 버튼 터치나 화면 타임아웃 시 다음 단계(종료와 리셋)로 진행함은 기획서 Step 7 분기를 준용함
+- **화면 내 텍스트**: 타이틀 "꼭두각시 한 판 완성", 산받이 말풍선 "또 만나요", 안내 "QR 코드를 스캔하면 기념 사진을 받을 수 있습니다", 버튼 "처음으로", 다운로드 가능 기간 안내(예시, 규정 검토 확정)
+- **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음(QR 익명 다운로드, [[덜미 - 나만의 꼭두각시 기획서#3.2 개인정보 처리]])
 
-### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부 + QR 추가)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience, without moving or resizing them:
-- the guide-host placeholder (keep its central position and farewell pose from the reference; on this closing screen the host is centered, not to the side) -> a stylized Korean Sanbaji narrator host character giving a warm farewell
-- background -> a namsadang booth-curtain puppet stage, a warm closing mood
-Keep the closing message '또 만나요'.
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 layout. Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) experience:
+- header -> a title '꼭두각시 한 판 완성'
+- the guide-host placeholder -> a stylized Korean Sanbaji narrator host character to one side giving a warm farewell, with a speech bubble '또 만나요'
+- center -> a download QR code with a scan-guide caption 'QR 코드를 스캔하면 기념 사진을 받을 수 있습니다' below it, at a comfortable height for a person holding up a phone to scan
+- below the QR -> a primary button '처음으로'
+- background -> a namsadang booth-curtain (pojangmak) puppet stage, a warm closing mood
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 

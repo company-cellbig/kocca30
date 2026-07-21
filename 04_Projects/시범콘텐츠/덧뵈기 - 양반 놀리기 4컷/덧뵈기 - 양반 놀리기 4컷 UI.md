@@ -7,14 +7,14 @@ created: 2026-07-02
 updated: 2026-07-21
 ---
 
-> 덧뵈기(탈춤) 양반 풍자 4컷 만화 생성 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고 덧뵈기 고유분만 더하며, 고유 화면(이름 입력, 캐릭터 카드, 세부 유형 선택, 말뚝이 문답, 결과물 감상과 받기)은 레이아웃을 상세 설계함. 카메라를 쓰지 않아 전 화면이 터치라 도달 존을 엄격히 적용함. 기획은 [[덧뵈기 - 양반 놀리기 4컷 기획서]].
+> 덧뵈기(탈춤) 양반 풍자 4컷 만화 생성 키오스크의 화면별 UI 설계. 각 화면의 레이아웃(16:9 영역 배치)과 예시 이미지 생성 프롬프트를 함께 담음. 공용 화면(인트로, 대기, 종료)은 [[시범콘텐츠 공통 사양#5. 공통 화면]] 표준을 따르고 덧뵈기 고유분만 더하며, 고유 화면(이름 입력, 캐릭터 카드, 세부 유형 선택, 말뚝이 문답, 결과물 감상)은 레이아웃을 상세 설계함. 카메라를 쓰지 않아 전 화면이 터치라 도달 존을 엄격히 적용함. 기획은 [[덧뵈기 - 양반 놀리기 4컷 기획서]].
 
 # 1. 개요
 
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
 - **대상 화면**: 11개. Step 순으로 배열함([[#2.1 화면 목록과 분류]])
-- **공용과 고유**: 공용 화면 6개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준(실패 안내 화면 포함)을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 덧뵈기 고유 화면 5개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음
+- **공용과 고유**: 공용 화면 6개는 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준(실패 안내 화면 포함)을 참조하고 덧뵈기 고유분(말뚝이, 탈 비주얼, 카피)만 더함. 덧뵈기 고유 화면 5개는 레이아웃을 상세 설계함. 결과물 받기(QR)는 감상 화면이 아니라 완주 시 마무리 인사 화면에서 하므로 [[시범콘텐츠 공통 사양#5.4 결과물 감상]] 전송 공용 화면은 쓰지 않음
 - **입력 특성**: 카메라를 쓰지 않고 터치와 음성(STT)만 씀(하드웨어 정본은 [[디바이스 사양]]). 따라서 카메라/모션 화면 예외가 없고, 전 화면에서 터치 조작 요소를 중앙 도달 존([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 6개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면(덧뵈기 고유 화면)은 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
@@ -36,7 +36,7 @@ updated: 2026-07-21
 | 바 | 양반 놀리기 세부 유형 선택 화면 | Step 3 | 덧뵈기 고유 | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.3 Step 3. 세부 유형 선택과 플롯 문답 (컷별 반복)]] |
 | 사 | 말뚝이 문답 화면 | Step 3 | 덧뵈기 고유 (핵심) | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.3 Step 3. 세부 유형 선택과 플롯 문답 (컷별 반복)]] |
 | 아 | 생성 대기 화면 | Step 4 | 공용 (대기, [[시범콘텐츠 공통 사양#5.3 생성과 변환 대기]]) | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.4 Step 4. 결과물 생성과 대기 화면 (병행)]] |
-| 자 | 결과물 감상과 받기 화면 | Step 5 | 덧뵈기 고유 | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.5 Step 5. 결과물 감상과 받기]] |
+| 자 | 결과물 감상 화면 | Step 5 | 덧뵈기 고유 | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.5 Step 5. 결과물 감상]] |
 | 차 | 마무리 인사 화면 | Step 6 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[덧뵈기 - 양반 놀리기 4컷 기획서#4.6 Step 6. 종료와 리셋]] |
 | 카 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]) | [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] |
 
@@ -44,8 +44,8 @@ updated: 2026-07-21
 
 모든 화면은 [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]]을 따름. 헤더(제목과 상태), 본문(주기능), 액션(버튼) 세 영역에 호스트 슬롯(진행 호스트가 들어갈 자리)을 얹는 구조임. 참여자가 화면 앞 가운데 서서 터치하므로 터치 조작 요소는 중앙 도달 존(가운데 폭, 눈높이~허리)에 두고 화면 가장자리는 피함([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성). 본 콘텐츠는 카메라를 쓰지 않아 모션/카메라 화면 예외가 없으므로 전 화면에 도달 존을 그대로 적용함. 공용 화면은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 참조 이미지가 이 배치와 호스트 측면 안내를 이미 담고 있어 그대로 계승함.
 
-- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상과 받기, 종료)을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함
-- **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(이름 입력, 캐릭터 카드, 세부 유형 선택, 말뚝이 문답, 결과물 감상과 받기)에 맞춰 레이아웃을 상세 설계함. 전부 터치 화면이라 입력 필드, 가상 키보드, 카드, 컷 넘김 등 조작 요소를 중앙 도달 존에 둠. 결과물 감상과 받기는 QR을 함께 담으므로 QR도 손 닿는 높이에 둠
+- **공용 화면**: [[시범콘텐츠 공통 사양#5. 공통 화면]]의 동작별 표준 레이아웃(인트로, 대기, 결과물 감상, 종료)을 그대로 따르고, 덧뵈기 고유분(말뚝이, 탈 비주얼, 한글 카피)만 각 영역에 끼움. 각 화면 설계의 레이아웃 항목에 준용 절을 명시함
+- **고유 화면**: 같은 16:9 영역 골격 위에서 덧뵈기 메커닉(이름 입력, 캐릭터 카드, 세부 유형 선택, 말뚝이 문답, 결과물 감상)에 맞춰 레이아웃을 상세 설계함. 전부 터치 화면이라 입력 필드, 가상 키보드, 카드, 컷 넘김 등 조작 요소를 중앙 도달 존에 둠. 받기 QR은 감상 화면이 아니라 마무리 인사 화면에 담으며, 유저가 폰을 들어 스캔하므로 손 닿는 높이에 둠
 - **덧뵈기 공통 요소**: 진행 호스트는 말뚝이임(역할은 [[덧뵈기 - 양반 놀리기 4컷 기획서#3.3 말뚝이 진행 호스트]], 구체 비주얼 미확정이라 전 화면에서 "말뚝이 탈 호스트 캐릭터"로만 묘사). 공통 화면에서는 말뚝이를 중앙 조작 존 옆 여유 공간에 화면 속 안내 캐릭터로 또렷이 두고 유저를 향해 안내하는 포즈로 함(실사 행인이나 다른 사용자로 오인되지 않게, [[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 호스트 슬롯). 말뚝이 문답 화면은 말뚝이가 화자로 전면에 서는 고유 화면임
 
 ## 2.3 공통 프롬프트 양식
@@ -55,7 +55,7 @@ updated: 2026-07-21
 생성 방식은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
 - **참조 이미지 기반** (시작, 가이드, 이용 동의, 이름 입력, 말뚝이 문답, 대기, 종료, 실패 안내): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덧뵈기 고유 요소(말뚝이, 탈 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함. 이름 입력과 말뚝이 문답은 텍스트 입력 화면이라 [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 이미지를 씀
-- **단독 프롬프트** (캐릭터 카드, 세부 유형 선택, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
+- **단독 프롬프트** (캐릭터 카드, 세부 유형 선택, 결과물 감상): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 2.3.1 공통 제약 (모든 화면 공유)
 
@@ -348,71 +348,75 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.9 Step 5. 결과물 감상과 받기 화면
+## 3.9 Step 5. 결과물 감상 화면
 
-덧뵈기 고유 화면. 완성된 4컷 만화를 감상하고, 같은 화면 아래쪽 QR을 본인 휴대폰으로 스캔해 결과물을 받고 마침으로 끝냄. 감상과 받기를 한 화면에서 끝내므로 별도 전송 화면이 없음. 호스팅과 다운로드 URL 발급은 Step 4 생성 파이프라인에서 이미 끝났고, 이 화면은 그 URL을 QR로 그리기만 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음 ([[덧뵈기 - 양반 놀리기 4컷 기획서#4.5 Step 5. 결과물 감상과 받기]], [[덧뵈기 - 양반 놀리기 4컷 기획서#3.2 개인정보 처리]]).
+덧뵈기 고유 화면. 완성된 4컷 만화를 크게 감상하고 마침으로 완주해 마무리 인사 화면(Step 6)으로 감. 결과물 받기(QR)는 이 화면이 아니라 마무리 인사 화면에서 함. 호스팅과 다운로드 URL 발급은 Step 4 생성 파이프라인에서 이미 끝남. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음 ([[덧뵈기 - 양반 놀리기 4컷 기획서#4.5 Step 5. 결과물 감상]], [[덧뵈기 - 양반 놀리기 4컷 기획서#3.2 개인정보 처리]]).
 
 ### 3.9.1 화면 설계
 
-- **레이아웃** (고유, 16:9 골격 위 4컷 만화 뷰어와 QR을 세로로 쌓음)
+- **레이아웃** (고유, 16:9 골격 위 4컷 만화 뷰어 중심)
 	- 헤더: 타이틀
-	- 본문 중앙: 4컷 만화 전체(예: 2열 2행)를 중앙에 배치. 아래 QR 띠와 액션이 자리를 차지하므로 뷰어 높이를 그만큼 낮춰 잡음
+	- 본문 중앙: 4컷 만화 전체(예: 2열 2행)를 중앙에 크게 배치
 	- 확대와 컷 넘김: 개별 컷 확대와 컷 넘김 컨트롤을 중앙 도달 존 안에 둠(화면 물리 끝이 아니라 손 닿는 범위)
-	- QR 띠: 뷰어 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임. 화면에 들어온 순간부터 보이며 별도 버튼으로 여는 단계가 없음
-	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음
+	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 이 화면은 진행 중 종료를 적용하지 않아 홈 버튼을 두지 않음. 받기 QR은 이 화면에 두지 않고 마무리 인사 화면에 둠([[#3.10 Step 6. 마무리 인사 화면]])
 - **핵심 UI 컴포넌트**
 	- 4컷 만화 뷰어(탈 캐릭터 등장, 컷별 말풍선 대사)
 	- 확대(줌)와 컷 넘김 컨트롤(도달 존 안)
-	- 결과물 QR 코드(Step 4가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
-	- 스캔 안내와 다운로드 가능 기간 문구
 	- "마침" 버튼
 - **말뚝이 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작과 QR은 가리지 않음)
 - **상태별 안내 (기획서 준용)**: 화면 타임아웃 발동 시 마무리 인사 화면 없이 세션 종료와 파기로 진행(마침을 누르지 않아 완주 아님)은 기획서 Step 5 분기를 준용함. 호스팅 실패는 이 화면에 닿기 전 대기 화면에서 상황 안내 뒤 마무리 인사 화면 없이 세션 종료와 파기로 갈림([[시범콘텐츠 공통 사양#5.5 종료와 리셋]], 목업은 정상 열람 상태만)
-- **화면 내 텍스트**: 타이틀 "나의 양반 놀리기 4컷", 안내 "QR 코드를 스캔하면 4컷 만화를 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
+- **화면 내 텍스트**: 타이틀 "나의 양반 놀리기 4컷", 버튼 "마침"
 - **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음
 
 ### 3.9.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The single result screen (view and receive in one screen) of a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience.
+The result viewing screen of a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience. This screen has NO QR code (the download QR is on the later closing screen).
 Title: '나의 양반 놀리기 4컷'.
-Layout, stacked vertically in the body: a complete 4-panel comic (for example a 2-by-2 grid) in the center, featuring the user's talchum mask hero character and speech-bubble dialogue in each panel, with a zoom (enlarge) control and panel-navigation controls placed within the central reachable zone (not at the physical screen edges); below it a QR strip holding a QR code next to a guide caption, placed at a comfortable height for a standing user to scan with a phone; below that, in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
-The QR code is visible from the moment the screen opens; there is no separate send or share screen and no step that opens the QR.
-Guide caption: 'QR 코드를 스캔하면 4컷 만화를 받을 수 있습니다', with a short download-availability note.
-To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls or the QR.
+Layout: a complete 4-panel comic (for example a 2-by-2 grid) in the center of the body, featuring the user's talchum mask hero character and speech-bubble dialogue in each panel, with a zoom (enlarge) control and panel-navigation controls placed within the central reachable zone (not at the physical screen edges); in the lower part of the central reachable zone (not at the physical bottom edge), a single primary button '마침' (no home button on this screen).
+To one side: a stylized Korean Maldukki mask host character (the talchum servant who mocks the yangban, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls.
 Background: a traditional madang stage, a proud showcase mood.
 No contact-input field, keypad, send button, or contact-collection notice anywhere on the screen.
 Art direction: Korean traditional talchum motifs blended with a modern kiosk UI, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a contact input field or keypad, and any UI buttons, toolbars, or controls not specified in this prompt.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, a contact input field or keypad, any QR code, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
 
 ## 3.10 Step 6. 마무리 인사 화면
 
-공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 5에서 마침 터치)로 진입한 경우에만 표시하는 완주 전용 화면임. 마무리 인사 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
+공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 5에서 마침 터치)로 진입한 경우에만 표시하는 완주 전용 화면임. 말뚝이 마무리 인사와 함께 결과물 받기 QR을 보여주고, "처음으로" 버튼 터치나 화면 타임아웃 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
 
 ### 3.10.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용. 본문 중앙에 말뚝이의 작별 인사와 마무리 메시지를 크게 둠. 액션은 없음(자동으로 시작 화면 복귀). 말뚝이가 중심
-- **핵심 UI 컴포넌트**: 마무리 인사 메시지, 말뚝이 작별 연출
-- **말뚝이 호스트**: 중심에서 정겹게 작별 인사
-- **화면 내 텍스트**: 인사 "또 만나요"
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용에 결과물 받기 QR을 더함. 헤더에 타이틀 "4컷 만화 완성", 본문 중앙에 결과물 QR과 스캔 안내를 두고, 그 아래 "처음으로" 버튼을 둠. 말뚝이가 측면에서 작별 인사를 함. "처음으로" 터치나 화면 타임아웃(기본 60초, 잠정) 뒤 시작 화면에 복귀함
+	- QR: QR 코드 아래에 스캔 안내 문구를 두고, 유저가 폰을 들어 스캔하므로 손 닿는 높이에 둠
+- **핵심 UI 컴포넌트**
+	- 타이틀 "4컷 만화 완성", 말뚝이 작별 말풍선("또 만나요")
+	- 결과물 QR 코드(Step 4가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내 문구
+	- "처음으로" 버튼(시작 화면 복귀)
+- **말뚝이 호스트**: 측면에서 정겹게 작별 인사(QR은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 완주로 진입한 경우에만 표시하고, "처음으로" 버튼 터치나 화면 타임아웃 시 다음 단계(종료와 리셋)로 진행함은 기획서 Step 6 분기를 준용함
+- **화면 내 텍스트**: 타이틀 "4컷 만화 완성", 말뚝이 말풍선 "또 만나요", 안내 "QR 코드를 스캔하면 4컷 만화를 받을 수 있습니다", 버튼 "처음으로", 다운로드 가능 기간 안내(예시, 규정 검토 확정)
+- **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음(QR 익명 다운로드, [[덧뵈기 - 양반 놀리기 4컷 기획서#3.2 개인정보 처리]])
 
-### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부 + QR 추가)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience, without moving or resizing them:
-- the guide-host placeholder (keep its central position and farewell pose from the reference; on this closing screen the host is centered, not to the side) -> a stylized Korean Maldukki mask host character giving a warm farewell
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 layout. Replace the neutral placeholders with content-specific elements for a Korean traditional mask dance (talchum/deotboegi) 4-panel satire comic experience:
+- header -> a title '4컷 만화 완성'
+- the guide-host placeholder -> a stylized Korean Maldukki mask host character to one side giving a warm farewell, with a speech bubble '또 만나요'
+- center -> a download QR code with a scan-guide caption 'QR 코드를 스캔하면 4컷 만화를 받을 수 있습니다' below it, at a comfortable height for a person holding up a phone to scan
+- below the QR -> a primary button '처음으로'
 - background -> a traditional madang stage, a warm closing mood
-Keep the closing message '또 만나요'.
 Art direction: Korean traditional talchum motifs, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Noh or Chinese opera masks, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
