@@ -178,6 +178,94 @@ def _find_md(name):
     return _MD_INDEX.get(name)
 
 
+# ---------------------------------------------------------------------------
+# 이미지 임베드 -> 실제 이미지 경로
+# ---------------------------------------------------------------------------
+
+_IMG_EXTS = (".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp")
+_IMG_INDEX = None
+
+
+def _build_img_index():
+    global _IMG_INDEX
+    if _IMG_INDEX is not None:
+        return
+    _IMG_INDEX = {}
+    for p in glob.glob(os.path.join(VAULT, "assets", "**", "*"), recursive=True):
+        if os.path.isfile(p) and p.lower().endswith(_IMG_EXTS):
+            parts = p.replace("\\", "/").split("/")
+            _IMG_INDEX.setdefault("/".join(parts[-2:]), p)  # 폴더/파일
+            _IMG_INDEX.setdefault(parts[-1], p)             # 파일명 폴백
+
+
+def _find_img(partial):
+    _build_img_index()
+    partial = partial.replace("\\", "/").strip()
+    return _IMG_INDEX.get(partial) or _IMG_INDEX.get(partial.split("/")[-1])
+
+
+_IMG_EMBED_RE = re.compile(r"!\[\[([^\]]+)\]\]")
+
+# Obsidian 이미지 폭(px)을 Word 지면 물리 크기(cm)로 환산하는 배율.
+# 사용자 기준: Obsidian 500px = Word 8cm (px->cm, 약 158.75 DPI 상당).
+# px 를 96 DPI 로 그대로 쓰면(500px=13.2cm) Obsidian 화면 대비 지면에서 과대해짐.
+PX_TO_CM = 8.0 / 500  # = 0.016 cm/px
+
+
+def _img_embed_md(inner):
+    """![[폴더/파일.png|너비]] 내부 텍스트 -> ![](절대경로){width=너비cm}.
+    폭(px)은 PX_TO_CM 배율로 cm 환산(500px=8cm). 이미지가 아니면 None(잔류),
+    경로 못 찾으면 ''(제거)."""
+    inner = inner.strip()
+    if "|" in inner:
+        path_part, width = inner.rsplit("|", 1)
+    else:
+        path_part, width = inner, None
+    path_part = path_part.strip()
+    if not path_part.lower().endswith(_IMG_EXTS):
+        return None  # 블록ID 등 비이미지 임베드는 resolve_embeds 로 넘김
+    abspath = _find_img(path_part)
+    if not abspath:
+        print("[경고] 이미지 없음: " + path_part, file=sys.stderr)
+        return ""
+    attr = ""
+    if width and width.strip().isdigit():
+        attr = "{width=%.2fcm}" % (int(width.strip()) * PX_TO_CM)
+    return "![](%s)%s" % (abspath.replace("\\", "/"), attr)
+
+
+def resolve_image_embeds(text):
+    """![[폴더/파일.png|너비]] -> ![](절대경로){width=너비px}. 비이미지 임베드는 잔류.
+
+    리스트 항목의 들여쓰기된 줄(블릿 연속 줄)에 있는 이미지는 들여쓰기를
+    보존하고 앞뒤 빈 줄을 넣지 않음. 빈 줄로 감싸고 열 0으로 내보내면 리스트가
+    끊겨 블릿이 깨지기 때문. 최상위(들여쓰기 0) 단독 이미지만 앞뒤 빈 줄로 둘러
+    pandoc 이 독립 그림 문단으로 렌더하게 함.
+    """
+    def repl(m):
+        r = _img_embed_md(m.group(1))
+        return m.group(0) if r is None else r
+
+    out = []
+    for ln in text.split("\n"):
+        if not _IMG_EMBED_RE.search(ln):
+            out.append(ln)
+            continue
+        replaced = _IMG_EMBED_RE.sub(repl, ln)
+        if replaced == ln:  # 비이미지 임베드만 있어 치환 없음
+            out.append(ln)
+            continue
+        lead = ln[: len(ln) - len(ln.lstrip())]
+        standalone = _IMG_EMBED_RE.sub("", ln).strip() == ""  # 그 줄이 이미지뿐
+        if lead == "" and standalone:
+            # 최상위 단독 이미지: 독립 그림 문단(앞뒤 빈 줄)
+            out.extend(["", replaced.strip(), ""])
+        else:
+            # 리스트 안(들여쓰기) 또는 텍스트와 동거: 인라인, 들여쓰기 보존
+            out.append(replaced)
+    return "\n".join(out)
+
+
 def _extract_block(lines, marker_idx):
     """marker_idx 는 '^id' 를 담은 줄. 그 위 블록(콜아웃/표/문단)을 추출."""
     # 마커가 줄 끝에 붙은 문단형(... ^id)인지, 독립 줄인지 판별
@@ -378,6 +466,7 @@ def preprocess(md_path, exclude=None):
     text = cut_before_first_h1(text)
     text = drop_h1_sections(text, exclude)   # 제외 절 제거(임베드 처리 전)
     text = drop_excluded_refs(text, exclude)  # 제외 절 댕글링 참조 정리
+    text = resolve_image_embeds(text)        # 이미지 임베드 -> 실제 이미지 (![[x.png|W]])
     text = resolve_embeds(text)              # 임베드 평탄화 (![[ ]])
     text = flatten_native_callouts(text)     # 자체 콜아웃 평탄화 (> [!note])
     text = strip_block_ids(text)             # 블록 ID 마커 제거 (^id)
@@ -464,15 +553,23 @@ def merge_numbering(tpl_num, pan_num):
 
 def assemble(content_docx, out_docx):
     with zipfile.ZipFile(TEMPLATE) as z:
-        names = z.namelist()
+        names = list(z.namelist())
         datas = {n: z.read(n) for n in names}
     tpl_doc = datas["word/document.xml"].decode("utf-8")
     tpl_num = datas["word/numbering.xml"].decode("utf-8")
+    rels_name = "word/_rels/document.xml.rels"
+    tpl_rels = datas.get(rels_name, b"").decode("utf-8")
+    ct_name = "[Content_Types].xml"
+    ct = datas.get(ct_name, b"").decode("utf-8")
 
     with zipfile.ZipFile(content_docx) as z:
+        cnames = z.namelist()
         pan_doc = z.read("word/document.xml").decode("utf-8")
         pan_styles = z.read("word/styles.xml").decode("utf-8")
         pan_num = z.read("word/numbering.xml").decode("utf-8")
+        pan_rels = (z.read(rels_name).decode("utf-8")
+                    if rels_name in cnames else "")
+        pan_media = {n: z.read(n) for n in cnames if n.startswith("word/media/")}
 
     pan_styles = inject_pandoc_styles(pan_styles)
 
@@ -495,13 +592,64 @@ def assemble(content_docx, out_docx):
     pan_last_sect = pan_doc.rfind("<w:sectPr")
     body = pan_doc[pb:pan_last_sect]
 
-    # pandoc 본문이 새 관계(rId: 이미지/하이퍼링크)를 참조하면 경고 (양식 rels 와 어긋날 위험)
-    rels = re.findall(r'r:(?:id|embed)="([^"]+)"', body)
-    if rels:
-        print("[경고] pandoc 본문에 관계 참조 %d건: %s (rels 병합 필요할 수 있음)"
-              % (len(rels), sorted(set(rels))), file=sys.stderr)
+    # pandoc 이미지/하이퍼링크 관계와 미디어를 양식 패키지로 병합.
+    # rId 충돌을 피하려 양식 최대 rId 다음부터 재번호하고, 본문 참조도 함께 고침.
+    # 본문이 실제 참조하는 관계(이미지 r:embed, 하이퍼링크 r:id)만 병합함:
+    # numbering/styles/settings/comments 등 파트 관계는 양식이 이미 제공하므로
+    # 병합하면 중복·댕글링(comments.xml 미포함)이 생겨 Word가 "일부 콘텐츠를
+    # 읽을 수 없음"을 띄움.
+    body_refs = set(re.findall(r'r:(?:embed|id)="(rId\d+)"', body))
+    existing = [int(x) for x in re.findall(r'Id="rId(\d+)"', tpl_rels)]
+    next_id = (max(existing) + 1) if existing else 1
+    new_rel, img_added = [], False
+    for rel in re.findall(r"<Relationship\b[^>]*?/>", pan_rels):
+        old_id = re.search(r'Id="(rId\d+)"', rel).group(1)
+        if old_id not in body_refs:
+            continue  # 본문이 참조 안 하는 파트 관계는 양식 것을 그대로 씀
+        new_id = "rId%d" % next_id
+        next_id += 1
+        body = body.replace('r:embed="%s"' % old_id, 'r:embed="%s"' % new_id)
+        body = body.replace('r:id="%s"' % old_id, 'r:id="%s"' % new_id)
+        if "/image" in rel:
+            target = re.search(r'Target="([^"]+)"', rel).group(1)
+            old_media = "word/" + target.lstrip("./")
+            new_base = "pan_" + os.path.basename(target)
+            if old_media in pan_media:
+                dest = "word/media/" + new_base
+                datas[dest] = pan_media[old_media]
+                if dest not in names:
+                    names.append(dest)
+                img_added = True
+            rel = rel.replace('Target="%s"' % target, 'Target="media/%s"' % new_base)
+        rel = rel.replace('Id="%s"' % old_id, 'Id="%s"' % new_id)
+        new_rel.append(rel)
+    if new_rel:
+        cl = tpl_rels.rfind("</Relationships>")
+        tpl_rels = tpl_rels[:cl] + "".join(new_rel) + tpl_rels[cl:]
+        datas[rels_name] = tpl_rels.encode("utf-8")
+    if img_added:
+        for ext, ctype in (("png", "image/png"), ("jpeg", "image/jpeg"),
+                           ("jpg", "image/jpeg"), ("gif", "image/gif"),
+                           ("bmp", "image/bmp")):
+            if ('Extension="%s"' % ext) not in ct:
+                cl = ct.rfind("</Types>")
+                ct = ct[:cl] + ('<Default Extension="%s" ContentType="%s"/>' % (ext, ctype)) + ct[cl:]
+        datas[ct_name] = ct.encode("utf-8")
 
     new_doc = head + body + tail
+
+    # pandoc 이미지 XML이 쓰는 네임스페이스(wp/a/pic 등)를 양식 루트 <w:document>에
+    # 보강. 없으면 그 접두를 못 풀어 Word 가 "unbound prefix"로 문서를 못 읽음.
+    pan_root = re.search(r"<w:document\b([^>]*)>", pan_doc).group(1)
+    tpl_root = re.search(r"<w:document\b([^>]*)>", new_doc).group(1)
+    pan_ns = re.findall(r'(xmlns:\w+)="([^"]+)"', pan_root)
+    have = set(re.findall(r"xmlns:\w+", tpl_root))
+    add_ns = "".join(' %s="%s"' % (k, v) for k, v in pan_ns if k not in have)
+    if add_ns:
+        new_doc = new_doc.replace(
+            "<w:document" + tpl_root + ">",
+            "<w:document" + tpl_root + add_ns + ">", 1)
+
     datas["word/document.xml"] = new_doc.encode("utf-8")
     datas["word/styles.xml"] = pan_styles.encode("utf-8")
     datas["word/numbering.xml"] = merge_numbering(tpl_num, pan_num).encode("utf-8")
