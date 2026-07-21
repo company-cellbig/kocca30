@@ -14,7 +14,7 @@ updated: 2026-07-20
 - **목적**: 화면별 UI 레이아웃을 설계하고 예시 이미지 생성 프롬프트를 정리함
 - **문서 성격**: 레이아웃 기획과 이미지 생성 프롬프트를 함께 담음. 레이아웃은 [[시범콘텐츠 공통 사양#5. 공통 화면]]의 16:9 영역 골격을 따름
 - **대상 화면**: 11개. Step 순으로 배열함([[#2.1 화면 목록과 분류]])
-- **공용과 고유**: 공용 화면 6개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(박첨지, 인형 비주얼, 카피)만 더함. 6개 모두 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을 정본으로 함(실패 안내 화면 포함). 덜미 고유 화면 5개는 레이아웃을 상세 설계함. 결과물 감상과 받기를 한 화면으로 합쳐 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음
+- **공용과 고유**: 공용 화면 6개는 콘텐츠 무관 표준을 참조하고 덜미 고유분(박첨지, 인형 비주얼, 카피)만 더함. 6개 모두 [[시범콘텐츠 공통 사양#5. 공통 화면]] 세션 표준을 정본으로 함(실패 안내 화면 포함). 덜미 고유 화면 5개는 레이아웃을 상세 설계함. 결과물 받기(QR)는 감상 화면이 아니라 완주 시 마무리 인사 화면에서 하므로 [[시범콘텐츠 공통 사양#5.4 결과물 감상과 받기]] 전송 공용 화면은 쓰지 않음
 - **입력 특성**: 카메라를 쓰지 않고 터치와 음성(STT)만 씀(하드웨어 정본은 [[디바이스 사양]]). 따라서 카메라/모션 화면 예외가 없고, 전 화면에서 터치 조작 요소를 중앙 도달 존([[시범콘텐츠 공통 사양#5.1 공통 영역 골격 (16:9 가로)]] 도달성)에 둠
 - **공통 규격**: 16:9 가로 키오스크, 실사풍 UI 목업, 영어 프롬프트. 이미지 안 UI 텍스트는 한글로 렌더링함
 - **사용법**: [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]에 중립 레이아웃 이미지가 있는 공용 화면 6개는 그 이미지를 첨부해 참조 이미지 기반으로 생성하고, 중립 이미지가 없는 화면 3개(캐릭터 카드, 마당 선택, 결과물 감상과 받기)는 [[#2.3 공통 프롬프트 양식]] 제약에 화면별 프롬프트를 이어 붙여 생성함. 생성 방식은 분류(공용/고유)와 별개 축임 (방식 구분은 [[#2.3 공통 프롬프트 양식]])
@@ -28,16 +28,16 @@ updated: 2026-07-20
 
 | 순서 | 화면 | Step | 분류 | 기획서 근거 |
 | --- | --- | --- | --- | --- |
-| 가 | 시작 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 나 | 가이드 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 다 | 동의 약관 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로 (시작 + 동의)]] |
-| 라 | 이름 입력 화면 | Step 2 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.2 Step 2. 캐릭터 정보 입력]] |
-| 마 | 캐릭터 카드 선택 화면 | Step 2 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.2 Step 2. 캐릭터 정보 입력]] |
-| 바 | 마당 유형 선택 화면 | Step 3 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]] |
-| 사 | 박첨지 문답 화면 | Step 3 | 덜미 고유 (핵심) | [[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]] |
-| 아 | 생성 대기 화면 | Step 4 | 공용 (대기, [[시범콘텐츠 공통 사양#5.3 생성과 변환 대기]]) | [[덜미 - 나만의 유람기 기획서#4.4 Step 4. 결과물 생성과 대기 화면 (병행)]] |
-| 자 | 결과물 감상과 받기 화면 | Step 5 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.5 Step 5. 결과물 감상과 받기]] |
-| 차 | 마무리 인사 화면 | Step 6 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[덜미 - 나만의 유람기 기획서#4.6 Step 6. 종료와 리셋]] |
+| 가 | 시작 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로]] |
+| 나 | 가이드 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로]] |
+| 다 | 이용 동의 화면 | Step 1 | 공용 (인트로, [[시범콘텐츠 공통 사양#5.2 인트로 (시작 + 동의)]]) | [[덜미 - 나만의 유람기 기획서#4.1 Step 1. 인트로]] |
+| 라 | 마당 유형 선택 화면 | Step 2 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.2 Step 2. 마당 유형 선택]] |
+| 마 | 캐릭터 카드 선택 화면 | Step 3 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.3 Step 3. 주인공 설정]] |
+| 바 | 이름 입력 화면 | Step 3 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.3 Step 3. 주인공 설정]] |
+| 사 | 박첨지 문답 화면 | Step 4 | 덜미 고유 (핵심) | [[덜미 - 나만의 유람기 기획서#4.4 Step 4. 플롯 문답]] |
+| 아 | 생성 대기 화면 | Step 5 | 공용 (대기, [[시범콘텐츠 공통 사양#5.3 생성과 변환 대기]]) | [[덜미 - 나만의 유람기 기획서#4.5 Step 5. 결과물 생성과 대기 화면 (병행)]] |
+| 자 | 결과물 감상과 받기 화면 | Step 6 | 덜미 고유 | [[덜미 - 나만의 유람기 기획서#4.6 Step 6. 결과물 감상과 받기]] |
+| 차 | 마무리 인사 화면 | Step 7 | 공용 (종료, [[시범콘텐츠 공통 사양#5.5 종료와 리셋]]) | [[덜미 - 나만의 유람기 기획서#4.7 Step 7. 종료와 리셋]] |
 | 카 | 실패 안내 (모달 팝업) | 실패 시(공통) | 공용 (실패 안내, [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]]) | [[시범콘텐츠 공통 사양#5.6 실패 안내 (상황 안내 모달 팝업)]] |
 
 ## 2.2 공통 레이아웃
@@ -54,7 +54,7 @@ updated: 2026-07-20
 
 생성 방식은 [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]] 중립 이미지 유무로 갈리며, 분류(공용/고유)와 별개 축임.
 
-- **참조 이미지 기반** (시작, 가이드, 동의 약관, 이름 입력, 박첨지 문답, 대기, 종료, 실패 안내): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(박첨지, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함. 이름 입력과 박첨지 문답은 텍스트 입력 화면이라 [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 이미지를 씀
+- **참조 이미지 기반** (시작, 가이드, 이용 동의, 이름 입력, 박첨지 문답, 대기, 종료, 실패 안내): [[시범콘텐츠 공통 사양#12. 공용 화면 예시 이미지]]의 중립 레이아웃 이미지를 첨부 입력으로 받아, 영역 구조와 요소 배치를 유지하며 중립 플레이스홀더를 덜미 고유 요소(박첨지, 인형 비주얼, 한글 카피)로 치환함. 프롬프트에 첨부 이미지를 명시함. 이름 입력과 박첨지 문답은 텍스트 입력 화면이라 [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 이미지를 씀
 - **단독 프롬프트** (캐릭터 카드, 마당 선택, 결과물 감상과 받기): 첨부할 중립 이미지가 없어 아래 공통 제약에 화면별 내용을 이어 붙인 단독 완결형 프롬프트로 생성함
 
 ### 2.3.1 공통 제약 (모든 화면 공유)
@@ -62,7 +62,7 @@ updated: 2026-07-20
 - **매체와 형식**: 키오스크 터치스크린 UI 화면 목업, 풀스크린, 실사풍 고해상도
 - **화면비와 규격**: 16:9 가로 (해상도는 디바이스 규격 확정 후, 예: 1920x1080, 확인 필요)
 - **아트 디렉션 (제안, 확정 필요)**: 한국 남사당 인형극(덜미, 꼭두각시놀음) 모티프와 현대 키오스크 UI의 결합. 목각 인형 질감과 포장막(인형이 오르는 막 무대) 배경, 오방색과 단청 계열 포인트 컬러, 한지와 목재 질감을 절제해 사용. 진행 호스트(박첨지)는 2D 플랫 일러스트 스타일로 통일함(3D 아님, 2026-07-02 결정)
-- **전통 정합성**: 한국 남사당 목각 인형(꼭두각시) 양식 유지, 일본 분라쿠 인형이나 서양 마리오네트와 혼동 금지 ([[덜미 - 나만의 유람기 기획서#4.4 Step 4. 결과물 생성과 대기 화면 (병행)]])
+- **전통 정합성**: 한국 남사당 목각 인형(꼭두각시) 양식 유지, 일본 분라쿠 인형이나 서양 마리오네트와 혼동 금지 ([[덜미 - 나만의 유람기 기획서#4.5 Step 5. 결과물 생성과 대기 화면 (병행)]])
 - **톤과 무드**: 마당놀이 축제의 신명, 밝고 활기차며 친근함
 - **UI 원칙**: 큰 터치 타깃, 명확한 시각 위계, 노년층 포함 가독성
 - **화면 내 텍스트 (후편집)**: 이미지에 텍스트를 렌더링하지 않음. 텍스트 영역은 빈 플레이스홀더로 두고 문구는 후편집(Figma)으로 넣음. 프롬프트와 각 화면 "화면 내 텍스트"의 한글 문구는 참조 카피임
@@ -143,7 +143,7 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.3 Step 1. 동의 약관 화면
+## 3.3 Step 1. 이용 동의 화면
 
 공용 화면(인트로, [[시범콘텐츠 공통 사양#5. 공통 화면]] 나). 필수 동의를 받음. 본 콘텐츠는 카메라를 쓰지 않아 필수 동의 항목은 이용 약관 동의임(카메라 동의 없음). 정확한 동의 항목과 문구는 규정 검토 확정(확인 필요).
 
@@ -173,45 +173,46 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.4 Step 2. 이름 입력 화면
+## 3.4 Step 2. 마당 유형 선택 화면
 
-덜미 고유 화면. 유저가 주인공 캐릭터의 이름을 가상 키보드나 음성(STT)으로 지어 입력함. 실명이 아니라 주인공에게 붙이는 이름이라 화면이 "주인공 이름 입력"으로 물음. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덜미 - 나만의 유람기 기획서#4.2 Step 2. 캐릭터 정보 입력]]).
+덜미 고유 화면. 유저가 마당 유형 4종 중 하나를 고름. 시스템은 그 유형 풀에서 랜덤 마당 1개를 배정함 ([[덜미 - 나만의 유람기 기획서#4.2 Step 2. 마당 유형 선택]], 유형 정의는 같은 문서 [[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]).
 
 ### 3.4.1 화면 설계
 
-- **레이아웃** (고유, 16:9 골격, 조작 요소를 중앙 도달 존에 집약)
-	- 헤더: 타이틀 "주인공 이름 입력"과 안내 카피 한 줄
-	- 본문 중앙: 이름 입력 필드와 가상 키보드, 음성 입력 버튼, 이름 랜덤 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음). 키보드는 하단에 한정해 안내와 입력 필드가 위에 보이게 함
-	- 액션: 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+- **레이아웃** (고유, 16:9 골격, 카드를 중앙 도달 존에 집약)
+	- 헤더: 안내 카피 한 줄
+	- 본문 중앙: 마당 유형 4종 카드(병렬)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
+	- 액션: 선택 후 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
-	- 이름 입력 필드
-	- 가상 키보드(한글)와 "음성으로 입력" 버튼(STT). 두 입력 수단 병행 ([[시범콘텐츠 공통 사양#5.7 텍스트 입력]])
-	- 이름 랜덤 입력 버튼: 사전 이름 목록에서 하나를 랜덤으로 뽑아 입력 필드를 채우는 보조 입력 수단(직전 이름 중복 회피, 현재 언어 반영). 채운 이름은 일반 입력과 동일하게 편집하거나 다시 눌러 바꿀 수 있음 ([[덜미 - 나만의 유람기 기획서#4.2 Step 2. 캐릭터 정보 입력]] 2))
+	- 마당 유형 카드 4종: 위협-구원형, 권력 풍자형, 위선 폭로형, 욕심과 다툼형 ([[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]). 유저 대면 카드 라벨은 친근한 표본이며 정확한 카피는 확인 필요
+	- 각 카드의 짧은 소개 문구와 인형극 양식 일러스트
+	- 선택 표시(하이라이트)
 	- "다음" 버튼
 	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
-- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 유저를 향해 이름을 청하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 길이 초과(이름 20자)나 비속어 검출 시 팝업 안내와 재입력, 각 3회(잠정) 초과 시 종료 Step 직행, 터치 미입력 타임아웃은 기획서 Step 2 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 입력 상태만)
-- **화면 내 텍스트**: 타이틀 "주인공 이름 입력", 안내 "주인공 이름을 지어 주세요", 버튼 "음성으로 입력", "랜덤으로 짓기", "다음", "그만두기"
+- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 어떤 마당으로 놀지 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 터치 미입력 타임아웃 등은 기획서 Step 2 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 선택 상태만)
+- **화면 내 텍스트**: 안내 "어떤 마당으로 놀아 볼까요"(표본), 카드 라벨 "위험을 물리치기"/"뻐기는 자 골리기"/"위선 들추기"/"욕심의 끝"(표본, 4종 유형에 매핑, 정확한 카피 확인 필요), 버튼 "다음", "그만두기"
 
-### 3.4.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
-
-첨부: [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 레이아웃 이미지
+### 3.4.2 프롬프트 (영어)
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
-- the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
-- the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
-- the background placeholders -> a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood
-Keep title '주인공 이름 입력', caption '주인공 이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음' with a secondary '그만두기' button beside it, and add a random-name button '랜덤으로 짓기' near the input field. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
-Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
+A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
+The madang (episode-type) selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
+Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
+Top header: a one-line caption '어떤 마당으로 놀아 볼까요'.
+Center, within reach: four selectable madang-type cards side by side, each with a short intro line and a puppet-play styled illustration, labeled '위험을 물리치기', '뻐기는 자 골리기', '위선 들추기', '욕심의 끝'. One card is highlighted as selected.
+A primary button labeled '다음', with a secondary '그만두기' button beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
+To one side: a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander) inviting the user to pick a madang, not blocking the central controls.
+Background: a namsadang booth-curtain puppet stage, festive mood.
+Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.5 Step 2. 캐릭터 카드 선택 화면
+## 3.5 Step 3. 캐릭터 카드 선택 화면
 
-덜미 고유 화면. 유저가 주인공 캐릭터 카드 1개를 고름. 카드는 연령대(아이/청소년/어른)와 성별(남/여)을 곱한 6종임 ([[덜미 - 나만의 유람기 기획서#4.2 Step 2. 캐릭터 정보 입력]]).
+덜미 고유 화면. 유저가 주인공 캐릭터 카드 1개를 고름. 카드는 연령대(아이/청소년/어른)와 성별(남/여)을 곱한 6종임 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 주인공 설정]]).
 
 ### 3.5.1 화면 설계
 
@@ -225,7 +226,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- "다음" 버튼
 	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 유저에게 고르라고 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 카드 미선택 시 다음 비활성, 터치 미입력 타임아웃 등은 기획서 Step 2 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 선택 상태만)
+- **상태별 안내 (기획서 준용)**: 카드 미선택 시 다음 비활성, 터치 미입력 타임아웃 등은 기획서 Step 3 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 선택 상태만)
 - **화면 내 텍스트**: 안내 "주인공을 골라 주세요", 카드 라벨 "아이 남"/"아이 여"/"청소년 남"/"청소년 여"/"어른 남"/"어른 여"(표본), 버튼 "다음", "그만두기"
 
 ### 3.5.2 프롬프트 (영어)
@@ -245,46 +246,45 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.6 Step 3. 마당 유형 선택 화면
+## 3.6 Step 3. 이름 입력 화면
 
-덜미 고유 화면. 유저가 마당 유형 4종 중 하나를 고름. 시스템은 그 유형 풀에서 랜덤 마당 1개를 배정함 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]], 유형 정의는 같은 문서 [[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]).
+덜미 고유 화면. 유저가 주인공 캐릭터의 이름을 가상 키보드나 음성(STT)으로 지어 입력함. 실명이 아니라 주인공에게 붙이는 이름이라 화면이 "주인공 이름 입력"으로 물음. 클라이언트 비속어 필터로 검증하고, 걸리면 재입력 안내함 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 주인공 설정]]).
 
 ### 3.6.1 화면 설계
 
-- **레이아웃** (고유, 16:9 골격, 카드를 중앙 도달 존에 집약)
-	- 헤더: 안내 카피 한 줄
-	- 본문 중앙: 마당 유형 4종 카드(병렬)를 중앙 도달 존에 둠(터치 선택이라 좌우 끝에 두지 않음)
-	- 액션: 선택 후 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
+- **레이아웃** (고유, 16:9 골격, 조작 요소를 중앙 도달 존에 집약)
+	- 헤더: 타이틀 "주인공 이름 입력"과 안내 카피 한 줄
+	- 본문 중앙: 이름 입력 필드와 가상 키보드, 음성 입력 버튼, 이름 랜덤 입력 버튼을 중앙 도달 존에 둠(터치와 음성 조작이라 좌우 끝에 두지 않음). 키보드는 하단에 한정해 안내와 입력 필드가 위에 보이게 함
+	- 액션: 다음 버튼과 그만두기 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님)
 - **핵심 UI 컴포넌트**
-	- 마당 유형 카드 4종: 위협-구원형, 권력 풍자형, 위선 폭로형, 욕심과 다툼형 ([[덜미 - 나만의 유람기 기획서#3) 마당 유형 (4종)]]). 유저 대면 카드 라벨은 친근한 표본이며 정확한 카피는 확인 필요
-	- 각 카드의 짧은 소개 문구와 인형극 양식 일러스트
-	- 선택 표시(하이라이트)
+	- 이름 입력 필드
+	- 가상 키보드(한글)와 "음성으로 입력" 버튼(STT). 두 입력 수단 병행 ([[시범콘텐츠 공통 사양#5.7 텍스트 입력]])
+	- 이름 랜덤 입력 버튼: 사전 이름 목록에서 하나를 랜덤으로 뽑아 입력 필드를 채우는 보조 입력 수단(직전 이름 중복 회피, 현재 언어 반영). 채운 이름은 일반 입력과 동일하게 편집하거나 다시 눌러 바꿀 수 있음 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 주인공 설정]] 2))
 	- "다음" 버튼
 	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
-- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 어떤 마당으로 놀지 권하는 포즈(중앙 도달 존 조작은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 터치 미입력 타임아웃 등은 기획서 Step 3 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 선택 상태만)
-- **화면 내 텍스트**: 안내 "어떤 마당으로 놀아 볼까요"(표본), 카드 라벨 "위험을 물리치기"/"뻐기는 자 골리기"/"위선 들추기"/"욕심의 끝"(표본, 4종 유형에 매핑, 정확한 카피 확인 필요), 버튼 "다음", "그만두기"
+- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로, 유저를 향해 이름을 청하는 포즈(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 길이 초과(이름 20자)나 비속어 검출 시 팝업 안내와 재입력, 각 3회(잠정) 초과 시 종료 Step 직행, 터치 미입력 타임아웃은 기획서 Step 3 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 입력 상태만)
+- **화면 내 텍스트**: 타이틀 "주인공 이름 입력", 안내 "주인공 이름을 지어 주세요", 버튼 "음성으로 입력", "랜덤으로 짓기", "다음", "그만두기"
 
-### 3.6.2 프롬프트 (영어)
+### 3.6.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+
+첨부: [[시범콘텐츠 공통 사양#12.3.8 텍스트 입력]] 중립 레이아웃 이미지
 
 ```
-A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The madang (episode-type) selection screen of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
-Large-screen kiosk where a person stands centered and touches: keep all interactive cards within a central reachable zone (center of the width, eye-to-waist height), not at the screen edges.
-Top header: a one-line caption '어떤 마당으로 놀아 볼까요'.
-Center, within reach: four selectable madang-type cards side by side, each with a short intro line and a puppet-play styled illustration, labeled '위험을 물리치기', '뻐기는 자 골리기', '위선 들추기', '욕심의 끝'. One card is highlighted as selected.
-A primary button labeled '다음', with a secondary '그만두기' button beside it, in the lower part of the central reachable zone, not at the physical bottom edge.
-To one side: a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander) inviting the user to pick a madang, not blocking the central controls.
-Background: a namsadang booth-curtain puppet stage, festive mood.
-Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
+Use the attached neutral layout mockup as the structural reference. Keep its 16:9 header/body/action regions and the position and size of every element (header/prompt area, text input field, on-screen keyboard confined to a lower band, voice-input button, primary '다음' button, host). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
+- the guide-host placeholder (keep its clear side presence from the reference) -> a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) inviting the user to name their hero, not blocking the central controls
+- the prompt/question area -> a one-line caption prompting for a name (this screen has no host question bubble)
+- the background placeholders -> a namsadang booth-curtain (pojangmak) puppet stage, warm inviting mood
+Keep title '주인공 이름 입력', caption '주인공 이름을 지어 주세요', voice-input button '음성으로 입력', primary button '다음' with a secondary '그만두기' button beside it, and add a random-name button '랜덤으로 짓기' near the input field. The on-screen keyboard stays confined to a lower band and the caption and input field remain clearly visible above it.
+Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
 Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.7 Step 3. 박첨지 문답 화면
+## 3.7 Step 4. 박첨지 문답 화면
 
-덜미 고유 화면(핵심 상호작용). 배정된 마당의 거리(도입/전개/절정/마무리)마다 박첨지가 사전 생성된 고정 질문을 던지고, 유저가 가상 키보드나 음성(STT)으로 답함. 거리 수만큼 반복함 ([[덜미 - 나만의 유람기 기획서#4.3 Step 3. 마당 선택과 플롯 문답 (거리별 반복)]]).
+덜미 고유 화면(핵심 상호작용). 배정된 마당의 거리(도입/전개/절정/마무리)마다 박첨지가 사전 생성된 고정 질문을 던지고, 유저가 가상 키보드나 음성(STT)으로 답함. 거리 수만큼 반복함 ([[덜미 - 나만의 유람기 기획서#4.4 Step 4. 플롯 문답]]).
 
 ### 3.7.1 화면 설계
 
@@ -301,7 +301,7 @@ Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, 
 	- "다음" 버튼
 	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
 - **박첨지 호스트**: 본문 상단에 화자로 전면 등장(질문을 던지는 주역). 본 화면은 박첨지가 조작을 가리지 않는 상단 영역에 서고 응답 입력이 중앙 도달 존을 차지함
-- **상태별 안내 (기획서 준용)**: 길이 초과(거리별 답변 50자)이나 가드레일 위반 시 팝업 안내와 재입력, 각 3회(잠정) 초과 시 종료 Step 직행, 터치 미입력 타임아웃은 기획서 Step 3 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 문답 상태만)
+- **상태별 안내 (기획서 준용)**: 길이 초과(거리별 답변 50자)이나 가드레일 위반 시 팝업 안내와 재입력, 각 3회(잠정) 초과 시 종료 Step 직행, 터치 미입력 타임아웃은 기획서 Step 4 분기를 준용함. 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행(목업은 정상 문답 상태만)
 - **화면 내 텍스트**: 거리 라벨 "도입"/"전개"/"절정"/"마무리", 질문 예시 "길에서 누구를 만났나요?"(표본, 사전 생성 고정 질문), 버튼 "음성으로 답하기", "다음", "그만두기"
 
 ### 3.7.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
@@ -320,14 +320,14 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.8 Step 4. 생성 대기 화면
+## 3.8 Step 5. 생성 대기 화면
 
 공용 화면(대기, [[시범콘텐츠 공통 사양#5. 공통 화면]] 다). 결과물을 생성하는 동안 대기 콘텐츠를 노출함.
 
 ### 3.8.1 화면 설계
 
 - **레이아웃**: [[시범콘텐츠 공통 사양#5.3 생성과 변환 대기]] 준용. 본문 중앙에 진행 인디케이터와 대기 콘텐츠, 상태 문구를 둠. 헤더와 액션은 비움(입력받지 않음). 두 타임아웃 미적용. 박첨지는 측면에 또렷한 안내 캐릭터로 둠
-- **핵심 UI 컴포넌트**: 진행 인디케이터(원형이나 바), 대기 콘텐츠(덜미 준비 과정 영상이나 큐레이션, [[덜미 - 나만의 유람기 기획서#4.4 Step 4. 결과물 생성과 대기 화면 (병행)]]), 안내 문구
+- **핵심 UI 컴포넌트**: 진행 인디케이터(원형이나 바), 대기 콘텐츠(덜미 준비 과정 영상이나 큐레이션, [[덜미 - 나만의 유람기 기획서#4.5 Step 5. 결과물 생성과 대기 화면 (병행)]]), 안내 문구
 - **박첨지 호스트**: 대기 동안 재담으로 흥을 돋움 (측면 또렷한 안내 캐릭터)
 - **화면 내 텍스트**: 안내 "이야기를 짓는 중", 진행률
 
@@ -347,74 +347,76 @@ Do NOT draw any titles, labels, button text, captions, or badges; leave every te
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
-## 3.9 Step 5. 결과물 감상과 받기 화면
+## 3.9 Step 6. 결과물 감상과 받기 화면
 
-덜미 고유 화면. 완성된 전자책을 페이지를 넘기며 감상하고, 페이지마다 박첨지 낭독 음성이 재생됨. 같은 화면 아래쪽 QR을 본인 휴대폰으로 스캔해 결과물을 받고 마침으로 끝냄. 감상과 받기를 한 화면에서 끝내므로 별도 전송 화면이 없음. 호스팅과 다운로드 URL 발급은 Step 4 생성 파이프라인에서 이미 끝났고, 이 화면은 그 URL을 QR로 그리기만 함. 연락처를 받지 않아 본 콘텐츠가 수집하는 개인정보는 없음 ([[덜미 - 나만의 유람기 기획서#4.5 Step 5. 결과물 감상과 받기]], [[덜미 - 나만의 유람기 기획서#3.2 개인정보 처리]]).
+덜미 고유 화면. 완성된 전자책을 페이지를 넘기며 감상하고, 페이지를 열면 그 페이지의 박첨지 낭독 음성이 재생됨. 마지막 페이지까지 본 뒤 다음으로 넘기면 마치기 확인을 거쳐 완주로 마무리 인사 화면(Step 7)으로 감. 결과물 받기(QR)는 이 화면이 아니라 마무리 인사 화면에서 함. 호스팅과 다운로드 URL 발급은 Step 5 생성 파이프라인에서 이미 끝남 ([[덜미 - 나만의 유람기 기획서#4.6 Step 6. 결과물 감상과 받기]], [[덜미 - 나만의 유람기 기획서#3.2 개인정보 처리]]).
 
 ### 3.9.1 화면 설계
 
-- **레이아웃** (고유, 16:9 골격 위 전자책 뷰어와 QR을 세로로 쌓음)
+- **레이아웃** (고유, 16:9 골격, 전자책 뷰어를 중앙에 크게)
 	- 헤더: 타이틀
-	- 본문 중앙: 세로 형식 전자책 페이지 1장을 가로 화면 중앙에 배치하고 양옆은 여백으로 둠. 아래 QR 띠와 액션이 자리를 차지하므로 페이지 높이를 그만큼 낮춰 잡음. 결과물 원본이 세로 형식임([[덜미 - 나만의 유람기 기획서#1. 개요]] 산출물)
+	- 본문 중앙: 세로 형식 전자책 페이지 1장을 가로 화면 중앙에 배치하고 양옆은 여백으로 둠. 결과물 원본이 세로 형식임([[덜미 - 나만의 유람기 기획서#1. 개요]] 산출물)
 	- 페이지 넘김: 좌우 넘김 버튼을 페이지 양옆 중앙 도달 존 안에 둠(화면 물리 좌우 끝이 아니라 손 닿는 범위). 스와이프 병행 가능
 	- 낭독 재생: 페이지 바로 아래에 재생과 일시정지 컨트롤을 둠. 페이지를 열면 그 페이지 낭독이 자동 재생되고, 페이지를 넘기면 이전 낭독을 멈춤
-	- QR 띠: 재생 컨트롤 아래에 QR 코드와 안내 문구를 가로로 나란히 둠. QR은 유저가 폰을 들어 스캔하므로 손 닿는 높이에 두고, 문구는 QR 오른쪽에 붙임
-	- 액션: "마침" 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 마지막 페이지가 아니어도 마침으로 언제든 끝낼 수 있음. 이 화면은 진행 중 종료를 적용하지 않아 그만두기 버튼을 두지 않음
+	- 액션: "그만두기" 보조 버튼을 중앙 도달 존 아래쪽에 둠(물리 최하단 아님). 완주는 마지막 페이지에서 다음으로 넘길 때 마치기 확인으로 처리하고, 별도 "마침" 버튼은 두지 않음
 - **핵심 UI 컴포넌트**
 	- 세로 전자책 페이지 뷰어(인형극 양식 일러스트 + 서사 텍스트)
 	- 좌우 페이지 넘김 컨트롤(도달 존 안)
 	- 낭독 음성 재생 컨트롤(재생과 일시정지)
-	- 결과물 QR 코드(Step 4가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
-	- 스캔 안내와 다운로드 가능 기간 문구
-	- "마침" 버튼
-- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작과 QR은 가리지 않음)
-- **상태별 안내 (기획서 준용)**: 화면 타임아웃(이 화면은 감상과 스캔을 겸해 300초 잠정으로 오버라이드, 화면 진입 후 체류가 임계를 넘으면 발동하는 조작 무관 체류 상한이며 터치 미입력 타임아웃은 미적용) 발동 시 종료 Step으로 정상 진행하는 것과, 낭독 음성 합성 실패 시 재생 컨트롤 없이 페이지와 QR만 표시하는 것은 기획서 Step 5 분기를 준용함. 호스팅 실패는 이 화면에 닿기 전 Step 4 대기 화면에서 상황 안내 뒤 종료 Step으로 갈림(목업은 낭독 포함 정상 열람 상태만)
-- **화면 내 텍스트**: 타이틀 "나만의 유람기", 안내 "QR 코드를 스캔하면 전자책과 낭독 음성을 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정), 버튼 "마침"
-- **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음
+	- "그만두기" 보조 버튼([[공통 UI 컴포넌트]] 그만두기 버튼)
+- **박첨지 호스트**: 측면에 또렷한 안내 캐릭터로 결과를 자랑하듯(중앙 도달 존 조작은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 마지막 페이지에서 다음으로 넘기면 마치기 확인 팝업을 거쳐 완주로 마무리 인사 화면 진행, 화면 타임아웃(감상용 300초 잠정 오버라이드)과 미입력 타임아웃 시 종료 Step 직행(비완주라 마무리 인사 건너뜀), 낭독 음성 합성 실패 시 재생 컨트롤 없이 페이지만 표시, 그만두기 버튼 터치 시 확인 팝업([[시범콘텐츠 공통 사양#5.8 그만두기 확인 팝업]]) 확정 시 종료 Step 직행은 기획서 Step 6 분기를 준용함(목업은 낭독 포함 정상 열람 상태만). 호스팅 실패는 이 화면에 닿기 전 Step 5 대기 화면에서 상황 안내 뒤 종료 Step으로 갈림
+- **화면 내 텍스트**: 타이틀 "나만의 유람기", 버튼 "그만두기"
 
 ### 3.9.2 프롬프트 (영어)
 
 ```
 A high-fidelity, photorealistic UI mockup of a horizontal 16:9 kiosk touchscreen, full screen.
-The result screen (e-book reader plus download QR) of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience.
+The result reading screen (e-book reader) of a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience. This screen has NO QR code (the download QR is on the later closing screen).
 Title: '나만의 유람기'.
-Center: a single portrait-oriented e-book page (a puppet-play styled illustration with narrative text) displayed in the middle with side margins, sized so that a QR band and an action button fit below it (the result image is portrait, independent of the landscape screen).
+Center: a single portrait-oriented e-book page (a puppet-play styled illustration with narrative text) displayed in the middle with side margins (the result image is portrait, independent of the landscape screen).
 Page-turn: left and right page-turn controls placed just beside the page, within the central reachable zone (not at the physical left/right screen edges).
 Narration playback: a compact play/pause control for the page narration audio, placed directly below the page.
-QR band: below the playback control, a download QR code and a guide caption side by side, at a comfortable height for a person holding up a phone to scan.
-Action: a primary button labeled '마침' in the lower part of the central reachable zone (not at the physical bottom edge).
-To one side: a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls or the QR code.
+Action: a secondary '그만두기' button in the lower part of the central reachable zone (not at the physical bottom edge); there is no '마침' button (finishing happens by paging past the last page).
+To one side: a stylized Korean Bak Cheomji host character (the wandering old-man narrator puppet of the deolmi puppet play, an on-screen guide character, not a realistic bystander or a second user) reacting proudly to the result, not blocking the central controls.
 Background: a namsadang booth-curtain puppet stage, a proud showcase mood.
 Art direction: Korean traditional namsadang puppet-play motifs blended with a modern kiosk UI, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
-Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, any QR code, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
 
-## 3.10 Step 6. 마무리 인사 화면
+## 3.10 Step 7. 마무리 인사 화면
 
-공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 5에서 마침 터치)로 진입한 경우에만 표시하는 완주 전용 화면임. 마무리 인사 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
+공용 화면(종료, [[시범콘텐츠 공통 사양#5. 공통 화면]] 마). 완주(Step 6에서 마지막 페이지까지 보고 마치기 확인)로 진입한 경우에만 표시하는 완주 전용 화면임. 박첨지 마무리 인사와 함께 결과물 받기 QR을 보여주고, 화면 타임아웃 뒤 시작 화면으로 복귀함. 비완주 종료(그만두기, 터치 미입력 타임아웃, 위반 한도 초과, 실패 중단)는 이 화면을 건너뜀([[시범콘텐츠 공통 사양#5.5 종료와 리셋]]).
 
 ### 3.10.1 화면 설계
 
-- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용. 본문 중앙에 박첨지의 마무리 인사를 크게 둠. 버튼을 두지 않고 3초(잠정) 표시한 뒤 자동으로 시작 화면에 복귀함. 박첨지가 중심
-- **핵심 UI 컴포넌트**: 마무리 인사 메시지, 박첨지 작별 연출
-- **박첨지 호스트**: 중심에서 정겹게 작별 인사
-- **화면 내 텍스트**: 인사 "또 만나요"
+- **레이아웃**: [[시범콘텐츠 공통 사양#5.5 종료와 리셋]] 준용에 결과물 받기 QR을 더함. 본문 중앙에 박첨지의 마무리 인사를 두고, 그 아래 결과물 QR 띠를 둠. 버튼을 두지 않고 화면 타임아웃(기본 60초, 잠정) 뒤 자동으로 시작 화면에 복귀함
+	- QR 띠: QR 코드와 스캔 안내 문구를 가로로 나란히 두고, 유저가 폰을 들어 스캔하므로 손 닿는 높이에 둠
+- **핵심 UI 컴포넌트**
+	- 마무리 인사 메시지, 박첨지 작별 연출
+	- 결과물 QR 코드(Step 5가 발급한 다운로드 URL 인코딩, 유저가 본인 휴대폰으로 스캔)
+	- 스캔 안내와 다운로드 가능 기간 문구
+- **박첨지 호스트**: 중심에서 정겹게 작별 인사(QR은 가리지 않음)
+- **상태별 안내 (기획서 준용)**: 완주로 진입한 경우에만 표시하고, 화면 타임아웃 시 다음 단계(종료와 리셋)로 진행함은 기획서 Step 7 분기를 준용함
+- **화면 내 텍스트**: 인사 "또 만나요", 안내 "QR 코드를 스캔하면 전자책과 낭독 음성을 받을 수 있습니다", 다운로드 가능 기간 안내(예시, 정확한 문구는 규정 검토 확정)
+- **연락처 관련 요소 없음**: 입력 필드와 키패드, 전송이나 받지 않기 버튼, 개인정보 수집 고지를 두지 않음(QR 익명 다운로드, [[덜미 - 나만의 유람기 기획서#3.2 개인정보 처리]])
 
-### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부)
+### 3.10.2 프롬프트 (영어, 공통 사양 중립 이미지 첨부 + QR 추가)
 
 첨부: [[시범콘텐츠 공통 사양#12.3.5 종료 (종료와 리셋 화면)]] 중립 레이아웃 이미지
 
 ```
-Use the attached neutral layout mockup as the structural reference. Keep its 16:9 body-centered layout and the position and size of every element (host at center, closing message). Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience, without moving or resizing them:
+Use the attached neutral layout mockup as the structural reference for the centered host and closing message. Keep its 16:9 body-centered layout for the host and message. Replace the neutral placeholders with content-specific elements for a Korean traditional namsadang puppet play (deolmi/kkokdugaksi) illustrated e-book experience:
 - the guide-host placeholder (keep its central position and farewell pose from the reference; on this closing screen the host is centered, not to the side) -> a stylized Korean Bak Cheomji host character giving a warm farewell
 - background -> a namsadang booth-curtain puppet stage, a warm closing mood
 Keep the closing message '또 만나요'.
+In addition to the reference layout, add a download QR band below the closing message (the reference mockup has none): a QR code and a short scan-guide caption side by side, at a comfortable height for a person holding up a phone to scan, placed so it does not overlap the host.
 Art direction: Korean traditional namsadang puppet-play motifs, wooden-puppet textures, obangsaek and dancheong accent colors, subtle hanji and wood textures, photorealistic high-fidelity.
 Large touch targets, clear visual hierarchy, high readability. The host character is drawn as a flat 2D illustration (flat vector/cartoon style), NOT a 3D character, figurine, or clay/render look.
-Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. No English text either.
+Do NOT draw any titles, labels, button text, captions, or badges; leave every text area as a blank placeholder box (all text is added later in post-production, e.g. Figma). The Korean strings quoted above are post-production reference copy only and must not be rendered in the image; treat any keep/label/caption instruction above as reference, not as text to draw. The QR code is a generic decorative square pattern and encodes nothing. No English text either.
 Avoid: garbled or broken Hangul, any English UI text, deformed hands and faces, watermark, copyrighted characters, Japanese Bunraku puppets or Western string marionettes, and any UI buttons, toolbars, or controls not specified in this prompt.
 ```
 
