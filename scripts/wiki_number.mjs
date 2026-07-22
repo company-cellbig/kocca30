@@ -22,6 +22,7 @@
 //
 // 예외 영역 (넘버링 안 함):
 //   - 05_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
+//   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용), 위키 콘텐츠 아님
 //   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
 //   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
 //   - .obsidian/, .claude/, scripts/, assets/, export/, node_modules/, .git/
@@ -52,10 +53,13 @@ const EXCLUDED_PATHS = new Set([
 
 // 헤딩 번호를 안 매기는 곳. 본문은 스캔하므로 anchor 연쇄 갱신 대상에는 들어감
 //   - 05_Logs/log.md: CONVENTIONS 4.2 명시 예외
+//   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용). 위키 콘텐츠가 아니라
+//     넘버링 규칙 대상이 아님. "2.2 Name" 같은 번호가 붙으면 오히려 어색함 (사용자 승인 2026-07-22)
 //   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
 //     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
 const NO_NUMBER = new Set([
   '05_Logs/log.md',
+  'README.md',
 ]);
 const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 
