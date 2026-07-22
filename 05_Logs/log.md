@@ -9,6 +9,47 @@ updated: 2026-07-22
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-07-22] review | 번역 검수 명확 오류 9건 JSON 반영
+
+- 계기: 사용자 G2 승인("반영해")
+- 반영 대상: `07_클라이언트 데이터/공통/localization.json`
+	- 치명 7건: `5_4_title`~`5_9_title`, `5_5_dialogue`의 en "User Agreement" 플레이스홀더를 실제 번역으로. 제목은 Title Case(Create Your Own Mask 등), `5_5_dialogue`는 서술문이라 문장 케이스("A wonderful mask is being created.")
+	- 대소문자 2건: `5_2_guide_1` `Malttugi'S`→`Malttugi's`, `5_2_guide_3` `Qr Code`→`QR Code`
+- 미반영 보존: `3_3_title`/`5_3_title`/`5_10_title`의 "User Agreement"는 ko "이용 동의"라 정상, 안 건드림
+- 검증: JSON parse 정상(97키), "User Agreement" 잔존 3건 모두 정상 항목, `Malttugi'S`/`Qr Code` 0건. `wiki_lint` 0건
+- 상태 기록: 검수 노트 §2/§3 반영 완료 표기, `README.md` §4 검수 상태 갱신
+- 잔여: 서술문 Title Case(사용자 직접), 아포스트로피 통일, 유람기 역어 통일, `5_10_title` 위치(미결)
+
+## [2026-07-22] update | 번역 검수 노트에 사용자 결정 반영
+
+- 계기: 사용자 G1 결정 4건
+- 반영: (1) Title Case 서술문 문장 케이스 전환 확정, 사용자 직접 수정 위해 §4.1에 전환 대상 키 목록(guide 8/dialogue 7/desc 20/placehold 2/기타 2 = 39키) + 경계/유지 구분 + 전환 규칙(고유명사 유지, 공백 유지) 추가. (2) 이름 풀 창작 영문명 의도 확정, 로마자 재작성 안 함(§7). (3) 이중 공백 줄바꿈 의도, 유지(§4.2). (4) 키 번호(3_9, 14_5/6) 의도적 결번(§8)
+- 미결 잔여: §4.3 아포스트로피 통일, §5 용어 일관성(유람기 역어/동일 ko 다른 en), §2 치명 7건 + §3 대소문자 2건 반영 방식(사용자/에이전트), 5_10_title 위치
+- 파일: `06_작업노트/시범콘텐츠 공통/클라이언트 데이터 번역 검수.md`
+- 검증: `wiki_number --check` 0건, `wiki_lint` 0건, em dash 0건
+
+## [2026-07-22] create | 클라이언트 데이터 번역 검수 노트 (전체 키 ko→en)
+
+- 계기: 사용자 지시. `07_클라이언트 데이터/` JSON 2종의 한국어→영어 번역을 전체 키 검수, 결과를 작업 노트로
+- 위치: `06_작업노트/시범콘텐츠 공통/클라이언트 데이터 번역 검수.md`(신규, agentnote). localization이 5종 공통이라 공통 폴더에 둠
+- 대상: `localization.json`(약 90개 문자열), `character_name_pool.json`(20항목). ko 기준 en 검수
+- 주요 발견: (치명) `5_x` en 플레이스홀더 `"User Agreement"` 오류 7건(5_4~5_9 + 5_5_dialogue). (오류) 대소문자 `Malttugi'S`, `Qr Code` 2건. (정책) 서술문 전면 Title Case, 이중 공백, 아포스트로피 혼용. (용어) 유람기 역어 3종 혼재(Story/E-Book/Travelogue), 동일 ko 다른 en. (이름 풀) 로마자 아닌 창작 영문명, 설계 의도 확인 필요 + Reed 중복
+- 반영 규칙: 제안 en은 초안. 사용자 항목별 승인 후에만 JSON 반영. 값 정본은 JSON, 노트는 값 중복 정본화 안 함
+- 잔여(사용자 결정): §4.1 Title Case 정책, 이름 풀 로마자/창작 의도, 키 번호 결번(3_9, 14_5/6) 확인
+- 검증: `wiki_number --check` 0건, `wiki_lint` 0건, em dash 0건
+
+## [2026-07-22] maint | 클라이언트 데이터 폴더 신설 (07_클라이언트 데이터)
+
+- 계기: 사용자 지시. localization.json과 character_name_pool.json을 프로그래머와 공유하고 번역 검수를 하려는데, 문서 삽화(PNG)와 클라 소비 데이터(JSON)가 `assets/`에 섞이면 클라 개발자가 불편함
+- 결정: 소비자가 다른 세 종류(문서 삽화/위키 문서/클라 데이터)를 분리. 클라 개발자가 앱에 로드하는 프로덕션 데이터 전용 최상위 폴더 `07_클라이언트 데이터/` 신설. 폴더명은 사용자 확정
+- 구조: `07_클라이언트 데이터/{공통,유람기}/`. 공통은 5종 공유(localization.json), 콘텐츠별은 유람기(character_name_pool.json). 루트 `README.md`가 개발자 진입점
+- 파일 이동: 사용자가 이미 값을 채워 `assets/시범콘텐츠/{공통,유람기}/`에 둔 실제 파일 2개를 새 위치로 이동. `localization.json`(공통, 키 접두 1_/3_/5_/13_/14_로 5종 공통 확정), `character_name_pool.json`(유람기, 20항목 ko+en). 구조는 `key→{ko,en}` 평면 맵. 클라 로더 보존 위해 메타 래퍼 안 씌우고 원본 구조 유지
+- 신규: `07_클라이언트 데이터/README.md`(개발자 진입점 + 확인 필요 목록)
+- 규약 반영: `CONVENTIONS.md` §2 디렉토리 트리에 `07_클라이언트 데이터/` 추가 + "클라이언트 데이터 분리" 문단 신설(운영 메타 변경, 외부 검토 면제 대상)
+- 검수 발견(첫 확인): `localization.json` `5_x` 다수 항목 en이 실제 번역 대신 `"User Agreement"` 플레이스홀더(복붙 흔적, 예 `5_4_title` ko "나만의 탈 만들기"/en "User Agreement"). 표기 일관성(대소문자, `Qr`, 이중 공백) 잔여. README §4에 기록
+- 잔여: 04_Projects에 검수용 위키 문서(.md) 생성 + ko→en 번역 검수(플레이스홀더 오류 우선)
+- 검증 예정: `wiki_number --check`, `wiki_lint`
+
 ## [2026-07-22] maint | 기획서 작성 양식에 이미지 삽입 규칙 교차 참조
 
 - 계기: 사용자 지시. 앞선 CONVENTIONS 이미지 삽입 규칙 명문화(같은 날 maint 항목)를 기획서 작성자가 바로 찾게 함
