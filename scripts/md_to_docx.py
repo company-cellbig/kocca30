@@ -27,6 +27,7 @@ import shutil
 import zipfile
 import tempfile
 import subprocess
+import urllib.parse
 
 # ---------------------------------------------------------------------------
 # 경로
@@ -298,6 +299,80 @@ def resolve_image_embeds(text):
     return "\n".join(out)
 
 
+# ---------------------------------------------------------------------------
+# HTML <img>  및  표준 마크다운 ![]() 이미지 처리 (GitHub 표준 문법)
+# ---------------------------------------------------------------------------
+# CONVENTIONS 는 이미지 삽입에 옵시디언 임베드(![[ ]]) 대신 GitHub 표준
+# (![]() 와 <img>)을 강제함. pandoc 은 <img> raw HTML 을 docx 에서 버리고,
+# 표준 ![]() 도 상대경로가 임시 폴더의 clean.md 기준이라 안 풀림. 그래서
+# 변환 전에 둘 다 절대경로 pandoc 이미지(![](abs){width=cm})로 바꿔 둠.
+
+_HTML_IMG_RE = re.compile(r"<img\b[^>]*>", re.I)
+# 표준 마크다운 이미지. src 캡처는 공백/닫는 괄호 전까지(제목 인자 " ... " 제외).
+_MD_IMG_RE = re.compile(r"(!\[[^\]]*\])\(\s*([^)\s]+)")
+
+
+def _resolve_img_path(src, md_dir):
+    """상대경로/부분경로 -> 실제 절대경로. %20 등 URL 인코딩은 디코드.
+    md 기준 상대경로를 먼저 풀고, 실패하면 assets 인덱스(_find_img)로 폴백."""
+    src = urllib.parse.unquote(src.strip())
+    cand = os.path.normpath(os.path.join(md_dir, src))
+    if os.path.isfile(cand):
+        return cand
+    return _find_img(src)
+
+
+def _html_img_md(tag, md_dir):
+    """<img src=".." width="N"> -> ![](절대경로){width=cm}. 경로 없으면 '' (제거)."""
+    sm = re.search(r"""src\s*=\s*["']([^"']+)["']""", tag)
+    if not sm:
+        return ""
+    abspath = _resolve_img_path(sm.group(1), md_dir)
+    if not abspath:
+        print("[경고] 이미지 없음: " + sm.group(1), file=sys.stderr)
+        return ""
+    attr = ""
+    wm = re.search(r"""width\s*=\s*["']?(\d+)""", tag)
+    if wm:
+        attr = "{width=%.2fcm}" % (int(wm.group(1)) * PX_TO_CM)
+    return "![](%s)%s" % (abspath.replace("\\", "/"), attr)
+
+
+def resolve_html_images(text, md_dir):
+    """<img ...> -> pandoc 이미지 마크다운. 배치 규칙은 resolve_image_embeds 와 동일:
+    단독 이미지는 앞뒤 빈 줄로 독립 문단화(리스트 안이면 들여쓰기 유지), 텍스트와
+    한 줄에 섞였으면 인라인 유지."""
+    out = []
+    for ln in text.split("\n"):
+        if not _HTML_IMG_RE.search(ln):
+            out.append(ln)
+            continue
+        replaced = _HTML_IMG_RE.sub(lambda m: _html_img_md(m.group(0), md_dir), ln)
+        lead = ln[: len(ln) - len(ln.lstrip())]
+        standalone = _HTML_IMG_RE.sub("", ln).strip() == ""
+        if standalone:
+            out.extend(["", replaced if lead else replaced.strip(), ""])
+        else:
+            out.append(replaced)
+    return "\n".join(out)
+
+
+def absolutize_md_images(text, md_dir):
+    """표준 ![alt](상대경로) 의 경로를 절대경로로 치환(임시폴더 pandoc 이 찾도록).
+    이미 절대경로거나 URL(http 등)이면 그대로 둠. <img>에서 만든 절대경로 이미지도
+    절대경로라 건드리지 않음."""
+    def repl(m):
+        alt, path = m.group(1), m.group(2)
+        if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", path) or os.path.isabs(path):
+            return m.group(0)
+        abspath = _resolve_img_path(path, md_dir)
+        if not abspath:
+            print("[경고] 이미지 없음: " + path, file=sys.stderr)
+            return m.group(0)
+        return "%s(%s" % (alt, abspath.replace("\\", "/"))
+    return _MD_IMG_RE.sub(repl, text)
+
+
 def _extract_block(lines, marker_idx):
     """marker_idx 는 '^id' 를 담은 줄. 그 위 블록(콜아웃/표/문단)을 추출."""
     # 마커가 줄 끝에 붙은 문단형(... ^id)인지, 독립 줄인지 판별
@@ -492,6 +567,7 @@ def strip_block_ids(text):
 
 
 def preprocess(md_path, exclude=None):
+    md_dir = os.path.dirname(md_path)
     with open(md_path, encoding="utf-8") as f:
         text = f.read()
     text = strip_frontmatter(text)
@@ -499,8 +575,10 @@ def preprocess(md_path, exclude=None):
     text = cut_before_first_h1(text)
     text = drop_h1_sections(text, exclude)   # 제외 절 제거(임베드 처리 전)
     text = drop_excluded_refs(text, exclude)  # 제외 절 댕글링 참조 정리
-    text = resolve_image_embeds(text)        # 이미지 임베드 -> 실제 이미지 (![[x.png|W]])
+    text = resolve_html_images(text, md_dir)  # <img src width> -> ![](절대){width=cm}
+    text = resolve_image_embeds(text)        # 레거시 이미지 임베드 (![[x.png|W]])
     text = resolve_embeds(text)              # 임베드 평탄화 (![[ ]])
+    text = absolutize_md_images(text, md_dir)  # 표준 ![](상대경로) -> 절대경로
     text = flatten_native_callouts(text)     # 자체 콜아웃 평탄화 (> [!note])
     text = strip_block_ids(text)             # 블록 ID 마커 제거 (^id)
     text = strip_wikilinks(text)             # 위키링크 표시텍스트화 ([[ ]])
@@ -868,7 +946,7 @@ def main():
             f.write(cleaned)
         r = subprocess.run(
             [pandoc, clean_md, "--reference-doc", TEMPLATE, "-o", content_docx],
-            capture_output=True, text=True,
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
         if r.returncode != 0:
             fail("pandoc 실패:\n" + r.stderr)
