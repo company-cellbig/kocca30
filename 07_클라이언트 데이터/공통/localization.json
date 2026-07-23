@@ -55,6 +55,10 @@
     "ko": "{0}초 후 자동 종료합니다.",
     "en": "This Session Will End Automatically In {0} Seconds."
   },
+  "1_2_countdown": {
+    "ko": "{0}",
+    "en": "{0}"
+  },
   "3_1_subtitle": {
     "ko": "AI 덜미 스토리 생성",
     "en": "AI Deolmi Story Generation"
@@ -340,7 +344,7 @@
     "en": "We’re Sorry For The Inconvenience.  This Experience Will End Here.  Please Start Again."
   },
   "14_10_title": {
-    "ko": "그림을 만들지 못하였습니다",
+    "ko": "이미지를 만들지 못하였습니다",
     "en": "Unable To Create The Image"
   },
   "14_10_desc": {
@@ -384,6 +388,14 @@
     "en": "Failed To Load Prepared Content"
   },
   "14_15_desc": {
+    "ko": "불편을 드려 죄송합니다. 체험을 여기서 마칩니다. 다시 시작해 주세요.",
+    "en": "We’re Sorry For The Inconvenience.  This Experience Will End Here.  Please Start Again."
+  },
+  "14_16_title": {
+    "ko": "탈을 만들지 못하였습니다",
+    "en": "Unable To Create The Mask"
+  },
+  "14_16_desc": {
     "ko": "불편을 드려 죄송합니다. 체험을 여기서 마칩니다. 다시 시작해 주세요.",
     "en": "We’re Sorry For The Inconvenience.  This Experience Will End Here.  Please Start Again."
   }
