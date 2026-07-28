@@ -24,7 +24,7 @@
 //
 // 예외 영역:
 //   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
-//   - 05_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
+//   - 07_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
@@ -54,7 +54,7 @@ const EXCLUDED_PATHS = new Set([
 ]);
 
 const SKIP_CONTENT_CHECKS = new Set([
-  '05_Logs/log.md',
+  '07_Logs/log.md',
 ]);
 
 const ALLOW_GAWUNDEOTJEOM = new Set([

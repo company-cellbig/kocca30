@@ -43,10 +43,11 @@ Raw 인자: `$ARGUMENTS`
      - 검수 큐 사이드카 경로
      - 헤딩/표/이미지 통계
      - 경고가 있다면 그대로 표시
+   - 변환본이 무형유산 종목 소재 전사본이면 `converted/` 루트에서 종류별 하위 폴더(예: `converted/남사당놀이/`)로 옮김. 파이프라인은 항상 루트로 출력하므로 사람이 수동 이동함 (규약: [[CONVENTIONS#2. 디렉토리 구조]] converted 하위 폴더 분리). wikilink는 파일명 해석이라 이동해도 안 깨짐
    - `00_Index/MOC.md`의 "참고자료 (03_References)" 섹션에 `[[<name>]]` 항목을 추가
      - 이미 등록되어 있으면 skip
      - MOC `updated` 필드를 오늘 날짜로 갱신
-   - `05_Logs/log.md`에 `ingest` 작업유형으로 다음 형식의 항목 추가:
+   - `07_Logs/log.md`에 `ingest` 작업유형으로 다음 형식의 항목 추가:
      ```markdown
      ## [YYYY-MM-DD] ingest | <name> 변환·통합
 
