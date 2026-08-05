@@ -173,12 +173,6 @@ body {
 	margin-top: var(--h5-space-above);
 }
 
-/* 문서 첫 헤딩은 위 여백을 지워 상단이 뜨지 않게 함 */
-.markdown-rendered h1:first-child,
-.markdown-rendered h2:first-child {
-	margin-top: 0;
-}
-
 /* ==========================================================================
    H1: 채운 박스 + 오른쪽 아래 그림자
 

@@ -12,6 +12,8 @@
 //      H1 `1.` / H2 `1.1` / H3 `1.1.1` / H4 `1)` / H5 `(1)`
 //      H1~H3은 경로를 품어 헤딩만 보고 위치를 알 수 있고, H4 이하는 지역 열거라 경로를 끊음
 //      상위 레벨이 올라가면 하위 카운터는 1로 리셋. 기존 번호는 떼고 다시 매김 (멱등)
+//      예외: 문서 첫 H1의 제목이 "문서 정보"면 `0.`을 부여하고 다음 H1부터 1로 셈
+//      (버전 관리표 절, CONVENTIONS 4.2 예외)
 //   2. wikilink anchor 연쇄 갱신: 번호가 바뀐 헤딩을 가리키는 [[파일#헤딩]], ![[파일#헤딩]],
 //      [[파일#헤딩|별칭]], 자기 문서 [[#헤딩]]를 저장소 전체에서 새 텍스트로 치환
 //      (옛 CONVENTIONS가 수동 grep 의무로 두던 작업)
@@ -179,6 +181,10 @@ function renumberFile(relPath, content) {
   const renames = [];
   const problems = [];
   const newLines = lines.slice();
+  // `# 0. 문서 정보` 예외 (CONVENTIONS 4.2): 문서 첫 H1의 제목이 "문서 정보"면
+  // 0번을 부여하고 H1 카운터를 올리지 않아 다음 H1부터 1로 셈. 하위 헤딩은 0.x 경로
+  let sawH1 = false;
+  let inDocInfo = false;
 
   for (let i = 0; i < lines.length; i++) {
     if (!isBody[i]) continue;
@@ -195,17 +201,36 @@ function renumberFile(relPath, content) {
       continue;
     }
 
+    const bare = stripMarker(oldText);
+
+    if (level === 1) {
+      if (!sawH1 && bare === '문서 정보') {
+        // 첫 H1 "문서 정보"는 0번. 카운터를 안 올려 다음 H1이 1이 됨
+        sawH1 = true;
+        inDocInfo = true;
+        for (let d = 1; d < 5; d++) counters[d] = 0;
+        const newText = `0. ${bare}`;
+        if (newText !== oldText) {
+          newLines[i] = `${m[1]} ${newText}${eol}`;
+          renames.push({ file: relPath, line: i + 1, level, oldText, newText, hadMarker: PREFIX_RE.test(oldText) });
+        }
+        continue;
+      }
+      sawH1 = true;
+      inDocInfo = false;
+    }
+
     counters[level - 1] += 1;
     for (let d = level; d < 5; d++) counters[d] = 0;
 
     // H2 `1.1` / H3 `1.1.1`은 상위 번호를 품으므로 상위 헤딩이 있어야 함
-    if (level >= 2 && level <= 3 && counters.slice(0, level - 1).some(v => v === 0)) {
+    // (문서 정보 절 안에서는 H1 카운터 0이 정상이라 0.x 경로를 허용)
+    if (level >= 2 && level <= 3 && counters.slice(0, level - 1).some((v, idx) => v === 0 && !(idx === 0 && inDocInfo))) {
       problems.push({ file: relPath, line: i + 1, kind: 'orphan', message: `H${level}인데 상위 헤딩이 없어 경로 번호를 못 만듦(레벨 건너뜀). 번호 안 매기고 넘어감: "${oldText}"` });
       continue;
     }
 
     const mk = marker(level, counters);
-    const bare = stripMarker(oldText);
     const newText = mk + bare;
     if (newText !== oldText) {
       newLines[i] = `${m[1]} ${newText}${eol}`;
