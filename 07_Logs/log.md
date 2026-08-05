@@ -9,6 +9,11 @@ updated: 2026-08-05
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-08-05] update | timeline.json 커밋과 README 등록, character_name_pool 줄 끝 복원
+
+- 사용자 지시. 신규 `07_클라이언트 데이터/공통/timeline.json`(체인 3줄기 30항목, JSON 파싱 정상)을 추적에 올리고 README 파일 목록 3.2에 등록함(용도는 탈춤 추정, 필드 의미 확정 필요로 표기). character_name_pool.json은 줄 끝(CRLF)만 변한 무변경 상태라 git restore로 복원함
+- localization.json은 사용자 관리 파일이라 스테이징하지 않음
+
 ## [2026-08-05] query | localization.json 탈춤 개편분 번역 검수 (전건 종결, 사용자 반영)
 
 - 사용자 요청으로 07_클라이언트 데이터/공통/localization.json의 탈춤 재편 반영분(결과 화면 키 신설, 가이드 4단계 교체, 옛 탈 생성/기념 사진 키 삭제)을 검수함. 값 정합 검수만 수행(기계 대상 JSON, 가독성 면제)
