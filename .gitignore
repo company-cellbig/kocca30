@@ -21,6 +21,13 @@ __pycache__/
 *.mp3
 *.wav
 
+# 영상 리소스 원본: 대용량 (GitHub 100MB 제한 초과, assets/영상에 로컬 보관, 목록은 03_References/남사당 기록영상 자료.md)
+*.mp4
+*.webm
+*.mkv
+*.avi
+*.mov
+
 # Obsidian 휴지통
 .trash/
 
