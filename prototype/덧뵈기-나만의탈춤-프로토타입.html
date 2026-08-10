@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>덧뵈기 - 나만의 탈춤, Step 2~5 프로토타입</title>
+<style>
+:root{
+  --paper:#efe6d6; --gold:#c8a34a; --red:#b4442f; --dim:#8b8074;
+  --line:rgba(200,163,74,.28); --ok:#7fb069;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:#0b0a09; color:var(--paper); overflow:hidden;
+  font-family:"Malgun Gothic","맑은 고딕",-apple-system,system-ui,sans-serif;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button:disabled{opacity:.4;cursor:default}
+
+#wrap{display:flex;width:100%;height:100%}
+#left{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;min-width:0}
+#stagecol{width:min(100%, calc((100vh - 250px) * 16 / 9));display:flex;flex-direction:column;gap:10px}
+
+/* ══ 키오스크 화면 (가로 16:9) ══ */
+#kiosk{
+  width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,#2a2320 0%,#141210 55%,#0b0a09 100%);
+  border:1px solid var(--line);border-radius:10px;box-shadow:0 0 50px rgba(0,0,0,.8);
+}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;padding:14px 16px}
+.screen.on{display:flex}
+.scr-head{display:flex;align-items:center;gap:9px;flex:0 0 auto;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07)}
+.step-tag{font-size:10.5px;letter-spacing:.06em;color:var(--gold);border:1px solid var(--line);padding:2px 8px;border-radius:99px}
+.scr-title{font-size:14.5px;font-weight:700}
+.spacer{flex:1}
+.quit-btn{font-size:11px;color:var(--dim);border:1px solid rgba(255,255,255,.14);padding:4px 10px;border-radius:6px}
+.quit-btn:hover{color:var(--paper);border-color:var(--gold)}
+.timer-chip{font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums}
+.timer-chip b{color:var(--gold);font-weight:600}
+.timer-chip.paused b{color:var(--dim)}
+
+.cols{flex:1;display:flex;gap:12px;min-height:0;padding-top:10px}
+.col{display:flex;flex-direction:column;min-width:0;min-height:0}
+.col-host{flex:0 0 25%}
+.col-stage{flex:1}
+.col-info{flex:0 0 26%}
+.col-half{flex:1}
+
+/* ══ 장쇠 호스트 (세로 열) ══ */
+.host{display:flex;flex-direction:column;gap:7px;height:100%;min-height:0}
+.host-art{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.host-art img{max-width:100%;max-height:100%;object-fit:contain}
+.host-art svg{max-height:100%}
+.host-box{flex:0 0 auto;background:rgba(20,17,14,.9);border:1px solid var(--line);border-radius:9px;padding:8px 10px;position:relative}
+.host-name{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:3px}
+.speaking .host-name::after{content:" ●";color:var(--red)}
+.host-line{font-size:12.5px;line-height:1.5;min-height:3.6em;max-height:5.4em;overflow:hidden}
+.host-line .prov{color:var(--dim);font-size:9.5px}
+.host-skip{position:absolute;right:7px;bottom:6px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.15);padding:2px 7px;border-radius:5px;background:#1b1815}
+
+/* ══ 판 (무대) ══ */
+.playfield{flex:1;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  background:linear-gradient(180deg,rgba(60,45,35,.35),rgba(20,17,14,.5));overflow:hidden;min-height:0}
+.playfield .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.5}
+.foe{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);transition:opacity .3s}
+.foe img{max-height:100%;object-fit:contain}
+.foe-cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
+.fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
+.verdict{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%) scale(.6);
+  font-size:38px;font-weight:900;opacity:0;pointer-events:none;letter-spacing:.05em}
+.verdict.eolssu{color:#ffd76e;text-shadow:0 0 24px rgba(255,190,60,.7)}
+.verdict.johda{color:#a8d18a}
+.verdict.dasi{color:#d98570}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+ 18%{opacity:1;transform:translate(-50%,-50%) scale(1.14)}
+ 70%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
+.verdict.play{animation:pop .95s ease-out}
+
+/* ══ 오른쪽 정보 열 ══ */
+.info-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:6px}
+.info-card{border:1px solid rgba(255,255,255,.11);border-radius:9px;padding:9px 10px;background:rgba(255,255,255,.03);margin-bottom:8px}
+.mv-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:11.5px;color:var(--dim)}
+.mv-row.now{color:var(--paper)}
+.mv-row.done{color:var(--ok)}
+.mv-ico{width:22px;height:22px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;font-size:13px}
+.mv-row.now .mv-ico{border-color:var(--gold);color:var(--gold)}
+.mv-row.done .mv-ico{border-color:var(--ok)}
+.mv-ico img{width:100%;height:100%;object-fit:contain}
+.demo-slot{border:1px dashed rgba(255,255,255,.16);border-radius:8px;height:96px;display:flex;align-items:center;justify-content:center;
+  color:#6d6459;font-size:10px;text-align:center;padding:6px;overflow:hidden}
+.demo-slot img{max-width:100%;max-height:100%;object-fit:contain}
+.beat-row{font-size:11px;color:var(--dim);padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+.beat-row.now{color:var(--gold)}
+.beat-row.done{color:#9a9184}
+
+/* ══ 마당 선택 ══ */
+.cards{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}
+.card{display:flex;gap:10px;align-items:center;text-align:left;padding:9px 10px;
+  border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.03);transition:.14s}
+.card:hover{border-color:rgba(200,163,74,.5)}
+.card.sel{border-color:var(--gold);background:rgba(200,163,74,.11)}
+.card-mask{width:38px;height:44px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.card-mask img{max-width:100%;max-height:100%}
+.card-name{font-size:14px;font-weight:700}
+.card-name span{font-size:9.5px;color:var(--gold);font-weight:400;margin-left:6px}
+.card-brief{font-size:11px;color:#c9bda9;margin-top:2px}
+.card-cast{font-size:10px;color:var(--dim);margin-top:3px}
+.preview{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px dashed rgba(255,255,255,.14);border-radius:10px;padding:10px;min-height:0;gap:8px}
+.preview-art{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.preview-art img{max-width:100%;max-height:100%;object-fit:contain}
+.preview-cap{font-size:11.5px;color:#c9bda9;text-align:center}
+.asset-note{font-size:9.5px;color:#6d6459;text-align:center;line-height:1.45}
+
+/* ══ 배역 확인 ══ */
+.role-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:0}
+.role-mask{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.role-mask img{max-height:100%;max-width:100%;object-fit:contain}
+.role-name{font-size:24px;font-weight:800}
+.role-sub{font-size:11.5px;color:var(--dim)}
+.slots{display:flex;gap:8px;justify-content:center}
+.slot{width:40px;height:46px;border:1px dashed rgba(255,255,255,.16);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:#5a5249}
+
+/* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
+.botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.notebar{height:62px;position:relative;border:1px solid var(--line);border-radius:9px;background:rgba(0,0,0,.34);overflow:hidden}
+.marker{position:absolute;left:78px;top:0;bottom:0;width:2px;background:var(--gold);opacity:.85}
+.marker::before{content:"";position:absolute;left:-17px;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border:2px solid rgba(200,163,74,.55);border-radius:50%}
+.note{position:absolute;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;border-radius:7px;
+  background:rgba(200,163,74,.14);border:1px solid rgba(200,163,74,.5);font-size:15px;color:#e8d6a8}
+.note img{width:80%;height:80%;object-fit:contain}
+.note.hit{background:rgba(127,176,105,.3);border-color:var(--ok)}
+.note.miss{opacity:.25}
+.gauge-wrap{display:flex;align-items:center;gap:8px}
+.gauge{flex:1;height:12px;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:rgba(0,0,0,.35)}
+.gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a5a2a,#c8a34a,#ffd76e);transition:width .22s}
+.gauge-lab{font-size:10px;color:var(--dim);white-space:nowrap}
+
+/* ══ 배역 인정 ══ */
+.accept{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:3px}
+.acc-block{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(200,163,74,.05)}
+.acc-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:4px}
+.acc-body{font-size:12.5px;line-height:1.55}
+.acc-decl{font-size:17px;font-weight:800;line-height:1.4}
+.sum-row{display:flex;justify-content:space-between;font-size:11.5px;padding:2px 0;border-bottom:1px dotted rgba(255,255,255,.09)}
+.sum-row:last-child{border:none}
+.bestshot{border:1px dashed rgba(255,255,255,.18);border-radius:8px;padding:12px;text-align:center;color:var(--dim);font-size:10.5px}
+
+.cta{display:block;width:100%;padding:11px;border-radius:9px;font-size:14px;font-weight:700;
+  background:linear-gradient(180deg,#c8a34a,#a8863a);color:#1b1509;flex:0 0 auto;margin-top:9px}
+.cta:hover{filter:brightness(1.08)}
+.cta.ghost{background:none;border:1px solid var(--line);color:var(--paper);font-weight:500}
+
+/* ══ 팝업 ══ */
+#pop{position:absolute;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:24px;z-index:40}
+#pop.on{display:flex}
+.pbox{background:#1b1815;border:1px solid var(--line);border-radius:12px;padding:18px;width:100%;max-width:340px;text-align:center}
+.ptitle{font-size:14px;font-weight:700;margin-bottom:7px}
+.pmsg{font-size:12px;color:#c9bda9;line-height:1.55;margin-bottom:14px}
+.prow{display:flex;gap:8px}
+.prow .cta{padding:10px;font-size:12.5px;margin:0}
+
+/* ══ 프로토타입 입력부 (키오스크 화면 밖) ══ */
+#band{width:100%;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#100e0c;
+  padding:9px 11px;display:flex;flex-direction:column;gap:7px}
+.band-head{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--dim)}
+.band-head b{color:#c9bda9;font-weight:600;font-size:10.5px}
+.band-head .note-txt{flex:1;text-align:right;color:#6d6459;font-size:9.5px}
+.band-body{display:flex;gap:11px;align-items:stretch}
+.band-info{flex:0 0 210px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.pad-move{font-size:16px;font-weight:800;color:var(--paper)}
+.pad-move small{font-size:11px;color:var(--dim);font-weight:400;margin-left:5px}
+.pad-how{font-size:11.5px;color:var(--gold);line-height:1.4}
+.pad-elems{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
+.el{font-size:9.5px;padding:2px 7px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:var(--dim)}
+.pad{flex:1;height:118px;position:relative;border:1px solid var(--line);border-radius:9px;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 8px,transparent 8px 16px),rgba(0,0,0,.3);
+  touch-action:none;user-select:none;overflow:hidden;transition:.15s}
+.pad.armed{border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,74,.35) inset,0 0 22px rgba(200,163,74,.14)}
+.pad.idle{opacity:.35}
+.pad-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:11px;color:#6d6459;pointer-events:none}
+.trail{position:absolute;inset:0;pointer-events:none}
+.pad-window{position:absolute;left:0;bottom:0;height:3px;background:var(--gold);width:100%;transform-origin:left;display:none}
+.band-arrow{flex:0 0 96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(0,0,0,.22)}
+.band-arrow .ar{font-size:40px;color:rgba(200,163,74,.75);line-height:1}
+.band-arrow .arcap{font-size:9.5px;color:var(--dim)}
+
+/* ══ 디버그 패널 ══ */
+#panel{flex:0 0 330px;height:100%;overflow-y:auto;padding:12px 14px 40px;background:#100e0c;
+  border-left:1px solid var(--line);font-size:12px;line-height:1.55}
+#panel.hidden{display:none}
+#panel h3{font-size:11px;color:var(--gold);letter-spacing:.08em;margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+#panel h3:first-child{margin-top:0}
+.kv{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px dotted rgba(255,255,255,.07)}
+.kv span:first-child{color:var(--dim);flex:0 0 auto}
+.kv span:last-child{text-align:right;word-break:break-all}
+#log{max-height:140px;overflow-y:auto;font-family:Consolas,monospace;font-size:10.5px;line-height:1.5}
+#log div{padding:1px 0;border-bottom:1px dotted rgba(255,255,255,.06)}
+.lg-srv{color:#8ab4e8}.lg-jud{color:#e0b354}.lg-sys{color:var(--dim)}.lg-err{color:#e08070}.lg-warn{color:#d9a05b}
+.cfg{display:flex;align-items:center;gap:6px;padding:3px 0}
+.cfg label{flex:1;color:var(--dim)}
+.cfg input[type=number]{width:58px;background:#1b1815;border:1px solid rgba(255,255,255,.15);color:var(--paper);padding:2px 5px;border-radius:4px;font-family:inherit;font-size:11px}
+.cfg input[type=checkbox]{accent-color:var(--gold)}
+.btnrow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.btnrow button{font-size:10.5px;padding:5px 8px;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:#c9bda9}
+.btnrow button:hover{border-color:var(--gold);color:var(--paper)}
+.warnbox{border:1px solid rgba(217,160,91,.45);background:rgba(217,160,91,.08);border-radius:7px;padding:8px;font-size:10.5px;line-height:1.5;color:#e3cba2;margin-top:6px}
+.warnbox b{color:#f0c987}
+.rep-row{display:flex;justify-content:space-between;padding:2px 0;font-size:11px}
+.asset-row{display:flex;justify-content:space-between;gap:6px;padding:2px 0;font-size:10.5px;border-bottom:1px dotted rgba(255,255,255,.06)}
+.asset-row span:first-child{color:var(--dim);word-break:break-all}
+.asset-row .yes{color:var(--ok)}
+.asset-row .no{color:#6d6459}
+#panelToggle{position:fixed;right:8px;top:8px;z-index:50;font-size:10px;color:var(--dim);
+  border:1px solid var(--line);padding:4px 8px;border-radius:5px;background:#100e0c}
+</style>
+</head>
+<body>
+<button id="panelToggle">패널</button>
+<div id="wrap">
+ <div id="left"><div id="stagecol">
+
+  <div id="kiosk">
+    <!-- Step 1 (약식) -->
+    <section class="screen" id="scr-start">
+      <div class="scr-head"><span class="step-tag">Step 1 (약식)</span><span class="scr-title">시작 화면</span></div>
+      <div class="cols"><div class="col col-half" style="align-items:center;justify-content:center">
+        <div style="font-size:32px;font-weight:800;letter-spacing:.04em">나만의 탈춤</div>
+        <div style="font-size:13px;color:#c9bda9;margin-top:6px">덧뵈기 가면극 배역 체험</div>
+        <div class="asset-note" style="max-width:70%;margin-top:12px">
+          이 프로토타입의 검증 범위는 Step 2부터 Step 5까지임.<br>Step 1의 가이드와 이용 동의 화면은 진입점만 두고 생략함
+        </div>
+        <button class="cta" id="btnStart" style="max-width:280px">시작하기</button>
+      </div></div>
+    </section>
+
+    <!-- Step 2-1 마당 선택 -->
+    <section class="screen" id="scr-madang">
+      <div class="scr-head"><span class="step-tag">Step 2</span><span class="scr-title">마당 선택</span>
+        <span class="spacer"></span><span class="timer-chip" data-timer></span>
+        <button class="quit-btn" data-quit>그만두기</button></div>
+      <div class="cols">
+        <div class="col col-half">
+          <div class="info-h">체험 마당 3종</div>
+          <div class="cards" id="madangCards"></div>
+          <button class="cta" id="btnMadangOk">이 마당으로 하기</button>
+        </div>
+        <div class="col col-half">
+          <div class="info-h">미리보기</div>
+          <div class="preview" id="madangPreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2-2 배역 확인 -->
+    <section class="screen" id="scr-role">
+      <div class="scr-head"><span class="step-tag">Step 2</span><span class="scr-title">배역 확인 (배역 입문)</span>
+        <span class="spacer"></span><span class="timer-chip" data-timer></span>
+        <button class="quit-btn" data-quit>그만두기</button></div>
+      <div class="cols">
+        <div class="col col-host"><div class="host" id="roleHost"></div></div>
+        <div class="col col-stage">
+          <div class="role-center">
+            <div class="role-mask" id="roleMask"></div>
+            <div class="role-name" id="roleName"></div>
+            <div class="role-sub" id="roleSub"></div>
+          </div>
+          <button class="cta" id="btnWear">탈 쓰기</button>
+        </div>
+        <div class="col col-info">
+          <div class="info-h">이 마당의 배역</div>
+          <div class="info-card">
+            <div class="slots" id="roleSlots"></div>
+            <div class="asset-note" style="margin-top:7px">마당당 배역 확장은 2차연도 확장 설계</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3 마당 장면 체험 -->
+    <section class="screen" id="scr-play">
+      <div class="scr-head"><span class="step-tag">Step 3</span><span class="scr-title" id="playTitle">기초 수업 (1장)</span>
+        <span class="spacer"></span><span class="timer-chip" data-timer></span>
+        <button class="quit-btn" data-quit>그만두기</button></div>
+      <div class="cols">
+        <div class="col col-host"><div class="host" id="playHost"></div></div>
+        <div class="col col-stage">
+          <div class="playfield" id="field">
+            <div class="foe" id="foe"></div>
+            <div class="foe-cap" id="foeCap"></div>
+            <div class="verdict" id="verdict"></div>
+            <div class="demo-hint" id="demoHint"></div>
+          </div>
+          <div class="botbar">
+            <div class="gauge-wrap" id="gaugeWrap" style="display:none">
+              <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
+              <div class="gauge-lab" id="gaugeLab"></div>
+            </div>
+            <div class="notebar" id="noteBar" style="display:none"><div class="marker"></div></div>
+          </div>
+        </div>
+        <div class="col col-info" id="infoPane"></div>
+      </div>
+    </section>
+
+    <!-- Step 4 배역 인정 -->
+    <section class="screen" id="scr-accept">
+      <div class="scr-head"><span class="step-tag">Step 4</span><span class="scr-title">배역 인정</span>
+        <span class="spacer"></span><span class="timer-chip" data-timer></span></div>
+      <div class="cols">
+        <div class="col col-host"><div class="host" id="acceptHost"></div></div>
+        <div class="col col-stage"><div class="accept" id="acceptBody"></div>
+          <button class="cta" id="btnHome">처음으로</button></div>
+        <div class="col col-info">
+          <div class="info-h">베스트샷</div>
+          <div class="bestshot" style="flex:1;display:flex;align-items:center;justify-content:center">
+            카메라를 쓰지 않는 프로토타입이라<br>자리표시로 둠
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="screen" id="scr-end">
+      <div class="scr-head"><span class="step-tag">Step 5</span><span class="scr-title">종료와 리셋</span></div>
+      <div class="cols"><div class="col col-half" style="align-items:center;justify-content:center">
+        <div style="font-size:15px" id="endMsg">세션 종료 처리 중</div>
+        <div class="asset-note" id="endSub" style="margin-top:6px"></div>
+      </div></div>
+    </section>
+
+    <div id="pop"><div class="pbox">
+      <div class="ptitle" id="popTitle"></div>
+      <div class="pmsg" id="popMsg"></div>
+      <div class="prow" id="popRow"></div>
+    </div></div>
+  </div>
+
+  <!-- 프로토타입 입력부: 실제 콘텐츠에는 없는 영역이라 화면 밖에 둠 -->
+  <div id="band">
+    <div class="band-head">
+      <b>프로토타입 입력부</b>
+      <span>실제 콘텐츠에서는 카메라 동작 인식이 이 자리를 대신함</span>
+      <span class="note-txt" id="bandState">대기 중</span>
+    </div>
+    <div class="band-body">
+      <div class="band-info">
+        <div class="pad-move" id="padMove">대기</div>
+        <div class="pad-how" id="padHow">장쇠가 신호를 주면 오른쪽 패드를 끄십시오</div>
+        <div class="pad-elems" id="padElems"></div>
+      </div>
+      <div class="pad idle" id="pad">
+        <canvas class="trail" id="trail"></canvas>
+        <div class="pad-hint" id="padHint">여기를 눌러 끄십시오</div>
+        <div class="pad-window" id="padWindow"></div>
+      </div>
+      <div class="band-arrow">
+        <div class="ar" id="padArrow">-</div>
+        <div class="arcap" id="padArrowCap">방향</div>
+      </div>
+    </div>
+  </div>
+
+ </div></div>
+
+ <aside id="panel">
+  <h3>세션 데이터</h3><div id="sess"></div>
+  <h3>이벤트 로그</h3><div id="log"></div>
+  <h3>체험 리포트</h3><div id="report"><div class="lg-sys" style="font-size:10.5px">세션 종료 시 집계됨</div></div>
+
+  <h3>리소스 상태</h3>
+  <div class="asset-note" style="text-align:left;margin-bottom:5px">
+    아래 경로에 파일을 넣으면 SVG 자리표시를 자동으로 대체함
+  </div>
+  <div id="assetList"></div>
+
+  <h3>튜닝값 (기획서 5.1 잠정값)</h3>
+  <div class="cfg"><label>화면 타임아웃(초)</label><input type="number" id="cfgScreen" value="60"></div>
+  <div class="cfg"><label>Step 3 합산(초)</label><input type="number" id="cfgStep3" value="300"></div>
+  <div class="cfg"><label>미입력 타임아웃(초)</label><input type="number" id="cfgIdle" value="45"></div>
+  <div class="cfg"><label>응답 대기(초)</label><input type="number" id="cfgWindow" value="4" step="0.5"></div>
+  <div class="cfg"><label>절정 판정 구간(초)</label><input type="number" id="cfgHit" value="0.5" step="0.1"></div>
+  <div class="cfg"><label>수업 재시도(회)</label><input type="number" id="cfgRetry" value="2"></div>
+  <div class="cfg"><label>얼쑤 진폭 임계</label><input type="number" id="cfgEolssu" value="0.45" step="0.05"></div>
+  <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
+  <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
+  <div class="cfg"><label>음성(TTS) 사용</label><input type="checkbox" id="cfgTts" checked></div>
+  <div class="cfg"><label>장단, 효과음</label><input type="checkbox" id="cfgSfx" checked></div>
+  <div class="cfg"><label>화면 타임아웃 작동</label><input type="checkbox" id="cfgTimeout" checked></div>
+
+  <h3>진행 도구</h3>
+  <div class="btnrow">
+    <button data-force="eolssu">강제 얼쑤</button>
+    <button data-force="johda">강제 좋다</button>
+    <button data-force="dasi">강제 다시</button>
+    <button id="btnSkipChap">이 장 건너뛰기</button>
+    <button id="btnReset">세션 리셋</button>
+  </div>
+
+  <h3>에러 케이스 발동 (기획서 5.2)</h3>
+  <div class="btnrow">
+    <button data-err="tts">TTS 실패</button>
+    <button data-err="pose">포즈 전환 실패</button>
+    <button data-err="res">마당 리소스 실패</button>
+    <button data-err="audio">절정 음원 시한 초과</button>
+    <button data-err="cam">카메라 미수신 지속</button>
+  </div>
+
+  <h3>기획서 대조에서 걸린 것</h3><div id="gaps"></div>
+ </aside>
+</div>
+
+<script>
+"use strict";
+/* ══════════════════════════════════════════════════════════
+   덧뵈기 - 나만의 탈춤, Step 2~5 진행 프로토타입 (가로형)
+   근거: 04_Projects/시범콘텐츠/덧뵈기 - 나만의 탈춤/덧뵈기 - 나만의 탈춤 기획서.md (3.4.0)
+   대사와 문안은 전부 프로토타입 임시 문안임 (기획서상 "문안 작성 예정")
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 0. 설정 ───────────────────────────── */
+const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,hitWindow:.5,
+  lessonRetry:2,eolssuAmp:.45,holdReq:.6,sinmyeongCut:55,tts:true,sfx:true,timeoutOn:true};
+const bind=(id,key,isNum)=>{const el=document.getElementById(id);
+  const set=()=>{
+    if(el.type==="checkbox"){CFG[key]=el.checked;return;}
+    if(!isNum){CFG[key]=el.value;return;}
+    const v=parseFloat(el.value);
+    if(isFinite(v)) CFG[key]=v; else el.value=CFG[key]; // 빈 칸이 임계를 0으로 떨구지 않게 함
+  };
+  el.addEventListener("change",set); set();};
+bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
+bind("cfgWindow","respWindow",1);bind("cfgHit","hitWindow",1);bind("cfgRetry","lessonRetry",1);
+bind("cfgEolssu","eolssuAmp",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);
+bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
+
+/* ── 1. 리소스 목록과 로더 ──────────────
+   실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠  */
+const ART_BASE="../assets/시범콘텐츠/탈춤/프로토타입/";
+const ART={
+  host_idle:"호스트_장쇠_기본.png",
+  host_talk:"호스트_장쇠_입벌림.png",
+  mask_꺽쇠:"탈_꺽쇠.png", mask_말뚝이:"탈_말뚝이.png", mask_취발이:"탈_취발이.png",
+  bg_omtal:"배경_옴탈잡이.png", bg_sennim:"배경_샌님잡이.png", bg_mokjung:"배경_먹중잡이.png",
+  bg_climax:"배경_절정무대.png"
+};
+["옴탈","샌님","먹중"].forEach(f=>["등장","대기","과장","중립","결말"].forEach(p=>{
+  ART["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png";
+}));
+const MOVE_KO={salpigi:"살피기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
+  horyeong:"호령가리키기",chaejjik:"채찍휘두르기",eokkae:"어깨메기",balchago:"한발차올리기",somae:"소매뿌리기"};
+Object.keys(MOVE_KO).forEach(k=>{ ART["pic_"+k]="픽토_"+MOVE_KO[k]+".png"; ART["demo_"+k]="시범_"+MOVE_KO[k]+".png"; });
+
+const ART_STATE={}; // key → true(있음) / false(없음) / undefined(미확인)
+function art(key,fallbackSVG,cls){
+  return `<span class="art ${cls||""}" data-key="${key}">${fallbackSVG||""}</span>`;
+}
+function hydrate(root){
+  (root||document).querySelectorAll(".art:not([data-done])").forEach(sp=>{
+    sp.setAttribute("data-done","1");
+    const key=sp.dataset.key, file=ART[key]; if(!file) return;
+    if(ART_STATE[key]===false) return;            // 이미 없는 것으로 확인됨
+    const im=new Image();
+    im.onload=()=>{ ART_STATE[key]=true; sp.innerHTML=""; sp.appendChild(im); renderAssets(); };
+    im.onerror=()=>{ if(ART_STATE[key]===undefined){ ART_STATE[key]=false; renderAssets(); } };
+    im.src=ART_BASE+encodeURIComponent(file);
+    im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
+  });
+}
+new MutationObserver(()=>hydrate()).observe(document.body,{childList:true,subtree:true});
+function renderAssets(){
+  const el=document.getElementById("assetList");
+  const have=Object.keys(ART).filter(k=>ART_STATE[k]===true).length;
+  el.innerHTML=`<div class="asset-row"><span>합계</span><span>${have} / ${Object.keys(ART).length} 확인됨</span></div>`+
+    Object.keys(ART).map(k=>{
+      const s=ART_STATE[k];
+      return `<div class="asset-row"><span>${esc(ART[k])}</span><span class="${s?"yes":"no"}">${s?"있음":"없음"}</span></div>`;
+    }).join("");
+}
+
+/* ── 2. 동작 정의 ───────────────────────
+   카메라가 없으므로 판정 요소를 마우스 제스처로 치환함:
+   자세 → 끄는 방향, 진폭 → 끈 거리, 홀드 → 버틴 시간, 타이밍 → 손 댄 시각  */
+const MOVES={
+ salpigi:{name:"살피기",body:"상체 기울임",elems:["자세","홀드"],dir:"left",how:"왼쪽으로 끌어 기울인 채 버티기"},
+ jjilleo:{name:"찔러보기",body:"팔 뻗기",elems:["자세","진폭"],dir:"right",how:"오른쪽으로 힘껏 밀기"},
+ hwidulleo:{name:"휘둘러 쫓기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 왕복하기"},
+ geodeureum:{name:"거드름 흉내",body:"상체 젖히기",elems:["자세","홀드"],dir:"down",how:"아래로 끌어 젖힌 채 버티기"},
+ horyeong:{name:"호령 가리키기",body:"팔 뻗기",elems:["자세","진폭","홀드"],dir:"right",how:"오른쪽으로 뻗어 가리킨 채 버티기"},
+ chaejjik:{name:"채찍 휘두르기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 왕복하기"},
+ eokkae:{name:"어깨 메기",body:"팔 얹기",elems:["자세","홀드"],dir:"upleft",how:"왼쪽 위로 끌어 얹은 채 버티기"},
+ balchago:{name:"한발 차올리기",body:"발목 높이",elems:["자세","진폭"],dir:"up",how:"위로 힘껏 차올리기"},
+ somae:{name:"소매 뿌리기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 뿌리기"}
+};
+const DIRVEC={left:[-1,0],right:[1,0],up:[0,-1],down:[0,1],upleft:[-.71,-.71]};
+const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"};
+const DIRCAP={left:"왼쪽",right:"오른쪽",up:"위",down:"아래",upleft:"왼쪽 위",swing:"좌우 왕복"};
+
+/* ── 3. 마당 데이터 ────────────────────── */
+const MADANG=[
+{id:"omtal",name:"옴탈잡이",tag:"잡기",user:"꺽쇠",foe:"옴탈",
+ brief:"슬금슬금 나타난 옴탈을 꺽쇠가 되어 잡아 쫓는 마당",
+ preview:"옴탈을 몰아 판 밖으로 쫓아내는 대목",
+ maskLine:"저 낯짝에 돋은 점이 옴 자국이다. 긁느라 정신없는 놈을 네가 잡아 쫓는 게야.",
+ vow:"탈을 쓰면 너는 네가 아니라 꺽쇠다. 서툰 건 꺽쇠가 서툰 것이니 마음 놓고 놀아라.",
+ moves:["salpigi","jjilleo","hwidulleo"],
+ openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
+ closeLine:"손에 익었구나. 이제 저놈 앞에 서 보자.",
+ scene:[
+  {t:"enter",cap:"옴탈이 슬금슬금 기어 나옴"},
+  {t:"say",who:"jangsoe",text:"저놈이 왔다. 소리 내지 말고 살펴라."},
+  {t:"cue",who:"jangsoe",text:"살펴봐라!",move:"salpigi",ok:"옴탈이 획 돌아본다!",no:"옴탈이 딴 데를 본다."},
+  {t:"cue",who:"jangsoe",text:"얼음! 그대로 버텨라!",move:"salpigi",ok:"옴탈이 눈치를 못 챈다!",no:"옴탈이 슬쩍 물러선다."},
+  {t:"cue",who:"jangsoe",text:"지금이다, 찔러봐라!",move:"jjilleo",ok:"옴탈이 펄쩍 뛴다!",no:"옴탈이 몸을 비튼다."},
+  {t:"free",text:"옴 올랐다! 긁는 시늉을 따라 해 보아라.",cap:"긁기 소동 (판정 없는 따라 하기 연출)"},
+  {t:"say",who:"jangsoe",text:"됐다. 이제 판을 크게 벌일 때다."}],
+ climax:{gaugeLab:"몰이 진행도",accel:true,bpm:112,
+  pattern:["hwidulleo","hwidulleo","jjilleo","hwidulleo","hwidulleo","salpigi","hwidulleo","jjilleo","hwidulleo","hwidulleo","hwidulleo","hwidulleo"],
+  seq:"몰아내기: 휘둘러 쫓기 중심의 연타 신호, 장단 가속",
+  ending:"옴탈이 화면 밖으로 튕겨 나가 퇴장함",
+  endingSoft:"옴탈이 슬금슬금 물러나 판 뒤로 숨음"}},
+{id:"sennim",name:"샌님잡이",tag:"놀리기",user:"말뚝이",foe:"샌님",
+ brief:"거드름 피우는 샌님을 말뚝이가 되어 놀려 뒤집는 마당",
+ preview:"샌님이 말뚝이에게 큰절을 올리는 대목",
+ maskLine:"저 째보 입술을 보아라. 양반 체면이 저리 갈라져 있으니 우스운 게지.",
+ vow:"탈을 쓰면 너는 네가 아니라 말뚝이다. 양반 앞에서도 기죽지 말고 놀아라.",
+ moves:["geodeureum","horyeong","chaejjik"],
+ openLine:"샌님이 거드름을 피우며 온다. 놀리려면 세 가지를 익혀라.",
+ closeLine:"제법이다. 이제 저 양반 앞에 서 보자.",
+ scene:[
+  {t:"enter",cap:"샌님이 거드름 피우며 등장함"},
+  {t:"say",who:"jangsoe",text:"저 양반 걸음 좀 보아라. 어깨가 하늘에 닿겠다."},
+  {t:"cue",who:"jangsoe",text:"저 꼴 좀 보아라, 그대로 흉내 내라!",move:"geodeureum",ok:"샌님이 발끈한다!",no:"샌님이 못 본 척한다."},
+  {t:"say",who:"foe",text:"이놈 말뚝아! 어디서 감히 주인을 흉내 내느냐!"},
+  {t:"cue",who:"jangsoe",text:"맞받아라!",move:"horyeong",ok:"샌님이 움찔한다!",no:"샌님이 헛기침을 한다."},
+  {t:"say",who:"jangsoe",text:"기세가 넘어왔다. 이제 절을 받을 차례다."}],
+ climax:{gaugeLab:"절 배우기 진행도",accel:false,bpm:96,
+  pattern:["horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik","horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik"],
+  seq:"절 배우기: 시범 동작 신호를 유저가 보이면 샌님이 우스꽝스럽게 따라 함",
+  ending:"샌님이 말뚝이에게 큰절을 올리고, 유저는 버티고 서서 절을 받음",
+  endingSoft:"샌님이 마지못해 고개만 까딱하고 물러섬"}},
+{id:"mokjung",name:"먹중잡이",tag:"이기기",user:"취발이",foe:"먹중",
+ brief:"행패 부리는 먹중을 취발이가 되어 춤으로 눌러 이기는 마당",
+ preview:"먹중이 춤 대결에서 나가떨어지는 대목",
+ maskLine:"중이 술에 절어 판을 뒤집고 다닌다. 저 행패를 네가 눌러야 판이 산다.",
+ vow:"탈을 쓰면 너는 네가 아니라 취발이다. 물러서지 말고 크게 놀아라.",
+ moves:["eokkae","balchago","somae"],
+ openLine:"먹중이 행패를 부린다. 누르려면 세 가지를 익혀라.",
+ closeLine:"기운이 붙었구나. 이제 저 중 앞에 서 보자.",
+ scene:[
+  {t:"enter",cap:"먹중이 행패 부리며 등장함"},
+  {t:"say",who:"jangsoe",text:"중이 술에 취해 판을 뒤집는다."},
+  {t:"cue",who:"jangsoe",text:"꾸짖어라!",move:"somae",gap:1,ok:"먹중이 맞받아 소리친다!",no:"먹중이 콧방귀를 뀐다."},
+  {t:"cue",who:"jangsoe",text:"기세를 보여라!",move:"eokkae",ok:"먹중이 주춤한다!",no:"먹중이 비웃는다."},
+  {t:"say",who:"jangsoe",text:"됐다. 이제 춤으로 붙어라."}],
+ climax:{gaugeLab:"대결 우세도",accel:false,bpm:104,
+  pattern:["eokkae","balchago","somae","eokkae","balchago","somae","somae","balchago","eokkae","somae","balchago","somae"],
+  seq:"춤 대결: 배운 동작 3개의 맞대무 시퀀스, 진폭이 클수록 게이지 가속",
+  ending:"먹중이 과장되게 나가떨어짐",
+  endingSoft:"먹중이 숨을 고르며 슬그머니 물러섬"}}];
+
+const GAPS=[
+ {where:"4.3.2 마당별 장면 대본 표, 먹중잡이 행",
+  what:'신호가 "꾸짖어라(호령 가리키기)"인데 호령 가리키기는 샌님잡이 동작 세트임. "배운 동작만 이후 장의 신호로 나온다"(4.3 도입부)와 어긋남',
+  fix:'먹중잡이 동작 세트 안의 "소매 뿌리기"로 대체해 구현함'},
+ {where:"4.3.3 마당별 절정 연출 표, 샌님잡이 행",
+  what:'절정 시퀀스가 "팔 들기, 꾸부리기"인데 둘 다 동작 세트 3개에 없는 이름임',
+  fix:"배운 동작 3개로 절 배우기 시퀀스를 구성함"},
+ {where:"4.3.1 마당별 수업 내용 표 / 3.10.2 3) 동작 세트",
+  what:"샌님잡이 동작 순서가 두 절에서 다름. 구성은 같고 순서만 어긋남",
+  fix:"수업 순서인 4.3.1을 따름"},
+ {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
+  what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
+  fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"}];
+
+/* ── 4. 사운드 (합성) ──────────────────── */
+const AU={ctx:null,
+ ensure(){ if(!this.ctx){try{this.ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+   if(this.ctx&&this.ctx.state==="suspended")this.ctx.resume(); return this.ctx; },
+ noise(dur,freq,q,gain,type){const c=this.ensure(); if(!c||!CFG.sfx)return;
+   const n=c.sampleRate*dur,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);
+   for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2);
+   const s=c.createBufferSource();s.buffer=b;
+   const f=c.createBiquadFilter();f.type=type||"bandpass";f.frequency.value=freq;f.Q.value=q;
+   const g=c.createGain();g.gain.value=gain;
+   s.connect(f);f.connect(g);g.connect(c.destination);s.start();},
+ tone(freq,dur,gain,type){const c=this.ensure(); if(!c||!CFG.sfx)return;
+   const o=c.createOscillator(),g=c.createGain();
+   o.type=type||"sine";o.frequency.setValueAtTime(freq,c.currentTime);
+   g.gain.setValueAtTime(gain,c.currentTime);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+dur);
+   o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur);},
+ kkwaenggwari(){this.noise(.16,2600,1.2,.16);this.tone(1180,.09,.05,"square");},
+ buk(){this.tone(88,.24,.28);this.noise(.06,220,.8,.06);},
+ jang(){this.noise(.07,900,2,.09);},
+ eolssu(){for(let i=0;i<7;i++)setTimeout(()=>this.noise(.05,1600+Math.random()*900,1.6,.07),i*46);
+   this.tone(660,.16,.05,"triangle");setTimeout(()=>this.tone(880,.2,.05,"triangle"),110);},
+ good(){this.tone(560,.1,.05,"triangle");},
+ miss(){this.tone(180,.16,.06,"sawtooth");},
+ hit(){this.noise(.09,1400,1,.1);},
+ cheer(){for(let i=0;i<26;i++)setTimeout(()=>this.noise(.06,1200+Math.random()*1800,1.4,.05),i*38);}};
+
+/* ── 5. 발화 ───────────────────────────── */
+const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
+ pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
+   return this.voices.filter(v=>/ko/i.test(v.lang)); },
+ say(who,text,box,cb){
+   this.stop();
+   const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
+   nm.textContent = who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역"):"유저 배역 (장쇠가 읽음)";
+   line.innerHTML=esc(text)+' <span class="prov">임시 문안</span>';
+   box.classList.add("speaking");
+   log("say",(who==="jangsoe"?"장쇠":who==="foe"?S.madang.foe:"유저 배역(장쇠 대독)")+": "+text,"lg-sys");
+   TO.pauseSpeak(true); this.startMouth(box);
+   const done=()=>{box.classList.remove("speaking");this.stopMouth();TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
+   this.onEnd=done;
+   const dur=Math.min(6500,Math.max(1100,text.length*105));
+   if(CFG.tts&&!this.failed&&window.speechSynthesis){
+     try{
+       const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
+       const vs=this.pick(); if(vs.length)u.voice=who==="foe"?(vs[1]||vs[0]):vs[0];
+       u.rate=who==="foe"?1.02:.98; u.pitch=who==="foe"?1.25:.85;
+       u.onend=()=>{ if(this.onEnd===done){this.timer&&clearTimeout(this.timer);done();} };
+       u.onerror=()=>{this.failed=true;};
+       this.cur=u; speechSynthesis.speak(u);
+     }catch(e){this.failed=true;}
+   }
+   this.timer=setTimeout(()=>{if(this.onEnd===done)done();},dur+(CFG.tts&&!this.failed?1400:0));
+ },
+ startMouth(box){ // 립싱크는 맞추지 않고 발화 동안 입 여닫기만 반복함 (기획서 3.4.2)
+   const sp=box.querySelector(".host-art .art"); if(!sp)return;
+   let open=false;
+   this.mouth=setInterval(()=>{
+     open=!open; const im=sp.querySelector("img"); if(!im)return;
+     const f=ART[open?"host_talk":"host_idle"]; if(f&&ART_STATE[open?"host_talk":"host_idle"]) im.src=ART_BASE+encodeURIComponent(f);
+     const sv=sp.querySelector("svg [data-mouth]"); if(sv) sv.setAttribute("ry",open?7:2.4);
+   },180);
+ },
+ stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
+ stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();
+   try{speechSynthesis.cancel();}catch(e){}}};
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
+
+/* ── 6. 세션 ───────────────────────────── */
+let S=null;
+function newSession(){
+  S={id:"SES-"+Math.random().toString(36).slice(2,8).toUpperCase(),lang:"ko",step:1,
+     madang:null,role:null,records:[],sinmyeong:0,success:0,eolssu:0,dasi:0,
+     chapters:{lesson:false,scene:false,climax:false},chapMs:{lesson:0,scene:0,climax:0},
+     gauge:0,startedAt:Date.now(),errType:null};
+  renderSess();
+}
+function renderSess(){
+  document.getElementById("sess").innerHTML=[["세션 ID",S.id],["현재 언어",S.lang],["현재 Step","Step "+S.step],
+   ["선택 마당",S.madang?S.madang.name:"미정"],["선택 배역",S.role||"미정"],
+   ["장면 수행 기록",S.records.length+"건"],["신명 지표(내부)",S.sinmyeong.toFixed(1)+" (화면 비표시)"],
+   ["에러 유형",S.errType||"없음"]]
+   .map(r=>`<div class="kv"><span>${r[0]}</span><span>${esc(String(r[1]))}</span></div>`).join("");
+}
+function log(kind,msg,cls){
+  const el=document.getElementById("log"),d=document.createElement("div");
+  d.className=cls||"lg-sys";
+  d.textContent="["+new Date().toLocaleTimeString("ko-KR",{hour12:false})+"] "+msg;
+  el.insertBefore(d,el.firstChild);
+  while(el.children.length>140)el.removeChild(el.lastChild);
+}
+function srv(m){log("srv","→ 서버: "+m,"lg-srv");}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ── 7. 화면 전환 ──────────────────────── */
+let curScreen=null;
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  curScreen=id; TO.enter(id);
+}
+
+/* ── 8. 타임아웃 ───────────────────────── */
+const TO={screenLeft:0,idleLeft:0,paused:false,inStep3:false,active:false,
+ enter(id){this.inStep3=(id==="scr-play");
+   this.screenLeft=this.inStep3?CFG.step3Timeout:CFG.screenTimeout;
+   this.idleLeft=CFG.idleTimeout;this.paused=false;
+   this.active=["scr-madang","scr-role","scr-play","scr-accept"].includes(id);},
+ pauseSpeak(v){this.paused=v;this.render();},
+ bump(){this.idleLeft=CFG.idleTimeout;},
+ render(){document.querySelectorAll("[data-timer]").forEach(el=>{
+   if(!this.active||!CFG.timeoutOn){el.textContent="";return;}
+   el.className="timer-chip"+(this.paused?" paused":"");
+   el.innerHTML=`화면 <b>${Math.ceil(this.screenLeft)}</b>s, 미입력 <b>${Math.ceil(this.idleLeft)}</b>s`;});},
+ start(){setInterval(()=>{
+   if(this.active&&CFG.timeoutOn&&!this.paused&&!POP.on){
+     this.screenLeft-=.25;this.idleLeft-=.25;
+     if(this.idleLeft<=0){this.active=false;log("to","미입력 타임아웃 발생 (이탈 처리)","lg-err");endSession("idle");}
+     else if(this.screenLeft<=0){this.active=false;onScreenTimeout();}
+   }
+   this.render();},250);}};
+TO.start();
+["pointerdown","keydown","wheel"].forEach(e=>window.addEventListener(e,()=>TO.bump(),{passive:true}));
+function onScreenTimeout(){
+  log("to","화면 타임아웃 → 정상 경로로 진행","lg-warn");
+  if(curScreen==="scr-madang")confirmMadang(true);
+  else if(curScreen==="scr-role")wearMask(true);
+  else if(curScreen==="scr-play"){log("to","Step 3 합산 타임아웃 → 중단 처리","lg-err");endSession("timeout-step3");}
+  else if(curScreen==="scr-accept")goStep5("complete-timeout");
+}
+
+/* ── 9. 팝업 ───────────────────────────── */
+const POP={on:false,
+ show(title,msg,buttons){this.on=true;
+   document.getElementById("popTitle").textContent=title;
+   document.getElementById("popMsg").textContent=msg;
+   const row=document.getElementById("popRow");row.innerHTML="";
+   buttons.forEach(b=>{const el=document.createElement("button");
+     el.className="cta"+(b.ghost?" ghost":"");el.textContent=b.label;
+     el.onclick=()=>{this.hide();b.fn&&b.fn();};row.appendChild(el);});
+   document.getElementById("pop").classList.add("on");},
+ hide(){this.on=false;document.getElementById("pop").classList.remove("on");}};
+document.querySelectorAll("[data-quit]").forEach(b=>b.onclick=()=>{
+  SPEECH.stop();
+  POP.show("그만두시겠습니까?","진행 중인 체험이 종료되고 처음 화면으로 돌아갑니다.",
+    [{label:"그만두기",fn:()=>endSession("quit")},{label:"계속하기",ghost:true}]);});
+
+/* ── 10. 자리표시 그림 (SVG) ───────────── */
+function maskSVG(kind,w,h,mood){
+  const C={"꺽쇠":["#c9a86a","#3a2a1a"],"말뚝이":["#b5533a","#2b1712"],"취발이":["#c4453a","#2a1310"],
+    "옴탈":["#8f9a5e","#2a2c18"],"샌님":["#e5dcc6","#3a3222"],"먹중":["#5c4a3a","#20180f"],
+    "장쇠":["#d1a96b","#3a2a18"]}[kind]||["#b9a583","#2a2018"];
+  const brow=mood==="angry"?"M22,24 L38,20 M62,20 L78,24":"M22,22 L38,22 M62,22 L78,22";
+  const mouth=mood==="hurt"?"M34,68 Q50,58 66,68":mood==="laugh"?"M32,62 Q50,80 68,62":"M34,66 Q50,72 66,66";
+  const id="g"+Math.random().toString(36).slice(2,7);
+  return `<svg viewBox="0 0 100 118" width="${w}" height="${h}">
+   <defs><radialGradient id="${id}"><stop offset="0" stop-color="${C[0]}"/><stop offset="1" stop-color="${shade(C[0],-28)}"/></radialGradient></defs>
+   <path d="M50,4 C78,4 90,26 90,54 C90,88 72,114 50,114 C28,114 10,88 10,54 C10,26 22,4 50,4 Z" fill="url(#${id})" stroke="${C[1]}" stroke-width="2.5"/>
+   <path d="${brow}" stroke="${C[1]}" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+   <ellipse cx="30" cy="${mood==="hurt"?42:42}" rx="9" ry="${mood==="hurt"?4:7}" fill="${C[1]}"/>
+   <ellipse cx="70" cy="42" rx="9" ry="${mood==="hurt"?4:7}" fill="${C[1]}"/>
+   <path d="M50,42 L44,60 L56,60 Z" fill="${shade(C[0],-38)}"/>
+   <path d="${mouth}" stroke="${C[1]}" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+   <ellipse data-mouth cx="50" cy="70" rx="7" ry="2.4" fill="${shade(C[1],10)}" opacity="${kind==="장쇠"?.9:0}"/>
+   ${kind==="옴탈"?'<g fill="#4c3b1e"><circle cx="24" cy="76" r="3.4"/><circle cx="76" cy="72" r="3"/><circle cx="58" cy="88" r="3.6"/><circle cx="38" cy="92" r="2.8"/></g>':""}
+   ${kind==="샌님"?'<path d="M42,66 L58,66" stroke="#8a2f2f" stroke-width="3"/><path d="M50,60 L50,74" stroke="#8a2f2f" stroke-width="2.6"/>':""}
+   ${kind==="장쇠"?'<path d="M14,50 Q4,66 14,80" stroke="'+C[1]+'" stroke-width="3" fill="none"/><path d="M86,50 Q96,66 86,80" stroke="'+C[1]+'" stroke-width="3" fill="none"/>':""}
+  </svg>`;
+}
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);
+  const r=Math.max(0,Math.min(255,(n>>16)+amt)),g=Math.max(0,Math.min(255,((n>>8)&255)+amt)),b=Math.max(0,Math.min(255,(n&255)+amt));
+  return "#"+((r<<16)|(g<<8)|b).toString(16).padStart(6,"0");}
+function hostHTML(){
+  return `<div class="host-art">${art("host_idle",maskSVG("장쇠",120,142))}</div>
+   <div class="host-box"><div class="host-name">장쇠 (스승)</div>
+   <div class="host-line">&nbsp;</div><button class="host-skip">다음</button></div>`;
+}
+function picHTML(mv){ return art("pic_"+mv, `<span>${DIRCH[MOVES[mv].dir]}</span>`); }
+
+/* ── 11. Step 2-1 마당 선택 ────────────── */
+let selIdx=0;
+function buildMadang(){
+  const c=document.getElementById("madangCards");c.innerHTML="";
+  MADANG.forEach((m,i)=>{
+    const b=document.createElement("button");
+    b.className="card"+(i===selIdx?" sel":"");
+    b.innerHTML=`<div class="card-mask">${art("foe_"+m.foe+"_대기",maskSVG(m.foe,38,44))}</div>
+      <div><div class="card-name">${m.name}<span>${m.tag}</span></div>
+      <div class="card-brief">${m.brief}</div>
+      <div class="card-cast">내 배역 ${m.user}, 상대 배역 ${m.foe}</div></div>`;
+    b.onclick=()=>{selIdx=i;AU.jang();buildMadang();};
+    c.appendChild(b);});
+  const m=MADANG[selIdx];
+  document.getElementById("madangPreview").innerHTML=
+   `<div class="preview-art">${art("foe_"+m.foe+"_등장",maskSVG(m.foe,120,142))}</div>
+    <div class="preview-cap">${m.preview}</div>
+    <div class="asset-note">기획서 4.2.1 2)의 미리보기(잠정). 상대 배역 일러스트 자리표시임</div>`;
+  hydrate();
+}
+function confirmMadang(auto){
+  const m=MADANG[selIdx];S.madang=m;S.role=m.user;S.step=2;
+  srv("선택 마당과 배역 확정: "+m.name+" / "+m.user+(auto?" (화면 타임아웃 자동 확정)":""));
+  renderSess();buildRole();show("scr-role");
+}
+
+/* ── 12. Step 2-2 배역 확인 ────────────── */
+function buildRole(){
+  const m=S.madang, box=document.getElementById("roleHost");
+  box.innerHTML=hostHTML();
+  document.getElementById("roleMask").innerHTML=art("mask_"+m.user,maskSVG(m.user,150,178));
+  document.getElementById("roleName").textContent=m.user;
+  document.getElementById("roleSub").textContent=m.name+"의 배역";
+  document.getElementById("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
+  hydrate();
+  box.querySelector(".host-skip").onclick=()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);};
+  SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
+}
+function wearMask(auto){
+  SPEECH.stop();AU.kkwaenggwari();
+  srv("배역 확정 저장: "+S.role+(auto?" (화면 타임아웃 자동 확정)":""));
+  const el=document.getElementById("roleMask");
+  el.style.transition="transform .5s cubic-bezier(.2,1.5,.4,1)";el.style.transform="scale(1.35)";
+  setTimeout(()=>{el.style.transform="";S.step=3;renderSess();startStep3();},600);
+}
+
+/* ── 13. 입력 패드 ─────────────────────── */
+const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
+ holdMs:0,peak:0,peakX:0,peakY:0,path:[],down:false,reverses:0,lastDir:0,pressT:0,windowTimer:null,
+ arm(moveId,ms,cb,opts){
+   this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
+   this.el.classList.add("armed");this.el.classList.remove("idle");
+   document.getElementById("padHint").style.display="none";
+   document.getElementById("bandState").textContent=this.opts.rhythm?"장단 판정 중":"응답 대기 중";
+   document.getElementById("padMove").innerHTML=esc(this.move.name)+` <small>${esc(this.move.body)}</small>`;
+   document.getElementById("padHow").textContent=this.move.how;
+   document.getElementById("padElems").innerHTML=this.move.elems.map(e=>`<span class="el">${e}</span>`).join("")+
+     (this.opts.rhythm?'<span class="el">타이밍</span>':"");
+   document.getElementById("padArrow").textContent=DIRCH[this.move.dir];
+   document.getElementById("padArrowCap").textContent=DIRCAP[this.move.dir];
+   if(ms>0){
+     const w=document.getElementById("padWindow");w.style.display="block";
+     w.style.transition="none";w.style.transform="scaleX(1)";
+     requestAnimationFrame(()=>{w.style.transition=`transform ${ms}ms linear`;w.style.transform="scaleX(0)";});
+     this.windowTimer=setTimeout(()=>{if(this.armed)this.settle(null);},ms+40);
+   }},
+ disarm(){this.armed=false;this.windowTimer&&clearTimeout(this.windowTimer);this.windowTimer=null;
+   this.el.classList.remove("armed");this.el.classList.add("idle");
+   document.getElementById("padWindow").style.display="none";
+   document.getElementById("padHint").style.display="";
+   document.getElementById("bandState").textContent="대기 중";
+   document.getElementById("padMove").textContent="대기";
+   document.getElementById("padHow").textContent="장쇠가 신호를 주면 오른쪽 패드를 끄십시오";
+   document.getElementById("padElems").innerHTML="";
+   document.getElementById("padArrow").textContent="-";
+   document.getElementById("padArrowCap").textContent="방향";},
+ settle(res){if(!this.armed)return;const cb=this.cb;this.disarm();
+   cb&&cb(res||{v:"dasi",amp:0,hold:0,reason:"미수행"});},
+ measure(){
+   const p=this.path;if(p.length<2)return{v:"dasi",amp:0,hold:0,reason:"입력 없음"};
+   const R=this.el.getBoundingClientRect(),diag=Math.hypot(R.width,R.height);
+   let total=0;
+   for(let i=1;i<p.length;i++)total+=Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y);
+   const dur=(p[p.length-1].t-p[0].t)/1000,M=this.move,need=M.elems;
+   let shape=0,amp=0;
+   if(M.dir==="swing"){
+     amp=Math.min(1,total/(diag*1.15));
+     shape=this.reverses>=2?Math.min(1,this.reverses/3):0;
+     if(this.reverses>=2&&dur<.28)shape=Math.min(1,shape+.15);
+   }else{
+     amp=Math.min(1,this.peak/(diag*.42));
+     const v=DIRVEC[M.dir],len=Math.hypot(this.peakX,this.peakY)||1;
+     const cos=(this.peakX*v[0]+this.peakY*v[1])/len;
+     shape=Math.max(0,(cos-.35)/.65); // 관대 판정: 약 70도까지 허용
+   }
+   const hold=this.holdMs/1000,needHold=need.includes("홀드"),reason=[];
+   const shapeOK=shape>=.3,ampOK=amp>=.17,holdOK=!needHold||hold>=CFG.holdReq;
+   if(!shapeOK)reason.push(M.dir==="swing"?"왕복 부족":"방향 불일치");
+   if(!ampOK)reason.push("진폭 부족");
+   if(!holdOK)reason.push("홀드 부족");
+   let v="dasi";
+   if(shapeOK&&ampOK&&holdOK){
+     const big=amp>=CFG.eolssuAmp&&shape>=.55&&(!needHold||hold>=CFG.holdReq*1.5);
+     v=big?"eolssu":"johda";
+   }
+   return{v,amp:+amp.toFixed(2),hold:+hold.toFixed(2),shape:+shape.toFixed(2),
+     reason:reason.join(", ")||"충족",rev:this.reverses};}};
+(function padInput(){
+  const el=PAD.el,cv=document.getElementById("trail"),cx=cv.getContext("2d");
+  const fit=()=>{const R=el.getBoundingClientRect();cv.width=R.width;cv.height=R.height;};
+  new ResizeObserver(fit).observe(el);fit();
+  let holdStart=0,atPeak=false;
+  const pos=e=>{const R=el.getBoundingClientRect();return{x:e.clientX-R.left,y:e.clientY-R.top,t:performance.now()};};
+  el.addEventListener("pointerdown",e=>{
+    if(!PAD.armed)return;
+    el.setPointerCapture(e.pointerId);
+    PAD.down=true;PAD.path=[pos(e)];PAD.pressT=performance.now();
+    PAD.reverses=0;PAD.lastDir=0;PAD.holdMs=0;PAD.peak=0;PAD.peakX=0;PAD.peakY=0;
+    holdStart=0;atPeak=false;cx.clearRect(0,0,cv.width,cv.height);AU.jang();});
+  el.addEventListener("pointermove",e=>{
+    if(!PAD.down||!PAD.armed)return;
+    const p=pos(e),prev=PAD.path[PAD.path.length-1];PAD.path.push(p);
+    const dx=p.x-PAD.path[0].x,dy=p.y-PAD.path[0].y,d=Math.hypot(dx,dy);
+    if(d>PAD.peak){PAD.peak=d;PAD.peakX=dx;PAD.peakY=dy;}
+    const sdx=p.x-prev.x;
+    if(Math.abs(sdx)>5){const dir=Math.sign(sdx);if(PAD.lastDir&&dir!==PAD.lastDir)PAD.reverses++;PAD.lastDir=dir;}
+    const R=el.getBoundingClientRect(),diag=Math.hypot(R.width,R.height),reached=d>=diag*.16;
+    if(reached&&!atPeak){atPeak=true;holdStart=p.t;}
+    if(!reached&&atPeak){atPeak=false;PAD.holdMs=Math.max(PAD.holdMs,p.t-holdStart);}
+    if(atPeak)PAD.holdMs=Math.max(PAD.holdMs,p.t-holdStart);
+    cx.strokeStyle="rgba(200,163,74,.55)";cx.lineWidth=3;cx.lineCap="round";
+    cx.beginPath();cx.moveTo(prev.x,prev.y);cx.lineTo(p.x,p.y);cx.stroke();});
+  const up=()=>{
+    if(!PAD.down)return;PAD.down=false;
+    if(atPeak){PAD.holdMs=Math.max(PAD.holdMs,performance.now()-holdStart);atPeak=false;}
+    if(!PAD.armed)return;
+    const res=PAD.measure();res.pressT=PAD.pressT; // 타이밍은 손을 댄 순간으로 잼
+    setTimeout(()=>cx.clearRect(0,0,cv.width,cv.height),260);
+    PAD.settle(res);};
+  el.addEventListener("pointerup",up);el.addEventListener("pointercancel",up);
+})();
+
+/* ── 14. 판정 표시 ─────────────────────── */
+function showVerdict(v){
+  const el=document.getElementById("verdict");
+  el.className="verdict "+v;
+  el.textContent=v==="eolssu"?"얼쑤!":v==="johda"?"좋다!":"다시!";
+  void el.offsetWidth;el.classList.add("play");
+  if(v==="eolssu"){AU.eolssu();crowd();}else if(v==="johda")AU.good();else AU.miss();
+}
+function crowd(){
+  const f=document.getElementById("field");
+  ["얼쑤","좋다","그렇지"].forEach((t,i)=>{
+    const s=document.createElement("div");s.className="fx";s.textContent=t;
+    s.style.left=(12+Math.random()*70)+"%";s.style.top=(55+Math.random()*30)+"%";
+    s.style.fontSize=(13+Math.random()*9)+"px";f.appendChild(s);
+    s.animate([{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"translateY(-14px)"},{opacity:0,transform:"translateY(-36px)"}],
+      {duration:1100,delay:i*110,easing:"ease-out"}).onfinish=()=>s.remove();});
+}
+function record(moveId,res,chapter){
+  S.records.push({move:moveId,v:res.v,amp:res.amp,hold:res.hold,chapter});
+  if(res.v==="eolssu"){S.success++;S.eolssu++;S.sinmyeong+=2.5;}
+  else if(res.v==="johda"){S.success++;S.sinmyeong+=1;}
+  else S.dasi++;
+  log("jud",`[${chapter}] ${MOVES[moveId].name} → ${res.v==="eolssu"?"얼쑤":res.v==="johda"?"좋다":"다시"} (진폭 ${res.amp}, 홀드 ${res.hold}s, ${res.reason})`,"lg-jud");
+  renderSess();
+}
+
+/* ── 15. Step 3 ────────────────────────── */
+let chapStart=0,curChap="lesson",climaxRAF=null;
+function startStep3(){
+  show("scr-play");
+  const box=document.getElementById("playHost");box.innerHTML=hostHTML();
+  box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
+  setBG(S.madang.id);setFoe(null);hydrate();
+  runLesson();
+}
+function setBG(which){
+  const f=document.getElementById("field");
+  const old=f.querySelector(".bgwrap");if(old)old.remove();
+  const w=document.createElement("div");w.className="bgwrap";
+  w.innerHTML=art("bg_"+which,"");
+  w.querySelectorAll(".art").forEach(a=>a.classList.add("bg"));
+  w.style.cssText="position:absolute;inset:0";
+  f.insertBefore(w,f.firstChild);hydrate(f);
+}
+function chapIn(k){curChap=k;chapStart=performance.now();}
+function chapOut(k){S.chapMs[k]=performance.now()-chapStart;S.chapters[k]=true;}
+
+/* 1장 기초 수업 */
+function runLesson(){
+  chapIn("lesson");
+  document.getElementById("playTitle").textContent="기초 수업 (1장)";
+  document.getElementById("demoHint").textContent="상대 배역은 아직 나오지 않음";
+  const box=document.getElementById("playHost"),list=S.madang.moves.slice();
+  let i=0;
+  const pane=()=>{
+    document.getElementById("infoPane").innerHTML=
+     `<div class="info-h">배울 동작 3개</div>
+      <div class="info-card">${list.map((id,k)=>
+        `<div class="mv-row ${k===i?"now":k<i?"done":""}"><span class="mv-ico">${picHTML(id)}</span>
+         <span>${MOVES[id].name}<br><small style="opacity:.7">${MOVES[id].body}</small></span></div>`).join("")}</div>
+      <div class="info-h">시범</div>
+      <div class="info-card"><div class="demo-slot">${i<list.length?art("demo_"+list[i],"시범 클립 자리<br>모션 레퍼런스 미확보"):"수업 종료"}</div></div>`;
+    hydrate();
+  };
+  const nextMove=()=>{
+    pane();
+    if(i>=list.length){SPEECH.say("jangsoe",S.madang.closeLine,box,()=>{chapOut("lesson");runScene();});return;}
+    const id=list[i],M=MOVES[id];let tries=0;
+    const ask=()=>{
+      PAD.arm(id,CFG.respWindow*1000,res=>{
+        record(id,res,"수업");showVerdict(res.v);
+        if(res.v==="dasi"){
+          tries++;
+          if(tries>CFG.lessonRetry){
+            SPEECH.say("jangsoe","됐다 됐다, 몸이 알아서 기억할 게다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
+          }else{
+            const fix=res.reason.includes("진폭")?"더 크게!":res.reason.includes("홀드")?"끝을 딱 맺어야지!":
+              res.reason.includes("왕복")?"한 번 말고 좌우로 몰아쳐라!":
+              res.reason.includes("방향")?"내 시범을 다시 보아라!":"장단에 맞춰!";
+            SPEECH.say("jangsoe",fix+` (${CFG.lessonRetry-tries+1}번 남았다)`,box,ask);
+          }
+        }else{
+          SPEECH.say("jangsoe",res.v==="eolssu"?"얼쑤! 그 맛이다!":"좋다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
+        }});
+    };
+    demoAnim(M);
+    SPEECH.say("jangsoe",`${M.name}. ${M.body}이다. 내 시범을 보고 따라 해라.`,box,ask);
+  };
+  SPEECH.say("jangsoe",S.madang.openLine,box,nextMove);
+}
+function demoAnim(M){
+  const f=document.getElementById("field"),d=document.createElement("div");
+  d.className="fx";d.style.left="50%";d.style.top="46%";d.style.transform="translate(-50%,-50%)";
+  d.style.fontSize="48px";d.textContent=DIRCH[M.dir];f.appendChild(d);
+  d.animate([{opacity:0},{opacity:1},{opacity:.9},{opacity:0}],{duration:1500,easing:"ease-in-out"}).onfinish=()=>d.remove();
+}
+
+/* 2장 장면 실습 */
+function runScene(){
+  chapIn("scene");
+  document.getElementById("playTitle").textContent="장면 실습 (2장)";
+  document.getElementById("demoHint").textContent="상대 배역 포즈 일러스트 자리";
+  const box=document.getElementById("playHost"),beats=S.madang.scene;
+  let i=0;
+  const pane=()=>{
+    document.getElementById("infoPane").innerHTML=
+     `<div class="info-h">장면 진행</div><div class="info-card">${beats.map((b,k)=>{
+        const t=b.t==="cue"?`신호: ${b.text} (${MOVES[b.move].name})`:b.t==="enter"?"상대 배역 등장":
+                b.t==="free"?"따라 하기 연출":`재담: ${b.text.slice(0,16)}...`;
+        return `<div class="beat-row ${k===i?"now":k<i?"done":""}">${esc(t)}</div>`;}).join("")}</div>`;
+  };
+  const next=()=>{
+    pane();
+    if(i>=beats.length){chapOut("scene");setFoe(null);runClimax();return;}
+    const b=beats[i++];
+    if(b.t==="enter"){setFoe("등장",b.cap);AU.kkwaenggwari();setTimeout(next,900);}
+    else if(b.t==="say"){SPEECH.say(b.who,b.text,box,next);}
+    else if(b.t==="free"){
+      setFoe("과장","옴탈이 온몸을 긁어 댐");
+      SPEECH.say("jangsoe",b.text,box,()=>{
+        document.getElementById("foeCap").textContent=b.cap;
+        PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");next();});
+        document.getElementById("padMove").textContent="긁는 시늉";
+        document.getElementById("padHow").textContent="아무렇게나 마구 긁어 보기 (판정 없음)";
+        document.getElementById("padElems").innerHTML="";
+      });}
+    else if(b.t==="cue"){
+      if(b.gap)log("gap","기획서 대조: 먹중잡이 신호가 미학습 동작이라 소매 뿌리기로 대체함","lg-warn");
+      setFoe("대기");
+      SPEECH.say(b.who,b.text,box,()=>{
+        PAD.arm(b.move,CFG.respWindow*1000,res=>{
+          record(b.move,res,"실습");showVerdict(res.v);
+          const ok=res.v!=="dasi";
+          setFoe(ok?"과장":"중립",ok?b.ok:b.no);
+          SPEECH.say("jangsoe",ok?b.ok:b.no,box,next);  // 장쇠 중계 재담
+        });});}
+  };
+  next();
+}
+function setFoe(pose,cap){
+  const el=document.getElementById("foe"),c=document.getElementById("foeCap");
+  if(!pose){el.innerHTML="";c.textContent="";return;}
+  const m=S.madang;
+  const mood=pose==="과장"?"hurt":pose==="등장"?"laugh":pose==="중립"?"angry":"idle";
+  el.innerHTML=art("foe_"+m.foe+"_"+pose,maskSVG(m.foe,130,154,mood));
+  el.style.height="62%";
+  c.textContent=cap||"";hydrate(el);
+  const anim={
+    "등장":[{transform:"translate(-50%,-50%) translateX(140px)",opacity:0},{transform:"translate(-50%,-50%)",opacity:1}],
+    "과장":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) translate(30px,-24px) rotate(14deg) scale(1.06)"},{transform:"translate(-50%,-50%)"}],
+    "중립":[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translateX(-7px)"},{transform:"translate(-50%,-50%) translateX(7px)"},{transform:"translate(-50%,-50%)"}],
+    "대기":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) scale(1.02)"},{transform:"translate(-50%,-50%) scale(1)"}],
+    "결말":[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translate(320px,-170px) rotate(90deg)",opacity:0}]
+  }[pose];
+  if(anim)el.animate(anim,{duration:pose==="결말"?900:520,easing:"ease-out",fill:pose==="결말"?"forwards":"none"});
+  if(pose==="과장")AU.hit();
+}
+
+/* 3장 절정 무대 */
+function runClimax(){
+  chapIn("climax");
+  document.getElementById("playTitle").textContent="절정 무대 (3장)";
+  document.getElementById("demoHint").textContent="관망 정렬 배경 자리";
+  const box=document.getElementById("playHost"),cx=S.madang.climax;
+  setBG("climax");
+  document.getElementById("noteBar").style.display="block";
+  document.getElementById("gaugeWrap").style.display="flex";
+  document.getElementById("gaugeLab").textContent=cx.gaugeLab;
+  S.gauge=0;updGauge();
+  document.getElementById("infoPane").innerHTML=
+   `<div class="info-h">절정 시퀀스</div><div class="info-card" style="font-size:11.5px;line-height:1.5">${esc(cx.seq)}</div>
+    <div class="info-h">결말 연출</div>
+    <div class="info-card" style="font-size:11px;line-height:1.5;color:#c9bda9">
+      게이지 만충: ${esc(cx.ending)}<br><br>
+      <span style="color:var(--dim)">미달 완화판: ${esc(cx.endingSoft)}</span></div>`;
+  setFoe("대기","맞서 선 "+S.madang.foe);
+  SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>climaxRun(cx));
+}
+function updGauge(){document.getElementById("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
+function climaxRun(cx){
+  const bar=document.getElementById("noteBar");
+  bar.querySelectorAll(".note").forEach(n=>n.remove());
+  const W=bar.clientWidth,markerX=78,lead=2.6,beat=60/cx.bpm;
+  let acc=2.2;
+  const notes=cx.pattern.map((mv,i)=>{
+    const n={mv,hitAt:acc,el:null,done:false};
+    acc+=beat*2.4*(cx.accel?Math.pow(.955,i):1); // 장단 가속은 간격을 좁혀 표현함
+    return n;});
+  const total=notes[notes.length-1].hitAt+2.4,t0=performance.now();
+  let jangdanNext=0,ended=false,armedNote=null;
+  const clock=()=>(performance.now()-t0)/1000;
+  notes.forEach(n=>{const el=document.createElement("div");el.className="note";
+    el.innerHTML=picHTML(n.mv);bar.appendChild(el);n.el=el;});
+  hydrate(bar);
+  const armNext=()=>{
+    const n=notes.find(x=>!x.done&&x.hitAt>=clock()-CFG.hitWindow);
+    if(!n||armedNote===n)return;
+    armedNote=n;
+    PAD.arm(n.mv,0,res=>{
+      const at=res.pressT?(res.pressT-t0)/1000:clock();
+      const dt=Math.abs(at-n.hitAt);n.done=true;
+      if(dt>CFG.hitWindow||res.v==="dasi"){
+        res.v="dasi";res.reason=dt>CFG.hitWindow?"타이밍 이탈 "+dt.toFixed(2)+"s":res.reason;
+        n.el.classList.add("miss");
+      }else{n.el.classList.add("hit");S.gauge+=res.v==="eolssu"?13:8;updGauge();}
+      record(n.mv,res,"절정");showVerdict(res.v);armedNote=null;
+      if(S.gauge>=100&&!ended){ended=true;finishClimax(cx,true);}
+      else setTimeout(armNext,60);
+    },{rhythm:true});};
+  const loop=()=>{
+    const t=clock();
+    if(CFG.sfx&&t>=jangdanNext){(Math.round(jangdanNext/beat)%2===0?AU.buk():AU.jang());jangdanNext+=beat;}
+    notes.forEach(n=>{
+      n.el.style.left=(markerX+(n.hitAt-t)/lead*(W-markerX))+"px";
+      if(!n.done&&t>n.hitAt+CFG.hitWindow){n.done=true;n.el.classList.add("miss");
+        record(n.mv,{v:"dasi",amp:0,hold:0,reason:"응답 없음"},"절정");}});
+    armNext();
+    if(!ended&&t>total){ended=true;finishClimax(cx,false);return;}
+    if(!ended)climaxRAF=requestAnimationFrame(loop);};
+  climaxRAF=requestAnimationFrame(loop);
+}
+function finishClimax(cx,full){
+  climaxRAF&&cancelAnimationFrame(climaxRAF);PAD.disarm();
+  const box=document.getElementById("playHost");
+  setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
+  if(full){AU.cheer();AU.kkwaenggwari();}
+  log("sys","절정 결말: "+(full?"완전판":"완화판")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
+  SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
+    chapOut("climax");
+    document.getElementById("noteBar").style.display="none";
+    document.getElementById("gaugeWrap").style.display="none";
+    goStep4();});
+}
+
+/* ── 16. Step 4 ────────────────────────── */
+function goStep4(){
+  S.step=4;renderSess();srv("Step 4 진입 (완주 확정, 서버 완주 기록 겸함)");
+  show("scr-accept");
+  const box=document.getElementById("acceptHost");box.innerHTML=hostHTML();hydrate();
+  box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
+  const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>b.amp-a.amp)[0];
+  const hot=S.sinmyeong>=CFG.sinmyeongCut;
+  const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
+  const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 몸을 더 크게 써 보자.";
+  const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나.":"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
+  document.getElementById("acceptBody").innerHTML=`
+   <div class="acc-block"><div class="acc-h">인정 선언</div><div class="acc-decl">${esc(decl)}</div>
+     <div class="asset-note" style="text-align:left;margin-top:4px">완주 자체를 인정함. 등급 서열 없음</div></div>
+   <div class="acc-block"><div class="acc-h">수행 요약</div>
+     <div class="sum-row"><span>1장 기초 수업</span><span>${S.chapters.lesson?"완수":"미완"}</span></div>
+     <div class="sum-row"><span>2장 장면 실습</span><span>${S.chapters.scene?"완수":"미완"}</span></div>
+     <div class="sum-row"><span>3장 절정 무대</span><span>${S.chapters.climax?"완수":"미완"}</span></div>
+     <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
+   <div class="acc-block"><div class="acc-h">신명의 서사 번역</div><div class="acc-body">${esc(narr)}</div>
+     <div class="asset-note" style="text-align:left;margin-top:4px">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 분기 임계 ${CFG.sinmyeongCut} (화면에 노출하지 않는 설계, 검증용 표기)</div></div>`;
+  if(hot)AU.cheer();
+  SPEECH.say("jangsoe",decl+" "+bestLine+" "+narr,box);
+}
+
+/* ── 17. Step 5 ────────────────────────── */
+function goStep5(kind){
+  S.step=5;renderSess();SPEECH.stop();PAD.disarm();
+  climaxRAF&&cancelAnimationFrame(climaxRAF);
+  show("scr-end");
+  document.getElementById("endMsg").textContent="세션 종료 이벤트 전송";
+  document.getElementById("endSub").textContent="완주 유형: "+kind;
+  srv("종료 이벤트 전송 ("+kind+") → 저장 확인 응답 대기");
+  buildReport(kind);
+  setTimeout(()=>{
+    srv("저장 확인 응답 수신, 장면 수행 기록의 식별 원본 파기");
+    document.getElementById("endMsg").textContent="세션 데이터 초기화 완료";
+    setTimeout(()=>{newSession();show("scr-start");},900);},900);
+}
+function endSession(reason){
+  SPEECH.stop();PAD.disarm();climaxRAF&&cancelAnimationFrame(climaxRAF);
+  log("sys","비완주 종료: "+reason+" (배역 인정 화면 건너뜀)","lg-err");
+  goStep5("비완주-"+reason);
+}
+function buildReport(kind){
+  const n=S.records.length,e=S.eolssu,ok=S.success-e,d=S.dasi;
+  const secs=k=>(S.chapMs[k]/1000).toFixed(1)+"s",pc=v=>n?Math.round(v/n*100)+"%":"0%";
+  document.getElementById("report").innerHTML=`
+   <div class="rep-row"><span>종료 유형</span><b>${esc(kind)}</b></div>
+   <div class="rep-row"><span>마당, 배역</span><b>${S.madang?S.madang.name+", "+S.role:"미선택"}</b></div>
+   <div class="rep-row"><span>총 동작 신호</span><b>${n}건</b></div>
+   <div class="rep-row"><span>얼쑤</span><b>${e} (${pc(e)})</b></div>
+   <div class="rep-row"><span>좋다</span><b>${ok} (${pc(ok)})</b></div>
+   <div class="rep-row"><span>다시</span><b>${d} (${pc(d)})</b></div>
+   <div class="rep-row"><span>1장 소요</span><b>${secs("lesson")}</b></div>
+   <div class="rep-row"><span>2장 소요</span><b>${secs("scene")}</b></div>
+   <div class="rep-row"><span>3장 소요</span><b>${secs("climax")}</b></div>
+   <div class="rep-row"><span>전체 소요</span><b>${((Date.now()-S.startedAt)/1000).toFixed(0)}s</b></div>
+   <div class="rep-row"><span>신명 지표</span><b>${S.sinmyeong.toFixed(1)} / 임계 ${CFG.sinmyeongCut}</b></div>`;
+}
+
+/* ── 18. 에러 케이스 ───────────────────── */
+document.querySelectorAll("[data-err]").forEach(b=>b.onclick=()=>{
+  const k=b.dataset.err;S.errType=k;renderSess();
+  const halt=msg=>{log("err","중단 처리: "+msg,"lg-err");
+    POP.show("잠시 문제가 생겼습니다",msg+" 처음 화면으로 돌아갑니다.",[{label:"확인",fn:()=>endSession("error-"+k)}]);};
+  if(k==="tts"){SPEECH.failed=true;log("err","기능 축소: TTS 실패 → 화면 텍스트와 포즈로 진행","lg-err");}
+  else if(k==="pose"){log("err","기능 축소: 상대 배역 포즈 전환 실패 → 대표 포즈 정지 표시와 효과음","lg-err");
+    document.getElementById("foe").style.filter="grayscale(1) brightness(.7)";AU.hit();}
+  else if(k==="res")halt("마당 리소스를 불러오지 못했습니다.");
+  else if(k==="audio")halt("절정 무대 음원 재생이 지연되었습니다.");
+  else if(k==="cam")halt("카메라 신호가 들어오지 않습니다.");});
+
+/* ── 19. 진행 도구 ─────────────────────── */
+document.querySelectorAll("[data-force]").forEach(b=>b.onclick=()=>{
+  if(!PAD.armed)return log("sys","지금은 응답 대기 구간이 아님","lg-sys");
+  const v=b.dataset.force;
+  PAD.settle({v,amp:v==="eolssu"?.7:v==="johda"?.3:0,hold:v==="dasi"?0:1.2,reason:"패널 강제 판정"});});
+document.getElementById("btnSkipChap").onclick=()=>{
+  if(curScreen!=="scr-play")return;
+  SPEECH.stop();PAD.disarm();
+  if(curChap==="lesson"){chapOut("lesson");runScene();}
+  else if(curChap==="scene"){chapOut("scene");setFoe(null);runClimax();}
+  else{climaxRAF&&cancelAnimationFrame(climaxRAF);finishClimax(S.madang.climax,S.gauge>=100);}};
+document.getElementById("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
+  climaxRAF&&cancelAnimationFrame(climaxRAF);newSession();show("scr-start");};
+document.getElementById("panelToggle").onclick=()=>document.getElementById("panel").classList.toggle("hidden");
+
+/* ── 20. 진입 ──────────────────────────── */
+document.getElementById("btnStart").onclick=()=>{
+  AU.ensure();newSession();srv("세션 생성 (익명), 언어 ko");
+  S.step=2;renderSess();selIdx=0;buildMadang();show("scr-madang");};
+document.getElementById("btnMadangOk").onclick=()=>confirmMadang(false);
+document.getElementById("btnWear").onclick=()=>wearMask(false);
+document.getElementById("btnHome").onclick=()=>goStep5("완주-처음으로 버튼");
+
+document.getElementById("gaps").innerHTML=GAPS.map(g=>
+  `<div class="warnbox"><b>${esc(g.where)}</b><br>${esc(g.what)}<br><span style="color:#a9c9a0">프로토타입 처리: ${esc(g.fix)}</span></div>`).join("");
+renderAssets();
+newSession();show("scr-start");
+hydrate();
+</script>
+</body>
+</html>
