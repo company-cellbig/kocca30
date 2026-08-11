@@ -90,6 +90,22 @@ button:disabled{opacity:.4;cursor:default}
   width:45%;height:62%;display:flex;align-items:center;justify-content:center}
 .foe img{max-height:100%;max-width:100%;object-fit:contain}
 .foe-cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
+/* 판 위 대사 칸. 상대 배역 대사는 상대 그림 위에, 잽이 대사는 악사 자리인 판 아래에 띄움.
+   장쇠와 내 배역 대사는 종전대로 왼쪽 호스트 자막 칸이 맡음 */
+.stage-say{position:absolute;left:50%;transform:translateX(-50%);max-width:76%;display:none;z-index:3;
+  padding:7px 11px;border-radius:10px;font-size:12px;line-height:1.45;text-align:center;
+  background:rgba(18,14,11,.9);border:1px solid rgba(200,163,74,.5);color:#f0e4cc;
+  box-shadow:0 4px 18px rgba(0,0,0,.55)}
+.stage-say.on{display:block;animation:sayIn .22s ease-out}
+.stage-say .who{display:block;font-size:9.5px;letter-spacing:.08em;color:var(--gold);margin-bottom:3px}
+.stage-say::after{content:"";position:absolute;left:50%;margin-left:-7px;border:7px solid transparent}
+.stage-say.at-foe{top:30px}
+.stage-say.at-foe::after{top:100%;border-top-color:rgba(18,14,11,.9)}
+.stage-say.at-jaebi{bottom:30px;border-color:rgba(255,255,255,.24);color:#ded6c8}
+.stage-say.at-jaebi .who{color:#b9b0a1}
+.stage-say.at-jaebi::after{bottom:100%;border-bottom-color:rgba(18,14,11,.9)}
+@keyframes sayIn{from{opacity:0;transform:translateX(-50%) translateY(-5px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
 .verdict{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%) scale(.6);
@@ -314,6 +330,7 @@ button:disabled{opacity:.4;cursor:default}
           <div class="playfield" id="field">
             <div class="foe" id="foe"></div>
             <div class="foe-cap" id="foeCap"></div>
+            <div class="stage-say" id="stageSay"></div>
             <div class="verdict" id="verdict"></div>
             <div class="demo-hint" id="demoHint"></div>
           </div>
@@ -833,18 +850,33 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
  /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역(장쇠가 대독) */
  nameOf(who){ return who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역")
    : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (장쇠가 대독)"; },
+ /* 판 위 대사 칸. 상대 배역은 제 그림 위에, 잽이는 악사 자리인 판 아래에 띄움 */
+ onStage(who){ return (who==="foe"||who==="jaebi")&&curScreen==="scr-play"
+   ? document.getElementById("stageSay") : null; },
+ hideStage(){ const b=document.getElementById("stageSay"); if(b)b.className="stage-say"; },
  say(who,text,box,cb){
    this.stop();
    if(!text){ if(cb)cb(); return; }
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
    const other = who==="foe"||who==="jaebi";   // 장쇠가 읽지 않는 화자
+   const bub = this.onStage(who);
    nm.textContent = this.nameOf(who);
-   line.innerHTML=esc(text)+(who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>');
-   // 자막 칸은 화자가 돌아가며 씀. 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
+   if(bub){
+     // 판 위에서 말하는 차례. 왼쪽 자막 칸은 화자만 알리고 대사는 판 위 칸이 맡음
+     bub.className="stage-say on "+(who==="foe"?"at-foe":"at-jaebi");
+     bub.innerHTML=`<span class="who">${esc(this.nameOf(who))}</span>${esc(text)}`;
+     line.innerHTML='<span class="prov">대사는 판 위에 표시됨</span>';
+   }else{
+     line.innerHTML=esc(text)+(who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>');
+   }
+   // 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
    box.classList.add("speaking"); box.classList.toggle("by-foe",other);
    log("say",this.nameOf(who)+": "+text,"lg-sys");
    TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 내 배역 대사는 장쇠가 대독하므로 포함함
-   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
+   /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
+      다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
+   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();
+     TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
    const dur=Math.min(6500,Math.max(1100,text.length*105));
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
@@ -869,7 +901,7 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    },180);
  },
  stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
- stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();
+ stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();this.hideStage();
    try{speechSynthesis.cancel();}catch(e){}}};
 if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
 
