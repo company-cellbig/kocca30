@@ -47,6 +47,11 @@ button:disabled{opacity:.4;cursor:default}
 .col-info{flex:0 0 26%}
 .col-half{flex:1}
 
+/* 자산 자리표시 래퍼를 레이아웃에서 빼, 안의 이미지가 부모 칸의 크기 제약을 직접 받게 함.
+   span이 레이아웃에 남으면 img의 max-height:100%가 높이 없는 span을 기준으로 삼아 무시되고
+   세로로 넘침 (판 배경은 span 자체를 절대 배치로 깔아야 해서 아래에서 예외 처리) */
+.art{display:contents}
+
 /* ══ 장쇠 호스트 (세로 열) ══ */
 .host{display:flex;flex-direction:column;gap:7px;height:100%;min-height:0}
 .host-art{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
@@ -62,9 +67,10 @@ button:disabled{opacity:.4;cursor:default}
 /* ══ 판 (무대) ══ */
 .playfield{flex:1;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:10px;
   background:linear-gradient(180deg,rgba(60,45,35,.35),rgba(20,17,14,.5));overflow:hidden;min-height:0}
-.playfield .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.5}
-.foe{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);transition:opacity .3s}
-.foe img{max-height:100%;object-fit:contain}
+.playfield .bg{display:block;position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.5}
+.foe{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);transition:opacity .3s;
+  width:45%;height:70%;display:flex;align-items:center;justify-content:center}
+.foe img{max-height:100%;max-width:100%;object-fit:contain}
 .foe-cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
 .fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
