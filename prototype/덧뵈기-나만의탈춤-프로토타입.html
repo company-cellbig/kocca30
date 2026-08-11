@@ -528,6 +528,19 @@ function loadArt(sp,key){
   im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
 }
 new MutationObserver(()=>hydrate()).observe(document.body,{childList:true,subtree:true});
+/* 시작할 때 목록 전체를 한 번 훑어 있음과 없음을 미리 확정함.
+   없는 파일을 화면에서 만나는 순간에야 알면, 404가 돌아올 때까지 SVG 자리표시가 잠깐 비쳤다가
+   대체 그림으로 바뀌어 깜빡임. 패널 표시도 시작부터 실제 상태와 맞음 */
+function probeArt(){
+  let t=null; const redraw=()=>{clearTimeout(t);t=setTimeout(renderAssets,60);};
+  Object.keys(ART).forEach(k=>{
+    if(ART_STATE[k]!==undefined) return;
+    const im=new Image();
+    im.onload=()=>{ART_STATE[k]=true;redraw();};
+    im.onerror=()=>{ART_STATE[k]=false;redraw();};
+    im.src=ART_BASE+encodeURIComponent(ART[k]);
+  });
+}
 function renderAssets(){
   const el=document.getElementById("assetList");
   const have=Object.keys(ART).filter(k=>ART_STATE[k]===true).length;
@@ -1101,6 +1114,10 @@ function runScene(){
 }
 function setFoe(pose,cap){
   const el=document.getElementById("foe"),c=document.getElementById("foeCap");
+  /* 앞서 건 애니메이션을 먼저 지움. 결말만 fill:forwards라 마지막 키프레임(퇴장 마당은 opacity 0)이
+     요소에 그대로 남고, 뒤에 건 애니메이션은 끝나면 사라져 그 값이 다시 올라옴.
+     지우지 않으면 한 마당을 끝낸 뒤부터 상대 배역이 계속 안 보임 */
+  el.getAnimations().forEach(a=>a.cancel());
   if(!pose){el.innerHTML="";c.textContent="";return;}
   const m=S.madang;
   const mood=pose==="과장"?"hurt":pose==="등장"?"laugh":pose==="중립"?"angry":"idle";
@@ -1296,6 +1313,7 @@ document.getElementById("btnHome").onclick=()=>goStep5("완주-처음으로 버�
 document.getElementById("gaps").innerHTML=GAPS.map(g=>
   `<div class="warnbox"><b>${esc(g.where)}</b><br>${esc(g.what)}<br><span style="color:#a9c9a0">프로토타입 처리: ${esc(g.fix)}</span></div>`).join("");
 renderAssets();
+probeArt();
 newSession();show("scr-start");
 hydrate();
 </script>
