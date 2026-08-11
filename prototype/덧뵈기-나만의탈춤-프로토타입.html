@@ -1231,7 +1231,10 @@ function wearMask(auto){
   SPEECH.stop();AU.kkwaenggwari();
   srv("배역 확정 저장: "+S.role+(auto?" (화면 타임아웃 자동 확정)":""));
   const el=document.getElementById("roleMask");
-  el.style.transition="transform .5s cubic-bezier(.2,1.5,.4,1)";el.style.transform="scale(1.35)";
+  /* 탈을 눌러 쓰는 맛으로 살짝 부풀렸다 되돌림. 이징이 목표를 지나쳤다 오므로(정점 1.08)
+     실제 정점은 지정값보다 큼: 1.12 → 1.13배(넓이 1.28배).
+     1.35였을 때는 정점 1.38배, 넓이 1.90배로 부풀어 올라 과하게 보였음 */
+  el.style.transition="transform .5s cubic-bezier(.2,1.5,.4,1)";el.style.transform="scale(1.12)";
   setTimeout(()=>{el.style.transform="";S.step=3;renderSess();startStep3();},600);
 }
 
