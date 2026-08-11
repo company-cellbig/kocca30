@@ -128,6 +128,7 @@ button:disabled{opacity:.4;cursor:default}
 .info-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:6px}
 .info-card{border:1px solid rgba(255,255,255,.11);border-radius:9px;padding:9px 10px;background:rgba(255,255,255,.03);margin-bottom:8px}
 .mv-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:11.5px;color:var(--dim)}
+.mv-no{flex:0 0 auto;width:17px;text-align:center;font-size:12px;font-weight:800;color:var(--gold)}
 .mv-row.now{color:var(--paper)}
 .mv-row.done{color:var(--ok)}
 .mv-ico{width:22px;height:22px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
@@ -234,20 +235,35 @@ button:disabled{opacity:.4;cursor:default}
 .pad-move{font-size:16px;font-weight:800;color:var(--paper)}
 .pad-move small{font-size:11px;color:var(--dim);font-weight:400;margin-left:5px}
 .pad-how{font-size:11.5px;color:var(--gold);line-height:1.4}
+.pad-real{font-size:10.5px;color:var(--dim);line-height:1.4;margin-top:1px}
 .pad-elems{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
 .el{font-size:9.5px;padding:2px 7px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:var(--dim)}
 .pad{flex:1;height:118px;position:relative;border:1px solid var(--line);border-radius:9px;
   background:repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 8px,transparent 8px 16px),rgba(0,0,0,.3);
-  touch-action:none;user-select:none;overflow:hidden;transition:.15s}
+  user-select:none;overflow:hidden;transition:.15s;display:flex;align-items:center;justify-content:center;gap:9px;padding:9px}
 .pad.armed{border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,74,.35) inset,0 0 22px rgba(200,163,74,.14)}
 .pad.idle{opacity:.35}
 .pad-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:11px;color:#6d6459;pointer-events:none}
-.trail{position:absolute;inset:0;pointer-events:none}
 .pad-window{position:absolute;left:0;bottom:0;height:3px;background:var(--gold);width:100%;transform-origin:left;display:none}
-.band-arrow{flex:0 0 96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(0,0,0,.22)}
-.band-arrow .ar{font-size:40px;color:rgba(200,163,74,.75);line-height:1}
-.band-arrow .arcap{font-size:9.5px;color:var(--dim)}
+/* 숫자 키패드. 배운 동작 3개에 1~3을 매기고, 판 위에 뜬 픽토그램에 맞는 번호를 누름.
+   홀드가 필요한 동작은 누르고 있는 시간으로 홀드를 잼 */
+.key{flex:1;max-width:118px;height:100%;border-radius:9px;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);background:rgba(28,24,20,.9);color:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:.12s}
+.pad.armed .key{border-color:rgba(200,163,74,.5);background:rgba(40,33,23,.9)}
+.pad.armed .key:hover{border-color:var(--gold);background:rgba(56,45,28,.95)}
+.key:disabled{cursor:default}
+.key.down{background:rgba(200,163,74,.3);border-color:var(--gold);transform:translateY(1px)}
+.key .num{font-size:23px;font-weight:800;line-height:1;color:var(--gold)}
+.key .nm{font-size:11px;color:#d8cdba;text-align:center;line-height:1.25}
+.key .holdbar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ok);transition:width .06s linear}
+.pad-elems .el.off{opacity:.4;text-decoration:line-through}
+.band-arrow{flex:0 0 128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(0,0,0,.22);padding:6px}
+.band-arrow .ar{width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  font-size:34px;color:rgba(200,163,74,.75);line-height:1}
+.band-arrow .ar img{max-width:100%;max-height:100%;object-fit:contain}
+.band-arrow .arcap{font-size:9.5px;color:var(--dim);text-align:center}
 
 /* ══ 디버그 패널 ══ */
 #panel{flex:0 0 330px;height:100%;overflow-y:auto;padding:12px 14px 40px;background:#100e0c;
@@ -410,23 +426,23 @@ button:disabled{opacity:.4;cursor:default}
   <div id="band">
     <div class="band-head">
       <b>프로토타입 입력부</b>
-      <span>실제 콘텐츠에서는 카메라 동작 인식이 이 자리를 대신함</span>
+      <span>실제 콘텐츠에서는 카메라 동작 인식이 이 자리를 대신함. 자세는 번호, 타이밍은 누른 시점, 홀드는 누른 시간으로 치환함</span>
       <span class="note-txt" id="bandState">대기 중</span>
     </div>
     <div class="band-body">
       <div class="band-info">
         <div class="pad-move" id="padMove">대기</div>
-        <div class="pad-how" id="padHow">대사가 끝나면 오른쪽 패드를 끄십시오</div>
+        <div class="pad-how" id="padHow">판에 뜬 그림에 맞는 번호를 누르십시오</div>
+        <div class="pad-real" id="padReal"></div>
         <div class="pad-elems" id="padElems"></div>
       </div>
       <div class="pad idle" id="pad">
-        <canvas class="trail" id="trail"></canvas>
-        <div class="pad-hint" id="padHint">여기를 눌러 끄십시오</div>
+        <div class="pad-hint" id="padHint">신호가 오면 번호를 누르십시오</div>
         <div class="pad-window" id="padWindow"></div>
       </div>
       <div class="band-arrow">
         <div class="ar" id="padArrow">-</div>
-        <div class="arcap" id="padArrowCap">방향</div>
+        <div class="arcap" id="padArrowCap">제시된 동작</div>
       </div>
     </div>
   </div>
@@ -450,7 +466,7 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>미입력 타임아웃(초)</label><input type="number" id="cfgIdle" value="45"></div>
   <div class="cfg"><label>응답 대기(초)</label><input type="number" id="cfgWindow" value="4" step="0.5"></div>
   <div class="cfg"><label>수업 재시도(회)</label><input type="number" id="cfgRetry" value="2"></div>
-  <div class="cfg"><label>얼쑤 진폭 임계</label><input type="number" id="cfgEolssu" value="0.45" step="0.05"></div>
+  <div class="cfg"><label>얼쑤 반응 구간(대기 비율)</label><input type="number" id="cfgEolssu" value="0.4" step="0.05"></div>
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
   <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
   <div class="cfg"><label>음성(TTS) 사용</label><input type="checkbox" id="cfgTts" checked></div>
@@ -489,7 +505,7 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,
-  lessonRetry:2,eolssuAmp:.45,holdReq:.6,sinmyeongCut:55,tts:true,sfx:true,timeoutOn:true};
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,sinmyeongCut:55,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -500,7 +516,7 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
 bind("cfgWindow","respWindow",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuAmp",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);
+bind("cfgEolssu","eolssuEarly",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
@@ -594,20 +610,21 @@ function renderAssets(){
 /* ── 2. 동작 정의 ───────────────────────
    카메라가 없으므로 판정 요소를 마우스 제스처로 치환함:
    자세 → 끄는 방향, 진폭 → 끈 거리, 홀드 → 버틴 시간, 타이밍 → 손 댄 시각  */
+/* how는 실기기에서 유저가 실제로 하는 몸짓임. 프로토타입 입력(키패드)이 아니라
+   카메라가 판정할 대상을 적어 개발자에게 명세를 계속 보여 줌 */
 const MOVES={
- salpigi:{name:"살피기",body:"상체 기울임",elems:["자세","홀드"],dir:"left",how:"왼쪽으로 끌어 기울인 채 버티기"},
- jjilleo:{name:"찔러보기",body:"팔 뻗기",elems:["자세","진폭"],dir:"right",how:"오른쪽으로 힘껏 밀기"},
- hwidulleo:{name:"휘둘러 쫓기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 왕복하기"},
- geodeureum:{name:"거드름 흉내",body:"상체 젖히기",elems:["자세","홀드"],dir:"down",how:"아래로 끌어 젖힌 채 버티기"},
- horyeong:{name:"호령 가리키기",body:"팔 뻗기",elems:["자세","진폭","홀드"],dir:"right",how:"오른쪽으로 뻗어 가리킨 채 버티기"},
- chaejjik:{name:"채찍 휘두르기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 왕복하기"},
- eokkae:{name:"어깨 메기",body:"팔 얹기",elems:["자세","홀드"],dir:"upleft",how:"왼쪽 위로 끌어 얹은 채 버티기"},
- balchago:{name:"한발 차올리기",body:"발목 높이",elems:["자세","진폭"],dir:"up",how:"위로 힘껏 차올리기"},
- somae:{name:"소매 뿌리기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"좌우로 크고 빠르게 뿌리기"}
+ salpigi:{name:"살피기",body:"상체 기울임",elems:["자세","홀드"],dir:"left",how:"몸을 왼쪽으로 기울여 살피는 자세로 버팀"},
+ jjilleo:{name:"찔러보기",body:"팔 뻗기",elems:["자세","진폭"],dir:"right",how:"팔을 앞으로 힘껏 뻗어 찌름"},
+ hwidulleo:{name:"휘둘러 쫓기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"팔을 좌우로 크고 빠르게 휘둘러 쫓음"},
+ geodeureum:{name:"거드름 흉내",body:"상체 젖히기",elems:["자세","홀드"],dir:"down",how:"상체를 뒤로 젖혀 거드름 피우는 자세로 버팀"},
+ horyeong:{name:"호령 가리키기",body:"팔 뻗기",elems:["자세","진폭","홀드"],dir:"right",how:"팔을 뻗어 가리킨 채 버팀"},
+ chaejjik:{name:"채찍 휘두르기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"말채찍 쥔 팔을 좌우로 크게 휘두름"},
+ eokkae:{name:"어깨 메기",body:"팔 얹기",elems:["자세","홀드"],dir:"upleft",how:"팔을 어깨 위로 얹은 채 버팀"},
+ balchago:{name:"한발 차올리기",body:"발목 높이",elems:["자세","진폭"],dir:"up",how:"한 발을 높이 차올림"},
+ somae:{name:"소매 뿌리기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"장삼 소매를 좌우로 크게 뿌림"}
 };
-const DIRVEC={left:[-1,0],right:[1,0],up:[0,-1],down:[0,1],upleft:[-.71,-.71]};
+/* 픽토그램 그림이 아직 없을 때 쓰는 대체 기호 */
 const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"};
-const DIRCAP={left:"왼쪽",right:"오른쪽",up:"위",down:"아래",upleft:"왼쪽 위",swing:"좌우 왕복"};
 
 /* ── 3. 마당 데이터 ──────────────────────
    2장과 3장의 대본은 전사본 `03_References/converted/남사당놀이/남사당놀이 - 덧뵈기.md`
@@ -843,7 +860,10 @@ const GAPS=[
   fix:"동작 가이드 레인은 유지하되 뜻을 바꿈. 앞으로 나올 응수 동작이 오른쪽에 줄 서 있고 한 대목이 끝날 때마다 한 칸씩 왼쪽으로 미끄러져 들어옴. 표시선에 든 노트는 남은 응답 시간만큼 아래 띠가 줄어듦. 장단은 배경 박으로 깔고, 가속은 응답 대기를 비트마다 좁혀 표현함"},
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
-  fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"}];
+  fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
+ {where:"프로토타입 입력부 (실기기 판정 요소 대역)",
+  what:"실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 재지만 프로토타입에는 카메라가 없음. 종전 마우스 드래그 대역은 조작 미숙과 설계 결함이 안 갈려 리뷰에서 오인 소지가 있었음",
+  fix:"2026-08-11 사용자 결정으로 숫자 키패드로 바꿈. 자세는 제시된 픽토그램에 맞는 번호, 얼쑤는 응답 대기의 앞 40% 안에 누른 반응 시점, 홀드는 번호를 누르고 있는 시간으로 잼. 진폭과 속도는 키패드로 못 재므로 요소 표시에 「실기기 전용」으로 그어 남기고, 하이라이트 동작도 최대 진폭 대신 최속 반응으로 뽑음"}];
 
 /* ── 4. 사운드 (합성) ──────────────────── */
 const AU={ctx:null,
@@ -1091,20 +1111,54 @@ function wearMask(auto){
   setTimeout(()=>{el.style.transform="";S.step=3;renderSess();startStep3();},600);
 }
 
-/* ── 13. 입력 패드 ─────────────────────── */
+/* ── 13. 입력 패드 (숫자 키패드) ─────────
+   실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 잼. 프로토타입에는 카메라가 없어
+   판정 요소를 키패드로 치환함:
+     자세  → 판에 뜬 픽토그램에 맞는 번호를 눌렀는가
+     타이밍 → 응답 대기 중 얼마나 빨리 눌렀는가 (앞 40% 안이면 얼쑤)
+     홀드  → 홀드가 필요한 동작에서 번호를 얼마나 오래 누르고 있었는가
+   진폭과 속도는 키패드로 잴 수 없어 요소 표시에 "실기기 전용"으로만 남김 */
 const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
- holdMs:0,peak:0,peakX:0,peakY:0,path:[],down:false,reverses:0,lastDir:0,pressT:0,windowTimer:null,
+ moveId:null,keys:[],slots:[],windowTimer:null,armedAt:0,windowMs:0,
+ pressT:0,holdMs:0,holdTimer:null,downKey:null,
+ /* 이번 마당에서 배운 동작 3개에 1~3을 매기고 키패드를 그림 */
+ setKeys(moves){
+   this.slots=moves.slice();
+   this.el.innerHTML=`<div class="pad-hint" id="padHint">신호가 오면 번호를 누르십시오</div>
+     <div class="pad-window" id="padWindow"></div>`+
+     moves.map((id,i)=>`<button class="key" data-slot="${i}" disabled>
+       <span class="num">${i+1}</span><span class="nm">${esc(MOVES[id].name)}</span>
+       <span class="holdbar"></span></button>`).join("");
+   this.keys=[...this.el.querySelectorAll(".key")];
+   this.keys.forEach(k=>{
+     k.addEventListener("pointerdown",e=>{e.preventDefault();this.press(+k.dataset.slot,k);});
+     k.addEventListener("pointerup",()=>this.release());
+     k.addEventListener("pointerleave",()=>this.release());
+     k.addEventListener("pointercancel",()=>this.release());
+   });
+ },
  arm(moveId,ms,cb,opts){
    this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
+   this.armedAt=performance.now();this.windowMs=ms>0?ms:CFG.respWindow*1000;
    this.el.classList.add("armed");this.el.classList.remove("idle");
-   document.getElementById("padHint").style.display="none";
-   document.getElementById("bandState").textContent=this.opts.rhythm?"장단 판정 중":this.opts.climax?"절정 응수 대기":"응수 대기 중";
+   this.keys.forEach(k=>{k.disabled=false;k.classList.remove("down");
+     k.querySelector(".holdbar").style.width="0";});
+   const hint=document.getElementById("padHint");if(hint)hint.style.display="none";
+   document.getElementById("bandState").textContent=this.opts.climax?"절정 응수 대기":"응수 대기 중";
    document.getElementById("padMove").innerHTML=esc(this.move.name)+` <small>${esc(this.move.body)}</small>`;
-   document.getElementById("padHow").textContent=this.move.how;
-   document.getElementById("padElems").innerHTML=this.move.elems.map(e=>`<span class="el">${e}</span>`).join("")+
-     (this.opts.rhythm?'<span class="el">타이밍</span>':"");
-   document.getElementById("padArrow").textContent=DIRCH[this.move.dir];
-   document.getElementById("padArrowCap").textContent=DIRCAP[this.move.dir];
+   const needHold=this.move.elems.includes("홀드");
+   document.getElementById("padHow").textContent=needHold
+     ? `그림에 맞는 번호를 ${CFG.holdReq}초 넘게 누르고 있기 (홀드 동작)`
+     : "그림에 맞는 번호를 빠르게 누르기";
+   document.getElementById("padReal").textContent="실기기 동작: "+this.move.how;
+   // 키패드로 못 재는 요소는 그어서 표시함. 실기기 명세는 그대로 보여 줌
+   document.getElementById("padElems").innerHTML=this.move.elems.map(e=>
+     `<span class="el${e==="진폭"||e==="속도"?" off":""}">${e}${e==="진폭"||e==="속도"?" (실기기 전용)":""}</span>`).join("")
+     +'<span class="el">타이밍</span>';
+   // 판정에 쓰이는 그림을 오른쪽에 크게 걸어 둠 (무엇을 눌러야 하는지의 근거)
+   document.getElementById("padArrow").innerHTML=picHTML(moveId);
+   document.getElementById("padArrowCap").textContent="제시된 동작";
+   hydrate(document.getElementById("padArrow"));
    if(ms>0){
      const w=document.getElementById("padWindow");w.style.display="block";
      w.style.transition="none";w.style.transform="scaleX(1)";
@@ -1112,80 +1166,52 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
      this.windowTimer=setTimeout(()=>{if(this.armed)this.settle(null);},ms+40);
    }},
  disarm(){this.armed=false;this.windowTimer&&clearTimeout(this.windowTimer);this.windowTimer=null;
+   this.holdTimer&&clearInterval(this.holdTimer);this.holdTimer=null;this.downKey=null;
    this.el.classList.remove("armed");this.el.classList.add("idle");
-   document.getElementById("padWindow").style.display="none";
-   document.getElementById("padHint").style.display="";
+   this.keys.forEach(k=>{k.disabled=true;k.classList.remove("down");});
+   const w=document.getElementById("padWindow");if(w)w.style.display="none";
+   const hint=document.getElementById("padHint");if(hint)hint.style.display="";
    document.getElementById("bandState").textContent="대기 중";
    document.getElementById("padMove").textContent="대기";
-   document.getElementById("padHow").textContent="대사가 끝나면 오른쪽 패드를 끄십시오";
+   document.getElementById("padHow").textContent="판에 뜬 그림에 맞는 번호를 누르십시오";
+   document.getElementById("padReal").textContent="";
    document.getElementById("padElems").innerHTML="";
    document.getElementById("padArrow").textContent="-";
-   document.getElementById("padArrowCap").textContent="방향";},
+   document.getElementById("padArrowCap").textContent="제시된 동작";},
  settle(res){if(!this.armed)return;const cb=this.cb;this.disarm();
    cb&&cb(res||{v:"dasi",amp:0,hold:0,reason:"미수행"});},
- measure(){
-   const p=this.path;if(p.length<2)return{v:"dasi",amp:0,hold:0,reason:"입력 없음"};
-   const R=this.el.getBoundingClientRect(),diag=Math.hypot(R.width,R.height);
-   let total=0;
-   for(let i=1;i<p.length;i++)total+=Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y);
-   const dur=(p[p.length-1].t-p[0].t)/1000,M=this.move,need=M.elems;
-   let shape=0,amp=0;
-   if(M.dir==="swing"){
-     amp=Math.min(1,total/(diag*1.15));
-     shape=this.reverses>=2?Math.min(1,this.reverses/3):0;
-     if(this.reverses>=2&&dur<.28)shape=Math.min(1,shape+.15);
-   }else{
-     amp=Math.min(1,this.peak/(diag*.42));
-     const v=DIRVEC[M.dir],len=Math.hypot(this.peakX,this.peakY)||1;
-     const cos=(this.peakX*v[0]+this.peakY*v[1])/len;
-     shape=Math.max(0,(cos-.35)/.65); // 관대 판정: 약 70도까지 허용
-   }
-   const hold=this.holdMs/1000,needHold=need.includes("홀드"),reason=[];
-   const shapeOK=shape>=.3,ampOK=amp>=.17,holdOK=!needHold||hold>=CFG.holdReq;
-   if(!shapeOK)reason.push(M.dir==="swing"?"왕복 부족":"방향 불일치");
-   if(!ampOK)reason.push("진폭 부족");
-   if(!holdOK)reason.push("홀드 부족");
-   let v="dasi";
-   if(shapeOK&&ampOK&&holdOK){
-     const big=amp>=CFG.eolssuAmp&&shape>=.55&&(!needHold||hold>=CFG.holdReq*1.5);
-     v=big?"eolssu":"johda";
-   }
-   return{v,amp:+amp.toFixed(2),hold:+hold.toFixed(2),shape:+shape.toFixed(2),
-     reason:reason.join(", ")||"충족",rev:this.reverses};}};
-(function padInput(){
-  const el=PAD.el,cv=document.getElementById("trail"),cx=cv.getContext("2d");
-  const fit=()=>{const R=el.getBoundingClientRect();cv.width=R.width;cv.height=R.height;};
-  new ResizeObserver(fit).observe(el);fit();
-  let holdStart=0,atPeak=false;
-  const pos=e=>{const R=el.getBoundingClientRect();return{x:e.clientX-R.left,y:e.clientY-R.top,t:performance.now()};};
-  el.addEventListener("pointerdown",e=>{
-    if(!PAD.armed)return;
-    el.setPointerCapture(e.pointerId);
-    PAD.down=true;PAD.path=[pos(e)];PAD.pressT=performance.now();
-    PAD.reverses=0;PAD.lastDir=0;PAD.holdMs=0;PAD.peak=0;PAD.peakX=0;PAD.peakY=0;
-    holdStart=0;atPeak=false;cx.clearRect(0,0,cv.width,cv.height);AU.jang();});
-  el.addEventListener("pointermove",e=>{
-    if(!PAD.down||!PAD.armed)return;
-    const p=pos(e),prev=PAD.path[PAD.path.length-1];PAD.path.push(p);
-    const dx=p.x-PAD.path[0].x,dy=p.y-PAD.path[0].y,d=Math.hypot(dx,dy);
-    if(d>PAD.peak){PAD.peak=d;PAD.peakX=dx;PAD.peakY=dy;}
-    const sdx=p.x-prev.x;
-    if(Math.abs(sdx)>5){const dir=Math.sign(sdx);if(PAD.lastDir&&dir!==PAD.lastDir)PAD.reverses++;PAD.lastDir=dir;}
-    const R=el.getBoundingClientRect(),diag=Math.hypot(R.width,R.height),reached=d>=diag*.16;
-    if(reached&&!atPeak){atPeak=true;holdStart=p.t;}
-    if(!reached&&atPeak){atPeak=false;PAD.holdMs=Math.max(PAD.holdMs,p.t-holdStart);}
-    if(atPeak)PAD.holdMs=Math.max(PAD.holdMs,p.t-holdStart);
-    cx.strokeStyle="rgba(200,163,74,.55)";cx.lineWidth=3;cx.lineCap="round";
-    cx.beginPath();cx.moveTo(prev.x,prev.y);cx.lineTo(p.x,p.y);cx.stroke();});
-  const up=()=>{
-    if(!PAD.down)return;PAD.down=false;
-    if(atPeak){PAD.holdMs=Math.max(PAD.holdMs,performance.now()-holdStart);atPeak=false;}
-    if(!PAD.armed)return;
-    const res=PAD.measure();res.pressT=PAD.pressT; // 타이밍은 손을 댄 순간으로 잼
-    setTimeout(()=>cx.clearRect(0,0,cv.width,cv.height),260);
-    PAD.settle(res);};
-  el.addEventListener("pointerup",up);el.addEventListener("pointercancel",up);
-})();
+ press(slot,el){
+   if(!this.armed||this.downKey)return;
+   this.downKey=el;this.pressT=performance.now();this.holdMs=0;
+   el.classList.add("down");AU.jang();
+   const bar=el.querySelector(".holdbar"),need=CFG.holdReq*1000*1.5;
+   this.holdTimer=setInterval(()=>{
+     this.holdMs=performance.now()-this.pressT;
+     bar.style.width=Math.min(100,this.holdMs/need*100)+"%";},40);
+   // 홀드가 필요 없는 동작은 누른 즉시 판정함
+   if(!this.move.elems.includes("홀드"))this.release();
+ },
+ release(){
+   if(!this.armed||!this.downKey)return;
+   this.holdTimer&&clearInterval(this.holdTimer);this.holdTimer=null;
+   this.holdMs=performance.now()-this.pressT;
+   const el=this.downKey;this.downKey=null;el.classList.remove("down");
+   this.settle(this.measure(+el.dataset.slot));
+ },
+ /* 자세는 번호 일치로, 얼쑤는 반응 시점(과 홀드 동작이면 누른 시간)으로 가름 */
+ measure(slot){
+   const right=this.slots[slot]===this.moveId;
+   const at=this.pressT-this.armedAt, early=this.windowMs?at/this.windowMs:1;
+   const hold=this.holdMs/1000, needHold=this.move.elems.includes("홀드");
+   const base={amp:0,hold:+hold.toFixed(2),slot:slot+1,early:+early.toFixed(2),pressT:this.pressT};
+   if(!right)return{...base,v:"dasi",
+     reason:`동작 불일치 (${MOVES[this.slots[slot]].name}를 누름)`};
+   if(needHold&&hold<CFG.holdReq)return{...base,v:"dasi",reason:`홀드 부족 ${hold.toFixed(2)}s`};
+   const quick=early<=CFG.eolssuEarly, longHold=!needHold||hold>=CFG.holdReq*1.5;
+   return{...base,v:quick&&longHold?"eolssu":"johda",
+     reason:`반응 ${(at/1000).toFixed(2)}s (대기의 ${Math.round(early*100)}%)`
+       +(needHold?`, 홀드 ${hold.toFixed(2)}s`:"")};
+ }};
 
 /* ── 14. 판정 표시 ─────────────────────── */
 /* 판정 대사. 판에서 던지는 추임새를 굵게 띄우고, 그 밑에 무엇이 좋았는지나
@@ -1197,10 +1223,10 @@ const VERDICT={
    sub:["그 정도면 붙는다","손에 익어 간다","이대로 이어 가자"]},
  dasi:{call:["아이쿠!","어허!","저런!","아깝다!"],
    sub:["몸이 덜 풀렸다"]}};
-/* 사유가 여럿 잡히면 앞의 것부터 고름. 근본 결함(손이 안 나감, 방향 어긋남)을
-   진폭이나 홀드 같은 정도 문제보다 먼저 짚음 */
-const DASI_SUB=[[/미수행|입력 없음/,"손이 안 나갔다"],[/방향/,"방향이 어긋났다"],
-  [/왕복/,"좌우로 몰아쳐라"],[/진폭/,"더 크게 써라"],[/홀드/,"끝을 딱 맺어야지"]];
+/* 사유가 여럿 잡히면 앞의 것부터 고름. 근본 결함(손이 안 나감, 다른 동작을 함)을
+   홀드 같은 정도 문제보다 먼저 짚음 */
+const DASI_SUB=[[/미수행|입력 없음/,"손이 안 나갔다"],[/동작 불일치/,"다른 동작을 했다"],
+  [/홀드/,"끝을 딱 맺어야지"]];
 const PICKED={};
 function pick(key,list){ // 바로 앞에 나온 것은 다시 안 뽑음
   if(list.length<2)return list[0];
@@ -1227,11 +1253,12 @@ function crowd(){
       {duration:1100,delay:i*110,easing:"ease-out"}).onfinish=()=>s.remove();});
 }
 function record(moveId,res,chapter){
-  S.records.push({move:moveId,v:res.v,amp:res.amp,hold:res.hold,chapter});
+  S.records.push({move:moveId,v:res.v,early:res.early,hold:res.hold,chapter});
   if(res.v==="eolssu"){S.success++;S.eolssu++;S.sinmyeong+=2.5;}
   else if(res.v==="johda"){S.success++;S.sinmyeong+=1;}
   else S.dasi++;
-  log("jud",`[${chapter}] ${MOVES[moveId].name} → ${res.v==="eolssu"?"얼쑤":res.v==="johda"?"좋다":"다시"} (진폭 ${res.amp}, 홀드 ${res.hold}s, ${res.reason})`,"lg-jud");
+  log("jud",`[${chapter}] ${MOVES[moveId].name} → ${res.v==="eolssu"?"얼쑤":res.v==="johda"?"좋다":"다시"}`
+    +(res.slot?` (${res.slot}번 누름, ${res.reason})`:` (${res.reason})`),"lg-jud");
   renderSess();
 }
 
@@ -1277,6 +1304,7 @@ function startStep3(){
   const box=document.getElementById("playHost");box.innerHTML=hostHTML();
   box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
   setBG(S.madang.id);setFoe(null);LANE.hide();hydrate();
+  PAD.setKeys(S.madang.moves);   // 이 마당에서 배울 동작 3개에 1~3을 매김
   runLesson();
 }
 function setBG(which){
@@ -1300,9 +1328,10 @@ function runLesson(){
   let i=0;
   const pane=()=>{
     document.getElementById("infoPane").innerHTML=
-     `<div class="info-h">배울 동작 3개</div>
+     `<div class="info-h">배울 동작 3개 (키패드 번호)</div>
       <div class="info-card">${list.map((id,k)=>
-        `<div class="mv-row ${k===i?"now":k<i?"done":""}"><span class="mv-ico">${picHTML(id)}</span>
+        `<div class="mv-row ${k===i?"now":k<i?"done":""}"><span class="mv-no">${k+1}</span>
+         <span class="mv-ico">${picHTML(id)}</span>
          <span>${MOVES[id].name}<br><small style="opacity:.7">${MOVES[id].body}</small></span></div>`).join("")}</div>
       <div class="info-h">시범</div>
       <div class="info-card"><div class="demo-slot">${i<list.length?art("demo_"+list[i],"시범 클립 자리<br>모션 레퍼런스 미확보"):"수업 종료"}</div></div>`;
@@ -1320,24 +1349,24 @@ function runLesson(){
           if(tries>CFG.lessonRetry){
             SPEECH.say("jangsoe","됐다 됐다, 몸이 알아서 기억할 게다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
           }else{
-            const fix=res.reason.includes("진폭")?"더 크게!":res.reason.includes("홀드")?"끝을 딱 맺어야지!":
-              res.reason.includes("왕복")?"한 번 말고 좌우로 몰아쳐라!":
-              res.reason.includes("방향")?"내 시범을 다시 보아라!":"장단에 맞춰!";
+            const fix=res.reason.includes("동작 불일치")?"그게 아니다, 내 시범을 다시 보아라!":
+              res.reason.includes("홀드")?"끝을 딱 맺어야지!":
+              res.reason.includes("미수행")?"몸이 굳었느냐, 장단 놓치지 마라!":"장단에 맞춰!";
             SPEECH.say("jangsoe",fix+` (${CFG.lessonRetry-tries+1}번 남았다)`,box,ask);
           }
         }else{
           SPEECH.say("jangsoe",res.v==="eolssu"?"얼쑤! 그 맛이다!":"좋다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
         }});
     };
-    demoAnim(M);
+    demoAnim(id);
     SPEECH.say("jangsoe",`${M.name}. ${M.body}이다. 내 시범을 보고 따라 해라.`,box,ask);
   };
   SPEECH.say("jangsoe",S.madang.openLine,box,nextMove);
 }
-function demoAnim(M){
+function demoAnim(moveId){   // 1장 시범: 배우는 동작의 픽토그램을 판 복판에 띄움
   const f=document.getElementById("field"),d=document.createElement("div");
-  d.className="fx";d.style.left="50%";d.style.top="46%";d.style.transform="translate(-50%,-50%)";
-  d.style.fontSize="48px";d.textContent=DIRCH[M.dir];f.appendChild(d);
+  d.className="fx demo-pic";d.style.left="50%";d.style.top="46%";d.style.transform="translate(-50%,-50%)";
+  d.innerHTML=picHTML(moveId);f.appendChild(d);hydrate(d);
   d.animate([{opacity:0},{opacity:1},{opacity:.9},{opacity:0}],{duration:1500,easing:"ease-in-out"}).onfinish=()=>d.remove();
 }
 
@@ -1375,8 +1404,10 @@ function runBeats(list,opts,onDone){
       SPEECH.say("jangsoe",b.text,box,()=>{
         PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");step();});
         document.getElementById("padMove").textContent="따라 하기";
-        document.getElementById("padHow").textContent="아무렇게나 크게 움직여 보기 (판정 없음)";
+        document.getElementById("padHow").textContent="아무 번호나 눌러 보기 (판정 없음)";
+        document.getElementById("padReal").textContent="";
         document.getElementById("padElems").innerHTML="";
+        document.getElementById("padArrow").textContent="-";
       });
       return;
     }
@@ -1492,10 +1523,11 @@ function goStep4(){
   show("scr-accept");
   const box=document.getElementById("acceptHost");box.innerHTML=hostHTML();hydrate();
   box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
-  const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>b.amp-a.amp)[0];
+  // 가장 빨리 받아친 동작을 하이라이트로 뽑음 (실기기에서는 진폭이 가장 컸던 동작)
+  const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>a.early-b.early)[0];
   const hot=S.sinmyeong>=CFG.sinmyeongCut;
   const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
-  const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 몸을 더 크게 써 보자.";
+  const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 장단을 놓치지 말고 받아 보자.";
   const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나.":"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
   document.getElementById("acceptBody").innerHTML=`
    <div class="acc-block"><div class="acc-h">인정 선언</div><div class="acc-decl">${esc(decl)}</div>
@@ -1563,7 +1595,7 @@ document.querySelectorAll("[data-err]").forEach(b=>b.onclick=()=>{
 document.querySelectorAll("[data-force]").forEach(b=>b.onclick=()=>{
   if(!PAD.armed)return log("sys","지금은 응답 대기 구간이 아님","lg-sys");
   const v=b.dataset.force;
-  PAD.settle({v,amp:v==="eolssu"?.7:v==="johda"?.3:0,hold:v==="dasi"?0:1.2,reason:"패널 강제 판정"});});
+  PAD.settle({v,early:v==="eolssu"?.2:v==="johda"?.7:1,hold:v==="dasi"?0:1.2,reason:"패널 강제 판정"});});
 document.getElementById("btnSkipChap").onclick=()=>{
   if(curScreen!=="scr-play")return;
   SPEECH.stop();PAD.disarm();
