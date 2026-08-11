@@ -482,6 +482,9 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
   <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
   <div class="cfg"><label>글자당 표시 간격(ms)</label><input type="number" id="cfgTypeMs" value="42" step="4"></div>
+  <div class="cfg"><label>대사 최소 노출(초)</label><input type="number" id="cfgMinShow" value="0.9" step="0.1"></div>
+  <div class="cfg"><label>대사 뒤 읽을 틈(초)</label><input type="number" id="cfgReadPause" value="0.4" step="0.1"></div>
+  <div class="cfg"><label>음성 끝까지 기다림</label><input type="checkbox" id="cfgWaitTts"></div>
   <div class="cfg"><label>대사 한 글자씩 표시</label><input type="checkbox" id="cfgType" checked></div>
   <div class="cfg"><label>음성(TTS) 사용</label><input type="checkbox" id="cfgTts" checked></div>
   <div class="cfg"><label>장단, 효과음</label><input type="checkbox" id="cfgSfx" checked></div>
@@ -519,7 +522,7 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,typewriter:true,typeMs:42,tts:true,sfx:true,timeoutOn:true};
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,typewriter:true,typeMs:42,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -530,7 +533,7 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
 bind("cfgRespBase","respBase",1);bind("cfgRespChar","respPerChar",1);bind("cfgRespMax","respMax",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgType","typewriter");
+bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgMinShow","minShow",1);bind("cfgReadPause","readPause",1);bind("cfgWaitTts","waitTts");bind("cfgType","typewriter");
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
@@ -875,9 +878,9 @@ const GAPS=[
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
- {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등 8건)",
-  what:"대사 표시 시간 상한이 6.5초(+음성 여유 1.4초)라, 105자짜리 취발이 사설처럼 긴 대목은 음성이 다 나오기 전에 다음 대사로 넘어가며 중간에 끊김. 글자 표시는 상한 안에 다 드러나므로 잘리지 않으나 초당 20자를 넘겨 읽기 어려움",
-  fix:"미해결. 상한을 늘리면 음성은 살지만 판이 늘어지고, 발췌를 줄이면 원문 인용이 짧아짐. 사용자 결정 대기 (2026-08-11 늘어짐 정비 때 함께 확인)"},
+ {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등)",
+  what:"음성(TTS)은 105자를 읽는 데 20초쯤 걸리는데 화면 출력은 4.8초에 끝남. 「음성 끝까지 기다림」이 꺼져 있으면 그 시점에 다음 대사로 넘어가며 음성이 중간에 끊김",
+  fix:"패널의 「음성 끝까지 기다림」으로 고를 수 있게 둠. 켜면 음성이 온전히 나오지만 긴 대목이 20초씩 걸려 판이 늘어짐. 화면 글자는 어느 쪽이든 잘리지 않음. 근본 해소는 발췌를 줄이는 것뿐이라 사용자 결정 대기"},
  {where:"프로토타입 입력부 (실기기 판정 요소 대역)",
   what:"실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 재지만 프로토타입에는 카메라가 없음. 종전 마우스 드래그 대역은 조작 미숙과 설계 결함이 안 갈려 리뷰에서 오인 소지가 있었음",
   fix:"2026-08-11 사용자 결정으로 숫자 키패드로 바꿈. 자세는 제시된 픽토그램에 맞는 번호, 얼쑤는 응답 대기의 앞 40% 안에 누른 반응 시점, 홀드는 번호를 누르고 있는 시간으로 잼. 진폭과 속도는 키패드로 못 재므로 요소 표시에 「실기기 전용」으로 그어 남기고, 하이라이트 동작도 최대 진폭 대신 최속 반응으로 뽑음"}];
@@ -939,7 +942,7 @@ function bindSkip(box,fn){
     if(TYPE.typing){TYPE.finish();return;}
     fn();};
 }
-const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
+const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],mouth:null,
  pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
    return this.voices.filter(v=>/ko/i.test(v.lang)); },
  /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역(장쇠가 대독) */
@@ -956,9 +959,12 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    const other = who==="foe"||who==="jaebi";   // 장쇠가 읽지 않는 화자
    const bub = this.onStage(who);
    nm.textContent = this.nameOf(who);
-   // 글자당 속도. 대사가 길어도 발화가 끝나기 전에 다 드러나도록 상한을 둠
-   const dur=Math.min(6500,Math.max(1100,text.length*105));
-   const perChar=Math.min(CFG.typeMs,dur*.7/text.length);
+   /* 대사가 화면에 머무는 시간. 글자수로 시간을 어림하지 않고, 타이핑이 실제로
+      끝나는 시각을 그대로 씀(타이핑 속도는 우리가 정하므로 정확히 앎).
+      짧은 대사가 눈 깜짝할 새 지나가지 않도록 최소 노출만 보장함 */
+   const len=[...text].length;
+   const showMs=Math.max(CFG.minShow*1000,len*CFG.typeMs);
+   const perChar=Math.min(CFG.typeMs,showMs/len);
    if(bub){
      // 판 위에서 말하는 차례. 대사는 판 위 칸이 맡고 왼쪽 칸은 비워 둠
      bub.className="stage-say on "+(who==="foe"?"at-foe":"at-jaebi");
@@ -975,19 +981,29 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
       다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
    const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TYPE.finish();
+     this.guard&&clearTimeout(this.guard);this.guard=null;
      TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
+   /* 진행 조건: 대사 출력이 끝나고(showMs) 읽을 틈(readPause)이 지나면 다음 단계로.
+      「음성 끝까지 기다림」을 켜면 발화가 끝나는 것까지 함께 기다림 */
+   let shown=false, spoken=true;
+   const advance=()=>{ if(shown&&spoken&&this.onEnd===done) done(); };
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
      try{
        const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
        const vs=this.pick(); if(vs.length)u.voice=other?(vs[1]||vs[0]):vs[0];
        u.rate=other?1.02:.98; u.pitch=who==="foe"?1.25:who==="jaebi"?1.1:.85;
-       u.onend=()=>{ if(this.onEnd===done){this.timer&&clearTimeout(this.timer);done();} };
-       u.onerror=()=>{this.failed=true;};
+       if(CFG.waitTts){
+         spoken=false;
+         u.onend=()=>{spoken=true;advance();};
+         // 브라우저가 발화 종료를 안 알리는 경우를 대비한 안전망
+         this.guard=setTimeout(()=>{spoken=true;advance();},CFG.ttsGuard*1000);
+       }
+       u.onerror=()=>{this.failed=true;spoken=true;advance();};
        this.cur=u; speechSynthesis.speak(u);
      }catch(e){this.failed=true;}
    }
-   this.timer=setTimeout(()=>{if(this.onEnd===done)done();},dur+(CFG.tts&&!this.failed?1400:0));
+   this.timer=setTimeout(()=>{shown=true;advance();},showMs+CFG.readPause*1000);
  },
  startMouth(box){ // 립싱크는 맞추지 않고 발화 동안 입 여닫기만 반복함 (기획서 3.4.2)
    const sp=box.querySelector(".host-art .art"); if(!sp)return;
@@ -999,7 +1015,8 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    },180);
  },
  stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
- stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();
+ stop(){this.timer&&clearTimeout(this.timer);this.timer=null;
+   this.guard&&clearTimeout(this.guard);this.guard=null;this.onEnd=null;this.stopMouth();
    TYPE.clear();this.hideStage();
    try{speechSynthesis.cancel();}catch(e){}}};
 if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
