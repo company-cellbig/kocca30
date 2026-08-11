@@ -42,7 +42,7 @@ button:disabled{opacity:.4;cursor:default}
 
 .cols{flex:1;display:flex;gap:12px;min-height:0;padding-top:10px}
 .col{display:flex;flex-direction:column;min-width:0;min-height:0}
-.col-host{flex:0 0 25%}
+.col-host{flex:0 0 18%}   /* 장쇠는 진행 멘트만 하므로 판에 자리를 내줌 */
 .col-stage{flex:1}
 .col-info{flex:0 0 26%}
 .col-half{flex:1}
@@ -62,7 +62,7 @@ button:disabled{opacity:.4;cursor:default}
 @keyframes maskNod{0%{transform:rotate(0)}35%{transform:rotate(-7deg) translateY(-2px)}70%{transform:rotate(4deg)}100%{transform:rotate(0)}}
 
 .host-art img,.host-art svg{animation:breathe 4.2s ease-in-out infinite}
-.speaking:not(.by-foe) .host-art img,.speaking:not(.by-foe) .host-art svg{animation:talkBob .9s ease-in-out infinite}
+.speaking .host-art img,.speaking .host-art svg{animation:talkBob .9s ease-in-out infinite}
 .role-mask img,.role-mask svg{animation:roleIn .5s cubic-bezier(.2,1.1,.4,1) both,
   breathe 4.6s ease-in-out .5s infinite}
 .card.sel .card-mask img,.card.sel .card-mask svg{animation:maskNod .42s ease-out}
@@ -97,10 +97,15 @@ button:disabled{opacity:.4;cursor:default}
 .playfield{flex:1;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:10px;
   background:linear-gradient(180deg,rgba(60,45,35,.35),rgba(20,17,14,.5));overflow:hidden;min-height:0}
 .playfield .bg{display:block;position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.5}
-.foe{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);transition:opacity .3s;
-  width:45%;height:62%;display:flex;align-items:center;justify-content:center}
-.foe img{max-height:100%;max-width:100%;object-fit:contain}
-.foe-cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
+/* 두 배역이 판을 나눠 씀. 종전 1인 중앙 배치보다 아래로 내려 머리 위에 말풍선 자리를 냄 */
+.actor{position:absolute;top:55%;transform:translateY(-50%);transition:opacity .3s;
+  width:44%;height:57%;display:flex;align-items:center;justify-content:center}
+.actor.at-l{left:2%}
+.actor.at-r{right:2%}
+.actor img{max-height:100%;max-width:100%;object-fit:contain}
+.actor-cap{position:absolute;bottom:7px;width:44%;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
+.actor-cap.at-l{left:2%}
+.actor-cap.at-r{right:2%}
 /* 판 위 대사 칸. 상대 배역 대사는 상대 그림 위에, 잽이 대사는 악사 자리인 판 아래에 띄움.
    장쇠와 내 배역 대사는 종전대로 왼쪽 호스트 자막 칸이 맡음 */
 /* left:50%로 잡으면 늘어날 수 있는 폭이 판의 절반으로 묶여 max-width가 안 먹음.
@@ -109,16 +114,22 @@ button:disabled{opacity:.4;cursor:default}
   padding:7px 11px;border-radius:10px;font-size:12px;line-height:1.45;text-align:center;
   background:rgba(18,14,11,.9);border:1px solid rgba(200,163,74,.5);color:#f0e4cc;
   box-shadow:0 4px 18px rgba(0,0,0,.55)}
-.stage-say.on{display:block;animation:sayIn .22s ease-out}
+.stage-say.on{display:block;opacity:1;animation:sayIn .22s ease-out}
 .stage-say .who{display:block;font-size:9.5px;letter-spacing:.08em;color:var(--gold);margin-bottom:3px}
 .stage-say::after{content:"";position:absolute;left:50%;margin-left:-7px;border:7px solid transparent}
-.stage-say.at-foe{top:30px}
-.stage-say.at-foe::after{top:100%;border-top-color:rgba(18,14,11,.9)}
+/* 배역 말풍선은 제 배역 쪽에 붙고 꼬리도 그 아래를 가리킴 */
+.stage-say.side-l,.stage-say.side-r{top:12px;max-width:44%;margin-inline:0}
+.stage-say.side-l{left:2%;right:auto}
+.stage-say.side-r{right:2%;left:auto}
+.stage-say.side-l::after,.stage-say.side-r::after{top:100%;border-top-color:rgba(18,14,11,.9)}
+.stage-say.side-r{border-color:rgba(127,176,105,.55)}
+.stage-say.side-r .who{color:#a8d18a}
 .stage-say.at-jaebi{bottom:30px;border-color:rgba(255,255,255,.24);color:#ded6c8}
 .stage-say.at-jaebi .who{color:#b9b0a1}
 .stage-say.at-jaebi::after{bottom:100%;border-bottom-color:rgba(18,14,11,.9)}
-@keyframes sayIn{from{opacity:0;transform:translateY(-5px)}
-  to{opacity:1;transform:translateY(0)}}
+/* 투명도는 애니메이션에 맡기지 않음. 키프레임이 opacity를 쥐고 있으면
+   애니메이션이 멈춘 상태(백그라운드 탭 등)에서 말풍선이 안 보일 수 있음 */
+@keyframes sayIn{from{transform:translateY(-6px)}to{transform:translateY(0)}}
 .fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
 .verdict{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%) scale(.6);
@@ -383,9 +394,14 @@ button:disabled{opacity:.4;cursor:default}
         <div class="col col-host"><div class="host" id="playHost"></div></div>
         <div class="col col-stage">
           <div class="playfield" id="field">
-            <div class="foe" id="foe"></div>
-            <div class="foe-cap" id="foeCap"></div>
-            <div class="stage-say" id="stageSay"></div>
+            <!-- 상대 배역은 왼쪽, 내 배역은 오른쪽. 각자 머리 위에 제 말풍선을 둠 -->
+            <div class="actor at-l" id="foe"></div>
+            <div class="actor-cap at-l" id="foeCap"></div>
+            <div class="stage-say side-l" id="sayFoe"></div>
+            <div class="actor at-r" id="me"></div>
+            <div class="actor-cap at-r" id="meCap"></div>
+            <div class="stage-say side-r" id="sayMe"></div>
+            <div class="stage-say at-jaebi" id="sayJaebi"></div>
             <div class="verdict" id="verdict"></div>
             <div class="demo-hint" id="demoHint"></div>
           </div>
@@ -657,7 +673,7 @@ const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"
 
    비트 종류
      enter  상대 배역 등장
-     say    대사만 하고 넘어감 (판정 없음). who=me면 내 배역 대사를 장쇠가 대독함
+     say    대사만 하고 넘어감 (판정 없음). who는 foe, jaebi, me, jangsoe
      cue    상대 배역 대사(text) 또는 무언 도발(act) 뒤에 내 동작을 받음
      free   판정 없는 따라 하기 연출
    cue의 mine/mineNo는 성공, 실패에 따라 내 배역이 내는 원전 대사이고,
@@ -985,13 +1001,16 @@ function bindSkip(box,fn){
 const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],mouth:null,
  pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
    return this.voices.filter(v=>/ko/i.test(v.lang)); },
- /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역(장쇠가 대독) */
+ /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역 */
  nameOf(who){ return who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역")
-   : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (장쇠가 대독)"; },
- /* 판 위 대사 칸. 상대 배역은 제 그림 위에, 잽이는 악사 자리인 판 아래에 띄움 */
- onStage(who){ return (who==="foe"||who==="jaebi")&&curScreen==="scr-play"
-   ? $("stageSay") : null; },
- hideStage(){ const b=$("stageSay"); if(b)b.className="stage-say"; },
+   : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (나)"; },
+ /* 판 위 대사 칸. 배역은 제 그림 위에, 잽이는 악사 자리인 판 아래에 띄움.
+    장쇠만 왼쪽 자막 칸을 씀 (2장, 3장에서는 진행 멘트만 하므로) */
+ BUBBLE:{foe:"sayFoe",me:"sayMe",jaebi:"sayJaebi"},
+ onStage(who){ const id=this.BUBBLE[who];
+   return id&&curScreen==="scr-play" ? $(id) : null; },
+ hideStage(){ Object.values(this.BUBBLE).forEach(id=>{
+   const b=$(id); if(b){b.classList.remove("on");b.innerHTML="";} }); },
  /* 한 번에 띄우는 글자수 한도를 넘는 대사는 나눠서 차례로 띄움.
     말풍선이 상대 배역 그림 위로 자라 배역을 가리는 것을 막음 (1920 화면 실측 66자).
     원문을 고치지 않고 표시만 나누므로 인용은 그대로임 */
@@ -1007,12 +1026,12 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    next();
  },
  sayOne(who,text,box,cb,meta){
-   this.stop();
+   this.stop(true);
    if(!text){ if(cb)cb(); return; }
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
-   const other = who==="foe"||who==="jaebi";   // 장쇠가 읽지 않는 화자
+   const other = who!=="jangsoe";   // 장쇠 말고 다른 배역이 말하는 차례
    const bub = this.onStage(who);
-   nm.textContent = this.nameOf(who);
+   if(!other) nm.textContent = this.nameOf(who);   // 왼쪽 칸은 장쇠 몫이라 이름표를 안 바꿈
    /* 대사가 화면에 머무는 시간. 글자수로 시간을 어림하지 않고, 타이핑이 실제로
       끝나는 시각을 그대로 씀(타이핑 속도는 우리가 정하므로 정확히 앎).
       짧은 대사가 눈 깜짝할 새 지나가지 않도록 최소 노출만 보장함 */
@@ -1020,8 +1039,9 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    const showMs=Math.max(CFG.minShow*1000,len*CFG.typeMs);
    const perChar=Math.min(CFG.typeMs,showMs/len);
    if(bub){
-     // 판 위에서 말하는 차례. 대사는 판 위 칸이 맡고 왼쪽 칸은 비워 둠
-     bub.className="stage-say on "+(who==="foe"?"at-foe":"at-jaebi");
+     /* 판 위에서 말하는 차례. 상대가 방금 한 말은 지우지 않아 주고받는 대화로 읽힘.
+        왼쪽 자막 칸은 장쇠 몫이라 비워 둠 */
+     bub.classList.add("on");
      TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,
        meta?` <span class="prov">${meta.part}/${meta.of}</span>`:"",perChar);
      line.innerHTML="&nbsp;";
@@ -1030,13 +1050,12 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
        (who==="jangsoe"?' <span class="prov">임시 문안':' <span class="prov">연회본 원문')
        +(meta?` ${meta.part}/${meta.of}`:"")+'</span>',perChar);
    }
-   // 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
-   box.classList.add("speaking"); box.classList.toggle("by-foe",other);
+   box.classList.toggle("speaking",!other);   // 장쇠 차례에만 입과 몸이 움직임
    log("say",this.nameOf(who)+(meta?` (${meta.part}/${meta.of})`:"")+": "+text,"lg-sys");
-   TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 내 배역 대사는 장쇠가 대독하므로 포함함
+   TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 장쇠가 제 말을 할 때만 입이 움직임
    /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
       다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
-   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TYPE.finish();
+   const done=()=>{box.classList.remove("speaking");this.stopMouth();TYPE.finish();
      this.guard&&clearTimeout(this.guard);this.guard=null;
      TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
@@ -1048,7 +1067,9 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
      try{
        const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
        const vs=this.pick(); if(vs.length)u.voice=other?(vs[1]||vs[0]):vs[0];
-       u.rate=other?1.02:.98; u.pitch=who==="foe"?1.25:who==="jaebi"?1.1:.85;
+       // 네 화자를 음높이로 구별함 (상대는 높게, 장쇠는 낮게, 내 배역은 그 사이)
+       u.rate=other?1.02:.98;
+       u.pitch=who==="foe"?1.25:who==="jaebi"?1.1:who==="me"?1.0:.85;
        if(CFG.waitTts){
          spoken=false;
          u.onend=()=>{spoken=true;advance();};
@@ -1071,9 +1092,11 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    },180);
  },
  stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
- stop(){this.timer&&clearTimeout(this.timer);this.timer=null;
+ /* keepBubbles: 다음 대사를 이어 말할 때는 판 위 대사를 남김.
+    장이 바뀌거나 중단될 때는 인자 없이 불러 다 지움 */
+ stop(keepBubbles){this.timer&&clearTimeout(this.timer);this.timer=null;
    this.guard&&clearTimeout(this.guard);this.guard=null;this.onEnd=null;this.stopMouth();
-   TYPE.clear();this.hideStage();
+   TYPE.clear(); if(!keepBubbles)this.hideStage();
    try{speechSynthesis.cancel();}catch(e){}}};
 if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
 
@@ -1440,8 +1463,11 @@ function startStep3(){
   show("scr-play");
   const box=$("playHost");box.innerHTML=hostHTML();
   bindSkip(box,()=>SPEECH.stop());
-  setBG(S.madang.id);setFoe(null);LANE.hide();hydrate();
+  setBG(S.madang.id);setFoe(null);LANE.hide();
+  setMe("등장",S.role+" (나)");   // 탈을 쓴 순간부터 내 배역이 판에 서 있음
+  hydrate();
   PAD.setKeys(S.madang.moves);   // 이 마당에서 배울 동작 3개에 1~3을 매김
+  fitSayMax();
   runLesson();
 }
 function setBG(which){
@@ -1567,6 +1593,7 @@ function runBeats(list,opts,onDone){
           S.gauge=Math.min(100,S.gauge+gain*(res.v==="eolssu"?1.15:.85));updGauge();
         }
         setFoe(ok?"과장":"중립",ok?b.ok:b.no);
+        setMe(ok?"과장":"중립",S.role+" (나)");
         SPEECH.say("me",ok?b.mine:(b.mineNo||b.mine),box,
           ()=>{ if(ok&&b.foeBack)SPEECH.say("foe",b.foeBack,box,step); else step(); });
       },opts.padOpts);
@@ -1583,35 +1610,66 @@ function runScene(){
   const m=S.madang;
   $("playTitle").textContent=`${m.sceneTitle} (2장)`;
   $("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
-  $("gaugeWrap").style.display="none";LANE.hide();
+  $("gaugeWrap").style.display="none";LANE.hide();SPEECH.hideStage();
   runBeats(m.scene,{chapter:"앞대목",paneTitle:`앞대목 대본 (${m.sceneSrc})`},
     ()=>{chapOut("scene");setFoe(null);runClimax();});
 }
-function setFoe(pose,cap){
-  const el=$("foe"),c=$("foeCap");
+/* 두 배역을 같은 함수로 세움. 상대 배역(foe)은 포즈별 그림이 따로 있고,
+   내 배역(me)은 그림이 한 장뿐이라 같은 그림에 반응 동작만 다르게 줌.
+   판 안에서 자기 쪽(왼쪽/오른쪽)에 서므로 등퇴장 방향도 그 쪽으로 감 */
+function setActor(who,pose,cap){
+  const el=$(who),c=$(who+"Cap"),isFoe=who==="foe";
   /* 앞서 건 애니메이션을 먼저 지움. 결말만 fill:forwards라 마지막 키프레임(퇴장 마당은 opacity 0)이
      요소에 그대로 남고, 뒤에 건 애니메이션은 끝나면 사라져 그 값이 다시 올라옴.
-     지우지 않으면 한 마당을 끝낸 뒤부터 상대 배역이 계속 안 보임 */
+     지우지 않으면 한 마당을 끝낸 뒤부터 배역이 계속 안 보임 */
   el.getAnimations().forEach(a=>a.cancel());
   if(!pose){el.innerHTML="";c.textContent="";return;}
-  const m=S.madang;
+  const m=S.madang, name=isFoe?m.foe:S.role, out=isFoe?-1:1;   // 판 밖으로 나가는 방향
   const mood=pose==="과장"?"hurt":pose==="등장"?"laugh":pose==="중립"?"angry":"idle";
-  el.innerHTML=art("foe_"+m.foe+"_"+pose,maskSVG(m.foe,130,154,mood));
+  el.innerHTML=art(isFoe?"foe_"+m.foe+"_"+pose:"body_"+S.role,maskSVG(name,130,154,mood));
   c.textContent=cap||"";hydrate(el);
+  const Y="translateY(-50%)";
   const anim={
-    "등장":[{transform:"translate(-50%,-50%) translateX(140px)",opacity:0},{transform:"translate(-50%,-50%)",opacity:1}],
-    "과장":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) translate(30px,-24px) rotate(14deg) scale(1.06)"},{transform:"translate(-50%,-50%)"}],
-    "중립":[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translateX(-7px)"},{transform:"translate(-50%,-50%) translateX(7px)"},{transform:"translate(-50%,-50%)"}],
-    "대기":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) scale(1.02)"},{transform:"translate(-50%,-50%) scale(1)"}],
+    "등장":[{transform:`${Y} translateX(${out*140}px)`,opacity:0},{transform:Y,opacity:1}],
+    "과장":[{transform:`${Y} scale(1)`},{transform:`${Y} translate(${-out*30}px,-24px) rotate(${-out*14}deg) scale(1.06)`},{transform:Y}],
+    "중립":[{transform:Y},{transform:`${Y} translateX(-7px)`},{transform:`${Y} translateX(7px)`},{transform:Y}],
+    "대기":[{transform:`${Y} scale(1)`},{transform:`${Y} scale(1.02)`},{transform:`${Y} scale(1)`}],
     /* 결말은 마당마다 갈림. 밀려나 퇴장하는 마당은 화면 밖으로 날리고,
        상대가 굴복해 판에 남는 마당(샌님의 큰절)은 제자리에서 내려앉아 머무름 */
     "결말": m.climax.endAnim==="settle"
-      ? [{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translateY(26px) scale(.97)"}]
-      : [{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translate(320px,-170px) rotate(90deg)",opacity:0}]
+      ? [{transform:Y},{transform:`${Y} translateY(26px) scale(.97)`}]
+      : [{transform:Y},{transform:`${Y} translate(${out*320}px,-170px) rotate(${out*90}deg)`,opacity:0}]
   }[pose];
   if(anim)el.animate(anim,{duration:pose==="결말"?900:520,easing:"ease-out",fill:pose==="결말"?"forwards":"none"});
   if(pose==="과장")AU.hit();
 }
+const setFoe=(pose,cap)=>setActor("foe",pose,cap);
+const setMe =(pose,cap)=>setActor("me",pose,cap);
+
+/* 말풍선이 배역 그림을 가리지 않는 최대 글자수를 판 크기에서 실제로 재어 정함.
+   창이 좁으면 말풍선이 좁고 낮아져 들어가는 글자가 확 줄기 때문에 고정값을 쓸 수 없음.
+   빈 말풍선에 글자를 늘려 넣어 보며 이분 탐색함 (Step 3 들어갈 때와 창 크기가 바뀔 때만 돎) */
+function fitSayMax(){
+  const f=$("field"),a=$("foe"),b=$("sayFoe");
+  if(!f||!b||!f.clientHeight)return;
+  const fr=f.getBoundingClientRect(),ar=a.getBoundingClientRect();
+  const room=(ar.top-fr.top)-parseFloat(getComputedStyle(b).top||12)-6;
+  if(room<20)return;
+  const keep=b.innerHTML,was=b.classList.contains("on");
+  b.classList.add("on");
+  const S1="가나다라마바사아자차카타파하거너더러머버서어저처커터퍼허";
+  const rep=n=>{let t="";for(let i=0;i<n;i++)t+=S1[i%S1.length];return t;};
+  let lo=8,hi=400,best=8;
+  while(lo<=hi){const m=(lo+hi)>>1;
+    b.innerHTML='<span class="who">아무개</span>'+rep(m);
+    if(b.scrollHeight<=room+.5){best=m;lo=m+1;}else hi=m-1;}
+  b.innerHTML=keep; if(!was)b.classList.remove("on");
+  CFG.sayMax=Math.max(20,best);
+  const el=$("cfgSayMax"); if(el)el.value=CFG.sayMax;
+  log("sys",`말풍선 한계 ${CFG.sayMax}자로 맞춤 (판 ${Math.round(fr.width)}px, 배역 위 여유 ${Math.round(room)}px)`,"lg-sys");
+}
+addEventListener("resize",()=>{clearTimeout(fitSayMax._t);
+  fitSayMax._t=setTimeout(()=>{if(curScreen==="scr-play")fitSayMax();},250);});
 
 /* 3장 뒷대목(절정) */
 function runClimax(){
