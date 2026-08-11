@@ -520,6 +520,7 @@ button:disabled{opacity:.4;cursor:default}
 
 <script>
 "use strict";
+const $=id=>document.getElementById(id);   // 이 파일 전체에서 DOM 조회는 이 한 줄을 씀
 /* ══════════════════════════════════════════════════════════
    덧뵈기 - 나만의 탈춤, Step 2~5 진행 프로토타입 (가로형)
    근거: 04_Projects/시범콘텐츠/덧뵈기 - 나만의 탈춤/덧뵈기 - 나만의 탈춤 기획서.md (3.4.0)
@@ -529,7 +530,7 @@ button:disabled{opacity:.4;cursor:default}
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
   lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,sayMax:66,typewriter:true,typeMs:65,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
-const bind=(id,key,isNum)=>{const el=document.getElementById(id);
+const bind=(id,key,isNum)=>{const el=$(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
     if(!isNum){CFG[key]=el.value;return;}
@@ -586,21 +587,20 @@ function hydrate(root){
     loadArt(sp,sp.dataset.key);
   });
 }
-/* 파일이 없으면 대체 키(ART_ALT)로 한 번 더 내려감. 대체도 없으면 SVG 자리표시가 그대로 남음 */
+/* 파일이 없으면 대체 키(ART_ALT)로 한 번 더 내려감. 대체도 없으면 SVG 자리표시가 그대로 남음.
+   패널 목록은 확보 상태가 실제로 바뀔 때만 다시 그림 (그림 하나 뜰 때마다 48행을 다시
+   만들 이유가 없음) */
 function loadArt(sp,key){
   const file=ART[key]; if(!file) return;
-  const alt=ART_ALT[key]!==key?ART_ALT[key]:null;
+  const alt=ART_ALT[key];
   if(ART_STATE[key]===false){ if(alt) loadArt(sp,alt); return; }   // 이미 없는 것으로 확인됨
   const im=new Image();
-  im.onload=()=>{ ART_STATE[key]=true; sp.innerHTML=""; sp.appendChild(im); renderAssets(); };
-  im.onerror=()=>{
-    if(ART_STATE[key]===undefined){ ART_STATE[key]=false; renderAssets(); }
-    if(alt) loadArt(sp,alt);
-  };
+  const mark=v=>{ if(ART_STATE[key]!==v){ ART_STATE[key]=v; renderAssets(); } };
+  im.onload=()=>{ mark(true); sp.innerHTML=""; sp.appendChild(im); };
+  im.onerror=()=>{ mark(false); if(alt) loadArt(sp,alt); };
   im.src=ART_BASE+encodeURIComponent(file);
   im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
 }
-new MutationObserver(()=>hydrate()).observe(document.body,{childList:true,subtree:true});
 /* 시작할 때 목록 전체를 한 번 훑어 있음과 없음을 미리 확정함.
    없는 파일을 화면에서 만나는 순간에야 알면, 404가 돌아올 때까지 SVG 자리표시가 잠깐 비쳤다가
    대체 그림으로 바뀌어 깜빡임. 패널 표시도 시작부터 실제 상태와 맞음 */
@@ -615,7 +615,7 @@ function probeArt(){
   });
 }
 function renderAssets(){
-  const el=document.getElementById("assetList");
+  const el=$("assetList");
   const have=Object.keys(ART).filter(k=>ART_STATE[k]===true).length;
   el.innerHTML=`<div class="asset-row"><span>합계</span><span>${have} / ${Object.keys(ART).length} 확인됨</span></div>`+
     ART_GROUPS.map(g=>{
@@ -990,8 +990,8 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (장쇠가 대독)"; },
  /* 판 위 대사 칸. 상대 배역은 제 그림 위에, 잽이는 악사 자리인 판 아래에 띄움 */
  onStage(who){ return (who==="foe"||who==="jaebi")&&curScreen==="scr-play"
-   ? document.getElementById("stageSay") : null; },
- hideStage(){ const b=document.getElementById("stageSay"); if(b)b.className="stage-say"; },
+   ? $("stageSay") : null; },
+ hideStage(){ const b=$("stageSay"); if(b)b.className="stage-say"; },
  /* 한 번에 띄우는 글자수 한도를 넘는 대사는 나눠서 차례로 띄움.
     말풍선이 상대 배역 그림 위로 자라 배역을 가리는 것을 막음 (1920 화면 실측 66자).
     원문을 고치지 않고 표시만 나누므로 인용은 그대로임 */
@@ -1087,14 +1087,14 @@ function newSession(){
   renderSess();
 }
 function renderSess(){
-  document.getElementById("sess").innerHTML=[["세션 ID",S.id],["현재 언어",S.lang],["현재 Step","Step "+S.step],
+  $("sess").innerHTML=[["세션 ID",S.id],["현재 언어",S.lang],["현재 Step","Step "+S.step],
    ["선택 마당",S.madang?S.madang.name:"미정"],["선택 배역",S.role||"미정"],
    ["장면 수행 기록",S.records.length+"건"],["신명 지표(내부)",S.sinmyeong.toFixed(1)+" (화면 비표시)"],
    ["에러 유형",S.errType||"없음"]]
    .map(r=>`<div class="kv"><span>${r[0]}</span><span>${esc(String(r[1]))}</span></div>`).join("");
 }
 function log(kind,msg,cls){
-  const el=document.getElementById("log"),d=document.createElement("div");
+  const el=$("log"),d=document.createElement("div");
   d.className=cls||"lg-sys";
   d.textContent="["+new Date().toLocaleTimeString("ko-KR",{hour12:false})+"] "+msg;
   el.insertBefore(d,el.firstChild);
@@ -1105,9 +1105,12 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 
 /* ── 7. 화면 전환 ──────────────────────── */
 let curScreen=null;
+/* 화면과 타이머 칩은 마크업에 고정이라 한 번만 찾아 둠 */
+const SCREENS=[...document.querySelectorAll(".screen")];
+const TIMER_CHIPS=[...document.querySelectorAll("[data-timer]")];
 function show(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
-  document.getElementById(id).classList.add("on");
+  SCREENS.forEach(s=>s.classList.remove("on"));
+  $(id).classList.add("on");
   curScreen=id; TO.enter(id);
 }
 
@@ -1119,10 +1122,13 @@ const TO={screenLeft:0,idleLeft:0,paused:false,inStep3:false,active:false,
    this.active=["scr-madang","scr-role","scr-play","scr-accept"].includes(id);},
  pauseSpeak(v){this.paused=v;this.render();},
  bump(){this.idleLeft=CFG.idleTimeout;},
- render(){document.querySelectorAll("[data-timer]").forEach(el=>{
-   if(!this.active||!CFG.timeoutOn){el.textContent="";return;}
-   el.className="timer-chip"+(this.paused?" paused":"");
-   el.innerHTML=`화면 <b>${Math.ceil(this.screenLeft)}</b>s, 미입력 <b>${Math.ceil(this.idleLeft)}</b>s`;});},
+ render(){   // 0.25초마다 도는 자리라 남은 초가 바뀔 때만 다시 씀
+   const on=this.active&&CFG.timeoutOn;
+   const txt=on?`화면 <b>${Math.ceil(this.screenLeft)}</b>s, 미입력 <b>${Math.ceil(this.idleLeft)}</b>s`:"";
+   const cls="timer-chip"+(this.paused?" paused":"");
+   if(txt===this._txt&&cls===this._cls)return;
+   this._txt=txt;this._cls=cls;
+   TIMER_CHIPS.forEach(el=>{ el.className=cls; el.innerHTML=txt; });},
  start(){setInterval(()=>{
    if(this.active&&CFG.timeoutOn&&!this.paused&&!POP.on){
      this.screenLeft-=.25;this.idleLeft-=.25;
@@ -1143,14 +1149,14 @@ function onScreenTimeout(){
 /* ── 9. 팝업 ───────────────────────────── */
 const POP={on:false,
  show(title,msg,buttons){this.on=true;
-   document.getElementById("popTitle").textContent=title;
-   document.getElementById("popMsg").textContent=msg;
-   const row=document.getElementById("popRow");row.innerHTML="";
+   $("popTitle").textContent=title;
+   $("popMsg").textContent=msg;
+   const row=$("popRow");row.innerHTML="";
    buttons.forEach(b=>{const el=document.createElement("button");
      el.className="cta"+(b.ghost?" ghost":"");el.textContent=b.label;
      el.onclick=()=>{this.hide();b.fn&&b.fn();};row.appendChild(el);});
-   document.getElementById("pop").classList.add("on");},
- hide(){this.on=false;document.getElementById("pop").classList.remove("on");}};
+   $("pop").classList.add("on");},
+ hide(){this.on=false;$("pop").classList.remove("on");}};
 document.querySelectorAll("[data-quit]").forEach(b=>b.onclick=()=>{
   SPEECH.stop();
   POP.show("그만두시겠습니까?","진행 중인 체험이 종료되고 처음 화면으로 돌아갑니다.",
@@ -1192,7 +1198,7 @@ function picHTML(mv){ return art("pic_"+mv, `<span>${DIRCH[MOVES[mv].dir]}</span
 /* ── 11. Step 2-1 마당 선택 ────────────── */
 let selIdx=0;
 function buildMadang(){
-  const c=document.getElementById("madangCards");c.innerHTML="";
+  const c=$("madangCards");c.innerHTML="";
   MADANG.forEach((m,i)=>{
     const b=document.createElement("button");
     b.className="card"+(i===selIdx?" sel":"");
@@ -1203,7 +1209,7 @@ function buildMadang(){
     b.onclick=()=>{selIdx=i;AU.jang();buildMadang();};
     c.appendChild(b);});
   const m=MADANG[selIdx];
-  document.getElementById("madangPreview").innerHTML=
+  $("madangPreview").innerHTML=
    `<div class="preview-art">${art("preview_"+m.id,maskSVG(m.foe,120,142))}</div>
     <div class="preview-cap">${m.preview}</div>
     <div class="asset-note">기획서 4.2.1 2)의 미리보기(잠정). 마당 대목 장면 자리임</div>`;
@@ -1217,12 +1223,12 @@ function confirmMadang(auto){
 
 /* ── 12. Step 2-2 배역 확인 ────────────── */
 function buildRole(){
-  const m=S.madang, box=document.getElementById("roleHost");
+  const m=S.madang, box=$("roleHost");
   box.innerHTML=hostHTML();
-  document.getElementById("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
-  document.getElementById("roleName").textContent=m.user;
-  document.getElementById("roleSub").textContent=m.name+"의 배역";
-  document.getElementById("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
+  $("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
+  $("roleName").textContent=m.user;
+  $("roleSub").textContent=m.name+"의 배역";
+  $("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
   hydrate();
   bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
   SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
@@ -1230,7 +1236,7 @@ function buildRole(){
 function wearMask(auto){
   SPEECH.stop();AU.kkwaenggwari();
   srv("배역 확정 저장: "+S.role+(auto?" (화면 타임아웃 자동 확정)":""));
-  const el=document.getElementById("roleMask");
+  const el=$("roleMask");
   /* 탈을 눌러 쓰는 맛으로 살짝 부풀렸다 되돌림. 이징이 목표를 지나쳤다 오므로(정점 1.08)
      실제 정점은 지정값보다 큼: 1.12 → 1.13배(넓이 1.28배).
      1.35였을 때는 정점 1.38배, 넓이 1.90배로 부풀어 올라 과하게 보였음 */
@@ -1245,7 +1251,7 @@ function wearMask(auto){
      타이밍 → 응답 대기 중 얼마나 빨리 눌렀는가 (앞 40% 안이면 얼쑤)
      홀드  → 홀드가 필요한 동작에서 번호를 얼마나 오래 누르고 있었는가
    진폭과 속도는 키패드로 잴 수 없어 요소 표시에 "실기기 전용"으로만 남김 */
-const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
+const PAD={el:$("pad"),armed:false,move:null,opts:{},
  moveId:null,keys:[],slots:[],windowTimer:null,armedAt:0,windowMs:0,
  pressT:0,holdMs:0,holdTimer:null,downKey:null,
  /* 이번 마당에서 배운 동작 3개에 1~3을 매기고 키패드를 그림 */
@@ -1266,30 +1272,37 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
      k.addEventListener("pointercancel",()=>this.release());
    });
  },
+ /* 왼쪽 안내 칸과 오른쪽 제시 그림을 한자리에서 씀. arm, disarm, 판정 없는 따라 하기가
+    같은 여섯 칸을 각자 세팅하다 빠뜨리는 일이 있어 하나로 모음 */
+ info({state,move,how,real,elems,pic}){
+   $("bandState").textContent=state;
+   $("padMove").innerHTML=move; $("padHow").textContent=how;
+   $("padReal").textContent=real||""; $("padElems").innerHTML=elems||"";
+   const ar=$("padArrow");
+   if(pic){ ar.innerHTML=picHTML(pic); hydrate(ar); } else ar.textContent="-";
+ },
  arm(moveId,ms,cb,opts){
    this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
    this.armedAt=performance.now();this.windowMs=ms>0?ms:CFG.respMax*1000;
    this.el.classList.add("armed");this.el.classList.remove("idle");
    this.keys.forEach(k=>{k.disabled=false;k.classList.remove("down");
      k.querySelector(".holdbar").style.width="0";});
-   const hint=document.getElementById("padHint");if(hint)hint.style.display="none";
-   document.getElementById("bandState").textContent=this.opts.climax?"절정 응수 대기":"응수 대기 중";
-   document.getElementById("padMove").innerHTML=esc(this.move.name)+` <small>${esc(this.move.body)}</small>`;
+   const hint=$("padHint");if(hint)hint.style.display="none";
    const needHold=this.move.elems.includes("홀드");
-   document.getElementById("padHow").textContent=needHold
-     ? `그림에 맞는 번호를 ${CFG.holdReq}초 넘게 누르고 있기 (홀드 동작)`
-     : "그림에 맞는 번호를 빠르게 누르기";
-   document.getElementById("padReal").textContent="실기기 동작: "+this.move.how;
    // 키패드로 못 재는 요소는 그어서 표시함. 실기기 명세는 그대로 보여 줌
-   document.getElementById("padElems").innerHTML=this.move.elems.map(e=>
-     `<span class="el${e==="진폭"||e==="속도"?" off":""}">${e}${e==="진폭"||e==="속도"?" (실기기 전용)":""}</span>`).join("")
-     +'<span class="el">타이밍</span>';
-   // 판정에 쓰이는 그림을 오른쪽에 크게 걸어 둠 (무엇을 눌러야 하는지의 근거)
-   document.getElementById("padArrow").innerHTML=picHTML(moveId);
-   document.getElementById("padArrowCap").textContent="제시된 동작";
-   hydrate(document.getElementById("padArrow"));
+   const off=e=>e==="진폭"||e==="속도";
+   this.info({
+     state:this.opts.climax?"절정 응수 대기":"응수 대기 중",
+     move:esc(this.move.name)+` <small>${esc(this.move.body)}</small>`,
+     how:needHold?`그림에 맞는 번호를 ${CFG.holdReq}초 넘게 누르고 있기 (홀드 동작)`
+                 :"그림에 맞는 번호를 빠르게 누르기",
+     real:"실기기 동작: "+this.move.how,
+     elems:this.move.elems.map(e=>
+       `<span class="el${off(e)?" off":""}">${e}${off(e)?" (실기기 전용)":""}</span>`).join("")
+       +'<span class="el">타이밍</span>',
+     pic:moveId});
    if(ms>0){
-     const w=document.getElementById("padWindow");w.style.display="block";
+     const w=$("padWindow");w.style.display="block";
      w.style.transition="none";w.style.transform="scaleX(1)";
      requestAnimationFrame(()=>{w.style.transition=`transform ${ms}ms linear`;w.style.transform="scaleX(0)";});
      this.windowTimer=setTimeout(()=>{if(this.armed)this.settle(null);},ms+40);
@@ -1298,15 +1311,9 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
    this.holdTimer&&clearInterval(this.holdTimer);this.holdTimer=null;this.downKey=null;
    this.el.classList.remove("armed");this.el.classList.add("idle");
    this.keys.forEach(k=>{k.disabled=true;k.classList.remove("down");});
-   const w=document.getElementById("padWindow");if(w)w.style.display="none";
-   const hint=document.getElementById("padHint");if(hint)hint.style.display="";
-   document.getElementById("bandState").textContent="대기 중";
-   document.getElementById("padMove").textContent="대기";
-   document.getElementById("padHow").textContent="판에 뜬 그림에 맞는 번호를 누르십시오";
-   document.getElementById("padReal").textContent="";
-   document.getElementById("padElems").innerHTML="";
-   document.getElementById("padArrow").textContent="-";
-   document.getElementById("padArrowCap").textContent="제시된 동작";},
+   const w=$("padWindow");if(w)w.style.display="none";
+   const hint=$("padHint");if(hint)hint.style.display="";
+   this.info({state:"대기 중",move:"대기",how:"판에 뜬 그림에 맞는 번호를 누르십시오"});},
  settle(res){if(!this.armed)return;const cb=this.cb;this.disarm();
    cb&&cb(res||{v:"dasi",amp:0,hold:0,reason:"미수행"});},
  press(slot,el){
@@ -1364,7 +1371,7 @@ function pick(key,list){ // 바로 앞에 나온 것은 다시 안 뽑음
   PICKED[key]=i;return list[i];
 }
 function showVerdict(v,res){
-  const el=document.getElementById("verdict"),V=VERDICT[v];
+  const el=$("verdict"),V=VERDICT[v];
   const sub=v==="dasi"
     ? ((DASI_SUB.find(([re])=>re.test(res&&res.reason||""))||[])[1]||pick("dasi-sub",V.sub))
     : pick(v+"-sub",V.sub);
@@ -1374,7 +1381,7 @@ function showVerdict(v,res){
   if(v==="eolssu"){AU.eolssu();crowd();}else if(v==="johda")AU.good();else AU.miss();
 }
 function crowd(){
-  const f=document.getElementById("field");
+  const f=$("field");
   ["얼쑤","좋다","그렇지"].forEach((t,i)=>{
     const s=document.createElement("div");s.className="fx";s.textContent=t;
     s.style.left=(12+Math.random()*70)+"%";s.style.top=(55+Math.random()*30)+"%";
@@ -1401,7 +1408,7 @@ let chapStart=0,curChap="lesson";
    만큼 아래 띠가 줄어 남은 시간을 보여 줌 */
 const LANE={gap:64,markerX:78,idx:0,notes:[],
  build(moves){
-   const bar=document.getElementById("noteBar"),lane=document.getElementById("noteLane");
+   const bar=$("noteBar"),lane=$("noteLane");
    bar.style.display="block";lane.style.transform="translateX(0)";
    lane.innerHTML="";this.notes=[];this.idx=0;
    moves.forEach((mv,i)=>{
@@ -1413,7 +1420,7 @@ const LANE={gap:64,markerX:78,idx:0,notes:[],
  },
  /* i번째 노트를 표시선으로 끌어오고, ms 동안 남은 시간 띠를 줄임 */
  focus(i,ms){
-   const lane=document.getElementById("noteLane");if(!lane||!this.notes[i])return;
+   const lane=$("noteLane");if(!lane||!this.notes[i])return;
    this.idx=i;lane.style.transform=`translateX(${-i*this.gap}px)`;
    const el=this.notes[i];el.classList.remove("ahead");el.classList.add("now");
    const t=el.querySelector(".note-timer");
@@ -1422,7 +1429,7 @@ const LANE={gap:64,markerX:78,idx:0,notes:[],
  },
  resolve(i,ok){const el=this.notes[i];if(!el)return;
    el.classList.remove("now");el.classList.add(ok?"hit":"miss");},
- hide(){const b=document.getElementById("noteBar");if(b)b.style.display="none";}};
+ hide(){const b=$("noteBar");if(b)b.style.display="none";}};
 /* 3장 배경 장단. 노트가 흘러가는 리듬 게임이 아니라 대사 응수로 진행하므로,
    장단은 판의 박만 깔아 주고 속도 조절은 응답 대기 시간으로 함 */
 const CLX={t:null,
@@ -1431,14 +1438,14 @@ const CLX={t:null,
  stop(){this.t&&clearInterval(this.t);this.t=null;}};
 function startStep3(){
   show("scr-play");
-  const box=document.getElementById("playHost");box.innerHTML=hostHTML();
+  const box=$("playHost");box.innerHTML=hostHTML();
   bindSkip(box,()=>SPEECH.stop());
   setBG(S.madang.id);setFoe(null);LANE.hide();hydrate();
   PAD.setKeys(S.madang.moves);   // 이 마당에서 배울 동작 3개에 1~3을 매김
   runLesson();
 }
 function setBG(which){
-  const f=document.getElementById("field");
+  const f=$("field");
   const old=f.querySelector(".bgwrap");if(old)old.remove();
   const w=document.createElement("div");w.className="bgwrap";
   w.innerHTML=art("bg_"+which,"");
@@ -1452,12 +1459,12 @@ function chapOut(k){S.chapMs[k]=performance.now()-chapStart;S.chapters[k]=true;}
 /* 1장 기초 수업 */
 function runLesson(){
   chapIn("lesson");
-  document.getElementById("playTitle").textContent="기초 수업 (1장)";
-  document.getElementById("demoHint").textContent="상대 배역은 아직 나오지 않음";
-  const box=document.getElementById("playHost"),list=S.madang.moves.slice();
+  $("playTitle").textContent="기초 수업 (1장)";
+  $("demoHint").textContent="상대 배역은 아직 나오지 않음";
+  const box=$("playHost"),list=S.madang.moves.slice();
   let i=0;
   const pane=()=>{
-    document.getElementById("infoPane").innerHTML=
+    $("infoPane").innerHTML=
      `<div class="info-h">배울 동작 3개 (키패드 번호)</div>
       <div class="info-card">${list.map((id,k)=>
         `<div class="mv-row ${k===i?"now":k<i?"done":""}"><span class="mv-no">${k+1}</span>
@@ -1494,7 +1501,7 @@ function runLesson(){
   SPEECH.say("jangsoe",S.madang.openLine,box,nextMove);
 }
 function demoAnim(moveId){   // 1장 시범: 배우는 동작의 픽토그램을 판 복판에 띄움
-  const f=document.getElementById("field"),d=document.createElement("div");
+  const f=$("field"),d=document.createElement("div");
   d.className="fx demo-pic";d.style.left="50%";d.style.top="46%";d.style.transform="translate(-50%,-50%)";
   d.innerHTML=picHTML(moveId);f.appendChild(d);hydrate(d);
   d.animate([{opacity:0},{opacity:1},{opacity:.9},{opacity:0}],{duration:1500,easing:"ease-in-out"}).onfinish=()=>d.remove();
@@ -1519,12 +1526,12 @@ function beatLabel(b){
   return `${b.act?"무언 도발":who+" 대사"} → ${MOVES[b.move].name}`;
 }
 function runBeats(list,opts,onDone){
-  const box=document.getElementById("playHost");
+  const box=$("playHost");
   const cueTotal=list.filter(b=>b.t==="cue").length;
   const gain=cueTotal?100/cueTotal:0;   // 다 얼쑤면 만충, 다 좋다면 완화판에 머무는 배분
   let i=0,cueSeen=0;
   const pane=()=>{
-    document.getElementById("infoPane").innerHTML=
+    $("infoPane").innerHTML=
      `<div class="info-h">${esc(opts.paneTitle)}</div>
       <div class="info-card">${list.map((b,k)=>
         `<div class="beat-row ${k===i?"now":k<i?"done":""}">${b.src?`<span class="beat-src">${esc(b.src)}</span>`:""}${esc(beatLabel(b))}</div>`).join("")}</div>`
@@ -1540,17 +1547,13 @@ function runBeats(list,opts,onDone){
       setFoe("과장",b.cap);
       SPEECH.say("jangsoe",b.text,box,()=>{
         PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");step();});
-        document.getElementById("padMove").textContent="따라 하기";
-        document.getElementById("padHow").textContent="아무 번호나 눌러 보기 (판정 없음)";
-        document.getElementById("padReal").textContent="";
-        document.getElementById("padElems").innerHTML="";
-        document.getElementById("padArrow").textContent="-";
+        PAD.info({state:"따라 하기",move:"따라 하기",how:"아무 번호나 눌러 보기 (판정 없음)"});
       });
       return;
     }
     /* cue: 상대 대사(text) 또는 무언 도발(act) 뒤에 응수를 받음 */
     const arm=()=>{
-      if(b.act)document.getElementById("foeCap").textContent=b.cap||b.act;
+      if(b.act)$("foeCap").textContent=b.cap||b.act;
       else setFoe("대기",b.cap);
       const ms=opts.window?opts.window(cueSeen,b):respMs(b);
       const slot=cueSeen;
@@ -1578,14 +1581,14 @@ function runBeats(list,opts,onDone){
 function runScene(){
   chapIn("scene");
   const m=S.madang;
-  document.getElementById("playTitle").textContent=`${m.sceneTitle} (2장)`;
-  document.getElementById("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
-  document.getElementById("gaugeWrap").style.display="none";LANE.hide();
+  $("playTitle").textContent=`${m.sceneTitle} (2장)`;
+  $("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
+  $("gaugeWrap").style.display="none";LANE.hide();
   runBeats(m.scene,{chapter:"앞대목",paneTitle:`앞대목 대본 (${m.sceneSrc})`},
     ()=>{chapOut("scene");setFoe(null);runClimax();});
 }
 function setFoe(pose,cap){
-  const el=document.getElementById("foe"),c=document.getElementById("foeCap");
+  const el=$("foe"),c=$("foeCap");
   /* 앞서 건 애니메이션을 먼저 지움. 결말만 fill:forwards라 마지막 키프레임(퇴장 마당은 opacity 0)이
      요소에 그대로 남고, 뒤에 건 애니메이션은 끝나면 사라져 그 값이 다시 올라옴.
      지우지 않으면 한 마당을 끝낸 뒤부터 상대 배역이 계속 안 보임 */
@@ -1614,12 +1617,12 @@ function setFoe(pose,cap){
 function runClimax(){
   chapIn("climax");
   const m=S.madang,cx=m.climax;
-  document.getElementById("playTitle").textContent=`${m.climaxTitle}, 절정 (3장)`;
-  document.getElementById("demoHint").textContent=`연회본 ${m.climaxSrc} 발췌`;
-  const box=document.getElementById("playHost");
+  $("playTitle").textContent=`${m.climaxTitle}, 절정 (3장)`;
+  $("demoHint").textContent=`연회본 ${m.climaxSrc} 발췌`;
+  const box=$("playHost");
   setBG("climax");
-  document.getElementById("gaugeWrap").style.display="flex";
-  document.getElementById("gaugeLab").textContent=cx.gaugeLab;
+  $("gaugeWrap").style.display="flex";
+  $("gaugeLab").textContent=cx.gaugeLab;
   S.gauge=0;updGauge();
   setFoe("대기","맞서 선 "+m.foe);
   const tail=
@@ -1639,17 +1642,17 @@ function runClimax(){
       ()=>finishClimax(cx,S.gauge>=100));
   });
 }
-function updGauge(){document.getElementById("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
+function updGauge(){$("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
 function finishClimax(cx,full){
   CLX.stop();PAD.disarm();   // 레인은 결말 대사가 끝난 뒤(wrap)에 걷음
-  const box=document.getElementById("playHost");
+  const box=$("playHost");
   setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
   if(full){AU.cheer();AU.kkwaenggwari();}
   log("sys","절정 결말: "+(full?"완전판":"완화판")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
   const outro=(cx.outro||[]).slice();   // 결말 뒤에 붙는 원전 마무리 대사
   const wrap=()=>SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
     chapOut("climax");
-    document.getElementById("gaugeWrap").style.display="none";LANE.hide();
+    $("gaugeWrap").style.display="none";LANE.hide();
     goStep4();});
   const nextOutro=()=>{if(!outro.length){wrap();return;}const b=outro.shift();SPEECH.say(b.who,b.text,box,nextOutro);};
   nextOutro();
@@ -1659,7 +1662,7 @@ function finishClimax(cx,full){
 function goStep4(){
   S.step=4;renderSess();srv("Step 4 진입 (완주 확정, 서버 완주 기록 겸함)");
   show("scr-accept");
-  const box=document.getElementById("acceptHost");box.innerHTML=hostHTML();hydrate();
+  const box=$("acceptHost");box.innerHTML=hostHTML();hydrate();
   bindSkip(box,()=>SPEECH.stop());
   // 가장 빨리 받아친 동작을 하이라이트로 뽑음 (실기기에서는 진폭이 가장 컸던 동작)
   const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>a.early-b.early)[0];
@@ -1667,7 +1670,7 @@ function goStep4(){
   const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
   const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 장단을 놓치지 말고 받아 보자.";
   const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나.":"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
-  document.getElementById("acceptBody").innerHTML=`
+  $("acceptBody").innerHTML=`
    <div class="acc-block"><div class="acc-h">인정 선언</div><div class="acc-decl">${esc(decl)}</div>
      <div class="asset-note" style="text-align:left;margin-top:4px">완주 자체를 인정함. 등급 서열 없음</div></div>
    <div class="acc-block"><div class="acc-h">수행 요약</div>
@@ -1686,13 +1689,13 @@ function goStep5(kind){
   S.step=5;renderSess();SPEECH.stop();PAD.disarm();
   CLX.stop();LANE.hide();
   show("scr-end");
-  document.getElementById("endMsg").textContent="세션 종료 이벤트 전송";
-  document.getElementById("endSub").textContent="완주 유형: "+kind;
+  $("endMsg").textContent="세션 종료 이벤트 전송";
+  $("endSub").textContent="완주 유형: "+kind;
   srv("종료 이벤트 전송 ("+kind+") → 저장 확인 응답 대기");
   buildReport(kind);
   setTimeout(()=>{
     srv("저장 확인 응답 수신, 장면 수행 기록의 식별 원본 파기");
-    document.getElementById("endMsg").textContent="세션 데이터 초기화 완료";
+    $("endMsg").textContent="세션 데이터 초기화 완료";
     setTimeout(()=>{newSession();show("scr-start");},900);},900);
 }
 function endSession(reason){
@@ -1703,7 +1706,7 @@ function endSession(reason){
 function buildReport(kind){
   const n=S.records.length,e=S.eolssu,ok=S.success-e,d=S.dasi;
   const secs=k=>(S.chapMs[k]/1000).toFixed(1)+"s",pc=v=>n?Math.round(v/n*100)+"%":"0%";
-  document.getElementById("report").innerHTML=`
+  $("report").innerHTML=`
    <div class="rep-row"><span>종료 유형</span><b>${esc(kind)}</b></div>
    <div class="rep-row"><span>마당, 배역</span><b>${S.madang?S.madang.name+", "+S.role:"미선택"}</b></div>
    <div class="rep-row"><span>총 동작 신호</span><b>${n}건</b></div>
@@ -1724,7 +1727,7 @@ document.querySelectorAll("[data-err]").forEach(b=>b.onclick=()=>{
     POP.show("잠시 문제가 생겼습니다",msg+" 처음 화면으로 돌아갑니다.",[{label:"확인",fn:()=>endSession("error-"+k)}]);};
   if(k==="tts"){SPEECH.failed=true;log("err","기능 축소: TTS 실패 → 화면 텍스트와 포즈로 진행","lg-err");}
   else if(k==="pose"){log("err","기능 축소: 상대 배역 포즈 전환 실패 → 대표 포즈 정지 표시와 효과음","lg-err");
-    document.getElementById("foe").style.filter="grayscale(1) brightness(.7)";AU.hit();}
+    $("foe").style.filter="grayscale(1) brightness(.7)";AU.hit();}
   else if(k==="res")halt("마당 리소스를 불러오지 못했습니다.");
   else if(k==="audio")halt("절정 무대 음원 재생이 지연되었습니다.");
   else if(k==="cam")halt("카메라 신호가 들어오지 않습니다.");});
@@ -1734,25 +1737,25 @@ document.querySelectorAll("[data-force]").forEach(b=>b.onclick=()=>{
   if(!PAD.armed)return log("sys","지금은 응답 대기 구간이 아님","lg-sys");
   const v=b.dataset.force;
   PAD.settle({v,early:v==="eolssu"?.2:v==="johda"?.7:1,hold:v==="dasi"?0:1.2,reason:"패널 강제 판정"});});
-document.getElementById("btnSkipChap").onclick=()=>{
+$("btnSkipChap").onclick=()=>{
   if(curScreen!=="scr-play")return;
   SPEECH.stop();PAD.disarm();
   if(curChap==="lesson"){chapOut("lesson");runScene();}
   else if(curChap==="scene"){chapOut("scene");setFoe(null);runClimax();}
   else{CLX.stop();finishClimax(S.madang.climax,S.gauge>=100);}};
-document.getElementById("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
+$("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
   CLX.stop();LANE.hide();newSession();show("scr-start");};
-document.getElementById("panelToggle").onclick=()=>document.getElementById("panel").classList.toggle("hidden");
+$("panelToggle").onclick=()=>$("panel").classList.toggle("hidden");
 
 /* ── 20. 진입 ──────────────────────────── */
-document.getElementById("btnStart").onclick=()=>{
+$("btnStart").onclick=()=>{
   AU.ensure();newSession();srv("세션 생성 (익명), 언어 ko");
   S.step=2;renderSess();selIdx=0;buildMadang();show("scr-madang");};
-document.getElementById("btnMadangOk").onclick=()=>confirmMadang(false);
-document.getElementById("btnWear").onclick=()=>wearMask(false);
-document.getElementById("btnHome").onclick=()=>goStep5("완주-처음으로 버튼");
+$("btnMadangOk").onclick=()=>confirmMadang(false);
+$("btnWear").onclick=()=>wearMask(false);
+$("btnHome").onclick=()=>goStep5("완주-처음으로 버튼");
 
-document.getElementById("gaps").innerHTML=GAPS.map(g=>
+$("gaps").innerHTML=GAPS.map(g=>
   `<div class="warnbox"><b>${esc(g.where)}</b><br>${esc(g.what)}<br><span style="color:#a9c9a0">프로토타입 처리: ${esc(g.fix)}</span></div>`).join("");
 renderAssets();
 probeArt();
