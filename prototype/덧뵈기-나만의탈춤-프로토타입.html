@@ -481,9 +481,12 @@ const ART_GROUPS=[
    host_idle:"호스트_장쇠_기본.png", host_talk:"호스트_장쇠_입벌림.png"}},
  {name:"내 배역 탈", where:"Step 2-1 마당 카드", items:{
    mask_꺽쇠:"탈_꺽쇠.png", mask_말뚝이:"탈_말뚝이.png", mask_취발이:"탈_취발이.png"}},
+ {name:"마당 미리보기", where:"Step 2-1 오른쪽 미리보기", items:{
+   preview_omtal:"미리보기_옴탈잡이.png", preview_sennim:"미리보기_샌님잡이.png",
+   preview_mokjung:"미리보기_먹중잡이.png"}},
  {name:"내 배역 전신", where:"Step 2-2 배역 확인", items:{
    body_꺽쇠:"배역_꺽쇠.png", body_말뚝이:"배역_말뚝이.png", body_취발이:"배역_취발이.png"}},
- {name:"상대 배역 전신", where:"Step 2-1 미리보기, Step 3 판", items:(()=>{const o={};
+ {name:"상대 배역 전신", where:"Step 3 판", items:(()=>{const o={};
    ["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.forEach(p=>o["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png"));return o;})()},
  {name:"동작 픽토그램", where:"Step 3 오른쪽 동작 목록", items:byMove("pic_","픽토_")},
  {name:"동작 시범", where:"Step 3 기초 수업 시범 자리", items:byMove("demo_","시범_")},
@@ -812,9 +815,9 @@ function buildMadang(){
     c.appendChild(b);});
   const m=MADANG[selIdx];
   document.getElementById("madangPreview").innerHTML=
-   `<div class="preview-art">${art("foe_"+m.foe+"_등장",maskSVG(m.foe,120,142))}</div>
+   `<div class="preview-art">${art("preview_"+m.id,maskSVG(m.foe,120,142))}</div>
     <div class="preview-cap">${m.preview}</div>
-    <div class="asset-note">기획서 4.2.1 2)의 미리보기(잠정). 상대 배역 일러스트 자리표시임</div>`;
+    <div class="asset-note">기획서 4.2.1 2)의 미리보기(잠정). 마당 대목 장면 자리임</div>`;
   hydrate();
 }
 function confirmMadang(auto){
