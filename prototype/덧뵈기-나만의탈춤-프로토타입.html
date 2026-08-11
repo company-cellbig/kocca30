@@ -245,6 +245,7 @@ button:disabled{opacity:.4;cursor:default}
 .asset-row span:first-child{color:var(--dim);word-break:break-all}
 .asset-row .yes{color:var(--ok)}
 .asset-row .no{color:#6d6459}
+.asset-row .sub{color:var(--gold)}
 #panelToggle{position:fixed;right:8px;top:8px;z-index:50;font-size:10px;color:var(--dim);
   border:1px solid var(--line);padding:4px 8px;border-radius:5px;background:#100e0c}
 </style>
@@ -496,6 +497,12 @@ const ART_GROUPS=[
 ];
 const ART={}; ART_GROUPS.forEach(g=>Object.assign(ART,g.items));
 
+/* 대체 자산. 아직 안 그린 포즈는 SVG 자리표시로 떨어지지 않고 같은 배역의 대기 전신을 씀.
+   전신이 선 채로 반응 동작(과장은 튀어오름, 중립은 좌우 흔들림)만 돌아 그림 없이도 피드백이 읽힘 */
+const ART_ALT={};
+["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.filter(p=>p!=="대기")
+  .forEach(p=>ART_ALT["foe_"+f+"_"+p]="foe_"+f+"_대기"));
+
 const ART_STATE={}; // key → true(있음) / false(없음) / undefined(미확인)
 function art(key,fallbackSVG,cls){
   return `<span class="art ${cls||""}" data-key="${key}">${fallbackSVG||""}</span>`;
@@ -503,14 +510,22 @@ function art(key,fallbackSVG,cls){
 function hydrate(root){
   (root||document).querySelectorAll(".art:not([data-done])").forEach(sp=>{
     sp.setAttribute("data-done","1");
-    const key=sp.dataset.key, file=ART[key]; if(!file) return;
-    if(ART_STATE[key]===false) return;            // 이미 없는 것으로 확인됨
-    const im=new Image();
-    im.onload=()=>{ ART_STATE[key]=true; sp.innerHTML=""; sp.appendChild(im); renderAssets(); };
-    im.onerror=()=>{ if(ART_STATE[key]===undefined){ ART_STATE[key]=false; renderAssets(); } };
-    im.src=ART_BASE+encodeURIComponent(file);
-    im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
+    loadArt(sp,sp.dataset.key);
   });
+}
+/* 파일이 없으면 대체 키(ART_ALT)로 한 번 더 내려감. 대체도 없으면 SVG 자리표시가 그대로 남음 */
+function loadArt(sp,key){
+  const file=ART[key]; if(!file) return;
+  const alt=ART_ALT[key]!==key?ART_ALT[key]:null;
+  if(ART_STATE[key]===false){ if(alt) loadArt(sp,alt); return; }   // 이미 없는 것으로 확인됨
+  const im=new Image();
+  im.onload=()=>{ ART_STATE[key]=true; sp.innerHTML=""; sp.appendChild(im); renderAssets(); };
+  im.onerror=()=>{
+    if(ART_STATE[key]===undefined){ ART_STATE[key]=false; renderAssets(); }
+    if(alt) loadArt(sp,alt);
+  };
+  im.src=ART_BASE+encodeURIComponent(file);
+  im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
 }
 new MutationObserver(()=>hydrate()).observe(document.body,{childList:true,subtree:true});
 function renderAssets(){
@@ -521,7 +536,10 @@ function renderAssets(){
       const ks=Object.keys(g.items), n=ks.filter(k=>ART_STATE[k]===true).length;
       return `<div class="asset-grp">${esc(g.name)} ${n}/${ks.length}<small>${esc(g.where)}</small></div>`+
         ks.map(k=>{ const s=ART_STATE[k];
-          return `<div class="asset-row"><span>${esc(g.items[k])}</span><span class="${s?"yes":"no"}">${s?"있음":"없음"}</span></div>`;
+          // 파일은 없지만 대체 자산이 대신 나오는 중이면 따로 표시함 (소계는 실제 확보분만 셈)
+          const sub=s===false&&ART_ALT[k]&&ART_STATE[ART_ALT[k]]===true;
+          const cls=s?"yes":sub?"sub":"no", lab=s?"있음":sub?"대체 중":"없음";
+          return `<div class="asset-row"><span>${esc(g.items[k])}</span><span class="${cls}">${lab}</span></div>`;
         }).join("");
     }).join("");
 }
