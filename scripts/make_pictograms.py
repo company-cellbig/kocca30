@@ -2,7 +2,7 @@
 """덧뵈기 프로토타입 동작 픽토그램 9종을 그림 (prototype/덧뵈기-나만의탈춤-프로토타입.html이 씀).
 
 실행: python scripts/make_pictograms.py
-    assets/시범콘텐츠/탈춤/프로토타입/픽토_*.png 9개를 덮어씀.
+    prototype/assets/픽토_*.png 9개를 덮어씀.
 
 그리는 기준
   - 동작 내용은 프로토타입 MOVES[].how(실기기에서 유저가 하는 몸짓)를 따름
@@ -16,7 +16,7 @@ import os
 from PIL import Image, ImageDraw
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                   "assets", "시범콘텐츠", "탈춤", "프로토타입")
+                   "prototype", "assets")
 SIZE, SS = 256, 4          # 최종 256px, 4배 supersampling
 W = SIZE * SS
 GOLD = (224, 192, 112, 255)

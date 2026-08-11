@@ -57,11 +57,14 @@ const EXCLUDED_PATHS = new Set([
 //   - 07_Logs/log.md: CONVENTIONS 4.2 명시 예외
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용). 위키 콘텐츠가 아니라
 //     넘버링 규칙 대상이 아님. "2.2 Name" 같은 번호가 붙으면 오히려 어색함 (사용자 승인 2026-07-22)
+//   - prototype/README.md: 프로토타입 압축본에 함께 나가는 안내문. 팀원이 위키 밖에서
+//     읽으므로 H1 제목과 평범한 번호를 씀 (사용자 승인 2026-08-11)
 //   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
 //     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
 const NO_NUMBER = new Set([
   '07_Logs/log.md',
   'README.md',
+  'prototype/README.md',
 ]);
 const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 

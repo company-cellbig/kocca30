@@ -546,7 +546,7 @@ bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 /* ── 1. 리소스 목록과 로더 ──────────────
    실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠.
    탈 이미지(얼굴만)와 전신 이미지는 쓰이는 자리가 달라 종류를 나눠 둠  */
-const ART_BASE="../assets/시범콘텐츠/탈춤/프로토타입/";
+const ART_BASE="assets/";   // 이 폴더만 압축해 공유할 수 있도록 그림을 함께 둠
 const MOVE_KO={salpigi:"살피기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
   horyeong:"호령가리키기",chaejjik:"채찍휘두르기",eokkae:"어깨메기",balchago:"한발차올리기",somae:"소매뿌리기"};
 const FOE_POSE=["등장","대기","과장","중립","결말"];
@@ -557,8 +557,8 @@ const ART_GROUPS=[
  {name:"내 배역 탈", where:"Step 2-1 마당 카드", items:{
    mask_꺽쇠:"탈_꺽쇠.png", mask_말뚝이:"탈_말뚝이.png", mask_취발이:"탈_취발이.png"}},
  {name:"마당 미리보기", where:"Step 2-1 오른쪽 미리보기", items:{
-   preview_omtal:"미리보기_옴탈잡이.png", preview_sennim:"미리보기_샌님잡이.png",
-   preview_mokjung:"미리보기_먹중잡이.png"}},
+   preview_omtal:"미리보기_옴탈잡이.jpg", preview_sennim:"미리보기_샌님잡이.jpg",
+   preview_mokjung:"미리보기_먹중잡이.jpg"}},
  {name:"내 배역 전신", where:"Step 2-2 배역 확인", items:{
    body_꺽쇠:"배역_꺽쇠.png", body_말뚝이:"배역_말뚝이.png", body_취발이:"배역_취발이.png"}},
  {name:"상대 배역 전신", where:"Step 3 판", items:(()=>{const o={};
