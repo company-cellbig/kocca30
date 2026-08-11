@@ -82,6 +82,10 @@ button:disabled{opacity:.4;cursor:default}
 .speaking .host-name::after{content:" ●";color:var(--red)}
 .host-line{font-size:12.5px;line-height:1.5;min-height:3.6em;max-height:5.4em;overflow:hidden}
 .host-line .prov{color:var(--dim);font-size:9.5px}
+/* 한 글자씩 드러날 때 끝에 붙는 커서 */
+.tw-caret{display:inline-block;width:2px;height:1em;margin-left:1px;vertical-align:-2px;
+  background:var(--gold);animation:twblink .62s steps(1) infinite}
+@keyframes twblink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
 .host-skip{position:absolute;right:7px;bottom:6px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.15);padding:2px 7px;border-radius:5px;background:#1b1815}
 
 /* ══ 판 (무대) ══ */
@@ -469,6 +473,8 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>얼쑤 반응 구간(대기 비율)</label><input type="number" id="cfgEolssu" value="0.4" step="0.05"></div>
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
   <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
+  <div class="cfg"><label>글자당 표시 간격(ms)</label><input type="number" id="cfgTypeMs" value="42" step="4"></div>
+  <div class="cfg"><label>대사 한 글자씩 표시</label><input type="checkbox" id="cfgType" checked></div>
   <div class="cfg"><label>음성(TTS) 사용</label><input type="checkbox" id="cfgTts" checked></div>
   <div class="cfg"><label>장단, 효과음</label><input type="checkbox" id="cfgSfx" checked></div>
   <div class="cfg"><label>화면 타임아웃 작동</label><input type="checkbox" id="cfgTimeout" checked></div>
@@ -505,7 +511,7 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,sinmyeongCut:55,tts:true,sfx:true,timeoutOn:true};
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,sinmyeongCut:55,typewriter:true,typeMs:42,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -516,7 +522,7 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
 bind("cfgWindow","respWindow",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuEarly",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);
+bind("cfgEolssu","eolssuEarly",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgType","typewriter");
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
@@ -892,6 +898,35 @@ const AU={ctx:null,
  cheer(){for(let i=0;i<26;i++)setTimeout(()=>this.noise(.06,1200+Math.random()*1800,1.4,.05),i*38);}};
 
 /* ── 5. 발화 ───────────────────────────── */
+/* 대사를 한 글자씩 드러냄. 자막 칸과 판 위 말풍선이 같이 씀.
+   글자를 늘리는 칸(.tw)만 textContent로 채우고, 앞의 이름표와 뒤의 출처 표시는
+   HTML 그대로 두름. 다 드러나기 전에 「다음」을 누르면 즉시 완성됨 */
+const TYPE={t:null,el:null,pre:"",full:"",tail:"",
+ get typing(){return !!this.t;},
+ run(el,pre,text,tail,perChar){
+   this.clear();
+   if(!CFG.typewriter||perChar<=0){el.innerHTML=pre+esc(text)+tail;return;}
+   this.el=el;this.pre=pre;this.full=text;this.tail=tail;
+   el.innerHTML=pre+'<span class="tw"></span><span class="tw-caret"></span>';
+   const span=el.querySelector(".tw");let i=0;
+   this.t=setInterval(()=>{
+     span.textContent=this.full.slice(0,++i);
+     if(i>=this.full.length)this.finish();
+   },perChar);
+ },
+ finish(){   // 남은 글자를 즉시 채우고 커서를 걷음
+   if(!this.t)return;
+   clearInterval(this.t);this.t=null;
+   if(this.el)this.el.innerHTML=this.pre+esc(this.full)+this.tail;
+   this.el=null;
+ },
+ clear(){if(this.t){clearInterval(this.t);this.t=null;}this.el=null;}};
+/* 「다음」 버튼: 아직 드러나는 중이면 먼저 완성하고, 다 드러났으면 넘어감 */
+function bindSkip(box,fn){
+  box.querySelector(".host-skip").onclick=()=>{
+    if(TYPE.typing){TYPE.finish();return;}
+    fn();};
+}
 const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
  pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
    return this.voices.filter(v=>/ko/i.test(v.lang)); },
@@ -909,13 +944,17 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    const other = who==="foe"||who==="jaebi";   // 장쇠가 읽지 않는 화자
    const bub = this.onStage(who);
    nm.textContent = this.nameOf(who);
+   // 글자당 속도. 대사가 길어도 발화가 끝나기 전에 다 드러나도록 상한을 둠
+   const dur=Math.min(6500,Math.max(1100,text.length*105));
+   const perChar=Math.min(CFG.typeMs,dur*.7/text.length);
    if(bub){
      // 판 위에서 말하는 차례. 대사는 판 위 칸이 맡고 왼쪽 칸은 비워 둠
      bub.className="stage-say on "+(who==="foe"?"at-foe":"at-jaebi");
-     bub.innerHTML=`<span class="who">${esc(this.nameOf(who))}</span>${esc(text)}`;
+     TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,"",perChar);
      line.innerHTML="&nbsp;";
    }else{
-     line.innerHTML=esc(text)+(who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>');
+     TYPE.run(line,"",text,
+       who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>',perChar);
    }
    // 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
    box.classList.add("speaking"); box.classList.toggle("by-foe",other);
@@ -923,10 +962,9 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 내 배역 대사는 장쇠가 대독하므로 포함함
    /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
       다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
-   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();
+   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TYPE.finish();
      TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
-   const dur=Math.min(6500,Math.max(1100,text.length*105));
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
      try{
        const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
@@ -949,7 +987,8 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    },180);
  },
  stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
- stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();this.hideStage();
+ stop(){this.timer&&clearTimeout(this.timer);this.timer=null;this.onEnd=null;this.stopMouth();
+   TYPE.clear();this.hideStage();
    try{speechSynthesis.cancel();}catch(e){}}};
 if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
 
@@ -1100,7 +1139,7 @@ function buildRole(){
   document.getElementById("roleSub").textContent=m.name+"의 배역";
   document.getElementById("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
   hydrate();
-  box.querySelector(".host-skip").onclick=()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);};
+  bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
   SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
 }
 function wearMask(auto){
@@ -1302,7 +1341,7 @@ const CLX={t:null,
 function startStep3(){
   show("scr-play");
   const box=document.getElementById("playHost");box.innerHTML=hostHTML();
-  box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
+  bindSkip(box,()=>SPEECH.stop());
   setBG(S.madang.id);setFoe(null);LANE.hide();hydrate();
   PAD.setKeys(S.madang.moves);   // 이 마당에서 배울 동작 3개에 1~3을 매김
   runLesson();
@@ -1522,7 +1561,7 @@ function goStep4(){
   S.step=4;renderSess();srv("Step 4 진입 (완주 확정, 서버 완주 기록 겸함)");
   show("scr-accept");
   const box=document.getElementById("acceptHost");box.innerHTML=hostHTML();hydrate();
-  box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
+  bindSkip(box,()=>SPEECH.stop());
   // 가장 빨리 받아친 동작을 하이라이트로 뽑음 (실기기에서는 진폭이 가장 컸던 동작)
   const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>a.early-b.early)[0];
   const hot=S.sinmyeong>=CFG.sinmyeongCut;
