@@ -561,7 +561,7 @@ const MADANG=[
   {t:"say",who:"foe",text:"이놈 말뚝아! 어디서 감히 주인을 흉내 내느냐!"},
   {t:"cue",who:"jangsoe",text:"맞받아라!",move:"horyeong",ok:"샌님이 움찔한다!",no:"샌님이 헛기침을 한다."},
   {t:"say",who:"jangsoe",text:"기세가 넘어왔다. 이제 절을 받을 차례다."}],
- climax:{gaugeLab:"절 배우기 진행도",accel:false,bpm:96,
+ climax:{gaugeLab:"절 배우기 진행도",accel:false,bpm:96,endAnim:"settle",
   pattern:["horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik","horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik"],
   seq:"절 배우기: 시범 동작 신호를 유저가 보이면 샌님이 우스꽝스럽게 따라 함",
   ending:"샌님이 말뚝이에게 큰절을 올리고, 유저는 버티고 서서 절을 받음",
@@ -577,8 +577,8 @@ const MADANG=[
  scene:[
   {t:"enter",cap:"먹중이 행패 부리며 등장함"},
   {t:"say",who:"jangsoe",text:"중이 술에 취해 판을 뒤집는다."},
-  {t:"cue",who:"jangsoe",text:"꾸짖어라!",move:"somae",gap:1,ok:"먹중이 맞받아 소리친다!",no:"먹중이 콧방귀를 뀐다."},
-  {t:"cue",who:"jangsoe",text:"기세를 보여라!",move:"eokkae",ok:"먹중이 주춤한다!",no:"먹중이 비웃는다."},
+  {t:"cue",who:"jangsoe",text:"꾸짖어라!",move:"somae",gap:1,ok:"먹중이 흠칫 물러선다!",no:"먹중이 콧방귀를 뀐다."},
+  {t:"cue",who:"jangsoe",text:"기세를 보여라!",move:"eokkae",ok:"먹중이 기세에 눌린다!",no:"먹중이 비웃는다."},
   {t:"say",who:"jangsoe",text:"됐다. 이제 춤으로 붙어라."}],
  climax:{gaugeLab:"대결 우세도",accel:false,bpm:104,
   pattern:["eokkae","balchago","somae","eokkae","balchago","somae","somae","balchago","eokkae","somae","balchago","somae"],
@@ -1071,7 +1071,11 @@ function setFoe(pose,cap){
     "과장":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) translate(30px,-24px) rotate(14deg) scale(1.06)"},{transform:"translate(-50%,-50%)"}],
     "중립":[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translateX(-7px)"},{transform:"translate(-50%,-50%) translateX(7px)"},{transform:"translate(-50%,-50%)"}],
     "대기":[{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) scale(1.02)"},{transform:"translate(-50%,-50%) scale(1)"}],
-    "결말":[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translate(320px,-170px) rotate(90deg)",opacity:0}]
+    /* 결말은 마당마다 갈림. 밀려나 퇴장하는 마당은 화면 밖으로 날리고,
+       상대가 굴복해 판에 남는 마당(샌님의 큰절)은 제자리에서 내려앉아 머무름 */
+    "결말": m.climax.endAnim==="settle"
+      ? [{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translateY(26px) scale(.97)"}]
+      : [{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) translate(320px,-170px) rotate(90deg)",opacity:0}]
   }[pose];
   if(anim)el.animate(anim,{duration:pose==="결말"?900:520,easing:"ease-out",fill:pose==="결말"?"forwards":"none"});
   if(pose==="과장")AU.hit();
