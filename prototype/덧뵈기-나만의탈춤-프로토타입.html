@@ -221,6 +221,8 @@ button:disabled{opacity:.4;cursor:default}
 .warnbox{border:1px solid rgba(217,160,91,.45);background:rgba(217,160,91,.08);border-radius:7px;padding:8px;font-size:10.5px;line-height:1.5;color:#e3cba2;margin-top:6px}
 .warnbox b{color:#f0c987}
 .rep-row{display:flex;justify-content:space-between;padding:2px 0;font-size:11px}
+.asset-grp{margin-top:8px;padding-bottom:2px;font-size:10px;color:var(--gold);border-bottom:1px solid var(--line)}
+.asset-grp small{color:var(--dim);font-size:9px;margin-left:6px}
 .asset-row{display:flex;justify-content:space-between;gap:6px;padding:2px 0;font-size:10.5px;border-bottom:1px dotted rgba(255,255,255,.06)}
 .asset-row span:first-child{color:var(--dim);word-break:break-all}
 .asset-row .yes{color:var(--ok)}
@@ -449,21 +451,29 @@ bind("cfgEolssu","eolssuAmp",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong",
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
-   실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠  */
+   실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠.
+   탈 이미지(얼굴만)와 전신 이미지는 쓰이는 자리가 달라 종류를 나눠 둠  */
 const ART_BASE="../assets/시범콘텐츠/탈춤/프로토타입/";
-const ART={
-  host_idle:"호스트_장쇠_기본.png",
-  host_talk:"호스트_장쇠_입벌림.png",
-  mask_꺽쇠:"배역_꺽쇠.png", mask_말뚝이:"배역_말뚝이.png", mask_취발이:"배역_취발이.png",
-  bg_omtal:"배경_옴탈잡이.png", bg_sennim:"배경_샌님잡이.png", bg_mokjung:"배경_먹중잡이.png",
-  bg_climax:"배경_절정무대.png"
-};
-["옴탈","샌님","먹중"].forEach(f=>["등장","대기","과장","중립","결말"].forEach(p=>{
-  ART["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png";
-}));
 const MOVE_KO={salpigi:"살피기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
   horyeong:"호령가리키기",chaejjik:"채찍휘두르기",eokkae:"어깨메기",balchago:"한발차올리기",somae:"소매뿌리기"};
-Object.keys(MOVE_KO).forEach(k=>{ ART["pic_"+k]="픽토_"+MOVE_KO[k]+".png"; ART["demo_"+k]="시범_"+MOVE_KO[k]+".png"; });
+const FOE_POSE=["등장","대기","과장","중립","결말"];
+const byMove=(pre,fix)=>{const o={};Object.keys(MOVE_KO).forEach(k=>o[pre+k]=fix+MOVE_KO[k]+".png");return o;};
+const ART_GROUPS=[
+ {name:"호스트 전신", where:"Step 2-2, 3, 4 왼쪽 열", items:{
+   host_idle:"호스트_장쇠_기본.png", host_talk:"호스트_장쇠_입벌림.png"}},
+ {name:"내 배역 탈", where:"Step 2-1 마당 카드", items:{
+   mask_꺽쇠:"탈_꺽쇠.png", mask_말뚝이:"탈_말뚝이.png", mask_취발이:"탈_취발이.png"}},
+ {name:"내 배역 전신", where:"Step 2-2 배역 확인", items:{
+   body_꺽쇠:"배역_꺽쇠.png", body_말뚝이:"배역_말뚝이.png", body_취발이:"배역_취발이.png"}},
+ {name:"상대 배역 전신", where:"Step 2-1 미리보기, Step 3 판", items:(()=>{const o={};
+   ["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.forEach(p=>o["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png"));return o;})()},
+ {name:"동작 픽토그램", where:"Step 3 오른쪽 동작 목록", items:byMove("pic_","픽토_")},
+ {name:"동작 시범", where:"Step 3 기초 수업 시범 자리", items:byMove("demo_","시범_")},
+ {name:"배경", where:"Step 3 판", items:{
+   bg_omtal:"배경_옴탈잡이.png", bg_sennim:"배경_샌님잡이.png", bg_mokjung:"배경_먹중잡이.png",
+   bg_climax:"배경_절정무대.png"}}
+];
+const ART={}; ART_GROUPS.forEach(g=>Object.assign(ART,g.items));
 
 const ART_STATE={}; // key → true(있음) / false(없음) / undefined(미확인)
 function art(key,fallbackSVG,cls){
@@ -486,9 +496,12 @@ function renderAssets(){
   const el=document.getElementById("assetList");
   const have=Object.keys(ART).filter(k=>ART_STATE[k]===true).length;
   el.innerHTML=`<div class="asset-row"><span>합계</span><span>${have} / ${Object.keys(ART).length} 확인됨</span></div>`+
-    Object.keys(ART).map(k=>{
-      const s=ART_STATE[k];
-      return `<div class="asset-row"><span>${esc(ART[k])}</span><span class="${s?"yes":"no"}">${s?"있음":"없음"}</span></div>`;
+    ART_GROUPS.map(g=>{
+      const ks=Object.keys(g.items), n=ks.filter(k=>ART_STATE[k]===true).length;
+      return `<div class="asset-grp">${esc(g.name)} ${n}/${ks.length}<small>${esc(g.where)}</small></div>`+
+        ks.map(k=>{ const s=ART_STATE[k];
+          return `<div class="asset-row"><span>${esc(g.items[k])}</span><span class="${s?"yes":"no"}">${s?"있음":"없음"}</span></div>`;
+        }).join("");
     }).join("");
 }
 
@@ -772,7 +785,7 @@ function buildMadang(){
   MADANG.forEach((m,i)=>{
     const b=document.createElement("button");
     b.className="card"+(i===selIdx?" sel":"");
-    b.innerHTML=`<div class="card-mask">${art("foe_"+m.foe+"_대기",maskSVG(m.foe,38,44))}</div>
+    b.innerHTML=`<div class="card-mask">${art("mask_"+m.user,maskSVG(m.user,38,44))}</div>
       <div><div class="card-name">${m.name}<span>${m.tag}</span></div>
       <div class="card-brief">${m.brief}</div>
       <div class="card-cast">내 배역 ${m.user}, 상대 배역 ${m.foe}</div></div>`;
@@ -795,7 +808,7 @@ function confirmMadang(auto){
 function buildRole(){
   const m=S.madang, box=document.getElementById("roleHost");
   box.innerHTML=hostHTML();
-  document.getElementById("roleMask").innerHTML=art("mask_"+m.user,maskSVG(m.user,150,178));
+  document.getElementById("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
   document.getElementById("roleName").textContent=m.user;
   document.getElementById("roleSub").textContent=m.name+"의 배역";
   document.getElementById("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
