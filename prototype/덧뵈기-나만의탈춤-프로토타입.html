@@ -103,7 +103,9 @@ button:disabled{opacity:.4;cursor:default}
 .foe-cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
 /* 판 위 대사 칸. 상대 배역 대사는 상대 그림 위에, 잽이 대사는 악사 자리인 판 아래에 띄움.
    장쇠와 내 배역 대사는 종전대로 왼쪽 호스트 자막 칸이 맡음 */
-.stage-say{position:absolute;left:50%;transform:translateX(-50%);max-width:76%;display:none;z-index:3;
+/* left:50%로 잡으면 늘어날 수 있는 폭이 판의 절반으로 묶여 max-width가 안 먹음.
+   좌우 0에 auto 여백으로 가운데 두어야 max-width가 실제로 적용됨 */
+.stage-say{position:absolute;left:0;right:0;margin-inline:auto;width:fit-content;max-width:76%;display:none;z-index:3;
   padding:7px 11px;border-radius:10px;font-size:12px;line-height:1.45;text-align:center;
   background:rgba(18,14,11,.9);border:1px solid rgba(200,163,74,.5);color:#f0e4cc;
   box-shadow:0 4px 18px rgba(0,0,0,.55)}
@@ -115,8 +117,8 @@ button:disabled{opacity:.4;cursor:default}
 .stage-say.at-jaebi{bottom:30px;border-color:rgba(255,255,255,.24);color:#ded6c8}
 .stage-say.at-jaebi .who{color:#b9b0a1}
 .stage-say.at-jaebi::after{bottom:100%;border-bottom-color:rgba(18,14,11,.9)}
-@keyframes sayIn{from{opacity:0;transform:translateX(-50%) translateY(-5px)}
-  to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes sayIn{from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}}
 .fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
 .verdict{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%) scale(.6);
@@ -482,6 +484,7 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
   <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
   <div class="cfg"><label>글자당 표시 간격(ms)</label><input type="number" id="cfgTypeMs" value="42" step="4"></div>
+  <div class="cfg"><label>한 번에 띄우는 최대 글자수</label><input type="number" id="cfgSayMax" value="66" step="2"></div>
   <div class="cfg"><label>대사 최소 노출(초)</label><input type="number" id="cfgMinShow" value="0.9" step="0.1"></div>
   <div class="cfg"><label>대사 뒤 읽을 틈(초)</label><input type="number" id="cfgReadPause" value="0.4" step="0.1"></div>
   <div class="cfg"><label>음성 끝까지 기다림</label><input type="checkbox" id="cfgWaitTts"></div>
@@ -522,7 +525,7 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,typewriter:true,typeMs:42,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,sayMax:66,typewriter:true,typeMs:42,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -533,7 +536,7 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
 bind("cfgRespBase","respBase",1);bind("cfgRespChar","respPerChar",1);bind("cfgRespMax","respMax",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgMinShow","minShow",1);bind("cfgReadPause","readPause",1);bind("cfgWaitTts","waitTts");bind("cfgType","typewriter");
+bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgSayMax","sayMax",1);bind("cfgMinShow","minShow",1);bind("cfgReadPause","readPause",1);bind("cfgWaitTts","waitTts");bind("cfgType","typewriter");
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
@@ -878,6 +881,9 @@ const GAPS=[
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
+ {where:"판 위 말풍선의 세로 여유 (작은 창)",
+  what:"말풍선은 상대 배역 그림 위에 뜨는데, 배역 윗변까지의 여유가 창 크기에 따라 크게 줄어듦(1920 화면 101px, 1600 화면 64px, 1366 화면 36px). 66자 분할과 중앙 정렬 정정으로 1920에서는 32토막 전부 안 가리지만, 1600에서 8건, 1366에서는 전부 배역을 가림",
+  fix:"1366 화면은 두세 줄만 들어가 글자를 아무리 줄여도 안 맞음. 배역 위가 아니라 판 아래로 옮기거나 배역 그림을 작게 잡는 배치 변경이 필요함. 사용자 결정 대기"},
  {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등)",
   what:"음성(TTS)은 105자를 읽는 데 20초쯤 걸리는데 화면 출력은 4.8초에 끝남. 「음성 끝까지 기다림」이 꺼져 있으면 그 시점에 다음 대사로 넘어가며 음성이 중간에 끊김",
   fix:"패널의 「음성 끝까지 기다림」으로 고를 수 있게 둠. 켜면 음성이 온전히 나오지만 긴 대목이 20초씩 걸려 판이 늘어짐. 화면 글자는 어느 쪽이든 잘리지 않음. 근본 해소는 발췌를 줄이는 것뿐이라 사용자 결정 대기"},
@@ -912,6 +918,37 @@ const AU={ctx:null,
  cheer(){for(let i=0;i<26;i++)setTimeout(()=>this.noise(.06,1200+Math.random()*1800,1.4,.05),i*38);}};
 
 /* ── 5. 발화 ───────────────────────────── */
+/* 한도를 넘는 대사를 문장 경계에서 나눔.
+   한도까지 채우고 자르면 "…절수, 절수," / "절수!" 처럼 뒤 토막이 짜투리가 되므로,
+   먼저 몇 토막으로 나눌지 정하고(ceil) 각 토막을 고르게 잡음.
+   끊는 자리는 목표 지점에 가까울수록, 문장 끝일수록 좋게 쳐서 고름
+   (쉼표와 띄어쓰기는 벌점을 줘 문장 끝을 앞세우되 너무 멀면 안 씀) */
+function splitLine(text,max){
+  const t=String(text).trim();
+  if(!max||t.length<=max)return [t];
+  const PEN={".":0,"!":0,"?":0,"…":0,",":8," ":16};
+  const out=[];let rest=t,left=Math.ceil(t.length/max);
+  while(left>1&&rest.length>max){
+    const target=Math.round(rest.length/left);
+    const lo=Math.max(1,rest.length-max*(left-1));   // 남은 토막들이 한도를 안 넘게
+    const hi=Math.min(max,rest.length-1);
+    let cut=-1,best=Infinity;
+    for(let i=0;i<hi;i++){
+      const ch=rest[i]; if(!(ch in PEN))continue;
+      const c=ch===" "?i:i+1;                        // 띄어쓰기는 그 앞에서 끊음
+      if(c<lo||c>hi)continue;
+      const sc=Math.abs(c-target)+PEN[ch];
+      if(sc<best){best=sc;cut=c;}
+    }
+    if(cut<0)cut=Math.min(hi,Math.max(lo,target));
+    const head=rest.slice(0,cut).trim();
+    if(!head)break;
+    out.push(head);rest=rest.slice(cut).trim();left--;
+  }
+  if(rest)out.push(rest);
+  return out;
+}
+
 /* 대사를 한 글자씩 드러냄. 자막 칸과 판 위 말풍선이 같이 씀.
    글자를 늘리는 칸(.tw)만 textContent로 채우고, 앞의 이름표와 뒤의 출처 표시는
    HTML 그대로 두름. 다 드러나기 전에 「다음」을 누르면 즉시 완성됨 */
@@ -952,7 +989,21 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
  onStage(who){ return (who==="foe"||who==="jaebi")&&curScreen==="scr-play"
    ? document.getElementById("stageSay") : null; },
  hideStage(){ const b=document.getElementById("stageSay"); if(b)b.className="stage-say"; },
+ /* 한 번에 띄우는 글자수 한도를 넘는 대사는 나눠서 차례로 띄움.
+    말풍선이 상대 배역 그림 위로 자라 배역을 가리는 것을 막음 (1920 화면 실측 66자).
+    원문을 고치지 않고 표시만 나누므로 인용은 그대로임 */
  say(who,text,box,cb){
+   const parts=splitLine(String(text==null?"":text),CFG.sayMax);
+   if(parts.length<2)return this.sayOne(who,text,box,cb);
+   let i=0;
+   const next=()=>{
+     if(i>=parts.length){ if(cb)cb(); return; }
+     const k=++i;
+     this.sayOne(who,parts[k-1],box,next,{part:k,of:parts.length});
+   };
+   next();
+ },
+ sayOne(who,text,box,cb,meta){
    this.stop();
    if(!text){ if(cb)cb(); return; }
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
@@ -968,15 +1019,17 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    if(bub){
      // 판 위에서 말하는 차례. 대사는 판 위 칸이 맡고 왼쪽 칸은 비워 둠
      bub.className="stage-say on "+(who==="foe"?"at-foe":"at-jaebi");
-     TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,"",perChar);
+     TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,
+       meta?` <span class="prov">${meta.part}/${meta.of}</span>`:"",perChar);
      line.innerHTML="&nbsp;";
    }else{
      TYPE.run(line,"",text,
-       who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>',perChar);
+       (who==="jangsoe"?' <span class="prov">임시 문안':' <span class="prov">연회본 원문')
+       +(meta?` ${meta.part}/${meta.of}`:"")+'</span>',perChar);
    }
    // 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
    box.classList.add("speaking"); box.classList.toggle("by-foe",other);
-   log("say",this.nameOf(who)+": "+text,"lg-sys");
+   log("say",this.nameOf(who)+(meta?` (${meta.part}/${meta.of})`:"")+": "+text,"lg-sys");
    TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 내 배역 대사는 장쇠가 대독하므로 포함함
    /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
       다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
