@@ -174,6 +174,26 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
 .botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
+/* 3장 동작 가이드 레인. 앞으로 나올 응수 동작이 오른쪽에 줄 서 있고,
+   한 대목이 끝날 때마다 왼쪽 표시선으로 미끄러져 들어옴 */
+.notebar{height:62px;position:relative;border:1px solid var(--line);border-radius:9px;
+  background:rgba(0,0,0,.34);overflow:hidden}
+.marker{position:absolute;left:78px;top:0;bottom:0;width:2px;background:var(--gold);opacity:.85}
+.marker::before{content:"";position:absolute;left:-19px;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border:2px solid rgba(200,163,74,.55);border-radius:50%}
+.notelane{position:absolute;inset:0;transition:transform .42s cubic-bezier(.3,.7,.3,1)}
+.note{position:absolute;top:50%;transform:translate(-50%,-50%);width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;border-radius:7px;overflow:hidden;
+  background:rgba(200,163,74,.14);border:1px solid rgba(200,163,74,.5);font-size:15px;color:#e8d6a8;
+  transition:opacity .3s,border-color .3s,background .3s}
+.note img{width:80%;height:80%;object-fit:contain}
+.note.ahead{opacity:.45}
+.note.now{background:rgba(200,163,74,.26);border-color:var(--gold);box-shadow:0 0 14px rgba(200,163,74,.45)}
+.note.hit{background:rgba(127,176,105,.32);border-color:var(--ok)}
+.note.miss{opacity:.22}
+.note-timer{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--gold);
+  transform-origin:left;display:none}
+.note.now .note-timer{display:block}
 .gauge-wrap{display:flex;align-items:center;gap:8px}
 .gauge{flex:1;height:12px;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:rgba(0,0,0,.35)}
 .gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a5a2a,#c8a34a,#ffd76e);transition:width .22s}
@@ -340,6 +360,9 @@ button:disabled{opacity:.4;cursor:default}
             <div class="demo-hint" id="demoHint"></div>
           </div>
           <div class="botbar">
+            <div class="notebar" id="noteBar" style="display:none">
+              <div class="notelane" id="noteLane"></div><div class="marker"></div>
+            </div>
             <div class="gauge-wrap" id="gaugeWrap" style="display:none">
               <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
               <div class="gauge-lab" id="gaugeLab"></div>
@@ -816,8 +839,8 @@ const GAPS=[
   what:"취발이가 피조리의 생김새를 품평하는 대목이 있으나 공공 전시물에 넣기 부적절함",
   fix:"뒷대목을 코피 재담(678행)에서 닫고 피조리 대목은 넣지 않음"},
  {where:"3장 절정 진행 방식",
-  what:"기존 프로토타입은 노트가 흘러오는 리듬 게임이었으나, 대사 응수 구조로 바뀌면서 타이밍 판정 대상이 사라짐",
-  fix:"노트 레인을 걷고 장단은 배경 박으로만 깔되, 응답 대기 시간을 비트마다 좁혀 가속을 표현함. 게이지는 응수 성공 누적으로 유지함"},
+  what:"기존 프로토타입은 노트가 정해진 시각에 흘러오는 리듬 게임이었으나, 대사가 신호를 주는 구조로 바뀌면서 고정 스케줄이 사라짐",
+  fix:"동작 가이드 레인은 유지하되 뜻을 바꿈. 앞으로 나올 응수 동작이 오른쪽에 줄 서 있고 한 대목이 끝날 때마다 한 칸씩 왼쪽으로 미끄러져 들어옴. 표시선에 든 노트는 남은 응답 시간만큼 아래 띠가 줄어듦. 장단은 배경 박으로 깔고, 가속은 응답 대기를 비트마다 좁혀 표현함"},
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"}];
@@ -1214,6 +1237,35 @@ function record(moveId,res,chapter){
 
 /* ── 15. Step 3 ────────────────────────── */
 let chapStart=0,curChap="lesson";
+/* 3장 동작 가이드 레인.
+   대사가 신호를 주는 구조라 노트가 고정 스케줄로 흘러오지는 않음. 대신 앞으로 나올
+   응수 동작이 오른쪽에 줄 서 있고, 한 대목이 끝날 때마다 레인이 한 칸씩 왼쪽으로
+   미끄러져 다음 동작이 표시선에 들어옴. 표시선에 든 노트는 응답 대기가 줄어드는
+   만큼 아래 띠가 줄어 남은 시간을 보여 줌 */
+const LANE={gap:64,markerX:78,idx:0,notes:[],
+ build(moves){
+   const bar=document.getElementById("noteBar"),lane=document.getElementById("noteLane");
+   bar.style.display="block";lane.style.transform="translateX(0)";
+   lane.innerHTML="";this.notes=[];this.idx=0;
+   moves.forEach((mv,i)=>{
+     const el=document.createElement("div");el.className="note ahead";
+     el.style.left=(this.markerX+i*this.gap)+"px";
+     el.innerHTML=picHTML(mv)+'<div class="note-timer"></div>';
+     lane.appendChild(el);this.notes.push(el);});
+   hydrate(lane);
+ },
+ /* i번째 노트를 표시선으로 끌어오고, ms 동안 남은 시간 띠를 줄임 */
+ focus(i,ms){
+   const lane=document.getElementById("noteLane");if(!lane||!this.notes[i])return;
+   this.idx=i;lane.style.transform=`translateX(${-i*this.gap}px)`;
+   const el=this.notes[i];el.classList.remove("ahead");el.classList.add("now");
+   const t=el.querySelector(".note-timer");
+   t.style.transition="none";t.style.transform="scaleX(1)";
+   requestAnimationFrame(()=>{t.style.transition=`transform ${ms}ms linear`;t.style.transform="scaleX(0)";});
+ },
+ resolve(i,ok){const el=this.notes[i];if(!el)return;
+   el.classList.remove("now");el.classList.add(ok?"hit":"miss");},
+ hide(){const b=document.getElementById("noteBar");if(b)b.style.display="none";}};
 /* 3장 배경 장단. 노트가 흘러가는 리듬 게임이 아니라 대사 응수로 진행하므로,
    장단은 판의 박만 깔아 주고 속도 조절은 응답 대기 시간으로 함 */
 const CLX={t:null,
@@ -1224,7 +1276,7 @@ function startStep3(){
   show("scr-play");
   const box=document.getElementById("playHost");box.innerHTML=hostHTML();
   box.querySelector(".host-skip").onclick=()=>SPEECH.stop();
-  setBG(S.madang.id);setFoe(null);hydrate();
+  setBG(S.madang.id);setFoe(null);LANE.hide();hydrate();
   runLesson();
 }
 function setBG(which){
@@ -1333,10 +1385,13 @@ function runBeats(list,opts,onDone){
       if(b.act)document.getElementById("foeCap").textContent=b.cap||b.act;
       else setFoe("대기",b.cap);
       const ms=opts.window?opts.window(cueSeen):CFG.respWindow*1000;
+      const slot=cueSeen;
+      if(opts.lane)LANE.focus(slot,ms);
       PAD.arm(b.move,ms,res=>{
         cueSeen++;
         record(b.move,res,opts.chapter);showVerdict(res.v,res);
         const ok=res.v!=="dasi";
+        if(opts.lane)LANE.resolve(slot,ok);
         if(opts.climax&&ok){
           S.gauge=Math.min(100,S.gauge+gain*(res.v==="eolssu"?1.15:.85));updGauge();
         }
@@ -1357,7 +1412,7 @@ function runScene(){
   const m=S.madang;
   document.getElementById("playTitle").textContent=`${m.sceneTitle} (2장)`;
   document.getElementById("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
-  document.getElementById("gaugeWrap").style.display="none";
+  document.getElementById("gaugeWrap").style.display="none";LANE.hide();
   runBeats(m.scene,{chapter:"앞대목",paneTitle:`앞대목 대본 (${m.sceneSrc})`},
     ()=>{chapOut("scene");setFoe(null);runClimax();});
 }
@@ -1406,8 +1461,9 @@ function runClimax(){
       게이지 만충: ${esc(cx.ending)}<br><br>
       <span style="color:var(--dim)">미달 완화판: ${esc(cx.endingSoft)}</span></div>`;
   CLX.start(cx.bpm);
+  LANE.build(cx.beats.filter(b=>b.t==="cue").map(b=>b.move));
   SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>{
-    runBeats(cx.beats,{chapter:"절정",paneTitle:`뒷대목 대본 (${m.climaxSrc})`,climax:true,tail,
+    runBeats(cx.beats,{chapter:"절정",paneTitle:`뒷대목 대본 (${m.climaxSrc})`,climax:true,tail,lane:true,
       padOpts:{climax:true},
       /* 장단 가속은 응답 대기를 조금씩 좁혀 표현함. 2초 밑으로는 안 내려감 */
       window:k=>Math.max(2000,CFG.respWindow*1000*.8*(cx.accel?Math.pow(.94,k):1))},
@@ -1416,7 +1472,7 @@ function runClimax(){
 }
 function updGauge(){document.getElementById("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
 function finishClimax(cx,full){
-  CLX.stop();PAD.disarm();
+  CLX.stop();PAD.disarm();   // 레인은 결말 대사가 끝난 뒤(wrap)에 걷음
   const box=document.getElementById("playHost");
   setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
   if(full){AU.cheer();AU.kkwaenggwari();}
@@ -1424,7 +1480,7 @@ function finishClimax(cx,full){
   const outro=(cx.outro||[]).slice();   // 결말 뒤에 붙는 원전 마무리 대사
   const wrap=()=>SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
     chapOut("climax");
-    document.getElementById("gaugeWrap").style.display="none";
+    document.getElementById("gaugeWrap").style.display="none";LANE.hide();
     goStep4();});
   const nextOutro=()=>{if(!outro.length){wrap();return;}const b=outro.shift();SPEECH.say(b.who,b.text,box,nextOutro);};
   nextOutro();
@@ -1458,7 +1514,7 @@ function goStep4(){
 /* ── 17. Step 5 ────────────────────────── */
 function goStep5(kind){
   S.step=5;renderSess();SPEECH.stop();PAD.disarm();
-  CLX.stop();
+  CLX.stop();LANE.hide();
   show("scr-end");
   document.getElementById("endMsg").textContent="세션 종료 이벤트 전송";
   document.getElementById("endSub").textContent="완주 유형: "+kind;
@@ -1515,7 +1571,7 @@ document.getElementById("btnSkipChap").onclick=()=>{
   else if(curChap==="scene"){chapOut("scene");setFoe(null);runClimax();}
   else{CLX.stop();finishClimax(S.madang.climax,S.gauge>=100);}};
 document.getElementById("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
-  CLX.stop();newSession();show("scr-start");};
+  CLX.stop();LANE.hide();newSession();show("scr-start");};
 document.getElementById("panelToggle").onclick=()=>document.getElementById("panel").classList.toggle("hidden");
 
 /* ── 20. 진입 ──────────────────────────── */
