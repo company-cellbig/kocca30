@@ -52,6 +52,21 @@ button:disabled{opacity:.4;cursor:default}
    세로로 넘침 (판 배경은 span 자체를 절대 배치로 깔아야 해서 아래에서 예외 처리) */
 .art{display:contents}
 
+/* 인물 동작. 상대 배역은 판정에 맞춰 반응해야 해 JS(setFoe)가 칸 자체를 움직이고,
+   늘 화면에 있는 장쇠와 내 배역은 CSS로 은은한 상시 동작만 줌.
+   칸이 아니라 그림(img, 자리표시 svg)에 걸어, 칸을 쓰는 다른 연출과 겹치지 않게 함 */
+@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.012)}}
+@keyframes talkBob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-.6deg)}
+  75%{transform:translateY(-1px) rotate(.6deg)}}
+@keyframes roleIn{from{transform:translateY(22px) scale(.96);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+@keyframes maskNod{0%{transform:rotate(0)}35%{transform:rotate(-7deg) translateY(-2px)}70%{transform:rotate(4deg)}100%{transform:rotate(0)}}
+
+.host-art img,.host-art svg{animation:breathe 4.2s ease-in-out infinite}
+.speaking:not(.by-foe) .host-art img,.speaking:not(.by-foe) .host-art svg{animation:talkBob .9s ease-in-out infinite}
+.role-mask img,.role-mask svg{animation:roleIn .5s cubic-bezier(.2,1.1,.4,1) both,
+  breathe 4.6s ease-in-out .5s infinite}
+.card.sel .card-mask img,.card.sel .card-mask svg{animation:maskNod .42s ease-out}
+
 /* ══ 장쇠 호스트 (세로 열) ══ */
 .host{display:flex;flex-direction:column;gap:7px;height:100%;min-height:0}
 .host-art{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
@@ -635,10 +650,11 @@ const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
    nm.textContent = who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역"):"유저 배역 (장쇠가 읽음)";
    line.innerHTML=esc(text)+' <span class="prov">임시 문안</span>';
-   box.classList.add("speaking");
+   // 자막 칸은 장쇠와 상대 배역이 같이 씀. 상대 배역 차례에는 장쇠가 입과 몸을 움직이지 않게 표시함
+   box.classList.add("speaking"); box.classList.toggle("by-foe",who==="foe");
    log("say",(who==="jangsoe"?"장쇠":who==="foe"?S.madang.foe:"유저 배역(장쇠 대독)")+": "+text,"lg-sys");
-   TO.pauseSpeak(true); this.startMouth(box);
-   const done=()=>{box.classList.remove("speaking");this.stopMouth();TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
+   TO.pauseSpeak(true); if(who!=="foe") this.startMouth(box);   // 유저 배역 대사는 장쇠가 대독하므로 포함함
+   const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
    const dur=Math.min(6500,Math.max(1100,text.length*105));
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
