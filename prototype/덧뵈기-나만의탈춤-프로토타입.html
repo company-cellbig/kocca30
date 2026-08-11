@@ -66,6 +66,9 @@ button:disabled{opacity:.4;cursor:default}
 .role-mask img,.role-mask svg{animation:roleIn .5s cubic-bezier(.2,1.1,.4,1) both,
   breathe 4.6s ease-in-out .5s infinite}
 .card.sel .card-mask img,.card.sel .card-mask svg{animation:maskNod .42s ease-out}
+/* 상대 배역도 평소에 숨을 쉬게 함. 반응 이동은 칸(.foe)이 맡으므로 서로 겹치지 않음.
+   주기를 장쇠 4.2초, 내 배역 4.6초와 어긋나게 두어 셋이 한 박자로 붙지 않게 함 */
+.foe img,.foe svg{animation:breathe 4.4s ease-in-out infinite}
 
 /* ══ 장쇠 호스트 (세로 열) ══ */
 .host{display:flex;flex-direction:column;gap:7px;height:100%;min-height:0}
