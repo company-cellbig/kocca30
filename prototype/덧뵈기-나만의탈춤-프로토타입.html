@@ -75,12 +75,17 @@ button:disabled{opacity:.4;cursor:default}
 .host-art{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
 .host-art img{max-width:100%;max-height:100%;object-fit:contain}
 .host-art svg{max-height:100%}
-/* 대사 칸이 장쇠 위에 오고 꼬리가 아래를 가리킴 (판 위 상대 배역 말풍선과 같은 규칙) */
-.host-box{flex:0 0 auto;background:rgba(20,17,14,.9);border:1px solid var(--line);border-radius:9px;padding:8px 10px;position:relative}
+/* 대사 칸이 장쇠 위에 오고 꼬리가 아래를 가리킴 (판 위 상대 배역 말풍선과 같은 규칙).
+   긴 사설이 들어오면 칸이 아래로 늘어나되, 장쇠가 안 보일 만큼은 못 자라게 절반에서 멈춤 */
+.host-box{flex:0 1 auto;max-height:52%;background:rgba(20,17,14,.9);border:1px solid var(--line);border-radius:9px;padding:8px 10px 22px;position:relative;display:flex;flex-direction:column}
 .host-box::after{content:"";position:absolute;top:100%;left:34px;border:8px solid transparent;border-top-color:rgba(20,17,14,.9)}
 .host-name{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:3px}
 .speaking .host-name::after{content:" ●";color:var(--red)}
-.host-line{font-size:12.5px;line-height:1.5;min-height:3.6em;max-height:5.4em;overflow:hidden}
+/* 넘치면 잘라 버리지 않고 스크롤로 남김. 종전 max-height 5.4em(3.6줄) + overflow:hidden은
+   60자 넘는 원문 사설을 소리 없이 잘라 먹었음 */
+.host-line{font-size:12.5px;line-height:1.5;min-height:3.6em;flex:1 1 auto;overflow-y:auto}
+.host-line::-webkit-scrollbar{width:4px}
+.host-line::-webkit-scrollbar-thumb{background:rgba(200,163,74,.35);border-radius:2px}
 .host-line .prov{color:var(--dim);font-size:9.5px}
 /* 한 글자씩 드러날 때 끝에 붙는 커서 */
 .tw-caret{display:inline-block;width:2px;height:1em;margin-left:1px;vertical-align:-2px;
@@ -468,9 +473,12 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>화면 타임아웃(초)</label><input type="number" id="cfgScreen" value="60"></div>
   <div class="cfg"><label>Step 3 합산(초)</label><input type="number" id="cfgStep3" value="300"></div>
   <div class="cfg"><label>미입력 타임아웃(초)</label><input type="number" id="cfgIdle" value="45"></div>
-  <div class="cfg"><label>응답 대기(초)</label><input type="number" id="cfgWindow" value="4" step="0.5"></div>
+  <div class="cfg"><label>응답 대기 기본(초)</label><input type="number" id="cfgRespBase" value="1.4" step="0.1"></div>
+  <div class="cfg"><label>응답 대기 글자당(초)</label><input type="number" id="cfgRespChar" value="0.02" step="0.005"></div>
+  <div class="cfg"><label>응답 대기 최대(초)</label><input type="number" id="cfgRespMax" value="3.2" step="0.1"></div>
   <div class="cfg"><label>수업 재시도(회)</label><input type="number" id="cfgRetry" value="2"></div>
   <div class="cfg"><label>얼쑤 반응 구간(대기 비율)</label><input type="number" id="cfgEolssu" value="0.4" step="0.05"></div>
+  <div class="cfg"><label>얼쑤 반응 하한(초)</label><input type="number" id="cfgEolssuMin" value="0.9" step="0.1"></div>
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
   <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
   <div class="cfg"><label>글자당 표시 간격(ms)</label><input type="number" id="cfgTypeMs" value="42" step="4"></div>
@@ -510,8 +518,8 @@ button:disabled{opacity:.4;cursor:default}
    ══════════════════════════════════════════════════════════ */
 
 /* ── 0. 설정 ───────────────────────────── */
-const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,sinmyeongCut:55,typewriter:true,typeMs:42,tts:true,sfx:true,timeoutOn:true};
+const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,typewriter:true,typeMs:42,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -521,8 +529,8 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   };
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
-bind("cfgWindow","respWindow",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuEarly",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgType","typewriter");
+bind("cfgRespBase","respBase",1);bind("cfgRespChar","respPerChar",1);bind("cfgRespMax","respMax",1);bind("cfgRetry","lessonRetry",1);
+bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgType","typewriter");
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
 /* ── 1. 리소스 목록과 로더 ──────────────
@@ -867,6 +875,9 @@ const GAPS=[
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
+ {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등 8건)",
+  what:"대사 표시 시간 상한이 6.5초(+음성 여유 1.4초)라, 105자짜리 취발이 사설처럼 긴 대목은 음성이 다 나오기 전에 다음 대사로 넘어가며 중간에 끊김. 글자 표시는 상한 안에 다 드러나므로 잘리지 않으나 초당 20자를 넘겨 읽기 어려움",
+  fix:"미해결. 상한을 늘리면 음성은 살지만 판이 늘어지고, 발췌를 줄이면 원문 인용이 짧아짐. 사용자 결정 대기 (2026-08-11 늘어짐 정비 때 함께 확인)"},
  {where:"프로토타입 입력부 (실기기 판정 요소 대역)",
   what:"실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 재지만 프로토타입에는 카메라가 없음. 종전 마우스 드래그 대역은 조작 미숙과 설계 결함이 안 갈려 리뷰에서 오인 소지가 있었음",
   fix:"2026-08-11 사용자 결정으로 숫자 키패드로 바꿈. 자세는 제시된 픽토그램에 맞는 번호, 얼쑤는 응답 대기의 앞 40% 안에 누른 반응 시점, 홀드는 번호를 누르고 있는 시간으로 잼. 진폭과 속도는 키패드로 못 재므로 요소 표시에 「실기기 전용」으로 그어 남기고, 하이라이트 동작도 최대 진폭 대신 최속 반응으로 뽑음"}];
@@ -911,6 +922,7 @@ const TYPE={t:null,el:null,pre:"",full:"",tail:"",
    const span=el.querySelector(".tw");let i=0;
    this.t=setInterval(()=>{
      span.textContent=this.full.slice(0,++i);
+     el.scrollTop=el.scrollHeight;      // 칸을 넘긴 긴 사설도 방금 나온 줄이 보이게 함
      if(i>=this.full.length)this.finish();
    },perChar);
  },
@@ -1178,7 +1190,7 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
  },
  arm(moveId,ms,cb,opts){
    this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
-   this.armedAt=performance.now();this.windowMs=ms>0?ms:CFG.respWindow*1000;
+   this.armedAt=performance.now();this.windowMs=ms>0?ms:CFG.respMax*1000;
    this.el.classList.add("armed");this.el.classList.remove("idle");
    this.keys.forEach(k=>{k.disabled=false;k.classList.remove("down");
      k.querySelector(".holdbar").style.width="0";});
@@ -1246,9 +1258,10 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
    if(!right)return{...base,v:"dasi",
      reason:`동작 불일치 (${MOVES[this.slots[slot]].name}를 누름)`};
    if(needHold&&hold<CFG.holdReq)return{...base,v:"dasi",reason:`홀드 부족 ${hold.toFixed(2)}s`};
-   const quick=early<=CFG.eolssuEarly, longHold=!needHold||hold>=CFG.holdReq*1.5;
+   const quickMs=Math.max(CFG.eolssuMin*1000,CFG.eolssuEarly*this.windowMs);
+   const quick=at<=quickMs, longHold=!needHold||hold>=CFG.holdReq*1.5;
    return{...base,v:quick&&longHold?"eolssu":"johda",
-     reason:`반응 ${(at/1000).toFixed(2)}s (대기의 ${Math.round(early*100)}%)`
+     reason:`반응 ${(at/1000).toFixed(2)}s / 얼쑤 ${(quickMs/1000).toFixed(2)}s 안, 대기 ${(this.windowMs/1000).toFixed(2)}s`
        +(needHold?`, 홀드 ${hold.toFixed(2)}s`:"")};
  }};
 
@@ -1381,7 +1394,7 @@ function runLesson(){
     if(i>=list.length){SPEECH.say("jangsoe",S.madang.closeLine,box,()=>{chapOut("lesson");runScene();});return;}
     const id=list[i],M=MOVES[id];let tries=0;
     const ask=()=>{
-      PAD.arm(id,CFG.respWindow*1000,res=>{
+      PAD.arm(id,CFG.respMax*1000,res=>{   // 수업은 배우는 자리라 가장 넉넉하게 줌
         record(id,res,"수업");showVerdict(res.v,res);
         if(res.v==="dasi"){
           tries++;
@@ -1412,6 +1425,13 @@ function demoAnim(moveId){   // 1장 시범: 배우는 동작의 픽토그램을
 /* 2장, 3장 공용 대본 진행기.
    한 비트의 흐름: 상대 배역이 원전 대사를 말함 → 유저가 동작으로 응수 →
    판정에 따라 내 배역의 원전 대사가 나옴 → (원전에 있으면) 상대가 되받음 */
+/* 응답 대기를 앞선 대사 길이에 비례해 냄. 대기를 고정하면 짧은 지시("꾸부려라") 뒤에도
+   똑같이 기다려 판이 늘어짐. 긴 사설 뒤에는 생각할 틈이 더 필요하므로 함께 늘어남.
+   대사 없이 몸짓만으로 거는 무언 도발은 볼 것이 적어 기본값만 줌 */
+function respMs(b){
+  const n=b&&b.text?[...b.text].length:0;
+  return Math.min(CFG.respMax*1000,CFG.respBase*1000+n*CFG.respPerChar*1000);
+}
 function beatLabel(b){
   if(b.t==="enter")return "상대 배역 등장";
   if(b.t==="free")return "따라 하기 연출";
@@ -1454,7 +1474,7 @@ function runBeats(list,opts,onDone){
     const arm=()=>{
       if(b.act)document.getElementById("foeCap").textContent=b.cap||b.act;
       else setFoe("대기",b.cap);
-      const ms=opts.window?opts.window(cueSeen):CFG.respWindow*1000;
+      const ms=opts.window?opts.window(cueSeen,b):respMs(b);
       const slot=cueSeen;
       if(opts.lane)LANE.focus(slot,ms);
       PAD.arm(b.move,ms,res=>{
@@ -1536,7 +1556,8 @@ function runClimax(){
     runBeats(cx.beats,{chapter:"절정",paneTitle:`뒷대목 대본 (${m.climaxSrc})`,climax:true,tail,lane:true,
       padOpts:{climax:true},
       /* 장단 가속은 응답 대기를 조금씩 좁혀 표현함. 2초 밑으로는 안 내려감 */
-      window:k=>Math.max(2000,CFG.respWindow*1000*.8*(cx.accel?Math.pow(.94,k):1))},
+      /* 가속 마당은 대목이 갈수록 좁아짐. 하한은 기본 대기라 손이 못 따라갈 만큼은 안 좁아짐 */
+      window:(k,b)=>Math.max(CFG.respBase*1000,respMs(b)*(cx.accel?Math.pow(.94,k):1))},
       ()=>finishClimax(cx,S.gauge>=100));
   });
 }
