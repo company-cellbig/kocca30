@@ -120,6 +120,7 @@ button:disabled{opacity:.4;cursor:default}
 .beat-row{font-size:11px;color:var(--dim);padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
 .beat-row.now{color:var(--gold)}
 .beat-row.done{color:#9a9184}
+.beat-src{display:inline-block;min-width:52px;color:#6f675c;font-size:10px}
 
 /* ══ 마당 선택 ══ */
 .cards{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}
@@ -152,16 +153,6 @@ button:disabled{opacity:.4;cursor:default}
 
 /* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
 .botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
-.notebar{height:62px;position:relative;border:1px solid var(--line);border-radius:9px;background:rgba(0,0,0,.34);overflow:hidden}
-.marker{position:absolute;left:78px;top:0;bottom:0;width:2px;background:var(--gold);opacity:.85}
-.marker::before{content:"";position:absolute;left:-17px;top:50%;transform:translateY(-50%);
-  width:36px;height:36px;border:2px solid rgba(200,163,74,.55);border-radius:50%}
-.note{position:absolute;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;
-  display:flex;align-items:center;justify-content:center;border-radius:7px;
-  background:rgba(200,163,74,.14);border:1px solid rgba(200,163,74,.5);font-size:15px;color:#e8d6a8}
-.note img{width:80%;height:80%;object-fit:contain}
-.note.hit{background:rgba(127,176,105,.3);border-color:var(--ok)}
-.note.miss{opacity:.25}
 .gauge-wrap{display:flex;align-items:center;gap:8px}
 .gauge{flex:1;height:12px;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:rgba(0,0,0,.35)}
 .gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a5a2a,#c8a34a,#ffd76e);transition:width .22s}
@@ -331,7 +322,6 @@ button:disabled{opacity:.4;cursor:default}
               <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
               <div class="gauge-lab" id="gaugeLab"></div>
             </div>
-            <div class="notebar" id="noteBar" style="display:none"><div class="marker"></div></div>
           </div>
         </div>
         <div class="col col-info" id="infoPane"></div>
@@ -381,7 +371,7 @@ button:disabled{opacity:.4;cursor:default}
     <div class="band-body">
       <div class="band-info">
         <div class="pad-move" id="padMove">대기</div>
-        <div class="pad-how" id="padHow">장쇠가 신호를 주면 오른쪽 패드를 끄십시오</div>
+        <div class="pad-how" id="padHow">대사가 끝나면 오른쪽 패드를 끄십시오</div>
         <div class="pad-elems" id="padElems"></div>
       </div>
       <div class="pad idle" id="pad">
@@ -414,7 +404,6 @@ button:disabled{opacity:.4;cursor:default}
   <div class="cfg"><label>Step 3 합산(초)</label><input type="number" id="cfgStep3" value="300"></div>
   <div class="cfg"><label>미입력 타임아웃(초)</label><input type="number" id="cfgIdle" value="45"></div>
   <div class="cfg"><label>응답 대기(초)</label><input type="number" id="cfgWindow" value="4" step="0.5"></div>
-  <div class="cfg"><label>절정 판정 구간(초)</label><input type="number" id="cfgHit" value="0.5" step="0.1"></div>
   <div class="cfg"><label>수업 재시도(회)</label><input type="number" id="cfgRetry" value="2"></div>
   <div class="cfg"><label>얼쑤 진폭 임계</label><input type="number" id="cfgEolssu" value="0.45" step="0.05"></div>
   <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
@@ -454,7 +443,7 @@ button:disabled{opacity:.4;cursor:default}
    ══════════════════════════════════════════════════════════ */
 
 /* ── 0. 설정 ───────────────────────────── */
-const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,hitWindow:.5,
+const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respWindow:4,
   lessonRetry:2,eolssuAmp:.45,holdReq:.6,sinmyeongCut:55,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   const set=()=>{
@@ -465,7 +454,7 @@ const bind=(id,key,isNum)=>{const el=document.getElementById(id);
   };
   el.addEventListener("change",set); set();};
 bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
-bind("cfgWindow","respWindow",1);bind("cfgHit","hitWindow",1);bind("cfgRetry","lessonRetry",1);
+bind("cfgWindow","respWindow",1);bind("cfgRetry","lessonRetry",1);
 bind("cfgEolssu","eolssuAmp",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);
 bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
 
@@ -575,7 +564,19 @@ const DIRVEC={left:[-1,0],right:[1,0],up:[0,-1],down:[0,1],upleft:[-.71,-.71]};
 const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"};
 const DIRCAP={left:"왼쪽",right:"오른쪽",up:"위",down:"아래",upleft:"왼쪽 위",swing:"좌우 왕복"};
 
-/* ── 3. 마당 데이터 ────────────────────── */
+/* ── 3. 마당 데이터 ──────────────────────
+   2장과 3장의 대본은 전사본 `03_References/converted/남사당놀이/남사당놀이 - 덧뵈기.md`
+   5) 연회본에서 발췌함. 대사는 원문 그대로 쓰고, 한 호흡에 안 들어가는 긴 사설만
+   문장 단위로 끊어 …로 줄임. src 필드가 그 전사본의 행 번호임.
+   한 마당을 앞대목(2장)과 뒷대목(3장, 절정)으로 가름.
+
+   비트 종류
+     enter  상대 배역 등장
+     say    대사만 하고 넘어감 (판정 없음). who=me면 내 배역 대사를 장쇠가 대독함
+     cue    상대 배역 대사(text) 또는 무언 도발(act) 뒤에 내 동작을 받음
+     free   판정 없는 따라 하기 연출
+   cue의 mine/mineNo는 성공, 실패에 따라 내 배역이 내는 원전 대사이고,
+   foeBack은 그 뒤에 상대가 원전에서 되받는 대사임 */
 const MADANG=[
 {id:"omtal",name:"옴탈잡이",tag:"잡기",user:"꺽쇠",foe:"옴탈",
  brief:"슬금슬금 나타난 옴탈을 꺽쇠가 되어 잡아 쫓는 마당",
@@ -585,19 +586,58 @@ const MADANG=[
  moves:["salpigi","jjilleo","hwidulleo"],
  openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
  closeLine:"손에 익었구나. 이제 저놈 앞에 서 보자.",
+ sceneTitle:"둘째 마당 앞대목",climaxTitle:"둘째 마당 뒷대목",
+ sceneSrc:"424~444행",climaxSrc:"446~466행",
  scene:[
-  {t:"enter",cap:"옴탈이 슬금슬금 기어 나옴"},
-  {t:"say",who:"jangsoe",text:"저놈이 왔다. 소리 내지 말고 살펴라."},
-  {t:"cue",who:"jangsoe",text:"살펴봐라!",move:"salpigi",ok:"옴탈이 획 돌아본다!",no:"옴탈이 딴 데를 본다."},
-  {t:"cue",who:"jangsoe",text:"얼음! 그대로 버텨라!",move:"salpigi",ok:"옴탈이 눈치를 못 챈다!",no:"옴탈이 슬쩍 물러선다."},
-  {t:"cue",who:"jangsoe",text:"지금이다, 찔러봐라!",move:"jjilleo",ok:"옴탈이 펄쩍 뛴다!",no:"옴탈이 몸을 비튼다."},
-  {t:"free",text:"옴 올랐다! 긁는 시늉을 따라 해 보아라.",cap:"긁기 소동 (판정 없는 따라 하기 연출)"},
-  {t:"say",who:"jangsoe",text:"됐다. 이제 판을 크게 벌일 때다."}],
+  {t:"enter",cap:"옴탈이 슬금슬금 나와 꺽쇠를 봄",src:"424행"},
+  {t:"cue",who:"foe",text:"이히! 네기럴꺼! 이놈이 뭣하는 놈인고.",src:"426행",
+   move:"salpigi",cap:"옴탈이 요리조리 쫓으며 살핌",
+   mine:"어이구 이놈이 하늘 높은 줄 모르고 땅 넓은 줄만 알지. 얼굴이 왜쟁반만 하구나.",
+   mineNo:"어, 어허, 이놈이 뭣하는 놈이더라.",
+   ok:"옴탈이 멈칫하며 뒷걸음침",no:"옴탈이 그대로 쫓아다님"},
+  {t:"cue",who:"foe",text:"허허 이놈 이거 놔라! 남의 의관 절단난다.",src:"434행",
+   move:"jjilleo",cap:"떡시루 밑을 잡힌 옴탈이 뿌리치려 함",
+   mine:"이놈 대관절 네가 사람이냐 짐승이냐. 황토 핀데 용천백이가 먼저 지나는구나.",
+   mineNo:"어이쿠, 손이 미끄러진다.",
+   foeBack:"이놈 내 쌍판이 어째서 사람 짐승을 묻느냐.",
+   ok:"머릿채를 쥐고 이리저리 끌고 다님",no:"손이 헛나가 옴탈이 빠져나감"},
+  {t:"cue",who:"foe",text:"내 네 얼굴 같으면 문지방도 안 넘것다!",src:"442행",
+   move:"hwidulleo",cap:"옴탈이 실랑이 끝에 풀려나 대듦",
+   mine:"그러나 저러나 네 얼굴을 보아하니 우툴두툴하고 땜쟁이 발등 같고, 보리 먹은 삼닢 같고, 콩멍석에 엎드러졌느냐?",
+   mineNo:"어, 어, 그놈 말은 잘하는구나.",
+   ok:"옴탈이 얼굴을 감싸며 물러섬",no:"옴탈이 되레 얼굴을 들이밂"}],
  climax:{gaugeLab:"몰이 진행도",accel:true,bpm:112,
-  pattern:["hwidulleo","hwidulleo","jjilleo","hwidulleo","hwidulleo","salpigi","hwidulleo","jjilleo","hwidulleo","hwidulleo","hwidulleo","hwidulleo"],
-  seq:"몰아내기: 휘둘러 쫓기 중심의 연타 신호, 장단 가속",
+  seq:"얼굴 내력 문답으로 붙었다가 채검에서 옴이 드러나고, 발악하는 옴탈을 춤으로 몰아냄",
   ending:"옴탈이 화면 밖으로 튕겨 나가 퇴장함",
-  endingSoft:"옴탈이 슬금슬금 물러나 판 뒤로 숨음"}},
+  endingSoft:"옴탈이 슬금슬금 물러나 판 뒤로 숨음",
+  beats:[
+  {t:"cue",who:"foe",text:"네 내 얼굴 우툴두툴한 내력을 모르는고.",src:"446행",
+   move:"salpigi",cap:"옴탈이 얼굴을 들이밂",
+   mine:"모르것다.",mineNo:"글쎄다, 알 듯 말 듯하구나.",
+   ok:"옴탈이 신이 나서 내력을 풀어 놓음",no:"옴탈이 콧방귀를 뀜"},
+  {t:"cue",who:"foe",text:"어훔! 그렇다면 내 얼굴 우툴두툴한 내력을 일러줄 것이니 똑똑히 들어 봐라. … 호구별상 손님 마마님을 뫼시고 나왔다가 내 쌍판이 이 모양이 되었것다.",src:"450행",
+   move:"jjilleo",cap:"옴탈이 우쭐대며 얼굴을 내밂",
+   mine:"호구별상 손님 마마님이라? 이놈 가만히 있거라, 내 채검을 해야것다.",
+   mineNo:"채검은 무슨 채검, 손이 안 나가는구나.",
+   ok:"옴탈의 얼굴을 요리조리 쓰다듬음",no:"옴탈이 얼굴을 홱 돌림"},
+  {t:"say",who:"me",text:"네 쌍판을 채검했더니 내 손 사이가 왜 가려우냐. 이놈이 어디서 옴을 차독 같이 묻쳐 왔구나.",
+   cap:"손가락 사이를 벅벅 긁음",src:"456행"},
+  {t:"cue",who:"foe",text:"힛힛! 옴, 옴, 옴 봐라! 옴!",src:"460행",
+   move:"hwidulleo",cap:"옴탈이 발악하며 대듦",
+   mine:"얼럴럴럴 네기럴꺼!",mineNo:"어이쿠, 옴 오르겠다.",
+   ok:"옴탈이 한 걸음 밀림",no:"옴탈이 더 사납게 달려듦"},
+  {t:"cue",who:"foe",text:"옴 봐라! 옴, 옴!",src:"460행 (발악 반복)",
+   move:"hwidulleo",cap:"옴탈이 옴 오른 팔을 들이댐",
+   mine:"에라 이 옴쟁이야!",mineNo:"어허, 저리 가라 이놈아.",
+   ok:"옴탈이 판 가장자리로 밀림",no:"옴탈이 다시 판 복판으로 들어옴"},
+  {t:"cue",who:"foe",act:"옴탈이 온몸을 긁어 대며 달려듦",src:"458행 지문",
+   move:"hwidulleo",cap:"옴탈이 마구 발악으로 대듦",
+   mine:"이놈, 판 밖으로 나가렷다!",mineNo:"이거 붙잡을 데가 없구나.",
+   ok:"옴탈이 비틀거리며 물러섬",no:"옴탈이 버티고 섬"},
+  {t:"cue",who:"me",text:"얼럴럴럴 네기럴꺼! 금강산이 좋단 말을 풍편에 넌짓 듣고 절수, 절수, 절수, 절수!",src:"464행",
+   move:"hwidulleo",cap:"덩덕궁이 장단에 춤으로 대듦",
+   mine:"얼럴럴럴 네기럴꺼!",mineNo:"장단이 어긋났구나.",
+   ok:"옴탈이 춤에 밀려 달아날 자리를 찾음",no:"옴탈이 춤을 받아 버팀"}]}},
 {id:"sennim",name:"샌님잡이",tag:"놀리기",user:"말뚝이",foe:"샌님",
  brief:"거드름 피우는 샌님을 말뚝이가 되어 놀려 뒤집는 마당",
  preview:"샌님이 말뚝이에게 큰절을 올리는 대목",
@@ -606,18 +646,76 @@ const MADANG=[
  moves:["geodeureum","horyeong","chaejjik"],
  openLine:"샌님이 거드름을 피우며 온다. 놀리려면 세 가지를 익혀라.",
  closeLine:"제법이다. 이제 저 양반 앞에 서 보자.",
+ sceneTitle:"셋째 마당 앞대목",climaxTitle:"셋째 마당 뒷대목",
+ sceneSrc:"470~544행",climaxSrc:"556~616행",
  scene:[
-  {t:"enter",cap:"샌님이 거드름 피우며 등장함"},
-  {t:"say",who:"jangsoe",text:"저 양반 걸음 좀 보아라. 어깨가 하늘에 닿겠다."},
-  {t:"cue",who:"jangsoe",text:"저 꼴 좀 보아라, 그대로 흉내 내라!",move:"geodeureum",ok:"샌님이 발끈한다!",no:"샌님이 못 본 척한다."},
-  {t:"say",who:"foe",text:"이놈 말뚝아! 어디서 감히 주인을 흉내 내느냐!"},
-  {t:"cue",who:"jangsoe",text:"맞받아라!",move:"horyeong",ok:"샌님이 움찔한다!",no:"샌님이 헛기침을 한다."},
-  {t:"say",who:"jangsoe",text:"기세가 넘어왔다. 이제 절을 받을 차례다."}],
+  {t:"enter",cap:"장죽 물고 부채와 지팡이를 든 샌님이 노친네와 나옴",src:"470행"},
+  {t:"say",who:"foe",text:"아이고, 주책 바가지야, 늙은 주제에 왜 내 궁뎅이만 졸졸 따라다녀, 창피하게스리!",
+   cap:"샌님이 노친네를 타박함",src:"472행"},
+  {t:"say",who:"jaebi",text:"여보시오, 웬 영감이 남의 노름청에 난가히 떠드시오.",
+   cap:"잽이가 판에서 말을 걸음",src:"482행"},
+  {t:"say",who:"foe",text:"내 부리던 하인을 찾으러 나왔것다. 참빗 새새 면면 촌촌 방방곡곡을 다녀도 못 보겠네.",
+   cap:"샌님이 하인을 찾아 두리번거림",src:"492, 518행"},
+  {t:"cue",who:"foe",text:"애, 뚝아, 뚝아, 말뚝아!",src:"522행",
+   move:"chaejjik",cap:"샌님이 길게 하인을 부름",
+   mine:"말뚝인지 꼴뚝인지 대령했소. 샌님, 샌님, 큰댁 샌님, 작은댁 샌님, 똥골댁 샌님, … 아래위가 빠꼼합니까오!",
+   mineNo:"부르는 소리는 들리는데 발이 안 떨어지는구나.",
+   ok:"샌님이 어이없어 입을 벌림",no:"샌님이 헛물을 켜고 다시 부름"},
+  {t:"cue",who:"foe",text:"네 이놈 양반을 만났으면 절을 하는 게 아니라 뭣이 어쩌구 어째!",src:"532행",
+   move:"geodeureum",cap:"샌님이 어이없어 호통침",
+   mine:"네 절이요? 알지요, 압니다. 서울로 일러도 새절, 덕절 도곡사, 마곡사, 물 건너 봉원사 합천 해인사, … 이런 절 말씀이오?",
+   mineNo:"절이요? 그, 그게 무슨 절인지.",
+   foeBack:"이놈 누가 그런 절 말이냐.",
+   ok:"샌님이 부채를 접었다 폈다 함",no:"샌님이 혀를 참"},
+  {t:"cue",who:"foe",text:"너 절 모르느냐.",src:"540행",
+   move:"horyeong",cap:"샌님이 지팡이로 땅을 짚음",
+   mine:"나 절 모르오. 그럼 무슨 절 말이오?",
+   mineNo:"어, 그게, 알 듯도 하고.",
+   foeBack:"너 그럼 절을 배워라!",
+   ok:"샌님이 소매를 걷어붙임",no:"샌님이 답답해 발을 구름"}],
  climax:{gaugeLab:"절 배우기 진행도",accel:false,bpm:96,endAnim:"settle",
-  pattern:["horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik","horyeong","geodeureum","horyeong","geodeureum","horyeong","chaejjik"],
-  seq:"절 배우기: 시범 동작 신호를 유저가 보이면 샌님이 우스꽝스럽게 따라 함",
+  seq:"샌님이 절을 가르친다며 지시를 쏟아내고, 말뚝이가 그대로 되받아 넘기다 판이 뒤집힘",
   ending:"샌님이 말뚝이에게 큰절을 올리고, 유저는 버티고 서서 절을 받음",
-  endingSoft:"샌님이 마지못해 고개만 까딱하고 물러섬"}},
+  endingSoft:"샌님이 마지못해 고개만 까딱하고 물러섬",
+  beats:[
+  {t:"say",who:"foe",text:"이놈, 나 시키는 대로, 나 하자는 대로, 한 가지도 빼놓지 말고….",
+   cap:"샌님이 절 배우기를 시작함",src:"556행"},
+  {t:"cue",who:"foe",text:"미륵님을 가로 잡아라.",src:"560행",
+   move:"horyeong",cap:"샌님이 부채를 가로 잡음",
+   mine:"부채를 가로 잡으란 말씀이오.",mineNo:"미륵님이 어느 님이오?",
+   ok:"샌님이 흡족해 고개를 끄덕임",no:"샌님이 답답해 부채를 흔듦"},
+  {t:"cue",who:"foe",text:"옳다. 번쩍 들어라.",src:"564행",
+   move:"horyeong",cap:"샌님이 부채를 번쩍 듦",
+   mine:"번쩍 들어라.",mineNo:"팔이 안 올라가는구나.",
+   ok:"샌님이 신이 나서 다음을 시킴",no:"샌님이 다시 해 보라며 재촉함"},
+  {t:"cue",who:"foe",text:"꾸부려라.",src:"568행",
+   move:"geodeureum",cap:"샌님이 허리를 꾸부림",
+   mine:"꾸부려라.",mineNo:"허리가 안 굽는구나.",
+   ok:"샌님이 어라, 하며 말뚝이를 봄",no:"샌님이 혀를 차며 다시 시킴"},
+  {t:"cue",who:"foe",text:"이놈 꾸부려라.",src:"572행",
+   move:"geodeureum",cap:"샌님이 목청을 높임",
+   mine:"이놈 꾸부려라.",mineNo:"어, 어, 뭐라 하셨소.",
+   ok:"샌님이 말끝까지 따라 하는 것을 알아챔",no:"샌님이 잠시 우쭐해짐"},
+  {t:"cue",who:"foe",text:"야 이놈아 이놈.",src:"576행",
+   move:"chaejjik",cap:"샌님이 발끈해 소리침",
+   mine:"야 이놈아 이놈.",mineNo:"이놈이라니, 누가 이놈이오.",
+   ok:"샌님이 얼굴이 벌게짐",no:"샌님이 기세를 되찾음"},
+  {t:"cue",who:"foe",text:"아하 이놈이, 아 이놈을 패줄까.",src:"584행",
+   move:"chaejjik",cap:"샌님이 지팡이를 치켜듦",
+   mine:"아하 이놈이, 아 이놈을 패줄까.",mineNo:"때리기는 왜 때리오.",
+   ok:"샌님이 말문이 막혀 헛기침을 함",no:"샌님이 지팡이를 고쳐 쥠"},
+  {t:"cue",who:"foe",text:"허허.",src:"588행",
+   move:"geodeureum",cap:"샌님과 말뚝이가 엉켜 씨름을 함",
+   mine:"허허.",mineNo:"어이쿠, 힘이 부치는구나.",
+   foeBack:"이놈, 이놈아, 다 배웠다, 다 배웠어, 그만두자 그만둬….",
+   ok:"샌님이 말뚝이에게 꿀려 주저앉음",no:"샌님이 겨우 버티고 섬"},
+  {t:"cue",who:"foe",text:"번쩍 들어라. 꾸부려라, 번쩍 들어라, 꾸부려라!",src:"606행",
+   move:"horyeong",cap:"샌님과 노친네가 나란히 서서 꾸부렸다 폈다 함",
+   mine:"어 모시고 가시고 잘 있었느냐!",mineNo:"어, 이거 절을 받아도 되는 것이오?",
+   foeBack:"이놈 양반에게 절을 받어!",
+   ok:"샌님 내외가 말뚝이에게 절을 올림",no:"샌님이 절하다 말고 허리를 폄"}],
+  outro:[
+  {t:"say",who:"me",text:"양반에게 절을 받으면 명이 길다 합디다. 어휴, 나 힘들어서 양반 안 하것소, 쌍놈 하것소, 쌍놈!",src:"616행"}]}},
 {id:"mokjung",name:"먹중잡이",tag:"이기기",user:"취발이",foe:"먹중",
  brief:"행패 부리는 먹중을 취발이가 되어 춤으로 눌러 이기는 마당",
  preview:"먹중이 춤 대결에서 나가떨어지는 대목",
@@ -626,28 +724,78 @@ const MADANG=[
  moves:["eokkae","balchago","somae"],
  openLine:"먹중이 행패를 부린다. 누르려면 세 가지를 익혀라.",
  closeLine:"기운이 붙었구나. 이제 저 중 앞에 서 보자.",
+ sceneTitle:"넷째 마당 앞대목",climaxTitle:"넷째 마당 뒷대목",
+ sceneSrc:"630~656행",climaxSrc:"658~678행",
+ /* 넷째 마당의 먹중은 대사가 한 줄도 없는 무언 배역이라, 원전에서 취발이와 말을 주고받는
+    상대는 악사인 잽이임. 그래서 이 마당만 상대 대사 화자를 잽이로 두고
+    먹중은 무언 도발(act)로만 응수함 (사용자 승인, 2026-08-11) */
  scene:[
-  {t:"enter",cap:"먹중이 행패 부리며 등장함"},
-  {t:"say",who:"jangsoe",text:"중이 술에 취해 판을 뒤집는다."},
-  {t:"cue",who:"jangsoe",text:"꾸짖어라!",move:"somae",gap:1,ok:"먹중이 흠칫 물러선다!",no:"먹중이 콧방귀를 뀐다."},
-  {t:"cue",who:"jangsoe",text:"기세를 보여라!",move:"eokkae",ok:"먹중이 기세에 눌린다!",no:"먹중이 비웃는다."},
-  {t:"say",who:"jangsoe",text:"됐다. 이제 춤으로 붙어라."}],
+  {t:"enter",cap:"먹중이 부채로 얼굴을 가리고 나와 피조리 둘과 춤춤",src:"630행"},
+  {t:"say",who:"me",text:"어라, 어라, 어라, 네기럴꺼! 늙은 놈이 집안을 웃씩 떠났더니 저희끼리 말 잡아먹고 북 메고 소 잡아먹고 장구 메고, … 이리 가도 훨훨, 저리로 가도 훨훨, 절수, 절수, 절수, 절수!",
+   cap:"취발이가 뛰어나와 사설을 늘어놓음",src:"632행"},
+  {t:"cue",who:"jaebi",text:"여보게 안암산이 컴컴한 거 모르나.",src:"640행",
+   move:"eokkae",cap:"먹중이 피조리들과 어울려 춤을 이어 감",
+   mine:"나 몰라.",mineNo:"안암산이 어느 산이더냐.",
+   ok:"먹중이 취발이 쪽을 흘끔거림",no:"먹중이 못 본 척 춤을 이어 감"},
+  {t:"cue",who:"jaebi",text:"저 서울 새절서 중이 속가에 내려와서 계집 하나도 무엇한데 둘씩 데리고 농탕친다네.",src:"644행",
+   move:"somae",cap:"잽이가 먹중을 가리킴",
+   mine:"홍 그놈이 내 형식을 몰랐구나! 여기저기 싸다니며 한 푼, 두 푼 모아다가 … 중놈 급살탕국 멕이는 취발이라 이른다.",
+   mineNo:"내 형식이 무어냐고 물으면 나도 말문이 막히는구나.",
+   ok:"먹중이 부채를 내리고 돌아섬",no:"먹중이 콧방귀를 뀜"},
+  {t:"cue",who:"jaebi",text:"어디 한번 얼러 보게.",src:"652행",
+   move:"balchago",cap:"판이 조용해지고 둘이 마주 섬",
+   mine:"아나 이놈 중아! 거리 노중이냐, 칠월 밸중이냐, 허공 공중이냐, 중이라 하는 건 산중에서 불도나 외우고 부처님이나 위하는 것이지 … 농탕쳐 이놈!",
+   mineNo:"어허, 이놈 중아, 그, 그러니까.",
+   foeBack:null,
+   ok:"먹중이 발끈해 따라 덤빔",no:"먹중이 비웃으며 등을 돌림"}],
  climax:{gaugeLab:"대결 우세도",accel:false,bpm:104,
-  pattern:["eokkae","balchago","somae","eokkae","balchago","somae","somae","balchago","eokkae","somae","balchago","somae"],
-  seq:"춤 대결: 배운 동작 3개의 맞대무 시퀀스, 진폭이 클수록 게이지 가속",
-  ending:"먹중이 과장되게 나가떨어짐",
-  endingSoft:"먹중이 숨을 고르며 슬그머니 물러섬"}}];
+  seq:"말 대신 춤으로 붙는 대목임. 먹중은 무언이라 도발을 동작으로만 걸고, 잽이가 판을 중계함",
+  ending:"먹중이 취발이의 코를 때리고 달아나 판이 취발이에게 넘어감",
+  endingSoft:"먹중이 숨을 고르며 슬그머니 물러섬",
+  beats:[
+  {t:"say",who:"me",text:"오호, 이 중놈 덤빈다. 저놈을 춤으로 한번 녹이것다. 무슨 춤으로 녹이느냐 하면, 달아, 달아, 밝은 달 절수, 절수, 절수!",
+   cap:"취발이가 먹중을 피하며 장단을 부름",src:"658, 666행"},
+  {t:"cue",who:"foe",act:"먹중이 장삼 소매를 크게 뿌리며 맞춤을 걸어옴",src:"668행 지문",
+   move:"somae",cap:"덩덕궁이 장단으로 맞춤이 붙음",
+   mine:"얼럴럴럴 네기럴꺼!",mineNo:"이 중놈 춤이 보통이 아니로구나.",
+   ok:"먹중이 반 박자 밀림",no:"먹중이 소매로 판을 쓸며 앞섬"},
+  {t:"cue",who:"foe",act:"먹중이 어깨를 들썩이며 취발이 앞을 막아섬",src:"668행 지문",
+   move:"eokkae",cap:"둘이 어깨를 맞대고 겨룸",
+   mine:"물러서라 이놈!",mineNo:"어깨가 무겁구나.",
+   ok:"먹중이 옆으로 비켜섬",no:"먹중이 버티고 서서 눌러옴"},
+  {t:"cue",who:"foe",act:"먹중이 발을 굴러 장단을 빼앗음",src:"668행 지문",
+   move:"balchago",cap:"장단 다툼이 붙음",
+   mine:"이 장단은 내 것이다!",mineNo:"장단을 놓쳤구나.",
+   ok:"먹중이 장단을 놓치고 헛발을 디딤",no:"먹중이 장단을 몰아 앞서 감"},
+  {t:"cue",who:"me",text:"얼럴럴럴 네기럴꺼, 이 중놈이 나보다 춤을 십 배나 잘 추는구나, 장단 밧짝 몰아 놓고 한상 부셔 보는데 절수, 절수, 절수!",src:"670행",
+   move:"somae",cap:"장단을 바짝 몰아 붙임",
+   mine:"절수, 절수, 절수!",mineNo:"숨이 차는구나.",
+   ok:"먹중이 춤에 밀려 물러남",no:"먹중이 아직 버팀"},
+  {t:"cue",who:"foe",act:"먹중이 마지막으로 크게 소매를 뿌리며 달려듦",src:"672행 지문",
+   move:"somae",cap:"맞춤이 절정에 오름",
+   mine:"이 중놈, 오늘 임자 만났다!",mineNo:"팔이 안 돌아가는구나.",
+   ok:"먹중이 견디지 못하고 춤을 놓음",no:"먹중이 끝까지 맞받아침"}],
+  outro:[
+  {t:"say",who:"me",text:"쉬! 아, 여보게 춤을 추다가 내 코를 탁 치고 가는 자 누군가.",src:"674행"},
+  {t:"say",who:"jaebi",text:"자네 누군지 모르나, 중이 자네 춤을 이기지 못하여 코를 때리고 도망쳤네.",src:"676행"},
+  {t:"say",who:"me",text:"뭐 코를 때리고 도망가. 아이쿠, 내 코, 허연 코피가 굴관지복을 하고 네고 네고 나오는구나.",src:"678행"}]}}];
 
 const GAPS=[
- {where:"4.3.2 마당별 장면 대본 표, 먹중잡이 행",
-  what:'신호가 "꾸짖어라(호령 가리키기)"인데 호령 가리키기는 샌님잡이 동작 세트임. "배운 동작만 이후 장의 신호로 나온다"(4.3 도입부)와 어긋남',
-  fix:'먹중잡이 동작 세트 안의 "소매 뿌리기"로 대체해 구현함'},
- {where:"4.3.3 마당별 절정 연출 표, 샌님잡이 행",
-  what:'절정 시퀀스가 "팔 들기, 꾸부리기"인데 둘 다 동작 세트 3개에 없는 이름임',
-  fix:"배운 동작 3개로 절 배우기 시퀀스를 구성함"},
- {where:"4.3.1 마당별 수업 내용 표 / 3.10.2 3) 동작 세트",
-  what:"샌님잡이 동작 순서가 두 절에서 다름. 구성은 같고 순서만 어긋남",
-  fix:"수업 순서인 4.3.1을 따름"},
+ {where:"4.3.2 마당별 장면 대본 표 / 4.3.3 마당별 절정 연출 표",
+  what:"기획서의 2장, 3장 대본은 창작 신호문(살펴봐라, 맞받아라 등)이라 원전 재담이 들어 있지 않음",
+  fix:"2026-08-11 사용자 지시로 두 장을 전사본 연회본 발췌로 다시 씀. 대사는 원문 그대로 쓰고 긴 사설만 …로 줄임. 각 비트에 원전 행 번호를 붙여 오른쪽 열에 표시함"},
+ {where:"넷째 마당 (먹중잡이), 전사본 628~704행",
+  what:"먹중은 대사가 한 줄도 없는 무언 배역이라 상대 배역이 대사를 주는 구조가 원전에서 성립하지 않음. 취발이의 말 상대는 악사인 잽이임",
+  fix:"이 마당만 말 상대를 잽이로 두고, 먹중은 무언 도발(춤으로 걸어오기)로 응수 신호를 줌"},
+ {where:"셋째 마당 (샌님잡이), 전사본 470~520행",
+  what:"유저 배역인 말뚝이가 528행에야 등장해, 그 앞의 샌님과 노친네 대목은 유저가 할 일이 없음",
+  fix:"판정 없는 도입 연출로 3개 대사만 뽑아 압축하고, 응수는 말뚝이 등장(522행)부터 시작함"},
+ {where:"넷째 마당 끝 (전사본 686~700행)",
+  what:"취발이가 피조리의 생김새를 품평하는 대목이 있으나 공공 전시물에 넣기 부적절함",
+  fix:"뒷대목을 코피 재담(678행)에서 닫고 피조리 대목은 넣지 않음"},
+ {where:"3장 절정 진행 방식",
+  what:"기존 프로토타입은 노트가 흘러오는 리듬 게임이었으나, 대사 응수 구조로 바뀌면서 타이밍 판정 대상이 사라짐",
+  fix:"노트 레인을 걷고 장단은 배경 박으로만 깔되, 응답 대기 시간을 비트마다 좁혀 가속을 표현함. 게이지는 응수 성공 누적으로 유지함"},
  {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"}];
@@ -682,23 +830,28 @@ const AU={ctx:null,
 const SPEECH={cur:null,timer:null,onEnd:null,failed:false,voices:[],mouth:null,
  pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
    return this.voices.filter(v=>/ko/i.test(v.lang)); },
+ /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역(장쇠가 대독) */
+ nameOf(who){ return who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역")
+   : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (장쇠가 대독)"; },
  say(who,text,box,cb){
    this.stop();
+   if(!text){ if(cb)cb(); return; }
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
-   nm.textContent = who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역"):"유저 배역 (장쇠가 읽음)";
-   line.innerHTML=esc(text)+' <span class="prov">임시 문안</span>';
-   // 자막 칸은 장쇠와 상대 배역이 같이 씀. 상대 배역 차례에는 장쇠가 입과 몸을 움직이지 않게 표시함
-   box.classList.add("speaking"); box.classList.toggle("by-foe",who==="foe");
-   log("say",(who==="jangsoe"?"장쇠":who==="foe"?S.madang.foe:"유저 배역(장쇠 대독)")+": "+text,"lg-sys");
-   TO.pauseSpeak(true); if(who!=="foe") this.startMouth(box);   // 유저 배역 대사는 장쇠가 대독하므로 포함함
+   const other = who==="foe"||who==="jaebi";   // 장쇠가 읽지 않는 화자
+   nm.textContent = this.nameOf(who);
+   line.innerHTML=esc(text)+(who==="jangsoe"?' <span class="prov">임시 문안</span>':' <span class="prov">연회본 원문</span>');
+   // 자막 칸은 화자가 돌아가며 씀. 장쇠가 읽지 않는 차례에는 장쇠 입과 몸을 움직이지 않게 표시함
+   box.classList.add("speaking"); box.classList.toggle("by-foe",other);
+   log("say",this.nameOf(who)+": "+text,"lg-sys");
+   TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 내 배역 대사는 장쇠가 대독하므로 포함함
    const done=()=>{box.classList.remove("speaking","by-foe");this.stopMouth();TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
    this.onEnd=done;
    const dur=Math.min(6500,Math.max(1100,text.length*105));
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
      try{
        const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
-       const vs=this.pick(); if(vs.length)u.voice=who==="foe"?(vs[1]||vs[0]):vs[0];
-       u.rate=who==="foe"?1.02:.98; u.pitch=who==="foe"?1.25:.85;
+       const vs=this.pick(); if(vs.length)u.voice=other?(vs[1]||vs[0]):vs[0];
+       u.rate=other?1.02:.98; u.pitch=who==="foe"?1.25:who==="jaebi"?1.1:.85;
        u.onend=()=>{ if(this.onEnd===done){this.timer&&clearTimeout(this.timer);done();} };
        u.onerror=()=>{this.failed=true;};
        this.cur=u; speechSynthesis.speak(u);
@@ -884,7 +1037,7 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
    this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
    this.el.classList.add("armed");this.el.classList.remove("idle");
    document.getElementById("padHint").style.display="none";
-   document.getElementById("bandState").textContent=this.opts.rhythm?"장단 판정 중":"응답 대기 중";
+   document.getElementById("bandState").textContent=this.opts.rhythm?"장단 판정 중":this.opts.climax?"절정 응수 대기":"응수 대기 중";
    document.getElementById("padMove").innerHTML=esc(this.move.name)+` <small>${esc(this.move.body)}</small>`;
    document.getElementById("padHow").textContent=this.move.how;
    document.getElementById("padElems").innerHTML=this.move.elems.map(e=>`<span class="el">${e}</span>`).join("")+
@@ -903,7 +1056,7 @@ const PAD={el:document.getElementById("pad"),armed:false,move:null,opts:{},
    document.getElementById("padHint").style.display="";
    document.getElementById("bandState").textContent="대기 중";
    document.getElementById("padMove").textContent="대기";
-   document.getElementById("padHow").textContent="장쇠가 신호를 주면 오른쪽 패드를 끄십시오";
+   document.getElementById("padHow").textContent="대사가 끝나면 오른쪽 패드를 끄십시오";
    document.getElementById("padElems").innerHTML="";
    document.getElementById("padArrow").textContent="-";
    document.getElementById("padArrowCap").textContent="방향";},
@@ -1000,7 +1153,13 @@ function record(moveId,res,chapter){
 }
 
 /* ── 15. Step 3 ────────────────────────── */
-let chapStart=0,curChap="lesson",climaxRAF=null;
+let chapStart=0,curChap="lesson";
+/* 3장 배경 장단. 노트가 흘러가는 리듬 게임이 아니라 대사 응수로 진행하므로,
+   장단은 판의 박만 깔아 주고 속도 조절은 응답 대기 시간으로 함 */
+const CLX={t:null,
+ start(bpm){this.stop();if(!CFG.sfx)return;let k=0;
+   this.t=setInterval(()=>{(k++%2===0?AU.buk():AU.jang());},60000/bpm);},
+ stop(){this.t&&clearInterval(this.t);this.t=null;}};
 function startStep3(){
   show("scr-play");
   const box=document.getElementById("playHost");box.innerHTML=hostHTML();
@@ -1070,47 +1229,77 @@ function demoAnim(M){
   d.animate([{opacity:0},{opacity:1},{opacity:.9},{opacity:0}],{duration:1500,easing:"ease-in-out"}).onfinish=()=>d.remove();
 }
 
-/* 2장 장면 실습 */
-function runScene(){
-  chapIn("scene");
-  document.getElementById("playTitle").textContent="장면 실습 (2장)";
-  document.getElementById("demoHint").textContent="상대 배역 포즈 일러스트 자리";
-  const box=document.getElementById("playHost"),beats=S.madang.scene;
-  let i=0;
+/* 2장, 3장 공용 대본 진행기.
+   한 비트의 흐름: 상대 배역이 원전 대사를 말함 → 유저가 동작으로 응수 →
+   판정에 따라 내 배역의 원전 대사가 나옴 → (원전에 있으면) 상대가 되받음 */
+function beatLabel(b){
+  if(b.t==="enter")return "상대 배역 등장";
+  if(b.t==="free")return "따라 하기 연출";
+  const who=b.who==="foe"?(S.madang?S.madang.foe:"상대"):b.who==="jaebi"?"잽이":
+            b.who==="me"?(S.role||"내 배역"):"장쇠";
+  if(b.t==="say")return `${who}: ${String(b.text||"").slice(0,20)}…`;
+  return `${b.act?"무언 도발":who+" 대사"} → ${MOVES[b.move].name}`;
+}
+function runBeats(list,opts,onDone){
+  const box=document.getElementById("playHost");
+  const cueTotal=list.filter(b=>b.t==="cue").length;
+  const gain=cueTotal?100/cueTotal:0;   // 다 얼쑤면 만충, 다 좋다면 완화판에 머무는 배분
+  let i=0,cueSeen=0;
   const pane=()=>{
     document.getElementById("infoPane").innerHTML=
-     `<div class="info-h">장면 진행</div><div class="info-card">${beats.map((b,k)=>{
-        const t=b.t==="cue"?`신호: ${b.text} (${MOVES[b.move].name})`:b.t==="enter"?"상대 배역 등장":
-                b.t==="free"?"따라 하기 연출":`재담: ${b.text.slice(0,16)}...`;
-        return `<div class="beat-row ${k===i?"now":k<i?"done":""}">${esc(t)}</div>`;}).join("")}</div>`;
+     `<div class="info-h">${esc(opts.paneTitle)}</div>
+      <div class="info-card">${list.map((b,k)=>
+        `<div class="beat-row ${k===i?"now":k<i?"done":""}">${b.src?`<span class="beat-src">${esc(b.src)}</span>`:""}${esc(beatLabel(b))}</div>`).join("")}</div>`
+     +(opts.tail||"");
   };
-  const next=()=>{
+  const step=()=>{
     pane();
-    if(i>=beats.length){chapOut("scene");setFoe(null);runClimax();return;}
-    const b=beats[i++];
-    if(b.t==="enter"){setFoe("등장",b.cap);AU.kkwaenggwari();setTimeout(next,900);}
-    else if(b.t==="say"){SPEECH.say(b.who,b.text,box,next);}
-    else if(b.t==="free"){
-      setFoe("과장","옴탈이 온몸을 긁어 댐");
+    if(i>=list.length){onDone();return;}
+    const b=list[i++];
+    if(b.t==="enter"){setFoe("등장",b.cap);AU.kkwaenggwari();setTimeout(step,900);return;}
+    if(b.t==="say"){ if(b.cap)setFoe("대기",b.cap); SPEECH.say(b.who,b.text,box,step); return; }
+    if(b.t==="free"){
+      setFoe("과장",b.cap);
       SPEECH.say("jangsoe",b.text,box,()=>{
-        document.getElementById("foeCap").textContent=b.cap;
-        PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");next();});
-        document.getElementById("padMove").textContent="긁는 시늉";
-        document.getElementById("padHow").textContent="아무렇게나 마구 긁어 보기 (판정 없음)";
+        PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");step();});
+        document.getElementById("padMove").textContent="따라 하기";
+        document.getElementById("padHow").textContent="아무렇게나 크게 움직여 보기 (판정 없음)";
         document.getElementById("padElems").innerHTML="";
-      });}
-    else if(b.t==="cue"){
-      if(b.gap)log("gap","기획서 대조: 먹중잡이 신호가 미학습 동작이라 소매 뿌리기로 대체함","lg-warn");
-      setFoe("대기");
-      SPEECH.say(b.who,b.text,box,()=>{
-        PAD.arm(b.move,CFG.respWindow*1000,res=>{
-          record(b.move,res,"실습");showVerdict(res.v);
-          const ok=res.v!=="dasi";
-          setFoe(ok?"과장":"중립",ok?b.ok:b.no);
-          SPEECH.say("jangsoe",ok?b.ok:b.no,box,next);  // 장쇠 중계 재담
-        });});}
+      });
+      return;
+    }
+    /* cue: 상대 대사(text) 또는 무언 도발(act) 뒤에 응수를 받음 */
+    const arm=()=>{
+      if(b.act)document.getElementById("foeCap").textContent=b.cap||b.act;
+      else setFoe("대기",b.cap);
+      const ms=opts.window?opts.window(cueSeen):CFG.respWindow*1000;
+      PAD.arm(b.move,ms,res=>{
+        cueSeen++;
+        record(b.move,res,opts.chapter);showVerdict(res.v);
+        const ok=res.v!=="dasi";
+        if(opts.climax&&ok){
+          S.gauge=Math.min(100,S.gauge+gain*(res.v==="eolssu"?1.15:.85));updGauge();
+        }
+        setFoe(ok?"과장":"중립",ok?b.ok:b.no);
+        SPEECH.say("me",ok?b.mine:(b.mineNo||b.mine),box,
+          ()=>{ if(ok&&b.foeBack)SPEECH.say("foe",b.foeBack,box,step); else step(); });
+      },opts.padOpts);
+    };
+    if(b.text)SPEECH.say(b.who,b.text,box,arm);
+    else{setFoe("과장",b.act);setTimeout(arm,1000);}
   };
-  next();
+  step();
+}
+
+/* 2장 앞대목 */
+function runScene(){
+  chapIn("scene");
+  const m=S.madang;
+  document.getElementById("playTitle").textContent=`${m.sceneTitle} (2장)`;
+  document.getElementById("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
+  document.getElementById("gaugeWrap").style.display="none";
+  runBeats(m.scene,{chapter:"앞대목",paneTitle:`앞대목 대본 (${m.sceneSrc})`},
+    ()=>{chapOut("scene");setFoe(null);runClimax();});
 }
 function setFoe(pose,cap){
   const el=document.getElementById("foe"),c=document.getElementById("foeCap");
@@ -1138,80 +1327,47 @@ function setFoe(pose,cap){
   if(pose==="과장")AU.hit();
 }
 
-/* 3장 절정 무대 */
+/* 3장 뒷대목(절정) */
 function runClimax(){
   chapIn("climax");
-  document.getElementById("playTitle").textContent="절정 무대 (3장)";
-  document.getElementById("demoHint").textContent="관망 정렬 배경 자리";
-  const box=document.getElementById("playHost"),cx=S.madang.climax;
+  const m=S.madang,cx=m.climax;
+  document.getElementById("playTitle").textContent=`${m.climaxTitle}, 절정 (3장)`;
+  document.getElementById("demoHint").textContent=`연회본 ${m.climaxSrc} 발췌`;
+  const box=document.getElementById("playHost");
   setBG("climax");
-  document.getElementById("noteBar").style.display="block";
   document.getElementById("gaugeWrap").style.display="flex";
   document.getElementById("gaugeLab").textContent=cx.gaugeLab;
   S.gauge=0;updGauge();
-  document.getElementById("infoPane").innerHTML=
-   `<div class="info-h">절정 시퀀스</div><div class="info-card" style="font-size:11.5px;line-height:1.5">${esc(cx.seq)}</div>
+  setFoe("대기","맞서 선 "+m.foe);
+  const tail=
+   `<div class="info-h">뒷대목 줄거리</div><div class="info-card" style="font-size:11.5px;line-height:1.5">${esc(cx.seq)}</div>
     <div class="info-h">결말 연출</div>
     <div class="info-card" style="font-size:11px;line-height:1.5;color:#c9bda9">
       게이지 만충: ${esc(cx.ending)}<br><br>
       <span style="color:var(--dim)">미달 완화판: ${esc(cx.endingSoft)}</span></div>`;
-  setFoe("대기","맞서 선 "+S.madang.foe);
-  SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>climaxRun(cx));
+  CLX.start(cx.bpm);
+  SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>{
+    runBeats(cx.beats,{chapter:"절정",paneTitle:`뒷대목 대본 (${m.climaxSrc})`,climax:true,tail,
+      padOpts:{climax:true},
+      /* 장단 가속은 응답 대기를 조금씩 좁혀 표현함. 2초 밑으로는 안 내려감 */
+      window:k=>Math.max(2000,CFG.respWindow*1000*.8*(cx.accel?Math.pow(.94,k):1))},
+      ()=>finishClimax(cx,S.gauge>=100));
+  });
 }
 function updGauge(){document.getElementById("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
-function climaxRun(cx){
-  const bar=document.getElementById("noteBar");
-  bar.querySelectorAll(".note").forEach(n=>n.remove());
-  const W=bar.clientWidth,markerX=78,lead=2.6,beat=60/cx.bpm;
-  let acc=2.2;
-  const notes=cx.pattern.map((mv,i)=>{
-    const n={mv,hitAt:acc,el:null,done:false};
-    acc+=beat*2.4*(cx.accel?Math.pow(.955,i):1); // 장단 가속은 간격을 좁혀 표현함
-    return n;});
-  const total=notes[notes.length-1].hitAt+2.4,t0=performance.now();
-  let jangdanNext=0,ended=false,armedNote=null;
-  const clock=()=>(performance.now()-t0)/1000;
-  notes.forEach(n=>{const el=document.createElement("div");el.className="note";
-    el.innerHTML=picHTML(n.mv);bar.appendChild(el);n.el=el;});
-  hydrate(bar);
-  const armNext=()=>{
-    const n=notes.find(x=>!x.done&&x.hitAt>=clock()-CFG.hitWindow);
-    if(!n||armedNote===n)return;
-    armedNote=n;
-    PAD.arm(n.mv,0,res=>{
-      const at=res.pressT?(res.pressT-t0)/1000:clock();
-      const dt=Math.abs(at-n.hitAt);n.done=true;
-      if(dt>CFG.hitWindow||res.v==="dasi"){
-        res.v="dasi";res.reason=dt>CFG.hitWindow?"타이밍 이탈 "+dt.toFixed(2)+"s":res.reason;
-        n.el.classList.add("miss");
-      }else{n.el.classList.add("hit");S.gauge+=res.v==="eolssu"?13:8;updGauge();}
-      record(n.mv,res,"절정");showVerdict(res.v);armedNote=null;
-      if(S.gauge>=100&&!ended){ended=true;finishClimax(cx,true);}
-      else setTimeout(armNext,60);
-    },{rhythm:true});};
-  const loop=()=>{
-    const t=clock();
-    if(CFG.sfx&&t>=jangdanNext){(Math.round(jangdanNext/beat)%2===0?AU.buk():AU.jang());jangdanNext+=beat;}
-    notes.forEach(n=>{
-      n.el.style.left=(markerX+(n.hitAt-t)/lead*(W-markerX))+"px";
-      if(!n.done&&t>n.hitAt+CFG.hitWindow){n.done=true;n.el.classList.add("miss");
-        record(n.mv,{v:"dasi",amp:0,hold:0,reason:"응답 없음"},"절정");}});
-    armNext();
-    if(!ended&&t>total){ended=true;finishClimax(cx,false);return;}
-    if(!ended)climaxRAF=requestAnimationFrame(loop);};
-  climaxRAF=requestAnimationFrame(loop);
-}
 function finishClimax(cx,full){
-  climaxRAF&&cancelAnimationFrame(climaxRAF);PAD.disarm();
+  CLX.stop();PAD.disarm();
   const box=document.getElementById("playHost");
   setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
   if(full){AU.cheer();AU.kkwaenggwari();}
   log("sys","절정 결말: "+(full?"완전판":"완화판")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
-  SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
+  const outro=(cx.outro||[]).slice();   // 결말 뒤에 붙는 원전 마무리 대사
+  const wrap=()=>SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
     chapOut("climax");
-    document.getElementById("noteBar").style.display="none";
     document.getElementById("gaugeWrap").style.display="none";
     goStep4();});
+  const nextOutro=()=>{if(!outro.length){wrap();return;}const b=outro.shift();SPEECH.say(b.who,b.text,box,nextOutro);};
+  nextOutro();
 }
 
 /* ── 16. Step 4 ────────────────────────── */
@@ -1230,8 +1386,8 @@ function goStep4(){
      <div class="asset-note" style="text-align:left;margin-top:4px">완주 자체를 인정함. 등급 서열 없음</div></div>
    <div class="acc-block"><div class="acc-h">수행 요약</div>
      <div class="sum-row"><span>1장 기초 수업</span><span>${S.chapters.lesson?"완수":"미완"}</span></div>
-     <div class="sum-row"><span>2장 장면 실습</span><span>${S.chapters.scene?"완수":"미완"}</span></div>
-     <div class="sum-row"><span>3장 절정 무대</span><span>${S.chapters.climax?"완수":"미완"}</span></div>
+     <div class="sum-row"><span>2장 ${S.madang?esc(S.madang.sceneTitle):"앞대목"}</span><span>${S.chapters.scene?"완수":"미완"}</span></div>
+     <div class="sum-row"><span>3장 ${S.madang?esc(S.madang.climaxTitle):"뒷대목"}</span><span>${S.chapters.climax?"완수":"미완"}</span></div>
      <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
    <div class="acc-block"><div class="acc-h">신명의 서사 번역</div><div class="acc-body">${esc(narr)}</div>
      <div class="asset-note" style="text-align:left;margin-top:4px">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 분기 임계 ${CFG.sinmyeongCut} (화면에 노출하지 않는 설계, 검증용 표기)</div></div>`;
@@ -1242,7 +1398,7 @@ function goStep4(){
 /* ── 17. Step 5 ────────────────────────── */
 function goStep5(kind){
   S.step=5;renderSess();SPEECH.stop();PAD.disarm();
-  climaxRAF&&cancelAnimationFrame(climaxRAF);
+  CLX.stop();
   show("scr-end");
   document.getElementById("endMsg").textContent="세션 종료 이벤트 전송";
   document.getElementById("endSub").textContent="완주 유형: "+kind;
@@ -1254,7 +1410,7 @@ function goStep5(kind){
     setTimeout(()=>{newSession();show("scr-start");},900);},900);
 }
 function endSession(reason){
-  SPEECH.stop();PAD.disarm();climaxRAF&&cancelAnimationFrame(climaxRAF);
+  SPEECH.stop();PAD.disarm();CLX.stop();
   log("sys","비완주 종료: "+reason+" (배역 인정 화면 건너뜀)","lg-err");
   goStep5("비완주-"+reason);
 }
@@ -1269,8 +1425,8 @@ function buildReport(kind){
    <div class="rep-row"><span>좋다</span><b>${ok} (${pc(ok)})</b></div>
    <div class="rep-row"><span>다시</span><b>${d} (${pc(d)})</b></div>
    <div class="rep-row"><span>1장 소요</span><b>${secs("lesson")}</b></div>
-   <div class="rep-row"><span>2장 소요</span><b>${secs("scene")}</b></div>
-   <div class="rep-row"><span>3장 소요</span><b>${secs("climax")}</b></div>
+   <div class="rep-row"><span>2장 앞대목 소요</span><b>${secs("scene")}</b></div>
+   <div class="rep-row"><span>3장 뒷대목 소요</span><b>${secs("climax")}</b></div>
    <div class="rep-row"><span>전체 소요</span><b>${((Date.now()-S.startedAt)/1000).toFixed(0)}s</b></div>
    <div class="rep-row"><span>신명 지표</span><b>${S.sinmyeong.toFixed(1)} / 임계 ${CFG.sinmyeongCut}</b></div>`;
 }
@@ -1297,9 +1453,9 @@ document.getElementById("btnSkipChap").onclick=()=>{
   SPEECH.stop();PAD.disarm();
   if(curChap==="lesson"){chapOut("lesson");runScene();}
   else if(curChap==="scene"){chapOut("scene");setFoe(null);runClimax();}
-  else{climaxRAF&&cancelAnimationFrame(climaxRAF);finishClimax(S.madang.climax,S.gauge>=100);}};
+  else{CLX.stop();finishClimax(S.madang.climax,S.gauge>=100);}};
 document.getElementById("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
-  climaxRAF&&cancelAnimationFrame(climaxRAF);newSession();show("scr-start");};
+  CLX.stop();newSession();show("scr-start");};
 document.getElementById("panelToggle").onclick=()=>document.getElementById("panel").classList.toggle("hidden");
 
 /* ── 20. 진입 ──────────────────────────── */
