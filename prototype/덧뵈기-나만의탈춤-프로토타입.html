@@ -106,8 +106,8 @@ button:disabled{opacity:.4;cursor:default}
 .actor-cap{position:absolute;bottom:7px;width:44%;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
 .actor-cap.at-l{left:2%}
 .actor-cap.at-r{right:2%}
-/* 판 위 대사 칸. 상대 배역 대사는 상대 그림 위에, 잽이 대사는 악사 자리인 판 아래에 띄움.
-   장쇠와 내 배역 대사는 종전대로 왼쪽 호스트 자막 칸이 맡음 */
+/* 판 위 대사 칸. 배역 대사는 제 그림 위에 띄움.
+   장쇠 대사는 왼쪽 호스트 자막 칸이 맡음 */
 /* left:50%로 잡으면 늘어날 수 있는 폭이 판의 절반으로 묶여 max-width가 안 먹음.
    좌우 0에 auto 여백으로 가운데 두어야 max-width가 실제로 적용됨 */
 .stage-say{position:absolute;left:0;right:0;margin-inline:auto;width:fit-content;max-width:76%;display:none;z-index:3;
@@ -124,9 +124,6 @@ button:disabled{opacity:.4;cursor:default}
 .stage-say.side-l::after,.stage-say.side-r::after{top:100%;border-top-color:rgba(18,14,11,.9)}
 .stage-say.side-r{border-color:rgba(127,176,105,.55)}
 .stage-say.side-r .who{color:#a8d18a}
-.stage-say.at-jaebi{bottom:30px;border-color:rgba(255,255,255,.24);color:#ded6c8}
-.stage-say.at-jaebi .who{color:#b9b0a1}
-.stage-say.at-jaebi::after{bottom:100%;border-bottom-color:rgba(18,14,11,.9)}
 /* 투명도는 애니메이션에 맡기지 않음. 키프레임이 opacity를 쥐고 있으면
    애니메이션이 멈춘 상태(백그라운드 탭 등)에서 말풍선이 안 보일 수 있음 */
 @keyframes sayIn{from{transform:translateY(-6px)}to{transform:translateY(0)}}
@@ -401,7 +398,6 @@ button:disabled{opacity:.4;cursor:default}
             <div class="actor at-r" id="me"></div>
             <div class="actor-cap at-r" id="meCap"></div>
             <div class="stage-say side-r" id="sayMe"></div>
-            <div class="stage-say at-jaebi" id="sayJaebi"></div>
             <div class="verdict" id="verdict"></div>
             <div class="demo-hint" id="demoHint"></div>
           </div>
@@ -673,7 +669,7 @@ const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"
 
    비트 종류
      enter  상대 배역 등장
-     say    대사만 하고 넘어감 (판정 없음). who는 foe, jaebi, me, jangsoe
+     say    대사만 하고 넘어감 (판정 없음). who는 foe, me, jangsoe
      cue    상대 배역 대사(text) 또는 무언 도발(act) 뒤에 내 동작을 받음
      free   판정 없는 따라 하기 연출
    cue의 mine/mineNo는 성공, 실패에 따라 내 배역이 내는 원전 대사이고,
@@ -753,8 +749,8 @@ const MADANG=[
   {t:"enter",cap:"장죽 물고 부채와 지팡이를 든 샌님이 노친네와 나옴",src:"470행"},
   {t:"say",who:"foe",text:"아이고, 주책 바가지야, 늙은 주제에 왜 내 궁뎅이만 졸졸 따라다녀, 창피하게스리!",
    cap:"샌님이 노친네를 타박함",src:"472행"},
-  {t:"say",who:"jaebi",text:"여보시오, 웬 영감이 남의 노름청에 난가히 떠드시오.",
-   cap:"잽이가 판에서 말을 걸음",src:"482행"},
+  {t:"say",who:"jangsoe",text:"여보시오, 웬 영감이 남의 노름청에 난가히 떠드시오.",
+   cap:"장쇠가 판 밖에서 말을 걸음",src:"482행"},
   {t:"say",who:"foe",text:"내 부리던 하인을 찾으러 나왔것다. 참빗 새새 면면 촌촌 방방곡곡을 다녀도 못 보겠네.",
    cap:"샌님이 하인을 찾아 두리번거림",src:"492, 518행"},
   {t:"cue",who:"foe",text:"애, 뚝아, 뚝아, 말뚝아!",src:"522행",
@@ -828,29 +824,29 @@ const MADANG=[
  sceneTitle:"넷째 마당 앞대목",climaxTitle:"넷째 마당 뒷대목",
  sceneSrc:"630~656행",climaxSrc:"658~678행",
  /* 넷째 마당의 먹중은 대사가 한 줄도 없는 무언 배역이라, 원전에서 취발이와 말을 주고받는
-    상대는 악사인 잽이임. 그래서 이 마당만 상대 대사 화자를 잽이로 두고
-    먹중은 무언 도발(act)로만 응수함 (사용자 승인, 2026-08-11) */
+    상대는 악사인 잽이임. 장쇠가 그 잽이 자리를 겸하므로 이 마당만 상대 대사를 장쇠가 맡고,
+    먹중은 무언 도발(act)로만 응수함 */
  scene:[
   {t:"enter",cap:"먹중이 부채로 얼굴을 가리고 나와 피조리 둘과 춤춤",src:"630행"},
   {t:"say",who:"me",text:"어라, 어라, 어라, 네기럴꺼! 늙은 놈이 집안을 웃씩 떠났더니 저희끼리 말 잡아먹고 북 메고 소 잡아먹고 장구 메고, … 이리 가도 훨훨, 저리로 가도 훨훨, 절수, 절수, 절수, 절수!",
    cap:"취발이가 뛰어나와 사설을 늘어놓음",src:"632행"},
-  {t:"cue",who:"jaebi",text:"여보게 안암산이 컴컴한 거 모르나.",src:"640행",
+  {t:"cue",who:"jangsoe",text:"여보게 안암산이 컴컴한 거 모르나.",src:"640행",
    move:"eokkae",cap:"먹중이 피조리들과 어울려 춤을 이어 감",
    mine:"나 몰라.",mineNo:"안암산이 어느 산이더냐.",
    ok:"저 중놈이 네 쪽을 흘끔거린다!",no:"저 중놈이 못 본 척 춤만 이어 가는구나."},
-  {t:"cue",who:"jaebi",text:"저 서울 새절서 중이 속가에 내려와서 계집 하나도 무엇한데 둘씩 데리고 농탕친다네.",src:"644행",
-   move:"somae",cap:"잽이가 먹중을 가리킴",
+  {t:"cue",who:"jangsoe",text:"저 서울 새절서 중이 속가에 내려와서 계집 하나도 무엇한데 둘씩 데리고 농탕친다네.",src:"644행",
+   move:"somae",cap:"장쇠가 먹중 쪽을 가리킴",
    mine:"홍 그놈이 내 형식을 몰랐구나! 여기저기 싸다니며 한 푼, 두 푼 모아다가 … 중놈 급살탕국 멕이는 취발이라 이른다.",
    mineNo:"내 형식이 무어냐고 물으면 나도 말문이 막히는구나.",
    ok:"부채를 내리고 돌아섰다! 들었구나!",no:"저 중놈이 콧방귀를 뀌는구나."},
-  {t:"cue",who:"jaebi",text:"어디 한번 얼러 보게.",src:"652행",
+  {t:"cue",who:"jangsoe",text:"어디 한번 얼러 보게.",src:"652행",
    move:"balchago",cap:"판이 조용해지고 둘이 마주 섬",
    mine:"아나 이놈 중아! 거리 노중이냐, 칠월 밸중이냐, 허공 공중이냐, 중이라 하는 건 산중에서 불도나 외우고 부처님이나 위하는 것이지 … 농탕쳐 이놈!",
    mineNo:"어허, 이놈 중아, 그, 그러니까.",
    foeBack:null,
    ok:"발끈해 덤빈다! 이제 붙는 게야!",no:"저 중놈이 비웃으며 등을 돌리는구나."}],
  climax:{gaugeLab:"대결 우세도",accel:false,bpm:104,
-  seq:"말 대신 춤으로 붙는 대목임. 먹중은 무언이라 도발을 동작으로만 걸고, 잽이가 판을 중계함",
+  seq:"말 대신 춤으로 붙는 대목임. 먹중은 무언이라 도발을 동작으로만 걸고, 장쇠가 판을 중계함",
   ending:"먹중이 취발이의 코를 때리고 달아나 판이 취발이에게 넘어감",
   endingSoft:"먹중이 숨을 고르며 슬그머니 물러섬",
   beats:[
@@ -878,7 +874,7 @@ const MADANG=[
    ok:"견디지 못하고 춤을 놓았다! 네가 이겼다!",no:"저 중놈이 끝까지 맞받아치는구나."}],
   outro:[
   {t:"say",who:"me",text:"쉬! 아, 여보게 춤을 추다가 내 코를 탁 치고 가는 자 누군가.",src:"674행"},
-  {t:"say",who:"jaebi",text:"자네 누군지 모르나, 중이 자네 춤을 이기지 못하여 코를 때리고 도망쳤네.",src:"676행"},
+  {t:"say",who:"jangsoe",text:"자네 누군지 모르나, 중이 자네 춤을 이기지 못하여 코를 때리고 도망쳤네.",src:"676행"},
   {t:"say",who:"me",text:"뭐 코를 때리고 도망가. 아이쿠, 내 코, 허연 코피가 굴관지복을 하고 네고 네고 나오는구나.",src:"678행"}]}}];
 
 const GAPS=[
@@ -890,7 +886,7 @@ const GAPS=[
   fix:"2026-08-11 사용자 지시로 두 장을 전사본 연회본 발췌로 다시 씀. 대사는 원문 그대로 쓰고 긴 사설만 …로 줄임. 각 비트에 원전 행 번호를 붙여 오른쪽 열에 표시함"},
  {where:"넷째 마당 (먹중잡이), 전사본 628~704행",
   what:"먹중은 대사가 한 줄도 없는 무언 배역이라 상대 배역이 대사를 주는 구조가 원전에서 성립하지 않음. 취발이의 말 상대는 악사인 잽이임",
-  fix:"이 마당만 말 상대를 잽이로 두고, 먹중은 무언 도발(춤으로 걸어오기)로 응수 신호를 줌"},
+  fix:"장쇠가 잽이 자리를 겸하므로 이 마당만 말 상대를 장쇠로 두고, 먹중은 무언 도발(춤으로 걸어오기)로 응수 신호를 줌"},
  {where:"셋째 마당 (샌님잡이), 전사본 470~520행",
   what:"유저 배역인 말뚝이가 528행에야 등장해, 그 앞의 샌님과 노친네 대목은 유저가 할 일이 없음",
   fix:"판정 없는 도입 연출로 3개 대사만 뽑아 압축하고, 응수는 말뚝이 등장(522행)부터 시작함"},
@@ -906,9 +902,6 @@ const GAPS=[
  {where:"판 위 말풍선의 세로 여유 (작은 창)",
   what:"2인 배치와 한계 자동 산출로 크게 나아졌으나 1366 이하에서는 여전히 안 맞음. 헤드리스 실측(2026-08-11 배치 기준): 1920 창은 배역 위 여유 155px에 한계 138자로 겹침 0건, 1600 창은 108px에 48자로 겹침 0건, 1366 창은 73px에 20자인데도 53토막 중 20건이 배역을 가림",
   fix:"1366은 말풍선 두 줄이 한계라 글자를 줄여도 안 맞음. 배역 그림을 작게 잡거나 좁은 화면에서 말풍선을 판 아래로 내리는 배치 변경이 필요함. 사용자 결정 대기"},
- {where:"잽이 말풍선 자리 (먹중잡이 전용)",
-  what:"잽이는 판 아래에서 말하는데, 2인 배치로 배역이 판을 좌우로 채우면서 1600 이하에서 잽이 말풍선이 배역 발치를 덮음. 1920에서는 안 겹침",
-  fix:"미해결. 말풍선 자체는 읽히고 가려지는 곳이 발치라 진행에는 지장이 없음. 배치 변경 때 함께 볼 사안임"},
  {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등)",
   what:"음성(TTS)은 105자를 읽는 데 20초쯤 걸리는데 화면 출력은 4.8초에 끝남. 「음성 끝까지 기다림」이 꺼져 있으면 그 시점에 다음 대사로 넘어가며 음성이 중간에 끊김",
   fix:"패널의 「음성 끝까지 기다림」으로 고를 수 있게 둠. 켜면 음성이 온전히 나오지만 긴 대목이 20초씩 걸려 판이 늘어짐. 화면 글자는 어느 쪽이든 잘리지 않음. 근본 해소는 발췌를 줄이는 것뿐이라 사용자 결정 대기"},
@@ -1007,12 +1000,12 @@ function bindSkip(box,fn){
 const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],mouth:null,
  pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
    return this.voices.filter(v=>/ko/i.test(v.lang)); },
- /* who: jangsoe 스승, foe 상대 배역, jaebi 악사(넷째 마당의 말 상대), me 내 배역 */
+ /* who: jangsoe 스승, foe 상대 배역, me 내 배역 */
  nameOf(who){ return who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역")
-   : who==="jaebi"?"잽이 (악사)" : (S.role||"내 배역")+" (나)"; },
- /* 판 위 대사 칸. 배역은 제 그림 위에, 잽이는 악사 자리인 판 아래에 띄움.
-    장쇠만 왼쪽 자막 칸을 씀 (2장, 3장에서는 진행 멘트만 하므로) */
- BUBBLE:{foe:"sayFoe",me:"sayMe",jaebi:"sayJaebi"},
+   : (S.role||"내 배역")+" (나)"; },
+ /* 판 위 대사 칸. 판에 선 두 배역은 제 그림 위에 띄우고,
+    판 밖에 있는 장쇠는 왼쪽 자막 칸을 씀 */
+ BUBBLE:{foe:"sayFoe",me:"sayMe"},
  onStage(who){ const id=this.BUBBLE[who];
    return id&&curScreen==="scr-play" ? $(id) : null; },
  hideStage(){ Object.values(this.BUBBLE).forEach(id=>{
@@ -1020,14 +1013,16 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
  /* 한 번에 띄우는 글자수 한도를 넘는 대사는 나눠서 차례로 띄움.
     말풍선이 상대 배역 그림 위로 자라 배역을 가리는 것을 막음 (1920 화면 실측 66자).
     원문을 고치지 않고 표시만 나누므로 인용은 그대로임 */
- say(who,text,box,cb){
+ /* opt.quote: 이 대사가 연회본 원문 발췌인가. 안 주면 장쇠는 임시 문안, 나머지는 원문으로 봄.
+    넷째 마당에서는 장쇠도 원문 대사를 하므로 비트가 직접 알려 줌 */
+ say(who,text,box,cb,opt){
    const parts=splitLine(String(text==null?"":text),CFG.sayMax);
-   if(parts.length<2)return this.sayOne(who,text,box,cb);
+   if(parts.length<2)return this.sayOne(who,text,box,cb,opt);
    let i=0;
    const next=()=>{
      if(i>=parts.length){ if(cb)cb(); return; }
      const k=++i;
-     this.sayOne(who,parts[k-1],box,next,{part:k,of:parts.length});
+     this.sayOne(who,parts[k-1],box,next,{part:k,of:parts.length,quote:opt&&opt.quote});
    };
    next();
  },
@@ -1036,6 +1031,8 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    if(!text){ if(cb)cb(); return; }
    const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
    const other = who!=="jangsoe";   // 장쇠 말고 다른 배역이 말하는 차례
+   const quoted = meta&&meta.quote!=null ? !!meta.quote : other;   // 출처 꼬리표를 가름
+   const part = meta&&meta.part ? ` ${meta.part}/${meta.of}` : "";
    const bub = this.onStage(who);
    if(!other) nm.textContent = this.nameOf(who);   // 왼쪽 칸은 장쇠 몫이라 이름표를 안 바꿈
    /* 대사가 화면에 머무는 시간. 글자수로 시간을 어림하지 않고, 타이핑이 실제로
@@ -1049,12 +1046,12 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
         왼쪽 자막 칸은 장쇠 몫이라 비워 둠 */
      bub.classList.add("on");
      TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,
-       meta?` <span class="prov">${meta.part}/${meta.of}</span>`:"",perChar);
+       part?` <span class="prov">${part.trim()}</span>`:"",perChar);
      // 장쇠 칸은 건드리지 않음. 직전 중계가 내 응수 동안 남아 있어야 함
    }else{
      TYPE.run(line,"",text,
-       (who==="jangsoe"?' <span class="prov">임시 문안':' <span class="prov">연회본 원문')
-       +(meta?` ${meta.part}/${meta.of}`:"")+'</span>',perChar);
+       (quoted?' <span class="prov">연회본 원문':' <span class="prov">임시 문안')
+       +part+'</span>',perChar);
    }
    box.classList.toggle("speaking",!other);   // 장쇠 차례에만 입과 몸이 움직임
    log("say",this.nameOf(who)+(meta?` (${meta.part}/${meta.of})`:"")+": "+text,"lg-sys");
@@ -1072,14 +1069,14 @@ const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],m
    if(CFG.tts&&!this.failed&&window.speechSynthesis){
      try{
        const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
-       /* 내 배역에는 전용 보이스를 두지 않음 (2026-08-11 사용자 결정).
+       /* 내 배역에는 전용 보이스를 두지 않음.
           장쇠와 같은 공용 보이스를 쓰고, 누가 말하는지는 말풍선 자리와 이름표로 가름.
           실제 보이스는 공용 확보나 남사당놀이보존회 녹음으로 정할 예정임.
-          상대 배역과 잽이만 다른 목소리로 갈라 대거리의 주고받기를 들리게 함 */
-       const otherVoice=who==="foe"||who==="jaebi";
+          상대 배역만 다른 목소리로 갈라 대거리의 주고받기를 들리게 함 */
+       const otherVoice=who==="foe";
        const vs=this.pick(); if(vs.length)u.voice=otherVoice?(vs[1]||vs[0]):vs[0];
        u.rate=otherVoice?1.02:.98;
-       u.pitch=who==="foe"?1.25:who==="jaebi"?1.1:.85;
+       u.pitch=otherVoice?1.25:.85;
        if(CFG.waitTts){
          spoken=false;
          u.onend=()=>{spoken=true;advance();};
@@ -1566,7 +1563,7 @@ function hostRelay(text){
 function beatLabel(b){
   if(b.t==="enter")return "상대 배역 등장";
   if(b.t==="free")return "따라 하기 연출";
-  const who=b.who==="foe"?(S.madang?S.madang.foe:"상대"):b.who==="jaebi"?"잽이":
+  const who=b.who==="foe"?(S.madang?S.madang.foe:"상대"):
             b.who==="me"?(S.role||"내 배역"):"장쇠";
   if(b.t==="say")return `${who}: ${String(b.text||"").slice(0,20)}…`;
   return `${b.act?"무언 도발":who+" 대사"} → ${MOVES[b.move].name}`;
@@ -1589,7 +1586,7 @@ function runBeats(list,opts,onDone){
     hostRelay("");   // 지난 대목의 중계를 걷고 새 대목을 엶
     const b=list[i++];
     if(b.t==="enter"){setFoe("등장",b.cap);AU.kkwaenggwari();setTimeout(step,900);return;}
-    if(b.t==="say"){ if(b.cap)setFoe("대기",b.cap); SPEECH.say(b.who,b.text,box,step); return; }
+    if(b.t==="say"){ if(b.cap)setFoe("대기",b.cap); SPEECH.say(b.who,b.text,box,step,{quote:!!b.src}); return; }
     if(b.t==="free"){
       setFoe("과장",b.cap);
       SPEECH.say("jangsoe",b.text,box,()=>{
@@ -1624,7 +1621,7 @@ function runBeats(list,opts,onDone){
           ()=>{ if(ok&&b.foeBack)SPEECH.say("foe",b.foeBack,box,step); else step(); });
       },opts.padOpts);
     };
-    if(b.text)SPEECH.say(b.who,b.text,box,arm);
+    if(b.text)SPEECH.say(b.who,b.text,box,arm,{quote:!!b.src});
     else{setFoe("과장",b.act);setTimeout(arm,1000);}
   };
   step();
