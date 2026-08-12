@@ -681,7 +681,7 @@ const MADANG=[
  preview:"옴탈을 몰아 판 밖으로 쫓아내는 대목",
  maskLine:"이 낯을 보아라. 엷은 자줏빛 바탕에 상모를 얹고 꽹과리를 든 꺽쇠다. 나와 한 패로 판을 여는 놈이지.",
  intro:"꽹과리를 든 남사당패의 앞잡이. 판을 열고 훼방꾼을 몰아내는 놈.",
- foeIntro:"슬금슬금 기어드는 옴쟁이", win:"옴탈을 판 밖으로 몰아내면 이김",
+ foeIntro:"슬금슬금 기어드는 옴쟁이",
  vow:"탈을 쓰면 너는 네가 아니라 꺽쇠다. 서툰 건 꺽쇠가 서툰 것이니 마음 놓고 놀아라.",
  moves:["salpigi","jjilleo","hwidulleo"],
  openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
@@ -743,7 +743,7 @@ const MADANG=[
  preview:"샌님이 말뚝이에게 큰절을 올리는 대목",
  maskLine:"이 낯을 보아라. 이마에 혹이 돋은 자줏빛 바탕에 벙거지 쓰고 말채찍을 든 말뚝이다. 제 주인 샌님을 말로 이기는 하인이지.",
  intro:"벙거지 쓰고 말채찍 든 하인. 주먹이 아니라 말로 주인을 이기는 놈.",
- foeIntro:"거드름 피우는 양반", win:"샌님에게 절을 받아내면 이김",
+ foeIntro:"거드름 피우는 양반",
  vow:"탈을 쓰면 너는 네가 아니라 말뚝이다. 양반 앞에서도 기죽지 말고 놀아라.",
  moves:["geodeureum","horyeong","chaejjik"],
  openLine:"샌님이 거드름을 피우며 온다. 놀리려면 세 가지를 익혀라.",
@@ -823,7 +823,7 @@ const MADANG=[
  preview:"먹중이 춤 대결에서 나가떨어지는 대목",
  maskLine:"이 낯을 보아라. 꽃자줏빛 바탕에 상투를 꽂고 붉은 띠를 두른 취발이다. 흥이 오르면 누구 앞에서도 물러서지 않는 놈이지.",
  intro:"상투 꽂고 붉은 띠 두른 장정. 흥이 오르면 누구 앞에서도 물러서지 않는 놈.",
- foeIntro:"행패 부리는 파계승", win:"춤 대결에서 먹중을 눌러 이김",
+ foeIntro:"행패 부리는 파계승",
  vow:"탈을 쓰면 너는 네가 아니라 취발이다. 물러서지 말고 크게 놀아라.",
  moves:["eokkae","balchago","somae"],
  openLine:"먹중이 행패를 부린다. 누르려면 세 가지를 익혀라.",
@@ -1261,8 +1261,7 @@ function buildRole(){
   $("roleIntro").textContent=m.intro;
   $("roleInfo").innerHTML=
    `<div class="fact"><b>맞설 상대</b><span>${esc(m.foe)} · ${esc(m.foeIntro)}</span></div>
-    <div class="fact"><b>배울 동작</b><span>${m.moves.map(k=>esc(MOVES[k].name)).join(" / ")}</span></div>
-    <div class="fact"><b>이 마당의 승부</b><span>${esc(m.win)}</span></div>`;
+    <div class="fact"><b>배울 동작</b><span>${m.moves.map(k=>esc(MOVES[k].name)).join(" / ")}</span></div>`;
   hydrate();
   bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
   SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
