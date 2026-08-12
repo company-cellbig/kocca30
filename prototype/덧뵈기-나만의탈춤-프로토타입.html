@@ -534,7 +534,7 @@ const $=id=>document.getElementById(id);   // 이 파일 전체에서 DOM 조회
 
 /* ── 0. 설정 ───────────────────────────── */
 const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,sayMax:66,typewriter:true,typeMs:65,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
+  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,sinmyeongCutLow:25,sayMax:66,typewriter:true,typeMs:65,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
 const bind=(id,key,isNum)=>{const el=$(id);
   const set=()=>{
     if(el.type==="checkbox"){CFG[key]=el.checked;return;}
@@ -1732,20 +1732,27 @@ function goStep4(){
   bindSkip(box,()=>SPEECH.stop());
   // 가장 빨리 받아친 동작을 하이라이트로 뽑음 (실기기에서는 진폭이 가장 컸던 동작)
   const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>a.early-b.early)[0];
+  /* 이수 단계(칭호)는 세션 신명 지표를 임계 2개와 대조해 3단으로 가름.
+     칭호 이름과 임계는 잠정값이고 실기기에서 다시 잡음 (기획서 4.4.1 이수 단계) */
   const hot=S.sinmyeong>=CFG.sinmyeongCut;
+  const rank=hot?"한몫 광대":S.sinmyeong>=CFG.sinmyeongCutLow?"초짜 광대":"구경꾼";
   const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
   const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 장단을 놓치지 말고 받아 보자.";
-  const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나.":"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
+  const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나."
+    :S.sinmyeong>=CFG.sinmyeongCutLow?"제법 몸이 풀렸구나. 한 판 더 놀면 광대 소리 듣것다."
+    :"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
   $("acceptBody").innerHTML=`
    <div class="acc-block"><div class="acc-h">인정 선언</div><div class="acc-decl">${esc(decl)}</div>
-     <div class="asset-note" style="text-align:left;margin-top:4px">완주 자체를 인정함. 등급 서열 없음</div></div>
+     <div class="asset-note" style="text-align:left;margin-top:4px">완주를 먼저 인정하고 그 위에 칭호를 얹음. 점수와 등수는 두지 않음</div></div>
+   <div class="acc-block"><div class="acc-h">이수 단계</div><div class="acc-decl">${esc(rank)}</div>
+     <div class="acc-body">${esc(narr)}</div></div>
    <div class="acc-block"><div class="acc-h">수행 요약</div>
      <div class="sum-row"><span>1장 기초 수업</span><span>${S.chapters.lesson?"완수":"미완"}</span></div>
      <div class="sum-row"><span>2장 ${S.madang?esc(S.madang.sceneTitle):"앞대목"}</span><span>${S.chapters.scene?"완수":"미완"}</span></div>
      <div class="sum-row"><span>3장 ${S.madang?esc(S.madang.climaxTitle):"뒷대목"}</span><span>${S.chapters.climax?"완수":"미완"}</span></div>
      <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
-   <div class="acc-block"><div class="acc-h">신명의 서사 번역</div><div class="acc-body">${esc(narr)}</div>
-     <div class="asset-note" style="text-align:left;margin-top:4px">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 분기 임계 ${CFG.sinmyeongCut} (화면에 노출하지 않는 설계, 검증용 표기)</div></div>`;
+   <div class="acc-block"><div class="acc-h">검증용 표기</div>
+     <div class="asset-note" style="text-align:left">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut} (지표 자체는 화면에 노출하지 않는 설계)</div></div>`;
   if(hot)AU.cheer();
   SPEECH.say("jangsoe",decl+" "+bestLine+" "+narr,box);
 }
@@ -1783,7 +1790,7 @@ function buildReport(kind){
    <div class="rep-row"><span>2장 앞대목 소요</span><b>${secs("scene")}</b></div>
    <div class="rep-row"><span>3장 뒷대목 소요</span><b>${secs("climax")}</b></div>
    <div class="rep-row"><span>전체 소요</span><b>${((Date.now()-S.startedAt)/1000).toFixed(0)}s</b></div>
-   <div class="rep-row"><span>신명 지표</span><b>${S.sinmyeong.toFixed(1)} / 임계 ${CFG.sinmyeongCut}</b></div>`;
+   <div class="rep-row"><span>신명 지표</span><b>${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut}</b></div>`;
 }
 
 /* ── 18. 에러 케이스 ───────────────────── */
