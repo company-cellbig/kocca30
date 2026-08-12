@@ -1555,7 +1555,7 @@ function beatLabel(b){
 function runBeats(list,opts,onDone){
   const box=$("playHost");
   const cueTotal=list.filter(b=>b.t==="cue").length;
-  const gain=cueTotal?100/cueTotal:0;   // 다 얼쑤면 만충, 다 좋다면 완화판에 머무는 배분
+  const gain=cueTotal?100/cueTotal:0;   // 다 얼쑤면 가득 차고, 다 좋다면 못 채우는 배분
   let i=0,cueSeen=0;
   const pane=()=>{
     $("infoPane").innerHTML=
@@ -1695,8 +1695,8 @@ function runClimax(){
    `<div class="info-h">뒷대목 줄거리</div><div class="info-card" style="font-size:11.5px;line-height:1.5">${esc(cx.seq)}</div>
     <div class="info-h">결말 연출</div>
     <div class="info-card" style="font-size:11px;line-height:1.5;color:#c9bda9">
-      게이지 만충: ${esc(cx.ending)}<br><br>
-      <span style="color:var(--dim)">미달 완화판: ${esc(cx.endingSoft)}</span></div>`;
+      게이지 가득 참: ${esc(cx.ending)}<br><br>
+      <span style="color:var(--dim)">미달 완화 결말: ${esc(cx.endingSoft)}</span></div>`;
   CLX.start(cx.bpm);
   LANE.build(cx.beats.filter(b=>b.t==="cue").map(b=>b.move));
   SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>{
@@ -1714,7 +1714,7 @@ function finishClimax(cx,full){
   const box=$("playHost");
   setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
   if(full){AU.cheer();AU.kkwaenggwari();}
-  log("sys","절정 결말: "+(full?"완전판":"완화판")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
+  log("sys","절정 결말: "+(full?"완전":"완화")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
   const outro=(cx.outro||[]).slice();   // 결말 뒤에 붙는 원전 마무리 대사
   const wrap=()=>SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
     chapOut("climax");
