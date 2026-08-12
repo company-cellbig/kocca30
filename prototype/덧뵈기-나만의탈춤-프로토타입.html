@@ -188,9 +188,6 @@ button:disabled{opacity:.4;cursor:default}
 .role-mask img{max-height:100%;max-width:100%;object-fit:contain}
 .role-name{font-size:24px;font-weight:800}
 .role-sub{font-size:11.5px;color:var(--dim)}
-.slots{display:flex;gap:8px;justify-content:center}
-.slot{width:40px;height:46px;border:1px dashed rgba(255,255,255,.16);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;font-size:9px;color:#5a5249}
 
 /* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
 .botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
@@ -374,10 +371,7 @@ button:disabled{opacity:.4;cursor:default}
         </div>
         <div class="col col-info">
           <div class="info-h">이 마당의 배역</div>
-          <div class="info-card">
-            <div class="slots" id="roleSlots"></div>
-            <div class="asset-note" style="margin-top:7px">마당당 배역 확장은 2차연도 확장 설계</div>
-          </div>
+          <div class="info-card" id="roleInfo"></div>
         </div>
       </div>
     </section>
@@ -1248,7 +1242,7 @@ function buildRole(){
   $("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
   $("roleName").textContent=m.user;
   $("roleSub").textContent=m.name+"의 배역";
-  $("roleSlots").innerHTML=[0,1].map(()=>`<div class="slot">잠김</div>`).join("");
+  $("roleInfo").innerHTML=`<b>${esc(m.user)}</b> (내 배역)<br>${esc(m.foe)} (상대 배역)`;   // 마당마다 배역은 하나임
   hydrate();
   bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
   SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
