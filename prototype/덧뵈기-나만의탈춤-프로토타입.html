@@ -188,6 +188,13 @@ button:disabled{opacity:.4;cursor:default}
 .role-mask img{max-height:100%;max-width:100%;object-fit:contain}
 .role-name{font-size:24px;font-weight:800}
 .role-sub{font-size:11.5px;color:var(--dim)}
+/* 배역 그림만 있으면 판이 허해 보여 소개문을 그림 아래에 붙임 */
+.role-intro{font-size:12.5px;line-height:1.55;color:#e7dcc8;text-align:center;max-width:88%;
+  padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(200,163,74,.28)}
+.role-facts .fact{display:flex;gap:8px;font-size:11.5px;line-height:1.5;padding:5px 0}
+.role-facts .fact+.fact{border-top:1px solid rgba(255,255,255,.08)}
+.role-facts .fact b{flex:0 0 62px;color:var(--gold);font-weight:600}
 
 /* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
 .botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
@@ -366,12 +373,13 @@ button:disabled{opacity:.4;cursor:default}
             <div class="role-mask" id="roleMask"></div>
             <div class="role-name" id="roleName"></div>
             <div class="role-sub" id="roleSub"></div>
+            <div class="role-intro" id="roleIntro"></div>
           </div>
           <button class="cta" id="btnWear">탈 쓰기</button>
         </div>
         <div class="col col-info">
-          <div class="info-h">이 마당의 배역</div>
-          <div class="info-card" id="roleInfo"></div>
+          <div class="info-h">이 배역이 할 일</div>
+          <div class="info-card role-facts" id="roleInfo"></div>
         </div>
       </div>
     </section>
@@ -671,7 +679,9 @@ const MADANG=[
 {id:"omtal",name:"옴탈잡이",tag:"잡기",user:"꺽쇠",foe:"옴탈",
  brief:"슬금슬금 나타난 옴탈을 꺽쇠가 되어 잡아 쫓는 마당",
  preview:"옴탈을 몰아 판 밖으로 쫓아내는 대목",
- maskLine:"이 낯을 보아라. 엷은 자줏빛 바탕에 상모를 얹고 꽹과리를 든 꺽쇠, 나와 한 패로 판을 여는 놈이다.",
+ maskLine:"이 낯을 보아라. 엷은 자줏빛 바탕에 상모를 얹고 꽹과리를 든 꺽쇠다. 나와 한 패로 판을 여는 놈이지.",
+ intro:"꽹과리를 든 남사당패의 앞잡이. 판을 열고 훼방꾼을 몰아내는 놈.",
+ foeIntro:"슬금슬금 기어드는 옴쟁이", win:"옴탈을 판 밖으로 몰아내면 이김",
  vow:"탈을 쓰면 너는 네가 아니라 꺽쇠다. 서툰 건 꺽쇠가 서툰 것이니 마음 놓고 놀아라.",
  moves:["salpigi","jjilleo","hwidulleo"],
  openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
@@ -731,7 +741,9 @@ const MADANG=[
 {id:"sennim",name:"샌님잡이",tag:"놀리기",user:"말뚝이",foe:"샌님",
  brief:"거드름 피우는 샌님을 말뚝이가 되어 놀려 뒤집는 마당",
  preview:"샌님이 말뚝이에게 큰절을 올리는 대목",
- maskLine:"이 낯을 보아라. 이마에 혹이 돋은 자줏빛 바탕에 벙거지 쓰고 말채찍을 든 말뚝이, 제 주인 샌님을 말로 이기는 하인이다.",
+ maskLine:"이 낯을 보아라. 이마에 혹이 돋은 자줏빛 바탕에 벙거지 쓰고 말채찍을 든 말뚝이다. 제 주인 샌님을 말로 이기는 하인이지.",
+ intro:"벙거지 쓰고 말채찍 든 하인. 주먹이 아니라 말로 주인을 이기는 놈.",
+ foeIntro:"거드름 피우는 양반", win:"샌님에게 절을 받아내면 이김",
  vow:"탈을 쓰면 너는 네가 아니라 말뚝이다. 양반 앞에서도 기죽지 말고 놀아라.",
  moves:["geodeureum","horyeong","chaejjik"],
  openLine:"샌님이 거드름을 피우며 온다. 놀리려면 세 가지를 익혀라.",
@@ -809,7 +821,9 @@ const MADANG=[
 {id:"mokjung",name:"먹중잡이",tag:"이기기",user:"취발이",foe:"먹중",
  brief:"행패 부리는 먹중을 취발이가 되어 춤으로 눌러 이기는 마당",
  preview:"먹중이 춤 대결에서 나가떨어지는 대목",
- maskLine:"이 낯을 보아라. 꽃자줏빛 바탕에 상투를 꽂고 붉은 띠를 두른 취발이, 흥이 오르면 누구 앞에서도 물러서지 않는 놈이다.",
+ maskLine:"이 낯을 보아라. 꽃자줏빛 바탕에 상투를 꽂고 붉은 띠를 두른 취발이다. 흥이 오르면 누구 앞에서도 물러서지 않는 놈이지.",
+ intro:"상투 꽂고 붉은 띠 두른 장정. 흥이 오르면 누구 앞에서도 물러서지 않는 놈.",
+ foeIntro:"행패 부리는 파계승", win:"춤 대결에서 먹중을 눌러 이김",
  vow:"탈을 쓰면 너는 네가 아니라 취발이다. 물러서지 말고 크게 놀아라.",
  moves:["eokkae","balchago","somae"],
  openLine:"먹중이 행패를 부린다. 누르려면 세 가지를 익혀라.",
@@ -1242,7 +1256,13 @@ function buildRole(){
   $("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
   $("roleName").textContent=m.user;
   $("roleSub").textContent=m.name+"의 배역";
-  $("roleInfo").innerHTML=`<b>${esc(m.user)}</b> (내 배역)<br>${esc(m.foe)} (상대 배역)`;   // 마당마다 배역은 하나임
+  /* 배역 그림 하나만 두면 가운데가 비어 소개문을 붙이고, 오른쪽은 할 일 세 가지로 채움.
+     장쇠는 탈 얼굴을 재담으로 풀고 화면 글은 무엇을 하게 되는지를 맡아 서로 겹치지 않게 나눔 */
+  $("roleIntro").textContent=m.intro;
+  $("roleInfo").innerHTML=
+   `<div class="fact"><b>맞설 상대</b><span>${esc(m.foe)} · ${esc(m.foeIntro)}</span></div>
+    <div class="fact"><b>배울 동작</b><span>${m.moves.map(k=>esc(MOVES[k].name)).join(" / ")}</span></div>
+    <div class="fact"><b>이 마당의 승부</b><span>${esc(m.win)}</span></div>`;
   hydrate();
   bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
   SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
