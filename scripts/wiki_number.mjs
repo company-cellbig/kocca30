@@ -65,6 +65,7 @@ const NO_NUMBER = new Set([
   '07_Logs/log.md',
   'README.md',
   'prototype/README.md',
+  'prototype/덧뵈기-나만의탈춤-텍스트.md',
 ]);
 const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 
