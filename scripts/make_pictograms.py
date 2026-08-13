@@ -107,7 +107,7 @@ def geodeureum(pen):     # 상체를 뒤로 젖혀 거드름 피우는 자세로
     pen.line([(150, 108), (208, 138), (156, 168)])      # 오른쪽 허리 짚음
     pen.line([(146, 110), (86, 140), (132, 172)])       # 왼쪽 허리 짚음
 
-def horyeong(pen):       # 팔을 뻗어 가리킨 채 버팀
+def satdae(pen):         # 팔을 뻗어 가리킨 채 버팀
     head(pen, (98, 92))
     pen.line([(98, 118), (100, 184)])
     pen.line([(100, 184), (74, 234)])
@@ -154,7 +154,7 @@ def somae(pen):          # 장삼 소매를 좌우로 크게 뿌림
     pen.poly([(186, 86), (232, 128), (212, 176), (178, 150), (170, 110)])
 
 MOVES = [("살피기", salpigi), ("찔러보기", jjilleo), ("휘둘러쫓기", hwidulleo),
-         ("거드름흉내", geodeureum), ("호령가리키기", horyeong), ("채찍휘두르기", chaejjik),
+         ("거드름흉내", geodeureum), ("삿대질", satdae), ("채찍휘두르기", chaejjik),
          ("어깨메기", eokkae), ("한발차올리기", balchago), ("소매뿌리기", somae)]
 
 os.makedirs(OUT, exist_ok=True)
