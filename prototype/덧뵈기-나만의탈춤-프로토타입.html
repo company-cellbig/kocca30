@@ -223,7 +223,7 @@ button:disabled{opacity:.4;cursor:default}
 .gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a5a2a,#c8a34a,#ffd76e);transition:width .22s}
 .gauge-lab{font-size:10px;color:var(--dim);white-space:nowrap}
 
-/* ══ 배역 인정 ══ */
+/* ══ 결과와 마무리 ══ */
 .accept{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:3px}
 .acc-block{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(200,163,74,.05)}
 .acc-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:4px}
@@ -386,7 +386,7 @@ button:disabled{opacity:.4;cursor:default}
 
     <!-- Step 3 마당 장면 체험 -->
     <section class="screen" id="scr-play">
-      <div class="scr-head"><span class="step-tag">Step 3</span><span class="scr-title" id="playTitle">기초 수업 (1장)</span>
+      <div class="scr-head"><span class="step-tag">Step 3</span><span class="scr-title" id="playTitle">익히기 (1장)</span>
         <span class="spacer"></span><span class="timer-chip" data-timer></span>
         <button class="quit-btn" data-quit>그만두기</button></div>
       <div class="cols">
@@ -417,9 +417,9 @@ button:disabled{opacity:.4;cursor:default}
       </div>
     </section>
 
-    <!-- Step 4 배역 인정 -->
+    <!-- Step 4 결과와 마무리 -->
     <section class="screen" id="scr-accept">
-      <div class="scr-head"><span class="step-tag">Step 4</span><span class="scr-title">배역 인정</span>
+      <div class="scr-head"><span class="step-tag">Step 4</span><span class="scr-title">결과와 마무리</span>
         <span class="spacer"></span><span class="timer-chip" data-timer></span></div>
       <div class="cols">
         <div class="col col-host"><div class="host" id="acceptHost"></div></div>
@@ -577,7 +577,7 @@ const ART_GROUPS=[
  {name:"상대 배역 전신", where:"Step 3 판", items:(()=>{const o={};
    ["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.forEach(p=>o["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png"));return o;})()},
  {name:"동작 픽토그램", where:"Step 3 오른쪽 동작 목록", items:byMove("pic_","픽토_")},
- {name:"동작 시범", where:"Step 3 기초 수업 시범 자리", items:byMove("demo_","시범_")},
+ {name:"동작 시범", where:"Step 3 익히기 시범 자리", items:byMove("demo_","시범_")},
  {name:"배경", where:"Step 3 판", items:{
    bg_omtal:"배경_옴탈잡이.png", bg_sennim:"배경_샌님잡이.png", bg_mokjung:"배경_먹중잡이.png",
    bg_climax:"배경_절정무대.png"}}
@@ -894,7 +894,7 @@ const GAPS=[
  {where:"넷째 마당 끝 (전사본 686~700행)",
   what:"취발이가 피조리의 생김새를 품평하는 대목이 있으나 공공 전시물에 넣기 부적절함",
   fix:"뒷대목을 코피 재담(678행)에서 닫고 피조리 대목은 넣지 않음"},
- {where:"4.3.1 3) (5) 신명 지표 / 4.4 배역 인정",
+ {where:"4.3.1 3) (5) 신명 지표 / 4.4 결과와 마무리",
   what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
   fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
  {where:"판 위 말풍선의 세로 여유 (작은 창)",
@@ -1492,10 +1492,10 @@ function setBG(which){
 function chapIn(k){curChap=k;chapStart=performance.now();}
 function chapOut(k){S.chapMs[k]=performance.now()-chapStart;S.chapters[k]=true;}
 
-/* 1장 기초 수업 */
+/* 1장 익히기 */
 function runLesson(){
   chapIn("lesson");
-  $("playTitle").textContent="기초 수업 (1장)";
+  $("playTitle").textContent="익히기 (1장)";
   $("demoHint").textContent="상대 배역은 아직 나오지 않음";
   const box=$("playHost"),list=S.madang.moves.slice();
   let i=0;
@@ -1772,9 +1772,9 @@ function goStep4(){
    <div class="acc-block"><div class="acc-h">이수 단계</div><div class="acc-decl">${esc(rank)}</div>
      <div class="acc-body">${esc(narr)}</div></div>
    <div class="acc-block"><div class="acc-h">수행 요약</div>
-     ${sumRow("1장 기초 수업","수업")}
-     ${sumRow("2장 장면 실습","앞대목")}
-     ${sumRow("3장 절정 무대","절정")}
+     ${sumRow("1장 익히기","수업")}
+     ${sumRow("2장 겨루기","앞대목")}
+     ${sumRow("3장 판 벌이기","절정")}
      <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
    <div class="acc-block"><div class="acc-h">검증용 표기</div>
      <div class="asset-note" style="text-align:left">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut} (지표 자체는 화면에 노출하지 않는 설계)</div></div>`;
@@ -1798,7 +1798,7 @@ function goStep5(kind){
 }
 function endSession(reason){
   SPEECH.stop();PAD.disarm();CLX.stop();
-  log("sys","비완주 종료: "+reason+" (배역 인정 화면 건너뜀)","lg-err");
+  log("sys","비완주 종료: "+reason+" (결과와 마무리 화면 건너뜀)","lg-err");
   goStep5("비완주-"+reason);
 }
 function buildReport(kind){
