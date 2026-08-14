@@ -1757,6 +1757,12 @@ function goStep4(){
   const rank=hot?"한몫 광대":S.sinmyeong>=CFG.sinmyeongCutLow?"초짜 광대":"구경꾼";
   const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
   const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 장단을 놓치지 말고 받아 보자.";
+  /* 수행 요약은 장별로 판정 3단을 세어 보여 줌. 판 안에서 부르는 얼쑤/좋다/다시를
+     이 화면에서만 대성공/성공/미수행으로 옮겨 적음 (기획서 4.4.1 수행 요약).
+     실습과 절정은 판 안에서 미수행을 말로 돌려주지 않아, 유저가 그것을 아는 자리가 여기뿐임 */
+  const sumRow=(label,chap)=>{
+    const r=S.records.filter(x=>x.chapter===chap),n=v=>r.filter(x=>x.v===v).length;
+    return `<div class="sum-row"><span>${label}</span><span>대성공 ${n("eolssu")}, 성공 ${n("johda")}, 미수행 ${n("dasi")}</span></div>`;};
   const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나."
     :S.sinmyeong>=CFG.sinmyeongCutLow?"제법 몸이 풀렸구나. 한 판 더 놀면 광대 소리 듣것다."
     :"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
@@ -1766,9 +1772,9 @@ function goStep4(){
    <div class="acc-block"><div class="acc-h">이수 단계</div><div class="acc-decl">${esc(rank)}</div>
      <div class="acc-body">${esc(narr)}</div></div>
    <div class="acc-block"><div class="acc-h">수행 요약</div>
-     <div class="sum-row"><span>1장 기초 수업</span><span>${S.chapters.lesson?"완수":"미완"}</span></div>
-     <div class="sum-row"><span>2장 ${S.madang?esc(S.madang.sceneTitle):"앞대목"}</span><span>${S.chapters.scene?"완수":"미완"}</span></div>
-     <div class="sum-row"><span>3장 ${S.madang?esc(S.madang.climaxTitle):"뒷대목"}</span><span>${S.chapters.climax?"완수":"미완"}</span></div>
+     ${sumRow("1장 기초 수업","수업")}
+     ${sumRow("2장 장면 실습","앞대목")}
+     ${sumRow("3장 절정 무대","절정")}
      <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
    <div class="acc-block"><div class="acc-h">검증용 표기</div>
      <div class="asset-note" style="text-align:left">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut} (지표 자체는 화면에 노출하지 않는 설계)</div></div>`;
