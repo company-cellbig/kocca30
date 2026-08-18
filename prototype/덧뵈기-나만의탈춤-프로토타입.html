@@ -560,7 +560,7 @@ bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
    실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠.
    탈 이미지(얼굴만)와 전신 이미지는 쓰이는 자리가 달라 종류를 나눠 둠  */
 const ART_BASE="assets/";   // 이 폴더만 압축해 공유할 수 있도록 그림을 함께 둠
-const MOVE_KO={hwalgae:"활개펴기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
+const MOVE_KO={chikyeo:"손치켜들기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
   satdae:"삿대질",chaejjik:"채찍휘두르기",eokkae:"어깨메기",balchago:"한발차올리기",somae:"소매뿌리기"};
 const FOE_POSE=["등장","대기","과장","중립","결말"];
 const byMove=(pre,fix)=>{const o={};Object.keys(MOVE_KO).forEach(k=>o[pre+k]=fix+MOVE_KO[k]+".png");return o;};
@@ -649,7 +649,7 @@ function renderAssets(){
 /* how는 실기기에서 유저가 실제로 하는 몸짓임. 프로토타입 입력(키패드)이 아니라
    카메라가 판정할 대상을 적어 개발자에게 명세를 계속 보여 줌 */
 const MOVES={
- hwalgae:{name:"활개 펴기",body:"양팔 벌리기",elems:["자세","홀드"],dir:"spread",how:"기막히다는 듯 양팔을 어깨높이로 활짝 벌린 채 버팀"},
+ chikyeo:{name:"손 치켜들기",body:"한 팔 높이 들기",elems:["자세","홀드"],dir:"up",how:"기막히다는 듯 한 팔을 머리 위로 치켜들고 상체를 숙인 채 버팀"},
  jjilleo:{name:"찔러보기",body:"팔 뻗기",elems:["자세","진폭"],dir:"right",how:"팔을 앞으로 힘껏 뻗어 찌름"},
  hwidulleo:{name:"휘둘러 쫓기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"팔을 좌우로 크고 빠르게 휘둘러 쫓음"},
  geodeureum:{name:"거드름 흉내",body:"상체 젖히기",elems:["자세","홀드"],dir:"down",how:"상체를 뒤로 젖혀 거드름 피우는 자세로 버팀"},
@@ -660,7 +660,7 @@ const MOVES={
  somae:{name:"소매 뿌리기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"장삼 소매를 좌우로 크게 뿌림"}
 };
 /* 픽토그램 그림이 아직 없을 때 쓰는 대체 기호 */
-const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔",spread:"⇔"};
+const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"};
 
 /* ── 3. 마당 데이터 ──────────────────────
    2장과 3장의 대본은 전사본 `03_References/converted/남사당놀이/남사당놀이 - 덧뵈기.md`
@@ -683,7 +683,7 @@ const MADANG=[
  intro:"꽹과리를 든 남사당패의 앞잡이. 판을 열고 훼방꾼을 몰아내는 놈.",
  foeIntro:"슬금슬금 기어드는 옴쟁이",
  vow:"탈을 쓰면 너는 네가 아니라 꺽쇠다. 서툰 건 꺽쇠가 서툰 것이니 마음 놓고 놀아라.",
- moves:["hwalgae","jjilleo","hwidulleo"],
+ moves:["chikyeo","jjilleo","hwidulleo"],
  openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
  closeLine:"손에 익었구나. 이제 저놈 앞에 서 보자.",
  sceneTitle:"둘째 마당 앞대목",climaxTitle:"둘째 마당 뒷대목",
@@ -691,7 +691,7 @@ const MADANG=[
  scene:[
   {t:"enter",cap:"옴탈이 슬금슬금 나와 꺽쇠를 봄",src:"424행"},
   {t:"cue",who:"foe",text:"이히! 네기럴꺼! 이놈이 뭣하는 놈인고.",src:"426행",
-   move:"hwalgae",cap:"옴탈이 요리조리 쫓으며 살핌",
+   move:"chikyeo",cap:"옴탈이 요리조리 쫓으며 살핌",
    mine:"어이구 이놈이 하늘 높은 줄 모르고 땅 넓은 줄만 알지. 얼굴이 왜쟁반만 하구나.",
    mineNo:"어, 어허, 이놈이 뭣하는 놈이더라.",
    ok:"저놈 봐라, 뒷걸음질을 친다!",no:"저놈이 아직도 네 뒤를 쫓는구나."},
@@ -712,7 +712,7 @@ const MADANG=[
   endingSoft:"옴탈이 슬금슬금 물러나 판 뒤로 숨음",
   beats:[
   {t:"cue",who:"foe",text:"네 내 얼굴 우툴두툴한 내력을 모르는고.",src:"446행",
-   move:"hwalgae",cap:"옴탈이 얼굴을 들이밂",
+   move:"chikyeo",cap:"옴탈이 얼굴을 들이밂",
    mine:"모르것다.",mineNo:"글쎄다, 알 듯 말 듯하구나.",
    ok:"걸려들었다! 제 내력을 술술 푼다.",no:"저놈이 콧방귀만 뀌는구나."},
   {t:"cue",who:"foe",text:"어훔! 그렇다면 내 얼굴 우툴두툴한 내력을 일러줄 것이니 똑똑히 들어 봐라. … 호구별상 손님 마마님을 뫼시고 나왔다가 내 쌍판이 이 모양이 되었것다.",src:"450행",
