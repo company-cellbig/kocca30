@@ -62,7 +62,7 @@ const EXCLUDED_PATHS = new Set([
 //   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
 //     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
 const NO_NUMBER = new Set([
-  '07_Logs/log.md',
+  '08_Logs/log.md',
   'README.md',
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
@@ -75,7 +75,7 @@ function skipNumbering(file) {
 
 // anchor 갱신도 안 하는 곳 (이력 보존: 과거 참조를 그대로 둠)
 const NO_ANCHOR_REWRITE = new Set([
-  '07_Logs/log.md',
+  '08_Logs/log.md',
 ]);
 
 // 옛 넘버링(한국 공문서 체계)에 쓰던 한글 기호. 기존 번호를 떼어낼 때만 씀

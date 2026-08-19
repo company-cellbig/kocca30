@@ -24,7 +24,7 @@
 //
 // 제외 파일/영역:
 //   - 02_HowTo/반복 결함 카탈로그.md: § 용례가 과거 결함 사례 인용이라 당시 상태를 가리킴
-//   - 03_References/(read-only), 07_Logs/log.md(이력), 04_Projects/_archive/(폐기 문서)
+//   - 03_References/(read-only), 08_Logs/log.md(이력), 04_Projects/_archive/(폐기 문서)
 
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, resolve, dirname, basename, extname } from 'node:path';
@@ -34,7 +34,7 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(SCRIPT_DIR, '..');
 
 const EXCLUDED_PATHS = new Set([
-  '03_References', '07_Logs', '04_Projects/_archive',
+  '03_References', '08_Logs', '04_Projects/_archive',
   '.claude', '.git', '.obsidian', 'node_modules', 'assets', 'export', 'scripts',
 ]);
 
