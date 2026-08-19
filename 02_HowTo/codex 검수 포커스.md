@@ -46,7 +46,7 @@ Codex 플러그인의 `adversarial-review` 시스템 프롬프트는 회의 기�
 [P4 톤/구조 일관성 (CONVENTIONS.md 3.4 문체)]
 - 음슴체(~임/~함) 준수, 가운뎃점(`·`) 금지, 두괄식/개조식
 - 프론트매터 updated 필드가 실제 수정 일자와 일치
-- 07_Logs/log.md 기록 양식 준수
+- 08_Logs/log.md 기록 양식 준수
 
 [P5 위키 정합성]
 - 신규 문서 MOC 등록, 양방향 wikilink, 깨진 링크 없음

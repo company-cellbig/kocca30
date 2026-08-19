@@ -47,7 +47,7 @@ Raw 인자: `$ARGUMENTS`
    - `00_Index/MOC.md`의 "참고자료 (03_References)" 섹션에 `[[<name>]]` 항목을 추가
      - 이미 등록되어 있으면 skip
      - MOC `updated` 필드를 오늘 날짜로 갱신
-   - `07_Logs/log.md`에 `ingest` 작업유형으로 다음 형식의 항목 추가:
+   - `08_Logs/log.md`에 `ingest` 작업유형으로 다음 형식의 항목 추가:
      ```markdown
      ## [YYYY-MM-DD] ingest | <name> 변환·통합
 
