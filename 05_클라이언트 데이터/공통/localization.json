@@ -7,6 +7,10 @@
     "ko": "다음으로",
     "en": "NEXT"
   },
+  "1_1_restart": {
+    "ko": "처음으로",
+    "en": "BACK TO START"
+  },
   "1_1_agree_and_start": {
     "ko": "동의하고 시작하기",
     "en": "AGREE AND START"
@@ -195,6 +199,46 @@
     "ko": "QR 코드를 스캔하면  전자책을 다운로드할 수 있습니다.",
     "en": "Scan The QR Code  To Download Your E-Book."
   },
+  "5_0_role_0_name": {
+    "ko": "꺽쇠",
+    "en": "Kkeoksoe"
+  },
+  "5_0_role_0_desc": {
+    "ko": "꽹과리를 울려 놀이판을 여는 흥의 대장입니다.  걸쭉한 입담과 신명나는 장단으로 판을 이끕니다.",
+    "en": "He Is The Leader Of Excitement Who Opens The Performance By Striking The Kkwaenggwari.  He Leads The Stage With His Boisterous Banter And Exhilarating Rhythms."
+  },
+  "5_0_role_1_name": {
+    "ko": "샌님",
+    "en": "Saennim"
+  },
+  "5_0_role_1_desc": {
+    "ko": "팔도 유람에 나선 거드름 가득한 양반입니다.  하인 말뚝이에게 번번이 골탕을 먹는 풍자의 주인공입니다.",
+    "en": "He Is A Haughty Nobleman Who Has Set Out To Tour The Eight Provinces.  He Is The Star Of The Satire Who Is Repeatedly Tricked By His Servant, Malttugi."
+  },
+  "5_0_role_2_name": {
+    "ko": "취발이",
+    "en": "Chwibari"
+  },
+  "5_0_role_2_desc": {
+    "ko": "힘꼴 좋고 흥이 넘치는 한량입니다.  판을 어지럽히는 먹중을 힘찬 춤 대결로 쫓아냅니다.",
+    "en": "He Is A Carefree Man Of Leisure With Great Strength And Overflowing Enthusiasm.  He Drives Away The Troublemaker Monk With A Vigorous Dance Duel."
+  },
+  "5_0_grade_0": {
+    "ko": "X",
+    "en": "X"
+  },
+  "5_0_grade_1": {
+    "ko": "OK",
+    "en": "OK"
+  },
+  "5_0_grade_2": {
+    "ko": "GOOD",
+    "en": "GOOD"
+  },
+  "5_0_grade_3": {
+    "ko": "PERFECT",
+    "en": "PERFECT"
+  },
   "5_1_subtitle": {
     "ko": "덧뵈기 체험하기",
     "en": "Experiencing The Deotboegi"
@@ -212,20 +256,20 @@
     "en": "I Will Tell You How To Use It."
   },
   "5_2_guide_0": {
-    "ko": "나만의 탈을 디자인하세요",
-    "en": "Design Your Own Mask"
+    "ko": "따라 출 배역의 탈을 골라주세요",
+    "en": "Select The Mask For The Role You Will Play."
   },
   "5_2_guide_1": {
-    "ko": "말뚝이와 함께 풍물 장단에 맞춰 춤사위를 따라하세요",
-    "en": "Follow Along With Malttugi's Dance Moves To The Pungmul Rhythm."
+    "ko": "화면이 안내하는 동작을 장단에 맞춰 따라 추세요",
+    "en": "Follow The Movements Guided By The Screen To The Rhythm."
   },
   "5_2_guide_2": {
-    "ko": "당신만의 기념 사진을 만들어보세요",
-    "en": "Create Your Own Commemorative Photo"
+    "ko": "동작이 정확할수록 높은 판정을 받습니다",
+    "en": "The More Accurate Your Movements, The Higher Your Score Will Be."
   },
   "5_2_guide_3": {
-    "ko": "QR 코드 스캔으로 기념 사진을 소장할 수 있습니다",
-    "en": "You Can Keep A Commemorative Photo By Scanning The QR Code."
+    "ko": "최종 점수와 말뚝이의 한마디를 확인하세요",
+    "en": "Check The Final Score And Malttugi's Comment."
   },
   "5_3_title": {
     "ko": "이용 동의",
@@ -240,36 +284,40 @@
     "en": "Terms And Conditions (To Be Added)"
   },
   "5_4_title": {
-    "ko": "나만의 탈 만들기",
-    "en": "Create Your Own Mask"
+    "ko": "배역 선택",
+    "en": "Role Selection"
   },
-  "5_5_title": {
-    "ko": "나만의 탈 생성 중",
-    "en": "Creating Your Own Mask"
-  },
-  "5_5_dialogue": {
-    "ko": "멋진 탈이 만들어지고 있다네.",
-    "en": "A wonderful mask is being created."
+  "5_4_dialogue": {
+    "ko": "누가 되어보고 싶은가?",
+    "en": "Who Would You Like To Be?"
   },
   "5_6_title": {
-    "ko": "춤사위 한마당",
-    "en": "Dance Performance"
+    "ko": "나의 탈춤 점수",
+    "en": "My Mask Dance Score"
   },
-  "5_7_title": {
-    "ko": "기념 촬영",
-    "en": "Commemorative Photo"
+  "5_6_dialogue_0": {
+    "ko": "한바탕 웃었으면 그게 바로 신명이지!",
+    "en": "If You've Had A Good Laugh, That's True Exhilaration!"
   },
-  "5_8_title": {
-    "ko": "사진 생성 중",
-    "en": "Creating Your Photo"
+  "5_6_dialogue_1": {
+    "ko": "괜찮네, 탈춤은 놀다 보면 느는 법이지!",
+    "en": "That's Alright. You Get Better At Mask Dance The More You Play!"
   },
-  "5_9_title": {
-    "ko": "사진 생성 완료",
-    "en": "Photo Completed"
+  "5_6_dialogue_2": {
+    "ko": "흥은 넘치는데 몸이 반 박자 늦는구먼!",
+    "en": "You're Overflowing With Excitement, But Your Body Is Half A Beat Behind!"
   },
-  "5_10_title": {
-    "ko": "이용 동의",
-    "en": "User Agreement"
+  "5_6_dialogue_3": {
+    "ko": "덩실덩실, 제법이야 제법!",
+    "en": "Deongsil-Deongsil! Not Bad At All, Not Bad!"
+  },
+  "5_6_dialogue_4": {
+    "ko": "얼쑤! 오늘 마당의 주인공은 자네일세!",
+    "en": "Eolssu! You Are The Star Of The Show Today!"
+  },
+  "5_6_finalScore": {
+    "ko": "최종 점수",
+    "en": "FINAL SCORE"
   },
   "13_1_title": {
     "ko": "그만하시겠어요?",
