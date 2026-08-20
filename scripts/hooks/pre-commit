@@ -49,6 +49,11 @@ if [ ! -d "$WORK/scripts" ]; then
 	exit 0
 fi
 
+# 이미지 등 바이너리 자산은 임시 폴더에 안 꺼내므로(용량) 진짜 저장소 루트를 알려 줌.
+# 자산 존재는 워킹트리 사실이라 인덱스 기준으로 볼 필요가 없음
+WIKI_ASSET_ROOT=$(git rev-parse --show-toplevel)
+export WIKI_ASSET_ROOT
+
 fail=0
 
 if ! ( cd "$WORK" && node scripts/wiki_number.mjs --check > /dev/null 2>&1 ); then

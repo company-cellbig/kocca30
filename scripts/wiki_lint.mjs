@@ -19,6 +19,8 @@
 //      severity: warning. CONVENTIONS가 유지보수 점검 대상이라 규정하므로 커밋은 안 막음
 //   7. em dash 위배: CONVENTIONS 3.4.1이 금지하나 검사가 없어 사각지대였음 (2026-08-20 추가)
 //      severity: error. 예외는 규칙을 설명하는 CONVENTIONS 본문뿐
+//   8. 이미지 경로: ![](경로)와 <img src>의 파일이 실재하는지 (2026-08-20 추가)
+//      severity: error. 코드블록, 인라인 백틱, <name> 자리표시자는 제외
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -44,6 +46,13 @@ import { fileURLToPath } from 'node:url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(SCRIPT_DIR, '..');
+
+// 이미지 등 바이너리 자산이 실제로 사는 곳. 보통 REPO_ROOT와 같음.
+// pre-commit 훅은 인덱스에서 .md와 스크립트만 임시 폴더로 꺼내 검사하므로
+// 그 폴더에는 assets/가 없음. 훅이 이 변수로 진짜 저장소 루트를 알려 줌
+const ASSET_ROOT = process.env.WIKI_ASSET_ROOT
+  ? resolve(process.env.WIKI_ASSET_ROOT)
+  : REPO_ROOT;
 
 const EXCLUDED_PATHS = new Set([
   '03_References/_locked',
@@ -406,6 +415,57 @@ function checkEmDash(allMdFiles) {
   return findings;
 }
 
+// 8. 이미지 경로. CONVENTIONS 3.5가 "작성자가 직접 확인"으로 두었으나 한 번도
+// 확인되지 않아 폴더 이동으로 깨진 32건이 방치됐음 (2026-08-20 기계로 옮김)
+function checkImagePaths(allMdFiles) {
+  const findings = [];
+  for (const relPath of allMdFiles) {
+    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    // 자산은 워킹트리 사실이라 ASSET_ROOT 기준으로 봄 (위 상수 설명 참조)
+    const absDir = dirname(join(ASSET_ROOT, relPath));
+    const lines = readFileSync(join(REPO_ROOT, relPath), 'utf8').split('\n');
+    let inCodeBlock = false;
+    for (let i = 0; i < lines.length; i++) {
+      if (/^\s*```/.test(lines[i])) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+      // 인라인 백틱 안은 문법 설명이라 제외
+      const line = lines[i].replace(/`[^`]*`/g, '');
+      const srcs = [];
+      for (const m of line.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) srcs.push(m[1].trim());
+      for (const m of line.matchAll(/<img[^>]+src="([^"]+)"/g)) srcs.push(m[1].trim());
+      for (const src of srcs) {
+        if (/^https?:|^data:/.test(src)) continue;
+        if (src.includes('<') || src.includes('>')) continue; // <name> 같은 자리표시자
+        let target;
+        try {
+          target = resolve(absDir, decodeURIComponent(src));
+        } catch {
+          continue;
+        }
+        let exists = true;
+        try {
+          statSync(target);
+        } catch {
+          exists = false;
+        }
+        if (!exists) {
+          findings.push({
+            type: '이미지 경로',
+            severity: 'error',
+            file: relPath,
+            line: i + 1,
+            message: `이미지 파일 없음: ${src} (CONVENTIONS 3.5 이미지 삽입, 그 .md 기준 상대경로여야 함)`,
+          });
+        }
+      }
+    }
+  }
+  return findings;
+}
+
 // § 절 참조는 2026-07-14에 폐기됨. 절 참조는 wikilink anchor로만 씀
 function checkSectionMark(allMdFiles) {
   const findings = [];
@@ -507,6 +567,7 @@ function main() {
     ...checkWikilinkAnchors(allMdFiles, fileIndex),
     ...checkGawundeotjeom(allMdFiles),
     ...checkEmDash(allMdFiles),
+    ...checkImagePaths(allMdFiles),
     ...checkSectionMark(allMdFiles),
     ...checkMocRegistration(allMdFiles),
     ...checkLinkFloor(allMdFiles, fileIndex),
