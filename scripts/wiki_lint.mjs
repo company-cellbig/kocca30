@@ -66,7 +66,9 @@ const EXCLUDED_PATHS = new Set([
   '.obsidian',
   'assets',
   'scripts',
-  '99_Temp', // 임시 작업 폴더. 외부 원자료가 그대로 들어와 위키 규칙 미적용 (2026-08-20)
+  // 99_Temp는 폴더 전체가 아니라 외부 원자료 파일만 제외함 (2026-08-20 외부 검토 반영).
+  // 에이전트가 쓴 임시 노트는 깨진 링크/anchor/금지 문자 검사를 계속 받음
+  '99_Temp/남사당놀이_덧뵈기의_희극적_요소.md',
 ]);
 
 const SKIP_CONTENT_CHECKS = new Set([
@@ -78,7 +80,7 @@ const SKIP_CONTENT_CHECKS = new Set([
 const GRAPH_EXEMPT_FILES = new Set([
   'README.md', 'AGENTS.md', 'CONVENTIONS.md', 'CLAUDE.md', '00_Index/MOC.md',
 ]);
-const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/'];
+const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/', '99_Temp/']; // 99_Temp: 임시 노트라 MOC 등록/링크 하한만 면제 (2026-08-20)
 const GRAPH_EXEMPT_TYPES = new Set(['index', 'log', 'agentnote']);
 
 // em dash 금지 규칙 자체를 설명하는 문서. 규칙을 적으려면 그 문자를 써야 함
@@ -105,6 +107,7 @@ const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, �
 const INDEX_INCLUDED_DIRS = [
   '03_References/_locked',
   '03_References/converted',
+  '99_Temp', // 제외된 원자료 파일도 link target으로는 유효해야 함 (2026-08-20)
 ];
 
 // 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)

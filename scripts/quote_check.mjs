@@ -41,7 +41,7 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 const TRANSCRIPT_DIR = path.join(ROOT, "03_References/converted/남사당놀이");
-const SCAN_DIRS = ["00_Index", "01_Concepts", "02_HowTo", "03_References", "04_Projects", "05_산출물", "07_작업노트", "prototype"];
+const SCAN_DIRS = ["00_Index", "01_Concepts", "02_HowTo", "03_References", "04_Projects", "05_산출물", "07_작업노트", "99_Temp", "prototype"];
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
