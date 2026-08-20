@@ -7,6 +7,7 @@
 # 점검 항목:
 #   1. 헤딩 넘버링 (wiki_number --check): CONVENTIONS 4.2 규칙과 어긋나는 헤딩
 #   2. 위키 정합 (wiki_lint): 깨진 wikilink anchor, 가운뎃점
+#   3. 원전 인용 (quote_check): 행 번호를 단 인용이 전사본 원문과 다른 것
 #
 # 파일을 자동으로 고치지는 않음. 스테이징하지 않은 변경까지 끌려 들어가는 사고를
 # 막기 위해, 고치는 것은 사람이나 에이전트가 명령을 직접 돌리게 함.
@@ -34,6 +35,16 @@ if ! node scripts/wiki_lint.mjs > /dev/null 2>&1; then
 	echo ""
 	echo "✗ 위키 정합성 error"
 	node scripts/wiki_lint.mjs 2>&1 | sed 's/^/    /'
+	fail=1
+fi
+
+if ! node scripts/quote_check.mjs > /dev/null 2>&1; then
+	echo ""
+	echo "✗ 원전 인용이 전사본과 어긋납니다 (AGENTS 셀프체크 [인용 재대조])"
+	node scripts/quote_check.mjs 2>&1 | sed 's/^/    /'
+	echo ""
+	echo "  인용문을 원문대로 고치거나, 행 번호를 맞는 행으로 고치세요."
+	echo "  인용이 아니라 개념어에 따옴표를 쓴 것이면 따옴표를 벗기세요."
 	fail=1
 fi
 
