@@ -13,6 +13,10 @@
 //      severity: error. 절 참조는 wikilink anchor로만 씀
 //      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그,
 //            검수 기록 3종)과 폐지 정책 자체를 설명하는 CONVENTIONS 본문
+//   5. MOC 미등록: 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음 (CONVENTIONS 5.1 6단계)
+//      severity: error
+//   6. 링크 하한 미달: 관련 페이지 링크가 2개 미만 (CONVENTIONS 3.5 링크 하한선)
+//      severity: warning. CONVENTIONS가 유지보수 점검 대상이라 규정하므로 커밋은 안 막음
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -56,6 +60,14 @@ const EXCLUDED_PATHS = new Set([
 const SKIP_CONTENT_CHECKS = new Set([
   '08_Logs/log.md',
 ]);
+
+// MOC 등록과 링크 하한을 면제하는 곳.
+// 루트 규칙 문서, 색인, 로그, 작업 노트, 그리고 위키 밖에서 읽히는 자족 폴더임
+const GRAPH_EXEMPT_FILES = new Set([
+  'README.md', 'AGENTS.md', 'CONVENTIONS.md', 'CLAUDE.md', '00_Index/MOC.md',
+]);
+const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/'];
+const GRAPH_EXEMPT_TYPES = new Set(['index', 'log', 'agentnote']);
 
 const ALLOW_GAWUNDEOTJEOM = new Set([
   'CONVENTIONS.md',
@@ -388,6 +400,66 @@ function checkSectionMark(allMdFiles) {
   return findings;
 }
 
+function graphExempt(relPath, content) {
+  if (GRAPH_EXEMPT_FILES.has(relPath)) return true;
+  if (GRAPH_EXEMPT_PREFIX.some(pre => relPath.startsWith(pre))) return true;
+  const fm = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fm) return false;
+  const t = fm[1].match(/^type:\s*(\S+)/m);
+  return t ? GRAPH_EXEMPT_TYPES.has(t[1]) : false;
+}
+
+// 5. MOC 미등록. 셀프체크 "MOC에 등록했는가"를 기계로 옮긴 것 (2026-08-20)
+function checkMocRegistration(allMdFiles) {
+  const findings = [];
+  const mocRel = '00_Index/MOC.md';
+  if (!allMdFiles.includes(mocRel)) return findings;
+  const moc = readFileSync(join(REPO_ROOT, mocRel), 'utf8');
+  for (const relPath of allMdFiles) {
+    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
+    if (graphExempt(relPath, content)) continue;
+    const name = basename(relPath, '.md');
+    const hit = moc.includes('[[' + name + ']]')
+      || moc.includes('[[' + name + '|')
+      || moc.includes('[[' + name + '#');
+    if (!hit) {
+      findings.push({
+        type: 'MOC 미등록',
+        severity: 'error',
+        file: relPath,
+        line: 1,
+        message: `00_Index/MOC.md에 [[${name}]]이 없음 (CONVENTIONS 5.1 문서 생성 6단계)`,
+      });
+    }
+  }
+  return findings;
+}
+
+// 6. 링크 하한 미달. 셀프체크 "관련 페이지 2개와 연결됐는가"를 기계로 옮긴 것 (2026-08-20)
+function checkLinkFloor(allMdFiles, fileIndex) {
+  const findings = [];
+  for (const relPath of allMdFiles) {
+    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
+    if (graphExempt(relPath, content)) continue;
+    const self = basename(relPath, '.md');
+    const targets = new Set();
+    for (const m of content.matchAll(/\[\[([^\]|#]+)/g)) {
+      const t = m[1].trim();
+      if (t && t !== self && fileIndex.has(t)) targets.add(t);
+    }
+    if (targets.size < 2) {
+      findings.push({
+        type: '링크 하한 미달',
+        severity: 'warning',
+        file: relPath,
+        line: 1,
+        message: `관련 페이지 링크가 ${targets.size}개임 (CONVENTIONS 3.5 링크 하한선은 2개)`,
+      });
+    }
+  }
+  return findings;
+}
+
 function main() {
   const allMdFiles = collectMd(REPO_ROOT);
   const fileIndex = buildFileIndex(allMdFiles);
@@ -396,6 +468,8 @@ function main() {
     ...checkWikilinkAnchors(allMdFiles, fileIndex),
     ...checkGawundeotjeom(allMdFiles),
     ...checkSectionMark(allMdFiles),
+    ...checkMocRegistration(allMdFiles),
+    ...checkLinkFloor(allMdFiles, fileIndex),
   ];
   const errors = findings.filter(f => f.severity === 'error');
   const warnings = findings.filter(f => f.severity === 'warning');
