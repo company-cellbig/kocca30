@@ -70,7 +70,7 @@ const NO_NUMBER = new Set([
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
 ]);
-const NO_NUMBER_PREFIX = ['04_Projects/_archive/', '99_Temp/']; // 99_Temp: 원자료가 예고 없이 들어오는 폴더라 번호 재작성 자체를 막음, anchor 갱신과 lint는 유지 (2026-08-20 외부 검토 반영)
+const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 
 function skipNumbering(file) {
   return NO_NUMBER.has(file) || NO_NUMBER_PREFIX.some(p => file.startsWith(p));
