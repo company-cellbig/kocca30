@@ -17,6 +17,8 @@
 //      severity: error
 //   6. 링크 하한 미달: 관련 페이지 링크가 2개 미만 (CONVENTIONS 3.5 링크 하한선)
 //      severity: warning. CONVENTIONS가 유지보수 점검 대상이라 규정하므로 커밋은 안 막음
+//   7. em dash 위배: CONVENTIONS 3.4.1이 금지하나 검사가 없어 사각지대였음 (2026-08-20 추가)
+//      severity: error. 예외는 규칙을 설명하는 CONVENTIONS 본문뿐
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -68,6 +70,11 @@ const GRAPH_EXEMPT_FILES = new Set([
 ]);
 const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/'];
 const GRAPH_EXEMPT_TYPES = new Set(['index', 'log', 'agentnote']);
+
+// em dash 금지 규칙 자체를 설명하는 문서. 규칙을 적으려면 그 문자를 써야 함
+const ALLOW_EM_DASH = new Set([
+  'CONVENTIONS.md',
+]);
 
 const ALLOW_GAWUNDEOTJEOM = new Set([
   'CONVENTIONS.md',
@@ -367,6 +374,38 @@ function checkGawundeotjeom(allMdFiles) {
   return findings;
 }
 
+// 7. em dash 위배. CONVENTIONS 3.4.1이 금지하나 어떤 검사도 없어 사각지대였음 (2026-08-20 추가)
+function checkEmDash(allMdFiles) {
+  const findings = [];
+  for (const relPath of allMdFiles) {
+    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (ALLOW_EM_DASH.has(relPath)) continue;
+    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
+    const lines = content.split('\n');
+    let inCodeBlock = false;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^```/.test(line)) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+      // 인라인 백틱 안 em dash는 무시 (규칙을 설명하는 자리)
+      const lineNoCode = line.replace(/`[^`]*`/g, '');
+      if (lineNoCode.includes('—')) {
+        findings.push({
+          type: 'em_dash',
+          severity: 'error',
+          file: relPath,
+          line: i + 1,
+          message: 'em dash 사용: CONVENTIONS 3.4.1 문체 위배 (쉼표, 콜론, 괄호로 대체하거나 문장을 나눔)',
+        });
+      }
+    }
+  }
+  return findings;
+}
+
 // § 절 참조는 2026-07-14에 폐기됨. 절 참조는 wikilink anchor로만 씀
 function checkSectionMark(allMdFiles) {
   const findings = [];
@@ -467,6 +506,7 @@ function main() {
     ...checkBrokenWikilinks(allMdFiles, fileIndex),
     ...checkWikilinkAnchors(allMdFiles, fileIndex),
     ...checkGawundeotjeom(allMdFiles),
+    ...checkEmDash(allMdFiles),
     ...checkSectionMark(allMdFiles),
     ...checkMocRegistration(allMdFiles),
     ...checkLinkFloor(allMdFiles, fileIndex),
