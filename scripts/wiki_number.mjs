@@ -51,6 +51,7 @@ const EXCLUDED_PATHS = new Set([
   'assets',
   'export',
   'scripts',
+  '99_Temp', // 임시 작업 폴더. 외부 원자료의 헤딩을 건드리지 않음 (2026-08-20)
 ]);
 
 // 헤딩 번호를 안 매기는 곳. 본문은 스캔하므로 anchor 연쇄 갱신 대상에는 들어감

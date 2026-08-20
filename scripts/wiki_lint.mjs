@@ -66,6 +66,7 @@ const EXCLUDED_PATHS = new Set([
   '.obsidian',
   'assets',
   'scripts',
+  '99_Temp', // 임시 작업 폴더. 외부 원자료가 그대로 들어와 위키 규칙 미적용 (2026-08-20)
 ]);
 
 const SKIP_CONTENT_CHECKS = new Set([
