@@ -66,9 +66,7 @@ const EXCLUDED_PATHS = new Set([
   '.obsidian',
   'assets',
   'scripts',
-  // 99_Temp는 폴더 전체가 아니라 외부 원자료 파일만 제외함 (2026-08-20 외부 검토 반영).
-  // 에이전트가 쓴 임시 노트는 깨진 링크/anchor/금지 문자 검사를 계속 받음
-  '99_Temp/남사당놀이_덧뵈기의_희극적_요소.md',
+  // 99_Temp(임시 대기소)는 lint 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
 ]);
 
 const SKIP_CONTENT_CHECKS = new Set([
@@ -107,7 +105,6 @@ const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, �
 const INDEX_INCLUDED_DIRS = [
   '03_References/_locked',
   '03_References/converted',
-  '99_Temp', // 제외된 원자료 파일도 link target으로는 유효해야 함 (2026-08-20)
 ];
 
 // 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)
