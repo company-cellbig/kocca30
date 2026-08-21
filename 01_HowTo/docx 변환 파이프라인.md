@@ -102,7 +102,7 @@ Claude Code는 추가로:
 
 HWPX 본문은 `Contents/section0.xml`, `section1.xml`, ... N개의 section 파일로 분리될 수 있음. V2는 모든 `Contents/section*.xml`을 ZIP에서 발견 → 숫자 정렬 → 순서대로 walk. section 경계에서는 list block을 끊어(`last_bullet_indent = -1`) 다음 section 첫 paragraph가 직전 bullet 흐름에 종속되지 않게 함.
 
-stats에 `sections` 수 보고. section0만 하드코딩하면 multi-section 문서에서 section1+ 콘텐츠가 silent data loss됨 (Codex 검수 지적, [[#8.11 패턴 12: 다중 section HWPX silent data loss]] 참고).
+stats에 `sections` 수 보고. section0만 하드코딩하면 multi-section 문서에서 section1+ 콘텐츠가 silent data loss됨 ([[#8.11 패턴 12: 다중 section HWPX silent data loss]] 참고).
 
 ## 6.2 헤딩 자동 부여
 
