@@ -26,6 +26,10 @@
 //   (행 범위 또는 원문 미명시)의 행 번호 유효성 검사임. 참조가 가리키는 요약의
 //   충실성은 기계가 못 보므로 사람 검토로 남음.
 //
+//   절 제목의 주장 어휘도 경고함 (2026-08-21 MECH-5 부분 수용): 전사본을 다루는
+//   문서의 헤딩이 승패나 결말을 주장하면(scripts/heading_claim_terms.txt 등록 어휘)
+//   경고를 출력함. 어휘 매칭은 오탐이 있을 수 있어 경고만 하고 exit code에 안 넣음.
+//
 // 대조 방식:
 //   전사본 줄에서 마크다운 강조 기호(*)만 걷고 나머지는 손대지 않음. 띄어쓰기와
 //   문장부호까지 그대로 봄. 인용문 안의 말줄임(… 또는 ...)은 생략으로 보고,
@@ -213,9 +217,21 @@ function closestLine(lines, quote) {
 	return best.len >= 4 ? best : null;
 }
 
+// ── 제목 주장 어휘 목록 ────────────────────────────────────────
+function loadHeadingClaimTerms() {
+	const p = path.join(ROOT, "scripts/heading_claim_terms.txt");
+	if (!fs.existsSync(p)) return [];
+	return fs.readFileSync(p, "utf8")
+		.split("\n")
+		.map((l) => l.trim())
+		.filter((l) => l && !l.startsWith("#"));
+}
+const claimTerms = loadHeadingClaimTerms();
+
 // ── 검사 ───────────────────────────────────────────────────────
 const findings = [];
 const skipped = [];
+const headingWarns = [];
 const rangeSeen = new Set(); // 같은 자리의 RANGE를 인용 경로와 참조 경로가 중복 보고하지 않게 함
 let quoteCount = 0;
 let docCount = 0;
@@ -228,6 +244,22 @@ for (const docPath of docs) {
 	docCount++;
 	const lines = text.split("\n");
 	const max = src.lines.length;
+
+	// 절 제목 주장 어휘 경고 (코드블록 안 헤딩은 제외)
+	{
+		let inCode = false;
+		for (let i = 0; i < lines.length; i++) {
+			if (/^```/.test(lines[i])) { inCode = !inCode; continue; }
+			if (inCode) continue;
+			const h = /^#{1,6}\s+(.+?)\s*$/.exec(lines[i]);
+			if (!h) continue;
+			for (const term of claimTerms) {
+				if (h[1].includes(term)) {
+					headingWarns.push({ file: rel, line: i + 1, heading: h[1], term });
+				}
+			}
+		}
+	}
 
 	for (let ln = 0; ln < lines.length; ln++) {
 		const line = lines[ln];
@@ -322,7 +354,7 @@ for (const docPath of docs) {
 const real = findings.filter((f) => f.verdict !== "SHOW");
 
 if (asJson) {
-	console.log(JSON.stringify({ docCount, quoteCount, findings, skipped }, null, 2));
+	console.log(JSON.stringify({ docCount, quoteCount, findings, skipped, headingWarns }, null, 2));
 	process.exit(real.length ? 1 : 0);
 }
 
@@ -337,6 +369,13 @@ if (showRefs) {
 			if (f.file !== cur) { cur = f.file; console.log(`\n  ${cur}`); }
 			console.log(`    :${f.line}  ${f.ref}  ${f.note}`);
 		}
+	}
+}
+
+if (headingWarns.length) {
+	console.log(`\n[제목 주장 어휘 경고] ${headingWarns.length}건 (제목은 가리키기만 하고 주장하지 않음, CONVENTIONS 4.1. 경고만 하고 커밋은 안 막음)`);
+	for (const w of headingWarns) {
+		console.log(`  ${w.file}:${w.line}  "${w.heading}" (어휘: ${w.term})`);
 	}
 }
 

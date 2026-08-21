@@ -10,6 +10,8 @@
 #   3. 원전 인용 (quote_check): 행 번호를 단 인용이 전사본 원문과 다른 것, 범위 밖 행 참조
 #   4. frontmatter updated (2026-08-21 이관): 변경된 .md의 updated가 오늘 날짜인지.
 #      AGENTS 셀프체크의 자기보고 항목("updated가 오늘과 일치하는가")을 기계로 옮긴 자리임
+#   5. 파생 텍스트 동반 알림 (2026-08-21 MECH-4): 본문이 바뀌었는데 헤딩과 TL;DR이
+#      그대로인 절을 확인 요구 목록으로 출력함. 알림만 하고 커밋은 막지 않음
 #
 # 무엇을 검사하는가:
 #   워킹트리가 아니라 인덱스(스테이징된 내용)를 검사함 (2026-08-20 변경).
@@ -103,6 +105,9 @@ if [ -s "$STALE" ]; then
 	echo "  updated를 오늘 날짜로 고친 뒤 다시 add 하세요."
 	fail=1
 fi
+
+# 5. 파생 텍스트 동반 알림. 실제 저장소 인덱스를 읽으므로 $WORK 밖에서 돌림
+node scripts/diff_companion.mjs 2>/dev/null || true
 
 if [ "$fail" -ne 0 ]; then
 	echo ""

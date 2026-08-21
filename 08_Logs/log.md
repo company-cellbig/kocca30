@@ -9,6 +9,16 @@ updated: 2026-08-21
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-08-21] maint | 보류 2건 구현 (MECH-4 파생 텍스트 알림, MECH-5 제목 주장 어휘 경고)
+
+- 계기: 사용자가 보류 3건(MECH-4, MECH-5 제목 어휘, SLIM-1) 해소를 지시함. 앞 둘은 보류 사유였던 위험을 설계로 눌러 구현하고, SLIM-1은 보류 조건(설계 후 재판정)에 따라 분할 설계안을 채팅으로 제시함(판정 대기)
+- MECH-4 `scripts/diff_companion.mjs` 신설: 스테이징 diff에서 본문이 바뀌었는데 절 제목과 TL;DR이 그대로인 절을 확인 요구 목록으로 출력함. 오탐 위험 때문에 알림 전용(exit 0, 커밋 안 막음)으로 구현하고 pre-commit 5번 점검으로 연결. log와 _archive와 03_References 제외. 실측 테스트에서 변경 절 2개를 정확히 짚음
+- MECH-5 제목 어휘(부분 수용분): `scripts/heading_claim_terms.txt` 신설(이기는, 승리, 패배, 화해 등 10어휘, 배역명 겹침 어간 제외), quote_check가 전사본을 다루는 문서의 절 제목에서 등록 어휘를 경고함(경고 전용, exit code 불변). CONVENTIONS 4.1에 "제목은 가리키기만 하고 주장하지 않음" 규칙 신설. 합성 테스트 검출 성공, 기존 문서 4종 오탐 0건
+- 검토안 적용 검토표의 MECH-4, MECH-5 판정을 2차 판정으로 갱신
+- 검증: wiki_number 0건, wiki_lint error 0건, quote_check 0건(경고 0건). 독립 검토 1회(신설 문장 2종): 발견 11건, 반영 10건(이중 주어, 목적어 호응, 시점 순환, 헤딩/제목 용어 불일치 등), 반려 1건(정의 anchor 동반된 용어의 발췌 한계 오탐)
+- (cycle-exempt) 운영 메타와 검사기 변경이라 외부 검토 면제. 보류 해소는 사용자 지시
+- 수정 파일: scripts/diff_companion.mjs(신규), scripts/heading_claim_terms.txt(신규), scripts/quote_check.mjs, scripts/hooks/pre-commit, CONVENTIONS.md, AGENTS.md, 99_Temp/문서 개정 검토안.md
+
 ## [2026-08-21] maint | 문서 개정 검토안 12건 판정 반영 (MECH 4, FLOW 4, SLIM 1 수용)
 
 - 계기: 99_Temp 검토안(이틀간 결함 16건의 원인 분석)의 개입 12건을 사용자가 판정함(작성자 권고안 수용). 수용 9(MECH-1/2/3/6, FLOW-1/2/3/4잔여, SLIM-2), 보류 3(MECH-4, MECH-5 제목 어휘, SLIM-1), 반려 1(MECH-5 단정 어휘). 판정은 검토안 적용 검토표에 기입
