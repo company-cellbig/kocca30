@@ -2,10 +2,10 @@
 // HWPX/DOCX → MD 변환 파이프라인
 // 사용법: node scripts/import-doc.mjs <path-to-hwpx-or-docx>
 // 출력:
-//   01_References/_sources/<name>.<ext>                       (원본 보존)
-//   01_References/converted/<name>/<name>.md                  (변환 본문)
-//   01_References/converted/<name>/figures/media/             (추출 이미지)
-//   01_References/converted/<name>/<name>_review_pending.md   (검수 큐 사이드카)
+//   02_References/_sources/<name>.<ext>                       (원본 보존)
+//   02_References/converted/<name>/<name>.md                  (변환 본문)
+//   02_References/converted/<name>/figures/media/             (추출 이미지)
+//   02_References/converted/<name>/<name>_review_pending.md   (검수 큐 사이드카)
 //
 // 분기:
 //   .hwpx → Python(assets/extract_hwpx.py) 호출: 헤딩/표/이미지 직접 파싱 (권장)
@@ -119,7 +119,7 @@ if (ext !== '.hwpx' && ext !== '.docx') {
 }
 
 const sourceName = basename(inputAbs, ext);
-const refRoot = join(REPO_ROOT, '01_References');
+const refRoot = join(REPO_ROOT, '02_References');
 const sourcesDir = join(refRoot, '_sources');
 const sourcePath = join(sourcesDir, `${sourceName}${ext}`);
 // 분리 구조:
@@ -226,7 +226,7 @@ if (ext === '.hwpx') {
   content = content.replace(/^---\s*\n[\s\S]*?\n---\s*\n/, '');
 
   // 이미지 경로: Pandoc이 절대경로(혼합 슬래시)로 박는 것을 MD 기준 상대경로로 치환
-  // MD: 01_References/converted/<name>.md, figures: 01_References/_figures/<name>/
+  // MD: 02_References/converted/<name>.md, figures: 02_References/_figures/<name>/
   // → link prefix: ../_figures/<name>
   const linkPrefix = relative(dirname(mdPath), figuresDir).replace(/\\/g, '/');
   const figuresAbsRegex = new RegExp(

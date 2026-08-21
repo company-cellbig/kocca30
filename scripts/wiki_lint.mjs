@@ -37,14 +37,14 @@
 //     점검은 `node scripts/wiki_number.mjs --check`, 정정은 `--write` (anchor 연쇄 갱신 포함)
 //
 // 예외 영역:
-//   - 01_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
+//   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
 //   - 99_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
 //   - CONVENTIONS.md (가운뎃점 규칙 정의)
-//   - 02_HowTo/반복 결함 카탈로그.md (정규식 예시)
-//   - 02_HowTo/codex 검수 포커스.md (정책 언급)
+//   - 01_HowTo/반복 결함 카탈로그.md (정규식 예시)
+//   - 01_HowTo/codex 검수 포커스.md (정책 언급)
 
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve, dirname, basename, extname } from 'node:path';
@@ -61,11 +61,11 @@ const ASSET_ROOT = process.env.WIKI_ASSET_ROOT
   : REPO_ROOT;
 
 const EXCLUDED_PATHS = new Set([
-  '01_References/_locked',
-  '01_References/_sources',
-  '01_References/_figures',
-  '01_References/_reviews',
-  '01_References/converted',
+  '02_References/_locked',
+  '02_References/_sources',
+  '02_References/_figures',
+  '02_References/_reviews',
+  '02_References/converted',
   '.claude',
   'node_modules',
   '.git',
@@ -94,29 +94,29 @@ const ALLOW_EM_DASH = new Set([
 
 const ALLOW_GAWUNDEOTJEOM = new Set([
   'CONVENTIONS.md',
-  '02_HowTo/반복 결함 카탈로그.md',
-  '02_HowTo/codex 검수 포커스.md',
-  '01_References/converted_모순점.md', // 변환본 인용 컨텍스트
+  '01_HowTo/반복 결함 카탈로그.md',
+  '01_HowTo/codex 검수 포커스.md',
+  '02_References/converted_모순점.md', // 변환본 인용 컨텍스트
 ]);
 
 // § 표기가 허용되는 곳. 모두 "당시 문서 상태"를 인용한 기록이라 고치면 기록이 왜곡됨
 const ALLOW_SECTION_MARK = new Set([
   'CONVENTIONS.md',                                          // § 폐지 정책을 설명하는 본문
-  '02_HowTo/반복 결함 카탈로그.md',                            // 과거 결함 사례 인용
+  '01_HowTo/반복 결함 카탈로그.md',                            // 과거 결함 사례 인용
 ]);
 const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, 이력 보존
 
 // fileIndex 빌드 시 read-only 영역도 포함 (link target 매칭용)
 // 다만 검사 대상은 EXCLUDED_PATHS 제외한 일반 위키만
 const INDEX_INCLUDED_DIRS = [
-  '01_References/_locked',
-  '01_References/converted',
+  '02_References/_locked',
+  '02_References/converted',
 ];
 
 // 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)
 const ATTACHMENT_DIRS = [
   'assets',
-  '01_References/_figures',
+  '02_References/_figures',
 ];
 
 const args = process.argv.slice(2);

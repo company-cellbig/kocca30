@@ -41,7 +41,7 @@
 //
 // 전사본 지정:
 //   1) --source <경로>
-//   2) 문서 frontmatter의 sources에 적힌 이름이 01_References/converted/ 아래 파일과 맞으면 그것
+//   2) 문서 frontmatter의 sources에 적힌 이름이 02_References/converted/ 아래 파일과 맞으면 그것
 //   3) 문서 경로나 제목에 종목 이름(덧뵈기, 덜미, 살판)이 있으면 그 전사본
 //   셋 다 안 되면 그 문서는 건너뛰고 알림
 
@@ -49,8 +49,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const TRANSCRIPT_DIR = path.join(ROOT, "01_References/converted/남사당놀이");
-const SCAN_DIRS = ["00_Index", "03_Concepts", "02_HowTo", "01_References", "04_Projects", "05_산출물", "07_작업노트", "08_제작 가이드", "90_Temp", "prototype"];
+const TRANSCRIPT_DIR = path.join(ROOT, "02_References/converted/남사당놀이");
+const SCAN_DIRS = ["00_Index", "03_Concepts", "01_HowTo", "02_References", "04_Projects", "05_산출물", "07_작업노트", "08_제작 가이드", "90_Temp", "prototype"];
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
@@ -96,7 +96,7 @@ if (targets.length) {
 	docs = [];
 	for (const d of SCAN_DIRS) walk(path.join(ROOT, d), docs);
 	// 전사본 자신과 로그는 대상이 아님
-	docs = docs.filter((p) => !p.replace(/\\/g, "/").includes("01_References/converted/"));
+	docs = docs.filter((p) => !p.replace(/\\/g, "/").includes("02_References/converted/"));
 	docs = docs.filter((p) => /\d{2,4}행/.test(fs.readFileSync(p, "utf8")));
 }
 

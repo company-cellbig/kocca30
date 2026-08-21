@@ -26,10 +26,10 @@ Raw 인자: `$ARGUMENTS`
    {
      "ok": true,
      "backend": "python (extract_hwpx.py)" | "pandoc (...)",
-     "source": "01_References/_sources/<name>.<ext>",
-     "converted": "01_References/converted/<name>.md",
-     "figuresDir": "01_References/_figures/<name>",
-     "sidecar": "01_References/_reviews/<name>.review.md",
+     "source": "02_References/_sources/<name>.<ext>",
+     "converted": "02_References/converted/<name>.md",
+     "figuresDir": "02_References/_figures/<name>",
+     "sidecar": "02_References/_reviews/<name>.review.md",
      "stats": { "h2": N, "h3": N, "tableMd": N, "tableGrid": N, "tableHtml": N, "figures": N },
      "backendStats": { ... } | null,
      "warnings": "..." | null
@@ -44,14 +44,14 @@ Raw 인자: `$ARGUMENTS`
      - 헤딩/표/이미지 통계
      - 경고가 있다면 그대로 표시
    - 변환본이 무형유산 종목 소재 전사본이면 `converted/` 루트에서 종류별 하위 폴더(예: `converted/남사당놀이/`)로 옮김. 파이프라인은 항상 루트로 출력하므로 사람이 수동 이동함 (규약: [[CONVENTIONS#2. 디렉토리 구조]] converted 하위 폴더 분리). wikilink는 파일명 해석이라 이동해도 안 깨짐
-   - `00_Index/MOC.md`의 "참고자료 (01_References)" 섹션에 `[[<name>]]` 항목을 추가
+   - `00_Index/MOC.md`의 "참고자료 (02_References)" 섹션에 `[[<name>]]` 항목을 추가
      - 이미 등록되어 있으면 skip
      - MOC `updated` 필드를 오늘 날짜로 갱신
    - `99_Logs/log.md`에 `ingest` 작업유형으로 다음 형식의 항목 추가:
      ```markdown
      ## [YYYY-MM-DD] ingest | <name> 변환·통합
 
-     - 원본: `01_References/_sources/<name>.<ext>`
+     - 원본: `02_References/_sources/<name>.<ext>`
      - 변환본: [[<name>]]
      - 검수 큐: [[<name>.review]]
      - 백엔드: <python|pandoc>
@@ -66,7 +66,7 @@ Raw 인자: `$ARGUMENTS`
 
 ## 주의
 
-- 스크립트는 원본 파일을 `01_References/_sources/`로 **복사**한다. 사용자의 원래 파일은 그대로 유지됨
+- 스크립트는 원본 파일을 `02_References/_sources/`로 **복사**한다. 사용자의 원래 파일은 그대로 유지됨
 - 같은 이름의 파일이 `_sources/`에 이미 있으면 덮어쓰기: 충돌이 우려되면 호출 전 사용자에게 확인 후 진행
 - 사이드카는 사람 검수용. 검수 완료 후 사용자가 삭제하거나 본문에 흡수
 - 이미지 자동 설명(Vision)은 OFF: 환각 방지. 시각 해석이 필요하면 별도 명령으로 명시 호출

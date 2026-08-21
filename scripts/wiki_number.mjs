@@ -25,7 +25,7 @@
 // 예외 영역 (넘버링 안 함):
 //   - 99_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용), 위키 콘텐츠 아님
-//   - 01_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
+//   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
 //   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
 //   - .obsidian/, .claude/, scripts/, assets/, export/, node_modules/, .git/
 //
@@ -39,11 +39,11 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(SCRIPT_DIR, '..');
 
 const EXCLUDED_PATHS = new Set([
-  '01_References/_locked',
-  '01_References/_sources',
-  '01_References/_figures',
-  '01_References/_reviews',
-  '01_References/converted',
+  '02_References/_locked',
+  '02_References/_sources',
+  '02_References/_figures',
+  '02_References/_reviews',
+  '02_References/converted',
   '.claude',
   '.git',
   '.obsidian',
