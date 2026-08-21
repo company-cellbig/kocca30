@@ -21,6 +21,11 @@
 //   여러 행을 쉼표로 나열하면 "그 행들 각각에 있다"는 주장으로 보고 전부 대조함.
 //   물결(424~444행)은 "그 구간 안에 있다"는 주장으로 보고 구간 안에서 찾음.
 //
+//   따옴표 인용이 없어도 행 번호 참조 자체는 검사함 (2026-08-21 확장): 전사본 범위를
+//   벗어나거나 시작이 끝보다 큰 참조를 RANGE로 잡음. CONVENTIONS 3.6의 근거 마커
+//   (행 범위 또는 원문 미명시)의 행 번호 유효성 검사임. 참조가 가리키는 요약의
+//   충실성은 기계가 못 보므로 사람 검토로 남음.
+//
 // 대조 방식:
 //   전사본 줄에서 마크다운 강조 기호(*)만 걷고 나머지는 손대지 않음. 띄어쓰기와
 //   문장부호까지 그대로 봄. 인용문 안의 말줄임(… 또는 ...)은 생략으로 보고,
@@ -211,6 +216,7 @@ function closestLine(lines, quote) {
 // ── 검사 ───────────────────────────────────────────────────────
 const findings = [];
 const skipped = [];
+const rangeSeen = new Set(); // 같은 자리의 RANGE를 인용 경로와 참조 경로가 중복 보고하지 않게 함
 let quoteCount = 0;
 let docCount = 0;
 
@@ -258,6 +264,7 @@ for (const docPath of docs) {
 			for (const b of bad) {
 				const label = b.ref.from === b.ref.to ? `${b.ref.from}행` : `${b.ref.from}~${b.ref.to}행`;
 				if (b.kind === "RANGE") {
+					rangeSeen.add(`${rel}:${ln + 1}:${label}`);
 					findings.push({ file: rel, line: ln + 1, verdict: "RANGE", quote, ref: label,
 						note: `전사본은 ${max}행까지임` });
 				} else if (elsewhere.length) {
@@ -267,6 +274,31 @@ for (const docPath of docs) {
 					const c = closestLine(src.lines, quote);
 					findings.push({ file: rel, line: ln + 1, verdict: "NOTFOUND", quote, ref: label,
 						note: c ? `가장 가까운 행 ${c.n}: ${strip(src.lines[c.n - 1]).trim().slice(0, 90)}` : "비슷한 행 없음" });
+				}
+			}
+		}
+
+		// 따옴표 인용이 없는 행 번호 참조의 범위 검사 (2026-08-21 확장).
+		// "13행"이 개수(분량)일 수 있으므로 인용 경로와 같은 구문 가름(괄호나 조사)을 적용함
+		{
+			const bare = line.replace(/"[^"\n]*"/g, "");
+			const re = new RegExp(REF_RE.source, "g");
+			let bm;
+			while ((bm = re.exec(bare)) !== null) {
+				const pre = bare.slice(0, bm.index);
+				const rest = bare.slice(bm.index + bm[0].length);
+				const inParen = pre.lastIndexOf("(") > pre.lastIndexOf(")");
+				if (!inParen && !/^[에의와과,)]/.test(rest)) continue;
+				for (const r of parseRefs(bm[0]) ?? []) {
+					const label = r.from === r.to ? `${r.from}행` : `${r.from}~${r.to}행`;
+					let note = null;
+					if (r.from > max || r.to > max) note = `전사본은 ${max}행까지임`;
+					else if (r.from > r.to) note = "범위 시작이 끝보다 큼";
+					if (!note) continue;
+					const key = `${rel}:${ln + 1}:${label}`;
+					if (rangeSeen.has(key)) continue;
+					rangeSeen.add(key);
+					findings.push({ file: rel, line: ln + 1, verdict: "RANGE", quote: "", ref: label, note });
 				}
 			}
 		}

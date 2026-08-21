@@ -9,6 +9,23 @@ updated: 2026-08-21
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-08-21] maint | 문서 개정 검토안 12건 판정 반영 (MECH 4, FLOW 4, SLIM 1 수용)
+
+- 계기: 99_Temp 검토안(이틀간 결함 16건의 원인 분석)의 개입 12건을 사용자가 판정함(작성자 권고안 수용). 수용 9(MECH-1/2/3/6, FLOW-1/2/3/4잔여, SLIM-2), 보류 3(MECH-4, MECH-5 제목 어휘, SLIM-1), 반려 1(MECH-5 단정 어휘). 판정은 검토안 적용 검토표에 기입
+- MECH-1: pre-commit이 스테이징에서 변경된 .md의 frontmatter `updated`가 오늘인지 검사(자동 갱신 아닌 실패 방식). AGENTS 셀프체크에서 해당 자기보고 항목 삭제. awk 추출 합성 테스트 통과
+- MECH-2: `scripts/deprecated_terms.txt` 신설(`한국 공문서 넘버링`, `전방 설계`, `판정 창`, `타이밍 윈도우`, `폴링`), wiki_lint 검사 9번(폐기 어휘) 추가. 백틱 언급과 log/_archive 면제. 도입 즉시 검토안 메타 언급 2건을 검출해 백틱 정정(검사 작동 확인)
+- MECH-3: CONVENTIONS 3.6 대상 항목에 원전 서사 사실 추가, 작성 절차 6(근거 열: 행 범위 또는 원문 미명시) 신설. quote_check가 따옴표 없는 행 참조의 범위 밖과 역전을 RANGE로 검출(합성 테스트: 9999행, 425~410행 검출, 개수 표현 미오탐)
+- MECH-6: `.claude/settings.json` PostToolUse 훅 + `scripts/hooks/stale_line_reminder.mjs` 신설(.md 편집 후 행 번호 무효 알림). 파이프 테스트와 세션 내 실발화 확인
+- FLOW-1: AGENTS 2.2.1 1단계를 "재료 확정 → 구조 설계"로 교체(사실 층은 행 번호 재료 목록을 07_작업노트에 파일로 커밋 후 도출). CONVENTIONS 3.8.1 3번 예외와 3.8.2 파일 커밋 문장 정합
+- FLOW-2: 독립 검토에 사실 대조 검토 추가(전사본 경로만 주고 각 주장의 근거 행 번호 제시, 못 찾으면 '없음' 과제)
+- FLOW-3: CONVENTIONS 핵심 원칙 7(충돌 시 사실 우선, `원문 미명시`는 정당한 값) 신설, 3.8.7 병렬성 우선을 재료 있는 항목으로 한정
+- FLOW-4 잔여: CONVENTIONS 5.2에 파생 텍스트 점검 단계(4번) 추가, AGENTS 2.2.1에 "정본 수치와 목록은 파일에 쓰고 채팅은 가리킴" 완화안 반영. 게이트 불릿은 같은 날 앞 커밋(d515adc)으로 선반영
+- SLIM-2: 링크 하한선(핵심 원칙 6 → 3.5 위임), 호출 면제(AGENTS 3.3 → 2.4.3 위임) 중복 기재 제거
+- 부수 정정: CONVENTIONS 5.1 4번 폐기 넘버링 지시를 번호 자동 부여로 교체, 7절 양식 규칙 문구 교체, 3.1 파일명 비문, 3.2 overview 행 중복 낱말과 sources 예시 명확화, 4.2 폐기 용어 백틱, AGENTS 3.3 상위 절 anchor를 2.2.1로 교정
+- 검증: wiki_number 0건, wiki_lint error 0건, quote_check 0건. 독립 검토 1회(맥락 없는 서브에이전트, 신설 문장 13종): 발견 32건, 반영 25건, 반려 7건(발췌 한계 조어 오탐 4: 같은 절이나 anchor에 정의 실재, 기존 정본 표현 3: 사용자 확정 이력)
+- (cycle-exempt) 운영 메타와 검사기 변경이라 외부 검토 면제. 판정은 사용자 G1 항목별 승인으로 수행함
+- 수정 파일: CONVENTIONS.md, AGENTS.md, scripts/wiki_lint.mjs, scripts/quote_check.mjs, scripts/hooks/pre-commit, scripts/deprecated_terms.txt(신규), scripts/hooks/stale_line_reminder.mjs(신규), .claude/settings.json(신규), 99_Temp/문서 개정 검토안.md(판정 기입, 첫 커밋)
+
 ## [2026-08-21] maint | 의미 판정과 기계 검사의 경계 정정 (게이트 근거, 보고 어휘, 재료 선행 절차화)
 
 - 계기: 사용자 지시로 규칙 문서 전수 점검. AI가 의미 이해로 판정하는 항목은 검사가 아니라 2차 의견이라는 원리로, G1 승인 7건(A1~A5, B1, C1)을 반영함

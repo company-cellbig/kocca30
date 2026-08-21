@@ -21,6 +21,8 @@
 //      severity: error. 예외는 규칙을 설명하는 CONVENTIONS 본문뿐
 //   8. 이미지 경로: ![](경로)와 <img src>의 파일이 실재하는지 (2026-08-20 추가)
 //      severity: error. 코드블록, 인라인 백틱, <name> 자리표시자는 제외
+//   9. 폐기 어휘: scripts/deprecated_terms.txt에 등록된 옛 용어가 활성 문서에 남았는지 (2026-08-21 추가)
+//      severity: error. 백틱 안 언급(폐기 설명 자리)과 이력 보존 영역(log.md, _archive/)은 면제
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -500,6 +502,59 @@ function checkSectionMark(allMdFiles) {
   return findings;
 }
 
+// 9. 폐기 어휘. 폐기 선언 뒤에도 옛 용어가 활성 문서에 남는 것을 잡음 (2026-08-21 추가).
+//    검증 불가능한 선언("옛 용어를 참조하지 않겠음")을 검증 가능한 검사로 옮긴 자리임
+function loadDeprecatedTerms() {
+  let raw;
+  try {
+    raw = readFileSync(join(SCRIPT_DIR, 'deprecated_terms.txt'), 'utf8');
+  } catch {
+    return [];
+  }
+  const terms = [];
+  for (const line of raw.split('\n')) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    const [term, hint] = t.split('\t');
+    if (term && term.trim()) terms.push({ term: term.trim(), hint: (hint || '').trim() });
+  }
+  return terms;
+}
+
+function checkDeprecatedTerms(allMdFiles) {
+  const findings = [];
+  const terms = loadDeprecatedTerms();
+  if (!terms.length) return findings;
+  for (const relPath of allMdFiles) {
+    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (relPath.startsWith('04_Projects/_archive/')) continue;
+    const lines = readFileSync(join(REPO_ROOT, relPath), 'utf8').split('\n');
+    let inCodeBlock = false;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^```/.test(line)) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+      // 인라인 백틱 안은 폐기를 설명하는 메타 언급이라 면제
+      const lineNoCode = line.replace(/`[^`]*`/g, '');
+      for (const { term, hint } of terms) {
+        if (lineNoCode.includes(term)) {
+          findings.push({
+            type: '폐기 어휘',
+            severity: 'error',
+            file: relPath,
+            line: i + 1,
+            message: `폐기 어휘 "${term}" 사용${hint ? ` (${hint})` : ''}. 용어 자체를 언급하는 자리면 백틱으로 감쌈`,
+          });
+        }
+      }
+    }
+  }
+  return findings;
+}
+
 function graphExempt(relPath, content) {
   if (GRAPH_EXEMPT_FILES.has(relPath)) return true;
   if (GRAPH_EXEMPT_PREFIX.some(pre => relPath.startsWith(pre))) return true;
@@ -570,6 +625,7 @@ function main() {
     ...checkEmDash(allMdFiles),
     ...checkImagePaths(allMdFiles),
     ...checkSectionMark(allMdFiles),
+    ...checkDeprecatedTerms(allMdFiles),
     ...checkMocRegistration(allMdFiles),
     ...checkLinkFloor(allMdFiles, fileIndex),
   ];
