@@ -9,6 +9,13 @@ updated: 2026-08-21
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-08-21] maint | 90_Temp 대기소 폴더 상주화 (.gitkeep) (cycle-exempt)
+
+- 계기: 사용자 지시. `ca76f4a`에서 마지막 파일(`문서 개정 검토안.md`)이 삭제되면서 대기소 폴더가 트리와 디스크에서 함께 사라졌음. git이 빈 디렉토리를 추적하지 않는 탓
+- 조치: `90_Temp/.gitkeep`(빈 파일)을 두어 폴더가 비어 있어도 저장소에 남게 함. 대기소 정책("승격하며 비움")은 그대로이며 빈 상태가 정상 상태임
+- 배경: `CONVENTIONS.md`의 디렉토리 구조와 세 스크립트(`wiki_lint.mjs`, `wiki_number.mjs`, `quote_check.mjs`)가 이미 90_Temp를 전제하고 있어 설정 변경은 없음
+- 파일: `90_Temp/.gitkeep`(신규), `99_Logs/log.md`
+
 ## [2026-08-21] lint | 02_References, 03_Concepts 문서 분류 점검 (cycle-exempt)
 
 - 계기: 사용자 지시로 두 폴더의 목적과 소속 문서의 분류(폴더, type)를 전수 대조함
