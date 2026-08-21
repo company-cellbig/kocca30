@@ -12,7 +12,7 @@
 //   유형 B 결함(본문 수정 후 이름표와 요약 미동기 7건, 2026-08-21 검토안)을 겨냥함.
 //
 // 제외:
-//   08_Logs/(이력), 04_Projects/_archive/(보존), 03_References/(변환 산출물)
+//   99_Logs/(이력), 04_Projects/_archive/(보존), 01_References/(변환 산출물)
 
 import { execFileSync } from "node:child_process";
 
@@ -29,7 +29,7 @@ try {
 	process.exit(0);
 }
 
-const SKIP = [/^08_Logs\//, /^04_Projects\/_archive\//, /^03_References\//];
+const SKIP = [/^99_Logs\//, /^04_Projects\/_archive\//, /^01_References\//];
 const report = [];
 
 for (const f of files) {

@@ -4,7 +4,7 @@ type: howto
 status: stable
 tags: [howto, pipeline, hwpx, docx, pandoc, ingest]
 created: 2026-05-11
-updated: 2026-07-03
+updated: 2026-08-21
 ---
 
 > 제안서/보고서 등 한컴 HWPX 또는 Word DOCX 문서를 LLM Wiki에 통합 가능한 MD로 변환하는 표준 절차. AI 에이전트가 후속 작업에서 환각 없이 인용할 수 있는 수준의 구조 보존이 목표.
@@ -41,7 +41,7 @@ HWPX 원본 (또는 DOCX)
 자산 수명/역할별로 폴더 분리: `converted/`는 1차 탐색 대상(본문만), `_figures/`/`_reviews/`는 부속 자산:
 
 ```
-03_References/
+01_References/
 ├── _sources/<name>.<ext>           (원본 보존, 영구, 수정 금지)
 ├── _figures/<name>/                (추출 이미지, 영구)
 │   ├── image1.png
@@ -71,7 +71,7 @@ HWPX 원본 (또는 DOCX)
 또는 이미 `_sources/`에 두었다면:
 
 ```
-/import-doc "03_References/_sources/제안서.hwpx"
+/import-doc "01_References/_sources/제안서.hwpx"
 ```
 
 ## 4.2 DOCX 경로
@@ -377,7 +377,7 @@ Pandoc은 기본적으로 1~3을 자동 선택. 4는 자동화하지 않음 (수
 
 ## 12.3 한글 파일명/경로
 
-- 따옴표로 감쌀 것: `/import-doc "03_References/_sources/연구계획서_v2.hwpx"`
+- 따옴표로 감쌀 것: `/import-doc "01_References/_sources/연구계획서_v2.hwpx"`
 - Windows 경로 구분자(`\`)는 Node.js가 자동 정규화
 
 ## 12.4 변환 결과가 깨짐

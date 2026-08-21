@@ -23,6 +23,10 @@
 //      severity: error. 코드블록, 인라인 백틱, <name> 자리표시자는 제외
 //   9. 폐기 어휘: scripts/deprecated_terms.txt에 등록된 옛 용어가 활성 문서에 남았는지 (2026-08-21 추가)
 //      severity: error. 백틱 안 언급(폐기 설명 자리)과 이력 보존 영역(log.md, _archive/)은 면제
+//  10. 참조 순서 위반: 번호 N 폴더의 문서가 뒷 번호 폴더의 문서를 wikilink로 가리킴 (2026-08-21 추가)
+//      severity: warning (CONVENTIONS 2 "폴더 번호는 참조 순서임". 해당 문서를 고칠 때 함께 정리함)
+//      순서 밖: 00_Index(색인은 전체를 가리킴), 무번호 폴더, 루트 규칙 문서. 링크의 출발이나
+//      도착이 순서 밖이면 검사하지 않음. log.md는 이력이라 제외
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -33,8 +37,8 @@
 //     점검은 `node scripts/wiki_number.mjs --check`, 정정은 `--write` (anchor 연쇄 갱신 포함)
 //
 // 예외 영역:
-//   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
-//   - 07_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
+//   - 01_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
+//   - 99_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
@@ -57,22 +61,22 @@ const ASSET_ROOT = process.env.WIKI_ASSET_ROOT
   : REPO_ROOT;
 
 const EXCLUDED_PATHS = new Set([
-  '03_References/_locked',
-  '03_References/_sources',
-  '03_References/_figures',
-  '03_References/_reviews',
-  '03_References/converted',
+  '01_References/_locked',
+  '01_References/_sources',
+  '01_References/_figures',
+  '01_References/_reviews',
+  '01_References/converted',
   '.claude',
   'node_modules',
   '.git',
   '.obsidian',
   'assets',
   'scripts',
-  // 99_Temp(임시 대기소)는 lint 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
+  // 90_Temp(임시 대기소)는 lint 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
 ]);
 
 const SKIP_CONTENT_CHECKS = new Set([
-  '08_Logs/log.md',
+  '99_Logs/log.md',
 ]);
 
 // MOC 등록과 링크 하한을 면제하는 곳.
@@ -80,7 +84,7 @@ const SKIP_CONTENT_CHECKS = new Set([
 const GRAPH_EXEMPT_FILES = new Set([
   'README.md', 'AGENTS.md', 'CONVENTIONS.md', 'CLAUDE.md', '00_Index/MOC.md',
 ]);
-const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/', '99_Temp/']; // 99_Temp: 임시 노트라 MOC 등록/링크 하한만 면제 (2026-08-20)
+const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/', '90_Temp/']; // 90_Temp: 임시 노트라 MOC 등록/링크 하한만 면제 (2026-08-20)
 const GRAPH_EXEMPT_TYPES = new Set(['index', 'log', 'agentnote']);
 
 // em dash 금지 규칙 자체를 설명하는 문서. 규칙을 적으려면 그 문자를 써야 함
@@ -92,7 +96,7 @@ const ALLOW_GAWUNDEOTJEOM = new Set([
   'CONVENTIONS.md',
   '02_HowTo/반복 결함 카탈로그.md',
   '02_HowTo/codex 검수 포커스.md',
-  '03_References/converted_모순점.md', // 변환본 인용 컨텍스트
+  '01_References/converted_모순점.md', // 변환본 인용 컨텍스트
 ]);
 
 // § 표기가 허용되는 곳. 모두 "당시 문서 상태"를 인용한 기록이라 고치면 기록이 왜곡됨
@@ -105,14 +109,14 @@ const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, �
 // fileIndex 빌드 시 read-only 영역도 포함 (link target 매칭용)
 // 다만 검사 대상은 EXCLUDED_PATHS 제외한 일반 위키만
 const INDEX_INCLUDED_DIRS = [
-  '03_References/_locked',
-  '03_References/converted',
+  '01_References/_locked',
+  '01_References/converted',
 ];
 
 // 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)
 const ATTACHMENT_DIRS = [
   'assets',
-  '03_References/_figures',
+  '01_References/_figures',
 ];
 
 const args = process.argv.slice(2);
@@ -615,6 +619,42 @@ function checkLinkFloor(allMdFiles, fileIndex) {
   return findings;
 }
 
+// 폴더의 참조 순서 번호. 순서 밖(루트 문서, 무번호 폴더, 00_Index)은 null
+function folderOrder(relPath) {
+  const m = normRel(relPath).match(/^(\d{2})_[^/]+\//);
+  if (!m) return null;
+  const n = parseInt(m[1], 10);
+  if (n === 0) return null; // 00_Index: 색인은 전체를 가리키는 면제 폴더
+  return n;
+}
+
+function checkReferenceOrder(allMdFiles, fileIndex) {
+  const findings = [];
+  for (const relPath of allMdFiles) {
+    if (SKIP_CONTENT_CHECKS.has(relPath)) continue; // log.md: 이력
+    const srcOrder = folderOrder(relPath);
+    if (srcOrder === null) continue;
+    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
+    for (const link of extractWikilinks(content)) {
+      if (!link.target) continue; // [[#anchor]] 자기 문서 참조
+      const targetPath = fileIndex.get(link.target);
+      if (!targetPath) continue; // 대상 없음은 1번(깨진 wikilink) 검사 몫
+      const tgtOrder = folderOrder(targetPath);
+      if (tgtOrder === null || tgtOrder <= srcOrder) continue;
+      const srcTop = normRel(relPath).split('/')[0];
+      const tgtTop = normRel(targetPath).split('/')[0];
+      findings.push({
+        type: '참조 순서 위반',
+        severity: 'warning',
+        file: relPath,
+        line: link.line,
+        message: `[[${link.target}]]: ${srcTop} 문서가 뒷 폴더 ${tgtTop}를 가리킴 (CONVENTIONS 2 참조 순서: 앞 폴더만 참고)`,
+      });
+    }
+  }
+  return findings;
+}
+
 function main() {
   const allMdFiles = collectMd(REPO_ROOT);
   const fileIndex = buildFileIndex(allMdFiles);
@@ -628,6 +668,7 @@ function main() {
     ...checkDeprecatedTerms(allMdFiles),
     ...checkMocRegistration(allMdFiles),
     ...checkLinkFloor(allMdFiles, fileIndex),
+    ...checkReferenceOrder(allMdFiles, fileIndex),
   ];
   const errors = findings.filter(f => f.severity === 'error');
   const warnings = findings.filter(f => f.severity === 'warning');

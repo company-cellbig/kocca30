@@ -23,9 +23,9 @@
 //     혹시 번호가 바뀐 헤딩이 있으면 목록으로 경고만 함
 //
 // 예외 영역 (넘버링 안 함):
-//   - 07_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
+//   - 99_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용), 위키 콘텐츠 아님
-//   - 03_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
+//   - 01_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
 //   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
 //   - .obsidian/, .claude/, scripts/, assets/, export/, node_modules/, .git/
 //
@@ -39,11 +39,11 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(SCRIPT_DIR, '..');
 
 const EXCLUDED_PATHS = new Set([
-  '03_References/_locked',
-  '03_References/_sources',
-  '03_References/_figures',
-  '03_References/_reviews',
-  '03_References/converted',
+  '01_References/_locked',
+  '01_References/_sources',
+  '01_References/_figures',
+  '01_References/_reviews',
+  '01_References/converted',
   '.claude',
   '.git',
   '.obsidian',
@@ -51,11 +51,11 @@ const EXCLUDED_PATHS = new Set([
   'assets',
   'export',
   'scripts',
-  // 99_Temp(임시 대기소)는 넘버링 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
+  // 90_Temp(임시 대기소)는 넘버링 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
 ]);
 
 // 헤딩 번호를 안 매기는 곳. 본문은 스캔하므로 anchor 연쇄 갱신 대상에는 들어감
-//   - 07_Logs/log.md: CONVENTIONS 4.2 명시 예외
+//   - 99_Logs/log.md: CONVENTIONS 4.2 명시 예외
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용). 위키 콘텐츠가 아니라
 //     넘버링 규칙 대상이 아님. "2.2 Name" 같은 번호가 붙으면 오히려 어색함 (사용자 승인 2026-07-22)
 //   - prototype/README.md: 프로토타입 압축본에 함께 나가는 안내문. 팀원이 위키 밖에서
@@ -63,7 +63,7 @@ const EXCLUDED_PATHS = new Set([
 //   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
 //     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
 const NO_NUMBER = new Set([
-  '08_Logs/log.md',
+  '99_Logs/log.md',
   'README.md',
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
@@ -76,7 +76,7 @@ function skipNumbering(file) {
 
 // anchor 갱신도 안 하는 곳 (이력 보존: 과거 참조를 그대로 둠)
 const NO_ANCHOR_REWRITE = new Set([
-  '08_Logs/log.md',
+  '99_Logs/log.md',
 ]);
 
 // 옛 넘버링(한국 공문서 체계)에 쓰던 한글 기호. 기존 번호를 떼어낼 때만 씀

@@ -9,6 +9,15 @@ updated: 2026-08-21
 
 > 에이전트(Claude Code 작성, Codex 검수)의 모든 작업 기록. 최신 항목이 위에 옴.
 
+## [2026-08-21] maint | 폴더 참조 순서 개편 (01↔03 맞교환, 99_Logs, 90_Temp, 방향 검사 lint)
+
+- 계기: 폴더 번호에 참조 순서를 부여하는 사용자 결정(2026-08-21). 번호 N 폴더의 문서는 앞 번호 폴더만 근거로 참고함. 결정 사항: 01_References ↔ 03_Concepts 맞교환(원자료가 개념의 상류. 옛 01_Concepts→03_References 근거 인용 11건이 역전돼 있었음), 08_Logs → 99_Logs(전 폴더 참조 802건의 최하류), 99_Temp → 90_Temp(99를 로그에 양보), 00_Index는 유지하고 순서 규칙 면제, 무번호 소문자 폴더(assets, export, prototype, scripts)는 인프라/자원층으로 순서 밖, 전방 참조는 예외 없이 경고 유지(문서 수정 시 함께 정리)
+- 폴더 개명: git mv로 이력 보존. wikilink는 파일명 해석이라 안 깨지고, assets 상대경로는 깊이 불변이라 유지됨
+- 스크립트 갱신: wiki_number, wiki_lint, quote_check, diff_companion, migrate_secref, import-doc, deprecated_terms 주석의 경로 하드코딩 전체와 낡은 07_Logs 주석 2건 정정. `.claude/commands/import-doc.md`도 갱신
+- 문서 갱신: CONVENTIONS 2 디렉토리 트리 재작성과 번호 원칙 교체("독자 우선순위 순" → "참조 순서"), 90_Temp를 트리에 등재, MOC 절 라벨, AGENTS와 02_HowTo 5개 문서, 01_References 루트 문서와 converted frontmatter source 경로. log.md 본문의 옛 경로는 이력이라 보존
+- 방향 검사 신설: wiki_lint 검사 10번(참조 순서 위반, warning). 전방 wikilink를 경고하되 커밋은 안 막음. 순서 밖(00_Index, 무번호 폴더, 루트 문서)과 log.md는 제외. 도입 시점 실측 118건(01→03 엔티티 연결, 02→04/05 사례 참조, 03→04/05 허브 연결, 04→05 참조 구현 등)이 정리 대상으로 표시됨
+- 검증: wiki_number 0건, wiki_lint error 0건(warning 119건 = 참조 순서 118 + 기존 링크 하한 1), quote_check 0건
+
 ## [2026-08-21] maint | LOGIC-004와 FLOW-1 규칙 일체 삭제 (사용자 재판정 철회)
 
 - 계기: 사용자 재판정. 앞으로 한 번에 많이 쓰지 않고 단계적으로 작성하는 방식으로 전환하며 이것이 틀 선행 왜곡을 예방한다고 판단, 재료 목록 절차는 복잡성만 늘리고 오류를 양산한다고 봄. FLOW-1(어제 수용)과 LOGIC-004 관련 규칙을 전부 철회함
