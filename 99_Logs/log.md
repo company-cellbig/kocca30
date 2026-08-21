@@ -15,6 +15,7 @@ updated: 2026-08-21
 - 개명 (git mv): 02_HowTo → 01_HowTo, 01_References → 02_References
 - 갱신: 스크립트 6종과 deprecated_terms 주석, import-doc 커맨드 문서, CONVENTIONS(트리 줄 순서, 참조 순서 사슬 "규칙(01) → 원자료(02)", 개편 경위), MOC 절 라벨, docx 변환 파이프라인, 02_References 루트 문서 2종과 converted frontmatter source 경로, 메모리 경로
 - 참조 순서 경고 수지 변화 없음(두 폴더 사이 링크가 없어 방향 반전 없음, 총 118건 유지)
+- 독립 검토 1회(고쳐 쓴 문장 2종): 발견 8건, 반영 6건(개편 경위 불릿을 날짜별 문장과 ①②③ 나열로 재구성, 한글/영문 명칭 병기로 "HowTo=규칙" 오독 소지 해소, "이하"의 기준 명시, 대기소 이동을 로그 이동보다 먼저 서술, 종결 마침표), 반려 2건(순서 사슬의 "상류에서 하류로"는 문단 전체가 쓰는 은유 명명이라 의도됨)
 - 검증: wiki_number 0건, wiki_lint error 0건, quote_check 0건
 
 ## [2026-08-21] maint | 링크 하한 검사 삭제 (나가는 링크 개수로는 고립 판정 불가)
