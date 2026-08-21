@@ -17,6 +17,14 @@ updated: 2026-08-21
 - 검증: wiki_number 0건, wiki_lint error 0건, quote_check 0건. 저장소 전수 grep으로 잔여 wikilink 없음 확인
 - 수정 파일: `03_Concepts/한국 전통 인형극.md`(RM), [[MOC]], [[덜미]], log.md
 
+## [2026-08-21] review | codex 검수 포커스 실행 불가 지시 6건 삭제 (Codex 메타 검수 반영)
+
+- 계기: 사용자 지시로 검수 포커스 문서를 Codex 자신에게 메타 검수시킴("각 지시가 발췌만 받는 네 환경에서 실행 가능한가"). 판정: 실행 가능 22, 불가능/무의미 6, 조건부 8. (b) 6건의 수정 설계는 규칙 증폭 방지 제약 하에 Claude Code와 Codex 투트랙으로 확인: 5건 일치(삭제), P4 log 항목만 갈렸고(Codex는 조건부 존치) 사용자가 전부 삭제로 판정
+- 삭제 6건: P1 깨진 링크 확인(wiki_lint 담당, P5 제외 문구와 모순), P2 _locked 변경 검증(_locked는 read-only라 에이전트 diff에 등장하지 않음), P4 log 양식(CONVENTIONS 7과 작성자 몫), 3.2 fresh context 필수 조건(AGENTS 2.2.2 중복), 5절 점검 항목 추가(AGENTS 3.4 중복), 5절 catch율 효과 검증(이미 수행 완료된 실험: 기본 33% 대 포커스 100%, 결과는 본 log 이력에 있음)
+- 파생 정합: 4절 표의 P1 검출 사례에서 깨진 wikilink 삭제, AGENTS 3.1 표의 P1/P2/P5 요약과 3.2 표의 사실/정합 시선을 현행 블록 내용으로 갱신
+- 규칙 총량: 순감 6, 추가 0
+- 검증: wiki_number 0건, wiki_lint error 0건, quote_check 0건
+
 ## [2026-08-21] update | 01_HowTo 7개 문서 전문 점검, 작성/수정 경위 10건 삭제
 
 - 계기: 사용자 지시. 7개 문서 전문을 하나씩 읽으며 경위 표기를 걸러냄
