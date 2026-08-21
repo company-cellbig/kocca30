@@ -648,7 +648,7 @@ function checkReferenceOrder(allMdFiles, fileIndex) {
         severity: 'warning',
         file: relPath,
         line: link.line,
-        message: `[[${link.target}]]: ${srcTop} 문서가 뒷 폴더 ${tgtTop}를 가리킴 (CONVENTIONS 2 참조 순서: 앞 폴더만 참고)`,
+        message: `[[${link.target}]]: ${srcTop} 문서가 뒷 폴더(${tgtTop}) 문서를 가리킴 (CONVENTIONS 2 참조 순서: 앞 폴더만 참고)`,
       });
     }
   }
