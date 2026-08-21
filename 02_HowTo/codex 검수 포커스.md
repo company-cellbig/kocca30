@@ -4,7 +4,7 @@ type: howto
 status: stable
 tags: [howto, codex, review, workflow]
 created: 2026-05-11
-updated: 2026-07-03
+updated: 2026-08-21
 ---
 
 > `/codex:adversarial-review` 호출 시 인자로 첨부하는 표준 비판적 검수 프롬프트. 코드 중심 attack surface를 문서 검수용으로 재정의.
@@ -140,4 +140,3 @@ Codex 플러그인의 `adversarial-review` 시스템 프롬프트는 회의 기�
 
 - [[AGENTS#2.1 역할 분담]], [[AGENTS#3. 검수 기준과 호출 방식]]
 - [[반복 결함 카탈로그]]: 적대 발췌 호출 시 동봉
-- [[log|작업 로그]]
