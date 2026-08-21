@@ -15,8 +15,8 @@
 //            검수 기록 3종)과 폐지 정책 자체를 설명하는 CONVENTIONS 본문
 //   5. MOC 미등록: 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음 (CONVENTIONS 5.1 6단계)
 //      severity: error
-//   6. 링크 하한 미달: 관련 페이지 링크가 2개 미만 (CONVENTIONS 3.5 링크 하한선)
-//      severity: warning. CONVENTIONS가 유지보수 점검 대상이라 규정하므로 커밋은 안 막음
+//   6. (2026-08-21 삭제) 링크 하한 미달: 나가는 링크 개수로는 고립을 판정할 수 없고 도달 보장은
+//      MOC 등록 검사(5번)가 하므로 제거함. 상호 연결은 CONVENTIONS 3.5의 작성 규칙으로만 유지함
 //   7. em dash 위배: CONVENTIONS 3.4.1이 금지하나 검사가 없어 사각지대였음 (2026-08-20 추가)
 //      severity: error. 예외는 규칙을 설명하는 CONVENTIONS 본문뿐
 //   8. 이미지 경로: ![](경로)와 <img src>의 파일이 실재하는지 (2026-08-20 추가)
@@ -79,12 +79,12 @@ const SKIP_CONTENT_CHECKS = new Set([
   '99_Logs/log.md',
 ]);
 
-// MOC 등록과 링크 하한을 면제하는 곳.
+// MOC 등록을 면제하는 곳.
 // 루트 규칙 문서, 색인, 로그, 작업 노트, 그리고 위키 밖에서 읽히는 자족 폴더임
 const GRAPH_EXEMPT_FILES = new Set([
   'README.md', 'AGENTS.md', 'CONVENTIONS.md', 'CLAUDE.md', '00_Index/MOC.md',
 ]);
-const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/', '90_Temp/']; // 90_Temp: 임시 노트라 MOC 등록/링크 하한만 면제 (2026-08-20)
+const GRAPH_EXEMPT_PREFIX = ['prototype/', '06_클라이언트 데이터/', '90_Temp/']; // 90_Temp: 임시 노트라 MOC 등록만 면제 (2026-08-20)
 const GRAPH_EXEMPT_TYPES = new Set(['index', 'log', 'agentnote']);
 
 // em dash 금지 규칙 자체를 설명하는 문서. 규칙을 적으려면 그 문자를 써야 함
@@ -594,30 +594,6 @@ function checkMocRegistration(allMdFiles) {
   return findings;
 }
 
-// 6. 링크 하한 미달. 셀프체크 "관련 페이지 2개와 연결됐는가"를 기계로 옮긴 것 (2026-08-20)
-function checkLinkFloor(allMdFiles, fileIndex) {
-  const findings = [];
-  for (const relPath of allMdFiles) {
-    const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
-    if (graphExempt(relPath, content)) continue;
-    const self = basename(relPath, '.md');
-    const targets = new Set();
-    for (const m of content.matchAll(/\[\[([^\]|#]+)/g)) {
-      const t = m[1].trim();
-      if (t && t !== self && fileIndex.has(t)) targets.add(t);
-    }
-    if (targets.size < 2) {
-      findings.push({
-        type: '링크 하한 미달',
-        severity: 'warning',
-        file: relPath,
-        line: 1,
-        message: `관련 페이지 링크가 ${targets.size}개임 (CONVENTIONS 3.5 링크 하한선은 2개)`,
-      });
-    }
-  }
-  return findings;
-}
 
 // 폴더의 참조 순서 번호. 순서 밖(루트 문서, 무번호 폴더, 00_Index)은 null
 function folderOrder(relPath) {
@@ -667,7 +643,6 @@ function main() {
     ...checkSectionMark(allMdFiles),
     ...checkDeprecatedTerms(allMdFiles),
     ...checkMocRegistration(allMdFiles),
-    ...checkLinkFloor(allMdFiles, fileIndex),
     ...checkReferenceOrder(allMdFiles, fileIndex),
   ];
   const errors = findings.filter(f => f.severity === 'error');
