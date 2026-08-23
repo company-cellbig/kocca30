@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const vm = require("node:vm");
 
 const sourceData = require("./덧뵈기-원전대사.js");
 const stateData = require("./덧뵈기-진행상태.js");
@@ -185,6 +186,19 @@ equal(schedule.blocks.flat(), expectedScheduledLines, "omtal: 재담 블록이 4
 assert(schedule.blocks.length === schedule.newApproachCount, "omtal: 원전 블록 수와 새로운 접근 수가 다름");
 assert(schedule.retryConsumesNextBlock === false, "omtal: 실패 재시도가 다음 원전 블록을 소비함");
 reports.push(`옴탈잡이: 원전 블록 ${schedule.blocks.length}개와 새로운 접근 ${schedule.newApproachCount}회 대응`);
+
+const prototypePath = path.join(__dirname, "덧뵈기-나만의탈춤-프로토타입.html");
+const prototypeHtml = fs.readFileSync(prototypePath, "utf8");
+const inlineScript = prototypeHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+assert(Boolean(inlineScript), "프로토타입 HTML: 인라인 스크립트를 찾을 수 없음");
+if (inlineScript) {
+  try {
+    new vm.Script(inlineScript, { filename: prototypePath });
+    reports.push("프로토타입 HTML: 인라인 스크립트 구문 통과");
+  } catch (error) {
+    errors.push(`프로토타입 HTML: 인라인 스크립트 구문 오류 - ${error.message}`);
+  }
+}
 
 if (errors.length) {
   console.error(`검증 실패 ${errors.length}건`);
