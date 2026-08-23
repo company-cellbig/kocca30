@@ -1,1863 +1,463 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>덧뵈기 - 나만의 탈춤, Step 2~5 프로토타입</title>
-<style>
-:root{
-  --paper:#efe6d6; --gold:#c8a34a; --red:#b4442f; --dim:#8b8074;
-  --line:rgba(200,163,74,.28); --ok:#7fb069;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  background:#0b0a09; color:var(--paper); overflow:hidden;
-  font-family:"Malgun Gothic","맑은 고딕",-apple-system,system-ui,sans-serif;
-}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-button:disabled{opacity:.4;cursor:default}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>덧뵈기 · 나만의 탈춤 프로토타입</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f8f0da;
+      --muted: #c9bea4;
+      --red: #e14e3f;
+      --gold: #f0b849;
+      --green: #43a477;
+      --panel: rgba(18, 17, 22, .94);
+      --line: rgba(255, 239, 201, .22);
+      --shadow: 0 22px 60px rgba(0, 0, 0, .42);
+    }
 
-#wrap{display:flex;width:100%;height:100%}
-#left{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;min-width:0}
-#stagecol{width:min(100%, calc((100vh - 250px) * 16 / 9));display:flex;flex-direction:column;gap:10px}
+    * { box-sizing: border-box; }
 
-/* ══ 키오스크 화면 (가로 16:9) ══ */
-#kiosk{
-  width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 0%,#2a2320 0%,#141210 55%,#0b0a09 100%);
-  border:1px solid var(--line);border-radius:10px;box-shadow:0 0 50px rgba(0,0,0,.8);
-}
-.screen{position:absolute;inset:0;display:none;flex-direction:column;padding:14px 16px}
-.screen.on{display:flex}
-.scr-head{display:flex;align-items:center;gap:9px;flex:0 0 auto;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07)}
-.step-tag{font-size:10.5px;letter-spacing:.06em;color:var(--gold);border:1px solid var(--line);padding:2px 8px;border-radius:99px}
-.scr-title{font-size:14.5px;font-weight:700}
-.spacer{flex:1}
-.quit-btn{font-size:11px;color:var(--dim);border:1px solid rgba(255,255,255,.14);padding:4px 10px;border-radius:6px}
-.quit-btn:hover{color:var(--paper);border-color:var(--gold)}
-.timer-chip{font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums}
-.timer-chip b{color:var(--gold);font-weight:600}
-.timer-chip.paused b{color:var(--dim)}
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #0d0c10;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
 
-.cols{flex:1;display:flex;gap:12px;min-height:0;padding-top:10px}
-.col{display:flex;flex-direction:column;min-width:0;min-height:0}
-.col-host{flex:0 0 18%}   /* 장쇠는 진행 멘트만 하므로 판에 자리를 내줌 */
-.col-stage{flex:1}
-.col-info{flex:0 0 26%}
-.col-half{flex:1}
+    button { font: inherit; }
 
-/* 자산 자리표시 래퍼를 레이아웃에서 빼, 안의 이미지가 부모 칸의 크기 제약을 직접 받게 함.
-   span이 레이아웃에 남으면 img의 max-height:100%가 높이 없는 span을 기준으로 삼아 무시되고
-   세로로 넘침 (판 배경은 span 자체를 절대 배치로 깔아야 해서 아래에서 예외 처리) */
-.art{display:contents}
+    body {
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(225, 78, 63, .18), transparent 34%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.016) 0 2px, transparent 2px 8px),
+        #0d0c10;
+    }
 
-/* 인물 동작. 상대 배역은 판정에 맞춰 반응해야 해 JS(setFoe)가 칸 자체를 움직이고,
-   늘 화면에 있는 장쇠와 내 배역은 CSS로 은은한 상시 동작만 줌.
-   칸이 아니라 그림(img, 자리표시 svg)에 걸어, 칸을 쓰는 다른 연출과 겹치지 않게 함 */
-@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1.5px) scale(1.006)}}
-@keyframes talkBob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-.6deg)}
-  75%{transform:translateY(-1px) rotate(.6deg)}}
-@keyframes roleIn{from{transform:translateY(22px) scale(.96);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-@keyframes maskNod{0%{transform:rotate(0)}35%{transform:rotate(-7deg) translateY(-2px)}70%{transform:rotate(4deg)}100%{transform:rotate(0)}}
+    #kiosk {
+      position: relative;
+      width: min(100vw, 177.777vh);
+      height: min(56.25vw, 100vh);
+      min-width: 960px;
+      min-height: 540px;
+      overflow: hidden;
+      background: #15131a;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
 
-.host-art img,.host-art svg{animation:breathe 4.2s ease-in-out infinite}
-.speaking .host-art img,.speaking .host-art svg{animation:talkBob .9s ease-in-out infinite}
-.role-mask img,.role-mask svg{animation:roleIn .5s cubic-bezier(.2,1.1,.4,1) both,
-  breathe 4.6s ease-in-out .5s infinite}
-.card.sel .card-mask img,.card.sel .card-mask svg{animation:maskNod .42s ease-out}
-/* 상대 배역도 평소에 숨을 쉬게 함. 반응 이동은 칸(.foe)이 맡으므로 서로 겹치지 않음.
-   주기를 장쇠 4.2초, 내 배역 4.6초와 어긋나게 두어 셋이 한 박자로 붙지 않게 함 */
-.foe img,.foe svg{animation:breathe 4.4s ease-in-out infinite}
+    .screen { position: absolute; inset: 0; display: none; }
+    .screen.active { display: flex; }
 
-/* ══ 장쇠 호스트 (세로 열) ══ */
-.host{display:flex;flex-direction:column;gap:7px;height:100%;min-height:0}
-.host-art{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;position:relative}
-.host-art img{max-width:100%;max-height:100%;object-fit:contain}
-.host-art svg{max-height:100%}
-/* 대사 칸이 장쇠 위에 오고 꼬리가 아래를 가리킴 (판 위 상대 배역 말풍선과 같은 규칙).
-   긴 사설이 들어오면 칸이 아래로 늘어나되, 장쇠가 안 보일 만큼은 못 자라게 절반에서 멈춤 */
-.host-box{flex:0 1 auto;max-height:52%;background:rgba(20,17,14,.9);border:1px solid var(--line);border-radius:9px;padding:8px 10px 22px;position:relative;display:flex;flex-direction:column}
-.host-box::after{content:"";position:absolute;top:100%;left:34px;border:8px solid transparent;border-top-color:rgba(20,17,14,.9)}
-.host-name{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:3px}
-.speaking .host-name::after{content:" ●";color:var(--red)}
-/* 넘치면 잘라 버리지 않고 스크롤로 남김. 종전 max-height 5.4em(3.6줄) + overflow:hidden은
-   60자 넘는 원문 사설을 소리 없이 잘라 먹었음 */
-.host-line{font-size:12.5px;line-height:1.5;min-height:3.6em;flex:1 1 auto;overflow-y:auto}
-.host-line::-webkit-scrollbar{width:4px}
-.host-line::-webkit-scrollbar-thumb{background:rgba(200,163,74,.35);border-radius:2px}
-.host-line .prov{color:var(--dim);font-size:9.5px}
-/* 한 글자씩 드러날 때 끝에 붙는 커서 */
-.tw-caret{display:inline-block;width:2px;height:1em;margin-left:1px;vertical-align:-2px;
-  background:var(--gold);animation:twblink .62s steps(1) infinite}
-@keyframes twblink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
-.host-skip{position:absolute;right:7px;bottom:6px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.15);padding:2px 7px;border-radius:5px;background:#1b1815}
+    /* 시작 화면 */
+    #home {
+      flex-direction: column;
+      padding: 4.4% 5.5% 4.2%;
+      background:
+        linear-gradient(rgba(12, 10, 13, .44), rgba(12, 10, 13, .7)),
+        radial-gradient(circle at 16% 28%, rgba(240, 184, 73, .18), transparent 25%),
+        radial-gradient(circle at 85% 20%, rgba(67, 164, 119, .15), transparent 26%),
+        linear-gradient(150deg, #32232a, #17151a 52%, #242228);
+    }
 
-/* ══ 판 (무대) ══ */
-.playfield{flex:1;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:10px;
-  background:linear-gradient(180deg,rgba(60,45,35,.35),rgba(20,17,14,.5));overflow:hidden;min-height:0}
-.playfield .bg{display:block;position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.5}
-/* 두 배역이 판을 나눠 씀. 종전 1인 중앙 배치보다 아래로 내려 머리 위에 말풍선 자리를 냄 */
-.actor{position:absolute;top:55%;transform:translateY(-50%);transition:opacity .3s;
-  width:44%;height:57%;display:flex;align-items:center;justify-content:center}
-.actor.at-l{left:2%}
-.actor.at-r{right:2%}
-.actor img{max-height:100%;max-width:100%;object-fit:contain}
-.actor-cap{position:absolute;bottom:7px;width:44%;text-align:center;font-size:11px;color:#c9bda9;text-shadow:0 1px 6px #000}
-.actor-cap.at-l{left:2%}
-.actor-cap.at-r{right:2%}
-/* 판 위 대사 칸. 배역 대사는 제 그림 위에 띄움.
-   장쇠 대사는 왼쪽 호스트 자막 칸이 맡음 */
-/* left:50%로 잡으면 늘어날 수 있는 폭이 판의 절반으로 묶여 max-width가 안 먹음.
-   좌우 0에 auto 여백으로 가운데 두어야 max-width가 실제로 적용됨 */
-.stage-say{position:absolute;left:0;right:0;margin-inline:auto;width:fit-content;max-width:76%;display:none;z-index:3;
-  padding:7px 11px;border-radius:10px;font-size:12px;line-height:1.45;text-align:center;
-  background:rgba(18,14,11,.9);border:1px solid rgba(200,163,74,.5);color:#f0e4cc;
-  box-shadow:0 4px 18px rgba(0,0,0,.55)}
-.stage-say.on{display:block;opacity:1;animation:sayIn .22s ease-out}
-.stage-say .who{display:block;font-size:9.5px;letter-spacing:.08em;color:var(--gold);margin-bottom:3px}
-.stage-say::after{content:"";position:absolute;left:50%;margin-left:-7px;border:7px solid transparent}
-/* 배역 말풍선은 제 배역 쪽에 붙고 꼬리도 그 아래를 가리킴 */
-.stage-say.side-l,.stage-say.side-r{top:12px;max-width:44%;margin-inline:0}
-.stage-say.side-l{left:2%;right:auto}
-.stage-say.side-r{right:2%;left:auto}
-.stage-say.side-l::after,.stage-say.side-r::after{top:100%;border-top-color:rgba(18,14,11,.9)}
-.stage-say.side-r{border-color:rgba(127,176,105,.55)}
-.stage-say.side-r .who{color:#a8d18a}
-/* 투명도는 애니메이션에 맡기지 않음. 키프레임이 opacity를 쥐고 있으면
-   애니메이션이 멈춘 상태(백그라운드 탭 등)에서 말풍선이 안 보일 수 있음 */
-@keyframes sayIn{from{transform:translateY(-6px)}to{transform:translateY(0)}}
-.fx{position:absolute;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.8)}
-.demo-hint{position:absolute;left:8px;top:8px;font-size:9.5px;color:var(--dim);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 7px;background:rgba(0,0,0,.4)}
-.verdict{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%) scale(.6);
-  opacity:0;pointer-events:none;text-align:center;white-space:nowrap}
-.vd-call{display:block;font-size:38px;font-weight:900;letter-spacing:.05em}
-.vd-sub{display:block;margin-top:2px;font-size:13px;font-weight:600;color:#e6dcc9;
-  letter-spacing:.02em;text-shadow:0 1px 8px rgba(0,0,0,.9)}
-.verdict.eolssu{color:#ffd76e;text-shadow:0 0 24px rgba(255,190,60,.7)}
-.verdict.johda{color:#a8d18a}
-.verdict.dasi{color:#d98570}
-@keyframes pop{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
- 18%{opacity:1;transform:translate(-50%,-50%) scale(1.14)}
- 70%{opacity:1;transform:translate(-50%,-50%) scale(1)}
- 100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
-.verdict.play{animation:pop .95s ease-out}
+    .brand-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 4%; }
+    .eyebrow { margin: 0 0 .55em; color: var(--gold); font-size: clamp(14px, 1.25vw, 24px); font-weight: 800; letter-spacing: .18em; }
+    h1 { margin: 0; font-family: Georgia, "Batang", serif; font-size: clamp(38px, 4.2vw, 80px); line-height: 1.04; letter-spacing: -.05em; }
+    .intro { max-width: 35%; margin: 0 0 .4%; color: var(--muted); font-size: clamp(15px, 1.15vw, 22px); line-height: 1.55; }
 
-/* ══ 오른쪽 정보 열 ══ */
-.info-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:6px}
-.info-card{border:1px solid rgba(255,255,255,.11);border-radius:9px;padding:9px 10px;background:rgba(255,255,255,.03);margin-bottom:8px}
-.mv-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:11.5px;color:var(--dim)}
-.mv-no{flex:0 0 auto;width:17px;text-align:center;font-size:12px;font-weight:800;color:var(--gold)}
-.mv-row.now{color:var(--paper)}
-.mv-row.done{color:var(--ok)}
-.mv-ico{width:22px;height:22px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(255,255,255,.14);border-radius:5px;font-size:13px}
-.mv-row.now .mv-ico{border-color:var(--gold);color:var(--gold)}
-.mv-row.done .mv-ico{border-color:var(--ok)}
-.mv-ico img{width:100%;height:100%;object-fit:contain}
-.demo-slot{border:1px dashed rgba(255,255,255,.16);border-radius:8px;height:96px;display:flex;align-items:center;justify-content:center;
-  color:#6d6459;font-size:10px;text-align:center;padding:6px;overflow:hidden}
-.demo-slot img{max-width:100%;max-height:100%;object-fit:contain}
-.beat-row{font-size:11px;color:var(--dim);padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
-.beat-row.now{color:var(--gold)}
-.beat-row.done{color:#9a9184}
-.beat-src{display:inline-block;min-width:52px;color:#6f675c;font-size:10px}
+    .scene-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.45%; flex: 1; margin-top: 3.2%; min-height: 0; }
+    .scene-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 0;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      background: #29252b;
+      transition: transform .22s ease, border-color .22s ease, filter .22s ease;
+    }
+    .scene-card:hover, .scene-card:focus-visible { transform: translateY(-8px); border-color: var(--gold); filter: brightness(1.06); outline: none; }
+    .card-art { position: absolute; inset: 0; background: var(--card-bg); }
+    .card-art::before {
+      content: ""; position: absolute; width: 45%; aspect-ratio: 1; left: 27%; top: 11%; border-radius: 48% 52% 46% 54%;
+      background: var(--mask); box-shadow: inset -14px -10px 0 rgba(0,0,0,.18), 0 12px 30px rgba(0,0,0,.28);
+      transform: rotate(var(--tilt));
+    }
+    .card-art::after {
+      content: ""; position: absolute; left: 34%; top: 29%; width: 8%; height: 5%; border-radius: 50%;
+      background: #171319; box-shadow: 88px 0 #171319, 44px 54px 0 -4px #171319;
+      transform: rotate(var(--tilt));
+    }
+    .card-content { position: absolute; inset: auto 0 0; z-index: 2; padding: 14% 8% 7%; background: linear-gradient(transparent, rgba(10,9,12,.94) 38%); }
+    .card-no { color: var(--gold); font-size: clamp(12px, .86vw, 17px); font-weight: 900; letter-spacing: .16em; }
+    .card-content h2 { margin: .2em 0 .18em; font-size: clamp(25px, 2.35vw, 45px); letter-spacing: -.045em; }
+    .card-content p { margin: 0 0 .85em; color: #ded5c2; font-size: clamp(13px, .96vw, 18px); line-height: 1.45; }
+    .role-chip { display: inline-flex; gap: .55em; align-items: center; padding: .45em .72em; border-radius: 999px; background: rgba(255,255,255,.1); font-size: clamp(12px, .82vw, 16px); }
+    .role-chip b { color: var(--gold); }
 
-/* ══ 마당 선택 ══ */
-.cards{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}
-.card{display:flex;gap:10px;align-items:center;text-align:left;padding:9px 10px;
-  border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.03);transition:.14s}
-.card:hover{border-color:rgba(200,163,74,.5)}
-.card.sel{border-color:var(--gold);background:rgba(200,163,74,.11)}
-.card-mask{width:38px;height:44px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
-.card-mask img{max-width:100%;max-height:100%}
-.card-name{font-size:14px;font-weight:700}
-.card-name span{font-size:9.5px;color:var(--gold);font-weight:400;margin-left:6px}
-.card-brief{font-size:11px;color:#c9bda9;margin-top:2px}
-.card-cast{font-size:10px;color:var(--dim);margin-top:3px}
-.preview{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border:1px dashed rgba(255,255,255,.14);border-radius:10px;padding:10px;min-height:0;gap:8px}
-.preview-art{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
-.preview-art img{max-width:100%;max-height:100%;object-fit:contain}
-.preview-cap{font-size:11.5px;color:#c9bda9;text-align:center}
-.asset-note{font-size:9.5px;color:#6d6459;text-align:center;line-height:1.45}
+    /* 체험 화면 */
+    #play { flex-direction: column; background: #18131a; }
+    .topbar {
+      position: absolute; z-index: 20; left: 2.3%; right: 2.3%; top: 2.2%; height: 7%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-title { display: flex; align-items: center; gap: 1em; font-size: clamp(15px, 1.15vw, 22px); font-weight: 850; }
+    .top-title small { color: var(--gold); letter-spacing: .12em; }
+    .progress { width: 23%; height: 8px; overflow: hidden; border-radius: 10px; background: rgba(255,255,255,.14); }
+    .progress > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--red)); transition: width .4s ease; }
+    .stage {
+      position: absolute; inset: 0 0 21%;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(21,14,18,.1), rgba(21,14,18,.3)),
+        radial-gradient(ellipse at 50% 80%, rgba(247,194,98,.27), transparent 46%),
+        linear-gradient(#293039 0 56%, #6a4a36 56% 59%, #272026 59%);
+    }
+    .stage::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(8,8,12,.72), transparent 17% 83%, rgba(8,8,12,.72)),
+        repeating-linear-gradient(90deg, transparent 0 14.7%, rgba(255,255,255,.035) 14.7% 15%);
+      pointer-events: none;
+    }
+    .stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 17%; background: radial-gradient(ellipse at center, rgba(0,0,0,.08), rgba(0,0,0,.5)); }
 
-/* ══ 배역 확인 ══ */
-.role-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:0}
-.role-mask{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
-.role-mask img{max-height:100%;max-width:100%;object-fit:contain}
-.role-name{font-size:24px;font-weight:800}
-.role-sub{font-size:11.5px;color:var(--dim)}
-/* 배역 그림만 있으면 판이 허해 보여 소개문을 그림 아래에 붙임 */
-.role-intro{font-size:12.5px;line-height:1.55;color:#e7dcc8;text-align:center;max-width:88%;
-  padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.04);
-  border:1px solid rgba(200,163,74,.28)}
-.role-facts .fact{display:flex;gap:8px;font-size:11.5px;line-height:1.5;padding:5px 0}
-.role-facts .fact+.fact{border-top:1px solid rgba(255,255,255,.08)}
-.role-facts .fact b{flex:0 0 62px;color:var(--gold);font-weight:600}
+    .curtain { position: absolute; z-index: 8; top: 0; width: 15%; height: 75%; background: linear-gradient(90deg, #4b1821, #962d31 42%, #4f151d); filter: drop-shadow(10px 8px 10px rgba(0,0,0,.34)); }
+    .curtain.left { left: 0; clip-path: polygon(0 0,100% 0,76% 100%,0 91%); }
+    .curtain.right { right: 0; transform: scaleX(-1); clip-path: polygon(0 0,100% 0,76% 100%,0 91%); }
+    .stage-label { position: absolute; z-index: 7; top: 11%; left: 50%; transform: translateX(-50%); color: rgba(255,240,212,.7); font-family: Georgia,"Batang",serif; font-size: clamp(18px, 1.65vw, 31px); letter-spacing: .28em; white-space: nowrap; }
 
-/* ══ 하단 요소 (동작 안내 바, 게이지) ══ */
-.botbar{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding-top:8px}
-/* 3장 동작 가이드 레인. 앞으로 나올 응수 동작이 오른쪽에 줄 서 있고,
-   한 대목이 끝날 때마다 왼쪽 표시선으로 미끄러져 들어옴 */
-.notebar{height:62px;position:relative;border:1px solid var(--line);border-radius:9px;
-  background:rgba(0,0,0,.34);overflow:hidden}
-.marker{position:absolute;left:78px;top:0;bottom:0;width:2px;background:var(--gold);opacity:.85}
-.marker::before{content:"";position:absolute;left:-19px;top:50%;transform:translateY(-50%);
-  width:40px;height:40px;border:2px solid rgba(200,163,74,.55);border-radius:50%}
-.notelane{position:absolute;inset:0;transition:transform .42s cubic-bezier(.3,.7,.3,1)}
-.note{position:absolute;top:50%;transform:translate(-50%,-50%);width:32px;height:32px;
-  display:flex;align-items:center;justify-content:center;border-radius:7px;overflow:hidden;
-  background:rgba(200,163,74,.14);border:1px solid rgba(200,163,74,.5);font-size:15px;color:#e8d6a8;
-  transition:opacity .3s,border-color .3s,background .3s}
-.note img{width:80%;height:80%;object-fit:contain}
-.note.ahead{opacity:.45}
-.note.now{background:rgba(200,163,74,.26);border-color:var(--gold);box-shadow:0 0 14px rgba(200,163,74,.45)}
-.note.hit{background:rgba(127,176,105,.32);border-color:var(--ok)}
-.note.miss{opacity:.22}
-.note-timer{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--gold);
-  transform-origin:left;display:none}
-.note.now .note-timer{display:block}
-.gauge-wrap{display:flex;align-items:center;gap:8px}
-.gauge{flex:1;height:12px;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:rgba(0,0,0,.35)}
-.gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#8a5a2a,#c8a34a,#ffd76e);transition:width .22s}
-.gauge-lab{font-size:10px;color:var(--dim);white-space:nowrap}
+    .cast { position: absolute; inset: 0; z-index: 10; }
+    .actor {
+      --x: 50%; --y: 58%; --scale: 1;
+      position: absolute; left: var(--x); top: var(--y); width: 12%; aspect-ratio: .62;
+      transform: translate(-50%, -50%) scale(var(--scale)); transform-origin: 50% 85%;
+      margin: 0; padding: 0; border: 0; color: inherit; background: transparent;
+      opacity: 0; pointer-events: none; transition: left .55s ease, top .55s ease, opacity .35s ease, transform .45s ease, filter .25s ease;
+    }
+    .actor.show { opacity: 1; }
+    .actor.dim { filter: brightness(.55) saturate(.7); --scale: .82; }
+    .actor.focus { --scale: 1.12; filter: drop-shadow(0 0 18px rgba(240,184,73,.42)); }
+    .actor.targetable { pointer-events: auto; cursor: pointer; }
+    .actor.targetable:hover .body, .actor.targetable:focus-visible .body { outline: 6px solid var(--gold); outline-offset: 8px; }
+    .body { position: absolute; left: 18%; right: 18%; top: 38%; bottom: 0; border-radius: 38% 38% 18% 18%; background: var(--robe, #8a3d39); box-shadow: inset -15px -8px rgba(0,0,0,.18), 0 16px 22px rgba(0,0,0,.3); }
+    .body::after { content: ""; position: absolute; left: 47%; top: 0; bottom: 0; width: 4px; background: rgba(255,235,195,.28); }
+    .head { position: absolute; z-index: 3; left: 22%; top: 5%; width: 56%; aspect-ratio: .9; border-radius: 46% 54% 50% 50%; background: var(--face, #e8c785); box-shadow: inset -10px -8px rgba(0,0,0,.16), 0 9px 15px rgba(0,0,0,.28); }
+    .head::before { content: ""; position: absolute; left: 18%; right: 18%; top: 38%; height: 8%; border-radius: 50%; background: #211820; box-shadow: 0 20px 0 -3px #6d2021; }
+    .head::after { content: ""; position: absolute; left: 48%; top: 15%; width: 8%; height: 58%; border-radius: 50%; background: rgba(116,61,45,.38); transform: rotate(-8deg); }
+    .arm { position: absolute; z-index: -1; top: 43%; width: 22%; height: 44%; border-radius: 999px; background: var(--robe,#8a3d39); transform-origin: 50% 10%; }
+    .arm.a { left: 5%; transform: rotate(18deg); }
+    .arm.b { right: 5%; transform: rotate(-18deg); }
+    .actor.action .arm.a { animation: armA .7s ease-in-out infinite alternate; }
+    .actor.action .arm.b { animation: armB .7s ease-in-out infinite alternate; }
+    .actor.bounce { animation: bounce .55s ease-in-out infinite alternate; }
+    .actor.shake { animation: shake .2s linear 3; }
+    .actor.spin { animation: spin .75s ease-in-out; }
+    .nameplate { position: absolute; left: 50%; bottom: -9%; transform: translateX(-50%); padding: .28em .65em; border-radius: 999px; background: rgba(13,12,16,.82); color: #fff5dd; font-size: clamp(11px, .78vw, 15px); font-weight: 800; white-space: nowrap; }
 
-/* ══ 결과와 마무리 ══ */
-.accept{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:3px}
-.acc-block{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(200,163,74,.05)}
-.acc-h{font-size:9.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:4px}
-.acc-body{font-size:12.5px;line-height:1.55}
-.acc-decl{font-size:17px;font-weight:800;line-height:1.4}
-.sum-row{display:flex;justify-content:space-between;font-size:11.5px;padding:2px 0;border-bottom:1px dotted rgba(255,255,255,.09)}
-.sum-row:last-child{border:none}
-.bestshot{border:1px dashed rgba(255,255,255,.18);border-radius:8px;padding:12px;text-align:center;color:var(--dim);font-size:10.5px}
+    .actor[data-role="jangsoe"] { --robe:#2e7164; --face:#ddb67d; }
+    .actor[data-role="kkeoksoe"] { --robe:#315b86; --face:#e6b64f; }
+    .actor[data-role="omtal"] { --robe:#872c34; --face:#c94b3c; }
+    .actor[data-role="saennim"] { --robe:#77548c; --face:#ead6b3; }
+    .actor[data-role="malttugi"] { --robe:#2f6d8d; --face:#bd4938; }
+    .actor[data-role="jaebi"] { --robe:#765d37; --face:#d7ad78; }
+    .actor[data-role="old"] { --robe:#6a687f; --face:#cfae88; }
+    .actor[data-role="meokjung"] { --robe:#6a5231; --face:#dbbd82; }
+    .actor[data-role="chv"] { --robe:#9c473b; --face:#d76d3e; }
+    .actor[data-role^="pijori"] { --robe:#a35f82; --face:#efd1b0; }
 
-.cta{display:block;width:100%;padding:11px;border-radius:9px;font-size:14px;font-weight:700;
-  background:linear-gradient(180deg,#c8a34a,#a8863a);color:#1b1509;flex:0 0 auto;margin-top:9px}
-.cta:hover{filter:brightness(1.08)}
-.cta.ghost{background:none;border:1px solid var(--line);color:var(--paper);font-weight:500}
+    .waiting-badge { position: absolute; z-index: 9; right: 4%; top: 16%; display: none; align-items: center; gap: .65em; padding: .6em .9em; border: 1px solid var(--line); border-radius: 999px; background: rgba(12,11,15,.74); color: var(--muted); font-size: clamp(12px, .86vw, 17px); }
+    .waiting-badge.show { display: flex; }
+    .waiting-badge i { width: .7em; height: .7em; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
 
-/* ══ 팝업 ══ */
-#pop{position:absolute;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:24px;z-index:40}
-#pop.on{display:flex}
-.pbox{background:#1b1815;border:1px solid var(--line);border-radius:12px;padding:18px;width:100%;max-width:340px;text-align:center}
-.ptitle{font-size:14px;font-weight:700;margin-bottom:7px}
-.pmsg{font-size:12px;color:#c9bda9;line-height:1.55;margin-bottom:14px}
-.prow{display:flex;gap:8px}
-.prow .cta{padding:10px;font-size:12.5px;margin:0}
+    .cue { position: absolute; z-index: 16; left: 50%; top: 43%; transform: translate(-50%,-50%); display: none; text-align: center; }
+    .cue.show { display: block; animation: cueIn .28s ease-out; }
+    .cue strong { display: block; font-size: clamp(48px, 6vw, 114px); line-height: 1; text-shadow: 0 8px 24px rgba(0,0,0,.55); }
+    .cue span { display: inline-block; margin-top: .75em; padding: .45em .85em; border-radius: 999px; background: rgba(10,9,12,.78); color: var(--gold); font-size: clamp(14px, 1.05vw, 20px); font-weight: 900; }
 
-/* ══ 프로토타입 입력부 (키오스크 화면 밖) ══ */
-#band{width:100%;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#100e0c;
-  padding:9px 11px;display:flex;flex-direction:column;gap:7px}
-.band-head{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--dim)}
-.band-head b{color:#c9bda9;font-weight:600;font-size:10.5px}
-.band-head .note-txt{flex:1;text-align:right;color:#6d6459;font-size:9.5px}
-.band-body{display:flex;gap:11px;align-items:stretch}
-.band-info{flex:0 0 210px;display:flex;flex-direction:column;justify-content:center;gap:4px}
-.pad-move{font-size:16px;font-weight:800;color:var(--paper)}
-.pad-move small{font-size:11px;color:var(--dim);font-weight:400;margin-left:5px}
-.pad-how{font-size:11.5px;color:var(--gold);line-height:1.4}
-.pad-real{font-size:10.5px;color:var(--dim);line-height:1.4;margin-top:1px}
-.pad-elems{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
-.el{font-size:9.5px;padding:2px 7px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:var(--dim)}
-.pad{flex:1;height:118px;position:relative;border:1px solid var(--line);border-radius:9px;
-  background:repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 8px,transparent 8px 16px),rgba(0,0,0,.3);
-  user-select:none;overflow:hidden;transition:.15s;display:flex;align-items:center;justify-content:center;gap:9px;padding:9px}
-.pad.armed{border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,74,.35) inset,0 0 22px rgba(200,163,74,.14)}
-.pad.idle{opacity:.35}
-.pad-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:11px;color:#6d6459;pointer-events:none}
-.pad-window{position:absolute;left:0;bottom:0;height:3px;background:var(--gold);width:100%;transform-origin:left;display:none}
-/* 숫자 키패드. 배운 동작 3개에 1~3을 매기고, 판 위에 뜬 픽토그램에 맞는 번호를 누름.
-   홀드가 필요한 동작은 누르고 있는 시간으로 홀드를 잼 */
-.key{flex:1;max-width:190px;height:100%;border-radius:9px;position:relative;overflow:hidden;
-  border:1px solid rgba(255,255,255,.16);background:rgba(28,24,20,.9);color:var(--paper);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:.12s}
-.pad.armed .key{border-color:rgba(200,163,74,.5);background:rgba(40,33,23,.9)}
-.pad.armed .key:hover{border-color:var(--gold);background:rgba(56,45,28,.95)}
-.key:disabled{cursor:default}
-.key.down{background:rgba(200,163,74,.3);border-color:var(--gold);transform:translateY(1px)}
-.key .pic{flex:0 1 auto;min-height:0;width:54px;height:54px;display:flex;align-items:center;justify-content:center}
-.key .pic img{max-width:100%;max-height:100%;object-fit:contain}
-.key .pic .art{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:20px;color:rgba(200,163,74,.8)}
-.key .lab{display:flex;align-items:center;gap:6px;font-size:12px;color:#d8cdba;line-height:1.2}
-.key .num{font-size:17px;font-weight:800;line-height:1;color:var(--gold)}
-.key .holdbar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ok);transition:width .06s linear}
-.pad-elems .el.off{opacity:.4;text-decoration:line-through}
-.band-arrow{flex:0 0 128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-  border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(0,0,0,.22);padding:6px}
-.band-arrow .ar{width:52px;height:52px;display:flex;align-items:center;justify-content:center;
-  font-size:34px;color:rgba(200,163,74,.75);line-height:1}
-.band-arrow .ar img{max-width:100%;max-height:100%;object-fit:contain}
-.band-arrow .arcap{font-size:9.5px;color:var(--dim);text-align:center}
+    .input-zone {
+      position: absolute; z-index: 30; left: 3%; right: 3%; bottom: 23.3%; min-height: 10%;
+      display: none; align-items: center; justify-content: center; gap: 1%; pointer-events: none;
+    }
+    .input-zone.show { display: flex; pointer-events: auto; }
+    .input-btn {
+      min-width: 13%; min-height: 68px; padding: .75em 1.35em; border: 2px solid rgba(255,255,255,.27); border-radius: 18px;
+      color: var(--ink); background: rgba(22,19,25,.9); cursor: pointer; font-size: clamp(15px, 1.05vw, 21px); font-weight: 850;
+      transition: transform .16s, border-color .16s, background .16s;
+    }
+    .input-btn:hover, .input-btn:focus-visible { transform: scale(1.045); border-color: var(--gold); background: rgba(92,61,38,.94); outline: none; }
+    .input-btn.primary { background: #8f302f; }
 
-/* ══ 디버그 패널 ══ */
-#panel{flex:0 0 330px;height:100%;overflow-y:auto;padding:12px 14px 40px;background:#100e0c;
-  border-left:1px solid var(--line);font-size:12px;line-height:1.55}
-#panel.hidden{display:none}
-#panel h3{font-size:11px;color:var(--gold);letter-spacing:.08em;margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line)}
-#panel h3:first-child{margin-top:0}
-.kv{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px dotted rgba(255,255,255,.07)}
-.kv span:first-child{color:var(--dim);flex:0 0 auto}
-.kv span:last-child{text-align:right;word-break:break-all}
-#log{max-height:140px;overflow-y:auto;font-family:Consolas,monospace;font-size:10.5px;line-height:1.5}
-#log div{padding:1px 0;border-bottom:1px dotted rgba(255,255,255,.06)}
-.lg-srv{color:#8ab4e8}.lg-jud{color:#e0b354}.lg-sys{color:var(--dim)}.lg-err{color:#e08070}.lg-warn{color:#d9a05b}
-.cfg{display:flex;align-items:center;gap:6px;padding:3px 0}
-.cfg label{flex:1;color:var(--dim)}
-.cfg input[type=number]{width:58px;background:#1b1815;border:1px solid rgba(255,255,255,.15);color:var(--paper);padding:2px 5px;border-radius:4px;font-family:inherit;font-size:11px}
-.cfg input[type=checkbox]{accent-color:var(--gold)}
-.btnrow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-.btnrow button{font-size:10.5px;padding:5px 8px;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:#c9bda9}
-.btnrow button:hover{border-color:var(--gold);color:var(--paper)}
-.warnbox{border:1px solid rgba(217,160,91,.45);background:rgba(217,160,91,.08);border-radius:7px;padding:8px;font-size:10.5px;line-height:1.5;color:#e3cba2;margin-top:6px}
-.warnbox b{color:#f0c987}
-.rep-row{display:flex;justify-content:space-between;padding:2px 0;font-size:11px}
-.asset-grp{margin-top:8px;padding-bottom:2px;font-size:10px;color:var(--gold);border-bottom:1px solid var(--line)}
-.asset-grp small{color:var(--dim);font-size:9px;margin-left:6px}
-.asset-row{display:flex;justify-content:space-between;gap:6px;padding:2px 0;font-size:10.5px;border-bottom:1px dotted rgba(255,255,255,.06)}
-.asset-row span:first-child{color:var(--dim);word-break:break-all}
-.asset-row .yes{color:var(--ok)}
-.asset-row .no{color:#6d6459}
-.asset-row .sub{color:var(--gold)}
-#panelToggle{position:fixed;right:8px;top:8px;z-index:50;font-size:10px;color:var(--dim);
-  border:1px solid var(--line);padding:4px 8px;border-radius:5px;background:#100e0c}
-</style>
+    .dialogue {
+      position: absolute; z-index: 25; left: 0; right: 0; bottom: 0; height: 21%;
+      display: grid; grid-template-columns: 15% 1fr auto; align-items: center; gap: 2%;
+      padding: 1.7% 3.2%; border-top: 2px solid rgba(240,184,73,.4); background: var(--panel);
+    }
+    .speaker { color: var(--gold); font-size: clamp(19px, 1.55vw, 30px); font-weight: 900; }
+    .speaker.guide { color: #83d8b1; }
+    .line { font-size: clamp(22px, 1.9vw, 38px); font-weight: 720; line-height: 1.35; letter-spacing: -.025em; }
+    .advance {
+      min-width: 112px; padding: .8em 1em; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); background: rgba(255,255,255,.08); cursor: pointer; font-weight: 850;
+    }
+    .advance:hover { border-color: var(--gold); }
+
+    .prototype-tools {
+      position: absolute; z-index: 40; top: 10%; left: 2.2%; display: flex; flex-direction: column; gap: 8px;
+    }
+    .tool-btn { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: rgba(10,9,12,.72); cursor: pointer; font-weight: 900; }
+    .tool-btn:hover { background: #7d302e; }
+    .dev-note { position: absolute; z-index: 40; top: 10.5%; right: 2.2%; padding: .45em .75em; border-radius: 8px; color: #cfc6b3; background: rgba(10,9,12,.6); font-size: clamp(10px, .7vw, 13px); }
+
+    .result-flash { position: absolute; z-index: 32; inset: 0 0 21%; display: none; place-items: center; pointer-events: none; background: rgba(15,12,16,.2); }
+    .result-flash.show { display: grid; animation: fadeResult 1.05s ease both; }
+    .result-flash span { padding: .35em .7em; border-radius: 14px; background: rgba(16,14,18,.9); color: var(--gold); font-family: Georgia,"Batang",serif; font-size: clamp(40px, 5vw, 94px); font-weight: 900; }
+
+    @keyframes armA { to { transform: rotate(-42deg); } }
+    @keyframes armB { to { transform: rotate(42deg); } }
+    @keyframes bounce { to { transform: translate(-50%,-54%) scale(var(--scale)); } }
+    @keyframes shake { 25% { margin-left:-12px } 75% { margin-left:12px } }
+    @keyframes spin { 50% { transform: translate(-50%,-50%) rotate(12deg) scale(1.12); } }
+    @keyframes cueIn { from { opacity:0; transform:translate(-50%,-50%) scale(.7) } }
+    @keyframes fadeResult { 0%{opacity:0} 20%,70%{opacity:1} 100%{opacity:0} }
+
+    @media (max-width: 1100px), (max-height: 620px) {
+      #kiosk { min-width: 0; min-height: 0; }
+      .input-btn { min-height: 48px; }
+      .dialogue { grid-template-columns: 14% 1fr auto; }
+      .advance { min-width: 82px; padding: .65em; }
+    }
+  </style>
 </head>
 <body>
-<button id="panelToggle">패널</button>
-<div id="wrap">
- <div id="left"><div id="stagecol">
-
-  <div id="kiosk">
-    <!-- Step 1 (약식) -->
-    <section class="screen" id="scr-start">
-      <div class="scr-head"><span class="step-tag">Step 1 (약식)</span><span class="scr-title">시작 화면</span></div>
-      <div class="cols"><div class="col col-half" style="align-items:center;justify-content:center">
-        <div style="font-size:32px;font-weight:800;letter-spacing:.04em">나만의 탈춤</div>
-        <div style="font-size:13px;color:#c9bda9;margin-top:6px">덧뵈기 가면극 배역 체험</div>
-        <div class="asset-note" style="max-width:70%;margin-top:12px">
-          이 프로토타입의 검증 범위는 Step 2부터 Step 5까지임.<br>Step 1의 가이드와 이용 동의 화면은 진입점만 두고 생략함
+  <main id="kiosk" aria-live="polite">
+    <section id="home" class="screen active" aria-label="마당 선택">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">남사당 덧뵈기 체험</p>
+          <h1>나만의 탈춤</h1>
         </div>
-        <button class="cta" id="btnStart" style="max-width:280px">시작하기</button>
-      </div></div>
-    </section>
-
-    <!-- Step 2-1 마당 선택 -->
-    <section class="screen" id="scr-madang">
-      <div class="scr-head"><span class="step-tag">Step 2</span><span class="scr-title">마당 선택</span>
-        <span class="spacer"></span><span class="timer-chip" data-timer></span>
-        <button class="quit-btn" data-quit>그만두기</button></div>
-      <div class="cols">
-        <div class="col col-half">
-          <div class="info-h">체험 마당 3종</div>
-          <div class="cards" id="madangCards"></div>
-          <button class="cta" id="btnMadangOk">이 마당으로 하기</button>
-        </div>
-        <div class="col col-half">
-          <div class="info-h">미리보기</div>
-          <div class="preview" id="madangPreview"></div>
-        </div>
+        <p class="intro">세 마당 중 하나를 고르면 선택한 마당의 처음부터 끝까지 이어서 체험합니다.</p>
+      </div>
+      <div class="scene-cards">
+        <button class="scene-card" data-start="omtal" style="--card-bg:linear-gradient(155deg,#7c352f,#2c1f25);--mask:#ca4d3f;--tilt:-5deg">
+          <span class="card-art"></span><span class="card-content"><span class="card-no">첫째 마당</span><h2>옴탈잡이</h2><p>좌우에서 달려드는 옴탈을 피하고 마지막 순간 밀어냅니다.</p><span class="role-chip">내 배역 <b>꺽쇠</b></span></span>
+        </button>
+        <button class="scene-card" data-start="saennim" style="--card-bg:linear-gradient(155deg,#5f4b7c,#241f2d);--mask:#e4d0aa;--tilt:3deg">
+          <span class="card-art"></span><span class="card-content"><span class="card-no">둘째 마당</span><h2>샌님잡이</h2><p>샌님의 말에서 허점을 골라 말뚝이의 재담으로 받아칩니다.</p><span class="role-chip">내 배역 <b>말뚝이</b></span></span>
+        </button>
+        <button class="scene-card" data-start="meokjung" style="--card-bg:linear-gradient(155deg,#4c6848,#211f22);--mask:#d2b276;--tilt:-2deg">
+          <span class="card-art"></span><span class="card-content"><span class="card-no">셋째 마당</span><h2>먹중잡이</h2><p>취발이가 나타난 뒤 몸짓이 달라진 인물을 찾아 지목합니다.</p><span class="role-chip">내 배역 <b>취발이</b></span></span>
+        </button>
       </div>
     </section>
 
-    <!-- Step 2-2 배역 확인 -->
-    <section class="screen" id="scr-role">
-      <div class="scr-head"><span class="step-tag">Step 2</span><span class="scr-title">배역 확인 (배역 입문)</span>
-        <span class="spacer"></span><span class="timer-chip" data-timer></span>
-        <button class="quit-btn" data-quit>그만두기</button></div>
-      <div class="cols">
-        <div class="col col-host"><div class="host" id="roleHost"></div></div>
-        <div class="col col-stage">
-          <div class="role-center">
-            <div class="role-mask" id="roleMask"></div>
-            <div class="role-name" id="roleName"></div>
-            <div class="role-sub" id="roleSub"></div>
-            <div class="role-intro" id="roleIntro"></div>
-          </div>
-          <button class="cta" id="btnWear">탈 쓰기</button>
-        </div>
-        <div class="col col-info">
-          <div class="info-h">이 배역이 할 일</div>
-          <div class="info-card role-facts" id="roleInfo"></div>
-        </div>
+    <section id="play" class="screen" aria-label="탈춤 체험">
+      <header class="topbar"><div class="top-title"><small id="sceneNo">첫째 마당</small><span id="sceneTitle">옴탈잡이</span></div><div class="progress"><i id="progressBar"></i></div></header>
+      <div class="stage">
+        <div class="curtain left"></div><div class="curtain right"></div><div class="stage-label">덧 뵈 기</div>
+        <div id="cast" class="cast"></div>
+        <div id="waiting" class="waiting-badge"><i></i><span></span></div>
+        <div id="cue" class="cue"><strong></strong><span></span></div>
       </div>
+      <div id="inputZone" class="input-zone"></div>
+      <div id="resultFlash" class="result-flash"><span></span></div>
+      <div class="dialogue"><div id="speaker" class="speaker">장쇠</div><div id="line" class="line"></div><button id="advance" class="advance">다음 ▶</button></div>
+      <div class="prototype-tools"><button id="homeBtn" class="tool-btn" title="마당 선택으로">⌂</button><button id="prevBtn" class="tool-btn" title="이전 순서">‹</button></div>
+      <div class="dev-note">화면 프로토타입 · ← → 이전/다음 · 숫자키 선택</div>
     </section>
+  </main>
 
-    <!-- Step 3 마당 장면 체험 -->
-    <section class="screen" id="scr-play">
-      <div class="scr-head"><span class="step-tag">Step 3</span><span class="scr-title" id="playTitle">익히기 (1장)</span>
-        <span class="spacer"></span><span class="timer-chip" data-timer></span>
-        <button class="quit-btn" data-quit>그만두기</button></div>
-      <div class="cols">
-        <div class="col col-host"><div class="host" id="playHost"></div></div>
-        <div class="col col-stage">
-          <div class="playfield" id="field">
-            <!-- 상대 배역은 왼쪽, 내 배역은 오른쪽. 각자 머리 위에 제 말풍선을 둠 -->
-            <div class="actor at-l" id="foe"></div>
-            <div class="actor-cap at-l" id="foeCap"></div>
-            <div class="stage-say side-l" id="sayFoe"></div>
-            <div class="actor at-r" id="me"></div>
-            <div class="actor-cap at-r" id="meCap"></div>
-            <div class="stage-say side-r" id="sayMe"></div>
-            <div class="verdict" id="verdict"></div>
-            <div class="demo-hint" id="demoHint"></div>
-          </div>
-          <div class="botbar">
-            <div class="notebar" id="noteBar" style="display:none">
-              <div class="notelane" id="noteLane"></div><div class="marker"></div>
-            </div>
-            <div class="gauge-wrap" id="gaugeWrap" style="display:none">
-              <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
-              <div class="gauge-lab" id="gaugeLab"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col col-info" id="infoPane"></div>
-      </div>
-    </section>
+  <script>
+    const actorNames = { jangsoe:'장쇠', kkeoksoe:'꺽쇠', omtal:'옴탈', saennim:'샌님', malttugi:'말뚝이', jaebi:'잽이', old:'노친네', meokjung:'먹중', chv:'취발이', pijoriA:'피조리', pijoriB:'피조리' };
+    const A = (role, x, y=58, mods='show') => ({ role, x, y, mods });
 
-    <!-- Step 4 결과와 마무리 -->
-    <section class="screen" id="scr-accept">
-      <div class="scr-head"><span class="step-tag">Step 4</span><span class="scr-title">결과와 마무리</span>
-        <span class="spacer"></span><span class="timer-chip" data-timer></span></div>
-      <div class="cols">
-        <div class="col col-host"><div class="host" id="acceptHost"></div></div>
-        <div class="col col-stage"><div class="accept" id="acceptBody"></div>
-          <button class="cta" id="btnHome">처음으로</button></div>
-        <div class="col col-info">
-          <div class="info-h">베스트샷</div>
-          <div class="bestshot" style="flex:1;display:flex;align-items:center;justify-content:center">
-            카메라를 쓰지 않는 프로토타입이라<br>자리표시로 둠
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Step 5 -->
-    <section class="screen" id="scr-end">
-      <div class="scr-head"><span class="step-tag">Step 5</span><span class="scr-title">종료와 리셋</span></div>
-      <div class="cols"><div class="col col-half" style="align-items:center;justify-content:center">
-        <div style="font-size:15px" id="endMsg">세션 종료 처리 중</div>
-        <div class="asset-note" id="endSub" style="margin-top:6px"></div>
-      </div></div>
-    </section>
-
-    <div id="pop"><div class="pbox">
-      <div class="ptitle" id="popTitle"></div>
-      <div class="pmsg" id="popMsg"></div>
-      <div class="prow" id="popRow"></div>
-    </div></div>
-  </div>
-
-  <!-- 프로토타입 입력부: 실제 콘텐츠에는 없는 영역이라 화면 밖에 둠 -->
-  <div id="band">
-    <div class="band-head">
-      <b>프로토타입 입력부</b>
-      <span>실제 콘텐츠에서는 카메라 동작 인식이 이 자리를 대신함. 자세는 번호, 타이밍은 누른 시점, 홀드는 누른 시간으로 치환함</span>
-      <span class="note-txt" id="bandState">대기 중</span>
-    </div>
-    <div class="band-body">
-      <div class="band-info">
-        <div class="pad-move" id="padMove">대기</div>
-        <div class="pad-how" id="padHow">판에 뜬 그림에 맞는 번호를 누르십시오</div>
-        <div class="pad-real" id="padReal"></div>
-        <div class="pad-elems" id="padElems"></div>
-      </div>
-      <div class="pad idle" id="pad">
-        <div class="pad-hint" id="padHint">신호가 오면 번호를 누르십시오</div>
-        <div class="pad-window" id="padWindow"></div>
-      </div>
-      <div class="band-arrow">
-        <div class="ar" id="padArrow">-</div>
-        <div class="arcap" id="padArrowCap">제시된 동작</div>
-      </div>
-    </div>
-  </div>
-
- </div></div>
-
- <aside id="panel">
-  <h3>세션 데이터</h3><div id="sess"></div>
-  <h3>이벤트 로그</h3><div id="log"></div>
-  <h3>체험 리포트</h3><div id="report"><div class="lg-sys" style="font-size:10.5px">세션 종료 시 집계됨</div></div>
-
-  <h3>리소스 상태</h3>
-  <div class="asset-note" style="text-align:left;margin-bottom:5px">
-    아래 경로에 파일을 넣으면 SVG 자리표시를 자동으로 대체함
-  </div>
-  <div id="assetList"></div>
-
-  <h3>튜닝값 (기획서 5.1 잠정값)</h3>
-  <div class="cfg"><label>화면 타임아웃(초)</label><input type="number" id="cfgScreen" value="60"></div>
-  <div class="cfg"><label>Step 3 합산(초)</label><input type="number" id="cfgStep3" value="300"></div>
-  <div class="cfg"><label>미입력 타임아웃(초)</label><input type="number" id="cfgIdle" value="45"></div>
-  <div class="cfg"><label>응답 대기 기본(초)</label><input type="number" id="cfgRespBase" value="1.4" step="0.1"></div>
-  <div class="cfg"><label>응답 대기 글자당(초)</label><input type="number" id="cfgRespChar" value="0.02" step="0.005"></div>
-  <div class="cfg"><label>응답 대기 최대(초)</label><input type="number" id="cfgRespMax" value="3.2" step="0.1"></div>
-  <div class="cfg"><label>수업 재시도(회)</label><input type="number" id="cfgRetry" value="2"></div>
-  <div class="cfg"><label>얼쑤 반응 구간(대기 비율)</label><input type="number" id="cfgEolssu" value="0.4" step="0.05"></div>
-  <div class="cfg"><label>얼쑤 반응 하한(초)</label><input type="number" id="cfgEolssuMin" value="0.9" step="0.1"></div>
-  <div class="cfg"><label>홀드 요구(초)</label><input type="number" id="cfgHold" value="0.6" step="0.1"></div>
-  <div class="cfg"><label>신명 서사 분기 임계</label><input type="number" id="cfgSinmyeong" value="55"></div>
-  <div class="cfg"><label>글자당 표시 간격(ms)</label><input type="number" id="cfgTypeMs" value="65" step="4"></div>
-  <div class="cfg"><label>한 번에 띄우는 최대 글자수</label><input type="number" id="cfgSayMax" value="66" step="2"></div>
-  <div class="cfg"><label>대사 최소 노출(초)</label><input type="number" id="cfgMinShow" value="0.9" step="0.1"></div>
-  <div class="cfg"><label>대사 뒤 읽을 틈(초)</label><input type="number" id="cfgReadPause" value="0.4" step="0.1"></div>
-  <div class="cfg"><label>음성 끝까지 기다림</label><input type="checkbox" id="cfgWaitTts"></div>
-  <div class="cfg"><label>대사 한 글자씩 표시</label><input type="checkbox" id="cfgType" checked></div>
-  <div class="cfg"><label>음성(TTS) 사용</label><input type="checkbox" id="cfgTts" checked></div>
-  <div class="cfg"><label>장단, 효과음</label><input type="checkbox" id="cfgSfx" checked></div>
-  <div class="cfg"><label>화면 타임아웃 작동</label><input type="checkbox" id="cfgTimeout" checked></div>
-
-  <h3>진행 도구</h3>
-  <div class="btnrow">
-    <button data-force="eolssu">강제 얼쑤</button>
-    <button data-force="johda">강제 좋다</button>
-    <button data-force="dasi">강제 다시</button>
-    <button id="btnSkipChap">이 장 건너뛰기</button>
-    <button id="btnReset">세션 리셋</button>
-  </div>
-
-  <h3>에러 케이스 발동 (기획서 5.2)</h3>
-  <div class="btnrow">
-    <button data-err="tts">TTS 실패</button>
-    <button data-err="pose">포즈 전환 실패</button>
-    <button data-err="res">마당 리소스 실패</button>
-    <button data-err="cam">카메라 미수신 지속</button>
-  </div>
-
-  <h3>기획서 대조에서 걸린 것</h3><div id="gaps"></div>
- </aside>
-</div>
-
-<script>
-"use strict";
-const $=id=>document.getElementById(id);   // 이 파일 전체에서 DOM 조회는 이 한 줄을 씀
-/* ══════════════════════════════════════════════════════════
-   덧뵈기 - 나만의 탈춤, Step 2~5 진행 프로토타입 (가로형)
-   근거: 04_Projects/시범콘텐츠/덧뵈기 - 나만의 탈춤/덧뵈기 - 나만의 탈춤 기획서.md
-   대사와 문안은 전부 프로토타입 임시 문안임 (기획서상 "문안 작성 예정")
-   ══════════════════════════════════════════════════════════ */
-
-/* ── 0. 설정 ───────────────────────────── */
-const CFG={screenTimeout:60,step3Timeout:300,idleTimeout:45,respBase:1.4,respPerChar:.02,respMax:3.2,
-  lessonRetry:2,eolssuEarly:.4,holdReq:.6,eolssuMin:.9,sinmyeongCut:55,sinmyeongCutLow:25,sayMax:66,typewriter:true,typeMs:65,minShow:.9,readPause:.4,waitTts:false,ttsGuard:25,tts:true,sfx:true,timeoutOn:true};
-const bind=(id,key,isNum)=>{const el=$(id);
-  const set=()=>{
-    if(el.type==="checkbox"){CFG[key]=el.checked;return;}
-    if(!isNum){CFG[key]=el.value;return;}
-    const v=parseFloat(el.value);
-    if(isFinite(v)) CFG[key]=v; else el.value=CFG[key]; // 빈 칸이 임계를 0으로 떨구지 않게 함
-  };
-  el.addEventListener("change",set); set();};
-bind("cfgScreen","screenTimeout",1);bind("cfgStep3","step3Timeout",1);bind("cfgIdle","idleTimeout",1);
-bind("cfgRespBase","respBase",1);bind("cfgRespChar","respPerChar",1);bind("cfgRespMax","respMax",1);bind("cfgRetry","lessonRetry",1);
-bind("cfgEolssu","eolssuEarly",1);bind("cfgEolssuMin","eolssuMin",1);bind("cfgHold","holdReq",1);bind("cfgSinmyeong","sinmyeongCut",1);bind("cfgTypeMs","typeMs",1);bind("cfgSayMax","sayMax",1);bind("cfgMinShow","minShow",1);bind("cfgReadPause","readPause",1);bind("cfgWaitTts","waitTts");bind("cfgType","typewriter");
-bind("cfgTts","tts");bind("cfgSfx","sfx");bind("cfgTimeout","timeoutOn");
-
-/* ── 1. 리소스 목록과 로더 ──────────────
-   실제 파일이 있으면 <img>로 바꿔 끼우고, 없으면 SVG 자리표시를 그대로 둠.
-   탈 이미지(얼굴만)와 전신 이미지는 쓰이는 자리가 달라 종류를 나눠 둠  */
-const ART_BASE="assets/";   // 이 폴더만 압축해 공유할 수 있도록 그림을 함께 둠
-const MOVE_KO={chikyeo:"손치켜들기",jjilleo:"찔러보기",hwidulleo:"휘둘러쫓기",geodeureum:"거드름흉내",
-  satdae:"삿대질",chaejjik:"채찍휘두르기",eokkae:"어깨메기",balchago:"한발차올리기",somae:"소매뿌리기"};
-const FOE_POSE=["등장","대기","과장","중립","결말"];
-const byMove=(pre,fix)=>{const o={};Object.keys(MOVE_KO).forEach(k=>o[pre+k]=fix+MOVE_KO[k]+".png");return o;};
-const ART_GROUPS=[
- {name:"호스트 전신", where:"Step 2-2, 3, 4 왼쪽 열", items:{
-   host_idle:"호스트_장쇠_기본.png", host_talk:"호스트_장쇠_입벌림.png"}},
- {name:"내 배역 탈", where:"Step 2-1 마당 카드", items:{
-   mask_꺽쇠:"탈_꺽쇠.png", mask_말뚝이:"탈_말뚝이.png", mask_취발이:"탈_취발이.png"}},
- {name:"마당 미리보기", where:"Step 2-1 오른쪽 미리보기", items:{
-   preview_omtal:"미리보기_옴탈잡이.jpg", preview_sennim:"미리보기_샌님잡이.jpg",
-   preview_mokjung:"미리보기_먹중잡이.jpg"}},
- {name:"내 배역 전신", where:"Step 2-2 배역 확인", items:{
-   body_꺽쇠:"배역_꺽쇠.png", body_말뚝이:"배역_말뚝이.png", body_취발이:"배역_취발이.png"}},
- {name:"상대 배역 전신", where:"Step 3 판", items:(()=>{const o={};
-   ["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.forEach(p=>o["foe_"+f+"_"+p]="상대_"+f+"_"+p+".png"));return o;})()},
- {name:"동작 픽토그램", where:"Step 3 오른쪽 동작 목록", items:byMove("pic_","픽토_")},
- {name:"동작 시범", where:"Step 3 익히기 시범 자리", items:byMove("demo_","시범_")},
- {name:"배경", where:"Step 3 판", items:{
-   bg_omtal:"배경_옴탈잡이.png", bg_sennim:"배경_샌님잡이.png", bg_mokjung:"배경_먹중잡이.png",
-   bg_climax:"배경_절정무대.png"}}
-];
-const ART={}; ART_GROUPS.forEach(g=>Object.assign(ART,g.items));
-
-/* 대체 자산. 아직 안 그린 포즈는 SVG 자리표시로 떨어지지 않고 같은 배역의 대기 전신을 씀.
-   전신이 선 채로 반응 동작(과장은 튀어오름, 중립은 좌우 흔들림)만 돌아 그림 없이도 피드백이 읽힘 */
-const ART_ALT={};
-["옴탈","샌님","먹중"].forEach(f=>FOE_POSE.filter(p=>p!=="대기")
-  .forEach(p=>ART_ALT["foe_"+f+"_"+p]="foe_"+f+"_대기"));
-
-const ART_STATE={}; // key → true(있음) / false(없음) / undefined(미확인)
-function art(key,fallbackSVG,cls){
-  return `<span class="art ${cls||""}" data-key="${key}">${fallbackSVG||""}</span>`;
-}
-function hydrate(root){
-  (root||document).querySelectorAll(".art:not([data-done])").forEach(sp=>{
-    sp.setAttribute("data-done","1");
-    loadArt(sp,sp.dataset.key);
-  });
-}
-/* 파일이 없으면 대체 키(ART_ALT)로 한 번 더 내려감. 대체도 없으면 SVG 자리표시가 그대로 남음.
-   패널 목록은 확보 상태가 실제로 바뀔 때만 다시 그림 (그림 하나 뜰 때마다 48행을 다시
-   만들 이유가 없음) */
-function loadArt(sp,key){
-  const file=ART[key]; if(!file) return;
-  const alt=ART_ALT[key];
-  if(ART_STATE[key]===false){ if(alt) loadArt(sp,alt); return; }   // 이미 없는 것으로 확인됨
-  const im=new Image();
-  const mark=v=>{ if(ART_STATE[key]!==v){ ART_STATE[key]=v; renderAssets(); } };
-  im.onload=()=>{ mark(true); sp.innerHTML=""; sp.appendChild(im); };
-  im.onerror=()=>{ mark(false); if(alt) loadArt(sp,alt); };
-  im.src=ART_BASE+encodeURIComponent(file);
-  im.style.maxWidth="100%"; im.style.maxHeight="100%"; im.style.objectFit="contain";
-}
-/* 시작할 때 목록 전체를 한 번 훑어 있음과 없음을 미리 확정함.
-   없는 파일을 화면에서 만나는 순간에야 알면, 404가 돌아올 때까지 SVG 자리표시가 잠깐 비쳤다가
-   대체 그림으로 바뀌어 깜빡임. 패널 표시도 시작부터 실제 상태와 맞음 */
-function probeArt(){
-  let t=null; const redraw=()=>{clearTimeout(t);t=setTimeout(renderAssets,60);};
-  Object.keys(ART).forEach(k=>{
-    if(ART_STATE[k]!==undefined) return;
-    const im=new Image();
-    im.onload=()=>{ART_STATE[k]=true;redraw();};
-    im.onerror=()=>{ART_STATE[k]=false;redraw();};
-    im.src=ART_BASE+encodeURIComponent(ART[k]);
-  });
-}
-function renderAssets(){
-  const el=$("assetList");
-  const have=Object.keys(ART).filter(k=>ART_STATE[k]===true).length;
-  el.innerHTML=`<div class="asset-row"><span>합계</span><span>${have} / ${Object.keys(ART).length} 확인됨</span></div>`+
-    ART_GROUPS.map(g=>{
-      const ks=Object.keys(g.items), n=ks.filter(k=>ART_STATE[k]===true).length;
-      return `<div class="asset-grp">${esc(g.name)} ${n}/${ks.length}<small>${esc(g.where)}</small></div>`+
-        ks.map(k=>{ const s=ART_STATE[k];
-          // 파일은 없지만 대체 자산이 대신 나오는 중이면 따로 표시함 (소계는 실제 확보분만 셈)
-          const sub=s===false&&ART_ALT[k]&&ART_STATE[ART_ALT[k]]===true;
-          const cls=s?"yes":sub?"sub":"no", lab=s?"있음":sub?"대체 중":"없음";
-          return `<div class="asset-row"><span>${esc(g.items[k])}</span><span class="${cls}">${lab}</span></div>`;
-        }).join("");
-    }).join("");
-}
-
-/* ── 2. 동작 정의 ───────────────────────
-   카메라가 없으므로 판정 요소를 마우스 제스처로 치환함:
-   자세 → 끄는 방향, 진폭 → 끈 거리, 홀드 → 버틴 시간, 타이밍 → 손 댄 시각  */
-/* how는 실기기에서 유저가 실제로 하는 몸짓임. 프로토타입 입력(키패드)이 아니라
-   카메라가 판정할 대상을 적어 개발자에게 명세를 계속 보여 줌 */
-const MOVES={
- chikyeo:{name:"손 치켜들기",body:"한 팔 높이 들기",elems:["자세","홀드"],dir:"up",how:"기막히다는 듯 한 팔을 머리 위로 치켜들고 상체를 숙인 채 버팀"},
- jjilleo:{name:"찔러보기",body:"팔 뻗기",elems:["자세","진폭"],dir:"right",how:"팔을 앞으로 힘껏 뻗어 찌름"},
- hwidulleo:{name:"휘둘러 쫓기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"팔을 좌우로 크고 빠르게 휘둘러 쫓음"},
- geodeureum:{name:"거드름 흉내",body:"상체 젖히기",elems:["자세","홀드"],dir:"down",how:"상체를 뒤로 젖혀 거드름 피우는 자세로 버팀"},
- satdae:{name:"삿대질",body:"팔 뻗기",elems:["자세","진폭","홀드"],dir:"right",how:"팔을 뻗어 가리킨 채 버팀"},
- chaejjik:{name:"채찍 휘두르기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"말채찍 쥔 팔을 좌우로 크게 휘두름"},
- eokkae:{name:"어깨 메기",body:"팔 얹기",elems:["자세","홀드"],dir:"upleft",how:"팔을 어깨 위로 얹은 채 버팀"},
- balchago:{name:"한발 차올리기",body:"발목 높이",elems:["자세","진폭"],dir:"up",how:"한 발을 높이 차올림"},
- somae:{name:"소매 뿌리기",body:"팔 휘두르기",elems:["자세","진폭","속도"],dir:"swing",how:"장삼 소매를 좌우로 크게 뿌림"}
-};
-/* 픽토그램 그림이 아직 없을 때 쓰는 대체 기호 */
-const DIRCH={left:"←",right:"→",up:"↑",down:"↓",upleft:"↖",swing:"↔"};
-
-/* ── 3. 마당 데이터 ──────────────────────
-   2장과 3장의 대본은 전사본 `03_References/converted/남사당놀이/남사당놀이 - 덧뵈기.md`
-   5) 연회본에서 발췌함. 대사는 원문 그대로 쓰고, 한 호흡에 안 들어가는 긴 사설만
-   문장 단위로 끊어 …로 줄임. src 필드가 그 전사본의 행 번호임.
-   한 마당을 앞대목(2장)과 뒷대목(3장, 절정)으로 가름.
-
-   비트 종류
-     enter  상대 배역 등장
-     say    대사만 하고 넘어감 (판정 없음). who는 foe, me, jangsoe
-     cue    상대 배역 대사(text) 또는 무언 도발(act) 뒤에 내 동작을 받음
-     free   판정 없는 따라 하기 연출
-   cue의 mine/mineNo는 성공, 실패에 따라 내 배역이 내는 원전 대사이고,
-   foeBack은 그 뒤에 상대가 원전에서 되받는 대사임 */
-const MADANG=[
-{id:"omtal",name:"옴탈잡이",tag:"잡기",user:"꺽쇠",foe:"옴탈",
- brief:"슬금슬금 나타난 옴탈을 꺽쇠가 되어 잡아 쫓는 마당",
- preview:"옴탈을 몰아 판 밖으로 쫓아내는 대목",
- maskLine:"이 낯을 보아라. 엷은 자줏빛 바탕에 상모를 얹고 꽹과리를 든 꺽쇠다. 나와 한 패로 판을 여는 놈이지.",
- intro:"꽹과리를 든 남사당패의 앞잡이. 판을 열고 훼방꾼을 몰아내는 놈.",
- foeIntro:"슬금슬금 기어드는 옴쟁이",
- vow:"탈을 쓰면 너는 네가 아니라 꺽쇠다. 서툰 건 꺽쇠가 서툰 것이니 마음 놓고 놀아라.",
- moves:["chikyeo","jjilleo","hwidulleo"],
- openLine:"옴탈이란 놈이 나타났다. 잡으려면 세 가지를 익혀라.",
- closeLine:"손에 익었구나. 이제 저놈 앞에 서 보자.",
- sceneTitle:"둘째 마당 앞대목",climaxTitle:"둘째 마당 뒷대목",
- sceneSrc:"424~444행",climaxSrc:"446~466행",
- scene:[
-  {t:"enter",cap:"옴탈이 슬금슬금 나와 꺽쇠를 봄",src:"424행"},
-  {t:"cue",who:"foe",text:"이히! 네기럴꺼! 이놈이 뭣하는 놈인고.",src:"426행",
-   move:"chikyeo",cap:"옴탈이 요리조리 쫓으며 살핌",
-   mine:"어이구 이놈이 하늘 높은 줄 모르고 땅 넓은 줄만 알지. 얼굴이 왜쟁반만 하구나.",
-   mineNo:"어, 어허, 이놈이 뭣하는 놈이더라.",
-   ok:"저놈 봐라, 뒷걸음질을 친다!",no:"저놈이 아직도 네 뒤를 쫓는구나."},
-  {t:"cue",who:"foe",text:"허허 이놈 이거 놔라! 남의 의관 절단난다.",src:"434행",
-   move:"jjilleo",cap:"떡시루 밑을 잡힌 옴탈이 뿌리치려 함",
-   mine:"이놈 대관절 네가 사람이냐 짐승이냐. 황토 핀데 용천백이가 먼저 지나는구나.",
-   mineNo:"어이쿠, 손이 미끄러진다.",
-   foeBack:"이놈 내 쌍판이 어째서 사람 짐승을 묻느냐.",
-   ok:"옳지! 머릿채를 쥐었다, 끌고 다녀라!",no:"어이쿠, 손이 헛나갔다. 빠져나가는구나."},
-  {t:"cue",who:"foe",text:"내 네 얼굴 같으면 문지방도 안 넘것다!",src:"442행",
-   move:"hwidulleo",cap:"옴탈이 실랑이 끝에 풀려나 대듦",
-   mine:"그러나 저러나 네 얼굴을 보아하니 우툴두툴하고 땜쟁이 발등 같고, 보리 먹은 삼닢 같고, 콩멍석에 엎드러졌느냐?",
-   mineNo:"어, 어, 그놈 말은 잘하는구나.",
-   ok:"제 낯이 부끄러운 게지, 감싸고 물러선다!",no:"저놈이 되레 낯을 들이미는구나."}],
- climax:{gaugeLab:"몰이 진행도",accel:true,bpm:112,
-  seq:"얼굴 내력 문답으로 붙었다가 채검에서 옴이 드러나고, 발악하는 옴탈을 춤으로 몰아냄",
-  ending:"옴탈이 화면 밖으로 튕겨 나가 퇴장함",
-  endingSoft:"옴탈이 슬금슬금 물러나 판 뒤로 숨음",
-  beats:[
-  {t:"cue",who:"foe",text:"네 내 얼굴 우툴두툴한 내력을 모르는고.",src:"446행",
-   move:"chikyeo",cap:"옴탈이 얼굴을 들이밂",
-   mine:"모르것다.",mineNo:"글쎄다, 알 듯 말 듯하구나.",
-   ok:"걸려들었다! 제 내력을 술술 푼다.",no:"저놈이 콧방귀만 뀌는구나."},
-  {t:"cue",who:"foe",text:"어훔! 그렇다면 내 얼굴 우툴두툴한 내력을 일러줄 것이니 똑똑히 들어 봐라. … 호구별상 손님 마마님을 뫼시고 나왔다가 내 쌍판이 이 모양이 되었것다.",src:"450행",
-   move:"jjilleo",cap:"옴탈이 우쭐대며 얼굴을 내밂",
-   mine:"호구별상 손님 마마님이라? 이놈 가만히 있거라, 내 채검을 해야것다.",
-   mineNo:"채검은 무슨 채검, 손이 안 나가는구나.",
-   ok:"그렇지, 요리조리 살펴봐라!",no:"저놈이 낯을 홱 돌린다. 뭘 숨기는 게야."},
-  {t:"say",who:"me",text:"네 쌍판을 채검했더니 내 손 사이가 왜 가려우냐. 이놈이 어디서 옴을 차독 같이 묻쳐 왔구나.",
-   cap:"손가락 사이를 벅벅 긁음",src:"456행"},
-  {t:"cue",who:"foe",text:"힛힛! 옴, 옴, 옴 봐라! 옴!",src:"460행",
-   move:"hwidulleo",cap:"옴탈이 발악하며 대듦",
-   mine:"얼럴럴럴 네기럴꺼!",mineNo:"어이쿠, 옴 오르겠다.",
-   ok:"한 걸음 밀렸다! 몰아붙여라!",no:"저놈이 더 사납게 달려드는구나."},
-  {t:"cue",who:"foe",text:"옴 봐라! 옴, 옴!",src:"460행 (발악 반복)",
-   move:"hwidulleo",cap:"옴탈이 옴 오른 팔을 들이댐",
-   mine:"에라 이 옴쟁이야!",mineNo:"어허, 저리 가라 이놈아.",
-   ok:"옳지, 판 가장자리로 몰았다!",no:"저놈이 다시 복판으로 들어온다. 밀어내라!"},
-  {t:"cue",who:"foe",act:"옴탈이 온몸을 긁어 대며 달려듦",src:"458행 지문",
-   move:"hwidulleo",cap:"옴탈이 마구 발악으로 대듦",
-   mine:"이놈, 판 밖으로 나가렷다!",mineNo:"이거 붙잡을 데가 없구나.",
-   ok:"비틀거린다! 이제 다 됐다!",no:"저놈이 아직 버티고 섰구나."},
-  {t:"cue",who:"me",text:"얼럴럴럴 네기럴꺼! 금강산이 좋단 말을 풍편에 넌짓 듣고 절수, 절수, 절수, 절수!",src:"464행",
-   move:"hwidulleo",cap:"덩덕궁이 장단에 춤으로 대듦",
-   mine:"얼럴럴럴 네기럴꺼!",mineNo:"장단이 어긋났구나.",
-   ok:"네 춤에 밀렸다! 달아날 구멍을 찾는구나!",no:"저놈이 네 춤을 받아 버티는구나."}]}},
-{id:"sennim",name:"샌님잡이",tag:"놀리기",user:"말뚝이",foe:"샌님",
- brief:"거드름 피우는 샌님을 말뚝이가 되어 놀려 뒤집는 마당",
- preview:"샌님이 말뚝이에게 큰절을 올리는 대목",
- maskLine:"이 낯을 보아라. 이마에 혹이 돋은 자줏빛 바탕에 벙거지 쓰고 말채찍을 든 말뚝이다. 제 주인 샌님을 말로 이기는 하인이지.",
- intro:"벙거지 쓰고 말채찍 든 하인. 주먹이 아니라 말로 주인을 이기는 놈.",
- foeIntro:"거드름 피우는 양반",
- vow:"탈을 쓰면 너는 네가 아니라 말뚝이다. 양반 앞에서도 기죽지 말고 놀아라.",
- moves:["geodeureum","satdae","chaejjik"],
- openLine:"샌님이 거드름을 피우며 온다. 놀리려면 세 가지를 익혀라.",
- closeLine:"제법이다. 이제 저 양반 앞에 서 보자.",
- sceneTitle:"셋째 마당 앞대목",climaxTitle:"셋째 마당 뒷대목",
- sceneSrc:"470~544행",climaxSrc:"556~616행",
- scene:[
-  {t:"enter",cap:"장죽 물고 부채와 지팡이를 든 샌님이 노친네와 나옴",src:"470행"},
-  {t:"say",who:"foe",text:"아이고, 주책 바가지야, 늙은 주제에 왜 내 궁뎅이만 졸졸 따라다녀, 창피하게스리!",
-   cap:"샌님이 노친네를 타박함",src:"472행"},
-  {t:"say",who:"jangsoe",text:"여보시오, 웬 영감이 남의 노름청에 난가히 떠드시오.",
-   cap:"장쇠가 판 밖에서 말을 걸음",src:"482행"},
-  {t:"say",who:"foe",text:"내 부리던 하인을 찾으러 나왔것다. 참빗 새새 면면 촌촌 방방곡곡을 다녀도 못 보겠네.",
-   cap:"샌님이 하인을 찾아 두리번거림",src:"492, 518행"},
-  {t:"cue",who:"foe",text:"애, 뚝아, 뚝아, 말뚝아!",src:"522행",
-   move:"chaejjik",cap:"샌님이 길게 하인을 부름",
-   mine:"말뚝인지 꼴뚝인지 대령했소. 샌님, 샌님, 큰댁 샌님, 작은댁 샌님, 똥골댁 샌님, … 아래위가 빠꼼합니까오!",
-   mineNo:"부르는 소리는 들리는데 발이 안 떨어지는구나.",
-   ok:"저 양반 입이 떡 벌어졌다!",no:"저 양반이 헛물만 켜고 또 부르는구나."},
-  {t:"cue",who:"foe",text:"네 이놈 양반을 만났으면 절을 하는 게 아니라 뭣이 어쩌구 어째!",src:"532행",
-   move:"geodeureum",cap:"샌님이 어이없어 호통침",
-   mine:"네 절이요? 알지요, 압니다. 서울로 일러도 새절, 덕절 도곡사, 마곡사, 물 건너 봉원사 합천 해인사, … 이런 절 말씀이오?",
-   mineNo:"절이요? 그, 그게 무슨 절인지.",
-   foeBack:"이놈 누가 그런 절 말이냐.",
-   ok:"보아라, 부채만 접었다 폈다 한다!",no:"저 양반이 혀를 차는구나."},
-  {t:"cue",who:"foe",text:"너 절 모르느냐.",src:"540행",
-   move:"satdae",cap:"샌님이 지팡이로 땅을 짚음",
-   mine:"나 절 모르오. 그럼 무슨 절 말이오?",
-   mineNo:"어, 그게, 알 듯도 하고.",
-   foeBack:"너 그럼 절을 배워라!",
-   ok:"걸려들었다! 소매를 걷어붙인다.",no:"저 양반이 답답해 발을 구르는구나."}],
- climax:{gaugeLab:"절 배우기 진행도",accel:false,bpm:96,endAnim:"settle",
-  seq:"샌님이 절을 가르친다며 지시를 쏟아내고, 말뚝이가 그대로 되받아 넘기다 판이 뒤집힘",
-  ending:"샌님이 말뚝이에게 큰절을 올리고, 유저는 버티고 서서 절을 받음",
-  endingSoft:"샌님이 마지못해 고개만 까딱하고 물러섬",
-  beats:[
-  {t:"say",who:"foe",text:"이놈, 나 시키는 대로, 나 하자는 대로, 한 가지도 빼놓지 말고….",
-   cap:"샌님이 절 배우기를 시작함",src:"556행"},
-  {t:"cue",who:"foe",text:"미륵님을 가로 잡아라.",src:"560행",
-   move:"satdae",cap:"샌님이 부채를 가로 잡음",
-   mine:"부채를 가로 잡으란 말씀이오.",mineNo:"미륵님이 어느 님이오?",
-   ok:"저 양반 흡족해 고개를 끄덕인다. 그대로 가자!",no:"저 양반이 부채를 흔들며 답답해하는구나."},
-  {t:"cue",who:"foe",text:"옳다. 번쩍 들어라.",src:"564행",
-   move:"satdae",cap:"샌님이 부채를 번쩍 듦",
-   mine:"번쩍 들어라.",mineNo:"팔이 안 올라가는구나.",
-   ok:"신이 나서 다음 것을 시킨다. 넘어왔다!",no:"저 양반이 다시 해 보라 재촉하는구나."},
-  {t:"cue",who:"foe",text:"꾸부려라.",src:"568행",
-   move:"geodeureum",cap:"샌님이 허리를 꾸부림",
-   mine:"꾸부려라.",mineNo:"허리가 안 굽는구나.",
-   ok:"어라, 하고 너를 본다! 눈치를 챘구나!",no:"저 양반이 혀를 차며 또 시키는구나."},
-  {t:"cue",who:"foe",text:"이놈 꾸부려라.",src:"572행",
-   move:"geodeureum",cap:"샌님이 목청을 높임",
-   mine:"이놈 꾸부려라.",mineNo:"어, 어, 뭐라 하셨소.",
-   ok:"말끝까지 따라 한 걸 알아챘다! 이제 뒤집힌다!",no:"저 양반이 우쭐해졌구나. 아직 모르는 게지."},
-  {t:"cue",who:"foe",text:"야 이놈아 이놈.",src:"576행",
-   move:"chaejjik",cap:"샌님이 발끈해 소리침",
-   mine:"야 이놈아 이놈.",mineNo:"이놈이라니, 누가 이놈이오.",
-   ok:"얼굴이 벌게졌다! 제대로 걸렸다!",no:"저 양반이 기세를 되찾는구나."},
-  {t:"cue",who:"foe",text:"아하 이놈이, 아 이놈을 패줄까.",src:"584행",
-   move:"chaejjik",cap:"샌님이 지팡이를 치켜듦",
-   mine:"아하 이놈이, 아 이놈을 패줄까.",mineNo:"때리기는 왜 때리오.",
-   ok:"말문이 막혀 헛기침만 한다!",no:"저 양반이 지팡이를 고쳐 쥐는구나."},
-  {t:"cue",who:"foe",text:"허허.",src:"588행",
-   move:"geodeureum",cap:"샌님과 말뚝이가 엉켜 씨름을 함",
-   mine:"허허.",mineNo:"어이쿠, 힘이 부치는구나.",
-   foeBack:"이놈, 이놈아, 다 배웠다, 다 배웠어, 그만두자 그만둬….",
-   ok:"네게 꿀려 주저앉았다! 양반 체면이 말이 아니다!",no:"저 양반이 겨우 버티고 섰구나."},
-  {t:"cue",who:"foe",text:"번쩍 들어라. 꾸부려라, 번쩍 들어라, 꾸부려라!",src:"606행",
-   move:"satdae",cap:"샌님과 노친네가 나란히 서서 꾸부렸다 폈다 함",
-   mine:"어 모시고 가시고 잘 있었느냐!",mineNo:"어, 이거 절을 받아도 되는 것이오?",
-   foeBack:"이놈 양반에게 절을 받어!",
-   ok:"보아라! 양반 내외가 네게 절을 올린다!",no:"저 양반이 절하다 말고 허리를 펴는구나."}],
-  outro:[
-  {t:"say",who:"me",text:"양반에게 절을 받으면 명이 길다 합디다. 어휴, 나 힘들어서 양반 안 하것소, 쌍놈 하것소, 쌍놈!",src:"616행"}]}},
-{id:"mokjung",name:"먹중잡이",tag:"이기기",user:"취발이",foe:"먹중",
- brief:"행패 부리는 먹중을 취발이가 되어 춤으로 눌러 이기는 마당",
- preview:"먹중이 춤 대결에서 나가떨어지는 대목",
- maskLine:"이 낯을 보아라. 꽃자줏빛 바탕에 상투를 꽂고 붉은 띠를 두른 취발이다. 흥이 오르면 누구 앞에서도 물러서지 않는 놈이지.",
- intro:"상투 꽂고 붉은 띠 두른 장정. 흥이 오르면 누구 앞에서도 물러서지 않는 놈.",
- foeIntro:"행패 부리는 파계승",
- vow:"탈을 쓰면 너는 네가 아니라 취발이다. 물러서지 말고 크게 놀아라.",
- moves:["eokkae","balchago","somae"],
- openLine:"먹중이 행패를 부린다. 누르려면 세 가지를 익혀라.",
- closeLine:"기운이 붙었구나. 이제 저 중 앞에 서 보자.",
- sceneTitle:"넷째 마당 앞대목",climaxTitle:"넷째 마당 뒷대목",
- sceneSrc:"630~656행",climaxSrc:"658~678행",
- /* 넷째 마당의 먹중은 대사가 한 줄도 없는 무언 배역이라, 원전에서 취발이와 말을 주고받는
-    상대는 악사인 잽이임. 장쇠가 그 잽이 자리를 겸하므로 이 마당만 상대 대사를 장쇠가 맡고,
-    먹중은 무언 도발(act)로만 응수함 */
- scene:[
-  {t:"enter",cap:"먹중이 부채로 얼굴을 가리고 나와 피조리 둘과 춤춤",src:"630행"},
-  {t:"say",who:"me",text:"어라, 어라, 어라, 네기럴꺼! 늙은 놈이 집안을 웃씩 떠났더니 저희끼리 말 잡아먹고 북 메고 소 잡아먹고 장구 메고, … 이리 가도 훨훨, 저리로 가도 훨훨, 절수, 절수, 절수, 절수!",
-   cap:"취발이가 뛰어나와 사설을 늘어놓음",src:"632행"},
-  {t:"cue",who:"jangsoe",text:"여보게 안암산이 컴컴한 거 모르나.",src:"640행",
-   move:"eokkae",cap:"먹중이 피조리들과 어울려 춤을 이어 감",
-   mine:"나 몰라.",mineNo:"안암산이 어느 산이더냐.",
-   ok:"저 중놈이 네 쪽을 흘끔거린다!",no:"저 중놈이 못 본 척 춤만 이어 가는구나."},
-  {t:"cue",who:"jangsoe",text:"저 서울 새절서 중이 속가에 내려와서 계집 하나도 무엇한데 둘씩 데리고 농탕친다네.",src:"644행",
-   move:"somae",cap:"장쇠가 먹중 쪽을 가리킴",
-   mine:"홍 그놈이 내 형식을 몰랐구나! 여기저기 싸다니며 한 푼, 두 푼 모아다가 … 중놈 급살탕국 멕이는 취발이라 이른다.",
-   mineNo:"내 형식이 무어냐고 물으면 나도 말문이 막히는구나.",
-   ok:"부채를 내리고 돌아섰다! 들었구나!",no:"저 중놈이 콧방귀를 뀌는구나."},
-  {t:"cue",who:"jangsoe",text:"어디 한번 얼러 보게.",src:"652행",
-   move:"balchago",cap:"판이 조용해지고 둘이 마주 섬",
-   mine:"아나 이놈 중아! 거리 노중이냐, 칠월 밸중이냐, 허공 공중이냐, 중이라 하는 건 산중에서 불도나 외우고 부처님이나 위하는 것이지 … 농탕쳐 이놈!",
-   mineNo:"어허, 이놈 중아, 그, 그러니까.",
-   foeBack:null,
-   ok:"발끈해 덤빈다! 이제 붙는 게야!",no:"저 중놈이 비웃으며 등을 돌리는구나."}],
- climax:{gaugeLab:"대결 우세도",accel:false,bpm:104,
-  seq:"말 대신 춤으로 붙는 대목임. 먹중은 무언이라 도발을 동작으로만 걸고, 장쇠가 판을 중계함",
-  ending:"먹중이 취발이의 코를 때리고 달아나 판이 취발이에게 넘어감",
-  endingSoft:"먹중이 숨을 고르며 슬그머니 물러섬",
-  beats:[
-  {t:"say",who:"me",text:"오호, 이 중놈 덤빈다. 저놈을 춤으로 한번 녹이것다. 무슨 춤으로 녹이느냐 하면, 달아, 달아, 밝은 달 절수, 절수, 절수!",
-   cap:"취발이가 먹중을 피하며 장단을 부름",src:"658, 666행"},
-  {t:"cue",who:"foe",act:"먹중이 장삼 소매를 크게 뿌리며 맞춤을 걸어옴",src:"668행 지문",
-   move:"somae",cap:"덩덕궁이 장단으로 맞춤이 붙음",
-   mine:"얼럴럴럴 네기럴꺼!",mineNo:"이 중놈 춤이 보통이 아니로구나.",
-   ok:"반 박자 밀렸다! 그 장단 놓치지 마라!",no:"저 중놈이 소매로 판을 쓸며 앞서는구나."},
-  {t:"cue",who:"foe",act:"먹중이 어깨를 들썩이며 취발이 앞을 막아섬",src:"668행 지문",
-   move:"eokkae",cap:"둘이 어깨를 맞대고 겨룸",
-   mine:"물러서라 이놈!",mineNo:"어깨가 무겁구나.",
-   ok:"옆으로 비켜선다! 어깨로 밀어붙여라!",no:"저 중놈이 버티고 서서 눌러오는구나."},
-  {t:"cue",who:"foe",act:"먹중이 발을 굴러 장단을 빼앗음",src:"668행 지문",
-   move:"balchago",cap:"장단 다툼이 붙음",
-   mine:"이 장단은 내 것이다!",mineNo:"장단을 놓쳤구나.",
-   ok:"장단을 놓쳤다! 헛발을 디디는구나!",no:"저 중놈이 장단을 몰아 앞서 가는구나."},
-  {t:"cue",who:"me",text:"얼럴럴럴 네기럴꺼, 이 중놈이 나보다 춤을 십 배나 잘 추는구나, 장단 밧짝 몰아 놓고 한상 부셔 보는데 절수, 절수, 절수!",src:"670행",
-   move:"somae",cap:"장단을 바짝 몰아 붙임",
-   mine:"절수, 절수, 절수!",mineNo:"숨이 차는구나.",
-   ok:"네 춤에 밀려 물러난다! 몰아붙여라!",no:"저 중놈이 아직 버티는구나."},
-  {t:"cue",who:"foe",act:"먹중이 마지막으로 크게 소매를 뿌리며 달려듦",src:"672행 지문",
-   move:"somae",cap:"맞춤이 절정에 오름",
-   mine:"이 중놈, 오늘 임자 만났다!",mineNo:"팔이 안 돌아가는구나.",
-   ok:"견디지 못하고 춤을 놓았다! 네가 이겼다!",no:"저 중놈이 끝까지 맞받아치는구나."}],
-  outro:[
-  {t:"say",who:"me",text:"쉬! 아, 여보게 춤을 추다가 내 코를 탁 치고 가는 자 누군가.",src:"674행"},
-  {t:"say",who:"jangsoe",text:"자네 누군지 모르나, 중이 자네 춤을 이기지 못하여 코를 때리고 도망쳤네.",src:"676행"},
-  {t:"say",who:"me",text:"뭐 코를 때리고 도망가. 아이쿠, 내 코, 허연 코피가 굴관지복을 하고 네고 네고 나오는구나.",src:"678행"}]}}];
-
-const GAPS=[
- {where:"넷째 마당 (먹중잡이), 전사본 628~704행",
-  what:"먹중은 대사가 한 줄도 없는 무언 배역이라 상대 배역이 대사를 주는 구조가 원전에서 성립하지 않음. 취발이의 말 상대는 악사인 잽이임",
-  fix:"장쇠가 잽이 자리를 겸하므로 이 마당만 말 상대를 장쇠로 두고, 먹중은 무언 도발(춤으로 걸어오기)로 응수 신호를 줌"},
- {where:"셋째 마당 (샌님잡이), 전사본 470~520행",
-  what:"유저 배역인 말뚝이가 528행에야 등장해, 그 앞의 샌님과 노친네 대목은 유저가 할 일이 없음",
-  fix:"판정 없는 도입 연출로 3개 대사만 뽑아 압축하고, 응수는 말뚝이 등장(522행)부터 시작함"},
- {where:"넷째 마당 끝 (전사본 686~700행)",
-  what:"취발이가 피조리의 생김새를 품평하는 대목이 있으나 공공 전시물에 넣기 부적절함",
-  fix:"뒷대목을 코피 재담(678행)에서 닫고 피조리 대목은 넣지 않음"},
- {where:"4.3.1 3) (5) 신명 지표 / 4.4 결과와 마무리",
-  what:"신명 지표 가중 산식과 서사 번역 분기 임계가 미정이라 결과 문구가 갈리는 지점을 문서만으로 재현할 수 없음",
-  fix:"성공 1점, 얼쑤 2.5점 누계에 임계 55를 잠정 적용하고 패널에서 조정 가능하게 둠"},
- {where:"판 위 말풍선의 세로 여유 (작은 창)",
-  what:"2인 배치와 한계 자동 산출로 크게 나아졌으나 1366 이하에서는 여전히 안 맞음. 헤드리스 실측(2026-08-11 배치 기준): 1920 창은 배역 위 여유 155px에 한계 138자로 겹침 0건, 1600 창은 108px에 48자로 겹침 0건, 1366 창은 73px에 20자인데도 53토막 중 20건이 배역을 가림",
-  fix:"1366은 말풍선 두 줄이 한계라 글자를 줄여도 안 맞음. 배역 그림을 작게 잡거나 좁은 화면에서 말풍선을 판 아래로 내리는 배치 변경이 필요함. 사용자 결정 대기"},
- {where:"긴 원문 사설의 음성 재생 (전사본 632행 취발이 사설 등)",
-  what:"음성(TTS)은 105자를 읽는 데 20초쯤 걸리는데 화면 출력은 4.8초에 끝남. 「음성 끝까지 기다림」이 꺼져 있으면 그 시점에 다음 대사로 넘어가며 음성이 중간에 끊김",
-  fix:"패널의 「음성 끝까지 기다림」으로 고를 수 있게 둠. 켜면 음성이 온전히 나오지만 긴 대목이 20초씩 걸려 판이 늘어짐. 화면 글자는 어느 쪽이든 잘리지 않음. 근본 해소는 발췌를 줄이는 것뿐이라 사용자 결정 대기"},
- {where:"프로토타입 입력부 (실기기 판정 요소 대역)",
-  what:"실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 재지만 프로토타입에는 카메라가 없음. 종전 마우스 드래그 대역은 조작 미숙과 설계 결함이 안 갈려 리뷰에서 오인 소지가 있었음",
-  fix:"2026-08-11 사용자 결정으로 숫자 키패드로 바꿈. 자세는 제시된 픽토그램에 맞는 번호, 얼쑤는 응답 대기의 앞 40% 안에 누른 반응 시점, 홀드는 번호를 누르고 있는 시간으로 잼. 진폭과 속도는 키패드로 못 재므로 요소 표시에 「실기기 전용」으로 그어 남기고, 하이라이트 동작도 최대 진폭 대신 최속 반응으로 뽑음"}];
-
-/* ── 4. 사운드 (합성) ──────────────────── */
-const AU={ctx:null,
- ensure(){ if(!this.ctx){try{this.ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}
-   if(this.ctx&&this.ctx.state==="suspended")this.ctx.resume(); return this.ctx; },
- noise(dur,freq,q,gain,type){const c=this.ensure(); if(!c||!CFG.sfx)return;
-   const n=c.sampleRate*dur,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);
-   for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2);
-   const s=c.createBufferSource();s.buffer=b;
-   const f=c.createBiquadFilter();f.type=type||"bandpass";f.frequency.value=freq;f.Q.value=q;
-   const g=c.createGain();g.gain.value=gain;
-   s.connect(f);f.connect(g);g.connect(c.destination);s.start();},
- tone(freq,dur,gain,type){const c=this.ensure(); if(!c||!CFG.sfx)return;
-   const o=c.createOscillator(),g=c.createGain();
-   o.type=type||"sine";o.frequency.setValueAtTime(freq,c.currentTime);
-   g.gain.setValueAtTime(gain,c.currentTime);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+dur);
-   o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur);},
- kkwaenggwari(){this.noise(.16,2600,1.2,.16);this.tone(1180,.09,.05,"square");},
- buk(){this.tone(88,.24,.28);this.noise(.06,220,.8,.06);},
- jang(){this.noise(.07,900,2,.09);},
- eolssu(){for(let i=0;i<7;i++)setTimeout(()=>this.noise(.05,1600+Math.random()*900,1.6,.07),i*46);
-   this.tone(660,.16,.05,"triangle");setTimeout(()=>this.tone(880,.2,.05,"triangle"),110);},
- good(){this.tone(560,.1,.05,"triangle");},
- miss(){this.tone(180,.16,.06,"sawtooth");},
- hit(){this.noise(.09,1400,1,.1);},
- cheer(){for(let i=0;i<26;i++)setTimeout(()=>this.noise(.06,1200+Math.random()*1800,1.4,.05),i*38);}};
-
-/* ── 5. 발화 ───────────────────────────── */
-/* 한도를 넘는 대사를 문장 경계에서 나눔.
-   한도까지 채우고 자르면 "…절수, 절수," / "절수!" 처럼 뒤 토막이 짜투리가 되므로,
-   먼저 몇 토막으로 나눌지 정하고(ceil) 각 토막을 고르게 잡음.
-   끊는 자리는 목표 지점에 가까울수록, 문장 끝일수록 좋게 쳐서 고름
-   (쉼표와 띄어쓰기는 벌점을 줘 문장 끝을 앞세우되 너무 멀면 안 씀) */
-function splitLine(text,max){
-  const t=String(text).trim();
-  if(!max||t.length<=max)return [t];
-  const PEN={".":0,"!":0,"?":0,"…":0,",":8," ":16};
-  const out=[];let rest=t,left=Math.ceil(t.length/max);
-  while(left>1&&rest.length>max){
-    const target=Math.round(rest.length/left);
-    const lo=Math.max(1,rest.length-max*(left-1));   // 남은 토막들이 한도를 안 넘게
-    const hi=Math.min(max,rest.length-1);
-    let cut=-1,best=Infinity;
-    for(let i=0;i<hi;i++){
-      const ch=rest[i]; if(!(ch in PEN))continue;
-      const c=ch===" "?i:i+1;                        // 띄어쓰기는 그 앞에서 끊음
-      if(c<lo||c>hi)continue;
-      const sc=Math.abs(c-target)+PEN[ch];
-      if(sc<best){best=sc;cut=c;}
-    }
-    if(cut<0)cut=Math.min(hi,Math.max(lo,target));
-    const head=rest.slice(0,cut).trim();
-    if(!head)break;
-    out.push(head);rest=rest.slice(cut).trim();left--;
-  }
-  if(rest)out.push(rest);
-  return out;
-}
-
-/* 대사를 한 글자씩 드러냄. 자막 칸과 판 위 말풍선이 같이 씀.
-   글자를 늘리는 칸(.tw)만 textContent로 채우고, 앞의 이름표와 뒤의 출처 표시는
-   HTML 그대로 두름. 다 드러나기 전에 「다음」을 누르면 즉시 완성됨 */
-const TYPE={t:null,el:null,pre:"",full:"",tail:"",
- get typing(){return !!this.t;},
- run(el,pre,text,tail,perChar){
-   this.clear();
-   if(!CFG.typewriter||perChar<=0){el.innerHTML=pre+esc(text)+tail;return;}
-   this.el=el;this.pre=pre;this.full=text;this.tail=tail;
-   el.innerHTML=pre+'<span class="tw"></span><span class="tw-caret"></span>';
-   const span=el.querySelector(".tw");let i=0;
-   this.t=setInterval(()=>{
-     span.textContent=this.full.slice(0,++i);
-     el.scrollTop=el.scrollHeight;      // 칸을 넘긴 긴 사설도 방금 나온 줄이 보이게 함
-     if(i>=this.full.length)this.finish();
-   },perChar);
- },
- finish(){   // 남은 글자를 즉시 채우고 커서를 걷음
-   if(!this.t)return;
-   clearInterval(this.t);this.t=null;
-   if(this.el)this.el.innerHTML=this.pre+esc(this.full)+this.tail;
-   this.el=null;
- },
- clear(){if(this.t){clearInterval(this.t);this.t=null;}this.el=null;}};
-/* 「다음」 버튼: 아직 드러나는 중이면 먼저 완성하고, 다 드러났으면 넘어감 */
-function bindSkip(box,fn){
-  box.querySelector(".host-skip").onclick=()=>{
-    if(TYPE.typing){TYPE.finish();return;}
-    fn();};
-}
-const SPEECH={cur:null,timer:null,guard:null,onEnd:null,failed:false,voices:[],mouth:null,
- pick(){ if(!this.voices.length)this.voices=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
-   return this.voices.filter(v=>/ko/i.test(v.lang)); },
- /* who: jangsoe 스승, foe 상대 배역, me 내 배역 */
- nameOf(who){ return who==="jangsoe"?"장쇠 (스승)" : who==="foe"?(S.madang?S.madang.foe:"상대 배역")
-   : (S.role||"내 배역")+" (나)"; },
- /* 판 위 대사 칸. 판에 선 두 배역은 제 그림 위에 띄우고,
-    판 밖에 있는 장쇠는 왼쪽 자막 칸을 씀 */
- BUBBLE:{foe:"sayFoe",me:"sayMe"},
- onStage(who){ const id=this.BUBBLE[who];
-   return id&&curScreen==="scr-play" ? $(id) : null; },
- hideStage(){ Object.values(this.BUBBLE).forEach(id=>{
-   const b=$(id); if(b){b.classList.remove("on");b.innerHTML="";} }); },
- /* 한 번에 띄우는 글자수 한도를 넘는 대사는 나눠서 차례로 띄움.
-    말풍선이 상대 배역 그림 위로 자라 배역을 가리는 것을 막음 (1920 화면 실측 66자).
-    원문을 고치지 않고 표시만 나누므로 인용은 그대로임 */
- /* opt.quote: 이 대사가 연회본 원문 발췌인가. 안 주면 장쇠는 임시 문안, 나머지는 원문으로 봄.
-    넷째 마당에서는 장쇠도 원문 대사를 하므로 비트가 직접 알려 줌 */
- say(who,text,box,cb,opt){
-   const parts=splitLine(String(text==null?"":text),CFG.sayMax);
-   if(parts.length<2)return this.sayOne(who,text,box,cb,opt);
-   let i=0;
-   const next=()=>{
-     if(i>=parts.length){ if(cb)cb(); return; }
-     const k=++i;
-     this.sayOne(who,parts[k-1],box,next,{part:k,of:parts.length,quote:opt&&opt.quote});
-   };
-   next();
- },
- sayOne(who,text,box,cb,meta){
-   this.stop(true);
-   if(!text){ if(cb)cb(); return; }
-   const line=box.querySelector(".host-line"), nm=box.querySelector(".host-name");
-   const other = who!=="jangsoe";   // 장쇠 말고 다른 배역이 말하는 차례
-   const quoted = meta&&meta.quote!=null ? !!meta.quote : other;   // 출처 꼬리표를 가름
-   const part = meta&&meta.part ? ` ${meta.part}/${meta.of}` : "";
-   const bub = this.onStage(who);
-   if(!other) nm.textContent = this.nameOf(who);   // 왼쪽 칸은 장쇠 몫이라 이름표를 안 바꿈
-   /* 대사가 화면에 머무는 시간. 글자수로 시간을 어림하지 않고, 타이핑이 실제로
-      끝나는 시각을 그대로 씀(타이핑 속도는 우리가 정하므로 정확히 앎).
-      짧은 대사가 눈 깜짝할 새 지나가지 않도록 최소 노출만 보장함 */
-   const len=[...text].length;
-   const showMs=Math.max(CFG.minShow*1000,len*CFG.typeMs);
-   const perChar=Math.min(CFG.typeMs,showMs/len);
-   if(bub){
-     /* 판 위에서 말하는 차례. 상대가 방금 한 말은 지우지 않아 주고받는 대화로 읽힘.
-        왼쪽 자막 칸은 장쇠 몫이라 비워 둠 */
-     bub.classList.add("on");
-     TYPE.run(bub,`<span class="who">${esc(this.nameOf(who))}</span>`,text,
-       part?` <span class="prov">${part.trim()}</span>`:"",perChar);
-     // 장쇠 칸은 건드리지 않음. 직전 중계가 내 응수 동안 남아 있어야 함
-   }else{
-     TYPE.run(line,"",text,
-       (quoted?' <span class="prov">연회본 원문':' <span class="prov">임시 문안')
-       +part+'</span>',perChar);
-   }
-   box.classList.toggle("speaking",!other);   // 장쇠 차례에만 입과 몸이 움직임
-   log("say",this.nameOf(who)+(meta?` (${meta.part}/${meta.of})`:"")+": "+text,"lg-sys");
-   TO.pauseSpeak(true); if(!other) this.startMouth(box);   // 장쇠가 제 말을 할 때만 입이 움직임
-   /* 말이 끝나도 판 위 대사는 지우지 않음. 유저가 그 대사를 보면서 응수해야 하므로
-      다음 대사가 시작될 때(say가 stop을 먼저 부름)나 중단될 때 지워짐 */
-   const done=()=>{box.classList.remove("speaking");this.stopMouth();TYPE.finish();
-     this.guard&&clearTimeout(this.guard);this.guard=null;
-     TO.pauseSpeak(false);this.cur=null;if(cb)cb();};
-   this.onEnd=done;
-   /* 진행 조건: 대사 출력이 끝나고(showMs) 읽을 틈(readPause)이 지나면 다음 단계로.
-      「음성 끝까지 기다림」을 켜면 발화가 끝나는 것까지 함께 기다림 */
-   let shown=false, spoken=true;
-   const advance=()=>{ if(shown&&spoken&&this.onEnd===done) done(); };
-   if(CFG.tts&&!this.failed&&window.speechSynthesis){
-     try{
-       const u=new SpeechSynthesisUtterance(text); u.lang="ko-KR";
-       /* 내 배역에는 전용 보이스를 두지 않음.
-          장쇠와 같은 공용 보이스를 쓰고, 누가 말하는지는 말풍선 자리와 이름표로 가름.
-          실제 보이스는 공용 확보나 남사당놀이보존회 녹음으로 정할 예정임.
-          상대 배역만 다른 목소리로 갈라 대거리의 주고받기를 들리게 함 */
-       const otherVoice=who==="foe";
-       const vs=this.pick(); if(vs.length)u.voice=otherVoice?(vs[1]||vs[0]):vs[0];
-       u.rate=otherVoice?1.02:.98;
-       u.pitch=otherVoice?1.25:.85;
-       if(CFG.waitTts){
-         spoken=false;
-         u.onend=()=>{spoken=true;advance();};
-         // 브라우저가 발화 종료를 안 알리는 경우를 대비한 안전망
-         this.guard=setTimeout(()=>{spoken=true;advance();},CFG.ttsGuard*1000);
-       }
-       u.onerror=()=>{this.failed=true;spoken=true;advance();};
-       this.cur=u; speechSynthesis.speak(u);
-     }catch(e){this.failed=true;}
-   }
-   this.timer=setTimeout(()=>{shown=true;advance();},showMs+CFG.readPause*1000);
- },
- startMouth(box){ // 립싱크는 맞추지 않고 발화 동안 입 여닫기만 반복함 (기획서 3.4.2)
-   const sp=box.querySelector(".host-art .art"); if(!sp)return;
-   let open=false;
-   this.mouth=setInterval(()=>{
-     open=!open; const im=sp.querySelector("img"); if(!im)return;
-     const f=ART[open?"host_talk":"host_idle"]; if(f&&ART_STATE[open?"host_talk":"host_idle"]) im.src=ART_BASE+encodeURIComponent(f);
-     const sv=sp.querySelector("svg [data-mouth]"); if(sv) sv.setAttribute("ry",open?7:2.4);
-   },180);
- },
- stopMouth(){ this.mouth&&clearInterval(this.mouth); this.mouth=null; },
- /* keepBubbles: 다음 대사를 이어 말할 때는 판 위 대사를 남김.
-    장이 바뀌거나 중단될 때는 인자 없이 불러 다 지움 */
- stop(keepBubbles){this.timer&&clearTimeout(this.timer);this.timer=null;
-   this.guard&&clearTimeout(this.guard);this.guard=null;this.onEnd=null;this.stopMouth();
-   TYPE.clear(); if(!keepBubbles)this.hideStage();
-   try{speechSynthesis.cancel();}catch(e){}}};
-if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>SPEECH.voices=speechSynthesis.getVoices();
-
-/* ── 6. 세션 ───────────────────────────── */
-let S=null;
-function newSession(){
-  S={id:"SES-"+Math.random().toString(36).slice(2,8).toUpperCase(),lang:"ko",step:1,
-     madang:null,role:null,records:[],sinmyeong:0,success:0,eolssu:0,dasi:0,
-     chapters:{lesson:false,scene:false,climax:false},chapMs:{lesson:0,scene:0,climax:0},
-     gauge:0,startedAt:Date.now(),errType:null};
-  renderSess();
-}
-function renderSess(){
-  $("sess").innerHTML=[["세션 ID",S.id],["현재 언어",S.lang],["현재 Step","Step "+S.step],
-   ["선택 마당",S.madang?S.madang.name:"미정"],["선택 배역",S.role||"미정"],
-   ["장면 수행 기록",S.records.length+"건"],["신명 지표(내부)",S.sinmyeong.toFixed(1)+" (화면 비표시)"],
-   ["에러 유형",S.errType||"없음"]]
-   .map(r=>`<div class="kv"><span>${r[0]}</span><span>${esc(String(r[1]))}</span></div>`).join("");
-}
-function log(kind,msg,cls){
-  const el=$("log"),d=document.createElement("div");
-  d.className=cls||"lg-sys";
-  d.textContent="["+new Date().toLocaleTimeString("ko-KR",{hour12:false})+"] "+msg;
-  el.insertBefore(d,el.firstChild);
-  while(el.children.length>140)el.removeChild(el.lastChild);
-}
-function srv(m){log("srv","→ 서버: "+m,"lg-srv");}
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
-/* ── 7. 화면 전환 ──────────────────────── */
-let curScreen=null;
-/* 화면과 타이머 칩은 마크업에 고정이라 한 번만 찾아 둠 */
-const SCREENS=[...document.querySelectorAll(".screen")];
-const TIMER_CHIPS=[...document.querySelectorAll("[data-timer]")];
-function show(id){
-  SCREENS.forEach(s=>s.classList.remove("on"));
-  $(id).classList.add("on");
-  curScreen=id; TO.enter(id);
-}
-
-/* ── 8. 타임아웃 ───────────────────────── */
-const TO={screenLeft:0,idleLeft:0,paused:false,inStep3:false,active:false,
- enter(id){this.inStep3=(id==="scr-play");
-   this.screenLeft=this.inStep3?CFG.step3Timeout:CFG.screenTimeout;
-   this.idleLeft=CFG.idleTimeout;this.paused=false;
-   this.active=["scr-madang","scr-role","scr-play","scr-accept"].includes(id);},
- pauseSpeak(v){this.paused=v;this.render();},
- bump(){this.idleLeft=CFG.idleTimeout;},
- render(){   // 0.25초마다 도는 자리라 남은 초가 바뀔 때만 다시 씀
-   const on=this.active&&CFG.timeoutOn;
-   const txt=on?`화면 <b>${Math.ceil(this.screenLeft)}</b>s, 미입력 <b>${Math.ceil(this.idleLeft)}</b>s`:"";
-   const cls="timer-chip"+(this.paused?" paused":"");
-   if(txt===this._txt&&cls===this._cls)return;
-   this._txt=txt;this._cls=cls;
-   TIMER_CHIPS.forEach(el=>{ el.className=cls; el.innerHTML=txt; });},
- start(){setInterval(()=>{
-   if(this.active&&CFG.timeoutOn&&!this.paused&&!POP.on){
-     this.screenLeft-=.25;this.idleLeft-=.25;
-     if(this.idleLeft<=0){this.active=false;log("to","미입력 타임아웃 발생 (이탈 처리)","lg-err");endSession("idle");}
-     else if(this.screenLeft<=0){this.active=false;onScreenTimeout();}
-   }
-   this.render();},250);}};
-TO.start();
-["pointerdown","keydown","wheel"].forEach(e=>window.addEventListener(e,()=>TO.bump(),{passive:true}));
-function onScreenTimeout(){
-  log("to","화면 타임아웃 → 정상 경로로 진행","lg-warn");
-  if(curScreen==="scr-madang")confirmMadang(true);
-  else if(curScreen==="scr-role")wearMask(true);
-  else if(curScreen==="scr-play"){log("to","Step 3 합산 타임아웃 → 중단 처리","lg-err");endSession("timeout-step3");}
-  else if(curScreen==="scr-accept")goStep5("complete-timeout");
-}
-
-/* ── 9. 팝업 ───────────────────────────── */
-const POP={on:false,
- show(title,msg,buttons){this.on=true;
-   $("popTitle").textContent=title;
-   $("popMsg").textContent=msg;
-   const row=$("popRow");row.innerHTML="";
-   buttons.forEach(b=>{const el=document.createElement("button");
-     el.className="cta"+(b.ghost?" ghost":"");el.textContent=b.label;
-     el.onclick=()=>{this.hide();b.fn&&b.fn();};row.appendChild(el);});
-   $("pop").classList.add("on");},
- hide(){this.on=false;$("pop").classList.remove("on");}};
-document.querySelectorAll("[data-quit]").forEach(b=>b.onclick=()=>{
-  SPEECH.stop();
-  POP.show("그만두시겠습니까?","진행 중인 체험이 종료되고 처음 화면으로 돌아갑니다.",
-    [{label:"그만두기",fn:()=>endSession("quit")},{label:"계속하기",ghost:true}]);});
-
-/* ── 10. 자리표시 그림 (SVG) ───────────── */
-function maskSVG(kind,w,h,mood){
-  const C={"꺽쇠":["#c9a86a","#3a2a1a"],"말뚝이":["#b5533a","#2b1712"],"취발이":["#c4453a","#2a1310"],
-    "옴탈":["#8f9a5e","#2a2c18"],"샌님":["#e5dcc6","#3a3222"],"먹중":["#5c4a3a","#20180f"],
-    "장쇠":["#d1a96b","#3a2a18"]}[kind]||["#b9a583","#2a2018"];
-  const brow=mood==="angry"?"M22,24 L38,20 M62,20 L78,24":"M22,22 L38,22 M62,22 L78,22";
-  const mouth=mood==="hurt"?"M34,68 Q50,58 66,68":mood==="laugh"?"M32,62 Q50,80 68,62":"M34,66 Q50,72 66,66";
-  const id="g"+Math.random().toString(36).slice(2,7);
-  return `<svg viewBox="0 0 100 118" width="${w}" height="${h}">
-   <defs><radialGradient id="${id}"><stop offset="0" stop-color="${C[0]}"/><stop offset="1" stop-color="${shade(C[0],-28)}"/></radialGradient></defs>
-   <path d="M50,4 C78,4 90,26 90,54 C90,88 72,114 50,114 C28,114 10,88 10,54 C10,26 22,4 50,4 Z" fill="url(#${id})" stroke="${C[1]}" stroke-width="2.5"/>
-   <path d="${brow}" stroke="${C[1]}" stroke-width="3.4" fill="none" stroke-linecap="round"/>
-   <ellipse cx="30" cy="${mood==="hurt"?42:42}" rx="9" ry="${mood==="hurt"?4:7}" fill="${C[1]}"/>
-   <ellipse cx="70" cy="42" rx="9" ry="${mood==="hurt"?4:7}" fill="${C[1]}"/>
-   <path d="M50,42 L44,60 L56,60 Z" fill="${shade(C[0],-38)}"/>
-   <path d="${mouth}" stroke="${C[1]}" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-   <ellipse data-mouth cx="50" cy="70" rx="7" ry="2.4" fill="${shade(C[1],10)}" opacity="${kind==="장쇠"?.9:0}"/>
-   ${kind==="옴탈"?'<g fill="#4c3b1e"><circle cx="24" cy="76" r="3.4"/><circle cx="76" cy="72" r="3"/><circle cx="58" cy="88" r="3.6"/><circle cx="38" cy="92" r="2.8"/></g>':""}
-   ${kind==="샌님"?'<path d="M42,66 L58,66" stroke="#8a2f2f" stroke-width="3"/><path d="M50,60 L50,74" stroke="#8a2f2f" stroke-width="2.6"/>':""}
-   ${kind==="장쇠"?'<path d="M14,50 Q4,66 14,80" stroke="'+C[1]+'" stroke-width="3" fill="none"/><path d="M86,50 Q96,66 86,80" stroke="'+C[1]+'" stroke-width="3" fill="none"/>':""}
-  </svg>`;
-}
-function shade(hex,amt){const n=parseInt(hex.slice(1),16);
-  const r=Math.max(0,Math.min(255,(n>>16)+amt)),g=Math.max(0,Math.min(255,((n>>8)&255)+amt)),b=Math.max(0,Math.min(255,(n&255)+amt));
-  return "#"+((r<<16)|(g<<8)|b).toString(16).padStart(6,"0");}
-function hostHTML(){
-  // 말풍선이 장쇠 위에 오도록 대사 칸을 그림보다 먼저 둠 (아래로 꼬리를 내려 화자를 가리킴)
-  return `<div class="host-box"><div class="host-name">장쇠 (스승)</div>
-   <div class="host-line">&nbsp;</div><button class="host-skip">다음</button></div>
-   <div class="host-art">${art("host_idle",maskSVG("장쇠",120,142))}</div>`;
-}
-function picHTML(mv){ return art("pic_"+mv, `<span>${DIRCH[MOVES[mv].dir]}</span>`); }
-
-/* ── 11. Step 2-1 마당 선택 ────────────── */
-let selIdx=0;
-function buildMadang(){
-  const c=$("madangCards");c.innerHTML="";
-  MADANG.forEach((m,i)=>{
-    const b=document.createElement("button");
-    b.className="card"+(i===selIdx?" sel":"");
-    b.innerHTML=`<div class="card-mask">${art("mask_"+m.user,maskSVG(m.user,38,44))}</div>
-      <div><div class="card-name">${m.name}<span>${m.tag}</span></div>
-      <div class="card-brief">${m.brief}</div>
-      <div class="card-cast">내 배역 ${m.user}, 상대 배역 ${m.foe}</div></div>`;
-    b.onclick=()=>{selIdx=i;AU.jang();buildMadang();};
-    c.appendChild(b);});
-  const m=MADANG[selIdx];
-  $("madangPreview").innerHTML=
-   `<div class="preview-art">${art("preview_"+m.id,maskSVG(m.foe,120,142))}</div>
-    <div class="preview-cap">${m.preview}</div>
-    <div class="asset-note">기획서 4.2.1 2)의 미리보기(잠정). 마당 대목 장면 자리임</div>`;
-  hydrate();
-}
-function confirmMadang(auto){
-  const m=MADANG[selIdx];S.madang=m;S.role=m.user;S.step=2;
-  srv("선택 마당과 배역 확정: "+m.name+" / "+m.user+(auto?" (화면 타임아웃 자동 확정)":""));
-  renderSess();buildRole();show("scr-role");
-}
-
-/* ── 12. Step 2-2 배역 확인 ────────────── */
-function buildRole(){
-  const m=S.madang, box=$("roleHost");
-  box.innerHTML=hostHTML();
-  $("roleMask").innerHTML=art("body_"+m.user,maskSVG(m.user,150,178));
-  $("roleName").textContent=m.user;
-  $("roleSub").textContent=m.name+"의 배역";
-  /* 배역 그림 하나만 두면 가운데가 비어 소개문을 붙이고, 오른쪽은 할 일 세 가지로 채움.
-     장쇠는 탈 얼굴을 재담으로 풀고 화면 글은 무엇을 하게 되는지를 맡아 서로 겹치지 않게 나눔 */
-  $("roleIntro").textContent=m.intro;
-  $("roleInfo").innerHTML=
-   `<div class="fact"><b>맞설 상대</b><span>${esc(m.foe)} · ${esc(m.foeIntro)}</span></div>
-    <div class="fact"><b>배울 동작</b><span>${m.moves.map(k=>esc(MOVES[k].name)).join(" / ")}</span></div>`;
-  hydrate();
-  bindSkip(box,()=>{SPEECH.stop();SPEECH.say("jangsoe",m.vow,box);});
-  SPEECH.say("jangsoe",m.maskLine,box,()=>SPEECH.say("jangsoe",m.vow,box));
-}
-function wearMask(auto){
-  SPEECH.stop();AU.kkwaenggwari();
-  srv("배역 확정 저장: "+S.role+(auto?" (화면 타임아웃 자동 확정)":""));
-  const el=$("roleMask");
-  /* 탈을 눌러 쓰는 맛으로 살짝 부풀렸다 되돌림. 이징이 목표를 지나쳤다 오므로(정점 1.08)
-     실제 정점은 지정값보다 큼: 1.12 → 1.13배(넓이 1.28배).
-     1.35였을 때는 정점 1.38배, 넓이 1.90배로 부풀어 올라 과하게 보였음 */
-  el.style.transition="transform .5s cubic-bezier(.2,1.5,.4,1)";el.style.transform="scale(1.12)";
-  setTimeout(()=>{el.style.transform="";S.step=3;renderSess();startStep3();},600);
-}
-
-/* ── 13. 입력 패드 (숫자 키패드) ─────────
-   실기기는 뎁스 카메라로 자세, 진폭, 홀드, 속도를 잼. 프로토타입에는 카메라가 없어
-   판정 요소를 키패드로 치환함:
-     자세  → 판에 뜬 픽토그램에 맞는 번호를 눌렀는가
-     타이밍 → 응답 대기 중 얼마나 빨리 눌렀는가 (앞 40% 안이면 얼쑤)
-     홀드  → 홀드가 필요한 동작에서 번호를 얼마나 오래 누르고 있었는가
-   진폭과 속도는 키패드로 잴 수 없어 요소 표시에 "실기기 전용"으로만 남김 */
-const PAD={el:$("pad"),armed:false,move:null,opts:{},
- moveId:null,keys:[],slots:[],windowTimer:null,armedAt:0,windowMs:0,
- pressT:0,holdMs:0,holdTimer:null,downKey:null,
- /* 이번 마당에서 배운 동작 3개에 1~3을 매기고 키패드를 그림 */
- setKeys(moves){
-   this.slots=moves.slice();
-   this.el.innerHTML=`<div class="pad-hint" id="padHint">신호가 오면 번호를 누르십시오</div>
-     <div class="pad-window" id="padWindow"></div>`+
-     moves.map((id,i)=>`<button class="key" data-slot="${i}" disabled>
-       <span class="pic">${picHTML(id)}</span>
-       <span class="lab"><b class="num">${i+1}</b>${esc(MOVES[id].name)}</span>
-       <span class="holdbar"></span></button>`).join("");
-   this.keys=[...this.el.querySelectorAll(".key")];
-   hydrate(this.el);   // 버튼 안 픽토그램을 실제 그림으로 바꿔 끼움
-   this.keys.forEach(k=>{
-     k.addEventListener("pointerdown",e=>{e.preventDefault();this.press(+k.dataset.slot,k);});
-     k.addEventListener("pointerup",()=>this.release());
-     k.addEventListener("pointerleave",()=>this.release());
-     k.addEventListener("pointercancel",()=>this.release());
-   });
- },
- /* 왼쪽 안내 칸과 오른쪽 제시 그림을 한자리에서 씀. arm, disarm, 판정 없는 따라 하기가
-    같은 여섯 칸을 각자 세팅하다 빠뜨리는 일이 있어 하나로 모음 */
- info({state,move,how,real,elems,pic}){
-   $("bandState").textContent=state;
-   $("padMove").innerHTML=move; $("padHow").textContent=how;
-   $("padReal").textContent=real||""; $("padElems").innerHTML=elems||"";
-   const ar=$("padArrow");
-   if(pic){ ar.innerHTML=picHTML(pic); hydrate(ar); } else ar.textContent="-";
- },
- arm(moveId,ms,cb,opts){
-   this.move=MOVES[moveId];this.moveId=moveId;this.cb=cb;this.opts=opts||{};this.armed=true;
-   this.armedAt=performance.now();this.windowMs=ms>0?ms:CFG.respMax*1000;
-   this.el.classList.add("armed");this.el.classList.remove("idle");
-   this.keys.forEach(k=>{k.disabled=false;k.classList.remove("down");
-     k.querySelector(".holdbar").style.width="0";});
-   const hint=$("padHint");if(hint)hint.style.display="none";
-   const needHold=this.move.elems.includes("홀드");
-   // 키패드로 못 재는 요소는 그어서 표시함. 실기기 명세는 그대로 보여 줌
-   const off=e=>e==="진폭"||e==="속도";
-   this.info({
-     state:this.opts.climax?"절정 응수 대기":"응수 대기 중",
-     move:esc(this.move.name)+` <small>${esc(this.move.body)}</small>`,
-     how:needHold?`그림에 맞는 번호를 ${CFG.holdReq}초 넘게 누르고 있기 (홀드 동작)`
-                 :"그림에 맞는 번호를 빠르게 누르기",
-     real:"실기기 동작: "+this.move.how,
-     elems:this.move.elems.map(e=>
-       `<span class="el${off(e)?" off":""}">${e}${off(e)?" (실기기 전용)":""}</span>`).join("")
-       +'<span class="el">타이밍</span>',
-     pic:moveId});
-   if(ms>0){
-     const w=$("padWindow");w.style.display="block";
-     w.style.transition="none";w.style.transform="scaleX(1)";
-     requestAnimationFrame(()=>{w.style.transition=`transform ${ms}ms linear`;w.style.transform="scaleX(0)";});
-     this.windowTimer=setTimeout(()=>{if(this.armed)this.settle(null);},ms+40);
-   }},
- disarm(){this.armed=false;this.windowTimer&&clearTimeout(this.windowTimer);this.windowTimer=null;
-   this.holdTimer&&clearInterval(this.holdTimer);this.holdTimer=null;this.downKey=null;
-   this.el.classList.remove("armed");this.el.classList.add("idle");
-   this.keys.forEach(k=>{k.disabled=true;k.classList.remove("down");});
-   const w=$("padWindow");if(w)w.style.display="none";
-   const hint=$("padHint");if(hint)hint.style.display="";
-   this.info({state:"대기 중",move:"대기",how:"판에 뜬 그림에 맞는 번호를 누르십시오"});},
- settle(res){if(!this.armed)return;const cb=this.cb;this.disarm();
-   cb&&cb(res||{v:"dasi",amp:0,hold:0,reason:"미수행"});},
- press(slot,el){
-   if(!this.armed||this.downKey)return;
-   this.downKey=el;this.pressT=performance.now();this.holdMs=0;
-   el.classList.add("down");AU.jang();
-   const bar=el.querySelector(".holdbar"),need=CFG.holdReq*1000*1.5;
-   this.holdTimer=setInterval(()=>{
-     this.holdMs=performance.now()-this.pressT;
-     bar.style.width=Math.min(100,this.holdMs/need*100)+"%";},40);
-   // 홀드가 필요 없는 동작은 누른 즉시 판정함
-   if(!this.move.elems.includes("홀드"))this.release();
- },
- release(){
-   if(!this.armed||!this.downKey)return;
-   this.holdTimer&&clearInterval(this.holdTimer);this.holdTimer=null;
-   this.holdMs=performance.now()-this.pressT;
-   const el=this.downKey;this.downKey=null;el.classList.remove("down");
-   this.settle(this.measure(+el.dataset.slot));
- },
- /* 자세는 번호 일치로, 얼쑤는 반응 시점(과 홀드 동작이면 누른 시간)으로 가름 */
- measure(slot){
-   const right=this.slots[slot]===this.moveId;
-   const at=this.pressT-this.armedAt, early=this.windowMs?at/this.windowMs:1;
-   const hold=this.holdMs/1000, needHold=this.move.elems.includes("홀드");
-   const base={amp:0,hold:+hold.toFixed(2),slot:slot+1,early:+early.toFixed(2),pressT:this.pressT};
-   if(!right)return{...base,v:"dasi",
-     reason:`동작 불일치 (${MOVES[this.slots[slot]].name}를 누름)`};
-   if(needHold&&hold<CFG.holdReq)return{...base,v:"dasi",reason:`홀드 부족 ${hold.toFixed(2)}s`};
-   const quickMs=Math.max(CFG.eolssuMin*1000,CFG.eolssuEarly*this.windowMs);
-   const quick=at<=quickMs, longHold=!needHold||hold>=CFG.holdReq*1.5;
-   return{...base,v:quick&&longHold?"eolssu":"johda",
-     reason:`반응 ${(at/1000).toFixed(2)}s / 얼쑤 ${(quickMs/1000).toFixed(2)}s 안, 대기 ${(this.windowMs/1000).toFixed(2)}s`
-       +(needHold?`, 홀드 ${hold.toFixed(2)}s`:"")};
- }};
-
-/* ── 14. 판정 표시 ─────────────────────── */
-/* 판정 대사. 판에서 던지는 추임새를 굵게 띄우고, 그 밑에 무엇이 좋았는지나
-   무엇이 모자랐는지를 한 줄로 붙임. 실패 줄은 판정이 짚은 사유에서 끌어옴 */
-const VERDICT={
- eolssu:{call:["얼씨구!","얼쑤!","지화자!","그렇지!","잘한다!"],
-   sub:["그 맛이다","판이 살아난다","구경꾼이 들썩인다","몸이 제대로 붙었다"]},
- johda:{call:["좋다!","옳지!","됐다!","그래 그래!"],
-   sub:["그 정도면 붙는다","손에 익어 간다","이대로 이어 가자"]},
- dasi:{call:["아이쿠!","어허!","저런!","아깝다!"],
-   sub:["몸이 덜 풀렸다"]}};
-/* 사유가 여럿 잡히면 앞의 것부터 고름. 근본 결함(손이 안 나감, 다른 동작을 함)을
-   홀드 같은 정도 문제보다 먼저 짚음 */
-const DASI_SUB=[[/미수행|입력 없음/,"손이 안 나갔다"],[/동작 불일치/,"다른 동작을 했다"],
-  [/홀드/,"끝을 딱 맺어야지"]];
-const PICKED={};
-function pick(key,list){ // 바로 앞에 나온 것은 다시 안 뽑음
-  if(list.length<2)return list[0];
-  let i;do{i=Math.floor(Math.random()*list.length);}while(i===PICKED[key]);
-  PICKED[key]=i;return list[i];
-}
-function showVerdict(v,res){
-  const el=$("verdict"),V=VERDICT[v];
-  const sub=v==="dasi"
-    ? ((DASI_SUB.find(([re])=>re.test(res&&res.reason||""))||[])[1]||pick("dasi-sub",V.sub))
-    : pick(v+"-sub",V.sub);
-  el.className="verdict "+v;
-  el.innerHTML=`<span class="vd-call">${esc(pick(v+"-call",V.call))}</span><span class="vd-sub">${esc(sub)}</span>`;
-  void el.offsetWidth;el.classList.add("play");
-  if(v==="eolssu"){AU.eolssu();crowd();}else if(v==="johda")AU.good();else AU.miss();
-}
-function crowd(){
-  const f=$("field");
-  ["얼쑤","좋다","그렇지"].forEach((t,i)=>{
-    const s=document.createElement("div");s.className="fx";s.textContent=t;
-    s.style.left=(12+Math.random()*70)+"%";s.style.top=(55+Math.random()*30)+"%";
-    s.style.fontSize=(13+Math.random()*9)+"px";f.appendChild(s);
-    s.animate([{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"translateY(-14px)"},{opacity:0,transform:"translateY(-36px)"}],
-      {duration:1100,delay:i*110,easing:"ease-out"}).onfinish=()=>s.remove();});
-}
-function record(moveId,res,chapter){
-  S.records.push({move:moveId,v:res.v,early:res.early,hold:res.hold,chapter});
-  if(res.v==="eolssu"){S.success++;S.eolssu++;S.sinmyeong+=2.5;}
-  else if(res.v==="johda"){S.success++;S.sinmyeong+=1;}
-  else S.dasi++;
-  log("jud",`[${chapter}] ${MOVES[moveId].name} → ${res.v==="eolssu"?"얼쑤":res.v==="johda"?"좋다":"다시"}`
-    +(res.slot?` (${res.slot}번 누름, ${res.reason})`:` (${res.reason})`),"lg-jud");
-  renderSess();
-}
-
-/* ── 15. Step 3 ────────────────────────── */
-let chapStart=0,curChap="lesson";
-/* 3장 동작 가이드 레인.
-   대사가 신호를 주는 구조라 노트가 고정 스케줄로 흘러오지는 않음. 대신 앞으로 나올
-   응수 동작이 오른쪽에 줄 서 있고, 한 대목이 끝날 때마다 레인이 한 칸씩 왼쪽으로
-   미끄러져 다음 동작이 표시선에 들어옴. 표시선에 든 노트는 응답 대기가 줄어드는
-   만큼 아래 띠가 줄어 남은 시간을 보여 줌 */
-const LANE={gap:64,markerX:78,idx:0,notes:[],
- build(moves){
-   const bar=$("noteBar"),lane=$("noteLane");
-   bar.style.display="block";lane.style.transform="translateX(0)";
-   lane.innerHTML="";this.notes=[];this.idx=0;
-   moves.forEach((mv,i)=>{
-     const el=document.createElement("div");el.className="note ahead";
-     el.style.left=(this.markerX+i*this.gap)+"px";
-     el.innerHTML=picHTML(mv)+'<div class="note-timer"></div>';
-     lane.appendChild(el);this.notes.push(el);});
-   hydrate(lane);
- },
- /* i번째 노트를 표시선으로 끌어오고, ms 동안 남은 시간 띠를 줄임 */
- focus(i,ms){
-   const lane=$("noteLane");if(!lane||!this.notes[i])return;
-   this.idx=i;lane.style.transform=`translateX(${-i*this.gap}px)`;
-   const el=this.notes[i];el.classList.remove("ahead");el.classList.add("now");
-   const t=el.querySelector(".note-timer");
-   t.style.transition="none";t.style.transform="scaleX(1)";
-   requestAnimationFrame(()=>{t.style.transition=`transform ${ms}ms linear`;t.style.transform="scaleX(0)";});
- },
- resolve(i,ok){const el=this.notes[i];if(!el)return;
-   el.classList.remove("now");el.classList.add(ok?"hit":"miss");},
- hide(){const b=$("noteBar");if(b)b.style.display="none";}};
-/* 3장 배경 장단. 노트가 흘러가는 리듬 게임이 아니라 대사 응수로 진행하므로,
-   장단은 판의 박만 깔아 주고 속도 조절은 응답 대기 시간으로 함 */
-const CLX={t:null,
- start(bpm){this.stop();if(!CFG.sfx)return;let k=0;
-   this.t=setInterval(()=>{(k++%2===0?AU.buk():AU.jang());},60000/bpm);},
- stop(){this.t&&clearInterval(this.t);this.t=null;}};
-function startStep3(){
-  show("scr-play");
-  const box=$("playHost");box.innerHTML=hostHTML();
-  bindSkip(box,()=>SPEECH.stop());
-  setBG(S.madang.id);setFoe(null);LANE.hide();
-  setMe("등장",S.role+" (나)");   // 탈을 쓴 순간부터 내 배역이 판에 서 있음
-  hydrate();
-  PAD.setKeys(S.madang.moves);   // 이 마당에서 배울 동작 3개에 1~3을 매김
-  fitSayMax();
-  runLesson();
-}
-function setBG(which){
-  const f=$("field");
-  const old=f.querySelector(".bgwrap");if(old)old.remove();
-  const w=document.createElement("div");w.className="bgwrap";
-  w.innerHTML=art("bg_"+which,"");
-  w.querySelectorAll(".art").forEach(a=>a.classList.add("bg"));
-  w.style.cssText="position:absolute;inset:0";
-  f.insertBefore(w,f.firstChild);hydrate(f);
-}
-function chapIn(k){curChap=k;chapStart=performance.now();}
-function chapOut(k){S.chapMs[k]=performance.now()-chapStart;S.chapters[k]=true;}
-
-/* 1장 익히기 */
-function runLesson(){
-  chapIn("lesson");
-  $("playTitle").textContent="익히기 (1장)";
-  $("demoHint").textContent="상대 배역은 아직 나오지 않음";
-  const box=$("playHost"),list=S.madang.moves.slice();
-  let i=0;
-  const pane=()=>{
-    $("infoPane").innerHTML=
-     `<div class="info-h">배울 동작 3개 (키패드 번호)</div>
-      <div class="info-card">${list.map((id,k)=>
-        `<div class="mv-row ${k===i?"now":k<i?"done":""}"><span class="mv-no">${k+1}</span>
-         <span class="mv-ico">${picHTML(id)}</span>
-         <span>${MOVES[id].name}<br><small style="opacity:.7">${MOVES[id].body}</small></span></div>`).join("")}</div>
-      <div class="info-h">시범</div>
-      <div class="info-card"><div class="demo-slot">${i<list.length?art("demo_"+list[i],"시범 클립 자리<br>모션 레퍼런스 미확보"):"수업 종료"}</div></div>`;
-    hydrate();
-  };
-  const nextMove=()=>{
-    pane();
-    if(i>=list.length){SPEECH.say("jangsoe",S.madang.closeLine,box,()=>{chapOut("lesson");runScene();});return;}
-    const id=list[i],M=MOVES[id];let tries=0;
-    const ask=()=>{
-      PAD.arm(id,CFG.respMax*1000,res=>{   // 수업은 배우는 자리라 가장 넉넉하게 줌
-        record(id,res,"수업");showVerdict(res.v,res);
-        if(res.v==="dasi"){
-          tries++;
-          if(tries>CFG.lessonRetry){
-            SPEECH.say("jangsoe","됐다 됐다, 몸이 알아서 기억할 게다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
-          }else{
-            const fix=res.reason.includes("동작 불일치")?"그게 아니다, 내 시범을 다시 보아라!":
-              res.reason.includes("홀드")?"끝을 딱 맺어야지!":
-              res.reason.includes("미수행")?"몸이 굳었느냐, 장단 놓치지 마라!":"장단에 맞춰!";
-            SPEECH.say("jangsoe",fix+` (${CFG.lessonRetry-tries+1}번 남았다)`,box,ask);
-          }
-        }else{
-          SPEECH.say("jangsoe",res.v==="eolssu"?"얼쑤! 그 맛이다!":"좋다. 다음 것으로 가자.",box,()=>{i++;nextMove();});
-        }});
+    const scenes = {
+      omtal: {
+        no:'첫째 마당', title:'옴탈잡이',
+        states:[
+          {speaker:'장쇠', line:'여기는 옴탈이 꺽쇠를 몰아붙이는 마당입니다. 먼저 마당 전체를 살펴보세요.', actors:[A('jangsoe',20),A('kkeoksoe',50),A('omtal',80)], cue:['마당 전경','장쇠 · 꺽쇠 · 옴탈']},
+          {speaker:'안내', line:'화면 중앙에 서서 몸을 좌우로 움직여 보세요.', actors:[A('jangsoe',18,59,'show dim'),A('kkeoksoe',50,56,'show focus action')], inputs:[['왼쪽 이동','ok'],['오른쪽 이동','ok']]},
+          {speaker:'장쇠', line:'좋습니다. 꺽쇠는 당신의 움직임을 따라갑니다. 옴탈의 반대쪽으로 피하세요.', actors:[A('jangsoe',18,61,'show'),A('kkeoksoe',50,57,'show focus')], waiting:'옴탈이 무대 밖에서 기다립니다'},
+          {speaker:'안내', line:'옴탈이 왼쪽에서 옵니다. 반대쪽으로 피하세요!', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',50,57,'show focus'),A('omtal',27,56,'show action')], inputs:[['← 왼쪽','miss'],['오른쪽 →','ok']]},
+          {speaker:'장쇠', line:'잘 피했습니다. 이번에는 방향이 바뀝니다.', actors:[A('jangsoe',18,61,'show'),A('kkeoksoe',68,57,'show bounce'),A('omtal',30,57,'show shake')], flash:'회피 성공'},
+          {speaker:'안내', line:'옴탈이 오른쪽에서 옵니다. 반대쪽으로 피하세요!', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',50,57,'show focus'),A('omtal',75,56,'show action')], inputs:[['← 왼쪽','ok'],['오른쪽 →','miss']]},
+          {speaker:'장쇠', line:'옴탈의 접근 방향은 계속 달라집니다. 몸짓을 보고 판단하세요.', actors:[A('jangsoe',18,61,'show'),A('kkeoksoe',33,57,'show bounce'),A('omtal',74,57,'show shake')], flash:'연속 회피'},
+          {speaker:'안내', line:'같은 접근이 다시 옵니다. 이번에도 반대쪽으로 피하세요.', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',50,57,'show focus'),A('omtal',26,56,'show action')], inputs:[['← 왼쪽','miss'],['오른쪽 →','ok']]},
+          {speaker:'장쇠', line:'이제 피하기만 해서는 끝나지 않습니다. 팔을 앞으로 밀어내는 동작을 연습하세요.', actors:[A('jangsoe',22,57,'show action'),A('kkeoksoe',50,57,'show focus')], inputs:[['밀어내기 연습','ok']]},
+          {speaker:'안내', line:'옴탈이 멈추는 순간 팔을 앞으로 밀어내세요!', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',48,57,'show focus action'),A('omtal',65,57,'show action')], cue:['멈춤!','지금 밀어내세요'], inputs:[['밀어내기','ok'],['아직 기다리기','miss']]},
+          {speaker:'장쇠', line:'옴탈이 밀려났습니다. 한 번 더 맞서면 물러날 겁니다.', actors:[A('jangsoe',18,61,'show'),A('kkeoksoe',45,57,'show action'),A('omtal',73,57,'show shake')], flash:'퇴치 성공'},
+          {speaker:'안내', line:'가짜 방향에 속지 말고 실제로 멈춘 순간 밀어내세요.', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',50,57,'show focus'),A('omtal',70,57,'show spin')], inputs:[['지금 밀어내기','miss'],['멈춤을 기다리기','ok']]},
+          {speaker:'안내', line:'옴탈이 멈췄습니다!', actors:[A('jangsoe',18,63,'show dim'),A('kkeoksoe',48,57,'show focus action'),A('omtal',63,57,'show')], cue:['지금!','마지막 밀어내기'], inputs:[['힘껏 밀어내기','ok']]},
+          {speaker:'장쇠', line:'꺽쇠가 옴탈을 물리쳤습니다!', actors:[A('jangsoe',20,58,'show action'),A('kkeoksoe',49,56,'show bounce'),A('omtal',82,62,'show shake')], flash:'최종 퇴치'},
+          {speaker:'장쇠', line:'옴탈잡이 한 마당이 끝났습니다. 함께 인사하고 마무리합니다.', actors:[A('jangsoe',26,57,'show'),A('kkeoksoe',50,57,'show'),A('omtal',74,57,'show dim')], inputs:[['마당 선택으로','home']]}
+        ]
+      },
+      saennim: {
+        no:'둘째 마당', title:'샌님잡이',
+        states:[
+          {speaker:'장쇠', line:'샌님의 허세와 말뚝이의 재담이 맞붙는 마당입니다. 먼저 전체 배치를 살펴보세요.', actors:[A('jangsoe',15),A('old',34),A('saennim',52),A('jaebi',70)], waiting:'말뚝이는 원전의 부름 전까지 무대 밖에서 기다립니다', cue:['마당 전경','장쇠 · 노친네 · 샌님 · 잽이']},
+          {speaker:'안내', line:'손을 움직여 선택판 위에 잠시 머물러 보세요.', actors:[A('jangsoe',20,58,'show'),A('saennim',58,57,'show dim')], waiting:'내 배역 말뚝이 대기', inputs:[['선택 연습','ok']]},
+          {speaker:'샌님', line:'내가 다녀 보지 않은 곳만 빼고는 세상 구경을 다 했지.', actors:[A('old',31,58,'show'),A('saennim',55,55,'show focus action'),A('jaebi',75,59,'show')], waiting:'말뚝이 대기'},
+          {speaker:'잽이', line:'그 말은 가 본 곳이 있다는 건지, 없다는 건지 모르겠구먼.', actors:[A('old',31,58,'show'),A('saennim',55,55,'show shake'),A('jaebi',75,57,'show focus action')], waiting:'말뚝이 대기'},
+          {speaker:'샌님', line:'내 하인을 찾아라. 이름이야 뭐, 부르면 나오겠지.', actors:[A('old',30,58,'show'),A('saennim',54,55,'show focus action'),A('jaebi',75,58,'show')], waiting:'말뚝이 대기'},
+          {speaker:'잽이', line:'성과 이름도 모르면서 어떻게 찾는단 말이오?', actors:[A('old',30,58,'show'),A('saennim',54,55,'show shake'),A('jaebi',75,57,'show focus action')], waiting:'말뚝이 대기'},
+          {speaker:'샌님', line:'그럼 길게 불러 보게. 들으면 제 발로 나오겠지.', actors:[A('old',30,58,'show'),A('saennim',54,55,'show action'),A('jaebi',75,57,'show action')], waiting:'말뚝이가 부름을 듣고 있습니다'},
+          {speaker:'장쇠', line:'부름이 끝났습니다. 이제 말뚝이가 무대로 들어옵니다.', actors:[A('jangsoe',18,60,'show'),A('saennim',55,57,'show'),A('malttugi',78,57,'show bounce')], flash:'말뚝이 등장'},
+          {speaker:'샌님', line:'말뚝아, 어른께 절을 올려라.', actors:[A('jangsoe',15,64,'show dim'),A('saennim',39,55,'show focus action'),A('malttugi',68,56,'show')], inputs:[['예를 갖춰 절하기','soft'],['말의 조건 되묻기','ok']]},
+          {speaker:'말뚝이', line:'절을 하라면서 누구에게, 어떻게 하라는 말은 빼셨소?', actors:[A('saennim',38,56,'show shake'),A('malttugi',68,55,'show focus action')], flash:'절 요구의 허점'},
+          {speaker:'샌님', line:'그렇다면 내가 하는 대로 한 가지도 빼놓지 말고 따라 해라.', actors:[A('saennim',39,55,'show focus action'),A('malttugi',68,56,'show')], inputs:[['동작만 따라 하기','soft'],['말 그대로 전부 따라 하기','ok']]},
+          {speaker:'말뚝이', line:'한 가지도 빼놓지 말라 했으니, 샌님의 엉킨 조건도 그대로 돌려드리지요.', actors:[A('saennim',38,56,'show shake'),A('malttugi',68,55,'show focus action')], flash:'따라 하기 조건 포착'},
+          {speaker:'장쇠', line:'말씨름이 몸씨름으로 이어집니다. 이 장면은 두 배역의 자동 연출입니다.', actors:[A('jangsoe',15,62,'show'),A('saennim',43,56,'show action'),A('malttugi',63,56,'show action')]},
+          {speaker:'말뚝이', line:'이제 누가 누구에게 절하는 꼴인지 보시오!', actors:[A('saennim',44,60,'show shake'),A('malttugi',64,54,'show action'),A('old',25,58,'show')], flash:'관계 역전'},
+          {speaker:'장쇠', line:'피조리들이 나와 각자의 춤을 추며 마당을 마무리합니다.', actors:[A('jangsoe',12,62,'show'),A('malttugi',32,56,'show bounce'),A('pijoriA',53,57,'show bounce'),A('pijoriB',72,57,'show bounce'),A('saennim',88,62,'show dim')]},
+          {speaker:'장쇠', line:'샌님잡이 한 마당이 끝났습니다.', actors:[A('jangsoe',26,58,'show'),A('malttugi',50,57,'show'),A('saennim',74,58,'show dim')], inputs:[['마당 선택으로','home']]}
+        ]
+      },
+      meokjung: {
+        no:'셋째 마당', title:'먹중잡이',
+        states:[
+          {speaker:'장쇠', line:'먹중과 피조리의 춤에 취발이가 뛰어드는 마당입니다. 먼저 전체를 살펴보세요.', actors:[A('jangsoe',13),A('meokjung',40),A('pijoriA',58),A('pijoriB',74)], waiting:'취발이는 원전 등장 전까지 무대 밖에서 기다립니다', cue:['마당 전경','장쇠 · 먹중 · 피조리']},
+          {speaker:'안내', line:'손가락 방향선을 표식에 맞춰 지목을 연습하세요.', actors:[A('jangsoe',20,59,'show'),A('meokjung',58,57,'show dim')], waiting:'내 배역 취발이 대기', inputs:[['표식 지목','ok']]},
+          {speaker:'장쇠', line:'등장 뒤 몸짓이 달라지는 인물이 있는지 잘 살펴보세요.', actors:[A('jangsoe',15,62,'show'),A('meokjung',39,56,'show action'),A('pijoriA',58,57,'show bounce'),A('pijoriB',74,57,'show bounce')], waiting:'취발이 대기'},
+          {speaker:'장쇠', line:'취발이가 마당에 들어옵니다.', actors:[A('jangsoe',12,63,'show dim'),A('chv',20,56,'show bounce'),A('meokjung',45,56,'show action'),A('pijoriA',64,57,'show'),A('pijoriB',79,57,'show')], flash:'취발이 등장'},
+          {speaker:'안내', line:'취발이가 나온 뒤 몸이 달라진 인물을 가리키세요.', actors:[A('chv',18,57,'show'),A('meokjung',45,56,'show focus targetable'),A('pijoriA',65,57,'show targetable'),A('pijoriB',80,57,'show targetable')], inputs:[['먹중 지목','ok'],['피조리 지목','miss'],['지목하지 않기','skip']]},
+          {speaker:'장쇠', line:'먹중이 부채로 얼굴을 다시 가린 순간이었습니다.', actors:[A('jangsoe',13,62,'show'),A('chv',24,57,'show'),A('meokjung',50,55,'show action'),A('pijoriA',70,58,'show dim')], flash:'몸짓 포착'},
+          {speaker:'잽이', line:'저 사람은 절에서 내려와 속가에서 노는 먹중이라네.', actors:[A('jaebi',13,58,'show focus action'),A('chv',30,56,'show'),A('meokjung',56,56,'show shake'),A('pijoriA',75,58,'show')]},
+          {speaker:'안내', line:'정체가 드러난 뒤 다시 몸이 달라진 인물을 가리키세요.', actors:[A('chv',20,56,'show'),A('meokjung',48,55,'show focus targetable'),A('pijoriA',68,57,'show targetable'),A('pijoriB',82,57,'show targetable')], inputs:[['먹중 지목','ok'],['피조리 지목','miss'],['지목하지 않기','skip']]},
+          {speaker:'장쇠', line:'먹중이 취발이와 피조리 사이를 거듭 살핀 순간이었습니다.', actors:[A('jangsoe',13,62,'show'),A('chv',28,56,'show'),A('meokjung',51,55,'show spin'),A('pijoriA',72,57,'show dim')], flash:'몸짓 포착'},
+          {speaker:'취발이', line:'남의 집에서 이 무슨 행실이오!', actors:[A('chv',30,54,'show focus action'),A('meokjung',57,56,'show shake'),A('pijoriA',76,58,'show')]},
+          {speaker:'장쇠', line:'취발이가 먼저 대들고 먹중이 따라 덤빕니다. 대결은 자동 연출로 이어집니다.', actors:[A('jangsoe',12,63,'show'),A('chv',39,55,'show action'),A('meokjung',61,55,'show action'),A('pijoriA',82,59,'show dim')]},
+          {speaker:'잽이', line:'말로 다투지 말고 춤으로 겨뤄 보시오!', actors:[A('jaebi',16,58,'show focus action'),A('chv',43,56,'show'),A('meokjung',67,56,'show')]},
+          {speaker:'장쇠', line:'장단이 빨라지며 두 춤이 맞붙습니다.', actors:[A('jangsoe',12,63,'show dim'),A('jaebi',24,61,'show action'),A('chv',48,55,'show bounce action'),A('meokjung',72,55,'show bounce action')]},
+          {speaker:'장쇠', line:'먹중은 취발이의 춤을 이기지 못하고 물러납니다.', actors:[A('jangsoe',12,63,'show'),A('chv',48,54,'show focus action'),A('meokjung',77,59,'show dim shake')], flash:'춤 대결 승리'},
+          {speaker:'장쇠', line:'먹중이 취발이의 코를 건드리고 달아납니다. 잠시 뒤 취발이가 아픔을 알아챕니다.', actors:[A('jangsoe',12,63,'show dim'),A('chv',48,56,'show shake'),A('meokjung',86,57,'show action')]},
+          {speaker:'장쇠', line:'갈라졌던 피조리들이 다시 모여 나란히 춤춥니다.', actors:[A('jangsoe',12,63,'show'),A('chv',32,56,'show bounce'),A('pijoriA',56,56,'show bounce'),A('pijoriB',74,56,'show bounce')]},
+          {speaker:'장쇠', line:'모든 출연진이 함께 춤추며 먹중잡이 한 마당을 끝냅니다.', actors:[A('jangsoe',12,58,'show bounce'),A('chv',30,56,'show bounce'),A('meokjung',48,58,'show dim'),A('pijoriA',66,56,'show bounce'),A('pijoriB',83,56,'show bounce')], inputs:[['마당 선택으로','home']]}
+        ]
+      }
     };
-    demoAnim(id);
-    SPEECH.say("jangsoe",`${M.name}. ${M.body}이다. 내 시범을 보고 따라 해라.`,box,ask);
-  };
-  SPEECH.say("jangsoe",S.madang.openLine,box,nextMove);
-}
-function demoAnim(moveId){   // 1장 시범: 배우는 동작의 픽토그램을 판 복판에 띄움
-  const f=$("field"),d=document.createElement("div");
-  d.className="fx demo-pic";d.style.left="50%";d.style.top="46%";d.style.transform="translate(-50%,-50%)";
-  d.innerHTML=picHTML(moveId);f.appendChild(d);hydrate(d);
-  d.animate([{opacity:0},{opacity:1},{opacity:.9},{opacity:0}],{duration:1500,easing:"ease-in-out"}).onfinish=()=>d.remove();
-}
 
-/* 2장, 3장 공용 대본 진행기.
-   한 비트의 흐름: 상대 배역이 원전 대사를 말함 → 유저가 동작으로 응수 →
-   판정에 따라 내 배역의 원전 대사가 나옴 → (원전에 있으면) 상대가 되받음 */
-/* 응답 대기를 앞선 대사 길이에 비례해 냄. 대기를 고정하면 짧은 지시("꾸부려라") 뒤에도
-   똑같이 기다려 판이 늘어짐. 긴 사설 뒤에는 생각할 틈이 더 필요하므로 함께 늘어남.
-   대사 없이 몸짓만으로 거는 무언 도발은 볼 것이 적어 기본값만 줌 */
-function respMs(b){
-  const n=b&&b.text?[...b.text].length:0;
-  return Math.min(CFG.respMax*1000,CFG.respBase*1000+n*CFG.respPerChar*1000);
-}
-/* 장쇠 중계를 왼쪽 칸에 올림. 발화가 아니라 표시라 진행을 붙잡지 않고,
-   장쇠가 제 말을 할 때(SPEECH.say)는 그 대사가 이 자리를 덮어씀 */
-function hostRelay(text){
-  const box=$("playHost"),line=box&&box.querySelector(".host-line");
-  if(!line)return;
-  if(!text){line.innerHTML="&nbsp;";return;}
-  const nm=box.querySelector(".host-name"); if(nm)nm.textContent="장쇠 (스승)";
-  line.innerHTML=esc(text)+' <span class="prov">중계</span>';
-  log("say","장쇠 중계: "+text,"lg-sys");
-}
-function beatLabel(b){
-  if(b.t==="enter")return "상대 배역 등장";
-  if(b.t==="free")return "따라 하기 연출";
-  const who=b.who==="foe"?(S.madang?S.madang.foe:"상대"):
-            b.who==="me"?(S.role||"내 배역"):"장쇠";
-  if(b.t==="say")return `${who}: ${String(b.text||"").slice(0,20)}…`;
-  return `${b.act?"무언 도발":who+" 대사"} → ${MOVES[b.move].name}`;
-}
-function runBeats(list,opts,onDone){
-  const box=$("playHost");
-  const cueTotal=list.filter(b=>b.t==="cue").length;
-  const gain=cueTotal?100/cueTotal:0;   // 다 얼쑤면 가득 차고, 다 좋다면 못 채우는 배분
-  let i=0,cueSeen=0;
-  const pane=()=>{
-    $("infoPane").innerHTML=
-     `<div class="info-h">${esc(opts.paneTitle)}</div>
-      <div class="info-card">${list.map((b,k)=>
-        `<div class="beat-row ${k===i?"now":k<i?"done":""}">${b.src?`<span class="beat-src">${esc(b.src)}</span>`:""}${esc(beatLabel(b))}</div>`).join("")}</div>`
-     +(opts.tail||"");
-  };
-  const step=()=>{
-    pane();
-    if(i>=list.length){onDone();return;}
-    hostRelay("");   // 지난 대목의 중계를 걷고 새 대목을 엶
-    const b=list[i++];
-    if(b.t==="enter"){setFoe("등장",b.cap);AU.kkwaenggwari();setTimeout(step,900);return;}
-    if(b.t==="say"){ if(b.cap)setFoe("대기",b.cap); SPEECH.say(b.who,b.text,box,step,{quote:!!b.src}); return; }
-    if(b.t==="free"){
-      setFoe("과장",b.cap);
-      SPEECH.say("jangsoe",b.text,box,()=>{
-        PAD.arm(S.madang.moves[0],2600,()=>{log("sys","따라 하기 연출 구간(판정 없음) 종료","lg-sys");step();});
-        PAD.info({state:"따라 하기",move:"따라 하기",how:"아무 번호나 눌러 보기 (판정 없음)"});
+    const els = Object.fromEntries(['home','play','sceneNo','sceneTitle','progressBar','cast','waiting','cue','inputZone','resultFlash','speaker','line','advance','homeBtn','prevBtn'].map(id => [id, document.getElementById(id)]));
+    let sceneKey = null, step = 0, locked = false, transitionTimer = null;
+
+    function actorMarkup(a) {
+      const name = actorNames[a.role] || a.role;
+      const interactive = (a.mods || '').includes('targetable');
+      const tag = interactive ? 'button' : 'div';
+      const label = interactive ? ` aria-label="${name} 지목"` : ' aria-hidden="true"';
+      return `<${tag} class="actor ${a.mods || 'show'}" data-role="${a.role}" style="--x:${a.x}%;--y:${a.y || 58}%"${label}><span class="head"></span><span class="body"><i class="arm a"></i><i class="arm b"></i></span><span class="nameplate">${name}</span></${tag}>`;
+    }
+
+    function render() {
+      const scene = scenes[sceneKey], state = scene.states[step];
+      els.sceneNo.textContent = scene.no;
+      els.sceneTitle.textContent = scene.title;
+      els.progressBar.style.width = `${((step + 1) / scene.states.length) * 100}%`;
+      els.cast.innerHTML = (state.actors || []).map(actorMarkup).join('');
+      els.cast.querySelectorAll('.actor.targetable').forEach(actor => {
+        actor.addEventListener('click', () => choose(actor.dataset.role === 'meokjung' ? 'ok' : 'miss', `${actorNames[actor.dataset.role]} 지목`));
       });
-      return;
+      els.speaker.textContent = state.speaker;
+      els.speaker.classList.toggle('guide', state.speaker === '안내');
+      els.line.textContent = state.line;
+      els.waiting.classList.toggle('show', !!state.waiting);
+      els.waiting.querySelector('span').textContent = state.waiting || '';
+      els.cue.classList.toggle('show', !!state.cue);
+      els.cue.querySelector('strong').textContent = state.cue?.[0] || '';
+      els.cue.querySelector('span').textContent = state.cue?.[1] || '';
+      els.inputZone.innerHTML = '';
+      els.inputZone.classList.toggle('show', !!state.inputs);
+      (state.inputs || []).forEach(([label, result], i) => {
+        const b = document.createElement('button');
+        b.className = `input-btn ${result === 'ok' ? 'primary' : ''}`;
+        b.textContent = `${i + 1}. ${label}`;
+        b.onclick = () => choose(result, label);
+        els.inputZone.appendChild(b);
+      });
+      els.advance.hidden = !!state.inputs;
+      els.advance.textContent = step === scene.states.length - 1 ? '마침' : '다음 ▶';
+      locked = false;
     }
-    /* cue: 상대 대사(text) 또는 무언 도발(act) 뒤에 응수를 받음 */
-    const arm=()=>{
-      if(b.act)$("foeCap").textContent=b.cap||b.act;
-      else setFoe("대기",b.cap);
-      const ms=opts.window?opts.window(cueSeen,b):respMs(b);
-      const slot=cueSeen;
-      if(opts.lane)LANE.focus(slot,ms);
-      PAD.arm(b.move,ms,res=>{
-        cueSeen++;
-        record(b.move,res,opts.chapter);showVerdict(res.v,res);
-        const ok=res.v!=="dasi";
-        if(opts.lane)LANE.resolve(slot,ok);
-        if(opts.climax&&ok){
-          S.gauge=Math.min(100,S.gauge+gain*(res.v==="eolssu"?1.15:.85));updGauge();
-        }
-        /* 상대 배역 반응은 장쇠가 중계함 (기획서 4.3.2 3) (3) 장쇠 중계).
-           프로토타입에서는 발화 비트를 따로 두지 않고 장쇠 칸에 글로만 올림:
-           비트마다 발화를 넣으면 마당당 13초가 늘어 판이 늘어짐.
-           실기기에서는 이 자리에 장쇠 TTS가 붙음 */
-        setFoe(ok?"과장":"중립",b.cap);
-        setMe(ok?"과장":"중립",S.role+" (나)");
-        hostRelay(ok?b.ok:b.no);
-        SPEECH.say("me",ok?b.mine:(b.mineNo||b.mine),box,
-          ()=>{ if(ok&&b.foeBack)SPEECH.say("foe",b.foeBack,box,step); else step(); });
-      },opts.padOpts);
-    };
-    if(b.text)SPEECH.say(b.who,b.text,box,arm,{quote:!!b.src});
-    else{setFoe("과장",b.act);setTimeout(arm,1000);}
-  };
-  step();
-}
 
-/* 2장 앞대목 */
-function runScene(){
-  chapIn("scene");
-  const m=S.madang;
-  $("playTitle").textContent=`${m.sceneTitle} (2장)`;
-  $("demoHint").textContent=`연회본 ${m.sceneSrc} 발췌`;
-  $("gaugeWrap").style.display="none";LANE.hide();SPEECH.hideStage();
-  runBeats(m.scene,{chapter:"앞대목",paneTitle:`앞대목 대본 (${m.sceneSrc})`},
-    ()=>{chapOut("scene");setFoe(null);runClimax();});
-}
-/* 두 배역을 같은 함수로 세움. 상대 배역(foe)은 포즈별 그림이 따로 있고,
-   내 배역(me)은 그림이 한 장뿐이라 같은 그림에 반응 동작만 다르게 줌.
-   판 안에서 자기 쪽(왼쪽/오른쪽)에 서므로 등퇴장 방향도 그 쪽으로 감 */
-function setActor(who,pose,cap){
-  const el=$(who),c=$(who+"Cap"),isFoe=who==="foe";
-  /* 앞서 건 애니메이션을 먼저 지움. 결말만 fill:forwards라 마지막 키프레임(퇴장 마당은 opacity 0)이
-     요소에 그대로 남고, 뒤에 건 애니메이션은 끝나면 사라져 그 값이 다시 올라옴.
-     지우지 않으면 한 마당을 끝낸 뒤부터 배역이 계속 안 보임 */
-  el.getAnimations().forEach(a=>a.cancel());
-  if(!pose){el.innerHTML="";c.textContent="";return;}
-  const m=S.madang, name=isFoe?m.foe:S.role, out=isFoe?-1:1;   // 판 밖으로 나가는 방향
-  const mood=pose==="과장"?"hurt":pose==="등장"?"laugh":pose==="중립"?"angry":"idle";
-  el.innerHTML=art(isFoe?"foe_"+m.foe+"_"+pose:"body_"+S.role,maskSVG(name,130,154,mood));
-  c.textContent=cap||"";hydrate(el);
-  const Y="translateY(-50%)";
-  const anim={
-    "등장":[{transform:`${Y} translateX(${out*140}px)`,opacity:0},{transform:Y,opacity:1}],
-    "과장":[{transform:`${Y} scale(1)`},{transform:`${Y} translate(${-out*30}px,-24px) rotate(${-out*14}deg) scale(1.06)`},{transform:Y}],
-    "중립":[{transform:Y},{transform:`${Y} translateX(-7px)`},{transform:`${Y} translateX(7px)`},{transform:Y}],
-    "대기":[{transform:`${Y} scale(1)`},{transform:`${Y} scale(1.02)`},{transform:`${Y} scale(1)`}],
-    /* 결말은 마당마다 갈림. 밀려나 퇴장하는 마당은 화면 밖으로 날리고,
-       상대가 굴복해 판에 남는 마당(샌님의 큰절)은 제자리에서 내려앉아 머무름 */
-    "결말": m.climax.endAnim==="settle"
-      ? [{transform:Y},{transform:`${Y} translateY(26px) scale(.97)`}]
-      : [{transform:Y},{transform:`${Y} translate(${out*320}px,-170px) rotate(${out*90}deg)`,opacity:0}]
-  }[pose];
-  if(anim)el.animate(anim,{duration:pose==="결말"?900:520,easing:"ease-out",fill:pose==="결말"?"forwards":"none"});
-  if(pose==="과장")AU.hit();
-}
-const setFoe=(pose,cap)=>setActor("foe",pose,cap);
-const setMe =(pose,cap)=>setActor("me",pose,cap);
+    function flash(text) {
+      if (!text) return;
+      els.resultFlash.querySelector('span').textContent = text;
+      els.resultFlash.classList.remove('show');
+      void els.resultFlash.offsetWidth;
+      els.resultFlash.classList.add('show');
+    }
 
-/* 말풍선이 배역 그림을 가리지 않는 최대 글자수를 판 크기에서 실제로 재어 정함.
-   창이 좁으면 말풍선이 좁고 낮아져 들어가는 글자가 확 줄기 때문에 고정값을 쓸 수 없음.
-   빈 말풍선에 글자를 늘려 넣어 보며 이분 탐색함 (Step 3 들어갈 때와 창 크기가 바뀔 때만 돎) */
-function fitSayMax(){
-  const f=$("field"),a=$("foe"),b=$("sayFoe");
-  if(!f||!b||!f.clientHeight)return;
-  const fr=f.getBoundingClientRect(),ar=a.getBoundingClientRect();
-  const room=(ar.top-fr.top)-parseFloat(getComputedStyle(b).top||12)-6;
-  if(room<20)return;
-  const keep=b.innerHTML,was=b.classList.contains("on");
-  b.classList.add("on");
-  const S1="가나다라마바사아자차카타파하거너더러머버서어저처커터퍼허";
-  const rep=n=>{let t="";for(let i=0;i<n;i++)t+=S1[i%S1.length];return t;};
-  let lo=8,hi=400,best=8;
-  while(lo<=hi){const m=(lo+hi)>>1;
-    b.innerHTML='<span class="who">아무개</span>'+rep(m);
-    if(b.scrollHeight<=room+.5){best=m;lo=m+1;}else hi=m-1;}
-  b.innerHTML=keep; if(!was)b.classList.remove("on");
-  CFG.sayMax=Math.max(20,best);
-  const el=$("cfgSayMax"); if(el)el.value=CFG.sayMax;
-  log("sys",`말풍선 한계 ${CFG.sayMax}자로 맞춤 (판 ${Math.round(fr.width)}px, 배역 위 여유 ${Math.round(room)}px)`,"lg-sys");
-}
-addEventListener("resize",()=>{clearTimeout(fitSayMax._t);
-  fitSayMax._t=setTimeout(()=>{if(curScreen==="scr-play")fitSayMax();},250);});
+    function choose(result, label) {
+      if (locked) return;
+      if (result === 'home') return goHome();
+      locked = true;
+      if (result === 'miss') {
+        flash('다시 살펴보세요');
+        els.line.textContent = '방향이나 인물을 다시 확인해 보세요. 이 프로토타입에서는 한 번 더 선택할 수 있습니다.';
+        setTimeout(() => { locked = false; }, 850);
+        return;
+      }
+      if (result === 'soft') {
+        flash('다른 표현을 살펴보세요');
+        els.line.textContent = '그 선택으로는 말의 허점이 드러나지 않습니다. 다른 표현을 골라 보세요.';
+        setTimeout(() => { locked = false; }, 850);
+        return;
+      }
+      if (result === 'skip') {
+        flash('원전 사건 계속');
+        const expected = step;
+        transitionTimer = setTimeout(() => {
+          if (sceneKey && step === expected) { step = Math.min(step + 2, scenes[sceneKey].states.length - 1); render(); }
+        }, 650);
+        return;
+      }
+      flash('입력 확인');
+      const expected = step;
+      transitionTimer = setTimeout(() => next(expected), 650);
+    }
 
-/* 3장 뒷대목(절정) */
-function runClimax(){
-  chapIn("climax");
-  const m=S.madang,cx=m.climax;
-  $("playTitle").textContent=`${m.climaxTitle}, 절정 (3장)`;
-  $("demoHint").textContent=`연회본 ${m.climaxSrc} 발췌`;
-  const box=$("playHost");
-  setBG("climax");
-  SPEECH.hideStage();hostRelay("");   // 앞대목에서 오간 말을 걷고 뒷대목을 엶
-  $("gaugeWrap").style.display="flex";
-  $("gaugeLab").textContent=cx.gaugeLab;
-  S.gauge=0;updGauge();
-  setFoe("대기","맞서 선 "+m.foe);
-  const tail=
-   `<div class="info-h">뒷대목 줄거리</div><div class="info-card" style="font-size:11.5px;line-height:1.5">${esc(cx.seq)}</div>
-    <div class="info-h">결말 연출</div>
-    <div class="info-card" style="font-size:11px;line-height:1.5;color:#c9bda9">
-      게이지 가득 참: ${esc(cx.ending)}<br><br>
-      <span style="color:var(--dim)">미달 완화 결말: ${esc(cx.endingSoft)}</span></div>`;
-  CLX.start(cx.bpm);
-  LANE.build(cx.beats.filter(b=>b.t==="cue").map(b=>b.move));
-  SPEECH.say("jangsoe","자, 장단 들어간다. 배운 것을 다 쏟아라!",box,()=>{
-    runBeats(cx.beats,{chapter:"절정",paneTitle:`뒷대목 대본 (${m.climaxSrc})`,climax:true,tail,lane:true,
-      padOpts:{climax:true},
-      /* 장단 가속은 응답 대기를 조금씩 좁혀 표현함. 2초 밑으로는 안 내려감 */
-      /* 가속 마당은 대목이 갈수록 좁아짐. 하한은 기본 대기라 손이 못 따라갈 만큼은 안 좁아짐 */
-      window:(k,b)=>Math.max(CFG.respBase*1000,respMs(b)*(cx.accel?Math.pow(.94,k):1))},
-      ()=>finishClimax(cx,S.gauge>=100));
-  });
-}
-function updGauge(){$("gaugeFill").style.width=Math.min(100,S.gauge)+"%";}
-function finishClimax(cx,full){
-  CLX.stop();PAD.disarm();   // 레인은 결말 대사가 끝난 뒤(wrap)에 걷음
-  const box=$("playHost");
-  setFoe(full?"결말":"대기",full?cx.ending:cx.endingSoft);
-  if(full){AU.cheer();AU.kkwaenggwari();}
-  log("sys","절정 결말: "+(full?"완전":"완화")+" / "+(full?cx.ending:cx.endingSoft),full?"lg-jud":"lg-warn");
-  const outro=(cx.outro||[]).slice();   // 결말 뒤에 붙는 원전 마무리 대사
-  const wrap=()=>SPEECH.say("jangsoe",full?"판이 뒤집혔다! 잘 놀았다!":"숨이 찼구나. 그래도 끝까지 갔다.",box,()=>{
-    chapOut("climax");
-    $("gaugeWrap").style.display="none";LANE.hide();
-    goStep4();});
-  const nextOutro=()=>{if(!outro.length){wrap();return;}const b=outro.shift();SPEECH.say(b.who,b.text,box,nextOutro);};
-  nextOutro();
-}
+    function next(expectedStep = null) {
+      if (!sceneKey || (expectedStep !== null && step !== expectedStep) || (locked && expectedStep === null)) return;
+      const scene = scenes[sceneKey];
+      if (step < scene.states.length - 1) { step++; render(); const f = scene.states[step].flash; if (f) setTimeout(() => flash(f), 180); }
+      else goHome();
+    }
 
-/* ── 16. Step 4 ────────────────────────── */
-function goStep4(){
-  S.step=4;renderSess();srv("Step 4 진입 (완주 확정, 서버 완주 기록 겸함)");
-  show("scr-accept");
-  const box=$("acceptHost");box.innerHTML=hostHTML();hydrate();
-  bindSkip(box,()=>SPEECH.stop());
-  // 가장 빨리 받아친 동작을 하이라이트로 뽑음 (실기기에서는 진폭이 가장 컸던 동작)
-  const best=[...S.records].filter(r=>r.v!=="dasi").sort((a,b)=>a.early-b.early)[0];
-  /* 이수 단계(칭호)는 세션 신명 지표를 임계 2개와 대조해 3단으로 가름.
-     칭호 이름과 임계는 잠정값이고 실기기에서 다시 잡음 (기획서 4.4.1 이수 단계) */
-  const hot=S.sinmyeong>=CFG.sinmyeongCut;
-  const rank=hot?"한몫 광대":S.sinmyeong>=CFG.sinmyeongCutLow?"초짜 광대":"구경꾼";
-  const decl=`오늘부로 ${S.role} 노릇 한번 제대로 했다!`;
-  const bestLine=best?`네 ${MOVES[best.move].name}가 제일 시원했다.`:"다음엔 장단을 놓치지 말고 받아 보자.";
-  /* 수행 요약은 장별로 판정 3단을 세어 보여 줌. 판 안에서 부르는 얼쑤/좋다/다시를
-     이 화면에서만 대성공/성공/미수행으로 옮겨 적음 (기획서 4.4.1 수행 요약).
-     실습과 절정은 판 안에서 미수행을 말로 돌려주지 않아, 유저가 그것을 아는 자리가 여기뿐임 */
-  const sumRow=(label,chap)=>{
-    const r=S.records.filter(x=>x.chapter===chap),n=v=>r.filter(x=>x.v===v).length;
-    return `<div class="sum-row"><span>${label}</span><span>대성공 ${n("eolssu")}, 성공 ${n("johda")}, 미수행 ${n("dasi")}</span></div>`;};
-  const narr=hot?"판이 후끈했다. 구경꾼들이 아직도 손뼉을 치는구나."
-    :S.sinmyeong>=CFG.sinmyeongCutLow?"제법 몸이 풀렸구나. 한 판 더 놀면 광대 소리 듣것다."
-    :"다음엔 더 크게 놀아보자. 몸이 아직 덜 풀렸을 뿐이다.";
-  $("acceptBody").innerHTML=`
-   <div class="acc-block"><div class="acc-h">인정 선언</div><div class="acc-decl">${esc(decl)}</div>
-     <div class="asset-note" style="text-align:left;margin-top:4px">완주를 먼저 인정하고 그 위에 칭호를 얹음. 점수와 등수는 두지 않음</div></div>
-   <div class="acc-block"><div class="acc-h">이수 단계</div><div class="acc-decl">${esc(rank)}</div>
-     <div class="acc-body">${esc(narr)}</div></div>
-   <div class="acc-block"><div class="acc-h">수행 요약</div>
-     ${sumRow("1장 익히기","수업")}
-     ${sumRow("2장 겨루기","앞대목")}
-     ${sumRow("3장 판 벌이기","절정")}
-     <div class="sum-row"><span>하이라이트 동작</span><span>${esc(bestLine)}</span></div></div>
-   <div class="acc-block"><div class="acc-h">검증용 표기</div>
-     <div class="asset-note" style="text-align:left">내부 신명 지표 ${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut} (지표 자체는 화면에 노출하지 않는 설계)</div></div>`;
-  if(hot)AU.cheer();
-  SPEECH.say("jangsoe",decl+" "+bestLine+" "+narr,box);
-}
+    function start(key) {
+      sceneKey = key; step = 0;
+      els.home.classList.remove('active'); els.play.classList.add('active');
+      render();
+    }
 
-/* ── 17. Step 5 ────────────────────────── */
-function goStep5(kind){
-  S.step=5;renderSess();SPEECH.stop();PAD.disarm();
-  CLX.stop();LANE.hide();
-  show("scr-end");
-  $("endMsg").textContent="세션 종료 이벤트 전송";
-  $("endSub").textContent="완주 유형: "+kind;
-  srv("종료 이벤트 전송 ("+kind+") → 저장 확인 응답 대기");
-  buildReport(kind);
-  setTimeout(()=>{
-    srv("저장 확인 응답 수신, 장면 수행 기록의 식별 원본 파기");
-    $("endMsg").textContent="세션 데이터 초기화 완료";
-    setTimeout(()=>{newSession();show("scr-start");},900);},900);
-}
-function endSession(reason){
-  SPEECH.stop();PAD.disarm();CLX.stop();
-  log("sys","비완주 종료: "+reason+" (결과와 마무리 화면 건너뜀)","lg-err");
-  goStep5("비완주-"+reason);
-}
-function buildReport(kind){
-  const n=S.records.length,e=S.eolssu,ok=S.success-e,d=S.dasi;
-  const secs=k=>(S.chapMs[k]/1000).toFixed(1)+"s",pc=v=>n?Math.round(v/n*100)+"%":"0%";
-  $("report").innerHTML=`
-   <div class="rep-row"><span>종료 유형</span><b>${esc(kind)}</b></div>
-   <div class="rep-row"><span>마당, 배역</span><b>${S.madang?S.madang.name+", "+S.role:"미선택"}</b></div>
-   <div class="rep-row"><span>총 동작 신호</span><b>${n}건</b></div>
-   <div class="rep-row"><span>얼쑤</span><b>${e} (${pc(e)})</b></div>
-   <div class="rep-row"><span>좋다</span><b>${ok} (${pc(ok)})</b></div>
-   <div class="rep-row"><span>다시</span><b>${d} (${pc(d)})</b></div>
-   <div class="rep-row"><span>1장 소요</span><b>${secs("lesson")}</b></div>
-   <div class="rep-row"><span>2장 앞대목 소요</span><b>${secs("scene")}</b></div>
-   <div class="rep-row"><span>3장 뒷대목 소요</span><b>${secs("climax")}</b></div>
-   <div class="rep-row"><span>전체 소요</span><b>${((Date.now()-S.startedAt)/1000).toFixed(0)}s</b></div>
-   <div class="rep-row"><span>신명 지표</span><b>${S.sinmyeong.toFixed(1)} / 단계 임계 ${CFG.sinmyeongCutLow}, ${CFG.sinmyeongCut}</b></div>`;
-}
+    function goHome() {
+      clearTimeout(transitionTimer); transitionTimer = null;
+      sceneKey = null; step = 0;
+      els.play.classList.remove('active'); els.home.classList.add('active');
+    }
 
-/* ── 18. 에러 케이스 ───────────────────── */
-document.querySelectorAll("[data-err]").forEach(b=>b.onclick=()=>{
-  const k=b.dataset.err;S.errType=k;renderSess();
-  const halt=msg=>{log("err","중단 처리: "+msg,"lg-err");
-    POP.show("잠시 문제가 생겼습니다",msg+" 처음 화면으로 돌아갑니다.",[{label:"확인",fn:()=>endSession("error-"+k)}]);};
-  if(k==="tts"){SPEECH.failed=true;log("err","기능 축소: TTS 실패 → 화면 텍스트와 포즈로 진행","lg-err");}
-  else if(k==="pose"){log("err","기능 축소: 상대 배역 포즈 전환 실패 → 대표 포즈 정지 표시와 효과음","lg-err");
-    $("foe").style.filter="grayscale(1) brightness(.7)";AU.hit();}
-  else if(k==="res")halt("마당 리소스를 불러오지 못했습니다.");
-  else if(k==="cam")halt("카메라 신호가 들어오지 않습니다.");});
-
-/* ── 19. 진행 도구 ─────────────────────── */
-document.querySelectorAll("[data-force]").forEach(b=>b.onclick=()=>{
-  if(!PAD.armed)return log("sys","지금은 응답 대기 구간이 아님","lg-sys");
-  const v=b.dataset.force;
-  PAD.settle({v,early:v==="eolssu"?.2:v==="johda"?.7:1,hold:v==="dasi"?0:1.2,reason:"패널 강제 판정"});});
-$("btnSkipChap").onclick=()=>{
-  if(curScreen!=="scr-play")return;
-  SPEECH.stop();PAD.disarm();
-  if(curChap==="lesson"){chapOut("lesson");runScene();}
-  else if(curChap==="scene"){chapOut("scene");setFoe(null);runClimax();}
-  else{CLX.stop();finishClimax(S.madang.climax,S.gauge>=100);}};
-$("btnReset").onclick=()=>{SPEECH.stop();PAD.disarm();
-  CLX.stop();LANE.hide();newSession();show("scr-start");};
-$("panelToggle").onclick=()=>$("panel").classList.toggle("hidden");
-
-/* ── 20. 진입 ──────────────────────────── */
-$("btnStart").onclick=()=>{
-  AU.ensure();newSession();srv("세션 생성 (익명), 언어 ko");
-  S.step=2;renderSess();selIdx=0;buildMadang();show("scr-madang");};
-$("btnMadangOk").onclick=()=>confirmMadang(false);
-$("btnWear").onclick=()=>wearMask(false);
-$("btnHome").onclick=()=>goStep5("완주-처음으로 버튼");
-
-$("gaps").innerHTML=GAPS.map(g=>
-  `<div class="warnbox"><b>${esc(g.where)}</b><br>${esc(g.what)}<br><span style="color:#a9c9a0">프로토타입 처리: ${esc(g.fix)}</span></div>`).join("");
-renderAssets();
-probeArt();
-newSession();show("scr-start");
-hydrate();
-</script>
+    document.querySelectorAll('[data-start]').forEach(b => b.addEventListener('click', () => start(b.dataset.start)));
+    els.advance.addEventListener('click', next);
+    els.homeBtn.addEventListener('click', goHome);
+    els.prevBtn.addEventListener('click', () => { if (!locked && sceneKey && step > 0) { clearTimeout(transitionTimer); transitionTimer = null; step--; render(); } });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') return goHome();
+      if (!sceneKey) {
+        if (['1','2','3'].includes(e.key)) start(['omtal','saennim','meokjung'][Number(e.key)-1]);
+        return;
+      }
+      if (e.key === 'ArrowRight' && !els.advance.hidden) next();
+      if (e.key === 'ArrowLeft' && !locked && step > 0) { clearTimeout(transitionTimer); transitionTimer = null; step--; render(); }
+      const buttons = [...els.inputZone.querySelectorAll('button')];
+      if (!locked && /^[1-9]$/.test(e.key) && buttons[Number(e.key)-1]) buttons[Number(e.key)-1].click();
+    });
+  </script>
 </body>
 </html>
