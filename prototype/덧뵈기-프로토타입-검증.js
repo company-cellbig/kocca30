@@ -1,0 +1,196 @@
+const fs = require("node:fs");
+const path = require("node:path");
+
+const sourceData = require("./덧뵈기-원전대사.js");
+const stateData = require("./덧뵈기-진행상태.js");
+const { paginateSourceText } = require("./덧뵈기-표시도구.js");
+
+const root = path.resolve(__dirname, "..");
+const transcriptLines = fs.readFileSync(path.join(root, "02_References", "converted", "남사당놀이", "남사당놀이 - 덧뵈기.md"), "utf8").split(/\r?\n/);
+const designLines = fs.readFileSync(path.join(root, "04_Projects", "시범콘텐츠", "05_덧뵈기 - 나만의 탈춤", "덧뵈기 나만의 탈춤 재설계 방향.md"), "utf8").split(/\r?\n/);
+const errors = [];
+const reports = [];
+
+function assert(condition, message) {
+  if (!condition) errors.push(message);
+}
+
+function equal(actual, expected, message) {
+  assert(JSON.stringify(actual) === JSON.stringify(expected), message);
+}
+
+function expectedRows(start, end) {
+  const rows = [];
+  for (let sourceLine = start; sourceLine <= end; sourceLine += 1) {
+    const sourceText = transcriptLines[sourceLine - 1];
+    if (sourceText?.trim()) rows.push({ sourceLine, sourceText });
+  }
+  return rows;
+}
+
+function parseSegments(sourceText) {
+  const match = sourceText.match(/^\*\*(.+?)\*\*\s*(.*)$/);
+  if (!match) return [{ type: "direction", speaker: "지문", text: sourceText }];
+  const [, speaker, rest] = match;
+  const segments = [];
+  const directionPattern = /\*\([^*]*?\)\*/g;
+  let cursor = 0;
+  let direction;
+  while ((direction = directionPattern.exec(rest))) {
+    if (direction.index > cursor) segments.push({ type: "dialogue", speaker, text: rest.slice(cursor, direction.index) });
+    segments.push({ type: "direction", speaker: "지문", text: direction[0] });
+    cursor = directionPattern.lastIndex;
+  }
+  if (cursor < rest.length) segments.push({ type: "dialogue", speaker, text: rest.slice(cursor) });
+  if (!segments.length) segments.push({ type: "dialogue", speaker, text: "" });
+  return segments;
+}
+
+const eventRanges = {
+  omtal: [["A1",420,424],["A2",424,430],["A3",428,430],["A4",432,434],["A5",434,440],["A6",442,444],["A7",446,452],["A8",454,456],["A9",458,460],["A10",462,464],["A11",464,466],["A12",466,466],["A13",466,466]],
+  saennim: [["S1",470,478],["S2",480,490],["S3",492,500],["S4",500,518],["S5",520,526],["S6",528,542],["S7",544,558],["S8",560,590],["S9",592,600],["S10",602,608],["S11",608,616],["S12",618,622],["S13",622,626]],
+  meokjung: [["M1",630,630],["M2",630,630],["M3",632,634],["M4",636,650],["M5",652,656],["M6",658,666],["M7",668,670],["M8",672,680],["M9",682,686],["M10",686,700],["M11",702,704]],
+};
+
+const stateRanges = {
+  omtal: [["omtal-03",420,426],["omtal-04",428,428],["omtal-05",430,430],["omtal-07",432,456],["omtal-10",458,458],["omtal-11",460,460],["omtal-14",462,464],["omtal-15",466,466]],
+  saennim: [["saennim-03",470,478],["saennim-04",480,490],["saennim-05",492,500],["saennim-06",500,518],["saennim-07",520,526],["saennim-08",528,530],["saennim-09",530,532],["saennim-11",534,542],["saennim-12",544,554],["saennim-13",556,558],["saennim-14",560,590],["saennim-15",592,600],["saennim-16",602,604],["saennim-17",606,616],["saennim-18",618,622],["saennim-19",622,626]],
+  meokjung: [["meokjung-03",630,630],["meokjung-04",630,630],["meokjung-07",632,634],["meokjung-10",636,644],["meokjung-11",646,650],["meokjung-12",652,654],["meokjung-13",656,656],["meokjung-14",658,666],["meokjung-15",668,670],["meokjung-16",668,670],["meokjung-17",672,672],["meokjung-18",674,680],["meokjung-19",682,686],["meokjung-20",686,700],["meokjung-21",702,704]],
+};
+
+function idsAt(ranges, sourceLine) {
+  return ranges.filter(([, start, end]) => sourceLine >= start && sourceLine <= end).map(([id]) => id);
+}
+
+for (const [sceneId, scene] of Object.entries(sourceData.scenes)) {
+  const expected = expectedRows(...scene.sourceRange);
+  equal(scene.rows.map(({ sourceLine, sourceText }) => ({ sourceLine, sourceText })), expected, `${sceneId}: 원전 행 번호, 순서 또는 문자열이 다름`);
+  assert(new Set(scene.rows.map((row) => row.sourceLine)).size === scene.rows.length, `${sceneId}: 원전 행이 중복됨`);
+  for (const row of scene.rows) {
+    assert(row.displayText === row.sourceText, `${sceneId}: ${row.sourceLine}행 표시값이 원문과 다름`);
+    equal(row.segments, parseSegments(row.sourceText), `${sceneId}: ${row.sourceLine}행 segment 종류, 화자, 순서 또는 문자열이 다름`);
+    equal(row.eventIds, idsAt(eventRanges[sceneId], row.sourceLine), `${sceneId}: ${row.sourceLine}행 eventIds 대응이 다름`);
+    equal(row.stateIds, idsAt(stateRanges[sceneId], row.sourceLine), `${sceneId}: ${row.sourceLine}행 stateIds 대응이 다름`);
+    assert(row.eventIds.length > 0 && row.stateIds.length > 0, `${sceneId}: ${row.sourceLine}행 사건 또는 상태 대응이 비어 있음`);
+    const pages = paginateSourceText(row.displayText);
+    assert(pages.length > 0 && pages.every((page) => page.length > 0), `${sceneId}: ${row.sourceLine}행 문장 페이지가 비었음`);
+    assert(pages.join("") === row.displayText, `${sceneId}: ${row.sourceLine}행 문장 페이지 재결합이 원문과 다름`);
+  }
+  reports.push(`${scene.title}: ${scene.rows.length}/${expected.length}행, 원문/segment/사건/상태/문장 페이지 일치`);
+}
+
+const tableHeadings = {
+  omtal: "## 4.6 옴탈잡이 상세 진행",
+  saennim: "## 5.5 샌님잡이 상세 진행",
+  meokjung: "## 6.5 먹중잡이 상세 진행",
+};
+
+const fieldNames = {
+  omtal: ["name", "cast", "bottomText", "action", "input", "outcomes"],
+  saennim: ["name", "basis", "cast", "bottomText", "action", "input", "outcomes"],
+  meokjung: ["name", "basis", "cast", "bottomText", "action", "input", "outcomes"],
+};
+
+function parseDesignTable(sceneId) {
+  const headingIndex = designLines.indexOf(tableHeadings[sceneId]);
+  assert(headingIndex >= 0, `${sceneId}: 상세 진행 헤딩을 찾지 못함`);
+  if (headingIndex < 0) return [];
+  const headerIndex = designLines.findIndex((line, index) => index > headingIndex && line.startsWith("| 순서 |"));
+  assert(headerIndex > headingIndex, `${sceneId}: 상세 진행 표 머리말을 찾지 못함`);
+  if (headerIndex <= headingIndex) return [];
+  const rows = [];
+  for (let index = headerIndex + 2; index < designLines.length && designLines[index].startsWith("|"); index += 1) {
+    const cells = designLines[index].slice(1, -1).split("|").map((cell) => cell.trim());
+    const row = {};
+    fieldNames[sceneId].forEach((field, fieldIndex) => { row[field] = cells[fieldIndex] || ""; });
+    rows.push(row);
+  }
+  assert(rows.length > 0, `${sceneId}: 상세 진행 표 본문을 찾지 못함`);
+  return rows;
+}
+
+const expectedGraphs = {
+  omtal: [["omtal-02"],["omtal-03","recovery-end"],["omtal-04"],["omtal-05","omtal-06"],["omtal-07"],["omtal-05","omtal-07"],["omtal-07","omtal-08","omtal-09"],["omtal-10"],["omtal-07"],["omtal-11","recovery-end"],["omtal-12","omtal-13"],["omtal-14"],["omtal-12","omtal-14"],["omtal-15","omtal-16"],["omtal-16"],["scene-end"]],
+  saennim: [["saennim-02"],["saennim-03","recovery-screen"],["saennim-04"],["saennim-05"],["saennim-06"],["saennim-07"],["saennim-08"],["saennim-09"],["saennim-10"],["saennim-11"],["saennim-12"],["saennim-13"],["saennim-14"],["saennim-15"],["saennim-16"],["saennim-17"],["saennim-18"],["saennim-19"],["scene-end"]],
+  meokjung: [["meokjung-02"],["meokjung-03","recovery-screen"],["meokjung-04"],["meokjung-05"],["meokjung-06","meokjung-07"],["meokjung-07"],["meokjung-08"],["meokjung-09","meokjung-10"],["meokjung-10"],["meokjung-11"],["meokjung-12"],["meokjung-13"],["meokjung-14"],["meokjung-15"],["meokjung-16"],["meokjung-17"],["meokjung-18"],["meokjung-19"],["meokjung-20"],["meokjung-21"],["scene-end"]],
+};
+
+const expectedStateEvents = {
+  omtal: [[],[],["A1","A2"],["A2","A3"],["A3"],[],["A4","A5","A6","A7","A8"],[],[],["A9"],["A9"],[],[],["A10","A11"],["A11","A12","A13"],[]],
+  saennim: [[],[],["S1"],["S2"],["S3"],["S4"],["S5"],["S5","S6"],["S6"],["S6"],["S6"],["S7"],["S7"],["S8"],["S9"],["S10"],["S11"],["S12"],["S13"]],
+  meokjung: [[],[],["M1"],["M2"],["M2"],["M2"],["M3"],["M3"],["M3"],["M4"],["M4"],["M5"],["M5"],["M6"],["M7"],["M7","M8"],["M8"],["M8"],["M9"],["M9","M10"],["M10","M11"]],
+};
+
+function canReachTerminal(startId, stateMap, pseudoTransitions) {
+  const visited = new Set();
+  const queue = [startId];
+  while (queue.length) {
+    const id = queue.shift();
+    if (id === "scene-end") return true;
+    if (visited.has(id)) continue;
+    visited.add(id);
+    const next = stateMap.get(id)?.next || pseudoTransitions[id] || [];
+    next.forEach((target) => queue.push(target));
+  }
+  return false;
+}
+
+for (const sceneId of Object.keys(tableHeadings)) {
+  const expectedRowsFromDesign = parseDesignTable(sceneId);
+  const states = stateData.scenes[sceneId].states;
+  assert(states.length === expectedRowsFromDesign.length, `${sceneId}: 상세 진행표와 상태 수가 다름`);
+  const ids = states.map((state) => state.id);
+  assert(new Set(ids).size === ids.length, `${sceneId}: 상태 ID가 중복됨`);
+  states.forEach((state, index) => {
+    assert(state.id === `${sceneId}-${String(index + 1).padStart(2, "0")}`, `${sceneId}: ${index + 1}번째 상태 ID가 순서와 다름`);
+    assert(state.order === index + 1, `${sceneId}: ${state.id} order가 연속 순서와 다름`);
+    for (const field of fieldNames[sceneId]) assert(state[field] === expectedRowsFromDesign[index]?.[field], `${sceneId}: ${state.id} ${field}가 상세 진행표와 다름`);
+    equal(state.eventIds, expectedStateEvents[sceneId][index], `${sceneId}: ${state.id} eventIds가 다름`);
+    equal(state.next, expectedGraphs[sceneId][index], `${sceneId}: ${state.id} next가 승인된 전이와 다름`);
+    assert(state.next.length > 0, `${sceneId}: ${state.id}에 다음 상태가 없음`);
+  });
+
+  const stateMap = new Map(states.map((state) => [state.id, state]));
+  const allowedTargets = new Set(["scene-end", "recovery-screen", "recovery-end"]);
+  for (const state of states) for (const target of state.next) assert(stateMap.has(target) || allowedTargets.has(target), `${sceneId}: ${state.id}의 다음 상태 ${target}가 없음`);
+
+  const reachable = new Set();
+  const queue = [states[0]?.id];
+  while (queue.length) {
+    const id = queue.shift();
+    if (!stateMap.has(id) || reachable.has(id)) continue;
+    reachable.add(id);
+    stateMap.get(id).next.forEach((target) => queue.push(target));
+  }
+  assert(reachable.size === states.length, `${sceneId}: 시작 상태에서 도달할 수 없는 상태가 있음`);
+
+  const pseudoTransitions = {
+    "recovery-screen": [`${sceneId}-02`, "scene-end"],
+    "recovery-end": ["scene-end"],
+  };
+  for (const state of states) assert(canReachTerminal(state.id, stateMap, pseudoTransitions), `${sceneId}: ${state.id}에서 종료 또는 복구 종료에 도달할 수 없음`);
+
+  for (const state of states) {
+    const rowsForState = sourceData.scenes[sceneId].rows.filter((row) => row.stateIds.includes(state.id));
+    if (!rowsForState.length || !state.eventIds.length) continue;
+    const hasEventOverlap = rowsForState.some((row) => row.eventIds.some((eventId) => state.eventIds.includes(eventId)));
+    assert(hasEventOverlap, `${sceneId}: ${state.id}의 원전 행과 상태 eventIds가 하나도 겹치지 않음`);
+  }
+  reports.push(`${sceneId}: 상세표 전 열/ID/order/eventIds/next/도달성/종료 가능성 일치`);
+}
+
+const schedule = stateData.scenes.omtal.sourceSchedule;
+const expectedScheduledLines = expectedRows(...schedule.range).map((row) => row.sourceLine);
+equal(schedule.blocks.flat(), expectedScheduledLines, "omtal: 재담 블록이 432~456행을 전수 순서대로 덮지 않음");
+assert(schedule.blocks.length === schedule.newApproachCount, "omtal: 원전 블록 수와 새로운 접근 수가 다름");
+assert(schedule.retryConsumesNextBlock === false, "omtal: 실패 재시도가 다음 원전 블록을 소비함");
+reports.push(`옴탈잡이: 원전 블록 ${schedule.blocks.length}개와 새로운 접근 ${schedule.newApproachCount}회 대응`);
+
+if (errors.length) {
+  console.error(`검증 실패 ${errors.length}건`);
+  errors.forEach((error) => console.error(`- ${error}`));
+  process.exit(1);
+}
+
+console.log("검증 통과");
+reports.forEach((report) => console.log(`- ${report}`));
