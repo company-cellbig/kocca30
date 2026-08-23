@@ -191,6 +191,9 @@ const prototypePath = path.join(__dirname, "덧뵈기-나만의탈춤-프로토�
 const prototypeHtml = fs.readFileSync(prototypePath, "utf8");
 const inlineScript = prototypeHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
 assert(Boolean(inlineScript), "프로토타입 HTML: 인라인 스크립트를 찾을 수 없음");
+assert(prototypeHtml.includes("row.segments.filter(segment=>segment.type==='dialogue')"), "프로토타입 HTML: 원전 지문이 화면 큐에서 제외되지 않음");
+assert(prototypeHtml.includes("function input(prompt,options,cue=''){return {kind:'설계 대사',speaker:'장쇠'"), "프로토타입 HTML: 행동 안내가 장쇠의 설계 대사로 처리되지 않음");
+assert(!prototypeHtml.includes("kind:'원전 지문'"), "프로토타입 HTML: 원전 지문 표시 항목이 남아 있음");
 if (inlineScript) {
   try {
     new vm.Script(inlineScript, { filename: prototypePath });
@@ -199,6 +202,7 @@ if (inlineScript) {
     errors.push(`프로토타입 HTML: 인라인 스크립트 구문 오류 - ${error.message}`);
   }
 }
+reports.push("프로토타입 HTML: 원전 지문 비표시와 장쇠 행동 안내 규칙 일치");
 
 if (errors.length) {
   console.error(`검증 실패 ${errors.length}건`);
