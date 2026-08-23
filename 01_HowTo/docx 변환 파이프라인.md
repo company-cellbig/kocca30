@@ -4,7 +4,7 @@ type: howto
 status: stable
 tags: [howto, pipeline, hwpx, docx, pandoc, ingest]
 created: 2026-05-11
-updated: 2026-08-21
+updated: 2026-08-23
 ---
 
 > 제안서/보고서 등 한컴 HWPX 또는 Word DOCX 문서를 LLM Wiki에 통합 가능한 MD로 변환하는 표준 절차. AI 에이전트가 후속 작업에서 환각 없이 인용할 수 있는 수준의 구조 보존이 목표.
@@ -27,7 +27,7 @@ HWPX 원본 (또는 DOCX)
   │    - 미디어는 _figures/<name>/ 추출 (이미지 경로 상대화 후처리)
   └─ 공통: frontmatter 주입(converted/), 검수 큐 사이드카(_reviews/) 생성
   ↓
-[Claude Code 후속 작업]
+[작성자 후속 작업]
   - MOC에 변환본 등록
   - log.md에 ingest 항목 추가
   ↓
@@ -91,7 +91,7 @@ HWPX 원본이 없을 때만:
 - 자동 통계 (H2/H3 헤딩 수, 표 N개, 이미지 N개)
 - 변환기 경고가 있으면 그대로 표시
 
-Claude Code는 추가로:
+작성자는 추가로:
 
 - MOC에 신규 변환본 등록
 - log.md에 `ingest` 항목 추가

@@ -4,7 +4,7 @@ argument-hint: '<path-to-hwpx-or-docx>'
 allowed-tools: Bash, Read, Edit, Glob
 ---
 
-HWPX 또는 DOCX 파일을 LLM Wiki 표준 위치로 변환·통합한다. **HWPX 직접 변환을 권장**: 한컴오피스 export 단계가 필요 없고 헤딩 구조가 손실 없이 보존된다.
+HWPX 또는 DOCX 파일을 LLM Wiki 표준 위치로 변환·통합한다. 이 명령을 실행하는 에이전트는 사용자의 명시적 호출 범위에서 작성자 역할을 맡아 MOC 등록과 로그 기록까지 수행한다. **HWPX 직접 변환을 권장**: 한컴오피스 export 단계가 필요 없고 헤딩 구조가 손실 없이 보존된다.
 
 Raw 인자: `$ARGUMENTS`
 

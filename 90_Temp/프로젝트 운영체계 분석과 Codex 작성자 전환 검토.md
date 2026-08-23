@@ -1,7 +1,7 @@
 ---
 title: 프로젝트 운영체계 분석과 Codex 작성자 전환 검토
 type: agentnote
-status: draft
+status: stable
 tags: [운영, 에이전트, 검토]
 sources: [AGENTS, CONVENTIONS, CLAUDE, MOC]
 created: 2026-08-23
@@ -36,7 +36,7 @@ updated: 2026-08-23
 
 ## 2.2 AGENTS.md
 
-`AGENTS.md`는 AI의 역할, 작업 사이클, 검수 게이트와 수정 권한을 정의함. 현행 역할은 Claude Code 작성자, Codex 외부 검토자, 사용자 중재자임.
+`AGENTS.md`는 AI의 역할, 작업 사이클, 검수 게이트와 수정 권한을 정의함. 이 분석을 시작할 때의 역할은 Claude Code 작성자, Codex 외부 검토자, 사용자 중재자였음.
 
 강점은 권한과 검증 단계를 명시적으로 분리한 점임.
 
@@ -179,7 +179,7 @@ Claude Code 호출 통로를 바로 만들 수 없다면 다음처럼 운용함.
 
 # 7. P0 반영안
 
-[[#5.1 권고안]]의 권고는 2026-08-23 사용자 결정으로 수용됨. 다음 반영안은 정본을 고치기 전 검토용이며, 아직 [[AGENTS]], [[CLAUDE]], [[CONVENTIONS]]에 적용하지 않음.
+[[#5.1 권고안]]의 권고는 2026-08-23 사용자 결정으로 수용됐으며, 커밋 `ff73340`에서 [[AGENTS]], [[CLAUDE]], [[CONVENTIONS]]과 관련 문서에 반영됨.
 
 ## 7.1 역할과 책임
 
