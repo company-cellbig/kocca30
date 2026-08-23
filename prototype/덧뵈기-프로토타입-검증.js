@@ -221,7 +221,9 @@ assert(prototypeHtml.includes("function input(prompt,options){return {kind:'설�
 assert(!prototypeHtml.includes("kind:'원전 지문'"), "프로토타입 HTML: 원전 지문 표시 항목이 남아 있음");
 assert(prototypeHtml.includes('data-start="saennim"') && prototypeHtml.includes('data-start="meokjung"'), "프로토타입 HTML: 샌님잡이 또는 먹중잡이 시작 경로가 없음");
 assert(prototypeHtml.includes("ctx.earlyCounts[id]>=2"), "프로토타입 HTML: 먹중잡이 이른 지목 반복의 종료 상한이 없음");
-assert(!prototypeHtml.includes("$('kind').textContent=item.kind"), "프로토타입 HTML: 내부 대사 분류명이 관람객 화면에 노출됨");
+assert(!prototypeHtml.includes("$('kind').textContent=item.kind;"), "프로토타입 HTML: 내부 대사 분류명이 관람객 화면에 노출됨");
+assert(prototypeHtml.includes("speaker:segment.speaker==='잽이'?'장쇠':segment.speaker"), "프로토타입 HTML: 잽이 원전 대사의 화면 화자가 장쇠로 전환되지 않음");
+assert(prototypeHtml.includes("sourceSpeaker:segment.speaker"), "프로토타입 HTML: 화면 화자 전환 뒤 원전 화자 추적값이 보존되지 않음");
 if (inlineScript) {
   try {
     new vm.Script(inlineScript, { filename: prototypePath });
