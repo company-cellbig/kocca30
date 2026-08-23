@@ -50,7 +50,7 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 const TRANSCRIPT_DIR = path.join(ROOT, "02_References/converted/남사당놀이");
-const SCAN_DIRS = ["00_Index", "03_Concepts", "01_HowTo", "02_References", "04_Projects", "05_산출물", "07_작업노트", "08_제작 가이드", "90_Temp", "prototype"];
+const SCAN_DIRS = ["00_Index", "03_Concepts", "01_HowTo", "02_References", "04_Projects", "05_산출물", "07_작업노트", "90_Temp", "prototype"];
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
