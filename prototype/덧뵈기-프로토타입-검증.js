@@ -187,13 +187,41 @@ assert(schedule.blocks.length === schedule.newApproachCount, "omtal: 원전 블�
 assert(schedule.retryConsumesNextBlock === false, "omtal: 실패 재시도가 다음 원전 블록을 소비함");
 reports.push(`옴탈잡이: 원전 블록 ${schedule.blocks.length}개와 새로운 접근 ${schedule.newApproachCount}회 대응`);
 
+function displayedDialogueLines(sceneId, statePath) {
+  const seen = new Set();
+  const displayed = [];
+  for (const stateId of statePath) {
+    for (const row of sourceData.scenes[sceneId].rows) {
+      if (seen.has(row.sourceLine) || !row.stateIds.includes(stateId)) continue;
+      seen.add(row.sourceLine);
+      if (row.segments.some((segment) => segment.type === "dialogue")) displayed.push(row.sourceLine);
+    }
+  }
+  return displayed;
+}
+
+for (const [sceneId, paths] of Object.entries({
+  saennim: [stateData.scenes.saennim.states.map((state) => state.id)],
+  meokjung: [
+    stateData.scenes.meokjung.states.map((state) => state.id),
+    stateData.scenes.meokjung.states.map((state) => state.id).filter((id) => !["meokjung-06", "meokjung-09"].includes(id)),
+  ],
+})) {
+  const expectedDialogueLines = sourceData.scenes[sceneId].rows.filter((row) => row.segments.some((segment) => segment.type === "dialogue")).map((row) => row.sourceLine);
+  paths.forEach((statePath, index) => equal(displayedDialogueLines(sceneId, statePath), expectedDialogueLines, `${sceneId}: 실행 경로 ${index + 1}에서 원전 대사 행이 누락되거나 순서가 다름`));
+  reports.push(`${sceneId}: 정상/무입력 경로에서 원전 대사 ${expectedDialogueLines.length}개 행 전수 표시 가능`);
+}
+
 const prototypePath = path.join(__dirname, "덧뵈기-나만의탈춤-프로토타입.html");
 const prototypeHtml = fs.readFileSync(prototypePath, "utf8");
 const inlineScript = prototypeHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
 assert(Boolean(inlineScript), "프로토타입 HTML: 인라인 스크립트를 찾을 수 없음");
 assert(prototypeHtml.includes("row.segments.filter(segment=>segment.type==='dialogue')"), "프로토타입 HTML: 원전 지문이 화면 큐에서 제외되지 않음");
-assert(prototypeHtml.includes("function input(prompt,options,cue=''){return {kind:'설계 대사',speaker:'장쇠'"), "프로토타입 HTML: 행동 안내가 장쇠의 설계 대사로 처리되지 않음");
+assert(prototypeHtml.includes("function input(prompt,options){return {kind:'설계 대사',speaker:'장쇠'"), "프로토타입 HTML: 행동 안내가 장쇠의 설계 대사로 처리되지 않음");
 assert(!prototypeHtml.includes("kind:'원전 지문'"), "프로토타입 HTML: 원전 지문 표시 항목이 남아 있음");
+assert(prototypeHtml.includes('data-start="saennim"') && prototypeHtml.includes('data-start="meokjung"'), "프로토타입 HTML: 샌님잡이 또는 먹중잡이 시작 경로가 없음");
+assert(prototypeHtml.includes("ctx.earlyCounts[id]>=2"), "프로토타입 HTML: 먹중잡이 이른 지목 반복의 종료 상한이 없음");
+assert(!prototypeHtml.includes("$('kind').textContent=item.kind"), "프로토타입 HTML: 내부 대사 분류명이 관람객 화면에 노출됨");
 if (inlineScript) {
   try {
     new vm.Script(inlineScript, { filename: prototypePath });
