@@ -207,9 +207,11 @@ for (const [sceneId, paths] of Object.entries({
     stateData.scenes.meokjung.states.map((state) => state.id).filter((id) => !["meokjung-06", "meokjung-09"].includes(id)),
   ],
 })) {
+  assert(!JSON.stringify(stateData.scenes[sceneId].states).includes("잽이"), `${sceneId}: 각색 상태에 잽이 화자나 독립 배역이 남아 있음`);
   const expectedDialogueLines = sourceData.scenes[sceneId].rows.filter((row) => row.segments.some((segment) => segment.type === "dialogue")).map((row) => row.sourceLine);
   paths.forEach((statePath, index) => equal(displayedDialogueLines(sceneId, statePath), expectedDialogueLines, `${sceneId}: 실행 경로 ${index + 1}에서 원전 대사 행이 누락되거나 순서가 다름`));
   reports.push(`${sceneId}: 정상/무입력 경로에서 원전 대사 ${expectedDialogueLines.length}개 행 전수 표시 가능`);
+  reports.push(`${sceneId}: 각색 상태의 잽이 화자와 독립 배역 0건`);
 }
 
 const prototypePath = path.join(__dirname, "덧뵈기-나만의탈춤-프로토타입.html");
@@ -224,6 +226,8 @@ assert(prototypeHtml.includes("ctx.earlyCounts[id]>=2"), "프로토타입 HTML: 
 assert(!prototypeHtml.includes("$('kind').textContent=item.kind;"), "프로토타입 HTML: 내부 대사 분류명이 관람객 화면에 노출됨");
 assert(prototypeHtml.includes("speaker:segment.speaker==='잽이'?'장쇠':segment.speaker"), "프로토타입 HTML: 잽이 원전 대사의 화면 화자가 장쇠로 전환되지 않음");
 assert(prototypeHtml.includes("sourceSpeaker:segment.speaker"), "프로토타입 HTML: 화면 화자 전환 뒤 원전 화자 추적값이 보존되지 않음");
+const runtimeCastList = prototypeHtml.match(/const known=\[([^\]]*)\]/)?.[1] || "";
+assert(!runtimeCastList.includes("'잽이'"), "프로토타입 HTML: 화면 배역 목록에 잽이가 남아 있음");
 if (inlineScript) {
   try {
     new vm.Script(inlineScript, { filename: prototypePath });
