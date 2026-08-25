@@ -47,15 +47,35 @@ function parseSegments(sourceText) {
   return segments;
 }
 
+function parseSaennimEventRanges() {
+  const headingIndex = designLines.indexOf("## 5.2 원전 원자 사건 추출");
+  assert(headingIndex >= 0, "saennim: 원전 원자 사건 추출 헤딩을 찾지 못함");
+  if (headingIndex < 0) return [];
+  const rows = [];
+  for (let index = headingIndex + 1; index < designLines.length; index += 1) {
+    const line = designLines[index];
+    if (!line.startsWith("|")) {
+      if (rows.length) break;
+      continue;
+    }
+    const cells = line.slice(1, -1).split("|").map((cell) => cell.trim());
+    if (!/^S\d+$/.test(cells[0])) continue;
+    const range = cells[1].match(/^(\d+)~(\d+)행$/);
+    assert(Boolean(range), `saennim: ${cells[0]} 원문 행 범위를 읽을 수 없음`);
+    if (range) rows.push([cells[0], Number(range[1]), Number(range[2])]);
+  }
+  assert(rows.length > 0, "saennim: 원전 원자 사건 범위를 찾지 못함");
+  return rows;
+}
+
 const eventRanges = {
   omtal: [["A1",420,424],["A2",424,430],["A3",428,430],["A4",432,434],["A5",434,440],["A6",442,444],["A7",446,452],["A8",454,456],["A9",458,460],["A10",462,464],["A11",464,466],["A12",466,466],["A13",466,466]],
-  saennim: [["S1",470,478],["S2",480,490],["S3",492,500],["S4",500,518],["S5",520,526],["S6",528,530],["S7",532,542],["S8",544,558],["S9",560,590],["S10",592,600],["S11",602,608],["S12",608,616],["S13",618,622],["S14",622,626]],
+  saennim: parseSaennimEventRanges(),
   meokjung: [["M1",630,630],["M2",630,630],["M3",632,634],["M4",636,650],["M5",652,656],["M6",658,666],["M7",668,670],["M8",672,680],["M9",682,686],["M10",686,700],["M11",702,704]],
 };
 
 const stateRanges = {
   omtal: [["omtal-03",420,426],["omtal-04",428,428],["omtal-05",430,430],["omtal-07",432,456],["omtal-10",458,458],["omtal-11",460,460],["omtal-14",462,464],["omtal-15",466,466]],
-  saennim: [["saennim-03",470,478],["saennim-04",480,490],["saennim-05",492,500],["saennim-06",500,518],["saennim-07",520,526],["saennim-08",528,530],["saennim-09",530,532],["saennim-11",534,542],["saennim-12",544,554],["saennim-13",556,558],["saennim-14",560,590],["saennim-15",592,600],["saennim-16",602,604],["saennim-17",606,616],["saennim-18",618,622],["saennim-19",622,626]],
   meokjung: [["meokjung-03",630,630],["meokjung-04",630,630],["meokjung-07",632,634],["meokjung-10",636,644],["meokjung-11",646,650],["meokjung-12",652,654],["meokjung-13",656,656],["meokjung-14",658,666],["meokjung-15",668,670],["meokjung-16",668,670],["meokjung-17",672,672],["meokjung-18",674,680],["meokjung-19",682,686],["meokjung-20",686,700],["meokjung-21",702,704]],
 };
 
@@ -65,24 +85,25 @@ function idsAt(ranges, sourceLine) {
 
 for (const [sceneId, scene] of Object.entries(sourceData.scenes)) {
   const expected = expectedRows(...scene.sourceRange);
+  const stateMappingIsActive = stateData.scenes[sceneId]?.active !== false;
   equal(scene.rows.map(({ sourceLine, sourceText }) => ({ sourceLine, sourceText })), expected, `${sceneId}: 원전 행 번호, 순서 또는 문자열이 다름`);
   assert(new Set(scene.rows.map((row) => row.sourceLine)).size === scene.rows.length, `${sceneId}: 원전 행이 중복됨`);
   for (const row of scene.rows) {
     assert(row.displayText === row.sourceText, `${sceneId}: ${row.sourceLine}행 표시값이 원문과 다름`);
     equal(row.segments, parseSegments(row.sourceText), `${sceneId}: ${row.sourceLine}행 segment 종류, 화자, 순서 또는 문자열이 다름`);
     equal(row.eventIds, idsAt(eventRanges[sceneId], row.sourceLine), `${sceneId}: ${row.sourceLine}행 eventIds 대응이 다름`);
-    equal(row.stateIds, idsAt(stateRanges[sceneId], row.sourceLine), `${sceneId}: ${row.sourceLine}행 stateIds 대응이 다름`);
-    assert(row.eventIds.length > 0 && row.stateIds.length > 0, `${sceneId}: ${row.sourceLine}행 사건 또는 상태 대응이 비어 있음`);
+    if (stateMappingIsActive) equal(row.stateIds, idsAt(stateRanges[sceneId], row.sourceLine), `${sceneId}: ${row.sourceLine}행 stateIds 대응이 다름`);
+    assert(row.eventIds.length > 0 && (!stateMappingIsActive || row.stateIds.length > 0), `${sceneId}: ${row.sourceLine}행 사건 또는 활성 상태 대응이 비어 있음`);
     const pages = paginateSourceText(row.displayText);
     assert(pages.length > 0 && pages.every((page) => page.length > 0), `${sceneId}: ${row.sourceLine}행 문장 페이지가 비었음`);
     assert(pages.join("") === row.displayText, `${sceneId}: ${row.sourceLine}행 문장 페이지 재결합이 원문과 다름`);
   }
-  reports.push(`${scene.title}: ${scene.rows.length}/${expected.length}행, 원문/segment/사건/상태/문장 페이지 일치`);
+  reports.push(stateMappingIsActive
+    ? `${scene.title}: ${scene.rows.length}/${expected.length}행, 원문/segment/사건/상태/문장 페이지 일치`
+    : `${scene.title}: ${scene.rows.length}/${expected.length}행, 원문/segment/사건/문장 페이지 일치. 상태 대응은 현 정본 미반영으로 검사하지 않음`);
 }
 
 const tableHeadings = {
-  omtal: "## 4.6 옴탈잡이 상세 진행",
-  saennim: "## 5.5 샌님잡이 상세 진행",
   meokjung: "## 6.5 먹중잡이 상세 진행",
 };
 
@@ -112,13 +133,11 @@ function parseDesignTable(sceneId) {
 
 const expectedGraphs = {
   omtal: [["omtal-02"],["omtal-03","recovery-end"],["omtal-04"],["omtal-05","omtal-06"],["omtal-07"],["omtal-05","omtal-07"],["omtal-07","omtal-08","omtal-09"],["omtal-10"],["omtal-07"],["omtal-11","recovery-end"],["omtal-12","omtal-13"],["omtal-14"],["omtal-12","omtal-14"],["omtal-15","omtal-16"],["omtal-16"],["scene-end"]],
-  saennim: [["saennim-02"],["saennim-03","recovery-screen"],["saennim-04"],["saennim-05"],["saennim-06"],["saennim-07"],["saennim-08"],["saennim-09"],["saennim-10"],["saennim-11"],["saennim-12"],["saennim-13"],["saennim-14"],["saennim-15"],["saennim-16"],["saennim-17"],["saennim-18"],["saennim-19"],["scene-end"]],
   meokjung: [["meokjung-02"],["meokjung-03","recovery-screen"],["meokjung-04"],["meokjung-05"],["meokjung-06","meokjung-07"],["meokjung-07"],["meokjung-08"],["meokjung-09","meokjung-10"],["meokjung-10"],["meokjung-11"],["meokjung-12"],["meokjung-13"],["meokjung-14"],["meokjung-15"],["meokjung-16"],["meokjung-17"],["meokjung-18"],["meokjung-19"],["meokjung-20"],["meokjung-21"],["scene-end"]],
 };
 
 const expectedStateEvents = {
   omtal: [[],[],["A1","A2"],["A2","A3"],["A3"],[],["A4","A5","A6","A7","A8"],[],[],["A9"],["A9"],[],[],["A10","A11"],["A11","A12","A13"],[]],
-  saennim: [[],[],["S1"],["S2"],["S3"],["S4"],["S5"],["S5","S6"],["S6","S7"],["S7"],["S7"],["S8"],["S8"],["S9"],["S10"],["S11"],["S12"],["S13"],["S14"]],
   meokjung: [[],[],["M1"],["M2"],["M2"],["M2"],["M3"],["M3"],["M3"],["M4"],["M4"],["M5"],["M5"],["M6"],["M7"],["M7","M8"],["M8"],["M8"],["M9"],["M9","M10"],["M10","M11"]],
 };
 
@@ -135,6 +154,9 @@ function canReachTerminal(startId, stateMap, pseudoTransitions) {
   }
   return false;
 }
+
+reports.push("옴탈잡이: 정본에 상세 진행표가 없어 표 전 열 대조를 실행하지 않음");
+reports.push("샌님잡이: 현 정본 미반영으로 상태 전이와 상세 진행표 대조를 실행하지 않음");
 
 for (const sceneId of Object.keys(tableHeadings)) {
   const expectedRowsFromDesign = parseDesignTable(sceneId);
@@ -201,7 +223,6 @@ function displayedDialogueLines(sceneId, statePath) {
 }
 
 for (const [sceneId, paths] of Object.entries({
-  saennim: [stateData.scenes.saennim.states.map((state) => state.id)],
   meokjung: [
     stateData.scenes.meokjung.states.map((state) => state.id),
     stateData.scenes.meokjung.states.map((state) => state.id).filter((id) => !["meokjung-06", "meokjung-09"].includes(id)),
@@ -217,11 +238,13 @@ for (const [sceneId, paths] of Object.entries({
 const prototypePath = path.join(__dirname, "덧뵈기-나만의탈춤-프로토타입.html");
 const prototypeHtml = fs.readFileSync(prototypePath, "utf8");
 const inlineScript = prototypeHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+assert(stateData.scenes.saennim.active === false, "진행 상태: 현 정본 미반영 샌님잡이가 비활성 상태가 아님");
 assert(Boolean(inlineScript), "프로토타입 HTML: 인라인 스크립트를 찾을 수 없음");
 assert(prototypeHtml.includes("row.segments.filter(segment=>segment.type==='dialogue')"), "프로토타입 HTML: 원전 지문이 화면 큐에서 제외되지 않음");
 assert(prototypeHtml.includes("function input(prompt,options){return {kind:'설계 대사',speaker:'장쇠'"), "프로토타입 HTML: 행동 안내가 장쇠의 설계 대사로 처리되지 않음");
 assert(!prototypeHtml.includes("kind:'원전 지문'"), "프로토타입 HTML: 원전 지문 표시 항목이 남아 있음");
-assert(prototypeHtml.includes('data-start="saennim"') && prototypeHtml.includes('data-start="meokjung"'), "프로토타입 HTML: 샌님잡이 또는 먹중잡이 시작 경로가 없음");
+assert(/<button[^>]*data-start="saennim"[^>]*disabled/.test(prototypeHtml), "프로토타입 HTML: 현 정본 미반영 샌님잡이 선택이 비활성화되지 않음");
+assert(prototypeHtml.includes('data-start="meokjung"'), "프로토타입 HTML: 먹중잡이 시작 경로가 없음");
 assert(prototypeHtml.includes("ctx.earlyCounts[id]>=2"), "프로토타입 HTML: 먹중잡이 이른 지목 반복의 종료 상한이 없음");
 assert(!prototypeHtml.includes("$('kind').textContent=item.kind;"), "프로토타입 HTML: 내부 대사 분류명이 관람객 화면에 노출됨");
 assert(prototypeHtml.includes("speaker:segment.speaker==='잽이'?'장쇠':segment.speaker"), "프로토타입 HTML: 잽이 원전 대사의 화면 화자가 장쇠로 전환되지 않음");
@@ -244,5 +267,5 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("검증 통과");
+console.log("활성 검사 통과");
 reports.forEach((report) => console.log(`- ${report}`));

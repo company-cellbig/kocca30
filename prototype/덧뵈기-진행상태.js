@@ -311,6 +311,8 @@ const DEOTBOEGI_STATES = {
       }
     },
     "saennim": {
+      "active": false,
+      "status": "현 정본 미반영",
       "states": [
         {
           "id": "saennim-01",
@@ -336,7 +338,7 @@ const DEOTBOEGI_STATES = {
           "bottomText": "`[안내] 손을 표시된 영역에 잠시 머물러 보세요.`",
           "action": "하단에 연습용 표현 영역을 하나 띄우고 손 위치에 따라 테두리가 반응함",
           "input": "손을 영역에 머물게 함",
-          "outcomes": "인식되면 관계 도입으로 진행함. 인식되지 않으면 [[#5.4 입력과 결과 규칙]]의 인식 실패 처리를 적용함",
+          "outcomes": "현재 정본을 반영하지 않은 상태이므로 실행하지 않음",
           "eventIds": [],
           "next": [
             "saennim-03",
@@ -473,7 +475,7 @@ const DEOTBOEGI_STATES = {
           "bottomText": "`[안내] 다른 뜻으로 바꿔 받을 수 있는 말을 찾으세요.`",
           "action": "절 요구 문장을 표현 단위 영역으로 나눠 보여줌",
           "input": "표현 하나에 손을 머물게 함",
-          "outcomes": "[[#5.4 입력과 결과 규칙]]에 따라 선택을 처리한 뒤 절 말놀이로 진행함",
+          "outcomes": "현재 정본을 반영하지 않은 상태이므로 실행하지 않음",
           "eventIds": [
             "S7"
           ],
@@ -524,7 +526,7 @@ const DEOTBOEGI_STATES = {
           "bottomText": "`[안내] 말뚝이가 그대로 지키면 샌님이 곤란해질 표현을 찾으세요.`",
           "action": "지시 문장을 표현 단위 영역으로 나눠 보여줌",
           "input": "표현 하나에 손을 머물게 함",
-          "outcomes": "[[#5.4 입력과 결과 규칙]]에 따라 선택을 처리한 뒤 모방 연쇄로 진행함",
+          "outcomes": "현재 정본을 반영하지 않은 상태이므로 실행하지 않음",
           "eventIds": [
             "S8"
           ],

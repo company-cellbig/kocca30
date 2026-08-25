@@ -1762,7 +1762,6 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(샌님과 노친네가 나란히 서서 말뚝이에게 꾸부렸다 폈다 한다).*",
           "displayText": "*(샌님과 노친네가 나란히 서서 말뚝이에게 꾸부렸다 폈다 한다).*",
           "eventIds": [
-            "S11",
             "S12"
           ],
           "stateIds": [
