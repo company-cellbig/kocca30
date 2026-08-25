@@ -77,11 +77,6 @@ const EXCLUDED_PATHS = new Set([
 
 const SKIP_CONTENT_CHECKS = new Set([
   '99_Logs/log.md',
-  // 90_Temp의 외부 작성 원자료. 우리 문체 규칙을 적용받지 않는 반입물이라 파일 단위로 제외함
-  // (대기소 정책: 폴더 통째 제외가 아니라 원자료만 개별 제외). 승격이 끝나면 파일과 함께 지움
-  '90_Temp/옴탈잡이_진행안.md',
-  '90_Temp/샌님잡이_진행안.md',
-  '90_Temp/먹중잡이_진행안.md',
 ]);
 
 // MOC 등록을 면제하는 곳.

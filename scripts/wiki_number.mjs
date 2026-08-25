@@ -67,11 +67,6 @@ const NO_NUMBER = new Set([
   'README.md',
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
-  // 90_Temp의 외부 작성 원자료. 우리 넘버링 규칙 대상이 아닌 반입물이라 원문 형태를 보존함
-  // (대기소 정책: 원자료만 파일 단위로 제외). 승격이 끝나면 파일과 함께 지움
-  '90_Temp/옴탈잡이_진행안.md',
-  '90_Temp/샌님잡이_진행안.md',
-  '90_Temp/먹중잡이_진행안.md',
 ]);
 const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
 
