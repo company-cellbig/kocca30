@@ -1068,7 +1068,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** *(어이없이)* 네 이놈 양반을 만났으면 절을 하는 게 아니라 뭣이 어쩌구 어째!",
           "displayText": "**샌님** *(어이없이)* 네 이놈 양반을 만났으면 절을 하는 게 아니라 뭣이 어쩌구 어째!",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-09"
@@ -1091,7 +1091,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 네 절이요? 알지요, 압니다. 서울로 일러도 새절, 덕절 도곡사, 마곡사, 물 건너 봉원사 합천 해인사, 염주원 염주대, 수원 용주사, 이런 절 말씀이오?",
           "displayText": "**말뚝이** 네 절이요? 알지요, 압니다. 서울로 일러도 새절, 덕절 도곡사, 마곡사, 물 건너 봉원사 합천 해인사, 염주원 염주대, 수원 용주사, 이런 절 말씀이오?",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-11"
@@ -1109,7 +1109,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈 누가 그런 절 말이냐.",
           "displayText": "**샌님** 이놈 누가 그런 절 말이냐.",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-11"
@@ -1127,7 +1127,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 그럼 무슨 절 말이오?",
           "displayText": "**말뚝이** 그럼 무슨 절 말이오?",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-11"
@@ -1145,7 +1145,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 너 절 모르느냐.",
           "displayText": "**샌님** 너 절 모르느냐.",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-11"
@@ -1163,7 +1163,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 나 절 모르오.",
           "displayText": "**말뚝이** 나 절 모르오.",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "stateIds": [
             "saennim-11"
@@ -1181,7 +1181,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 너 그럼 절을 배워라!",
           "displayText": "**샌님** 너 그럼 절을 배워라!",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1199,7 +1199,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 절도 배웁니까?",
           "displayText": "**말뚝이** 절도 배웁니까?",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1217,7 +1217,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 그렇지!",
           "displayText": "**샌님** 그렇지!",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1235,7 +1235,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** *(우스꽝스럽게)* 그럼 배웁시다.",
           "displayText": "**말뚝이** *(우스꽝스럽게)* 그럼 배웁시다.",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1258,7 +1258,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈아 그럼 절 안 배워!",
           "displayText": "**샌님** 이놈아 그럼 절 안 배워!",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1276,7 +1276,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 절 배웁시다.",
           "displayText": "**말뚝이** 절 배웁시다.",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-12"
@@ -1294,7 +1294,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈, 나 시키는 대로, 나 하자는 대로, 한 가지도 빼놓지 말고….",
           "displayText": "**샌님** 이놈, 나 시키는 대로, 나 하자는 대로, 한 가지도 빼놓지 말고….",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-13"
@@ -1312,7 +1312,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 그럼 샌님이 하자는 대로 무엇이든지 빼놓지 말고 해요? 그럼 배웁시다.",
           "displayText": "**말뚝이** 그럼 샌님이 하자는 대로 무엇이든지 빼놓지 말고 해요? 그럼 배웁시다.",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "stateIds": [
             "saennim-13"
@@ -1330,7 +1330,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 미륵님을 가로 잡아라.",
           "displayText": "**샌님** 미륵님을 가로 잡아라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1348,7 +1348,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 부채를 가로 잡으란 말씀이오.",
           "displayText": "**말뚝이** 부채를 가로 잡으란 말씀이오.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1366,7 +1366,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 옳다. 번쩍 들어라.",
           "displayText": "**샌님** 옳다. 번쩍 들어라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1384,7 +1384,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 번쩍 들어라.",
           "displayText": "**말뚝이** 번쩍 들어라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1402,7 +1402,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 꾸부려라.",
           "displayText": "**샌님** 꾸부려라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1420,7 +1420,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 꾸부려라.",
           "displayText": "**말뚝이** 꾸부려라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1438,7 +1438,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈 꾸부려라.",
           "displayText": "**샌님** 이놈 꾸부려라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1456,7 +1456,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 이놈 꾸부려라.",
           "displayText": "**말뚝이** 이놈 꾸부려라.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1474,7 +1474,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 야 이놈아 이놈.",
           "displayText": "**샌님** 야 이놈아 이놈.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1492,7 +1492,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 야 이놈아 이놈.",
           "displayText": "**말뚝이** 야 이놈아 이놈.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1510,7 +1510,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 아 이놈이.",
           "displayText": "**샌님** 아 이놈이.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1528,7 +1528,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 아 이놈이.",
           "displayText": "**말뚝이** 아 이놈이.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1546,7 +1546,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 아하 이놈이, 아 이놈을 패줄까.",
           "displayText": "**샌님** 아하 이놈이, 아 이놈을 패줄까.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1564,7 +1564,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 아하 이놈이, 아 이놈을 패줄까.",
           "displayText": "**말뚝이** 아하 이놈이, 아 이놈을 패줄까.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1582,7 +1582,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 허허.",
           "displayText": "**샌님** 허허.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1600,7 +1600,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 허허.",
           "displayText": "**말뚝이** 허허.",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "stateIds": [
             "saennim-14"
@@ -1618,7 +1618,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(샌님과 말뚝이 서로 엉켜 씨름을 하다 말뚝이에게 꿀리는 샌님).*",
           "displayText": "*(샌님과 말뚝이 서로 엉켜 씨름을 하다 말뚝이에게 꿀리는 샌님).*",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "stateIds": [
             "saennim-15"
@@ -1636,7 +1636,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈, 이놈아, 다 배웠다, 다 배웠어, 그만두자 그만둬….",
           "displayText": "**샌님** 이놈, 이놈아, 다 배웠다, 다 배웠어, 그만두자 그만둬….",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "stateIds": [
             "saennim-15"
@@ -1654,7 +1654,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 아이쿠, 배우기가 참 힘듭니다.",
           "displayText": "**말뚝이** 아이쿠, 배우기가 참 힘듭니다.",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "stateIds": [
             "saennim-15"
@@ -1672,7 +1672,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈 양반이 시키는 대로 하지 않고 쌍놈이 양반 흉내를 내, 아니 나를 메다 꼰겨!",
           "displayText": "**샌님** 이놈 양반이 시키는 대로 하지 않고 쌍놈이 양반 흉내를 내, 아니 나를 메다 꼰겨!",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "stateIds": [
             "saennim-15"
@@ -1690,7 +1690,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 아니 원 샌님이 뭐든지 한 가지도 빼놓지 말고 다 하래서 했소.",
           "displayText": "**말뚝이** 아니 원 샌님이 뭐든지 한 가지도 빼놓지 말고 다 하래서 했소.",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "stateIds": [
             "saennim-15"
@@ -1708,7 +1708,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 허허 그렇구나. 내가 미련하구나. 그러면 초판부터 새로 하자. 나는 꾸부려 할 적에 너는 피새집(남사당 은어로 입)은 벌리지 말고 꾸부려라.",
           "displayText": "**샌님** 허허 그렇구나. 내가 미련하구나. 그러면 초판부터 새로 하자. 나는 꾸부려 할 적에 너는 피새집(남사당 은어로 입)은 벌리지 말고 꾸부려라.",
           "eventIds": [
-            "S10"
+            "S11"
           ],
           "stateIds": [
             "saennim-16"
@@ -1726,7 +1726,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 알것소, 알것소.",
           "displayText": "**말뚝이** 알것소, 알것소.",
           "eventIds": [
-            "S10"
+            "S11"
           ],
           "stateIds": [
             "saennim-16"
@@ -1744,7 +1744,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 번쩍 들어라. 꾸부려라, 번쩍 들어라, 꾸부려라!",
           "displayText": "**샌님** 번쩍 들어라. 꾸부려라, 번쩍 들어라, 꾸부려라!",
           "eventIds": [
-            "S10"
+            "S11"
           ],
           "stateIds": [
             "saennim-17"
@@ -1762,8 +1762,8 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(샌님과 노친네가 나란히 서서 말뚝이에게 꾸부렸다 폈다 한다).*",
           "displayText": "*(샌님과 노친네가 나란히 서서 말뚝이에게 꾸부렸다 폈다 한다).*",
           "eventIds": [
-            "S10",
-            "S11"
+            "S11",
+            "S12"
           ],
           "stateIds": [
             "saennim-17"
@@ -1781,7 +1781,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** *(으젓하게)* 어 모시고 가시고 잘 있었느냐!",
           "displayText": "**말뚝이** *(으젓하게)* 어 모시고 가시고 잘 있었느냐!",
           "eventIds": [
-            "S11"
+            "S12"
           ],
           "stateIds": [
             "saennim-17"
@@ -1804,7 +1804,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(깜짝 놀란 샌님 내외 의관을 고치며.)*",
           "displayText": "*(깜짝 놀란 샌님 내외 의관을 고치며.)*",
           "eventIds": [
-            "S11"
+            "S12"
           ],
           "stateIds": [
             "saennim-17"
@@ -1822,7 +1822,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 이놈 양반에게 절을 받어!",
           "displayText": "**샌님** 이놈 양반에게 절을 받어!",
           "eventIds": [
-            "S11"
+            "S12"
           ],
           "stateIds": [
             "saennim-17"
@@ -1840,7 +1840,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 양반에게 절을 받으면 명이 길다 합디다. 어휴, 나 힘들어서 양반 안 하것소, 쌍놈 하것소, 쌍놈!",
           "displayText": "**말뚝이** 양반에게 절을 받으면 명이 길다 합디다. 어휴, 나 힘들어서 양반 안 하것소, 쌍놈 하것소, 쌍놈!",
           "eventIds": [
-            "S11"
+            "S12"
           ],
           "stateIds": [
             "saennim-17"
@@ -1858,7 +1858,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 그러나 저러나, 너허구 나하구 여러 해포 만에 이렇게 만났으니 춤이나 한상 추고 들어가자.",
           "displayText": "**샌님** 그러나 저러나, 너허구 나하구 여러 해포 만에 이렇게 만났으니 춤이나 한상 추고 들어가자.",
           "eventIds": [
-            "S12"
+            "S13"
           ],
           "stateIds": [
             "saennim-18"
@@ -1876,7 +1876,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**말뚝이** 좋은 말씀.",
           "displayText": "**말뚝이** 좋은 말씀.",
           "eventIds": [
-            "S12"
+            "S13"
           ],
           "stateIds": [
             "saennim-18"
@@ -1894,8 +1894,8 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(샌님, 노친네, 말뚝이 서로 어울려 굿거리 장단의 춤을 추다가 말뚝이가 노친네를 꼬여 감싸안고 퇴장하면, 이를 보고 어리둥절한 샌님 앞에 피조리-처녀- 둘이 나와 그 주위를 돌며 춤춘다. 샌님이 피조리들의 행색을 보고 놀라며)*",
           "displayText": "*(샌님, 노친네, 말뚝이 서로 어울려 굿거리 장단의 춤을 추다가 말뚝이가 노친네를 꼬여 감싸안고 퇴장하면, 이를 보고 어리둥절한 샌님 앞에 피조리-처녀- 둘이 나와 그 주위를 돌며 춤춘다. 샌님이 피조리들의 행색을 보고 놀라며)*",
           "eventIds": [
-            "S12",
-            "S13"
+            "S13",
+            "S14"
           ],
           "stateIds": [
             "saennim-18",
@@ -1914,7 +1914,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "**샌님** 액쿠나, 조카 딸년이 춤추러 나왔구나! 이년들아 난잡히 놀지 말로 바로 들어오너라, 나는 창피스러워서 들어가겠다.",
           "displayText": "**샌님** 액쿠나, 조카 딸년이 춤추러 나왔구나! 이년들아 난잡히 놀지 말로 바로 들어오너라, 나는 창피스러워서 들어가겠다.",
           "eventIds": [
-            "S13"
+            "S14"
           ],
           "stateIds": [
             "saennim-19"
@@ -1932,7 +1932,7 @@ const DEOTBOEGI_SOURCE = {
           "sourceText": "*(샌님 퇴장하면, 피조리들 한쪽에 나란히 서며, 피조리춤(무동춤)을 추기 시작한다.)*",
           "displayText": "*(샌님 퇴장하면, 피조리들 한쪽에 나란히 서며, 피조리춤(무동춤)을 추기 시작한다.)*",
           "eventIds": [
-            "S13"
+            "S14"
           ],
           "stateIds": [
             "saennim-19"

@@ -450,14 +450,15 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-09",
           "order": 9,
           "name": "인사와 절 요구",
-          "basis": "S6",
+          "basis": "S6, S7",
           "cast": "말뚝이, 샌님",
           "bottomText": "샌님이 인사를 받고 절하라고 요구하는 설계 대사를 표시함",
           "action": "말뚝이가 과장되게 인사하고 샌님이 절 동작을 지시함",
           "input": "없음",
           "outcomes": "샌님의 발화가 끝나면 절 요구 허점 선택으로 진행함",
           "eventIds": [
-            "S6"
+            "S6",
+            "S7"
           ],
           "next": [
             "saennim-10"
@@ -467,14 +468,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-10",
           "order": 10,
           "name": "절 요구 허점 선택",
-          "basis": "S6",
+          "basis": "S7",
           "cast": "말뚝이, 샌님",
           "bottomText": "`[안내] 다른 뜻으로 바꿔 받을 수 있는 말을 찾으세요.`",
           "action": "절 요구 문장을 표현 단위 영역으로 나눠 보여줌",
           "input": "표현 하나에 손을 머물게 함",
           "outcomes": "[[#5.4 입력과 결과 규칙]]에 따라 선택을 처리한 뒤 절 말놀이로 진행함",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "next": [
             "saennim-11"
@@ -484,14 +485,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-11",
           "order": 11,
           "name": "절 말놀이",
-          "basis": "S6",
+          "basis": "S7",
           "cast": "말뚝이, 샌님",
           "bottomText": "선택했으면 해당 표현에 연결된 추가 재담을 표시하고, 무입력이면 절을 다른 뜻으로 받는 기본 재담만 표시함",
           "action": "말뚝이는 엉뚱한 방향을 가리키고 샌님은 답답해하며 직접 가르치려 함",
           "input": "없음",
           "outcomes": "반응이 끝나면 절 교육 조건으로 진행함",
           "eventIds": [
-            "S6"
+            "S7"
           ],
           "next": [
             "saennim-12"
@@ -501,14 +502,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-12",
           "order": 12,
           "name": "절 교육 조건",
-          "basis": "S7",
+          "basis": "S8",
           "cast": "말뚝이, 샌님",
           "bottomText": "샌님이 자기 행동을 빠짐없이 따라 하라고 지시하는 설계 대사를 표시함",
           "action": "샌님이 절 자세를 준비하고 말뚝이는 유심히 따라 볼 자세를 취함",
           "input": "없음",
           "outcomes": "지시가 끝나면 따라 하기 조건 선택으로 진행함",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "next": [
             "saennim-13"
@@ -518,14 +519,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-13",
           "order": 13,
           "name": "따라 하기 조건 선택",
-          "basis": "S7",
+          "basis": "S8",
           "cast": "말뚝이, 샌님",
           "bottomText": "`[안내] 말뚝이가 그대로 지키면 샌님이 곤란해질 표현을 찾으세요.`",
           "action": "지시 문장을 표현 단위 영역으로 나눠 보여줌",
           "input": "표현 하나에 손을 머물게 함",
           "outcomes": "[[#5.4 입력과 결과 규칙]]에 따라 선택을 처리한 뒤 모방 연쇄로 진행함",
           "eventIds": [
-            "S7"
+            "S8"
           ],
           "next": [
             "saennim-14"
@@ -535,14 +536,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-14",
           "order": 14,
           "name": "모방 연쇄",
-          "basis": "S8",
+          "basis": "S9",
           "cast": "말뚝이, 샌님, 노친네",
           "bottomText": "선택했으면 해당 표현에 연결된 말뚝이의 설계 재담을 표시하고, 무입력이면 대사 없이 진행함",
           "action": "선택 결과와 관계없이 샌님의 절, 명령과 웃음을 말뚝이가 차례로 따라 함. 욕설은 재현하지 않음",
           "input": "없음",
           "outcomes": "모방 연쇄 전체를 재생하고 선택 강도에 따라 앞뒤 연결 재담과 샌님의 반응 상태만 바꾼 뒤 씨름으로 진행함",
           "eventIds": [
-            "S8"
+            "S9"
           ],
           "next": [
             "saennim-15"
@@ -552,14 +553,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-15",
           "order": 15,
           "name": "씨름",
-          "basis": "S9",
+          "basis": "S10",
           "cast": "말뚝이, 샌님",
           "bottomText": "`[샌님] 그것까지 따라 하라는 뜻은 아니었다.`",
           "action": "두 인물이 중앙으로 이동해 씨름하고 샌님이 밀림. 말뚝이는 지시를 지켰다는 몸짓을 함",
           "input": "없음",
           "outcomes": "씨름 연출이 끝나면 수정 조건 제시로 진행함",
           "eventIds": [
-            "S9"
+            "S10"
           ],
           "next": [
             "saennim-16"
@@ -569,14 +570,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-16",
           "order": 16,
           "name": "수정 조건 제시",
-          "basis": "S10",
+          "basis": "S11",
           "cast": "말뚝이, 샌님, 노친네",
           "bottomText": "샌님이 자기 잘못을 인정하고 말은 따라 하지 말고 몸만 굽히라는 조건을 덧붙임",
           "action": "샌님이 옷매무새를 고치고 노친네와 나란히 서서 절 교육을 다시 준비함",
           "input": "없음",
           "outcomes": "수정 조건을 표시한 뒤 절의 관계 역전으로 진행함",
           "eventIds": [
-            "S10"
+            "S11"
           ],
           "next": [
             "saennim-17"
@@ -586,14 +587,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-17",
           "order": 17,
           "name": "절의 관계 역전",
-          "basis": "S11",
+          "basis": "S12",
           "cast": "말뚝이, 샌님, 노친네",
           "bottomText": "`[말뚝이] 가르치려던 분들이 제게 절을 하십니다.`",
           "action": "배치와 동작이 엇갈려 샌님과 노친네가 말뚝이에게 절하는 모양이 됨. 말뚝이는 으쓱하며 능청스럽게 받음",
           "input": "없음",
           "outcomes": "관계 역전이 보인 뒤 함께 추는 춤으로 진행함",
           "eventIds": [
-            "S11"
+            "S12"
           ],
           "next": [
             "saennim-18"
@@ -603,14 +604,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-18",
           "order": 18,
           "name": "함께 추는 춤",
-          "basis": "S12",
+          "basis": "S13",
           "cast": "말뚝이, 샌님, 노친네, 장쇠",
           "bottomText": "`[장쇠] 말로 세운 체면이 춤판에서 뒤집혔습니다.`",
           "action": "세 인물이 각자 춤을 추고 노친네, 말뚝이 순으로 퇴장함. 샌님은 뒤에 남음",
           "input": "없음",
           "outcomes": "퇴장이 끝나면 피조리 등장과 마무리로 진행함",
           "eventIds": [
-            "S12"
+            "S13"
           ],
           "next": [
             "saennim-19"
@@ -620,14 +621,14 @@ const DEOTBOEGI_STATES = {
           "id": "saennim-19",
           "order": 19,
           "name": "피조리 등장과 마무리",
-          "basis": "S13",
+          "basis": "S14",
           "cast": "장쇠, 샌님, 피조리 둘",
           "bottomText": "`[장쇠] 새 춤이 이어지고 샌님은 자리를 피합니다.`",
           "action": "피조리 둘이 샌님 주위를 돌며 춤춤. 샌님이 당황해 퇴장하면 둘이 나란히 서서 피조리춤을 시작하고, 장쇠가 앞으로 나와 종료를 알림",
           "input": "없음",
           "outcomes": "피조리춤과 장쇠의 종료 안내가 끝나면 마무리 화면으로 이동함. 마무리 화면 뒤 시작 화면으로 돌아감",
           "eventIds": [
-            "S13"
+            "S14"
           ],
           "next": [
             "scene-end"
