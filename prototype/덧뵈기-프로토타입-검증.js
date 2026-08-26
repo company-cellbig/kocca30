@@ -8,7 +8,7 @@ const { paginateSourceText } = require("./덧뵈기-표시도구.js");
 
 const root = path.resolve(__dirname, "..");
 const transcriptLines = fs.readFileSync(path.join(root, "02_References", "converted", "남사당놀이", "남사당놀이 - 덧뵈기.md"), "utf8").split(/\r?\n/);
-const designLines = fs.readFileSync(path.join(root, "04_Projects", "시범콘텐츠", "05_덧뵈기 - 나만의 탈춤", "덧뵈기 나만의 탈춤 재설계 방향.md"), "utf8").split(/\r?\n/);
+const designLines = fs.readFileSync(path.join(root, "04_Projects", "시범콘텐츠", "05_덧뵈기 - 탈놀음 한바탕", "덧뵈기 탈놀음 한바탕 재설계 방향.md"), "utf8").split(/\r?\n/);
 const errors = [];
 const reports = [];
 

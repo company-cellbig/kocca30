@@ -1,7 +1,7 @@
 /* 상세 진행표와 승인된 개발 명세에서 생성한 상태 데이터. */
 const DEOTBOEGI_STATES = {
   "meta": {
-    "source": "04_Projects/시범콘텐츠/05_덧뵈기 - 나만의 탈춤/덧뵈기 나만의 탈춤 재설계 방향.md",
+    "source": "04_Projects/시범콘텐츠/05_덧뵈기 - 탈놀음 한바탕/덧뵈기 탈놀음 한바탕 재설계 방향.md",
     "status": "approved-spec-input"
   },
   "scenes": {
