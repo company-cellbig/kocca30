@@ -1,5 +1,6 @@
 {
   "enabledCssSnippets": [
-    "headings"
+    "headings",
+    "pdf-page-break"
   ]
 }
