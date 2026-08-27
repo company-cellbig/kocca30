@@ -1,6 +1,6 @@
 {
   "enabledCssSnippets": [
-    "headings",
-    "pdf-page-break"
-  ]
+    "headings"
+  ],
+  "textFontFamily": "Pretendard"
 }
