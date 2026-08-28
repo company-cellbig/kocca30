@@ -15,6 +15,7 @@ updated: 2026-08-28
 - 생성 도구가 투명 영역을 체크무늬 RGB로 출력해 이미지 외곽과 연결된 밝은 무채색 영역만 제거하고 실제 알파 채널로 변환함. 탈 내부의 흰 눈과 밝은 채색은 외곽선으로 분리해 보존함.
 - 전수 검사에서 6개 파일 모두 152×176 `Format32bppArgb`이며 알파값의 최솟값이 0이고 최댓값이 255임을 확인함. 원본 6개 파일은 수정하지 않음.
 - 생성: `prototype/assets/탈_꺽쇠_x4.png`, `prototype/assets/탈_말뚝이_x4.png`, `prototype/assets/탈_샌님_x4.png`, `prototype/assets/탈_옴탈_x4.png`, `prototype/assets/탈_취발이_x4.png`, `prototype/assets/탈_먹중_x4.png`
+- `(cycle-exempt)` 사용자 결정으로 Claude Code 외부 검토를 생략함.
 - 새 wikilink: 없음
 
 ## [2026-08-28] create | Seedance 꺽쇠와 옴탈 모자 실랑이 영상 생성
