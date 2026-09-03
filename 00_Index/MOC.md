@@ -112,7 +112,7 @@ updated: 2026-09-03
 
 ## 6.4 위키 규칙 정비 (위키 규칙 정비/)
 
-- [[CONVENTIONS와 HowTo 역할 분리 계획]]: CONVENTIONS와 HowTo 9개를 개별 비교해 규칙, 작업별 절차와 운영 권한의 소유처를 나누는 정비 계획
+- [[CONVENTIONS와 HowTo 역할 분리 계획]]: CONVENTIONS와 HowTo 9개를 개별 비교해 규칙, 작업별 절차와 운영 권한의 소유처 및 Codex의 작업별 로딩 경로를 나누는 정비 계획
 
 # 7. 로그 (99_Logs)
 
