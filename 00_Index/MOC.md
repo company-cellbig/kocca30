@@ -119,6 +119,7 @@ updated: 2026-09-08
 - [[CONVENTIONS와 HowTo 역할 분리 실행 기준선]]: 역할 분리 실행 전 문서 크기와 anchor 참조 현황, 자동 검사 상태, 선결 정책 결정을 기록한 기준선
 - [[CONVENTIONS와 HowTo 역할 분리 1단계 외부 검수 지시문]]: 기준선 커밋의 사실과 정합, 적대, 가독성을 새 Claude Code 세션에서 검토하는 지시문
 - [[CONVENTIONS와 HowTo 역할 분리 2단계 외부 검수 지시문]]: AGENTS 라우터 변경의 의미 보존, 규칙 로딩 경로와 가독성을 새 Claude Code 세션에서 검토하는 지시문
+- [[CONVENTIONS와 HowTo 역할 분리 3단계 외부 검수 지시문]]: 정보 구조 규칙 이동의 의미 보존, 정본 소유 경계와 가독성을 새 Claude Code 세션에서 검토하는 지시문
 
 # 7. 로그 (99_Logs)
 
