@@ -4,7 +4,7 @@ type: index
 status: stable
 tags: [index, moc]
 created: 2026-04-27
-updated: 2026-09-03
+updated: 2026-09-08
 ---
 
 > 위키 전체의 진입점. 주제별로 핵심 문서를 모아둔 목차임.
@@ -115,7 +115,8 @@ updated: 2026-09-03
 
 ## 6.4 위키 규칙 정비 (위키 규칙 정비/)
 
-- [[CONVENTIONS와 HowTo 역할 분리 계획]]: CONVENTIONS와 HowTo 9개를 개별 비교해 규칙, 작업별 절차와 운영 권한의 소유처 및 Codex의 작업별 로딩 경로를 나누는 정비 계획
+- [[CONVENTIONS와 HowTo 역할 분리 계획]]: CONVENTIONS와 HowTo 9개를 개별 비교해 공통 규칙, 작업별 절차와 운영 권한의 소유처를 구분하고 Codex의 작업별 로딩 경로를 정비하는 계획
+- [[CONVENTIONS와 HowTo 역할 분리 실행 기준선]]: 역할 분리 실행 전 문서 크기와 anchor 참조 현황, 자동 검사 상태, 선결 정책 결정을 기록한 기준선
 
 # 7. 로그 (99_Logs)
 
