@@ -2,10 +2,18 @@
 title: 작업 로그
 tags: [log]
 created: 2026-04-27
-updated: 2026-09-07
+updated: 2026-09-08
 ---
 
 # 작업 로그
+
+## [2026-09-08] query | CONVENTIONS와 HowTo 역할 분리 계획 확인
+
+- `CONVENTIONS와 HowTo 역할 분리 계획.md`, `CONVENTIONS.md`와 `위키 운영 워크플로.md`를 읽고 계획의 범위, 역할 분리 기준, 선결 정책과 실행 순서를 확인함
+- 계획은 HowTo 9개에서 추출한 근거 단위 33개를 담당 문서별 10개 묶음으로 정리하고, 공통 규칙은 `CONVENTIONS.md`, 작업 절차는 해당 HowTo, 역할과 승인 권한은 `AGENTS.md`가 맡도록 제안함
+- 계획 문서가 마지막으로 변경된 뒤 `CONVENTIONS.md`, `AGENTS.md` 또는 `01_HowTo/`를 수정한 후속 커밋이 없으므로 계획의 단계별 실행은 시작되지 않은 것으로 확인함
+- 새 지식의 위키 환원은 생략하고 질의 결과만 보고함
+- 수정 파일: `99_Logs/log.md`
 
 ## [2026-09-07] query | 위키 운영 도구 표현 검토
 
