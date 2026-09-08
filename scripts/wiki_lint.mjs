@@ -38,6 +38,7 @@
 //
 // 예외 영역:
 //   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
+//   - 05_산출물/ (사용자가 직접 쓰는 외부 원고, 위키 작성 규칙 비적용)
 //   - 99_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
@@ -66,6 +67,7 @@ const EXCLUDED_PATHS = new Set([
   '02_References/_figures',
   '02_References/_reviews',
   '02_References/converted',
+  '05_산출물',
   '.claude',
   'node_modules',
   '.git',
@@ -106,11 +108,11 @@ const ALLOW_SECTION_MARK = new Set([
 ]);
 const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, 이력 보존
 
-// fileIndex 빌드 시 read-only 영역도 포함 (link target 매칭용)
-// 다만 검사 대상은 EXCLUDED_PATHS 제외한 일반 위키만
+// 검사 대상에서 제외한 영역도 fileIndex에는 포함해 link target을 매칭함
 const INDEX_INCLUDED_DIRS = [
   '02_References/_locked',
   '02_References/converted',
+  '05_산출물',
 ];
 
 // 이미지 등 첨부 파일이 사는 디렉토리 (임베드 ![[경로/파일.png]] 대상 검증용)

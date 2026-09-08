@@ -27,6 +27,7 @@
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용), 위키 콘텐츠 아님
 //   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
 //   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
+//   - 05_산출물/: 사용자 원고, 위키 헤딩 넘버링 대상이 아님. 다른 문서 변경에 따른 anchor만 갱신함
 //   - .obsidian/, .claude/, scripts/, assets/, export/, node_modules/, .git/
 //
 // exit code: 0 = 정상 / 1 = --check 모드에서 어긋난 헤딩 발견, 또는 처리 불가 오류
@@ -62,13 +63,15 @@ const EXCLUDED_PATHS = new Set([
 //     읽으므로 H1 제목과 평범한 번호를 씀 (사용자 승인 2026-08-11)
 //   - 04_Projects/_archive/: read-only 폐기 문서. 본문은 그대로 두되, 살아있는 문서를
 //     가리키는 anchor가 재번호로 깨지므로 링크만 따라 고침 (사용자 승인 2026-07-14)
+//   - 05_산출물/: 사용자가 직접 쓰는 외부 원고. 헤딩은 바꾸지 않고, 산출물 밖 문서의
+//     anchor 변경으로 깨지는 링크만 기계적으로 고침 (사용자 승인 2026-09-08)
 const NO_NUMBER = new Set([
   '99_Logs/log.md',
   'README.md',
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
 ]);
-const NO_NUMBER_PREFIX = ['04_Projects/_archive/'];
+const NO_NUMBER_PREFIX = ['04_Projects/_archive/', '05_산출물/'];
 
 function skipNumbering(file) {
   return NO_NUMBER.has(file) || NO_NUMBER_PREFIX.some(p => file.startsWith(p));
