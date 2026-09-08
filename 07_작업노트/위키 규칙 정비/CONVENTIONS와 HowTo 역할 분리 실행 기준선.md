@@ -92,6 +92,7 @@ updated: 2026-09-08
 
 # 7. 관련 문서
 
+- [[CONVENTIONS와 HowTo 역할 분리 1단계 외부 검수 지시문]]
 - [[CONVENTIONS와 HowTo 역할 분리 계획]]
 - [[CONVENTIONS|위키 작성 규칙]]
 - [[AGENTS|에이전트 작업 지침]]
