@@ -46,12 +46,14 @@ updated: 2026-09-09
 - 새 루트 Codex 세션 점검에서 자동 적용 문서는 `AGENTS.md` 하나였고, H06 작업에는 `CONVENTIONS.md`, `문서 작성 세부 규칙.md`, `위키 운영 워크플로.md`와 `반복 결함 카탈로그.md`를 직접 선택함. `CLAUDE.md` import와 하위 `AGENTS.md` 자동 탐색에는 의존하지 않음
 - 자동 합산되는 `AGENTS.md`는 21,128바이트이며 기본 32KiB 한도까지 11,640바이트가 남음
 - 자기검수에서 정적 완료 조건에 없던 새 의무 1건과 옛 anchor 2건을 즉시 정정함. 독립 가독성 검토는 1차 7건, 2차 5건을 반영한 뒤 3차 발견 0건이었고, 독립 의미 및 anchor 대조는 1차 3건, 2차 1건을 반영한 뒤 3차 발견 0건이었음
+- 첫 커밋 훅에서 `diff_companion.mjs`의 옛 절 안내 1건을 발견해 새 갱신 절차 5번으로 정정함
+- 후속 독립 가독성 및 정합 대조가 같은 주석의 옛 순서 번호 1건을 발견해 정정했고, 최종 대조에서는 추가 발견이 0건이었음
 - 이 로그 항목의 독립 가독성 검토는 1차 발견 2건을 반영한 뒤 2차 발견 0건이었음
 - 자동 검사 결과
 	- `wiki_number.mjs --write`: 문서 72개 처리, 어긋남 0건
 	- `wiki_lint.mjs`: 문서 64개 처리, 오류 0건, 기존 경고 16건
 	- `quote_check.mjs`: 인용 어긋남 0건, 건너뜀 7건
-- 수정 파일: `00_Index/MOC.md`, `01_HowTo/위키 운영 워크플로.md`, `07_작업노트/위키 규칙 정비/CONVENTIONS와 HowTo 역할 분리 계획.md`, `99_Logs/log.md`, `AGENTS.md`, `CONVENTIONS.md`
+- 수정 파일: `00_Index/MOC.md`, `01_HowTo/위키 운영 워크플로.md`, `07_작업노트/위키 규칙 정비/CONVENTIONS와 HowTo 역할 분리 계획.md`, `99_Logs/log.md`, `AGENTS.md`, `CONVENTIONS.md`, `scripts/diff_companion.mjs`
 
 ## [2026-09-09] review | 로그 기록 기준 외부 검수 반영
 
