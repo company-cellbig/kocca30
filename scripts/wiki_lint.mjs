@@ -13,7 +13,8 @@
 //      severity: error. 절 참조는 wikilink anchor로만 씀
 //      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그,
 //            검수 기록 3종)과 폐지 정책 자체를 설명하는 CONVENTIONS 본문
-//   5. MOC 미등록: 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음 (CONVENTIONS 5.1 6단계)
+//   5. MOC 미등록: 등록 대상 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음
+//      (위키 운영 워크플로 5.1 문서 생성 절차 5번, 면제 정본은 CONVENTIONS 5절)
 //      severity: error
 //   6. (2026-08-21 삭제) 링크 하한 미달: 나가는 링크 개수로는 고립을 판정할 수 없고 도달 보장은
 //      MOC 등록 검사(5번)가 하므로 제거함. 상호 연결은 CONVENTIONS 3.5의 작성 규칙으로만 유지함
@@ -36,8 +37,8 @@
 //   - 헤딩 넘버링 정합 (H1 `1.` / H2 `1.1` / H3 `1.1.1` / H4 `1)` / H5 `(1)`) → scripts/wiki_number.mjs
 //     점검은 `node scripts/wiki_number.mjs --check`, 정정은 `--write` (anchor 연쇄 갱신 포함)
 //
-// 예외 영역:
-//   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/ (read-only)
+// 일반 콘텐츠 검사 예외 영역 (MOC 등록 검사는 converted/를 포함함):
+//   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/
 //   - 05_산출물/ (사용자가 직접 쓰는 외부 원고, 위키 작성 규칙 비적용)
 //   - 99_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
@@ -81,8 +82,8 @@ const SKIP_CONTENT_CHECKS = new Set([
   '99_Logs/log.md',
 ]);
 
-// MOC 등록을 면제하는 곳.
-// 루트 규칙 문서, 색인, 로그, 작업 노트, 그리고 위키 밖에서 읽히는 자족 폴더임
+// MOC 등록 검사 후보군에서 면제하는 파일, 경로와 문서 유형. 전체 면제 범위의 정본은 CONVENTIONS 5절임.
+// 루트 규칙 문서, 색인, 로그, 작업 노트, 자족 폴더와 승격 전 대기소임
 const GRAPH_EXEMPT_FILES = new Set([
   'README.md', 'AGENTS.md', 'CONVENTIONS.md', 'CLAUDE.md', '00_Index/MOC.md',
 ]);
@@ -589,7 +590,7 @@ function checkMocRegistration(allMdFiles) {
         severity: 'error',
         file: relPath,
         line: 1,
-        message: `00_Index/MOC.md에 [[${name}]]이 없음 (CONVENTIONS 5.1 문서 생성 6단계)`,
+        message: `00_Index/MOC.md에 [[${name}]]이 없음 (위키 운영 워크플로 5.1 문서 생성 절차 5번)`,
       });
     }
   }
@@ -635,6 +636,11 @@ function checkReferenceOrder(allMdFiles, fileIndex) {
 
 function main() {
   const allMdFiles = collectMd(REPO_ROOT);
+  // converted/는 원문 보존을 위해 일반 lint에서는 제외하지만 위키 탐색 문서이므로 MOC 등록은 검사함
+  const mocMdFiles = [...new Set([
+    ...allMdFiles,
+    ...collectMd(REPO_ROOT, '02_References/converted'),
+  ])];
   const fileIndex = buildFileIndex(allMdFiles);
   const findings = [
     ...checkBrokenWikilinks(allMdFiles, fileIndex),
@@ -644,7 +650,7 @@ function main() {
     ...checkImagePaths(allMdFiles),
     ...checkSectionMark(allMdFiles),
     ...checkDeprecatedTerms(allMdFiles),
-    ...checkMocRegistration(allMdFiles),
+    ...checkMocRegistration(mocMdFiles),
     ...checkReferenceOrder(allMdFiles, fileIndex),
   ];
   const errors = findings.filter(f => f.severity === 'error');
@@ -655,10 +661,11 @@ function main() {
       errorCount: errors.length,
       warningCount: warnings.length,
       scanned: allMdFiles.length,
+      mocRegistrationScanned: mocMdFiles.length,
       findings,
     }, null, 2));
   } else {
-    console.log(`Wiki lint v2: ${allMdFiles.length}개 .md 스캔`);
+    console.log(`Wiki lint v2: 일반 lint ${allMdFiles.length}개 문서 검사 / MOC 등록 ${mocMdFiles.length}개 문서 검사`);
     if (findings.length === 0) {
       console.log('✓ 발견 0건');
     } else {
