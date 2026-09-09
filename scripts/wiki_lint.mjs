@@ -11,8 +11,7 @@
 //      severity: error
 //   4. § 절 참조 사용: 2026-07-14에 폐기된 표기 (CONVENTIONS 3.5 Wikilink 규칙)
 //      severity: error. 절 참조는 wikilink anchor로만 씀
-//      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그,
-//            검수 기록 3종)과 폐지 정책 자체를 설명하는 CONVENTIONS 본문
+//      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그)
 //   5. MOC 미등록: 등록 대상 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음
 //      (위키 운영 워크플로 5.1 문서 생성 절차 5번, 면제 정본은 CONVENTIONS 5절)
 //      severity: error
@@ -104,7 +103,6 @@ const ALLOW_GAWUNDEOTJEOM = new Set([
 
 // § 표기가 허용되는 곳. 모두 "당시 문서 상태"를 인용한 기록이라 고치면 기록이 왜곡됨
 const ALLOW_SECTION_MARK = new Set([
-  'CONVENTIONS.md',                                          // § 폐지 정책을 설명하는 본문
   '01_HowTo/반복 결함 카탈로그.md',                            // 과거 결함 사례 인용
 ]);
 const ALLOW_SECTION_MARK_PREFIX = ['04_Projects/_archive/']; // 폐기 문서, 이력 보존
