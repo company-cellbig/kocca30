@@ -4,18 +4,20 @@ r"""HWPX → Markdown 변환기 (V2).
 input: HWPX 파일 경로
 output:
   - MD 본문 (-o 옵션)
-  - figures/media/ 폴더에 BinData 이미지 복사
+  - --figures-dir로 지정한 폴더 바로 아래에 BinData 이미지를 복사
 
 설계:
   - HWPX의 paragraph 스타일은 모두 styleIDRef=0(Normal). 헤딩 스타일은 미사용.
   - 헤딩 식별은 텍스트 패턴 기반:
-      ^\d+-\d+\.\s          → H2
-      ^\d+-\d+-\d+\.\s      → H3
-      ^[○●◇■]\s            → H3
+      ^\d+-\d+\.\s          → H1
+      ^\d+-\d+-\d+\.\s      → H2
+      ^[가-하](?:-\d+)?\.\s → H2
+      ^[○●◇■]\s            → 헤딩이 아닌 1단 bullet
   - bullet 들여쓰기는 paraPr의 <hh:heading idRef="N"> 값으로 결정 (1, 2, 3 단)
   - 그림 캡션: align=CENTER + 텍스트가 "[그림]" 시작
-  - 표: <hp:tbl> 안의 행/셀을 grid_table로 렌더 (paragraph 내부에 있어도 추출)
-  - 이미지: <hp:pic>/<hc:img binaryItemIDRef="N"> → figures/media/N.<ext>
+  - 표: <hp:tbl> 안의 행과 셀을 추출해 위치와 형태에 따라 라벨, 정의 목록,
+    pipe_table 등으로 렌더 (paragraph 내부에 있어도 추출)
+  - 이미지: <hp:pic>/<hc:img binaryItemIDRef="imageN"> → <figures-dir>/imageN.<ext>
   - frontmatter title은 파일명에서 자동 생성. 챕터 제목 paragraph는 본문에도 그대로 출력
     (제거하면 N-M. 패턴 H1이 없는 문서에서 본문 전체가 삼켜지는 위험)
 """
@@ -502,6 +504,7 @@ def convert(hwpx_path, out_md, figures_dir, source_rel):
         stats['sections'] = len(sections)
 
     lines = []
+    visual_marker_bullet_lines = set()
     last_bullet_indent = [-1]  # 마지막 bullet의 들여쓰기 단계 (-1 = bullet block 밖)
 
     def emit_table(tbl):
@@ -527,6 +530,7 @@ def convert(hwpx_path, out_md, figures_dir, source_rel):
         # 조건: 1단 bullet, ≤25자, 콜론 끝X, 시각 마커X, 위 라인이 bullet 아님(isolated)
         if (lines
             and lines[-1].startswith('- ')
+            and (len(lines) - 1) not in visual_marker_bullet_lines
             and not re.match(r'^- [○●◇◆■□▶▸▣\-]', lines[-1])
         ):
             cand_text = lines[-1][2:].strip()
@@ -651,6 +655,7 @@ def convert(hwpx_path, out_md, figures_dir, source_rel):
         if CIRCLE_BULLET_PAT.match(text):
             last_bullet_indent[0] = 0
             lines.append(f'- {strip_visual_marker(text)}')
+            visual_marker_bullet_lines.add(len(lines) - 1)
             stats['bullets'] += 1
             return
         if bullet_level >= 1:
@@ -660,6 +665,8 @@ def convert(hwpx_path, out_md, figures_dir, source_rel):
             # paraPr.heading=BULLET인 paragraph도 시작 시각 마커 제거 (한컴이 시각 표지로 넣은 경우)
             cleaned = strip_visual_marker(text)
             lines.append(f'{indent}- {cleaned}')
+            if LEADING_VISUAL_MARK.match(text):
+                visual_marker_bullet_lines.add(len(lines) - 1)
             stats['bullets'] += 1
             return
 
@@ -726,7 +733,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('hwpx', help='HWPX 파일 경로')
     ap.add_argument('-o', '--out', required=True, help='출력 MD 경로')
-    ap.add_argument('--figures-dir', required=True, help='figures/ 폴더 경로 (media/ 하위 생성)')
+    ap.add_argument('--figures-dir', required=True, help='추출 이미지를 바로 아래에 저장할 폴더 경로')
     ap.add_argument('--source-rel', default='', help='frontmatter의 source 필드값 (저장소 상대경로)')
     args = ap.parse_args()
 

@@ -166,7 +166,7 @@ const relSource = relative(REPO_ROOT, sourcePath).replace(/\\/g, '/');
 const dateStr = today();
 let backend = '';
 let warnings = '';
-let backendStats = null;  // HWPX 경로의 정확한 stats (h2, h3, tables, images, bullets)
+let backendStats = null;  // HWPX 파서가 반환한 세부 통계 (h1, h2, tables, images, bullets, sections)
 
 if (ext === '.hwpx') {
   // ---- HWPX 경로: Python 파서 호출 ----
