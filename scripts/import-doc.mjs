@@ -3,9 +3,9 @@
 // 사용법: node scripts/import-doc.mjs <path-to-hwpx-or-docx>
 // 출력:
 //   02_References/_sources/<name>.<ext>                       (원본 보존)
-//   02_References/converted/<name>/<name>.md                  (변환 본문)
-//   02_References/converted/<name>/figures/media/             (추출 이미지)
-//   02_References/converted/<name>/<name>_review_pending.md   (검수 큐 사이드카)
+//   02_References/converted/<name>.md                         (변환 본문)
+//   02_References/_figures/<name>/                            (추출 이미지)
+//   02_References/_reviews/<name>.review.md                   (검수 큐 사이드카)
 //
 // 분기:
 //   .hwpx → Python(assets/extract_hwpx.py) 호출: 헤딩/표/이미지 직접 파싱 (권장)
@@ -138,7 +138,7 @@ mkdirSync(convertedRoot, { recursive: true });
 mkdirSync(figuresDir, { recursive: true });
 mkdirSync(reviewsRoot, { recursive: true });
 
-// _sources/는 read-only 정책 (AGENTS.md). 변환 파이프라인의 "추가"는 허용하나
+// _sources/는 read-only 정책 (CONVENTIONS.md). 변환 파이프라인의 "추가"는 허용하나
 // 기존 원본을 덮어쓰지 않도록 동일성 체크. 같은 파일명으로 다른 내용이 들어오면 거부.
 if (resolve(inputAbs) !== resolve(sourcePath)) {
   if (existsSync(sourcePath)) {
@@ -147,7 +147,7 @@ if (resolve(inputAbs) !== resolve(sourcePath)) {
     if (existingHash !== incomingHash) {
       fail(
         `_sources/${sourceName}${ext}가 이미 존재하지만 내용이 다름. ` +
-        `덮어쓰기 거부 (AGENTS.md _xxx/ read-only 정책). ` +
+        `덮어쓰기 거부 (CONVENTIONS.md _xxx/ read-only 정책). ` +
         `다른 파일명으로 import하거나, 기존 원본 보존이 불필요하면 명시적으로 _sources/에서 먼저 제거할 것.`,
         {
           existingSha256: existingHash,

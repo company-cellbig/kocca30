@@ -17,7 +17,7 @@ output:
   - 표: <hp:tbl> 안의 행/셀을 grid_table로 렌더 (paragraph 내부에 있어도 추출)
   - 이미지: <hp:pic>/<hc:img binaryItemIDRef="N"> → figures/media/N.<ext>
   - frontmatter title은 파일명에서 자동 생성. 챕터 제목 paragraph는 본문에도 그대로 출력
-    (제거하면 N-M. 패턴 H2가 없는 문서에서 본문 전체가 삼켜지는 위험)
+    (제거하면 N-M. 패턴 H1이 없는 문서에서 본문 전체가 삼켜지는 위험)
 """
 
 import argparse
@@ -467,7 +467,7 @@ def convert(hwpx_path, out_md, figures_dir, source_rel):
     figures_dir = Path(figures_dir)
     figures_dir.mkdir(parents=True, exist_ok=True)
     # 본문 내 이미지 link prefix: MD 파일 위치 기준 figures_dir 상대경로
-    # 예: MD가 03_References/converted/x.md, figures가 03_References/_figures/x/
+    # 예: MD가 02_References/converted/x.md, figures가 02_References/_figures/x/
     #     → link prefix = ../_figures/x
     out_md_path = Path(out_md).resolve()
     link_prefix = os.path.relpath(figures_dir.resolve(), out_md_path.parent).replace(os.sep, '/')
