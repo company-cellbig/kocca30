@@ -11,7 +11,7 @@
 //      severity: error
 //   4. § 절 참조 사용: 2026-07-14에 폐기된 표기 (CONVENTIONS 3.5 Wikilink 규칙)
 //      severity: error. 절 참조는 wikilink anchor로만 씀
-//      예외: 당시 문서 상태를 인용한 이력 (log.md, _archive/, 반복 결함 카탈로그)
+//      예외: 당시 문서 상태를 인용한 이력 (월별 로그, _archive/, 반복 결함 카탈로그)
 //   5. MOC 미등록: 등록 대상 문서가 00_Index/MOC.md에 [[ ]]로 등록되지 않음
 //      (위키 운영 워크플로 5.1 문서 생성 절차 5번, 면제 정본은 CONVENTIONS 5절)
 //      severity: error
@@ -22,11 +22,11 @@
 //   8. 이미지 경로: ![](경로)와 <img src>의 파일이 실재하는지 (2026-08-20 추가)
 //      severity: error. 코드블록, 인라인 백틱, <name> 자리표시자는 제외
 //   9. 폐기 어휘: scripts/deprecated_terms.txt에 등록된 옛 용어가 활성 문서에 남았는지 (2026-08-21 추가)
-//      severity: error. 백틱 안 언급(폐기 설명 자리)과 이력 보존 영역(log.md, _archive/)은 면제
+//      severity: error. 백틱 안 언급(폐기 설명 자리)과 이력 보존 영역(월별 로그, _archive/)은 면제
 //  10. 참조 순서 위반: 번호 N 폴더의 문서가 뒷 번호 폴더의 문서를 wikilink로 가리킴 (2026-08-21 추가)
 //      severity: warning (CONVENTIONS 2 "폴더 번호는 참조 순서임". 해당 문서를 고칠 때 함께 정리함)
 //      순서 밖: 00_Index(색인은 전체를 가리킴), 무번호 폴더, 루트 규칙 문서. 링크의 출발이나
-//      도착이 순서 밖이면 검사하지 않음. log.md는 이력이라 제외
+//      도착이 순서 밖이면 검사하지 않음. 월별 로그는 이력이라 제외
 //
 // exit code:
 //   - 0: error 0건 (warning은 표시만 하고 통과)
@@ -39,7 +39,7 @@
 // 일반 콘텐츠 검사 예외 영역 (MOC 등록 검사는 converted/를 포함함):
 //   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/
 //   - 05_산출물/ (사용자가 직접 쓰는 외부 원고, 위키 작성 규칙 비적용)
-//   - 99_Logs/log.md (이력 보존: 가운뎃점/문체 검사 제외)
+//   - 99_Logs/YYYY/M월/ 월별 로그 (이력 보존: 링크/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
@@ -77,9 +77,9 @@ const EXCLUDED_PATHS = new Set([
   // 90_Temp(임시 대기소)는 lint 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
 ]);
 
-const SKIP_CONTENT_CHECKS = new Set([
-  '99_Logs/log.md',
-]);
+function isMonthlyLogPath(relPath) {
+  return /^99_Logs\/\d{4}\/(?:[1-9]|1[0-2])월\//.test(relPath);
+}
 
 // MOC 등록 검사 후보군에서 면제하는 파일, 경로와 문서 유형. 전체 면제 범위의 정본은 CONVENTIONS 5절임.
 // 루트 규칙 문서, 색인, 로그, 작업 노트, 자족 폴더와 승격 전 대기소임
@@ -260,8 +260,8 @@ function checkBrokenWikilinks(allMdFiles, fileIndex) {
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
     const links = extractWikilinks(content);
     for (const link of links) {
-      // log.md는 이력: wikilink 검사 제외 (과거 참조 보존)
-      if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+      // 월별 로그는 이력: wikilink 검사 제외 (과거 참조 보존)
+      if (isMonthlyLogPath(relPath)) continue;
       if (link.target === '') continue; // [[#anchor]] 자기 문서 참조: 대상 파일이 자기 자신
       if (!fileIndex.has(link.target)) {
         findings.push({
@@ -314,7 +314,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
   const findings = [];
   const headingsCache = new Map();
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
     const links = extractWikilinks(content);
     for (const link of links) {
@@ -363,7 +363,7 @@ function checkWikilinkAnchors(allMdFiles, fileIndex) {
 function checkGawundeotjeom(allMdFiles) {
   const findings = [];
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     if (ALLOW_GAWUNDEOTJEOM.has(relPath)) continue;
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
     const lines = content.split('\n');
@@ -395,7 +395,7 @@ function checkGawundeotjeom(allMdFiles) {
 function checkEmDash(allMdFiles) {
   const findings = [];
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     if (ALLOW_EM_DASH.has(relPath)) continue;
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
     const lines = content.split('\n');
@@ -428,7 +428,7 @@ function checkEmDash(allMdFiles) {
 function checkImagePaths(allMdFiles) {
   const findings = [];
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     // 자산은 워킹트리 사실이라 ASSET_ROOT 기준으로 봄 (위 상수 설명 참조)
     const absDir = dirname(join(ASSET_ROOT, relPath));
     const lines = readFileSync(join(REPO_ROOT, relPath), 'utf8').split('\n');
@@ -478,7 +478,7 @@ function checkImagePaths(allMdFiles) {
 function checkSectionMark(allMdFiles) {
   const findings = [];
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     if (ALLOW_SECTION_MARK.has(relPath)) continue;
     if (ALLOW_SECTION_MARK_PREFIX.some(p => relPath.startsWith(p))) continue;
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');
@@ -531,7 +531,7 @@ function checkDeprecatedTerms(allMdFiles) {
   const terms = loadDeprecatedTerms();
   if (!terms.length) return findings;
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue;
+    if (isMonthlyLogPath(relPath)) continue;
     if (relPath.startsWith('04_Projects/_archive/')) continue;
     const lines = readFileSync(join(REPO_ROOT, relPath), 'utf8').split('\n');
     let inCodeBlock = false;
@@ -608,7 +608,7 @@ function folderOrder(relPath) {
 function checkReferenceOrder(allMdFiles, fileIndex) {
   const findings = [];
   for (const relPath of allMdFiles) {
-    if (SKIP_CONTENT_CHECKS.has(relPath)) continue; // log.md: 이력
+    if (isMonthlyLogPath(relPath)) continue; // 월별 로그: 이력
     const srcOrder = folderOrder(relPath);
     if (srcOrder === null) continue;
     const content = readFileSync(join(REPO_ROOT, relPath), 'utf8');

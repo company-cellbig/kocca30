@@ -23,7 +23,7 @@
 //     혹시 번호가 바뀐 헤딩이 있으면 목록으로 경고만 함
 //
 // 예외 영역 (넘버링 안 함):
-//   - 99_Logs/log.md: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (`# 작업 로그` H1 + `## [날짜] 유형 | 제목`)
+//   - 99_Logs/: CONVENTIONS 4.2 헤딩 넘버링 명시 예외 (루트 색인 + 월별 로그)
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용), 위키 콘텐츠 아님
 //   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/: 변환 산출물, read-only
 //   - 04_Projects/_archive/: 폐기 문서, read-only (CONVENTIONS 6. 수정 금지 영역). anchor는 갱신함
@@ -55,8 +55,9 @@ const EXCLUDED_PATHS = new Set([
   // 90_Temp(임시 대기소)는 넘버링 대상임. 외부 원자료가 들어오면 그 파일만 여기 개별 제외함
 ]);
 
-// 헤딩 번호를 안 매기는 곳. 본문은 스캔하므로 anchor 연쇄 갱신 대상에는 들어감
-//   - 99_Logs/log.md: CONVENTIONS 4.2 명시 예외
+// 헤딩 번호를 안 매기는 곳. 루트 색인은 anchor 연쇄 갱신 대상에 들어가지만,
+// 월별 로그는 이력 보존을 위해 anchor 갱신에서도 제외함
+//   - 99_Logs/: CONVENTIONS 4.2 명시 예외
 //   - README.md: 저장소 소개 대문(GitLab/GitHub 렌더링용). 위키 콘텐츠가 아니라
 //     넘버링 규칙 대상이 아님. "2.2 Name" 같은 번호가 붙으면 오히려 어색함 (사용자 승인 2026-07-22)
 //   - prototype/README.md: 프로토타입 압축본에 함께 나가는 안내문. 팀원이 위키 밖에서
@@ -66,21 +67,20 @@ const EXCLUDED_PATHS = new Set([
 //   - 05_산출물/: 사용자가 직접 쓰는 외부 원고. 헤딩은 바꾸지 않고, 산출물 밖 문서의
 //     anchor 변경으로 깨지는 링크만 기계적으로 고침 (사용자 승인 2026-09-08)
 const NO_NUMBER = new Set([
-  '99_Logs/log.md',
   'README.md',
   'prototype/README.md',
   'prototype/덧뵈기-나만의탈춤-텍스트.md',
 ]);
-const NO_NUMBER_PREFIX = ['04_Projects/_archive/', '05_산출물/'];
+const NO_NUMBER_PREFIX = ['04_Projects/_archive/', '05_산출물/', '99_Logs/'];
 
 function skipNumbering(file) {
   return NO_NUMBER.has(file) || NO_NUMBER_PREFIX.some(p => file.startsWith(p));
 }
 
-// anchor 갱신도 안 하는 곳 (이력 보존: 과거 참조를 그대로 둠)
-const NO_ANCHOR_REWRITE = new Set([
-  '99_Logs/log.md',
-]);
+// anchor 갱신도 안 하는 곳 (월별 로그 이력 보존: 과거 참조를 그대로 둠)
+function isMonthlyLogPath(file) {
+  return /^99_Logs\/\d{4}\/(?:[1-9]|1[0-2])월\//.test(file);
+}
 
 // 옛 넘버링(한국 공문서 체계)에 쓰던 한글 기호. 기존 번호를 떼어낼 때만 씀
 const KO = ['가', '나', '다', '라', '마', '바', '사', '아', '자', '차', '카', '타', '파', '하'];
@@ -272,7 +272,7 @@ function rewriteAnchors(allFiles, contents, renamesByFile, fileIndex) {
   const LINK_RE = /(!?\[\[)([^\[\]|#]*?)#([^\[\]|]+?)((?:\\?\|[^\[\]]+?)?\]\])/g;
 
   for (const file of allFiles) {
-    if (NO_ANCHOR_REWRITE.has(file)) continue; // log.md는 이력 보존: 과거 anchor 그대로 둠
+    if (isMonthlyLogPath(file)) continue; // 월별 로그는 이력 보존: 과거 anchor 그대로 둠
     const lines = contents.get(file).split('\n');
     const isBody = bodyLineFlags(lines);
     let changed = false;

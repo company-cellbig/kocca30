@@ -24,7 +24,7 @@
 //
 // 제외 파일/영역:
 //   - 01_HowTo/반복 결함 카탈로그.md: § 용례가 과거 결함 사례 인용이라 당시 상태를 가리킴
-//   - 02_References/(read-only), 99_Logs/log.md(이력), 04_Projects/_archive/(폐기 문서)
+//   - 02_References/(read-only), 99_Logs/(로그와 색인), 04_Projects/_archive/(폐기 문서)
 
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, resolve, dirname, basename, extname } from 'node:path';
