@@ -1,11 +1,11 @@
 ---
 title: CONVENTIONS와 HowTo 역할 분리 계획
 type: agentnote
-status: draft
+status: stable
 tags: [규칙, 정비, conventions, howto]
 sources: [CONVENTIONS, docx 변환 파이프라인, PDF 읽기 절차, 문서 작성 세부 규칙, 반복 결함 카탈로그, 외부 검수 포커스, 위키 운영 워크플로, 인포그래픽 생성 지침, 절 참조 오변환 점검 절차, 클라이언트 데이터 번역 규칙]
 created: 2026-09-03
-updated: 2026-09-09
+updated: 2026-09-11
 ---
 
 > `CONVENTIONS.md` 및 HowTo 문서 9개의 소유 범위와 Codex의 작업별 규칙 로딩 경로를 다시 나누기 위한 비교 결과와 실행 계획임. 이번 문서는 정비 계획만 다루며 규칙 원문은 바꾸지 않음.
