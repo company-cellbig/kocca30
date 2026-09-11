@@ -4,7 +4,7 @@ type: howto
 status: stable
 tags: [howto, pdf, 변환]
 created: 2026-08-21
-updated: 2026-08-21
+updated: 2026-09-11
 ---
 
 > PDF 자료(RFP, 보고서, 논문 등)를 분석할 때의 절차 정본임.
@@ -19,5 +19,5 @@ updated: 2026-08-21
 
 # 2. 관련 문서
 
-- [[AGENTS|에이전트 작업 지침]]: 작업 절차의 상위 정본
+- [[AGENTS#2.7 PDF 읽기 원칙|에이전트 작업 지침]]: PDF 분석에서 이 절차를 따르도록 정한 에이전트 운영 규칙
 - [[docx 변환 파이프라인]]: DOCX/HWPX 계열 변환 도구 (PDF 외 원본용)
