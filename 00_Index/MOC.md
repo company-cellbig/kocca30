@@ -4,7 +4,7 @@ type: index
 status: stable
 tags: [index, moc]
 created: 2026-04-27
-updated: 2026-09-10
+updated: 2026-09-11
 ---
 
 > 위키 전체의 진입점. 주제별로 핵심 문서를 모아둔 목차임.
@@ -124,6 +124,7 @@ updated: 2026-09-10
 - [[CONVENTIONS와 HowTo 역할 분리 5단계 외부 검수 지시문]]: 현행 절 참조 규칙과 과거 오변환 복구의 소유 경계와 이관 수치 및 lint 예외의 정합성과 가독성을 새 Claude Code 세션에서 검토하는 지시문
 - [[CONVENTIONS와 HowTo 역할 분리 6단계 외부 검수 지시문]]: HWPX와 DOCX 변환 산출물의 예외, 공통 규칙의 소유 경계, 문서, 구현, 파생 명령 사이의 정합성과 가독성을 새 Claude Code 세션에서 검토하는 지시문
 - [[CONVENTIONS와 HowTo 역할 분리 7단계 외부 검수 지시문]]: 반복 결함의 과거 기록과 현행 정본에서 파생한 재발 질문의 경계, P1부터 P5까지의 분류, 검토 역할과 가독성을 새 Claude Code 세션에서 검토하는 지시문
+- [[CONVENTIONS와 HowTo 역할 분리 7단계 외부 검수 결과]]: H04 정리 커밋 두 개의 검토 발견 12건, 자동 검사 재현과 G2 판정 기록
 
 # 7. 로그 (99_Logs)
 
