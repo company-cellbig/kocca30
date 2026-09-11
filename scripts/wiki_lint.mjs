@@ -39,7 +39,7 @@
 // 일반 콘텐츠 검사 예외 영역 (MOC 등록 검사는 converted/를 포함함):
 //   - 02_References/_locked/, _sources/, _figures/, _reviews/, converted/
 //   - 05_산출물/ (사용자가 직접 쓰는 외부 원고, 위키 작성 규칙 비적용)
-//   - 99_Logs/YYYY/M월/ 월별 로그 (이력 보존: 링크/문체 검사 제외)
+//   - 99_Logs/YYYY/YYYY년 M월 작업 로그.md (이력 보존: 링크/문체 검사 제외)
 //   - .claude/, node_modules/, .git/, .obsidian/, assets/, scripts/
 //
 // 가운뎃점 의도 예외:
@@ -78,7 +78,7 @@ const EXCLUDED_PATHS = new Set([
 ]);
 
 function isMonthlyLogPath(relPath) {
-  return /^99_Logs\/\d{4}\/(?:[1-9]|1[0-2])월\//.test(relPath);
+  return /^99_Logs\/(\d{4})\/\1년 (?:[1-9]|1[0-2])월 작업 로그\.md$/.test(relPath);
 }
 
 // MOC 등록 검사 후보군에서 면제하는 파일, 경로와 문서 유형. 전체 면제 범위의 정본은 CONVENTIONS 5절임.

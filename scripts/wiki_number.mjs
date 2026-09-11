@@ -79,7 +79,7 @@ function skipNumbering(file) {
 
 // anchor 갱신도 안 하는 곳 (월별 로그 이력 보존: 과거 참조를 그대로 둠)
 function isMonthlyLogPath(file) {
-  return /^99_Logs\/\d{4}\/(?:[1-9]|1[0-2])월\//.test(file);
+  return /^99_Logs\/(\d{4})\/\1년 (?:[1-9]|1[0-2])월 작업 로그\.md$/.test(file);
 }
 
 // 옛 넘버링(한국 공문서 체계)에 쓰던 한글 기호. 기존 번호를 떼어낼 때만 씀
