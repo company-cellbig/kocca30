@@ -1,0 +1,68 @@
+덜미 - 나만의 꼭두각시 콘셉트 기획, 개요 인포그래픽 생성 기록
+최종 검수 결과: {"labelCount":25,"transcriptCount":25,"missing":[],"extra":[],"duplicates":[],"unreadable":[],"boundaryNotes":[],"logos":false}
+초안 및 최종본 직접 대조, 별도 맥락 블라인드 전사와 문자열 기계 대조 수행. 초안 전사 발견 0건, 최종 수정본 목록 외 기호 1건 정정, 정비 최종본 전사에서 새 발견 0건. 무발견은 결함 부재의 증명이 아님.
+정비 최종본 블라인드 전사 원본: ["덜미, 나만의 꼭두각시","남사당놀이 덜미의 꼭두각시 거리 체험","전경의 유저 인형","이야기의 큰 흐름 유지","유저 행동에 따른 세부 변화","원경의 덜미 인형극","박첨지","꼭두각시","덜머리집","공감하기 쉬운 치정극","실시간 체험과 학습","무형문화유산의 형식과 의미","움직임과 이야기가 어우러진 웃음","사진 기반 인형 생성","얼굴 사진의 목각인형 변환","유저 전용 인형과 몰입감","조종 원리 시각화","외형과 내부 구조의 동시 연동","몸동작을 통한 구조 학습","병렬 서사","전경과 원경의 동시 진행","자유로운 참여와 매끄러운 진행","유저 성향 평가","체험 행동을 토대로 성향 평가","마무리 화면의 행동 의미 부여"]
+말풍선 기호 제거 프롬프트 전문:
+Edit only the small speech bubble in the upper middle of this infographic. REMOVE its three orange dots/ellipsis completely, leaving the interior of the speech bubble empty warm ivory with no symbol or text. Preserve absolutely everything else: all Korean lettering verbatim, all illustrations, kiosk screens, people, puppet shapes, palette, margins, layout, resolution and exact 2:1 aspect ratio. Do not add any new text, dots, logo, glyph or watermark. This is a single localized cleanup.
+
+생성일: 2026-09-14
+원자료: 05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md
+분석 범위: 1. 개요 전체(콘텐츠 정의, 개발 목적, 핵심 시스템, 진행). 이미 구조화된 입력을 사용함.
+핵심 메시지: 나를 닮은 인형으로 덜미의 꼭두각시 거리에 참여하며 움직임, 조종 구조와 이야기의 의미를 체험하고 학습함.
+정보 블록: 콘텐츠와 목적, 전경과 원경의 연동, 네 핵심 시스템, 우선 개발 소재와 세 인물.
+레이아웃: 2:1 가로형, 상단 대형 체험 장면과 목적, 하단 네 시스템 클러스터. 사진 생성에서 구조 연동, 서사 참여와 성향 평가로 연결함.
+설계 추가: 삽화 인물의 외형, 배색, 키오스크 화면 구성, 목각 내부 구조의 개념적 표현. 실제 조종 장치의 고증 도면이나 확정 UI가 아님.
+요약 처리: 원문의 개발 난이도와 복잡한 분기 제한은 구조 학습과 매끄러운 진행 캡션으로 요약함. 새 수치나 원전 사건을 추가하지 않음.
+도구: built-in image_gen.imagegen. CLI/API 미사용.
+설정: 도구 인자에는 prompt와 최종 수정 시 referenced_image_paths만 사용함. 초안 및 최종 모델/quality 설정은 직접 지정할 수 없어 도구 기본값을 사용함. 프롬프트에서 2:1 가로형과 최종 고품질을 요청함.
+검수: 초안의 외부 끈과 손 조작 표현을 몸동작 연동 표현으로 수정함. 배경 꼭두각시를 노년 여성으로 조정하고 디지털 키오스크 화면 경계를 추가함.
+초안 라벨 수: 실제 25개. 최초 프롬프트의 총수 26개 기입은 집계 오기이며 최종 수정 프롬프트에서 25개로 정정함.
+최종본 정비: 최종 수정본 블라인드 전사에서 말풍선 점 세 개가 목록 밖 기호로 발견돼 단일 편집으로 제거함.
+실제 최종 파일 규격: 1774 x 887 PNG, 가로:세로 2:1. 요청한 2048 x 1024는 프롬프트상의 목표였으며 실제 출력 크기로 기록하지 않음.
+
+확정 렌더 문자열(각 1회):
+1. 덜미, 나만의 꼭두각시
+2. 남사당놀이 덜미의 꼭두각시 거리 체험
+3. 실시간 체험과 학습
+4. 무형문화유산의 형식과 의미
+5. 전경의 유저 인형
+6. 원경의 덜미 인형극
+7. 박첨지
+8. 꼭두각시
+9. 덜머리집
+10. 공감하기 쉬운 치정극
+11. 이야기의 큰 흐름 유지
+12. 유저 행동에 따른 세부 변화
+13. 움직임과 이야기가 어우러진 웃음
+14. 사진 기반 인형 생성
+15. 얼굴 사진의 목각인형 변환
+16. 유저 전용 인형과 몰입감
+17. 조종 원리 시각화
+18. 외형과 내부 구조의 동시 연동
+19. 몸동작을 통한 구조 학습
+20. 병렬 서사
+21. 전경과 원경의 동시 진행
+22. 자유로운 참여와 매끄러운 진행
+23. 유저 성향 평가
+24. 체험 행동을 토대로 성향 평가
+25. 마무리 화면의 행동 의미 부여
+
+초안 생성 프롬프트 전문:
+Use case: infographic-diagram. Create a polished Korean presentation infographic, exact landscape aspect ratio 2:1, 2048 by 1024 composition, high quality. Warm ivory canvas, deep charcoal Korean sans-serif typography, tasteful vermilion, teal, ochre accents inspired by traditional Korean puppetry. Rich full-color wood puppet illustrations and a small photorealistic visitor portrait inset. Editorial visual storytelling, generous spacing, strong hierarchy, no stock business icons. Concept design visualization, not a historically verified mechanical blueprint.
+
+Text control: Render ONLY the 26 exact Korean strings assigned below, each exactly once at its assigned place. Never render other words, numerals, Latin letters, decorative glyphs, logos, brands, signatures or watermarks. Text in photos and props prohibited. Mockup screens contain illustrations only. All captions are short noun phrases. Korean letters must be perfectly legible. No repeated labels in icons. No chart.
+
+Upper left title: "덜미, 나만의 꼭두각시". Directly below: "남사당놀이 덜미의 꼭두각시 거리 체험". Upper right purpose emblem: "실시간 체험과 학습", with a colorful icon of a person interacting with a carved wooden puppet, caption directly beneath "무형문화유산의 형식과 의미".
+
+Middle dominant centerpiece: a beautiful simplified interactive kiosk scene showing foreground wooden visitor puppet and its translucent duplicate revealing schematic WOODEN internal control parts, no robots, no gears. In the distant puppet stage, three distinct traditional Korean rod puppets, elderly male with beard, elderly female, younger female, perform a comic domestic jealousy scene, no violence, no disaster. Foreground visitor puppet is visibly distinct from background characters. Small label directly above foreground "전경의 유저 인형", above distant stage "원경의 덜미 인형극". Background cast labels directly beneath the relevant figures: "박첨지", "꼭두각시", "덜머리집", exactly once each. A caption below the background stage reads "공감하기 쉬운 치정극". An expressive flowing arrow connecting foreground gestures to distant puppets ends at a small symbolic speech bubble containing no words. Along this arrow place two separate captions: "이야기의 큰 흐름 유지" and "유저 행동에 따른 세부 변화". Keep this composition readable, with no actual software controls, frame labels or tiny illegible UI. A footer ribbon beneath centerpiece says "움직임과 이야기가 어우러진 웃음".
+
+Lower area: four visually connected informational clusters distinguished by subtle pastel organic backdrops, NOT heavy rectangular cards. Each has a medium illustration and three exact strings. Reading left to right, the first starts with photo-based creation, the second shows two matched puppet bodies, the third shows two depth planes of a theater, and fourth shows reflection on behavior.
+First cluster header "사진 기반 인형 생성"; visual a portrait transforming into a wooden puppet with same face traits; short caption directly below "얼굴 사진의 목각인형 변환"; second caption "유저 전용 인형과 몰입감".
+Second header "조종 원리 시각화"; visual two identical wooden puppets in matching pose, one exterior and one schematic internal wooden structure; caption "외형과 내부 구조의 동시 연동"; second caption "몸동작을 통한 구조 학습".
+Third header "병렬 서사"; visual foreground participant and background three-puppet stage with branching response depicted only via arrows; caption "전경과 원경의 동시 진행"; second caption "자유로운 참여와 매끄러운 진행".
+Fourth header "유저 성향 평가"; visual behavioral traces leading to a neutral results summary with abstract colored shapes only, no invented personality category or personality score; caption "체험 행동을 토대로 성향 평가"; second caption "마무리 화면의 행동 의미 부여".
+
+There are exactly 26 strings total. Fill the 2:1 canvas coherently without crowding. All wording must be verbatim. No English words may appear in the final image. Do not add a master header such as infographic. Draft and final should use the same visual concept.
+
+최종 수정 프롬프트 전문:
+Produce the FINAL high-quality version of this Korean infographic, exact 2:1 aspect ratio. Preserve its beautiful warm ivory traditional theater palette, readable typography, all 25 exact text strings and placements, and four bottom system groups. Make one focused conceptual correction throughout the image: it is BODY-MOTION TRACKING of DIGITAL puppets on a KIOSK display. Remove EVERY string, cord, hand-held stick, puppet control rod protruding into hands, and marionette controller in the human and external puppet illustrations. The woman on the far left should gesture with empty hands, slightly raise one arm and tilt her torso; the exterior digital puppet and its transparent wooden-structure twin mimic the same gesture with EMPTY hands. The internal schematic may contain wooden rods inside its body, but no cables running outside the body, no mechanical gears and no robot look. Enclose the large central digital puppet stage, foreground puppet and structure puppet within one clearly identifiable understated dark kiosk display bezel, so this reads as a kiosk experience rather than real stage puppetry. Keep the human participant outside that display and the upper labels above it readable. The lower 'two puppets' visual must also have empty hands and no external rods. On the background stage, the elderly male stays elderly; his wife must be an elderly wooden female puppet with mature face, graying traditional hair and restrained hanbok, while the other female is younger. The names beneath the background figures must be exactly the same as before. Do not alter wording. All 25 strings, exactly once, are: "덜미, 나만의 꼭두각시", "남사당놀이 덜미의 꼭두각시 거리 체험", "실시간 체험과 학습", "무형문화유산의 형식과 의미", "전경의 유저 인형", "원경의 덜미 인형극", "박첨지", "꼭두각시", "덜머리집", "공감하기 쉬운 치정극", "이야기의 큰 흐름 유지", "유저 행동에 따른 세부 변화", "움직임과 이야기가 어우러진 웃음", "사진 기반 인형 생성", "얼굴 사진의 목각인형 변환", "유저 전용 인형과 몰입감", "조종 원리 시각화", "외형과 내부 구조의 동시 연동", "몸동작을 통한 구조 학습", "병렬 서사", "전경과 원경의 동시 진행", "자유로운 참여와 매끄러운 진행", "유저 성향 평가", "체험 행동을 토대로 성향 평가", "마무리 화면의 행동 의미 부여". Nothing else may be text. Render at crisp final resolution, maintaining width exactly twice height.
