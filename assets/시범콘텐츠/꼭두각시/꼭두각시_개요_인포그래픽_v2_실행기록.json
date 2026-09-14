@@ -1,0 +1,381 @@
+{
+  "state": "generated-with-review-records",
+  "sourceScopeRecheck": {
+  "entireFileChanged": true,
+  "currentFileSHA256": "12020caa6540fa72518c3d9f2a5dd8e4311486d88c62d31ccbd45fac73abbbd8",
+  "scopeUnchangedByDirectComparison": true,
+  "recordedAfterGeneration": true,
+  "detail": "파일 전체 변경을 감지한 뒤 1. 개요를 생성 전 읽은 내용과 직접 재대조함. 개요는 동일하며 뒤쪽 진행 절의 변경은 이번 이미지 범위 밖임",
+  "scopeSnapshot": "# 1. 개요\n\n- **콘텐츠 정의**\n\t- 남사당놀이 덜미 2개 마당 7개 거리 중 꼭두각시 거리를 체험하는 키오스크 콘텐츠\n- **개발 목적**\n\t- 무형문화유산의 형식과 포함된 의미를 사용자와 실시간으로 상호작용하며 체험 및 학습할 수 있는 수단 제공\n- **핵심 시스템**\n\t- 조종 원리 시각화 시스템\n\t\t-  유저 동작을 외형 인형과 구조 인형에 동시에 연동하여 움직임 및 조작 원리 시각화\n\t\t\t- 조작 체험 구현의 경우 난이도가 높기 때문에 체험 대신 구조 학습 수단 제공\n\t- 병렬 서사 시스템\n\t\t- 전경의 유저 인형과 원경의 덜미 인형극을 병렬로 진행하며 이야기의 큰 흐름은 유지하면서 유저 행동이 세부 진행을 바꿔 두 장면이 합쳐진 웃음을 만드는 시스템\n\t\t\t- 유저의 체험에 큰 제약을 두지 않으면서 인형극 진행에 복잡한 분기를 두지 않아 매끄러운 진행 유도\n\t- 유저 성향 평가 시스템\n\t\t- 유저의 행동을 토대로 성향을 평가하여 마무리 화면에 표시\n\t\t\t- 병렬 서사 시스템에서 유저가 한 행동과 유저의 성향을 연결시켜 유저의 행동에 의미 부여\n\t- 사진 기반 인형 생성 시스템\n\t\t- 유저의 얼굴 촬영 뒤 생성형 AI를 이용하여 목각인형으로 변환\n\t\t\t- 병렬 서사 시스템에서 사용할 유저 인형이 필요하며 몰입감을 높이기 위해 공통 인형 대신 유저 전용 인형 사용\n- **진행**\n\t- 현대 사람들도 공감하기 쉬운 치정극이라는 소재와 간단한 구성(박첨지, 꼭두각시, 덜머리집)을 가진 꼭두각시 거리를 우선 개발"
+},
+  "date": "2026-09-14",
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md",
+  "scope": "# 1. 개요부터 # 2. 핵심 시스템 직전까지, 기존에 구조화된 정의/목적/네 시스템/진행을 입력으로 사용",
+  "message": "내 동작으로 배우는 꼭두각시 인형극",
+  "narrative": "조작 체험 구현의 어려움 → 전용 인형과 병렬 서사 및 동시 구조 학습 → 참여 행동 의미 부여와 문화유산 체험 및 학습",
+  "layout": {
+    "family": "격자형",
+    "pattern": "중앙 허브 + 방사형",
+    "reason": "네 시스템을 일렬 단계로 오인하지 않고 실제 입력/사용/평가 관계를 표시"
+  },
+  "blocks": [
+    {
+      "id": "context",
+      "type": "나열 및 문제",
+      "source": "1. 개요의 콘텐츠 정의, 조종 원리의 난이도와 진행",
+      "visual": "추상 퍼즐 및 극장 아이콘"
+    },
+    {
+      "id": "photo",
+      "type": "프로세스",
+      "source": "1. 개요의 사진 기반 인형 생성",
+      "visual": "실사 얼굴→풀컬러 목각 초상"
+    },
+    {
+      "id": "story",
+      "type": "프로세스 및 병렬 관계",
+      "source": "1. 개요의 병렬 서사",
+      "visual": "전경 유저 인형/원경 세 인물의 동시 장면"
+    },
+    {
+      "id": "motion",
+      "type": "프로세스 및 병렬 출력",
+      "source": "1. 개요의 조종 원리 시각화",
+      "visual": "몸동작→외형/추상 구조 동시 출력, 실물 기구 재현 없음"
+    },
+    {
+      "id": "trait",
+      "type": "프로세스",
+      "source": "1. 개요의 유저 성향 평가",
+      "visual": "행동→추상 성향, 마무리 화면 내부 추상 도형"
+    },
+    {
+      "id": "goal",
+      "type": "나열",
+      "source": "1. 개요의 개발 목적",
+      "visual": "상호작용과 학습 풀컬러 아이콘"
+    }
+  ],
+  "relations": [
+    {
+      "from": "photo",
+      "to": "story",
+      "basis": "사용할 유저 인형이 필요함"
+    },
+    {
+      "from": "story",
+      "to": "trait",
+      "basis": "유저 행동과 성향 연결"
+    },
+    {
+      "from": "body-motion",
+      "to": [
+        "exterior-puppet",
+        "abstract-structure-puppet"
+      ],
+      "basis": "외형 인형과 구조 인형 동시 연동"
+    },
+    {
+      "from": "context",
+      "to": "story",
+      "kind": "편집상 시선 흐름"
+    },
+    {
+      "from": "story",
+      "to": "goal",
+      "kind": "개발 목적, 실측 성과 아님"
+    }
+  ],
+  "additionalDesign": "배색, 가상 참여자 초상, 개념도와 위치는 시각 설계 추가임. 실물 조종 기구, 실제 성향 점수나 구현 완료를 주장하지 않음.",
+  "excluded": [
+    {
+      "item": "2개 마당 7개 거리",
+      "reason": "관계 설명 중심의 개요 이미지에서 종목 전체 수량 맥락은 생략"
+    },
+    {
+      "item": "진행 복잡성을 줄이는 상세 설명",
+      "reason": "큰 흐름 유지와 세부 진행 변화로 압축"
+    },
+    {
+      "item": "2절 이후 동작, 기준 및 미완 초안",
+      "reason": "사용자 지정 범위 밖"
+    }
+  ],
+  "labels": [
+    {
+      "id": "title",
+      "text": "내 동작으로 배우는 꼭두각시 인형극",
+      "kind": "title",
+      "zone": "top",
+      "count": 1
+    },
+    {
+      "id": "subtitle",
+      "text": "덜미 - 나만의 꼭두각시",
+      "kind": "subtitle",
+      "zone": "top",
+      "count": 1
+    },
+    {
+      "id": "challenge_h",
+      "text": "체험 과제",
+      "kind": "header",
+      "zone": "left-top",
+      "count": 1
+    },
+    {
+      "id": "challenge_c",
+      "text": "조작 체험 구현의 어려움",
+      "kind": "caption",
+      "zone": "left-top",
+      "count": 1
+    },
+    {
+      "id": "scope_h",
+      "text": "우선 개발",
+      "kind": "header",
+      "zone": "left-bottom",
+      "count": 1
+    },
+    {
+      "id": "scope_c",
+      "text": "꼭두각시 거리의 치정극",
+      "kind": "caption",
+      "zone": "left-bottom",
+      "count": 1
+    },
+    {
+      "id": "photo_h",
+      "text": "사진 기반 생성",
+      "kind": "header",
+      "zone": "upper-middle",
+      "count": 1
+    },
+    {
+      "id": "photo_c",
+      "text": "얼굴 사진의 목각인형 변환",
+      "kind": "caption",
+      "zone": "upper-middle",
+      "count": 1
+    },
+    {
+      "id": "photo_value",
+      "text": "나를 닮은 전용 인형",
+      "kind": "caption",
+      "zone": "upper-middle",
+      "count": 1
+    },
+    {
+      "id": "story_h",
+      "text": "병렬 서사",
+      "kind": "header",
+      "zone": "center",
+      "count": 1
+    },
+    {
+      "id": "story_c",
+      "text": "전경 참여와 원경 인형극의 결합",
+      "kind": "caption",
+      "zone": "center",
+      "count": 1
+    },
+    {
+      "id": "p_user",
+      "text": "유저 인형",
+      "kind": "label",
+      "zone": "center-foreground",
+      "count": 1
+    },
+    {
+      "id": "p_park",
+      "text": "박첨지",
+      "kind": "label",
+      "zone": "center-background-left",
+      "count": 1
+    },
+    {
+      "id": "p_kkok",
+      "text": "꼭두각시",
+      "kind": "label",
+      "zone": "center-background-middle",
+      "count": 1
+    },
+    {
+      "id": "p_deol",
+      "text": "덜머리집",
+      "kind": "label",
+      "zone": "center-background-right",
+      "count": 1
+    },
+    {
+      "id": "story_flow",
+      "text": "큰 흐름 유지와 세부 진행 변화",
+      "kind": "caption",
+      "zone": "center",
+      "count": 1
+    },
+    {
+      "id": "story_laugh",
+      "text": "두 장면이 만드는 웃음",
+      "kind": "caption",
+      "zone": "center",
+      "count": 1
+    },
+    {
+      "id": "motion_h",
+      "text": "조종 원리",
+      "kind": "header",
+      "zone": "right-top",
+      "count": 1
+    },
+    {
+      "id": "motion_c",
+      "text": "외형과 구조의 동시 연동",
+      "kind": "caption",
+      "zone": "right-top",
+      "count": 1
+    },
+    {
+      "id": "motion_value",
+      "text": "동작을 통한 구조 학습",
+      "kind": "caption",
+      "zone": "right-top",
+      "count": 1
+    },
+    {
+      "id": "trait_h",
+      "text": "성향 평가",
+      "kind": "header",
+      "zone": "lower-middle",
+      "count": 1
+    },
+    {
+      "id": "trait_c",
+      "text": "참여 행동과 성향의 연결",
+      "kind": "caption",
+      "zone": "lower-middle",
+      "count": 1
+    },
+    {
+      "id": "trait_value",
+      "text": "마무리 화면의 성향 표시",
+      "kind": "caption",
+      "zone": "lower-middle",
+      "count": 1
+    },
+    {
+      "id": "goal_h",
+      "text": "키오스크 체험",
+      "kind": "header",
+      "zone": "right-bottom",
+      "count": 1
+    },
+    {
+      "id": "goal_c",
+      "text": "실시간 상호작용",
+      "kind": "caption",
+      "zone": "right-bottom",
+      "count": 1
+    },
+    {
+      "id": "goal_value",
+      "text": "무형문화유산의 형식과 의미",
+      "kind": "caption",
+      "zone": "right-bottom",
+      "count": 1
+    }
+  ],
+  "params": {
+    "model": "gpt_image_2",
+    "aspect_ratio": "16:9",
+    "resolution": "1k",
+    "quality": "medium",
+    "count": 1
+  },
+  "prompt": "Create a landscape 16:9 Korean proposal infographic, consulting-deck quality, using a GRID-BASED central hub with surrounding rounded, color-filled rectangular panels. The largest central hub is a theatrical scene, with smaller supporting panels. Use warm ivory canvas, dark indigo typography, terracotta, turquoise, saffron and pale lavender fills, tasteful subtle paper texture, colorful filled icons and vibrant flat illustrations with tactile wooden puppets. Use crisp Korean sans-serif lettering, generous breathing room and clear typography hierarchy. This is a concept explanation for an interactive kiosk, with visual weight on the central puppet theater rather than a generic dashboard.\nRender ONLY the exact quoted Korean strings specified below, each exactly once at its assigned location. Preserve every spelling, space and punctuation. Do not invent or add any other text, numbers, letters, labels or symbols resembling writing. No real brand logos, trademarks or watermarks. Decorations and photographs must contain no text. Any screen mockup interior must contain ONLY abstract geometric shapes, with no text, faces, puppets, concrete scenes or faux writing. All labels are outside screen interiors. Do not render these English instructions.\nTOP: A wide, clean heading area holds the large title \"내 동작으로 배우는 꼭두각시 인형극\" and below it the smaller subtitle \"덜미 - 나만의 꼭두각시\". No additional title or slogan.\nLEFT SIDE, narrow context area: In the upper rounded panel, place \"체험 과제\" with \"조작 체험 구현의 어려움\" directly beneath. Illustrate implementation complexity using a few interlocking colorful abstract puzzle pieces, not hands or a factual puppet mechanism. In the lower rounded panel, place \"우선 개발\" with \"꼭두각시 거리의 치정극\" directly beneath, and a small full-color theatrical mask-and-curtain icon without writing. A broad quiet rightward arrow from this context area toward the central hub denotes the editorial movement from challenge to proposed experience, not an extra gameplay step.\nUPPER MIDDLE supporting panel: Place \"사진 기반 생성\". Show a small photorealistic portrait of a fictional adult participant, a camera icon, and a full-color wooden avatar portrait linked by a short directional arrow. This is an illustrated portrait transformation, outside any display frame. Place \"얼굴 사진의 목각인형 변환\" and \"나를 닮은 전용 인형\" directly beneath this visual as two separate captions at the same secondary typographic level. A single down-pointing connector leads from the wooden avatar portrait to the central user puppet.\nCENTER, largest rounded panel: Place \"병렬 서사\" and \"전경 참여와 원경 인형극의 결합\" at its top. Create one spacious full-color puppet-theater scene outside any screen frame. The foreground contains the participant's personalized wooden puppet, with \"유저 인형\" directly beneath it. A visually separated receding theater plane contains three distinct generic traditional wooden puppet characters with the external labels \"박첨지\", \"꼭두각시\", and \"덜머리집\" directly beneath their respective characters. Their appearance is illustrative, not a claim of exact historical costume or likeness. Keep foreground and background simultaneously visible. A small curved feedback arrow connects the foreground action with a reaction in the distant scene, without implying that the whole plot branches. Below the scene place \"큰 흐름 유지와 세부 진행 변화\" and \"두 장면이 만드는 웃음\" as two short, clearly separated captions. Do not repeat the scene elsewhere.\nUPPER RIGHT supporting panel: Place \"조종 원리\". Show one full-color body-pose silhouette sending two simultaneous colored motion paths to two compact wooden puppet silhouettes: one opaque exterior representation and one simplified abstract structural representation, with symbolic dots and curves. Do not depict an anatomically detailed or literal mechanical cutaway, rods, joints or control construction unsupported by the supplied concept. Place \"외형과 구조의 동시 연동\" and \"동작을 통한 구조 학습\" directly below this conceptual visual. Keep this simultaneous learning explanation distinct from the narrative dependency connectors.\nLOWER MIDDLE supporting panel: A down-pointing arrow from the central participation scene leads to this panel. Place \"성향 평가\". Show a colorful action-token trail linking to an abstract profile icon and a small kiosk monitor. The monitor contains only plain colored circles and rectangles. Place \"참여 행동과 성향의 연결\" and \"마무리 화면의 성향 표시\" as external captions directly beneath the visual. Do not invent a named personality type, score or diagnostic result.\nLOWER RIGHT outcome panel: Place \"키오스크 체험\" above colorful hand-and-speech and open-book icons, with \"실시간 상호작용\" and \"무형문화유산의 형식과 의미\" directly beneath. A subtle rightward arrow from the central experience toward this panel indicates the intended experience and learning purpose, not measured achievement.\nAll supporting panels use the same rounded rectangular family and color fills. The composition must read as context, an interconnected experience hub, and intended learning outcome. The four systems are NOT a numbered linear pipeline. Do not add charts, axes, numerals, QR codes, UI menu labels, tiny text, border captions or written stage signs. Keep every caption readable at the requested resolution.",
+  "prechecks": {
+    "analysis": "기존 구조화 입력 사용, 메시지/서사/블록 유형 선행 확정",
+    "strings": "전 문자열 위치와 1회 배정, 헤더 2~8자/캡션 20자 이내, 명사형 및 마침표/마크다운 없음",
+    "layout": "격자형 일관, 허브 관계와 편집상 화살표 구분",
+    "vocabulary": "실사 초상, 풀컬러 삽화/아이콘, 추상 UI 혼용",
+    "charts": "미사용, 방향 대조 해당 없음",
+    "props": "글자 유입 소품/브랜드 금지",
+    "prompt": "첫 문단 용도/스타일/배색/타이포/계열, 직후 텍스트 통제, 한국어는 인용 문자열만",
+    "settings": "현재 사용자 지침 기본 16:9, 모델 설정 읽기 전용 대조 뒤 호출 예정"
+  },
+  "postchecks": "직접 대조 및 4개 영역 크롭 확대→이미지만 제공한 새 맥락 전사→문자열 및 횟수와 단어 겹침 및 브랜드와 차트 대조를 수행함. 범위와 한계는 검수결과 파일에 기록함",
+  "preReview": {
+    "findings": 1,
+    "corrected": 1,
+    "detail": "1. 개요에 미명시된 손 조작 재현을 조작 체험 구현으로 정정하고 관련 시각 지시를 추상 퍼즐로 변경",
+    "recheckFindings": 0
+  },
+  "hashes": {
+    "guide": "eba8f798aa0ad1a17b7b73c0b3526ef9bfcb95f9fed887a852ea0ee811f52ac6",
+    "source": "e4c7cf5fb9eacb810b19343dd12f1d365e6793e1f31d7fc695a9b0a660345dcb"
+  },
+  "execution": {
+    "tool": "Higgsfield generate_image",
+    "mode": "사용자가 지정한 저장소 지침의 힉스필드 신규 생성 경로 사용, 내장 imagegen 경로 아님",
+    "jobId": "b4f15d1b-05c6-4ff3-a8a3-3016ff4a1da4",
+    "submitted": {
+      "id": "b4f15d1b-05c6-4ff3-a8a3-3016ff4a1da4",
+      "type": "image",
+      "status": "pending",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a landscape 16:9 Korean proposal infographic, consulting-deck quality, using a GRID-BASED central hub with surrounding rounded, color-filled rectangular panels. The largest central hub is a theatrical scene, with smaller supporting panels. Use warm ivory canvas, dark indigo typography, terracotta, turquoise, saffron and pale lavender fills, tasteful subtle paper texture, colorful filled icons and vibrant flat illustrations with tactile wooden puppets. Use crisp Korean sans-serif lettering, generous breathing room and clear typography hierarchy. This is a concept explanation for an interactive kiosk, with visual weight on the central puppet theater rather than a generic dashboard.\nRender ONLY the exact quoted Korean strings specified below, each exactly once at its assigned location. Preserve every spelling, space and punctuation. Do not invent or add any other text, numbers, letters, labels or symbols resembling writing. No real brand logos, trademarks or watermarks. Decorations and photographs must contain no text. Any screen mockup interior must contain ONLY abstract geometric shapes, with no text, faces, puppets, concrete scenes or faux writing. All labels are outside screen interiors. Do not render these English instructions.\nTOP: A wide, clean heading area holds the large title \"내 동작으로 배우는 꼭두각시 인형극\" and below it the smaller subtitle \"덜미 - 나만의 꼭두각시\". No additional title or slogan.\nLEFT SIDE, narrow context area: In the upper rounded panel, place \"체험 과제\" with \"조작 체험 구현의 어려움\" directly beneath. Illustrate implementation complexity using a few interlocking colorful abstract puzzle pieces, not hands or a factual puppet mechanism. In the lower rounded panel, place \"우선 개발\" with \"꼭두각시 거리의 치정극\" directly beneath, and a small full-color theatrical mask-and-curtain icon without writing. A broad quiet rightward arrow from this context area toward the central hub denotes the editorial movement from challenge to proposed experience, not an extra gameplay step.\nUPPER MIDDLE supporting panel: Place \"사진 기반 생성\". Show a small photorealistic portrait of a fictional adult participant, a camera icon, and a full-color wooden avatar portrait linked by a short directional arrow. This is an illustrated portrait transformation, outside any display frame. Place \"얼굴 사진의 목각인형 변환\" and \"나를 닮은 전용 인형\" directly beneath this visual as two separate captions at the same secondary typographic level. A single down-pointing connector leads from the wooden avatar portrait to the central user puppet.\nCENTER, largest rounded panel: Place \"병렬 서사\" and \"전경 참여와 원경 인형극의 결합\" at its top. Create one spacious full-color puppet-theater scene outside any screen frame. The foreground contains the participant's personalized wooden puppet, with \"유저 인형\" directly beneath it. A visually separated receding theater plane contains three distinct generic traditional wooden puppet characters with the external labels \"박첨지\", \"꼭두각시\", and \"덜머리집\" directly beneath their respective characters. Their appearance is illustrative, not a claim of exact historical costume or likeness. Keep foreground and background simultaneously visible. A small curved feedback arrow connects the foreground action with a reaction in the distant scene, without implying that the whole plot branches. Below the scene place \"큰 흐름 유지와 세부 진행 변화\" and \"두 장면이 만드는 웃음\" as two short, clearly separated captions. Do not repeat the scene elsewhere.\nUPPER RIGHT supporting panel: Place \"조종 원리\". Show one full-color body-pose silhouette sending two simultaneous colored motion paths to two compact wooden puppet silhouettes: one opaque exterior representation and one simplified abstract structural representation, with symbolic dots and curves. Do not depict an anatomically detailed or literal mechanical cutaway, rods, joints or control construction unsupported by the supplied concept. Place \"외형과 구조의 동시 연동\" and \"동작을 통한 구조 학습\" directly below this conceptual visual. Keep this simultaneous learning explanation distinct from the narrative dependency connectors.\nLOWER MIDDLE supporting panel: A down-pointing arrow from the central participation scene leads to this panel. Place \"성향 평가\". Show a colorful action-token trail linking to an abstract profile icon and a small kiosk monitor. The monitor contains only plain colored circles and rectangles. Place \"참여 행동과 성향의 연결\" and \"마무리 화면의 성향 표시\" as external captions directly beneath the visual. Do not invent a named personality type, score or diagnostic result.\nLOWER RIGHT outcome panel: Place \"키오스크 체험\" above colorful hand-and-speech and open-book icons, with \"실시간 상호작용\" and \"무형문화유산의 형식과 의미\" directly beneath. A subtle rightward arrow from the central experience toward this panel indicates the intended experience and learning purpose, not measured achievement.\nAll supporting panels use the same rounded rectangular family and color fills. The composition must read as context, an interconnected experience hub, and intended learning outcome. The four systems are NOT a numbered linear pipeline. Do not add charts, axes, numerals, QR codes, UI menu labels, tiny text, border captions or written stage signs. Keep every caption readable at the requested resolution.",
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "medium"
+      }
+    },
+    "completion": {
+      "index": 0,
+      "job_id": "b4f15d1b-05c6-4ff3-a8a3-3016ff4a1da4",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AVM1cFdhum7PAQOPk1ppvsBBQR/hf_20260914_064348_b4f15d1b-05c6-4ff3-a8a3-3016ff4a1da4.png"
+    },
+    "file": "assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png",
+    "width": 1344,
+    "height": 752,
+    "sha256": "cb6d7bae5e35933b8f72cd7a9e4a2876763b1955816408c8916edeefcdf91b91",
+    "generatedCount": 1,
+    "upgraded2k": false,
+    "evidence": {
+      "response": "꼭두각시_개요_인포그래픽_v2_생성응답.json",
+      "transcript": "꼭두각시_개요_인포그래픽_v2_블라인드전사.json",
+      "checks": "꼭두각시_개요_인포그래픽_v2_검수결과.json",
+      "crops": [
+        "꼭두각시_개요_인포그래픽_v2_stage_zoom.png",
+        "꼭두각시_개요_인포그래픽_v2_motion_zoom.png",
+        "꼭두각시_개요_인포그래픽_v2_screen_zoom.png",
+        "꼭두각시_개요_인포그래픽_v2_outcome_zoom.png"
+      ]
+    },
+    "preflight": {
+      "labels": 26,
+      "promptQuotes": 26,
+      "missing": [],
+      "duplicateLabels": [],
+      "outsideQuotedKorean": false,
+      "promptSHA256": "fe815912f55a22b785f9eb1a2c8cf8ff46ed3d8b27b685c5c7f1a8dd3c13f183"
+    },
+    "postCheckSummary": {
+      "expected": 26,
+      "transcribed": 26,
+      "missing": 0,
+      "extra": 0,
+      "excess": 0,
+      "withinLabelRepeatedWords": 0,
+      "overlapCandidates": 4,
+      "brandsReported": 0,
+      "boundaryReported": 0,
+      "unreadableReported": 0,
+      "regenerationTriggersFound": 0
+    },
+    "remaining": "호출 화면비는 16:9이나 실제 파일은 1344×752로 정확한 16:9와 차이 있음. 일반 인형 삽화의 복식/실물 고증은 검수 범위 밖임. 전체 지침 무결성을 선언하지 않음."
+  }
+}
