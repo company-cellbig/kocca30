@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "image": "조종_원리_시각화_인포그래픽_v4.png",
+  "width": 1774,
+  "height": 887,
+  "ratio": "2:1",
+  "sha256": "BC05887BFAEC47A0119A32FD6506025BFD092CFF423E4AB9095CD4FCC3321DD8",
+  "preflight": { "expected": 18, "quoted": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "postflight": { "expected": 18, "observed": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "structurePuppets": { "expected": 3, "physicalTanRodsObserved": 3, "redAnnotationMarksObserved": 0 },
+  "factCrosscheck": "붉은 선은 배치 주석이며 출력 색상으로 쓰지 않는다는 해석과 세 경로 및 실물 사진의 근거 범위를 독립 대조. 사전 점검 발견 0건. 사진에 보이지 않는 역사적 결합 구조는 검증하지 않음.",
+  "remainingLimit": "세부 접합부 및 실제 역사적 구동 방식은 사진과 정지 이미지에서 확인할 수 없음.",
+  "g1": "외부 노출 이미지 수용과 외부 검토 진행 또는 생략에 대한 사용자 판정 대기"
+}
