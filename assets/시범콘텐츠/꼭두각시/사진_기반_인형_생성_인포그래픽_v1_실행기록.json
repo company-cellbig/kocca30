@@ -1,0 +1,60 @@
+{
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md#2.4 사진 기반 인형 생성 시스템",
+  "core_message": "얼굴 사진을 바탕으로 유저를 닮은 목각인형 모습을 생성해 유저 인형에 적용하는 시스템",
+  "narrative": [
+    "유저 얼굴 촬영",
+    "생성형 AI의 얼굴 특징 반영",
+    "생성 모습의 유저 인형 적용",
+    "몰입감"
+  ],
+  "blocks": [
+    "프로세스",
+    "프로세스",
+    "프로세스",
+    "효과"
+  ],
+  "render_labels": [
+    "얼굴 사진으로 만드는 나만의 인형",
+    "사진 기반 인형 생성 시스템",
+    "얼굴 촬영",
+    "유저 얼굴 사진",
+    "AI 변환",
+    "얼굴 특징 반영",
+    "인형 적용",
+    "전경의 유저 인형",
+    "몰입감",
+    "나를 닮은 전용 인형"
+  ],
+  "layout": "열린 캔버스의 좌→우 3단계 플로우와 우측 효과 콜아웃",
+  "tool": "Higgsfield generate_image",
+  "model": "gpt_image_2",
+  "resolution": "1k",
+  "quality": "medium",
+  "submitted_aspect_ratio": "16:9",
+  "job_id": "fb872e6a-58b3-40a8-8564-ba14e32fba97",
+  "source_dimensions": [
+    1344,
+    752
+  ],
+  "final_dimensions": [
+    1344,
+    672
+  ],
+  "crop_pixels": {
+    "top": 40,
+    "bottom": 40,
+    "left": 0,
+    "right": 0
+  },
+  "final_file": "assets/시범콘텐츠/꼭두각시/사진_기반_인형_생성_인포그래픽_v1.png",
+  "blind_transcription": {
+    "labels_read": 10,
+    "missing": 0,
+    "extra": 0,
+    "repeated": 0,
+    "illegible": 0,
+    "brands": 0
+  },
+  "fact_crosscheck": "2.4절에서 얼굴 촬영·AI 변환·인형 적용·몰입감 확인. ‘전경’은 같은 문서 2.2절에서 확인. 무대, 의상, 손잡이는 구체 구현 명세가 아닌 시각 예시.",
+  "prompt": "Create a polished Korean infographic for a cultural heritage concept proposal. Landscape 16:9 canvas designed with a central safe area that can be cropped to exact 2:1 by trimming about 6% from both the top and bottom; keep every label, arrow, face and puppet fully within the central 80% height. Consulting-deck quality, warm cream paper background, deep navy typography, coral, ochre and teal accents, colorful filled illustrations, subtle Korean folk-art brush textures. Organic editorial composition on an open canvas, NO boxed cards, NO uniform rectangular panels.\n\nTEXT CONTROL: Render only the exact quoted Korean strings below, in their assigned locations and exactly once each. Preserve spelling, spacing and case. Invent no other text, numbers, letters, labels, logos, trademarks or watermarks. Decorative objects and any photo must contain no writing. A camera preview or screen, if depicted, may contain only the portrait or abstract shapes and no interface text.\n\nComposition: strong left-to-right three-step transformation across the middle, with clear broad arrows. Start with a circular realistic portrait inset of one ordinary adult visitor, photographed straight on with friendly natural expression. In the center show the SAME facial features translated into a digitally generated carved-wood Korean rod puppet face, with warm wood grain, painted cheeks and traditional cloth attire; this is a visual avatar, not a physical workshop or a claim about real carving. On the right show that same puppet avatar performing in the foreground of a small traditional puppet-theatre scene. Preserve recognizable eyes, hairstyle and face shape across the portrait, generated puppet and stage puppet. The background theatre is subdued so that the user puppet is unmistakably the subject.\n\nTop title, large: \"얼굴 사진으로 만드는 나만의 인형\"\nDirectly beneath title, smaller: \"사진 기반 인형 생성 시스템\"\nDirectly beneath the left portrait, step header: \"얼굴 촬영\"\nDirectly beneath that header, small caption: \"유저 얼굴 사진\"\nDirectly beneath the middle puppet, step header: \"AI 변환\"\nDirectly beneath that header, small caption: \"얼굴 특징 반영\"\nDirectly beneath the right theatre puppet, step header: \"인형 적용\"\nDirectly beneath that header, small caption: \"전경의 유저 인형\"\nNear the right end of the visual flow, a compact outcome callout attached by a leader line, header: \"몰입감\"\nDirectly beneath that header, small caption: \"나를 닮은 전용 인형\"\n\nEvery Korean phrase above must be readable at normal infographic size, with no repeats. Arrows carry no text. No additional people or puppet characters in the foreground. No numerical chart."
+}
