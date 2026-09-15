@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-15",
+  "image": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_v3.png",
+  "annotatedReference": "assets/시범콘텐츠/꼭두각시/막대표시.png",
+  "sourceScope": "덜미 - 나만의 꼭두각시 콘셉트 기획.md 2.1 조종 원리 시각화 시스템",
+  "pixels": { "width": 1774, "height": 887, "exactRatio": "2:1" },
+  "preflightPromptCheck": { "expected": 18, "quoted": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "blindTranscriptionCheck": { "expected": 18, "observed": 18, "missing": 0, "extra": 0, "duplicate": 0, "unreadableOrAmbiguous": 0, "fakeNumericLatinOrBrandText": 0 },
+  "markingCheck": { "annotatedStructurePuppets": 3, "finalMarkedStructurePuppets": 3, "roundJointBeadsAddedByFirstEdit": true, "roundJointBeadsPresentInFinal": false, "pathRelationship": "사용자 주석의 좌측 팔부터 중앙과 우측 손목까지, 중앙부터 옷자락 끝까지 이어지는 형태를 세 위치에서 유지" },
+  "independentFactCheck": "첫 생성 후보의 사용자 주석에 없는 원형 관절구를 발견해 단일 후속 편집으로 큰 구조 인형과 아래 두 반복에서 전수 제거함. 최종 재대조의 지정 범위에서 새 사실·시각 발견 0건임. 사용자 주석과의 대응 판단이며 실물 기구 전체의 고증 판단은 아님",
+  "P1": "붉은 막대 경로의 구체 위치와 색을 사용자 주석과 대조함. 원고 2.1절은 동시 연동과 내부 조작부 시각화 목적을 뒷받침하나 주석의 선을 실물의 확정 결합 도면으로 일반화하지 않음",
+  "P5": "원고 2.1절, 인포그래픽 생성 지침, v2, 막대표시.png, 최종 v3 이미지와 기록 파일의 실제 경로를 확인함. 사용자 변경 중인 원고와 주석 이미지 및 v2는 수정하지 않음",
+  "residualFinding": "붉은 선은 사용자 지정 경로를 정리한 개념적 표시이며 실제 고정, 결합과 구동 방식까지 검증하는 도면은 아님",
+  "G1": "외부 노출 이미지 변경이므로 Claude Code 외부 검토 진행 또는 생략 결정을 사용자에게 요청할 예정"
+}
