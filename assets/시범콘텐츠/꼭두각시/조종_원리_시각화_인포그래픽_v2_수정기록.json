@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-15",
+  "state": "generated-and-self-checked-pending-G1",
+  "request": "사용자 제공 박첨지 인형 실물 레퍼런스를 참고해 기존 인포그래픽의 구조 인형이 실제와 거리가 있는 점을 수정",
+  "target": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽.png",
+  "reference": "assets/시범콘텐츠/꼭두각시/박첨지 인형 실물 레퍼런스.png",
+  "referencePixels": "105x138",
+  "referenceSha256": "BA258E90C2373D80F2B1B80BB408D0CF8C017285386477BB74C3250C090A65D4",
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md#2.1 조종 원리 시각화 시스템",
+  "sourceClaim": "구조 인형은 인형의 겉 움직임을 만드는 내부 조작 부위의 작동을 시각화함",
+  "observedInReference": [
+    "정면의 머리 둘레와 턱 아래에 보이는 흰 장식의 외형. 재질과 나이는 확인 불가",
+    "밝은 의상과 몸 양쪽으로 뻗는 가는 소매 형상. 재질과 실제 동작은 확인 불가",
+    "옷 아래 중앙에서 수직으로 길게 보이는 가는 부재. 내부 연속성과 결합 방식은 확인 불가",
+    "정면 사진의 보이는 영역에는 다리나 색 구슬식 관절이 없음. 실제 구조의 부재를 증명하지 않음"
+  ],
+  "notObserved": [
+    "옷 안의 막대 결합점과 정확한 고정 방식",
+    "팔 내부의 구동 부품이나 줄 배치",
+    "사진 밖 후면 구조와 각 인형의 동작 메커니즘"
+  ],
+  "editScope": "우측 구조 인형과 하단 학습 영역의 작은 구조 인형만 수정. 외형 인형과 인물, 동작 예시, 화살표, 색 패널, 모든 문구 및 2:1 비율 보존",
+  "visualDecision": "구조 인형의 로봇처럼 보이는 구슬 관절과 선을 제거하고, 사진에서 보이는 중앙의 가는 수직 부재와 밝은 옷·소매 형상을 참고함. 첫 편집은 박첨지 얼굴로 바뀌어 외형 인형과 다른 캐릭터가 됐으므로 비교 대상의 얼굴·의상을 맞추는 추가 편집을 진행함. 실제 내부 결합 도면이라고 주장하지 않음",
+  "independentFactCheck": "새 Codex 서브에이전트가 소형 정면 사진과 원고 2.1절을 독립 대조. 재질, 나이, 내부부터 이어지는 단일 막대의 연속성·결합, 팔의 구동과 움직임은 사진에 근거 없음. 첫 프롬프트의 OBSERVABLE construction과 sleeve motion은 관찰 범위를 넘는 표현이므로 후속 프롬프트와 최종 설명에서 사실로 단정하지 않음",
+  "finalFactCheck": "최종 v2 이미지는 외형·구조 인형이 같은 캐릭터로 보임. 잔류 발견 2건: 반투명 옷 안의 세로선은 사진에 없는 내부 연속 경로를 추정하게 할 수 있고, 정적 막대만으로 원고의 내부 조작 부위가 어떻게 작동하는지는 드러나지 않음. 실제 결합점·고정장치를 그리지는 않음",
+  "output": { "file": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_v2.png", "width": 1774, "height": 887, "ratio": "2:1", "sha256": "D18701DFB8BD3E5A591D9D0FFFD499E3C4972C67FB42D7AE0474BF2B418471EA" },
+  "attempts": { "imageEdits": 2, "selected": "second edit", "reason": "첫 편집은 구조 인형이 박첨지 얼굴로 변해 외형 인형과 비교 관계가 약해졌고, 두 번째 편집이 얼굴·자세를 맞추면서 세로 부재를 남김" },
+  "postflight": { "blindTranscription": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_v2_블라인드_전사.json", "verification": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_v2_검수_결과.json", "labelsExpected": 18, "labelsObserved": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "followupPrompt": "Use case: precise-object-edit; asset type: Korean infographic-diagram. Image 1 is the ONLY EDIT TARGET, the already edited 2:1 infographic. Image 2 is the Korean opaque puppet identity reference. Image 3 is the user's SMALL front-facing REAL-PUPPET PHOTO, whose visible lower slim vertical element informs only the simplified support form, not hidden mechanical details. Preserve Image 1's entire exact landscape 2:1 canvas, the adult, challenge panel, three gesture silhouettes, simultaneous fork arrows, BOTH panel headings, all 18 exact Korean text strings, backgrounds, typography, color and especially the praised opaque puppet on the left output panel UNCHANGED. Change ONLY the structure puppet on the right output panel and its two smaller repeats in the bottom learning area. The current white-haired puppet from Image 3 is a DIFFERENT CHARACTER and must become a transparent counterpart of the opaque puppet in Image 2: same spotted carved face, dark red-green patterned headwrap, cream/light-blue wide-sleeved upper garment, navy robe outline and same raised-arm leaning pose. Keep the non-robotic simple body form already achieved, with a thin straight vertical element visibly emerging from below the cloth robe like the visible lower element in Image 3; at most show a faint continuation behind sheer fabric as a CONCEPTUAL cue, never a verified internal attachment. Remove the white furry hair and beard from the structure puppet, and remove any reappearing joint balls, rigid articulated legs, colored wire diagrams, gears, ropes, mechanisms or skeletal framework. Do not invent unseen arm or head joints or claim actual hidden construction. Keep outer and structure views recognizably the SAME puppet and both outputs simultaneous. Keep the 18 existing quoted Korean strings exactly once each, with zero deletion, insertion, misspelling or invented text. No Latin text, numbers, brands, logos or watermark. Do not modify Image 2 or Image 3.",
+  "renderStrings": [
+    "몸동작으로 배우는 인형 조종 원리",
+    "조종 원리 시각화 시스템",
+    "학습 과제",
+    "손동작 조작 재현의 어려움",
+    "몸동작 인식",
+    "이동",
+    "몸 기울이기",
+    "팔 휘두르기",
+    "동시 연동",
+    "동작에 맞춘 동시 조작",
+    "외형 인형",
+    "겉의 움직임",
+    "구조 인형",
+    "내부 조작 부위의 작동",
+    "학습 효과",
+    "움직임과 내부 구조의 관계",
+    "인형 조작 원리 이해",
+    "몸동작을 통한 쉬운 학습"
+  ],
+  "tool": "built-in image_gen.imagegen edit with two local reference paths",
+  "prompt": "Use case: precise-object-edit; asset type: Korean infographic-diagram. Image 1 is the EDIT TARGET infographic. Image 2 is the real puppet reference supplied by the user, NOT an edit target. Keep Image 1's exact 2:1 landscape canvas, all 18 Korean labels, typography, title, reading order, adult participant, gesture silhouettes, arrows, colored panels and its opaque Korean outer puppet entirely unchanged. Change ONLY the transparent STRUCTURE PUPPET in the upper-right panel and its two small repeats in the bottom learning area. The current robot-like colored ball joints, rigid segmented legs, skeletal framework and multicolored technical wiring are misleading and must be removed completely. Study Image 2's OBSERVABLE construction: a slender cloth-bodied puppet with soft pale sleeves and one long narrow dark upright central stick visibly continuing far below the garment. Use this form for the structure puppet while keeping its face and robe identity close to the existing outer puppet so the two views remain comparable and responsive to the same participant pose. The structure view may have a gently translucent garment and a restrained warm highlight around the VISIBLE lower support stick and sleeve motion, but do NOT invent unseen attachment points, arm strings, gears, colored dot-joints, a mechanical skeleton, legs, head mechanism, control bars or a cutaway blueprint. The provided photo is small and front-facing; it does not reveal exact hidden assembly, so do not imply that the rendering is a verified physical interior. Make the paired puppet outputs still read as simultaneous, not consecutive. Keep every existing visible Korean string unchanged, exactly once, with no invented writing: \"몸동작으로 배우는 인형 조종 원리\", \"조종 원리 시각화 시스템\", \"학습 과제\", \"손동작 조작 재현의 어려움\", \"몸동작 인식\", \"이동\", \"몸 기울이기\", \"팔 휘두르기\", \"동시 연동\", \"동작에 맞춘 동시 조작\", \"외형 인형\", \"겉의 움직임\", \"구조 인형\", \"내부 조작 부위의 작동\", \"학습 효과\", \"움직임과 내부 구조의 관계\", \"인형 조작 원리 이해\", \"몸동작을 통한 쉬운 학습\". No extra Korean or Latin text, numbers, brands, logos, QR codes, fake text or watermarks. Do not modify Image 2."
+}

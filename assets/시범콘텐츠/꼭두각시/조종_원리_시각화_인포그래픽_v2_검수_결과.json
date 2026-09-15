@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-15",
+  "image": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_v2.png",
+  "source": "덜미 - 나만의 꼭두각시 콘셉트 기획.md 2.1 조종 원리 시각화 시스템",
+  "reference": "assets/시범콘텐츠/꼭두각시/박첨지 인형 실물 레퍼런스.png",
+  "pixels": { "width": 1774, "height": 887, "exactRatio": "2:1" },
+  "preflightPromptStrings": { "expected": 18, "quoted": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "blindTranscription": { "expected": 18, "observed": 18, "missing": 0, "extra": 0, "duplicate": 0, "unreadableOrAmbiguous": 0, "fakeNumericLatinOrBrandText": 0 },
+  "P1": "로봇처럼 보이는 구슬 관절과 구조 선을 제거하고 실물 사진에서 보이는 옷 아래 중앙 세로 부재 및 밝은 옷, 소매 형상을 참고함. 사진은 정확한 내부 결합과 팔 구동을 보여주지 않으므로 구조 인형은 참조 기반 개념 표현으로 한정함",
+  "P5": "2.1절 원고, 인포그래픽 생성 지침, 실물 참고 사진, 원본과 v2 이미지, 수정 및 블라인드 전사 파일 경로를 대조함. 원고나 원본 이미지는 수정하지 않음",
+  "residualFindings": [
+    "사진의 작은 정면 모습만으로 숨은 내부 부품과 부재의 결합 방식은 확인 불가. v2의 반투명 옷 안으로 이어지는 세로선이 실제 내부 경로처럼 읽힐 수 있음",
+    "원고 2.1절은 내부 조작 부위의 작동 시각화를 요구하지만 정적 참조 사진을 토대로 한 v2는 그 부위가 어떻게 구동되는지 보여주지 않음"
+  ],
+  "G1": "외부 노출 이미지이므로 사용자에게 Claude Code 외부 검토 진행 또는 생략 결정을 요청할 예정"
+}
