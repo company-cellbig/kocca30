@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "image": "병렬_서사_시스템_인포그래픽_v3.png",
+  "width": 1774,
+  "height": 887,
+  "ratio": "2:1",
+  "sha256": "1767F24EC97DDD0BFA099454828B5463580B5090F829F107287F20C45F3E5016",
+  "preflight": { "expected": 12, "quoted": 12, "missing": 0, "extra": 0, "duplicate": 0 },
+  "postflight": { "expected": 12, "observed": 12, "missing": 0, "extra": 0, "duplicate": 0, "unreadable": 0 },
+  "orientation": { "userPuppetFrontFace": true, "userPuppetFrontGarment": true, "rearHeadOrBackVestVisible": false },
+  "scope": { "otherMeaningfulChange": 0, "minorTextureOrColorPixelDifferences": true },
+  "independentChecks": { "blindTextAndVisualFinding": 0, "v2v3ScopeFinding": 0 },
+  "g1": "사용자의 v2 수용과 유일한 인형 방향 발견은 즉시 반영. 외부 노출 이미지의 최종 수용과 외부 검토 진행 또는 생략은 사용자 판정 대기"
+}
