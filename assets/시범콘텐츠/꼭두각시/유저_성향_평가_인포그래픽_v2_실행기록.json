@@ -1,0 +1,68 @@
+{
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md",
+  "source_sections": ["2.3 유저 성향 평가 시스템", "3.3 마무리"],
+  "message": "행동 기록과 해석으로 유저 성향을 판정하고 마무리 화면에서 성향과 근거 행동을 보여줌",
+  "layout": "좌측 세 단계 흐름, 우측 개입 적극도 × 문제 해결도 3×3 판정표",
+  "model_generation": {
+    "tool": "Higgsfield generate_image",
+    "model": "gpt_image_2",
+    "resolution": "1k",
+    "quality": "medium",
+    "requested_aspect_ratio": "2:1",
+    "used_aspect_ratio": "16:9",
+    "adjustment": "모델의 가장 가까운 지원 화면비로 조정",
+    "job_id": "8989439c-0b48-432f-a358-634981eae726"
+  },
+  "edits": [
+    "built-in image_gen: 원본의 문구와 표를 보존하며 좌우를 확장해 2:1로 변환",
+    "built-in image_gen: 목적 라벨 추가와 마무리 화면 캡션 보강"
+  ],
+  "final_image": "assets/시범콘텐츠/꼭두각시/유저_성향_평가_인포그래픽_v2.png",
+  "final_dimensions": [1774, 887],
+  "render_strings": [
+    "유저 성향 평가 시스템",
+    "참여 의미·체험 돌아보기",
+    "행동 기록",
+    "병렬 서사 속 유저 행동",
+    "성향 해석",
+    "개입 적극도·문제 해결도",
+    "결과 표시",
+    "마무리 화면의 성향·근거 행동",
+    "유저 성향 판정",
+    "문제 해결도",
+    "개입 적극도",
+    "해결",
+    "중립",
+    "혼란",
+    "적극 개입",
+    "중간 개입",
+    "소극 개입",
+    "적극 해결사",
+    "오지랖쟁이",
+    "천둥 벌거숭이",
+    "은근한 조력자",
+    "유유자적 유람객",
+    "장난꾸러기",
+    "조용한 수습꾼",
+    "태평한 구경꾼",
+    "슬쩍 사고뭉치"
+  ],
+  "blind_transcription": {
+    "strings_read": 26,
+    "missing": 0,
+    "extra": 0,
+    "duplicate_full_strings": 0,
+    "ambiguous_initially": "오른쪽 아래 셀의 슬쩍",
+    "zoom_check": "확대 확인에서 슬쩍 사고뭉치로 판독",
+    "latin_numeric_brand_logo": 0
+  },
+  "fact_comparison": {
+    "matrix_cell_mismatch": 0,
+    "unsupported_addition": 0,
+    "key_requirement_omission": 0
+  },
+  "prompts": {
+    "generation_summary": "Korean consulting-deck infographic; exact 25 preselected strings; left behavior-recording to interpretation to result flow; right exact 3-by-3 outcome matrix; no other text; central composition for 2:1 adaptation",
+    "final_edit": "Edit this exact Korean infographic while preserving its EXACT 2:1 dimensions, layout, illustrations, arrows, color, title, all matrix axes and all nine matrix outcomes. Make only these two tightly related content edits in the left information flow: replace the caption directly beneath '결과 표시' from '성향과 근거 행동' to exactly '마무리 화면의 성향·근거 행동'; add one concise purpose caption directly beneath the main title but above the left stage flow, reading exactly '참여 의미·체험 돌아보기'. Keep the new purpose caption small but clearly legible and visually connected to the left flow. Do not repeat any string, make up any additional text, or alter any other Hangul glyph. The right 3-by-3 matrix MUST keep row and column placement exactly. No logos, Latin letters, numerals, watermarks or pseudo-writing."
+  }
+}
