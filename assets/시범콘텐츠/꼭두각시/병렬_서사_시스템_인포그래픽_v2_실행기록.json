@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-15",
+  "state": "final-render-self-checked-pending-G1",
+  "sourceScope": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md 2.2 병렬 서사 시스템 55~67행과 사용자 스케치 병렬서사예시.jpg. 68~74행의 외부 코미디 참고는 디자인 근거의 보조 맥락으로만 사용하며 특정 프로그램 장면과 브랜드는 이미지에 재현하지 않음.",
+  "segmentation": "원고에서는 주체, 행동, 상태 또는 관계가 바뀌는 불릿을 근거 단위로 분리. 스케치에서는 공간에 표시된 요소와 라벨을 개별 근거 단위로 분리.",
+  "sourceUnits": [
+    { "id": "P1", "location": "59~60행", "unit": "전경 유저 인형과 원경 인형극을 병렬로 진행" },
+    { "id": "P2", "location": "60행", "unit": "유저 행동을 원경의 세부 진행에 반영" },
+    { "id": "P3", "location": "62행", "unit": "유저 행동을 폭넓게 허용" },
+    { "id": "P4", "location": "62행", "unit": "이야기의 큰 흐름을 유지" },
+    { "id": "P5", "location": "63행", "unit": "유저 행동과 인형극 반응을 어우러지게 하여 웃음과 몰입을 높일 목적" },
+    { "id": "P6", "location": "65행", "unit": "전경 유저 인형, 원경 꼭두각시 거리 인물과 사건을 제시" },
+    { "id": "P7", "location": "66행", "unit": "유저 행동에 따라 원경 인물의 대사 등 세부 진행을 변경" },
+    { "id": "P8", "location": "67행", "unit": "주요 사건과 순서를 유지하고 다음 장면으로 연결" },
+    { "id": "S1", "location": "스케치 중앙", "unit": "하나의 큰 무대 화면" },
+    { "id": "S2", "location": "스케치 무대 뒤 왼쪽과 오른쪽", "unit": "박첨지와 꼭두각시를 원경 인물로 배치" },
+    { "id": "S3", "location": "스케치 무대 앞 중앙", "unit": "유저 인형을 전경 주인공으로 배치" },
+    { "id": "S4", "location": "스케치 무대 앞 왼쪽", "unit": "상호작용 소품 배치" },
+    { "id": "S5", "location": "스케치 오른쪽 위", "unit": "화면 밖 실제 유저의 행동을 작은 인셋으로 표시" },
+    { "id": "S6", "location": "스케치 화면 아래", "unit": "대사 표시 영역 배치" }
+  ],
+  "message": "전경의 유저 행동이 원경 인형극의 대사 등 세부 진행을 바꾸지만, 주요 사건과 순서는 유지되어 다음 장면으로 이어지는 병렬 서사.",
+  "informationBlocks": [
+    { "block": "병렬 무대", "type": "대비", "basis": ["P1", "P6", "S1", "S2", "S3", "S4", "S5", "S6"] },
+    { "block": "반응 경로", "type": "프로세스", "basis": ["P2", "P3", "P7", "S5", "S6"] },
+    { "block": "고정 이야기 경로", "type": "프로세스", "basis": ["P4", "P8"] },
+    { "block": "목적", "type": "나열", "basis": ["P5"] }
+  ],
+  "mapping": [
+    { "unit": "P1,P6,S1,S2,S3", "output": "한 무대 안 전경과 원경의 깊이 대비" },
+    { "unit": "P2,P3,P7,S5,S6", "output": "실제 유저 행동 인셋에서 전경 인형을 거쳐 원경 대사 영역으로 이어지는 주황 반응 화살표" },
+    { "unit": "P4,P8", "output": "무대 아래 끊기지 않는 남색 이야기 화살표와 다음 장면" },
+    { "unit": "P5", "output": "마지막 웃음과 몰입 라벨" },
+    { "unit": "S4", "output": "무대 왼쪽 소품 클러스터" }
+  ],
+  "designAdded": "정돈된 색, 화살표, 배지, 입체적인 유저 인형 외형과 추상 말풍선은 개념 전달을 위한 그래픽 설계이며 구현 완료, 성과 측정 또는 원전 고증을 주장하지 않음.",
+  "excluded": "스케치의 손글씨와 붉은 주석 자체, SNL 및 개그콘서트 브랜드와 특정 장면, 덜머리집 추가 배역은 이번 중앙 무대의 시각 집중을 위해 출력하지 않음. 스케치가 표시한 두 원경 인물만 배치.",
+  "output": "assets/시범콘텐츠/꼭두각시/병렬_서사_시스템_인포그래픽_v2.png",
+  "firstRender": {"file":"C:/Users/cellbig/AppData/Local/Temp/codex-parallel-story-first-draft-20260915.png","width":1774,"height":887,"ratio":"2:1","sha256":"6F267E2A056D68763F55AEB99DAA89E03E8449B755714C58B5E7734E1E3BB27F","finding":"하단 타임라인의 점 다섯 개가 원고에 없는 사건 수를 암시할 수 있음. 끝의 환호 인물이 웃음과 몰입을 목적보다 이미 달성한 성과처럼 읽히게 할 수 있음.","workspaceStatus":"중간 시안은 프로젝트 폴더에서 임시 폴더로 이동; 최종 산출물은 v2만"},
+  "finalRender": { "file": "병렬_서사_시스템_인포그래픽_v2.png", "width": 1774, "height": 887, "ratio": "2:1", "sha256": "B9F957331F9989877EE3CA981E8C38F1A89647DE28E3650B4058E2A8446554A8", "edits": 2, "firstCall": "오래 결과 없이 진행되어 종료; 출력 파일 없음", "selected": "두번째 기본 생성 뒤 단일 하단 보정 편집", "tool": "built-in image_gen.imagegen" },
+  "preflight": { "expectedStrings": 12, "promptQuotedStrings": 12, "missing": 0, "extra": 0, "duplicate": 0, "followupQuotedStrings": 12 },
+  "postflight": { "blindTranscript": "병렬_서사_시스템_인포그래픽_v2_블라인드_전사.json", "verification": "병렬_서사_시스템_인포그래픽_v2_검수_결과.json", "expectedStrings": 12, "observedStrings": 12, "missing": 0, "extra": 0, "duplicate": 0, "unreadable": 0, "redHandwriting": 0 },
+  "factCrosscheck": "첫 시안의 환호 인물과 다섯 마커가 성과 달성 및 근거 없는 사건 수를 암시할 수 있다는 독립 발견 2건을 하단 단일 보정으로 반영. 최종 독립 재대조 새 사실 불일치 0건. 소품은 2.2절 본문이 아니라 스케치 좌측 소품의 시각 근거로만 기록.",
+  "followupPrompt": "Use case: precise-object-edit. Asset type: finished landscape 2:1 Korean proposal infographic. Image 1 is the ONLY edit target: a polished theater infographic. Keep its entire canvas, exact 2:1 ratio, all original text, headline, puppet stage, foreground user puppet, rear-left elderly puppet, rear-right decorated puppet, props, participant vignette, orange input and response arrows, empty speech bubble, blank gray dialogue bars, labels, Korean type style and all other colors and objects unchanged. Make exactly TWO small corrections near the bottom. First, in the dark navy story rail at the very bottom, REMOVE the five evenly spaced white circular markers and make that rail one clean, continuous, unbroken navy arrow with a subtle thin teal center highlight. This rail must not imply any numbered or counted event list. Keep the rail's left-to-right direction and the existing two Korean story labels in their original positions. Second, in the lower-right goal cluster, REPLACE the cheering little child illustration, raised fists and radiating celebration strokes with one tasteful filled-color TARGET or compass-like goal emblem. Keep the existing Korean goal label exactly once in its original location, but visually present it as an intended design goal, NOT as an already proven outcome. No human cheering, confetti, trophies, awards, performance graph or checkmarks. Do not add a new text label. Preserve ONLY these twelve existing Korean strings with exactly original spelling, spaces and each once: \"두 장면이 함께 만드는 웃음\", \"병렬 서사 시스템\", \"원경 인형극\", \"박첨지\", \"꼭두각시\", \"전경 유저 인형\", \"소품\", \"다양한 행동\", \"대사 등 세부 변화\", \"주요 사건과 순서 유지\", \"다음 장면\", \"웃음과 몰입\". No other words, pseudo-Hangul, digits, Latin text, brand, logo, watermark or handwriting. Do not change anything outside the two specified bottom regions.",
+  "renderStrings": [
+    "두 장면이 함께 만드는 웃음",
+    "병렬 서사 시스템",
+    "원경 인형극",
+    "박첨지",
+    "꼭두각시",
+    "전경 유저 인형",
+    "소품",
+    "다양한 행동",
+    "대사 등 세부 변화",
+    "주요 사건과 순서 유지",
+    "다음 장면",
+    "웃음과 몰입"
+  ],
+  "prompt": "Use case: infographic-diagram. Asset type: landscape 2:1 Korean proposal infographic, consulting-deck quality. Image 1 is a composition reference ONLY: the user's rough theater sketch. Its red handwritten labels, red arrows, black stick figures and frame lines are temporary design annotations, NEVER final visual elements. Image 2 is a polished infographic STYLE reference ONLY for cream paper backdrop, dark navy Hangul typography, warm orange and teal accents, softly rendered objects, colorful filled icons, generous spacing and professional finish. Do not copy Image 2's content, text, puppets or panel structure. Image 3 is the visual identity reference ONLY for the elderly white-haired, white-bearded puppet on the rear-left of the theater. Image 4 is the visual identity reference ONLY for the puppet with black hair, red-green head decorations, patterned pale upper garment and dark blue skirt on the rear-right. Design a NEW clear infographic with a giant central theater scene as the hero, not a tracing of the sketch. Exact canvas ratio width:height 2:1. Text control: render ONLY the twelve exact quoted Korean strings below, each in its specified location ONCE, with verbatim spelling and spaces. No invented words, pseudo-Hangul, digits, English, brand names, logos or watermarks. The small action inset, stage scenery, props and dialogue mockup contain abstract shapes only, no text. TOP: bold readable headline \"두 장면이 함께 만드는 웃음\" and directly below it smaller subtitle \"병렬 서사 시스템\". MIDDLE hero stage: an elegant dimensional traditional Korean puppet-theater opening viewed slightly from above, showing foreground and background concurrently on the SAME screen. Place the stage at center-left, and a small rounded human-action vignette above and to the right of it as in Image 1, with an adult participant making a broad gesture; label the vignette \"다양한 행동\" directly beneath it. A warm orange arrow leads from the participant into the central foreground puppet, not into the rear cast. In the stage's distant rear layer, place the two recognizably different puppet actors: Image 3's white-haired white-bearded elder on rear-left labeled \"박첨지\" and Image 4's decorated dark-haired puppet on rear-right labeled \"꼭두각시\". A teal small section badge \"원경 인형극\" sits directly above this rear theatrical layer. Behind them is simple traditional scenic cloth and an abstract event setting, not another interface. In the near foreground center, place ONE distinct custom-looking carved user puppet, larger than the rear puppets and clearly separated by depth, looking toward them; a warm small badge \"전경 유저 인형\" attaches directly to that near puppet. On the near-left edge of the stage, show a small cluster of text-free colorful interactive objects; label it \"소품\" directly beneath. Show a delicate warm orange response arrow from the user's foreground puppet toward a clean empty speech-bubble shape near the rear actor, then to a wide clean dialogue strip at the bottom of the stage; put \"대사 등 세부 변화\" just outside and directly aligned with that dialogue strip, never inside it. The dialogue strip itself has ONLY gray abstract bars, NO characters, words, numbers or icons that resemble writing. BOTTOM story logic: a single continuous dark navy path below the stage, labeled \"주요 사건과 순서 유지\", flows horizontally to a bright arrowhead labeled \"다음 장면\". The orange response arrow modifies only details and does NOT branch or interrupt this navy path. Finish with a compact vivid filled celebration icon and label \"웃음과 몰입\" at the right-lower end as the design goal, not a measured result. Visual hierarchy must communicate two simultaneous depth layers and the contrast between variable detail and fixed main story. Avoid a tree of alternate endings, numbered stages, robotic joints, generic western marionettes, random puppets, red markup, handwriting, screenshots or any additional text. All labels are clean modern Korean typography legible at slide size, each once."
+}

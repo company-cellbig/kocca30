@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "image": "병렬_서사_시스템_인포그래픽_v2.png",
+  "pixels": "1774x887",
+  "ratio": "2:1",
+  "sha256": "B9F957331F9989877EE3CA981E8C38F1A89647DE28E3650B4058E2A8446554A8",
+  "preflight": { "expected": 12, "quoted": 12, "missing": 0, "extra": 0, "duplicate": 0 },
+  "postflight": { "expected": 12, "observed": 12, "missing": 0, "extra": 0, "duplicate": 0, "unreadable": 0, "brand": 0, "redHandwriting": 0 },
+  "designChecks": { "foregroundBackgroundDistinct": true, "userToDialogueResponsePath": true, "mainEventPathContinuous": true, "unfoundedEventCountMarkers": 0, "goalInsteadOfMeasuredOutcome": true },
+  "factScope": "원고 2.2절 59~67행은 병렬, 다양한 행동, 대사 등 세부 변화, 주요 사건과 순서 유지 및 웃음과 몰입 목적의 근거. 스케치는 박첨지·꼭두각시의 상대 위치와 무대 왼쪽 소품의 시각 근거. 인물의 세부 외형은 별도 제공 이미지 참고에 따른 설계 표현.",
+  "independentFindings": { "firstRender": 2, "corrected": 2, "finalNewFactualMismatch": 0, "blindUnreadable": 0 },
+  "remainingLimit": "정지 이미지가 실제 구현, 원전 고증, 측정된 웃음 또는 몰입 성과를 증명하지 않음.",
+  "g1": "외부 노출 이미지 수용과 외부 검토 진행 또는 생략에 대한 사용자 판정 대기"
+}
