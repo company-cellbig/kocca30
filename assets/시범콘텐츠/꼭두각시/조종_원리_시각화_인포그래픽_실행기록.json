@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-15",
+  "state": "generated-and-self-checked-pending-G1",
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md",
+  "scope": "2.1 조종 원리 시각화 시스템의 정의, 목적, 동작 방식 전체. 2.2 시작 전까지",
+  "inputStructure": "원고가 이미 정의, 목적, 동작 방식으로 구조화됨. 새 원전 단계나 시스템 수를 도출하지 않음",
+  "message": "몸동작을 외형과 구조 인형에 동시에 연동해 인형 조종 원리를 배우는 시스템",
+  "narrative": "손동작 조작 재현의 어려움 → 몸동작 인식과 두 인형 동시 연동 → 움직임과 내부 구조 관계 학습",
+  "layout": {
+    "requestedRatio": "2:1",
+    "family": "격자형",
+    "pattern": "좌→우 플로우",
+    "reason": "유저 동작 인식에서 외형과 구조의 병렬 출력으로 이어지는 원고의 동작 관계를 표현함. 세 몸동작 예시는 순차 단계가 아님"
+  },
+  "sourceUnits": [
+    { "id": "S1", "sourceLocation": "2.1 정의 첫 불릿", "content": "유저 동작을 외형 인형과 구조 인형에 동시에 연동", "mappedTo": ["link", "outputs"] },
+    { "id": "S2", "sourceLocation": "2.1 목적 첫 불릿", "content": "움직임과 내부 구조의 관계를 함께 보아 조작 원리 이해", "mappedTo": ["goal"] },
+    { "id": "S3", "sourceLocation": "2.1 목적 둘째 불릿", "content": "실제 손동작 조작 재현의 어려움을 줄이고 몸동작으로 쉽게 학습", "mappedTo": ["challenge", "goal"] },
+    { "id": "S4", "sourceLocation": "2.1 동작 방식 첫 불릿", "content": "이동, 몸 기울이기, 팔 휘두르기 등 동작 인식", "mappedTo": ["input"] },
+    { "id": "S5", "sourceLocation": "2.1 동작 방식 둘째 불릿", "content": "인식한 동작에 맞춰 외형과 구조 인형 동시 조작", "mappedTo": ["link", "outputs"] },
+    { "id": "S6", "sourceLocation": "2.1 동작 방식 셋째 불릿", "content": "외형은 겉의 움직임, 구조는 내부 조작 부위의 작동 시각화", "mappedTo": ["outputs"] }
+  ],
+  "blocks": [
+    { "id": "challenge", "type": "대비의 배경", "visual": "손동작 조작 재현의 어려움을 나타내는 추상 형태. 구현 복잡성을 사실로 주장하지 않음", "sourceUnits": ["S3"] },
+    { "id": "input", "type": "나열", "visual": "세 몸동작의 풀컬러 자세 아이콘과 실사형 가상 참여자", "sourceUnits": ["S4"] },
+    { "id": "link", "type": "프로세스", "visual": "하나의 동작 흐름이 두 동시 경로로 나뉘는 연결선", "sourceUnits": ["S1", "S5"] },
+    { "id": "outputs", "type": "병렬 출력", "visual": "첨부 꼭두각시 이미지를 참고한 같은 자세의 외형 천 인형과 개념적 투명 구조 인형", "sourceUnits": ["S1", "S5", "S6"] },
+    { "id": "goal", "type": "나열", "visual": "움직임과 내부 구조의 대응을 보여주는 두 색 연결 아이콘", "sourceUnits": ["S2", "S3"] }
+  ],
+  "additionalDesign": "가상 참여자, 색, 화면 구성, 인형의 외형과 구조 인형의 점/곡선은 시각 설계 추가임. 인형 외형은 사용자가 앞서 첨부한 꼭두각시 이미지를 참고함. 실제 손 조작 장치의 고증 도면, 확정 UI와 구현 완료를 주장하지 않음",
+  "excluded": [
+    { "item": "2.2 이후 시스템과 인형극 장면", "reason": "사용자 지정 절 범위 밖" },
+    { "item": "실제 손 조작 장치의 세부 부품", "reason": "2.1 원고에 형태와 배치가 명시되지 않음" }
+  ],
+  "labels": [
+    { "text": "몸동작으로 배우는 인형 조종 원리", "zone": "top", "count": 1 },
+    { "text": "조종 원리 시각화 시스템", "zone": "top", "count": 1 },
+    { "text": "학습 과제", "zone": "left-upper", "count": 1 },
+    { "text": "손동작 조작 재현의 어려움", "zone": "left-upper", "count": 1 },
+    { "text": "몸동작 인식", "zone": "left-main", "count": 1 },
+    { "text": "이동", "zone": "left-gesture-1", "count": 1 },
+    { "text": "몸 기울이기", "zone": "left-gesture-2", "count": 1 },
+    { "text": "팔 휘두르기", "zone": "left-gesture-3", "count": 1 },
+    { "text": "동시 연동", "zone": "center", "count": 1 },
+    { "text": "동작에 맞춘 동시 조작", "zone": "center", "count": 1 },
+    { "text": "외형 인형", "zone": "right-upper", "count": 1 },
+    { "text": "겉의 움직임", "zone": "right-upper", "count": 1 },
+    { "text": "구조 인형", "zone": "right-lower", "count": 1 },
+    { "text": "내부 조작 부위의 작동", "zone": "right-lower", "count": 1 },
+    { "text": "학습 효과", "zone": "bottom", "count": 1 },
+    { "text": "움직임과 내부 구조의 관계", "zone": "bottom", "count": 1 },
+    { "text": "인형 조작 원리 이해", "zone": "bottom", "count": 1 },
+    { "text": "몸동작을 통한 쉬운 학습", "zone": "bottom", "count": 1 }
+  ],
+  "execution": { "tool": "built-in image_gen.imagegen", "explicitModelQualitySizeControls": false, "requestedCount": 1, "generationAttempts": 1, "editAttempts": 1, "referenceImage": "assets/시범콘텐츠/꼭두각시/꼭두각시_컬러_투명.png" },
+  "factCheck": {
+    "method": "새 독립 Codex 서브에이전트가 원고 2.1절과 실행기록을 대조; 파일 수정 없음",
+    "sourceGroundedUnits": 6,
+    "sourceGroundedLabels": 18,
+    "finding": "원고 목적은 학습 의도이지 측정된 효과가 아님. 최초 프롬프트의 implementation complexity는 2.1절에서 직접 뒷받침되지 않는 표현이므로 실제 그림과 설명에서 구현 복잡성을 사실로 주장하지 않음. 인형의 구체적 외형, 투명 점/경로와 신호 연결선은 시각 설계 추가임"
+  },
+  "editPrompt": "Edit the FIRST supplied image as the only target infographic. The SECOND supplied image is the visual reference for the Korean traditional puppet's identity, face, dark patterned headwrap, pale blue/cream jeogori and dark navy robe. Preserve the infographic's exact landscape 2:1 canvas, all 18 Korean text labels, their spelling, their count, typography, reading order, panels, background, adult participant, colored gesture silhouettes, branch arrows and bottom learning area unchanged. Replace every Pinocchio-like pointed-hat, wooden-limbed or robotic-looking puppet in the infographic with Korean puppet designs inspired by the SECOND image. In the upper-right \"외형 인형\" panel, show the opaque cloth-robed puppet with the referenced facial features and clothes, one arm lifted and body leaning to match the participant. In the peer \"구조 인형\" panel, show the SAME Korean puppet silhouette, face, headwrap and robe in the SAME pose, but with the clothing and torso subtly translucent and a sparse ABSTRACT color-coded conceptual motion overlay of dots and flowing paths inside. It must read as a transparent view of a Korean cloth puppet, not a metal robot, skeleton, gadget, rigid articulated toy, historical mechanism blueprint, rods, strings, gears or verified physical assembly. Repeat these revised Korean puppets in the three smaller learning illustrations at the bottom. The interior visualization is conceptual only. No new or deleted text, no misspellings, no extra logos/watermarks/numbers/Latin text. Do not edit the supplied reference portrait itself.",
+  "output": { "file": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽.png", "width": 1774, "height": 887, "actualRatio": "2:1", "sha256": "E662026BD46B79B56E7A484F8D7772410C6986424BC13FDE42130904CA06A796" },
+  "postflight": { "blindTranscription": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_블라인드_전사.json", "verification": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽_검수_결과.json", "labelsExpected": 18, "labelsObserved": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "prompt": "Use case: infographic-diagram. Create a Korean proposal infographic on an exact landscape 2:1 canvas, consulting-deck quality. Use a GRID-BASED left-to-right process composition with softly rounded, color-filled information areas. Warm ivory background, deep charcoal Korean sans-serif typography, terracotta, turquoise, ochre and dark indigo accent colors, subtle paper texture, full-color carved-wood puppet illustrations and a small natural photorealistic fictional adult participant. This is a concept explanation of simultaneous motion learning, not a verified historical puppet-mechanism blueprint. Make the two output puppet views equally prominent and visibly synchronized, not sequential steps.\n\nRender ONLY the exact 18 quoted Korean strings below, each exactly once at its assigned location. Preserve spelling, spacing and punctuation exactly. Do not invent other text, Latin letters, numbers, year marks, symbols resembling writing, labels, logos, trademarks or watermarks. All photos, clothing and decorative shapes contain no text. Do not place any text inside a screen mockup; if a display frame appears, its interior must contain abstract geometric shapes only. Do not render these English instructions.\n\nTOP: The strong headline \"몸동작으로 배우는 인형 조종 원리\" with the smaller subtitle \"조종 원리 시각화 시스템\" directly beneath.\n\nLEFT UPPER, small context area: Place \"학습 과제\" and directly beneath it \"손동작 조작 재현의 어려움\". Show only abstract interlocking pieces suggesting implementation complexity; do not draw hands operating rods or claim a specific historical device.\n\nLEFT MAIN, body-motion recognition area: Place \"몸동작 인식\". Show one fictional adult participant in a natural full-body pose, hands empty, alongside three small colorful filled pose illustrations representing alternative recognized motions, NOT ordered steps. Put the external labels \"이동\", \"몸 기울이기\", and \"팔 휘두르기\" directly beneath their corresponding gesture illustrations, once each. These motions are examples, not a required sequence.\n\nCENTER LINK: A single wide visual signal leaves the participant motion and forks into TWO simultaneous color-coded paths at the same point. Place \"동시 연동\" at the fork and \"동작에 맞춘 동시 조작\" directly beneath. Avoid any one-after-the-other numbering.\n\nRIGHT UPPER OUTPUT: Place \"외형 인형\" above a vibrant opaque wooden puppet that matches the participant's current leaning and raised-arm body pose. Directly beneath the puppet put \"겉의 움직임\". RIGHT LOWER OUTPUT: Place \"구조 인형\" above a puppet of the same silhouette, scale and pose, translucent enough to reveal a deliberately ABSTRACT conceptual interior made from colored joints, dots and smooth motion paths. Do not draw literal rods, strings, control bars, detailed mechanisms, robotic gears or unverified anatomy. Directly beneath put \"내부 조작 부위의 작동\". The two outputs must be displayed side by side or as equal peers, both receiving the same forked input simultaneously. All Korean labels must be outside any display interior.\n\nBOTTOM LEARNING AREA: Place \"학습 효과\" above a tasteful filled-color visual comparison tying the opaque puppet movement to the translucent conceptual interior. Under it render three separate short captions at one secondary typographic level: \"움직임과 내부 구조의 관계\", \"인형 조작 원리 이해\", and \"몸동작을 통한 쉬운 학습\". This is the intended learning purpose, not measured achievement.\n\nReading order is challenge and participant motion, simultaneous fork, twin puppet outputs, then intended learning. Keep gestures and the twin outputs large enough to read at normal slide size. No charts, axes, scores, numerals, QR codes, tiny UI text or generic thin-line business icons."
+}

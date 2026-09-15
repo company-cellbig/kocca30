@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "sourceScope": "덜미 - 나만의 꼭두각시 콘셉트 기획.md 2.1 조종 원리 시각화 시스템",
+  "image": "assets/시범콘텐츠/꼭두각시/조종_원리_시각화_인포그래픽.png",
+  "outputPixels": { "width": 1774, "height": 887, "ratio": "2:1" },
+  "preflightPromptStringCheck": { "expected": 18, "quoted": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "blindTranscriptionMechanicalCheck": { "expected": 18, "observed": 18, "missing": 0, "extra": 0, "duplicate": 0 },
+  "blindVisualObservation": "두 인형이 중앙 분기에서 동시에 연결된 병렬 출력으로 보이고, 판독 불가·브랜드·가짜 글자·숫자·라틴 글자 보고는 0건",
+  "factCheck": "정의·목적·동작 방식의 근거 단위 6개는 원고 2.1절에 대응. 학습 효과는 목적이며 측정 성과가 아님. 인형 외형과 구조 인형 점·경로는 시각 설계 추가. 최초 프롬프트의 implementation complexity는 원고 직접 근거가 없으므로 이미지 설명의 사실 주장으로 사용하지 않음",
+  "P1": "원고의 몸동작 인식, 외형·구조 인형 동시 연동, 겉 움직임과 내부 작동의 병렬 표현 및 학습 목적을 이미지와 대조. 특정 실제 조종 부품, 구현 완료 또는 측정 효과를 주장하지 않음",
+  "P5": "원고 2.1절, 인포그래픽 생성 지침, 꼭두각시 외형 참고 이미지, 최종 이미지와 실행·전사·검수 파일 경로를 직접 확인",
+  "residualFinding": "구조 인형 내부의 점과 연결선은 원고가 기구의 형태를 특정하지 않으므로 개념적 시각화로만 읽어야 함",
+  "G1": "새 외부 노출 이미지 자산이므로 사용자에게 Claude Code 외부 검토 진행 또는 생략 결정을 요청할 예정"
+}
