@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-15",
+  "image": "꼭두각시_개요_인포그래픽_v4.png",
+  "expectedLabels": 24,
+  "transcribedLabels": 24,
+  "missing": [],
+  "extra": [],
+  "excess": [],
+  "oldCaptionRemaining": false,
+  "newCaptionCount": 1,
+  "unreadable": [],
+  "boundaryNotes": [],
+  "brandsOrLogos": [],
+  "fauxWriting": [],
+  "charts": [],
+  "ratio": { "requested": "2:1", "width": 1774, "height": 887, "actual": 2, "match": true },
+  "regenerationTriggersFound": 0,
+  "remainingVisualFinding": "우측 작은 무대의 가운데 인형은 참조의 얼굴 점과 머리 형태를 작은 크기에서 확정 대응하기 어려움",
+  "statement": "직접 대조, 블라인드 전사와 문자열 기계 대조를 수행함. 문자열 무발견은 모든 시각 결함의 부재를 증명하지 않음"
+}

@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-15",
+  "state": "selected-final-after-targeted-review",
+  "sourceImage": "꼭두각시_개요_인포그래픽_v3.png",
+  "finalImage": "꼭두각시_개요_인포그래픽_v4.png",
+  "sourceSection": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md#1. 개요",
+  "requestedChanges": [
+    {
+      "kind": "text-replacement",
+      "location": "bottom-center, directly beneath 우선 개발",
+      "old": "꼭두각시 거리의 치정극",
+      "new": "현대에도 공감하기 쉬운 소재",
+      "count": 1
+    },
+    {
+      "kind": "character-reference",
+      "stageAreas": ["central-kiosk-upper-stage", "upper-right-miniature-stage"],
+      "mapping": {
+        "박첨지": "박첨지_컬러_투명.png",
+        "꼭두각시": "꼭두각시_컬러_투명.png",
+        "덜머리집": "덜머리집_컬러_투명.png"
+      }
+    }
+  ],
+  "tool": "built-in image_gen.imagegen",
+  "inputImageRoles": {
+    "Image 1": "edit target, v3 infographic",
+    "Image 2": "박첨지 visual reference",
+    "Image 3": "꼭두각시 visual reference, as supplied male puppet",
+    "Image 4": "덜머리집 visual reference"
+  },
+  "finalEditPrompt": "Use case: precise-object-edit. Asset type: revised Korean proposal infographic. Image 1 is the exact edit target. Images 2, 3, and 4 are visual reference cutouts for the three named stage puppets respectively, NOT extra subjects and NOT edits of the cutouts. Preserve Image 1's exact landscape 2:1 framing, entire organic layout, all other people and puppets, kiosk, palette, typography, arrows, icon clusters, spacing, decorative motifs, and every other Korean string verbatim. Make exactly two localized changes throughout Image 1. First, replace ONLY the bottom-center caption beneath the pill \"우선 개발\": the old wording \"꼭두각시 거리의 치정극\" must disappear completely; in precisely its place render \"현대에도 공감하기 쉬운 소재\" exactly once, with the same style, weight and size. Do not render the old wording anywhere. Second, revise the appearances of the named trio in the upper stage of the central kiosk and in the miniature theater at upper right to match the supplied character references. The figure beneath \"박첨지\" must closely match Image 2: old wooden male with large fluffy white hair, bushy white beard and moustache, wide circular eyes, deeply lined tan face, very large ears, loose ivory/white robe. The figure beneath \"꼭두각시\" must closely match Image 3 AS PROVIDED: a wooden male with dark hair and red-green cloth accents, thick black brows, circular eyes, tan face with dark freckles or stippled cheeks, thin dark moustache/goatee, pale blue-white top and dark navy lower garment. Do NOT invent a woman or reinterpret Image 3. The figure beneath \"덜머리집\" must closely match Image 4: female wooden puppet with dark center-parted hair, thick brows, round wide eyes, circular dark forehead mark and cheek marks, pale cream upper garment and deep navy skirt with navy sash. Preserve each name label below the correct puppet. Keep the theatrical scale, poses and illustrative treatment compatible with Image 1, but faithfully carry over distinctive faces, hair, markings and garments. The three reference cutouts have transparent or checkerboard backgrounds; do not import those backgrounds. Text control: All existing text other than the one caption replacement must remain unchanged and readable. No extra text, letters, numerals, logos, watermarks or faux writing. Keep all specified labels exactly once. Do not alter the personalized foreground puppet, photographic visitor portrait, visitor outside the kiosk, or the two structural puppets.",
+  "targetedFollowup": {
+    "attempted": true,
+    "target": "upper-right miniature stage middle puppet",
+    "selected": false,
+    "reason": "추가 생성이 얼굴 점과 머리 형태를 충분히 개선하지 못했고 다른 영역의 미세 변화가 커서 첫 편집 결과를 최종본으로 선택함"
+  },
+  "output": {
+    "width": 1774,
+    "height": 887,
+    "actualRatio": 2,
+    "sha256": "2bcd3d99869fe1d05b6da2822fa6a7363e1ce84dd3e0de3fe6e6a5db1d82088f"
+  },
+  "labelSet": {
+    "base": "꼭두각시_개요_인포그래픽_v3_실행기록.json#labels",
+    "replace": {
+      "from": "꼭두각시 거리의 치정극",
+      "to": "현대에도 공감하기 쉬운 소재"
+    },
+    "expectedCount": 24
+  },
+  "independentFactCheck": {
+    "performed": true,
+    "sourceLocation": "1. 개요 35행",
+    "unsupportedNewClaims": 0,
+    "meaningChange": "새 문구는 원자료의 현대 사람들도 공감하기 쉬운 치정극이라는 소재를 축약함. 치정극이라는 구체적 소재명은 생략되어 추상화됨",
+    "characterReferenceMapping": "중앙 무대의 세 인형 외형은 사용자 제공 세 참고 이미지와 각각 대응함"
+  },
+  "limits": "큰 무대 세 인형의 외형은 참조와 대응함. 우측 작은 무대의 가운데 인형은 작은 크기 탓에 참조의 얼굴 점과 머리 형태까지 확정 대응하기 어려움. 실제 인형 복식의 고증이나 정확한 원본 재현으로 단정하지 않음"
+}
