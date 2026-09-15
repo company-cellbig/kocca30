@@ -1,0 +1,169 @@
+{
+  "state": "generated-with-review-records",
+  "date": "2026-09-15",
+  "source": "05_산출물/시범콘텐츠/06_덜미 - 나만의 꼭두각시/덜미 - 나만의 꼭두각시 콘셉트 기획.md",
+  "scope": "1. 개요 전체. 이미 구조화된 콘텐츠 정의, 개발 목적, 네 핵심 시스템과 진행을 사용함",
+  "message": "나를 닮은 인형으로 배우는 꼭두각시 거리",
+  "narrative": "키오스크 체험의 정의와 목적 → 동등한 네 핵심 시스템 → 우선 개발 범위",
+  "layout": {
+    "ratio": "2:1",
+    "family": "비격자형",
+    "pattern": "궤도 허브형",
+    "reason": "네 시스템을 동등한 핵심 요소로 보이고 일렬 단계나 단일 시스템 중심의 성과 관계로 오인되는 것을 피함"
+  },
+  "blocks": [
+    {
+      "id": "identity",
+      "type": "나열",
+      "source": "콘텐츠 정의와 개발 목적",
+      "visual": "상단의 제목과 두 설명 클러스터"
+    },
+    {
+      "id": "experience",
+      "type": "허브",
+      "source": "꼭두각시 거리 키오스크 체험",
+      "visual": "중앙 실사 참여자와 디지털 인형극 화면"
+    },
+    {
+      "id": "photo",
+      "type": "프로세스",
+      "source": "사진 기반 인형 생성 시스템",
+      "visual": "얼굴 초상에서 목각인형으로 이어지는 변환"
+    },
+    {
+      "id": "motion",
+      "type": "병렬 출력",
+      "source": "조종 원리 시각화 시스템",
+      "visual": "한 몸동작에서 외형과 구조 인형으로 나뉘는 동시 연동"
+    },
+    {
+      "id": "story",
+      "type": "병렬 관계",
+      "source": "병렬 서사 시스템",
+      "visual": "전경 유저 인형과 원경 세 인물의 동시 장면"
+    },
+    {
+      "id": "trait",
+      "type": "프로세스",
+      "source": "유저 성향 평가 시스템",
+      "visual": "참여 행동에서 추상 성향 화면으로 이어지는 흐름"
+    },
+    {
+      "id": "scope",
+      "type": "나열",
+      "source": "진행",
+      "visual": "하단 리더 라인 배지와 세 인물"
+    }
+  ],
+  "relations": [
+    {
+      "from": "photo",
+      "to": "experience",
+      "basis": "병렬 서사에 사용할 유저 전용 인형 생성"
+    },
+    {
+      "from": "motion",
+      "to": "experience",
+      "basis": "유저 동작을 외형 인형과 구조 인형에 동시 연동"
+    },
+    {
+      "from": "story",
+      "to": "experience",
+      "basis": "전경 유저 인형과 원경 덜미 인형극의 병렬 진행"
+    },
+    {
+      "from": "trait",
+      "to": "experience",
+      "basis": "병렬 서사에서 한 행동과 유저 성향의 연결"
+    }
+  ],
+  "additionalDesign": "배색, 가상 참여자, 화면과 아이콘의 외형 및 궤도 배치는 시각 설계 추가임. 구현 완료, 확정 UI, 실물 조종 기구나 고증 도면을 주장하지 않음",
+  "excluded": [
+    {
+      "item": "2개 마당 7개 거리",
+      "reason": "이번 그림은 선택된 꼭두각시 거리의 체험 구조를 설명하므로 종목 전체 수량은 제외"
+    },
+    {
+      "item": "조작 체험 구현 난이도와 복잡한 분기 제한의 상세 설명",
+      "reason": "네 시스템의 정의와 목적을 읽기 쉬운 한 화면으로 압축"
+    },
+    {
+      "item": "2절 이후 세부 동작과 판정 기준",
+      "reason": "사용자 지정 범위 밖"
+    }
+  ],
+  "labels": [
+    { "id": "title", "text": "나를 닮은 인형으로 배우는 꼭두각시 거리", "zone": "top-center", "count": 1 },
+    { "id": "subtitle", "text": "남사당놀이 덜미 키오스크 체험", "zone": "top-center", "count": 1 },
+    { "id": "content_h", "text": "콘텐츠", "zone": "top-left", "count": 1 },
+    { "id": "content_c", "text": "꼭두각시 거리 체험", "zone": "top-left", "count": 1 },
+    { "id": "goal_h", "text": "목적", "zone": "top-right", "count": 1 },
+    { "id": "goal_c", "text": "실시간 상호작용과 학습", "zone": "top-right", "count": 1 },
+    { "id": "photo_h", "text": "사진 기반 생성", "zone": "upper-left", "count": 1 },
+    { "id": "photo_c", "text": "얼굴 사진의 목각인형 변환", "zone": "upper-left", "count": 1 },
+    { "id": "photo_v", "text": "나를 닮은 전용 인형", "zone": "upper-left", "count": 1 },
+    { "id": "motion_h", "text": "조종 원리", "zone": "lower-left", "count": 1 },
+    { "id": "motion_c", "text": "외형과 구조의 동시 연동", "zone": "lower-left", "count": 1 },
+    { "id": "motion_v", "text": "몸동작으로 구조 학습", "zone": "lower-left", "count": 1 },
+    { "id": "story_h", "text": "병렬 서사", "zone": "upper-right", "count": 1 },
+    { "id": "story_c", "text": "전경과 원경의 병렬 진행", "zone": "upper-right", "count": 1 },
+    { "id": "story_v", "text": "큰 흐름 유지와 세부 변화", "zone": "upper-right", "count": 1 },
+    { "id": "story_laugh", "text": "두 장면이 만드는 웃음", "zone": "upper-right", "count": 1 },
+    { "id": "trait_h", "text": "성향 평가", "zone": "lower-right", "count": 1 },
+    { "id": "trait_c", "text": "참여 행동과 성향의 연결", "zone": "lower-right", "count": 1 },
+    { "id": "trait_v", "text": "마무리 화면의 성향 표시", "zone": "lower-right", "count": 1 },
+    { "id": "scope_h", "text": "우선 개발", "zone": "bottom-center", "count": 1 },
+    { "id": "scope_c", "text": "꼭두각시 거리의 치정극", "zone": "bottom-center", "count": 1 },
+    { "id": "park", "text": "박첨지", "zone": "center-stage-left", "count": 1 },
+    { "id": "kkok", "text": "꼭두각시", "zone": "center-stage-middle", "count": 1 },
+    { "id": "deol", "text": "덜머리집", "zone": "center-stage-right", "count": 1 }
+  ],
+  "execution": {
+    "tool": "built-in image_gen.imagegen",
+    "requestedRatio": "2:1",
+    "requestedCount": 1,
+    "explicitModelQualitySizeControls": false,
+    "draftIssue": "초안에서 상단 콘텐츠와 목적 클러스터의 문자열 4개가 누락되어 단일 편집으로 보완함",
+    "editPrompt": "Use case: precise-object-edit. Edit only the existing Korean infographic. Preserve the exact 2:1 canvas, all existing illustrations, people, puppets, kiosk, colors, spacing, all current Korean text, and every current text placement unchanged. Add exactly four missing Korean strings and nothing else. In the upper-left open area, add a small leader-line pill \"콘텐츠\" with the caption \"꼭두각시 거리 체험\" directly beneath it. In the upper-right open area, add a matching leader-line pill \"목적\" with the caption \"실시간 상호작용과 학습\" directly beneath it. Keep these additions clear of the main title and the two upper system clusters. Render each of the four new strings exactly once, verbatim. Do not invent, delete, rewrite, move, duplicate, or distort any other text. No new numbers, letters, logos, marks, symbols, watermarks, or faux writing.",
+    "output": {
+      "file": "assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v3.png",
+      "width": 1774,
+      "height": 887,
+      "actualRatio": 2,
+      "bytes": 2569218,
+      "sha256": "a11ffcb213f7b158f9539ac7898a3170189b4f86c9e63aa5b02b4cffb3e04fb2"
+    }
+  },
+  "prompt": "Use case: infographic-diagram. Create a polished Korean proposal infographic on an exact landscape 2:1 canvas, consulting-deck quality. Use an organic editorial composition on an open warm-ivory canvas, with NO boxed cards and NO uniform rectangular panels. Use deep charcoal Korean sans-serif typography, vermilion, teal, ochre and indigo accents inspired by traditional Korean puppetry, tactile full-color wooden-puppet illustrations, a small photorealistic fictional participant portrait, subtle paper texture, strong hierarchy and generous spacing. The four system clusters must have equal visual weight around one central kiosk experience; they are not a numbered linear pipeline.\n\nRender ONLY the exact 24 quoted Korean strings specified below, each exactly once at its assigned location. Preserve every spelling and space. Do not invent or add any other text, number, letter, logo, trademark, signature, watermark or writing-like mark. Decorations, clothes, props, stage curtains and photos contain no text. Any kiosk display interior contains only the specified external labels and illustrations, with no software menu, score or tiny faux writing. Do not render these English instructions.\n\nTOP CENTER: Place the large title \"나를 닮은 인형으로 배우는 꼭두각시 거리\" with the subtitle \"남사당놀이 덜미 키오스크 체험\" directly beneath. At upper left, a small leader-line pill \"콘텐츠\" anchors the caption \"꼭두각시 거리 체험\". At upper right, a matching leader-line pill \"목적\" anchors \"실시간 상호작용과 학습\".\n\nCENTER: Show a clearly identifiable digital kiosk with an understated dark display bezel. A fictional adult participant stands outside the display and makes a simple empty-hand body gesture. Inside the display, a personalized wooden user puppet occupies the foreground while a separate receding puppet-stage plane shows three distinct generic traditional wooden puppets performing a light comic domestic-jealousy situation. The cast labels must sit directly beneath their respective figures: \"박첨지\", \"꼭두각시\", and \"덜머리집\". Their appearance is illustrative, not a claim of exact historical costume or likeness. No violence, no disaster, no real brand, no rods or strings outside bodies.\n\nUPPER LEFT ORBIT CLUSTER: A leader-line pill \"사진 기반 생성\". Show a small photorealistic fictional face portrait transforming into a full-color wooden avatar portrait. Directly beneath the visual, place \"얼굴 사진의 목각인형 변환\" and then \"나를 닮은 전용 인형\". A single clean curved connector leads from the wooden avatar toward the central personalized puppet.\n\nLOWER LEFT ORBIT CLUSTER: A leader-line pill \"조종 원리\". Show one body-pose silhouette sending two simultaneous color paths toward two matching puppet figures, one opaque exterior and one simplified translucent abstract wooden structure with internal dots and curves. All hands remain empty. Do not depict a literal historical mechanism, external rods, strings, gears or robot parts. Directly beneath, place \"외형과 구조의 동시 연동\" and \"몸동작으로 구조 학습\". A clean connector points toward the central kiosk without crossing the other clusters.\n\nUPPER RIGHT ORBIT CLUSTER: A leader-line pill \"병렬 서사\". Show a miniature cutaway of the central experience with a foreground participant puppet and a clearly separate distant three-puppet stage plane, linked by one restrained feedback curve. Directly beneath, place \"전경과 원경의 병렬 진행\", \"큰 흐름 유지와 세부 변화\", and \"두 장면이 만드는 웃음\". Do not duplicate the cast labels here. A clean connector points toward the central kiosk.\n\nLOWER RIGHT ORBIT CLUSTER: A leader-line pill \"성향 평가\". Show a trail of colorful action tokens leading to an abstract profile icon and a simple result screen made only from circles and rectangles. Directly beneath, place \"참여 행동과 성향의 연결\" and \"마무리 화면의 성향 표시\". Do not invent a personality type, score or diagnosis. A clean connector points toward the central kiosk.\n\nBOTTOM CENTER: A leader-line pill \"우선 개발\" anchors \"꼭두각시 거리의 치정극\". Keep this as the selected story scope, not as a system dependency or measured outcome.\n\nUse thin curved leader lines, airy asymmetry and a few organic color fields to bind the open composition. Each caption must sit directly beneath its visual. Preserve equal prominence for all four systems. No charts, axes, numerals, QR codes, UI menus, speech-bubble dots or generic business icons. Fill the exact 2:1 canvas coherently and keep every Korean label large and crisp.",
+  "preflight": {
+    "labels": 24,
+    "promptQuotedKorean": 24,
+    "missing": [],
+    "extra": [],
+    "duplicateLabels": [],
+    "duplicatePromptStrings": []
+  },
+  "independentFactCheck": {
+    "performed": true,
+    "sourceRange": "1. 개요 15~35행",
+    "contentContradictions": 0,
+    "unsupportedContentClaims": 0,
+    "boundary": "나를 닮은은 얼굴 사진의 목각인형 변환과 유저 전용 인형을 합친 표현",
+    "designOnly": "배치, 화풍, 재질, 가상 참여자, 추상 표현과 오인 방지 금지 요소는 시각 설계 추가로 구분함"
+  },
+  "postCheckSummary": {
+    "directComparison": true,
+    "blindTranscriptionPerformed": true,
+    "expected": 24,
+    "transcribed": 24,
+    "missing": 0,
+    "extra": 0,
+    "excess": 0,
+    "brandsReported": 0,
+    "boundaryReported": 0,
+    "unreadableReported": 0,
+    "chartsReported": 0,
+    "regenerationTriggersFound": 0
+  },
+  "remaining": "일반 인형 삽화의 복식과 실물 외형 고증, 구현 완료 여부는 이번 이미지가 주장하지 않음. 독립 검토 무발견은 모든 시각 결함의 부재를 증명하지 않음"
+}

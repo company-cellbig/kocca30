@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-15",
+  "image": "꼭두각시_개요_인포그래픽_v3.png",
+  "expectedLabels": 24,
+  "transcribedLabels": 24,
+  "missing": [],
+  "extra": [],
+  "excess": [],
+  "unreadable": [],
+  "boundaryNotes": [],
+  "brandsOrLogos": [],
+  "fauxWriting": [],
+  "charts": [],
+  "ratio": {
+    "requested": "2:1",
+    "width": 1774,
+    "height": 887,
+    "actual": 2,
+    "match": true
+  },
+  "regenerationTriggersFound": 0,
+  "statement": "직접 대조, 독립 사실 대조, 블라인드 전사와 문자열 기계 대조를 수행함. 무발견은 모든 시각 결함의 부재를 증명하지 않음"
+}
