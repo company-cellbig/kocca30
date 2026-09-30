@@ -1,0 +1,50 @@
+PROMPT HISTORY — 유람기 OVERVIEW
+These are separate generation calls, not a single combined prompt.
+The selected output is version 3. Rejected attempts are retained as audit history only.
+CALL 1 | new | INTERMEDIATE
+REFERENCE: assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-71ac95cb-abd5-4487-85e7-35aeaf248678.png
+PROMPT:
+Create a new landscape 16:9 Korean proposal infographic, consulting-deck quality, using a GRID-BASED central hub with supporting rounded, color-filled panels. The supplied image is a STYLE AND COMPOSITION REFERENCE ONLY, not an edit target or a factual source: match its warm ivory paper texture, dark indigo Korean typography, terracotta, turquoise, saffron and pale lavender fills, subtle soft shadows, full-color tactile illustrations and wooden-puppet visual vocabulary. Replace all content with the new concept below. Use a generous heading band, a dominant central illustrated scene, two narrow context panels at left and interconnected supporting panels above, below and at right. This infographic explains an AI electronic-book kiosk inspired by a Korean traditional puppet play, not a motion-controlled puppet performance.
+
+Render ONLY the exact quoted Korean strings specified below, each exactly once at its assigned location. Preserve every syllable, space, hyphen and punctuation. Do not copy any text from the reference image. Do not invent, repeat or add any other visible text, numbers, letters or pseudo-writing. No real brands, logos, trademarks or watermarks. Photographs, decorations, masks, costumes and book pages must contain no writing. Every screen interior contains ONLY abstract geometric shapes, with no letters, faces or concrete scenes. Labels sit outside screens. These English instructions are not rendered text.
+
+TOP: Place the large title "내 선택으로 완성하는 나만의 유람기" with the smaller subtitle "덜미 - 나만의 유람기" directly below. Use the same bold, readable title hierarchy as the reference. Do not crop the title or add another slogan.
+
+LEFT CONTEXT: In the upper terracotta panel, place the header "이야기의 틀" and the caption "전통 골격 유지와 사건 변주". Show a colorful theatrical arch surrounding interchangeable illustrated scene tiles, symbolizing a stable narrative frame and changing events. In the lower saffron panel, place "입력과 변주" and "내 선택과 응답으로 달라지는 사건". Show simple speech bubbles, choice tokens and a pencil, all without text. A quiet broad arrow toward the central hub indicates these inputs shaping the story, not an additional gameplay stage.
+
+UPPER MIDDLE: In a pale turquoise panel, place "마당 선택" with the caption "선택 유형 안에서 마당 무작위 배정". Show four compact colorful illustrated tokens for the available narrative categories, with each external label directly beneath its token: "위협-구원형", "권력 풍자형", "위선 폭로형", "욕심과 다툼형". These are alternative categories, never four consecutive stages. Use a shield, an exaggerated authority figure, a two-sided mask and two disputing character silhouettes as symbolic icons, not specific historical scenes. A small connector leads from the selected token to the central story.
+
+UPPER RIGHT: In a pale lavender panel, place "주인공 설정" and "캐릭터 선택과 이름 입력". Illustrate selecting a character card from several different generic storybook portraits and placing a blank name tag beside it. These are predesigned character choices, NOT face photography or photo-based avatar generation. Do not show a camera or body tracking in this infographic. A subtle connector leads from the selected character toward the central protagonist.
+
+CENTER, THE LARGEST PANEL: Place "박첨지와 문답" and "거리별 응답으로 채우는 이야기" above a spacious, warm full-color illustration. Show an expressive generic traditional wooden elder puppet serving as the guide and a distinct youthful illustrated traveler representing the chosen protagonist, in a theatrical Korean journey landscape with a receding path and hills. Their clothes and appearances are illustrative, not claims of documented historical costume. Place the external labels "박첨지" and "나의 주인공" directly beneath the respective characters. Empty speech bubbles connect the guide's question and the protagonist's response. A ribbon of small illustrated scene tiles leads toward an open electronic-book illustration at the bottom of this panel, outside any monitor frame. Book pages show colorful two-dimensional story art and clean blank areas, never writing or faux text. Beneath the scene, place "전통 틀 안에서 나만의 사건 구성". Do not imply that the user physically operates a puppet or that all narrative structure is invented freely in real time.
+
+LOWER MIDDLE: A single downward arrow from the central response scene leads to a saffron panel. Place "전자책 생성" and "AI 일러스트와 텍스트의 결합". Show a colorful picture icon and a clean blank page icon joining into a multi-page electronic-book symbol. No readable text appears inside icons or book pages. This means the story responses become a generated electronic book; do not show invented performance scores or personality analysis.
+
+LOWER RIGHT: In a pale turquoise outcome panel, place "감상과 반출". Use a warm wooden guide-puppet portrait with a speaker icon for listening, and a separate electronic-book icon with a download arrow to a phone containing only abstract shapes. Put "박첨지 낭독과 함께 감상" directly beneath the listening visual and "전자책만 다운로드" directly beneath the book-download visual. Keep these captions separate but at the same secondary text level. ONLY the electronic book connects to the download arrow; the audio speaker does not connect to the download arrow. The spoken narration is for kiosk playback and is not a take-away audio file.
+
+Maintain aligned rounded panels, spacious typography, full-color filled icons and carefully controlled visual density. The arrows show genuine input and output relationships, not an arbitrary list of systems. Preserve the visual family of the supplied reference while creating an entirely new overview. No charts, axes, percentages, numbered steps, QR codes, decorative numerals, source footnotes, menu labels or extra tiny text. Keep every specified string readable and unclipped. The canvas must be landscape 16:9.
+
+END CALL 1
+
+CALL 2 | edit | INTERMEDIATE
+REFERENCE: 유람기 v1
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-633e4494-dec8-4942-a735-ec67eb68d81b.png
+PROMPT:
+Revise the supplied infographic with a minimal relationship correction. The supplied image is the EDIT TARGET. Preserve the exact landscape canvas, all twenty-four existing Korean strings, their spelling, spacing, size and positions, all illustrated people and books, every panel, the paper texture, colors and all other visual content.
+
+Remove exactly two purple arrows in the right-side gutter: the left-pointing purple arrow between the upper-right character-setting panel and the upper-middle category-selection panel, and the down-pointing purple arrow between the upper-right character-setting panel and the lower-right viewing-and-download panel. Replace only those two arrow footprints with the matching clean ivory background and paper texture.
+
+Keep the teal down-pointing arrow from the category-selection panel to the main conversation scene, the saffron down-pointing arrow from the main scene to the electronic-book-generation panel, the terracotta contextual arrow at left, and the download arrow INSIDE the lower-right outcome panel unchanged. That outcome-panel download arrow applies only to the electronic book, never the audio speaker.
+
+Do not add any replacement arrow, new relationship, label, number, slogan, logo, watermark or visible explanatory text. Do not reposition or rewrite any existing label. Do not redraw the whole scene or change the original composition. Make only the two specified arrow removals.
+
+END CALL 2
+
+CALL 3 | edit | SELECTED
+REFERENCE: 유람기 v2
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-e76d4ffd-2693-4bbc-90a2-c2db1aac1296.png
+PROMPT:
+Replace only the short label immediately beneath the shield icon in the upper-middle category panel with "위기와 구원". Completely erase its previous lettering and render this one new label clearly in dark navy Korean sans-serif, centered beneath the shield. The supplied infographic is the edit target. Keep the other twenty-three Korean strings exactly unchanged. Preserve the current canvas, every illustration, all rounded panels, paper texture, colors, and existing arrows. Do not restore the two removed purple arrows. Do not add any new text, logo, numeral or watermark. The plus icon in the electronic-book panel remains an abstract combination symbol. No other changes.
+
+END CALL 3

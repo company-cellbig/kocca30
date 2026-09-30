@@ -1,0 +1,470 @@
+{
+  "date": "2026-09-30",
+  "state": "selected-draft-awaiting-user-confirmation",
+  "useCase": "infographic-diagram",
+  "styleReference": "assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png",
+  "styleReferenceSHA256": "cb6d7bae5e35933b8f72cd7a9e4a2876763b1955816408c8916edeefcdf91b91",
+  "styleReferenceRole": "배색, 종이 질감, 타이포 위계, 채색 패널과 중앙 장면의 구성 참고. 내용 근거와 편집 대상이 아님",
+  "sourceHandling": "이미 구조화된 기획서 개요와 지정된 시스템 및 진행 절을 사용함. 새로운 원전 분류나 전승 사실을 도출하지 않음. 기획서 본문은 수정하지 않음",
+  "layout": {
+    "family": "격자형",
+    "pattern": "중앙 체험 장면과 주변 입력 및 결과 패널",
+    "palette": "아이보리, 남색, 테라코타, 청록, 금색, 라벤더",
+    "quantitativeChart": false
+  },
+  "additionalDesign": "문구 압축, 패널 배치, 예시 인물 및 장면, 상징 아이콘은 이미지 설명을 위한 시각 설계임. 역사적 복식과 실물 탈의 고증, 실제 구현 및 성능, 실측 학습 성과를 주장하지 않음",
+  "execution": {
+    "tool": "내장 image_gen",
+    "strategy": "별도 호출로 신규 생성과 부분 수정 수행, 최종 후보만 저장소 자산으로 보존",
+    "requestedAspectRatio": "16:9",
+    "actualWidth": 1672,
+    "actualHeight": 941,
+    "exact16x9": false,
+    "ratioNote": "프롬프트는 16:9이며 원본은 1672×941로 정확한 16:9와 미세한 차이가 있음. 원본 비율을 수정하지 않음",
+    "qualityControl": "내장 도구에는 resolution 및 quality 인수가 없어 1k/medium을 지정하지 않음",
+    "transparentBackground": false,
+    "generatedCount": 6,
+    "selectedFileCount": 1
+  },
+  "promptReadability": {
+    "findings": 0,
+    "applied": 0
+  },
+  "preflight": {
+    "allLabelsOnce": true,
+    "outsideQuotedKorean": false,
+    "captionLengthExceeded": 0
+  },
+  "review": {
+    "sequence": [
+      "작성자 직접 대조와 미세 영역 확대",
+      "정답을 제공하지 않은 새 컨텍스트의 블라인드 전사",
+      "문자열 및 단어 횟수의 기계 대조"
+    ],
+    "directComparison": "최종 후보의 전체 구성, 인물 표찰, 화면, 부채, 책, 빈 이름표와 의상 문양을 대조함",
+    "blindContext": "fork_turns=none의 새 에이전트에 최종 이미지 1장만 제공함. 프롬프트, 라벨 정답과 원자료를 제공하지 않음",
+    "blindTranscription": {
+      "transcription": [
+        {
+          "location": "상단 큰 제목",
+          "text": "내 몸짓으로 즐기는 덧뵈기 한바탕"
+        },
+        {
+          "location": "상단 부제",
+          "text": "덧뵈기 - 탈놀음 한바탕"
+        },
+        {
+          "location": "왼쪽 상단 패널 제목",
+          "text": "덧뵈기의 재미"
+        },
+        {
+          "location": "왼쪽 상단 패널 설명",
+          "text": "마임, 재담, 사회 풍자"
+        },
+        {
+          "location": "가운데 상단 패널 제목",
+          "text": "모션 인식"
+        },
+        {
+          "location": "가운데 상단 패널 설명",
+          "text": "카메라로 신체와 양손 추적"
+        },
+        {
+          "location": "오른쪽 상단 패널 제목",
+          "text": "손 위치 표시"
+        },
+        {
+          "location": "오른쪽 상단 패널 설명",
+          "text": "화면 속 포인터로 위치 확인"
+        },
+        {
+          "location": "가운데 무대 패널 제목",
+          "text": "몸짓으로 참여"
+        },
+        {
+          "location": "가운데 무대 패널 설명",
+          "text": "기괴한 탈을 몰아내는 재미"
+        },
+        {
+          "location": "왼쪽 하단 패널 제목",
+          "text": "우선 개발"
+        },
+        {
+          "location": "왼쪽 하단 패널 설명",
+          "text": "꺽쇠와 탈의 한판"
+        },
+        {
+          "location": "가운데 무대 왼쪽 인물 표찰",
+          "text": "유저 동작"
+        },
+        {
+          "location": "가운데 무대 가운데 인물 표찰",
+          "text": "꺽쇠"
+        },
+        {
+          "location": "가운데 무대 오른쪽 인물 표찰",
+          "text": "탈 캐릭터"
+        },
+        {
+          "location": "하단 가운데 패널 제목",
+          "text": "진행 판정"
+        },
+        {
+          "location": "하단 가운데 패널 왼쪽 설명",
+          "text": "손 위치와 목표 영역의 충돌"
+        },
+        {
+          "location": "하단 가운데 패널 오른쪽 설명",
+          "text": "수행 기록의 점수 반영"
+        },
+        {
+          "location": "오른쪽 하단 패널 제목",
+          "text": "체험과 학습"
+        },
+        {
+          "location": "오른쪽 하단 패널 설명",
+          "text": "마당별 재미와 특성의 이해"
+        }
+      ],
+      "unreadable_regions": [],
+      "borderline_glyphs": [],
+      "brands": [],
+      "watermarks": [],
+      "charts": [],
+      "symbol_fields": [
+        {
+          "location": "왼쪽 상단 인물 위",
+          "description": "노란색·청록색 말풍선 내부는 비어 있음"
+        },
+        {
+          "location": "가운데 상단 인물",
+          "description": "몸과 양손의 색 원·점선 및 손 주변 강조선. 문자 없음"
+        },
+        {
+          "location": "가운데 상단 카메라",
+          "description": "렌즈와 작은 표시점. 판독되는 문자·로고 없음"
+        },
+        {
+          "location": "가운데 무대",
+          "description": "손에서 원으로 이어지는 청록색 점선, 청록색 원과 흰 테두리. 문자 없음"
+        },
+        {
+          "location": "가운데 무대 부채",
+          "description": "방사형 부챗살. 문자 없음"
+        },
+        {
+          "location": "오른쪽 상단 화면",
+          "description": "청록색 원·점선과 주황색 테두리의 붉은 원. 문자 없음"
+        },
+        {
+          "location": "하단 가운데 진행 판정",
+          "description": "청록색 원과 붉은 원이 겹치며 교집합은 노란색. 수치·축·범례 없음"
+        },
+        {
+          "location": "오른쪽 하단 펼친 책",
+          "description": "왼쪽 페이지에 붉은 원·청록색 삼각형, 오른쪽 페이지에 주황색 원·보라색 물결 도형. 문자 없음"
+        },
+        {
+          "location": "전체 인물의 옷·모자·신발 및 배경 소품",
+          "description": "확대 확인에서 별도 문자·로고·워터마크는 보이지 않음"
+        }
+      ]
+    },
+    "mechanicalComparison": {
+      "expected": 20,
+      "transcribed": 20,
+      "missing": [],
+      "extra": [],
+      "excess": [],
+      "wordRepetitionIncreases": [],
+      "unreadableRegions": [],
+      "borderlineGlyphs": [],
+      "brands": [],
+      "watermarks": [],
+      "charts": []
+    },
+    "sourceComparison": {
+      "initialFindings": 0,
+      "applied": 0,
+      "impactReviewRuns": 1,
+      "newFindings": 0,
+      "note": "표현 축약 뒤에도 옴탈잡이 우선 범위, 카메라 신체 및 양손 입력과 포인터 충돌 판정 관계를 지정 기획서와 대조함"
+    },
+    "readability": {
+      "initialFindings": 0,
+      "impactReviewRuns": 1,
+      "newFindings": 0
+    },
+    "limitation": "무발견은 결함 부재나 역사적 고증 및 구현 성능의 증명이 아님"
+  },
+  "approval": {
+    "workClass": "고위험 외부 노출용 이미지 초안",
+    "userRequest": "각 콘텐츠의 개요 인포그래픽 생성",
+    "externalReview": "미실시",
+    "state": "사용자 확인 전 시안. G1 자동 통과로 처리하지 않음"
+  },
+  "source": "05_산출물/시범콘텐츠/05_덧뵈기 - 탈놀음 한바탕/덧뵈기 - 탈놀음 한바탕 기획서.md",
+  "sourceSHA256": "119b27a24c72304626a9aa6e1c9efee45eaa8e66fdceac706571df1e26d75075",
+  "sourceScopes": [
+    {
+      "section": "1. 개요",
+      "lines": "32~43",
+      "use": "덧뵈기의 재미, 옴탈잡이 우선 개발과 체험 및 학습 목적"
+    },
+    {
+      "section": "3.6 유저 기반 모션 인식 시스템",
+      "lines": "227~355",
+      "use": "양손 추적, 손 위치 포인터, 충돌 판정과 컨트롤러 없는 입력"
+    },
+    {
+      "section": "5. 마당 선택, 6.1과 6.2 체험 개요와 준비, 6.3 옴탈잡이",
+      "lines": "489~667",
+      "use": "옴탈잡이 참여와 인물, 손 동작의 반응 및 수행 기록"
+    }
+  ],
+  "message": "내 몸짓으로 즐기는 덧뵈기 한바탕",
+  "labels": [
+    {
+      "id": "L01",
+      "text": "내 몸짓으로 즐기는 덧뵈기 한바탕",
+      "count": 1
+    },
+    {
+      "id": "L02",
+      "text": "덧뵈기 - 탈놀음 한바탕",
+      "count": 1
+    },
+    {
+      "id": "L03",
+      "text": "덧뵈기의 재미",
+      "count": 1
+    },
+    {
+      "id": "L04",
+      "text": "마임, 재담, 사회 풍자",
+      "count": 1
+    },
+    {
+      "id": "L05",
+      "text": "우선 개발",
+      "count": 1
+    },
+    {
+      "id": "L06",
+      "text": "꺽쇠와 탈의 한판",
+      "count": 1
+    },
+    {
+      "id": "L07",
+      "text": "모션 인식",
+      "count": 1
+    },
+    {
+      "id": "L08",
+      "text": "카메라로 신체와 양손 추적",
+      "count": 1
+    },
+    {
+      "id": "L09",
+      "text": "몸짓으로 참여",
+      "count": 1
+    },
+    {
+      "id": "L10",
+      "text": "기괴한 탈을 몰아내는 재미",
+      "count": 1
+    },
+    {
+      "id": "L11",
+      "text": "유저 동작",
+      "count": 1
+    },
+    {
+      "id": "L12",
+      "text": "꺽쇠",
+      "count": 1
+    },
+    {
+      "id": "L13",
+      "text": "탈 캐릭터",
+      "count": 1
+    },
+    {
+      "id": "L14",
+      "text": "손 위치 표시",
+      "count": 1
+    },
+    {
+      "id": "L15",
+      "text": "화면 속 포인터로 위치 확인",
+      "count": 1
+    },
+    {
+      "id": "L16",
+      "text": "진행 판정",
+      "count": 1
+    },
+    {
+      "id": "L17",
+      "text": "손 위치와 목표 영역의 충돌",
+      "count": 1
+    },
+    {
+      "id": "L18",
+      "text": "수행 기록의 점수 반영",
+      "count": 1
+    },
+    {
+      "id": "L19",
+      "text": "체험과 학습",
+      "count": 1
+    },
+    {
+      "id": "L20",
+      "text": "마당별 재미와 특성의 이해",
+      "count": 1
+    }
+  ],
+  "sourceToPanels": [
+    {
+      "panel": "덧뵈기의 재미, 우선 개발",
+      "basis": "1. 개요"
+    },
+    {
+      "panel": "모션 인식, 손 위치 표시",
+      "basis": "3.6.1 및 3.6.3, 6.2"
+    },
+    {
+      "panel": "몸짓으로 참여",
+      "basis": "6.3 옴탈잡이"
+    },
+    {
+      "panel": "진행 판정",
+      "basis": "3.6.3, 6.3"
+    },
+    {
+      "panel": "체험과 학습",
+      "basis": "1. 개요, 6.1"
+    }
+  ],
+  "excluded": [
+    {
+      "item": "샌님잡이, 먹중잡이 및 차년도 키워드와 증거 조합",
+      "reason": "옴탈잡이 우선 개발 범위와 구분하여 이번 이미지에 넣지 않음"
+    },
+    {
+      "item": "마당씻이",
+      "reason": "기획서가 체험 대상에서 제외함"
+    },
+    {
+      "item": "점수 수치와 타이머, 정밀도 및 성과 그래프",
+      "reason": "측정값을 만들지 않고 진행 점수 반영만 개념으로 표시함"
+    },
+    {
+      "item": "기획서가 인용한 상용 게임과 브랜드",
+      "reason": "기술 참고 사례로 생성 이미지에 노출하지 않음"
+    }
+  ],
+  "promptFile": "탈놀음_개요_인포그래픽_v6_프롬프트세트.txt",
+  "outputFile": "탈놀음_개요_인포그래픽_v6.png",
+  "outputSHA256": "05829b3588aa33cf40ff904aa657a1df760e2ee9b24286fa8dadf646ba4c5610",
+  "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-62f0338b-c50d-4075-8918-6049211a6526.png",
+  "scopeNote": "지정한 범위를 끝까지 읽었으며 해당 범위 밖의 기술 및 미래 설계는 이번 이미지의 근거로 삼지 않음",
+  "selectedVersion": 6,
+  "labelRevisions": [
+    {
+      "original": "옴탈잡이 마당 체험",
+      "rendered": "꺽쇠와 탈의 한판",
+      "reason": "옴탈잡이 우선 개발 범위의 쉬운 개요용 설명임. 원 기획서의 정식 명칭은 변경하지 않음"
+    },
+    {
+      "original": "기괴한 옴탈을 몰아내는 재미",
+      "rendered": "기괴한 탈을 몰아내는 재미",
+      "reason": "글자 오독을 피하는 설명 축약"
+    },
+    {
+      "original": "옴탈",
+      "rendered": "탈 캐릭터",
+      "reason": "정식 배역명 대신 그림을 설명하는 일반 표찰"
+    }
+  ],
+  "history": [
+    {
+      "version": 1,
+      "kind": "new",
+      "promptSection": "CALL 1",
+      "reference": "assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-44d4f2ec-1b30-4844-8bfe-9a46f0caaf37.png",
+      "SHA256": "f8399a274ce4620867cbca27eab3c3c329a1ef9c6263009b738185b5fb96e02d",
+      "width": 1672,
+      "height": 941,
+      "status": "중간본",
+      "findings": "블라인드 전사에서 옴을 음으로 읽는 오탈자 3건과 부채의 판독 불가 유사 서체 발견"
+    },
+    {
+      "version": 2,
+      "kind": "edit",
+      "promptSection": "CALL 2",
+      "reference": "탈놀음 v1",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-45ec426f-4f2c-445a-b53d-231d5dad2950.png",
+      "SHA256": "692703b52f07dac4b78d86e0e4da8352e7ab8eede87ecf33ab8a5245633c6986",
+      "width": 1672,
+      "height": 941,
+      "status": "중간본",
+      "findings": "부채 문자 제거됨. 직접 확대 대조에서 글자 오탈자 3건이 남음"
+    },
+    {
+      "version": 3,
+      "kind": "edit",
+      "promptSection": "CALL 3",
+      "reference": "탈놀음 v2",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-c44820db-93bf-4b61-819e-2c8307c9a6c4.png",
+      "SHA256": "54288baccc48e92bccd719ad48ca847a4bbaac8e568b29904cea8d2aa8381c9e",
+      "width": 1672,
+      "height": 941,
+      "status": "중간본",
+      "findings": "글자의 획을 지정한 수정도 옴 표기 오탈자 3건을 해결하지 못함. 이 수정 프롬프트에는 설명용 한글이 따옴표 밖에 들어가는 지침 이탈이 있으며 최종 프롬프트로 채택하지 않음"
+    },
+    {
+      "version": 4,
+      "kind": "new",
+      "promptSection": "CALL 4",
+      "reference": "assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-8509ef5f-9129-4459-871d-bf76b755d175.png",
+      "SHA256": "88f86dc811669dbd588930ce5f426e616eeac234f61f79024051acf3bc8b6074",
+      "width": 1672,
+      "height": 941,
+      "status": "중간본",
+      "findings": "새로 생성했지만 옴 표기 오탈자 3건이 남고 상단 왼쪽 설명에 불필요한 작은 기호가 생김"
+    },
+    {
+      "version": 5,
+      "kind": "edit",
+      "promptSection": "CALL 5",
+      "reference": "탈놀음 v2",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-c55a0df4-6416-4c6d-9b7c-9161a69775cf.png",
+      "SHA256": "cc0ea4115ddc1b5530e6d111056ac8d683b0c814a3103a189b6c26ed8b387555",
+      "width": 1672,
+      "height": 941,
+      "status": "중간본",
+      "findings": "세 명칭 문구를 쉬운 표현으로 바꿈. 우선 개발 헤더가 소실되어 복구가 필요함"
+    },
+    {
+      "version": 6,
+      "kind": "edit",
+      "promptSection": "CALL 6",
+      "reference": "탈놀음 v5",
+      "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-62f0338b-c50d-4075-8918-6049211a6526.png",
+      "SHA256": "05829b3588aa33cf40ff904aa657a1df760e2ee9b24286fa8dadf646ba4c5610",
+      "width": 1672,
+      "height": 941,
+      "status": "선택 초안",
+      "findings": "우선 개발 헤더와 두 층 문구 배치 복구함"
+    }
+  ],
+  "symbolPolicy": {
+    "overlappingCircles": "손 포인터와 목표 영역의 충돌 개념",
+    "quantitativeData": false
+  },
+  "storagePolicy": "선택 PNG 1장과 이 실행 기록 및 프롬프트 이력을 저장소에 보존함. 재생성용 중간 이미지의 생성 원본은 originalGeneratedPath에 남기며 저장소의 중간 복사본만 정리함"
+}

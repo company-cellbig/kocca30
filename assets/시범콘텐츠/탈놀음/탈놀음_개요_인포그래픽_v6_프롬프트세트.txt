@@ -1,0 +1,117 @@
+PROMPT HISTORY — 탈놀음 OVERVIEW
+These are separate generation calls, not a single combined prompt.
+The selected output is version 6. Rejected attempts are retained as audit history only.
+CALL 1 | new | INTERMEDIATE
+REFERENCE: assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-44d4f2ec-1b30-4844-8bfe-9a46f0caaf37.png
+PROMPT:
+Create a new landscape 16:9 Korean proposal infographic, consulting-deck quality, using a GRID-BASED central hub with supporting rounded, color-filled panels. The supplied image is a STYLE AND COMPOSITION REFERENCE ONLY, not an edit target or a factual source: match its warm ivory paper texture, dark indigo Korean typography, terracotta, turquoise, saffron and pale lavender fills, subtle soft shadows, full-color tactile illustrations and theatrical visual vocabulary. Replace all content with the new concept below. Use a generous heading band, a dominant central illustrated scene, two narrow context panels at left and interconnected supporting panels above, below and at right. This infographic explains a camera-based interactive kiosk for a Korean traditional masked play, not a puppet electronic-book service or a generic dance-training app.
+
+Render ONLY the exact quoted Korean strings specified below, each exactly once at its assigned location. Preserve every syllable, space and punctuation. Do not copy any text from the reference image. Do not invent, repeat or add any other visible text, numbers, letters or pseudo-writing. No real brands, logos, trademarks or watermarks. Photographs, decorations, masks, costumes and book pages contain no writing. Every screen interior contains ONLY abstract geometric shapes, with no letters, faces, camera feed or concrete scenes. Labels sit outside screens. These English instructions are not rendered text.
+
+TOP: Place the large title "내 몸짓으로 즐기는 덧뵈기 한바탕" with the smaller subtitle "덧뵈기 - 탈놀음 한바탕" directly below. Use the same bold, readable title hierarchy as the reference. Do not crop the title or add another slogan.
+
+LEFT CONTEXT: In the upper terracotta panel, place "덧뵈기의 재미" and "마임, 재담, 사회 풍자". Show a full-color theatrical-mask and speech-bubble illustration, without lettering, symbolizing comic physical acting and dialogue. In the lower saffron panel, place "우선 개발" and "옴탈잡이 마당 체험". Show a small playful grotesque traditional theatrical mask being ushered away through a curtain, with a comic rather than frightening or violent tone. A quiet broad rightward arrow points toward the central experience, indicating the scope informing the proposed experience, not an extra gameplay stage.
+
+UPPER MIDDLE: In a pale turquoise panel, place "모션 인식" and "카메라로 신체와 양손 추적". Show a small photorealistic fictional adult participant in ordinary contemporary clothes, standing comfortably with arms visible, beside a plain camera icon. Colored tracking dots and simple symbolic paths highlight the body and both hands. The participant holds no controller and wears no headset or traditional mask. A connector runs from the hand-tracking visual toward the central input relationship. This is conceptual tracking, not biometric identification, face-photo generation or a claim of measured precision.
+
+CENTER, THE LARGEST PANEL: Place "몸짓으로 참여" and "기괴한 옴탈을 몰아내는 재미" above a spacious full-color comic theatrical scene. On the left, show an unmasked modern participant gesturing with an arm; place "유저 동작" beneath that participant. On the right, show a lively generic masked performer reacting to a playful grotesque mask character, with the separate external labels "꺽쇠" and "옴탈" directly beneath their respective figures. Use a small teal path from the participant's hand to a circular pointer symbol, then toward the theatrical interaction, expressing hand input influencing game actions. Keep the explanatory theatre OUTSIDE any monitor or screen frame. The masked figures are illustrative representations, not documented mask-design reproductions. Do not dress the real participant as the masked performer, mirror the participant's whole body as an avatar, or imply that this is a dance technique assessment. The tone is humorous and energetic with no injury, weapons or realistic violence.
+
+UPPER RIGHT: In a pale lavender panel, place "손 위치 표시" and "화면 속 포인터로 위치 확인". Show a simple kiosk monitor containing only plain abstract colored circles: a hand-position circle and a target circle, with a curved motion trail. No camera-feed portrait, theatrical character or readable UI appears in the monitor. The visual explains seeing the input location, not seeing a live video of oneself during gameplay.
+
+LOWER MIDDLE: A single downward connector from the central hand-pointer interaction leads to a saffron panel. Place "진행 판정" above two full-color circles partly overlapping, one representing the hand pointer and the other a target region. Beneath the diagram, place "손 위치와 목표 영역의 충돌" and "수행 기록의 점수 반영" as two separate captions at the same secondary text level. Do not place words inside the circles. Do not invent actual scores, a leaderboard, a chart, a numeric scale or a validated accuracy percentage. This is game-input success and recorded progress, not grading traditional dance movements.
+
+LOWER RIGHT: In a pale turquoise outcome panel, place "체험과 학습" and "마당별 재미와 특성의 이해". Show a colorful theatrical-mask icon beside a clean open-book icon and cheerful gesture shapes. The book contains only abstract colored shapes and blank pages, not writing. A quiet arrow from the central scene to this panel shows the intended learning purpose, not proven educational results. Do not show downloads, photo souvenirs, generative avatars or additional future acts as if they are part of the first developed experience.
+
+Maintain aligned rounded panels, spacious typography, full-color filled icons and carefully controlled visual density. The arrows show input, response and intended learning relationships, not a numbered dance routine. Preserve the visual family of the supplied reference while creating an entirely new overview. No charts, axes, percentages, numbered steps, QR codes, decorative numerals, source footnotes, menu labels or extra tiny text. Keep every specified string readable and unclipped. The canvas must be landscape 16:9.
+
+END CALL 1
+
+CALL 2 | edit | INTERMEDIATE
+REFERENCE: 탈놀음 v1
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-45ec426f-4f2c-445a-b53d-231d5dad2950.png
+PROMPT:
+Revise the supplied infographic, preserving its original landscape canvas, all panel positions, imagery, color palette, paper texture, arrows, typography sizes and every correct existing label. The supplied image is the EDIT TARGET. Correct only the three misrendered labels specified below and remove the pseudo-writing on the central folding fan. All other content must stay unchanged.
+
+Text fidelity is mandatory. The shared initial syllable in the three corrected strings is Unicode U+C634: an initial circle, the Korean vowel with a short vertical stroke pointing UP from a horizontal stroke, and a final square consonant beneath it. It is NOT Unicode U+C74C, which has only a horizontal vowel stroke. Make the upward vowel stroke unmistakably visible, with adequate separation above the final square. Render each corrected string exactly once in its existing location, preserving every other syllable and space.
+
+In the lower-left priority-development panel, replace its existing caption with "옴탈잡이 마당 체험".
+In the largest central theatre panel, replace the caption beneath its header with "기괴한 옴탈을 몰아내는 재미".
+Beneath the rightmost grotesque masked character in the central theatre scene, replace its name label with "옴탈".
+
+Remove all dark ink marks and pseudo-calligraphy from the folding fan held by the middle masked performer. The fan must be plain unprinted warm ivory paper with natural wooden ribs and no graphic inscription. Do not alter the figure, hand, fan position or the surrounding scene.
+
+Do not copy or add any extra text, syllable demonstration, English text, Unicode value, explanatory marker, new label, number, symbol resembling writing, logo or watermark. The other seventeen existing labels remain exactly unchanged. Do not redesign the image or change its composition. Every screen interior continues to contain only the original abstract geometric shapes.
+
+END CALL 2
+
+CALL 3 | edit | INTERMEDIATE
+REFERENCE: 탈놀음 v2
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-c44820db-93bf-4b61-819e-2c8307c9a6c4.png
+PROMPT:
+Make a precise visual typography repair to the supplied infographic. Preserve the whole existing artwork and all correct lettering. Three occurrences of one Korean syllable are visibly wrong: a small vertical stem is missing from the middle vowel of the syllable. You must visibly draw that missing upward vertical stem, not return the current pixels unchanged.
+
+The correct syllable is 옴, made from ㅇ above, ㅗ in the middle, and ㅁ below. The current wrong syllable is 음, made from ㅇ above, ㅡ in the middle, and ㅁ below. In every specified occurrence, replace the middle horizontal vowel ㅡ with the T-shaped vowel ㅗ: a dark navy horizontal stroke with a clear vertical stroke rising UPWARD from its CENTER. The circle above and the square below remain. Leave a little empty space around the upward stem so it is unambiguously visible. Use normal clean Korean sans-serif typography.
+
+Apply this exactly three times:
+1. In the yellow panel at the lower left, the first character of the caption near pixel (111, 612) must become 옴. The entire corrected caption reads "옴탈잡이 마당 체험".
+2. In the large central theatre panel, the fourth character of its one-line caption near pixel (803, 422), after the word 기괴한 and a space, must become 옴. The entire corrected caption reads "기괴한 옴탈을 몰아내는 재미".
+3. Beneath the rightmost masked performer inside the central theatre scene, the first character of its name label near pixel (1110, 707) must become 옴. The entire corrected label reads "옴탈".
+
+If the current label pixels resist a local repair, fully remove and typeset just those three caption lines anew in the same dark navy font, same locations and same legible sizes. The result must visibly contain the upward stem of ㅗ in all three first syllables of this character name. Do not render explanatory Korean component letters, pixel coordinates or any extra text.
+
+Keep all other seventeen label strings unchanged, keep the central fan entirely blank, and preserve all imagery, arrows, colors, texture, dimensions and composition. This is only a three-syllable correction. No new labels, no logo, no watermarks.
+
+END CALL 3
+
+CALL 4 | new | INTERMEDIATE
+REFERENCE: assets/시범콘텐츠/꼭두각시/꼭두각시_개요_인포그래픽_v2.png
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-8509ef5f-9129-4459-871d-bf76b755d175.png
+PROMPT:
+Create a new landscape 16:9 Korean proposal infographic, consulting-deck quality, using a GRID-BASED central hub with supporting rounded, color-filled panels. The supplied image is a STYLE AND COMPOSITION REFERENCE ONLY, not an edit target or a factual source: match its warm ivory paper texture, dark indigo Korean typography, terracotta, turquoise, saffron and pale lavender fills, subtle soft shadows, full-color tactile illustrations and theatrical visual vocabulary. Replace all content with the new concept below. Use a generous heading band, a dominant central illustrated scene, two narrow context panels at left and interconnected supporting panels above, below and at right. This infographic explains a camera-based interactive kiosk for a Korean traditional masked play, not a puppet electronic-book service or a generic dance-training app.
+
+Render ONLY the exact quoted Korean strings specified below, each exactly once at its assigned location. Preserve every syllable, space and punctuation. Do not copy any text from the reference image. Do not invent, repeat or add any other visible text, numbers, letters or pseudo-writing. No real brands, logos, trademarks or watermarks. Photographs, decorations, masks, costumes and book pages contain no writing. Every screen interior contains ONLY abstract geometric shapes, with no letters, faces, camera feed or concrete scenes. Labels sit outside screens. These English instructions are not rendered text.
+
+TYPOGRAPHIC PRIORITY: Use crisp, conventional Korean sans-serif text with generous character spacing. In the character-name syllable occurring in the lower-left scope caption, the central explanatory caption and the central right-hand figure label, the middle vowel is the T-shaped vowel with a vertical stem pointing UP, not a plain horizontal vowel. Make that upward stem clearly visible at normal viewing size. Build this as a new image from the style reference; do not copy faulty text pixels from another infographic. The central performer's folding fan must be entirely blank warm ivory with natural ribs, without any calligraphy or pseudo-writing.
+
+TOP: Place the large title "내 몸짓으로 즐기는 덧뵈기 한바탕" with the smaller subtitle "덧뵈기 - 탈놀음 한바탕" directly below. Use the same bold, readable title hierarchy as the reference. Do not crop the title or add another slogan.
+
+LEFT CONTEXT: In the upper terracotta panel, place "덧뵈기의 재미" and "마임, 재담, 사회 풍자". Show a full-color theatrical-mask and speech-bubble illustration, without lettering, symbolizing comic physical acting and dialogue. In the lower saffron panel, place "우선 개발" and "옴탈잡이 마당 체험". Show a small playful grotesque traditional theatrical mask being ushered away through a curtain, with a comic rather than frightening or violent tone. A quiet broad rightward arrow points toward the central experience, indicating the scope informing the proposed experience, not an extra gameplay stage.
+
+UPPER MIDDLE: In a pale turquoise panel, place "모션 인식" and "카메라로 신체와 양손 추적". Show a small photorealistic fictional adult participant in ordinary contemporary clothes, standing comfortably with arms visible, beside a plain camera icon. Colored tracking dots and simple symbolic paths highlight the body and both hands. The participant holds no controller and wears no headset or traditional mask. A connector runs from the hand-tracking visual toward the central input relationship. This is conceptual tracking, not biometric identification, face-photo generation or a claim of measured precision.
+
+CENTER, THE LARGEST PANEL: Place "몸짓으로 참여" and "기괴한 옴탈을 몰아내는 재미" above a spacious full-color comic theatrical scene. On the left, show an unmasked modern participant gesturing with an arm; place "유저 동작" beneath that participant. On the right, show a lively generic masked performer reacting to a playful grotesque mask character, with the separate external labels "꺽쇠" and "옴탈" directly beneath their respective figures. Use a small teal path from the participant's hand to a circular pointer symbol, then toward the theatrical interaction, expressing hand input influencing game actions. Keep the explanatory theatre OUTSIDE any monitor or screen frame. The masked figures are illustrative representations, not documented mask-design reproductions. Do not dress the real participant as the masked performer, mirror the participant's whole body as an avatar, or imply that this is a dance technique assessment. The tone is humorous and energetic with no injury, weapons or realistic violence.
+
+UPPER RIGHT: In a pale lavender panel, place "손 위치 표시" and "화면 속 포인터로 위치 확인". Show a simple kiosk monitor containing only plain abstract colored circles: a hand-position circle and a target circle, with a curved motion trail. No camera-feed portrait, theatrical character or readable UI appears in the monitor. The visual explains seeing the input location, not seeing a live video of oneself during gameplay.
+
+LOWER MIDDLE: A single downward connector from the central hand-pointer interaction leads to a saffron panel. Place "진행 판정" above two full-color circles partly overlapping, one representing the hand pointer and the other a target region. Beneath the diagram, place "손 위치와 목표 영역의 충돌" and "수행 기록의 점수 반영" as two separate captions at the same secondary text level. Do not place words inside the circles. Do not invent actual scores, a leaderboard, a chart, a numeric scale or a validated accuracy percentage. This is game-input success and recorded progress, not grading traditional dance movements.
+
+LOWER RIGHT: In a pale turquoise outcome panel, place "체험과 학습" and "마당별 재미와 특성의 이해". Show a colorful theatrical-mask icon beside a clean open-book icon and cheerful gesture shapes. The book contains only abstract colored shapes and blank pages, not writing. A quiet arrow from the central scene to this panel shows the intended learning purpose, not proven educational results. Do not show downloads, photo souvenirs, generative avatars or additional future acts as if they are part of the first developed experience.
+
+Maintain aligned rounded panels, spacious typography, full-color filled icons and carefully controlled visual density. The arrows show input, response and intended learning relationships, not a numbered dance routine. Preserve the visual family of the supplied reference while creating an entirely new overview. No charts, axes, percentages, numbered steps, QR codes, decorative numerals, source footnotes, menu labels or extra tiny text. Keep every specified string readable and unclipped. The canvas must be landscape 16:9.
+
+END CALL 4
+
+CALL 5 | edit | INTERMEDIATE
+REFERENCE: 탈놀음 v2
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-c55a0df4-6416-4c6d-9b7c-9161a69775cf.png
+PROMPT:
+Edit the supplied infographic with only three clear label substitutions. Preserve the existing landscape canvas, all illustration, colors, paper texture, panel layout, all arrows and the blank folding fan. These substitutions use plain Korean wording for an overview image. Completely erase the three old captions and re-typeset the specified replacement strings below. Do not preserve the old text pixels in those areas.
+
+Replace the caption in the lower-left yellow priority-development panel with "꺽쇠와 탈의 한판".
+Replace the one-line caption directly below the header in the largest central theatre panel with "기괴한 탈을 몰아내는 재미".
+Replace the name label below the rightmost grotesque masked character in the central theatre scene with "탈 캐릭터".
+
+Render each of these three replacement strings exactly once at its assigned position in crisp conventional dark navy Korean sans-serif, at the same visual hierarchy and with enough width to be fully readable. Every other seventeen text labels must remain exactly unchanged. Do not introduce any extra letters, numbers, brands, logos, symbols resembling writing, captions or watermarks. The fan remains completely unprinted. The monitor and book pages remain abstract geometric diagrams without any text or pictures. Do not redesign the overall artwork.
+
+END CALL 5
+
+CALL 6 | edit | SELECTED
+REFERENCE: 탈놀음 v5
+GENERATED ORIGINAL: C:\Users\cellbig\.codex\generated_images\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\exec-62f0338b-c50d-4075-8918-6049211a6526.png
+PROMPT:
+Repair the text arrangement in the lower-left yellow panel of the supplied infographic. Restore a two-level text hierarchy: the large header "우선 개발" centered near pixel (205, 561), and the smaller caption "꺽쇠와 탈의 한판" centered near pixel (205, 610). These are two separate lines, and both must be present exactly once. Use the same dark navy Korean sans-serif as the rest of the image. The caption must be smaller than the header. Keep the small theatre illustration below the caption unchanged.
+
+This is the only change. Preserve all other eighteen Korean text strings exactly as they are, including the central caption and character labels. Keep all panel boundaries, colours, paper texture, images, arrows and the blank folding fan unchanged. Do not add extra text, letters, symbols, logos or watermarks. Do not erase any other header. Maintain the current landscape canvas and composition.
+
+END CALL 6
