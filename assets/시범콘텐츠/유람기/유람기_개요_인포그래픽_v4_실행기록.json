@@ -1,0 +1,439 @@
+{
+  "date": "2026-09-30",
+  "state": "selected-draft-awaiting-user-confirmation",
+  "selectedVersion": 4,
+  "useCase": "precise-object-edit",
+  "assetType": "유람기 개요 인포그래픽",
+  "correctionSource": {
+    "type": "사용자 직접 지시",
+    "statement": "유람기에서 박첨지 낭독과 함께 감상이 나중에 기획에서 제거되었어. 해당 내용 반영해서 다시 생성해.",
+    "precedence": "이번 수정에서는 사용자의 낭독 제거 지시를 이전 시안과 이전 기획서의 낭독 표현보다 우선함"
+  },
+  "editTarget": {
+    "path": "assets/시범콘텐츠/유람기/유람기_개요_인포그래픽_v3.png",
+    "SHA256": "8a49e816b3c5de9e28db0316c9d0caca7811b23abd5aa55d59a6c25bc9c03995",
+    "record": "유람기_개요_인포그래픽_v3_실행기록.json",
+    "retained": true,
+    "role": "부분 수정 대상과 배치 및 스타일의 기준. 낭독 기능의 현행 근거가 아님"
+  },
+  "scope": "오른쪽 아래 감상과 반출 패널",
+  "changes": [
+    {
+      "kind": "문구 교체",
+      "before": "박첨지 낭독과 함께 감상",
+      "after": "전자책 화면 감상"
+    },
+    {
+      "kind": "그림 제거",
+      "items": [
+        "감상 패널의 낭독용 박첨지",
+        "스피커",
+        "음파 곡선"
+      ]
+    },
+    {
+      "kind": "패널 안 배치 조정",
+      "detail": "기존 전자책과 다운로드 기기를 두 결과로 나란히 배치하고 전자책에서 기기로 향하는 화살표를 유지함"
+    }
+  ],
+  "invariants": [
+    "중앙 박첨지 문답과 주인공",
+    "마당 선택과 주인공 설정",
+    "전통 골격과 사건 변주",
+    "전자책 생성",
+    "전자책만 다운로드",
+    "전체 패널 배치와 색감 및 종이 질감",
+    "나머지 한국어 문구 23개"
+  ],
+  "notChanged": [
+    "기획서와 콘셉트 기획서 본문",
+    "이전 v3 자산과 기록",
+    "탈놀음 이미지"
+  ],
+  "labels": [
+    {
+      "id": "L01",
+      "text": "내 선택으로 완성하는 나만의 유람기",
+      "count": 1
+    },
+    {
+      "id": "L02",
+      "text": "덜미 - 나만의 유람기",
+      "count": 1
+    },
+    {
+      "id": "L03",
+      "text": "이야기의 틀",
+      "count": 1
+    },
+    {
+      "id": "L04",
+      "text": "전통 골격 유지와 사건 변주",
+      "count": 1
+    },
+    {
+      "id": "L05",
+      "text": "입력과 변주",
+      "count": 1
+    },
+    {
+      "id": "L06",
+      "text": "내 선택과 응답으로 달라지는 사건",
+      "count": 1
+    },
+    {
+      "id": "L07",
+      "text": "마당 선택",
+      "count": 1
+    },
+    {
+      "id": "L08",
+      "text": "선택 유형 안에서 마당 무작위 배정",
+      "count": 1
+    },
+    {
+      "id": "L09",
+      "text": "위기와 구원",
+      "count": 1
+    },
+    {
+      "id": "L10",
+      "text": "권력 풍자형",
+      "count": 1
+    },
+    {
+      "id": "L11",
+      "text": "위선 폭로형",
+      "count": 1
+    },
+    {
+      "id": "L12",
+      "text": "욕심과 다툼형",
+      "count": 1
+    },
+    {
+      "id": "L13",
+      "text": "주인공 설정",
+      "count": 1
+    },
+    {
+      "id": "L14",
+      "text": "캐릭터 선택과 이름 입력",
+      "count": 1
+    },
+    {
+      "id": "L15",
+      "text": "박첨지와 문답",
+      "count": 1
+    },
+    {
+      "id": "L16",
+      "text": "거리별 응답으로 채우는 이야기",
+      "count": 1
+    },
+    {
+      "id": "L17",
+      "text": "박첨지",
+      "count": 1
+    },
+    {
+      "id": "L18",
+      "text": "나의 주인공",
+      "count": 1
+    },
+    {
+      "id": "L19",
+      "text": "전통 틀 안에서 나만의 사건 구성",
+      "count": 1
+    },
+    {
+      "id": "L20",
+      "text": "전자책 생성",
+      "count": 1
+    },
+    {
+      "id": "L21",
+      "text": "AI 일러스트와 텍스트의 결합",
+      "count": 1
+    },
+    {
+      "id": "L22",
+      "text": "감상과 반출",
+      "count": 1
+    },
+    {
+      "id": "L23",
+      "text": "전자책 화면 감상",
+      "count": 1
+    },
+    {
+      "id": "L24",
+      "text": "전자책만 다운로드",
+      "count": 1
+    }
+  ],
+  "execution": {
+    "tool": "내장 image_gen",
+    "strategy": "v3 이미지 1장을 편집 대상으로 전달한 부분 수정",
+    "generatedCount": 1,
+    "selectedFileCount": 1,
+    "requestedCanvas": "편집 대상의 가로형 화면과 비율 보존",
+    "actualWidth": 1672,
+    "actualHeight": 941,
+    "exact16x9": false,
+    "ratioNote": "원본 1672×941의 비율을 유지함. 정확한 16:9라고 주장하지 않음",
+    "transparentBackground": false,
+    "qualityAndResolution": "내장 도구에 지정 인수가 없어 1k/medium을 지정하지 않음"
+  },
+  "promptFile": "유람기_개요_인포그래픽_v4_수정프롬프트.txt",
+  "outputFile": "유람기_개요_인포그래픽_v4.png",
+  "outputSHA256": "5d195e3615966495852dc1058dbb1df0ea6e86815cbb7215cdeba65691521c15",
+  "originalGeneratedPath": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0f02c-0966-7ff3-b4c8-56a0ca003dff\\exec-f7001bdf-79dc-4128-8d26-13731d7011ba.png",
+  "preflight": {
+    "outsideQuotedKorean": false,
+    "newCaptionCharacters": 9,
+    "replacementCaptionOccurrences": 1
+  },
+  "review": {
+    "sequence": [
+      "작성자 직접 대조와 미세 영역 확대",
+      "정답과 원자료를 주지 않은 새 컨텍스트의 블라인드 전사",
+      "문자열 및 단어 횟수 기계 대조"
+    ],
+    "directComparison": {
+      "wholeImageInspected": true,
+      "croppedRegions": [
+        "감상과 반출 패널",
+        "빈 이름표",
+        "중앙 책과 의상 및 인물 표찰",
+        "전자책 생성 패널"
+      ],
+      "audioIllustrationsInOutcomePresent": false,
+      "centralDialoguePreserved": true
+    },
+    "blindContext": "fork_turns=none의 새 에이전트에 최종 이미지 한 장만 제공함. 정답 라벨과 프롬프트 및 원자료를 제공하지 않음",
+    "blindTranscription": {
+      "transcription": [
+        {
+          "location": "상단 제목",
+          "text": "내 선택으로 완성하는 나만의 유람기"
+        },
+        {
+          "location": "상단 부제",
+          "text": "덜미 - 나만의 유람기"
+        },
+        {
+          "location": "왼쪽 위 패널 제목",
+          "text": "이야기의 틀"
+        },
+        {
+          "location": "왼쪽 위 패널 설명",
+          "text": "전통 골격 유지와 사건 변주"
+        },
+        {
+          "location": "가운데 위 패널 제목",
+          "text": "마당 선택"
+        },
+        {
+          "location": "가운데 위 패널 설명",
+          "text": "선택 유형 안에서 마당 무작위 배정"
+        },
+        {
+          "location": "가운데 위 방패 그림 아래",
+          "text": "위기와 구원"
+        },
+        {
+          "location": "가운데 위 관모를 쓴 인물 아래",
+          "text": "권력 풍자형"
+        },
+        {
+          "location": "가운데 위 가면 그림 아래",
+          "text": "위선 폭로형"
+        },
+        {
+          "location": "가운데 위 두 인물 그림 아래",
+          "text": "욕심과 다툼형"
+        },
+        {
+          "location": "오른쪽 위 패널 제목",
+          "text": "주인공 설정"
+        },
+        {
+          "location": "오른쪽 위 패널 설명",
+          "text": "캐릭터 선택과 이름 입력"
+        },
+        {
+          "location": "중앙 패널 제목",
+          "text": "박첨지와 문답"
+        },
+        {
+          "location": "중앙 패널 설명",
+          "text": "거리별 응답으로 채우는 이야기"
+        },
+        {
+          "location": "중앙 왼쪽 인물 표찰",
+          "text": "박첨지"
+        },
+        {
+          "location": "중앙 오른쪽 인물 표찰",
+          "text": "나의 주인공"
+        },
+        {
+          "location": "중앙 패널 하단 설명",
+          "text": "전통 틀 안에서 나만의 사건 구성"
+        },
+        {
+          "location": "왼쪽 아래 패널 제목",
+          "text": "입력과 변주"
+        },
+        {
+          "location": "왼쪽 아래 패널 설명",
+          "text": "내 선택과 응답으로 달라지는 사건"
+        },
+        {
+          "location": "가운데 아래 패널 제목",
+          "text": "전자책 생성"
+        },
+        {
+          "location": "가운데 아래 패널 설명",
+          "text": "AI 일러스트와 텍스트의 결합"
+        },
+        {
+          "location": "오른쪽 아래 패널 제목",
+          "text": "감상과 반출"
+        },
+        {
+          "location": "오른쪽 아래 책 그림 밑",
+          "text": "전자책 화면 감상"
+        },
+        {
+          "location": "오른쪽 아래 태블릿 그림 밑",
+          "text": "전자책만 다운로드"
+        }
+      ],
+      "unreadable_regions": [],
+      "borderline_glyphs": [],
+      "brands": [],
+      "watermarks": [],
+      "charts": [],
+      "symbol_fields": [
+        {
+          "location": "왼쪽 아래 빨간 말풍선 내부",
+          "description": "흰색 점 세 개"
+        },
+        {
+          "location": "왼쪽 아래 청록색 말풍선 내부",
+          "description": "흰색 점 세 개"
+        },
+        {
+          "location": "왼쪽 아래 첫 번째 둥근 버튼",
+          "description": "밝은색 원"
+        },
+        {
+          "location": "왼쪽 아래 두 번째 둥근 버튼",
+          "description": "밝은색 삼각형"
+        },
+        {
+          "location": "왼쪽 아래 세 번째 둥근 버튼",
+          "description": "밝은색 사각형"
+        },
+        {
+          "location": "왼쪽 아래 네 번째 둥근 버튼",
+          "description": "밝은색 별"
+        },
+        {
+          "location": "중앙 왼쪽 인물 위",
+          "description": "글자가 없는 말풍선"
+        },
+        {
+          "location": "중앙 오른쪽 인물 위",
+          "description": "글자가 없는 말풍선"
+        },
+        {
+          "location": "오른쪽 위 캐릭터들 아래",
+          "description": "글자가 없는 이름표"
+        },
+        {
+          "location": "가운데 위 두 인물 사이 위쪽",
+          "description": "주황색 강조선 세 개"
+        },
+        {
+          "location": "왼쪽 패널과 중앙 패널 사이",
+          "description": "오른쪽을 향하는 주황색 화살표"
+        },
+        {
+          "location": "마당 선택 패널 아래",
+          "description": "아래를 향하는 청록색 화살표"
+        },
+        {
+          "location": "중앙 패널과 전자책 생성 패널 사이",
+          "description": "아래를 향하는 주황색 화살표"
+        },
+        {
+          "location": "전자책 생성 패널의 그림 카드와 빈 책 사이",
+          "description": "청록색 더하기 기호"
+        },
+        {
+          "location": "전자책 생성 패널의 빈 책과 그림책 사이",
+          "description": "오른쪽을 향하는 주황색 화살표"
+        },
+        {
+          "location": "오른쪽 아래 책과 태블릿 사이",
+          "description": "태블릿을 향하는 보라색 곡선 화살표"
+        },
+        {
+          "location": "오른쪽 아래 태블릿 화면 왼쪽 위",
+          "description": "빨간색 원"
+        },
+        {
+          "location": "오른쪽 아래 태블릿 화면 오른쪽 위",
+          "description": "보라색과 파란색의 다각형"
+        },
+        {
+          "location": "오른쪽 아래 태블릿 화면 왼쪽 아래",
+          "description": "노란색 사각형"
+        },
+        {
+          "location": "오른쪽 아래 태블릿 화면 오른쪽 아래",
+          "description": "청록색 사각형"
+        }
+      ],
+      "lower_right_visuals": [
+        "여러 색의 책이 겹쳐 있고 맨 위 책은 펼쳐져 있다. 펼친 두 페이지에는 산, 물, 나무와 구름 그림이 있다.",
+        "펼친 책에서 오른쪽 태블릿으로 보라색 곡선 화살표가 이어진다.",
+        "기울어진 태블릿 화면에는 빨간 원, 보라색과 파란색의 다각형, 노란색 사각형, 청록색 사각형이 배치되어 있다."
+      ]
+    },
+    "mechanicalComparison": {
+      "expectedLabelCount": 24,
+      "transcribedLabelCount": 24,
+      "missing": [],
+      "extra": [],
+      "excess": [],
+      "wordRepetitionIncreases": [],
+      "oldNarrationStrings": [],
+      "brands": [],
+      "watermarks": [],
+      "unreadableRegions": [],
+      "borderlineGlyphs": [],
+      "charts": []
+    },
+    "independentReadability": {
+      "findings": 0,
+      "applied": 0
+    },
+    "factComparison": "새로운 L1~L4 사실이나 출처 해석을 추가하지 않은 사용자 직접 기획 변경 반영이므로 별도 사실 대조 조건에 해당하지 않음",
+    "limitation": "무발견은 결함 부재의 증명이 아님. 예시 인물과 복식 및 장면은 역사적 고증이나 실제 구현 및 성능의 증거가 아님"
+  },
+  "symbolPolicy": {
+    "combinationIcon": "+",
+    "assignedCount": 1,
+    "location": "전자책 생성 패널",
+    "role": "그림과 텍스트의 결합을 나타내는 개념 기호이며 정량 차트가 아님"
+  },
+  "approval": {
+    "workClass": "외부 사용용 이미지 시안",
+    "state": "사용자 수정본 확인 대기. G1 자동 통과로 처리하지 않음",
+    "externalReview": "미실시"
+  }
+}
