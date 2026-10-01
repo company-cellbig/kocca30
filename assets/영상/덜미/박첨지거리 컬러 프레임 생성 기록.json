@@ -1,0 +1,1491 @@
+{
+  "title": "박첨지거리 컬러 프레임 생성 기록",
+  "created": "2026-10-01",
+  "mode": "built-in image_gen",
+  "intent": "edit",
+  "use_case": "identity-preserve",
+  "requested_aspect_ratio": "16:9",
+  "source_directory": "assets/영상/덜미/원본이미지",
+  "output_directory": "assets/영상/덜미",
+  "filename_policy": "원본 파일명 유지",
+  "total_outputs": 23,
+  "total_generation_calls": 24,
+  "references": [
+    {
+      "path": "assets/영상/덜미/레퍼런스_전체.png",
+      "size": [
+        2172,
+        724
+      ],
+      "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
+      "role": "모든 장면의 무대와 마당 색 및 재질 참조"
+    },
+    {
+      "path": "assets/영상/덜미/레퍼런스_산받이.png",
+      "size": [
+        1672,
+        940
+      ],
+      "sha256": "cb93427ceda016f78fb218bb36fd3791bd56c0ab380dd08ef014dd1edcfc9529",
+      "role": "12번과 22번의 인물, 의상, 악기 및 무대 밖 배경의 색과 재질 참조"
+    }
+  ],
+  "composition_policy": "각 흑백 원본을 구도와 자세의 기준으로 입력하고, 레퍼런스를 색과 재질 참조로 사용하도록 요청함. 좌우 확장과 세로 시야 보존을 지시함.",
+  "restoration_scope": "색상, 저화질 원본에서 불분명한 얼굴과 문양 및 건축 세부, 원본 밖 영역은 생성한 복원 표현임. 실제 색을 확인한 정본이나 원본 픽셀 위치를 보존한 결과로 간주하지 않음.",
+  "native_size_note": "요청 비율은 16:9임. 내장 도구의 생성 원본은 1672×941px 22장과 1672×940px 1장으로 정확한 16:9와 소폭 차이가 있음. 별도 자르기나 리사이즈 없이 도구 출력 PNG를 저장함.",
+  "validation": {
+    "count": 23,
+    "missing": [],
+    "changedSources": [],
+    "changedRefs": [],
+    "duplicateHashes": [],
+    "all_rgb": true,
+    "visual_review": "23장 모두 원본 및 해당 레퍼런스와 대조함. 01번 초안의 원본 밖 바닥 추가를 발견해 재생성하고 최종 버전에서 바닥 제거를 확인함.",
+    "review_limit": "인형과 인물의 큰 배치, 촬영 범위, 글자 유무와 공통 색 및 재질을 비교한 육안 점검임. 모든 표정, 기와 및 문 세부나 천의 주름이 원본과 동일하다는 보장은 아님."
+  },
+  "frames": [
+    {
+      "filename": "박첨지거리_01.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_01.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "73d0493c88ab8f83738ba7b376237443ab0917a1d8c861dbbf7cb3d434a4e7c7"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_01.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "ce0c2691100bfba6fd15c29737b1961682132f71e134d1e73aef7c5f2f70c1a3",
+        "bytes": 2257995
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_01.png",
+          "role": "edit target; composition, pose and geometry",
+          "sha256": "73d0493c88ab8f83738ba7b376237443ab0917a1d8c861dbbf7cb3d434a4e7c7"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "environment color/material reference only",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: EMPTY stage, no puppets or people. The tiled roof/eaves and wooden doors occupy the top third; the black cloth top edge is at about 33% of image height. The curtain fills the lower two thirds. Preserve its broad diagonal sag and folds. Preserve exactly the three existing hand-painted white Korean characters \"남 사 당\", across the lower-middle cloth at about 71% of height, in the same relative locations and spacing. No yard or musicians enter the side extensions.\nCritical corrective constraint: This is a tight SOURCE-frame restoration. In the final 16:9 image the curtain's top edge MUST lie at 0.33H (one-third from the top), exactly like Image 1; the curtain extends beyond the bottom image border. NO visible ground or floor anywhere along the bottom. Roof/doors stay inside the original top-third area and there must be NO extra sky/headroom compared to the source. Do not show the whole roof or the curtain base just because Image 2 does. Center the original source canvas within the new left/right extensions; original subject sizes relative to height are unchanged. Only left/right outpainting.",
+      "visual_review": "바닥 추가가 제거되었고 빈 무대와 남 사 당 글자를 확인함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: EMPTY stage, no puppets or people. The tiled roof/eaves and wooden doors occupy the top third; the black cloth top edge is at about 33% of image height. The curtain fills the lower two thirds. Preserve its broad diagonal sag and folds. Preserve exactly the three existing hand-painted white Korean characters \"남 사 당\", across the lower-middle cloth at about 71% of height, in the same relative locations and spacing. No yard or musicians enter the side extensions.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_01.png",
+              "role": "edit target; composition, pose and geometry"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "environment color/material reference only"
+            }
+          ],
+          "generated_cache_filename": "exec-75ee365e-9aef-45cd-bc95-223dfa4770b5.png",
+          "selected": false,
+          "review": "검은 막 상단이 원본보다 낮고 바닥이 추가되어 재생성함."
+        },
+        {
+          "attempt": 2,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: EMPTY stage, no puppets or people. The tiled roof/eaves and wooden doors occupy the top third; the black cloth top edge is at about 33% of image height. The curtain fills the lower two thirds. Preserve its broad diagonal sag and folds. Preserve exactly the three existing hand-painted white Korean characters \"남 사 당\", across the lower-middle cloth at about 71% of height, in the same relative locations and spacing. No yard or musicians enter the side extensions.\nCritical corrective constraint: This is a tight SOURCE-frame restoration. In the final 16:9 image the curtain's top edge MUST lie at 0.33H (one-third from the top), exactly like Image 1; the curtain extends beyond the bottom image border. NO visible ground or floor anywhere along the bottom. Roof/doors stay inside the original top-third area and there must be NO extra sky/headroom compared to the source. Do not show the whole roof or the curtain base just because Image 2 does. Center the original source canvas within the new left/right extensions; original subject sizes relative to height are unchanged. Only left/right outpainting.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_01.png",
+              "role": "edit target; composition, pose and geometry"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "environment color/material reference only"
+            }
+          ],
+          "generated_cache_filename": "exec-8017b22b-3a94-45a6-9daf-48048b0d62f1.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_02.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_02.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "a9260449321b1752c86bc61a1c139eeeaee3aa8331e157cefc091f8f80dbf0f6"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_02.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "2bd8e724292a4c123373268be5e73004fe038615e0fd94a668740b867f99d3d3",
+        "bytes": 2025405
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_02.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "a9260449321b1752c86bc61a1c139eeeaee3aa8331e157cefc091f8f80dbf0f6"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_01.png",
+          "role": "stage materials and curtain lettering style; not geometry",
+          "sha256": "ce0c2691100bfba6fd15c29737b1961682132f71e134d1e73aef7c5f2f70c1a3"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the generated empty-stage color anchor; use only its materials and handwriting style, never its camera/framing.\nSource-specific lock: Two SMALL original stage appearances, neither is a full-height puppet. On the left around original x=105 only a low broad rounded crown/head-top silhouette peeks just above the curtain, with a small pale part; do not expose a face or body hidden by the source curtain. On the right around original x=470 a TINY narrow wooden puppet head and pale neckline peek above the curtain, no full torso. Keep their exact source silhouettes and relative sizes, head tops below about 15% of canvas height. Curtain top edge about 24% height, black cloth covers the bottom three quarters. The source is tightly framed on doors and the lower eave, not a complete roof. Preserve three large source white hand-painted characters \"남 사 당\" at approximately 75% height, with the original uneven spacing. No musicians, no extra puppet.",
+      "visual_review": "원본 인형의 위치와 노출 크기, 기울기, 막과 글자 노출을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the generated empty-stage color anchor; use only its materials and handwriting style, never its camera/framing.\nSource-specific lock: Two SMALL original stage appearances, neither is a full-height puppet. On the left around original x=105 only a low broad rounded crown/head-top silhouette peeks just above the curtain, with a small pale part; do not expose a face or body hidden by the source curtain. On the right around original x=470 a TINY narrow wooden puppet head and pale neckline peek above the curtain, no full torso. Keep their exact source silhouettes and relative sizes, head tops below about 15% of canvas height. Curtain top edge about 24% height, black cloth covers the bottom three quarters. The source is tightly framed on doors and the lower eave, not a complete roof. Preserve three large source white hand-painted characters \"남 사 당\" at approximately 75% height, with the original uneven spacing. No musicians, no extra puppet.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_02.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_01.png",
+              "role": "stage materials and curtain lettering style; not geometry"
+            }
+          ],
+          "generated_cache_filename": "exec-7e26d714-7f28-4a1c-bdd6-0448489676ab.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_03.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_03.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "f0385de8898881db1ca83c217c861ca0314ee32489d90c6b09f72b14719aa834",
+        "bytes": 2129994
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+          "role": "edit target; composition, pose and geometry",
+          "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "environment color/material reference only",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: CLOSE shot of one moustached wooden puppet very far RIGHT, its right side partly clipped in the original. Keep its large ears, staring round painted eyes, small narrow face, curling BLACK moustache and thin light ivory headwrap/cap. Color the carved face warm pale wood and the visible shoulder cloth pale ivory. Its face tilts slightly; preserve the exact gaze and silhouette. The black curtain top edge is at 48% of height, blank cloth fills the lower half. Dark wooden doors behind; no roof and NO visible lettering. Do not move the puppet toward center or enlarge the body.",
+      "visual_review": "원본 인형의 종류와 화면 내 상대 위치, 검은 막 및 배경을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: CLOSE shot of one moustached wooden puppet very far RIGHT, its right side partly clipped in the original. Keep its large ears, staring round painted eyes, small narrow face, curling BLACK moustache and thin light ivory headwrap/cap. Color the carved face warm pale wood and the visible shoulder cloth pale ivory. Its face tilts slightly; preserve the exact gaze and silhouette. The black curtain top edge is at 48% of height, blank cloth fills the lower half. Dark wooden doors behind; no roof and NO visible lettering. Do not move the puppet toward center or enlarge the body.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+              "role": "edit target; composition, pose and geometry"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "environment color/material reference only"
+            }
+          ],
+          "generated_cache_filename": "exec-12f4f127-3b13-4b17-8fe3-35baee96439f.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_04.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_04.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "59ea17f96ab4e0c48779b7e59be4d770bccc0e09a3e5e84450edd71e2757016b"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_04.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "e9faea3654ca9c68919d2bd35f5058f5a7604284b92827fb806dc53d27bcfc2a",
+        "bytes": 1874582
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_04.png",
+          "role": "edit target; composition, pose and geometry",
+          "sha256": "59ea17f96ab4e0c48779b7e59be4d770bccc0e09a3e5e84450edd71e2757016b"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "environment color/material reference only",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: ONE thin tall smiling wooden puppet center-right, very large ears, long narrow neck, small pale beige brimmed hat with a dark band, and a dark patterned cloth garment, muted brown/indigo with small pale motifs. Preserve the carved smile, painted eyes, exact upright pose and original head size. Top of curtain at 45% height; blank black cloth fills the lower half. Source shows dark doors, pillars and a narrow dancheong eave above. No white-bearded puppet, no additional characters, NO visible lettering.",
+      "visual_review": "원본 인형의 종류와 화면 내 상대 위치, 검은 막 및 배경을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: ONE thin tall smiling wooden puppet center-right, very large ears, long narrow neck, small pale beige brimmed hat with a dark band, and a dark patterned cloth garment, muted brown/indigo with small pale motifs. Preserve the carved smile, painted eyes, exact upright pose and original head size. Top of curtain at 45% height; blank black cloth fills the lower half. Source shows dark doors, pillars and a narrow dancheong eave above. No white-bearded puppet, no additional characters, NO visible lettering.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_04.png",
+              "role": "edit target; composition, pose and geometry"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "environment color/material reference only"
+            }
+          ],
+          "generated_cache_filename": "exec-ed916980-fcf7-4746-8bf4-ce0a6092ae7a.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_05.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_05.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558",
+        "bytes": 2019692
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+          "role": "edit target; composition, pose and geometry",
+          "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "environment color/material reference only",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: ONE old male WOODEN puppet center-right, upright frontal face. Preserve the source's long carved face, large painted eyes, sharply incised cheek/forehead lines, ivory-white eyebrows and wispy white hair, thick broad white moustache and long white fiber beard. The painted wooden face is aged warm tan, not realistic human skin. The costume is light ivory cotton, with the original folds and neckline, not an invented formal costume. Do not beautify or change expression. Black curtain top edge at 64% of height. Row of tile ends along the very top, muted dancheong strip and dark brown doors behind. NO visible lettering. This frame establishes the same puppet's material/color for later shots.",
+      "visual_review": "원본의 인형 위치, 자세와 표정, 무대 요소를 대조함. 후속 인형 장면의 색상과 재질 참조로 선정함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nScene-specific lock: ONE old male WOODEN puppet center-right, upright frontal face. Preserve the source's long carved face, large painted eyes, sharply incised cheek/forehead lines, ivory-white eyebrows and wispy white hair, thick broad white moustache and long white fiber beard. The painted wooden face is aged warm tan, not realistic human skin. The costume is light ivory cotton, with the original folds and neckline, not an invented formal costume. Do not beautify or change expression. Black curtain top edge at 64% of height. Row of tile ends along the very top, muted dancheong strip and dark brown doors behind. NO visible lettering. This frame establishes the same puppet's material/color for later shots.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+              "role": "edit target; composition, pose and geometry"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "environment color/material reference only"
+            }
+          ],
+          "generated_cache_filename": "exec-d0ac023f-f7fb-41e0-8b4f-81d0173e5f53.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_06.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_06.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "6dec8f0b62e56594c727b474d2ce1d697b6d8855c9676d423437f3eea6fc44c0",
+        "bytes": 2167184
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: Same white-haired old wooden puppet as Image 3, but keep Image 1's SMALLER size and turned face/pose. Source puppet center is about x=438 of 654, visible head/body roughly y=155..281 of 480. Wide medium stage shot, full rows of gray roof tiles in the top quarter, dark doors below. Curtain top edge at 59% height; blank black curtain below, NO lettering. Do not substitute the closer Image 3 pose/framing.",
+      "visual_review": "원본 인형의 위치와 노출 크기, 기울기, 막과 글자 노출을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: Same white-haired old wooden puppet as Image 3, but keep Image 1's SMALLER size and turned face/pose. Source puppet center is about x=438 of 654, visible head/body roughly y=155..281 of 480. Wide medium stage shot, full rows of gray roof tiles in the top quarter, dark doors below. Curtain top edge at 59% height; blank black curtain below, NO lettering. Do not substitute the closer Image 3 pose/framing.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-ffb2dfbd-b387-4e71-97ec-55c9227148a7.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_07.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_07.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "37e4b6a5d1022c0b23ce092a0a81dec9e2548ef643642f9ce70060a446d39fcc",
+        "bytes": 2320733
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: Same old wooden puppet as Image 3, LEFT of center (source x=205 of 654), with its whole head sharply TILTED toward image-left, about y=94..216. Preserve the tilted head, diagonal beard and tiny shoulders rather than an upright pose. Wide stage shot with turned roof corner at top left and rows of gray tiles above. Curtain top edge 45% height. Preserve the existing hand-painted white Korean \"남 사 당\" near the BOTTOM at about 89% height with original spacing, not middle. No musicians.",
+      "visual_review": "원본 인형의 위치와 노출 크기, 기울기, 막과 글자 노출을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: Same old wooden puppet as Image 3, LEFT of center (source x=205 of 654), with its whole head sharply TILTED toward image-left, about y=94..216. Preserve the tilted head, diagonal beard and tiny shoulders rather than an upright pose. Wide stage shot with turned roof corner at top left and rows of gray tiles above. Curtain top edge 45% height. Preserve the existing hand-painted white Korean \"남 사 당\" near the BOTTOM at about 89% height with original spacing, not middle. No musicians.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-ed1cfedc-88b4-4353-8cbd-5adf1efc70ee.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_08.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_08.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "16e332d8ba7930a6cbeda114af946d40a2988f9ed9e35646cbb5792d68a1980e",
+        "bytes": 2285102
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: One SAME old puppet, medium CLOSE shot LEFT of center. Its head is strongly leaned about 25 degrees toward IMAGE-LEFT, neck and beard diagonal, light costume extending diagonally toward bottom-right. Source eye/head silhouette and wistful painted expression MUST be retained. In source the head spans about x=75..275,y=138..326, shoulders x=47..357 to y=389. Curtain edge at81% height leaves only a narrow blank black strip at bottom; NO lettering. Gray roof tiles take the upper40%, dark doors below. Do not straighten head, center it, or replace this distinct pose with Image3.",
+      "visual_review": "원본의 인형 자세와 얼굴 방향, 막의 노출 및 후속 장면의 인형 색을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: One SAME old puppet, medium CLOSE shot LEFT of center. Its head is strongly leaned about 25 degrees toward IMAGE-LEFT, neck and beard diagonal, light costume extending diagonally toward bottom-right. Source eye/head silhouette and wistful painted expression MUST be retained. In source the head spans about x=75..275,y=138..326, shoulders x=47..357 to y=389. Curtain edge at81% height leaves only a narrow blank black strip at bottom; NO lettering. Gray roof tiles take the upper40%, dark doors below. Do not straighten head, center it, or replace this distinct pose with Image3.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-355b7ef4-7b2e-45fa-bc15-3e7f05478c09.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_09.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_09.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "4149d4fbe0063add19c604b09752f137494a78af14f30243753512356d16ec97",
+        "bytes": 2001559
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: SAME old puppet, medium CLOSE shot LEFT of center, original head and torso around x=95..288 of654 and y=128..380 of480. Nearly upright but slightly leaned, staring painted eyes, thick moustache, long white beard. Keep the smaller original shoulders and long neck. Curtain edge at80% height, only blank black cloth in bottom20%; NO lettering. Rows of gray roof tiles upper36%, dark wood doors below. Preserve Image1's specific posture, not Image3's frontal position.",
+      "visual_review": "원본의 인형 자세와 얼굴 방향, 막의 노출 및 후속 장면의 인형 색을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: SAME old puppet, medium CLOSE shot LEFT of center, original head and torso around x=95..288 of654 and y=128..380 of480. Nearly upright but slightly leaned, staring painted eyes, thick moustache, long white beard. Keep the smaller original shoulders and long neck. Curtain edge at80% height, only blank black cloth in bottom20%; NO lettering. Rows of gray roof tiles upper36%, dark wood doors below. Preserve Image1's specific posture, not Image3's frontal position.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-ee91fcfa-abd1-408e-a28f-0b81f4879cb8.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_10.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_10.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "8add2ac1dac361be2577ede5e4a5e13070c39c378865f74ce1f0af274204eb02",
+        "bytes": 2145566
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: SAME old puppet, medium CLOSE shot LEFT of center, original head/torso around x=150..336 of654,y=90..383 of480, FRONT facing with both painted eyes visible, keep exact expression. The light costume and pointed beard tip rest at or slightly over the curtain's top edge. Curtain edge80% height, blank black bottom strip, NO lettering. Gray roof tiles top third, dark doors/eave below. Preserve Image1's relative size, position and frontal pose.",
+      "visual_review": "원본의 인형 자세와 얼굴 방향, 막의 노출 및 후속 장면의 인형 색을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: SAME old puppet, medium CLOSE shot LEFT of center, original head/torso around x=150..336 of654,y=90..383 of480, FRONT facing with both painted eyes visible, keep exact expression. The light costume and pointed beard tip rest at or slightly over the curtain's top edge. Curtain edge80% height, blank black bottom strip, NO lettering. Gray roof tiles top third, dark doors/eave below. Preserve Image1's relative size, position and frontal pose.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-ba5cbc58-8c36-41ad-8703-c1d79cd716eb.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_11.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_11.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe",
+        "bytes": 1991691
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP of the SAME old wooden puppet. The original face and white hair are LARGE, centered slightly LEFT of image center (head source x~155..447 of654), crown at about18% height; both staring painted eyes, long nose, cheek carvings and thick white moustache clearly visible. The long beard and ivory shoulders are CROPPED by the BOTTOM of the image. Preserve exact source frontal gaze and expression; do not reduce the head size. Gray roof tiles and muted eave only as softly focused backdrop at top, dark wood below. There is NO black curtain edge or lettering anywhere in this shot. Do not zoom out to show a complete body/stage.",
+      "visual_review": "원본의 큰 얼굴과 화면 밖으로 잘리는 수염, 막이 없는 배경을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP of the SAME old wooden puppet. The original face and white hair are LARGE, centered slightly LEFT of image center (head source x~155..447 of654), crown at about18% height; both staring painted eyes, long nose, cheek carvings and thick white moustache clearly visible. The long beard and ivory shoulders are CROPPED by the BOTTOM of the image. Preserve exact source frontal gaze and expression; do not reduce the head size. Gray roof tiles and muted eave only as softly focused backdrop at top, dark wood below. There is NO black curtain edge or lettering anywhere in this shot. Do not zoom out to show a complete body/stage.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-642b49a0-271b-4eb6-aa2e-1100a151bc04.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_12.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_12.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "8082db64f732727757c2abac7b1b30ceaa40314f8e4eea858a61f688aa868bcf"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_12.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "c6a88239207b36e61ab94a337ccd71634742dbac0bcf4153a6fe6de0da8a8242",
+        "bytes": 2360283
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_12.png",
+          "role": "edit target; source camera, people identities, pose and positions",
+          "sha256": "8082db64f732727757c2abac7b1b30ceaa40314f8e4eea858a61f688aa868bcf"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_산받이.png",
+          "role": "musician clothing, faces, instrument and yard color/material reference",
+          "sha256": "cb93427ceda016f78fb218bb36fd3791bd56c0ab380dd08ef014dd1edcfc9529"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "shared spatial/material reference",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: a restored endpoint frame from original Korean Namsadang performance footage.\nEDIT Image 1, the monochrome ORIGINAL offstage shot, into one high-detail natural-color photograph, landscape 16:9, highest available native resolution (aim 1920x1080). Image 1 has ABSOLUTE priority for camera angle/distance, people count, poses, hand positions, facial profiles, clothing silhouettes and background locations.\nImage 2 is the musician/yard COLOR AND MATERIAL reference; Image 3 is the same whole-space palette reference. Match their natural daylight, warm skin, white cotton clothing, pale straw hat, brown timber, gray tile, muted green/rust eaves, charcoal curtain, beige dirt, dull grass and pale tan hide drums with brown shells/ivory rope. Reference pose must NOT replace source poses.\nPreserve exactly THREE real seated men: foreground at source x~510/654 the short dark-haired older man in white short-sleeved shirt and white trousers, LEFT-facing profile, his visible hand flat on the LARGE drum head; behind-left at source x~415 the broad-brimmed straw-hat/glasses man in white long-sleeved shirt, source looking toward LEFT; third man behind-right at source x~590, partly occluded, dark short hair and white shirt. Keep source's occlusions and the two circular drumheads, sizes and rope patterns. Do not introduce puppets, extra people, jewelry, visible new instruments or extra limbs.\nKeep left black vertical hanging curtain, diagonal pale guyline falling from top-left toward rail, low dark rail/posts, grass beyond and raised wooden lattice building in the source upper background. Do NOT add a large complete roof above the source's cropped building.\nCanvas: keep Image 1's FULL top-to-bottom field of view and subject scale relative to height; original is central approximately77% of wider16:9 canvas. Extend LEFT and RIGHT only with coherent environment at the same camera angle. Do not crop vertically, zoom out, recenter group, stretch bodies, paste the reference photo or change the camera. Remove scan border/noise/compression; restore plausible photographic textures while keeping source expressions, hand gestures and positions. No subtitles, new signs, logos or watermarks.",
+      "visual_review": "원본의 세 사람, 좌향 얼굴, 두 북, 옆막과 대각선 줄, 난간을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: a restored endpoint frame from original Korean Namsadang performance footage.\nEDIT Image 1, the monochrome ORIGINAL offstage shot, into one high-detail natural-color photograph, landscape 16:9, highest available native resolution (aim 1920x1080). Image 1 has ABSOLUTE priority for camera angle/distance, people count, poses, hand positions, facial profiles, clothing silhouettes and background locations.\nImage 2 is the musician/yard COLOR AND MATERIAL reference; Image 3 is the same whole-space palette reference. Match their natural daylight, warm skin, white cotton clothing, pale straw hat, brown timber, gray tile, muted green/rust eaves, charcoal curtain, beige dirt, dull grass and pale tan hide drums with brown shells/ivory rope. Reference pose must NOT replace source poses.\nPreserve exactly THREE real seated men: foreground at source x~510/654 the short dark-haired older man in white short-sleeved shirt and white trousers, LEFT-facing profile, his visible hand flat on the LARGE drum head; behind-left at source x~415 the broad-brimmed straw-hat/glasses man in white long-sleeved shirt, source looking toward LEFT; third man behind-right at source x~590, partly occluded, dark short hair and white shirt. Keep source's occlusions and the two circular drumheads, sizes and rope patterns. Do not introduce puppets, extra people, jewelry, visible new instruments or extra limbs.\nKeep left black vertical hanging curtain, diagonal pale guyline falling from top-left toward rail, low dark rail/posts, grass beyond and raised wooden lattice building in the source upper background. Do NOT add a large complete roof above the source's cropped building.\nCanvas: keep Image 1's FULL top-to-bottom field of view and subject scale relative to height; original is central approximately77% of wider16:9 canvas. Extend LEFT and RIGHT only with coherent environment at the same camera angle. Do not crop vertically, zoom out, recenter group, stretch bodies, paste the reference photo or change the camera. Remove scan border/noise/compression; restore plausible photographic textures while keeping source expressions, hand gestures and positions. No subtitles, new signs, logos or watermarks.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_12.png",
+              "role": "edit target; source camera, people identities, pose and positions"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_산받이.png",
+              "role": "musician clothing, faces, instrument and yard color/material reference"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "shared spatial/material reference"
+            }
+          ],
+          "generated_cache_filename": "exec-4811a620-de31-452c-930c-42c2d0a6e3b4.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_13.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_13.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "ba0f10eb97bee236f9bc061ae5eae279cfd47f2c490524dcaeeefca480fe4e5a",
+        "bytes": 2257826
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: WIDE stage shot of the SAME old puppet, SMALL upright front-facing figure LEFT of center (source center x~268 of654, hair y~94, body ends y~217 of480). Preserve its small scale and front facing expression. Roof tiles and turned LEFT roof corner fill top quarter, doors in background. Curtain top edge45% height, black curtain fills bottom half and extends past bottom (NO ground). Preserve exact hand-painted white \"남 사 당\" across the cloth at about83% height, source spacing and locations. NO other puppet or person.",
+      "visual_review": "원본의 인형 위치와 원근, 막의 노출 및 글자 유무를 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: WIDE stage shot of the SAME old puppet, SMALL upright front-facing figure LEFT of center (source center x~268 of654, hair y~94, body ends y~217 of480). Preserve its small scale and front facing expression. Roof tiles and turned LEFT roof corner fill top quarter, doors in background. Curtain top edge45% height, black curtain fills bottom half and extends past bottom (NO ground). Preserve exact hand-painted white \"남 사 당\" across the cloth at about83% height, source spacing and locations. NO other puppet or person.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-a8d9dd4e-b59f-4c88-a4be-9f3e8edee56a.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_14.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_14.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "326e8fae380e5dcae7066ac89934d83eaaff315e09e2059a11bd8e939f8b3d8a",
+        "bytes": 2090449
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE torso/head view of SAME old puppet around source x~195..430 of654, hair y~95, torso to y~449 of480. FRONT-facing painted eyes, thick white moustache, white beard falls toward bottom center, ivory clothing. Preserve the original head tilt, eyes and robe folds. Curtain top edge at93% height, just a THIN black band along bottom. Source has a narrow light dangling piece over edge near center; keep that detail where visible. Gray roof upper third, dark wood and muted dancheong behind. NO lettering, do not increase curtain height.",
+      "visual_review": "원본의 인형 위치와 원근, 막의 노출 및 글자 유무를 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE torso/head view of SAME old puppet around source x~195..430 of654, hair y~95, torso to y~449 of480. FRONT-facing painted eyes, thick white moustache, white beard falls toward bottom center, ivory clothing. Preserve the original head tilt, eyes and robe folds. Curtain top edge at93% height, just a THIN black band along bottom. Source has a narrow light dangling piece over edge near center; keep that detail where visible. Gray roof upper third, dark wood and muted dancheong behind. NO lettering, do not increase curtain height.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-429522ed-899e-4c63-a8f6-a0abad61c944.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_15.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_15.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "22ed7e60b9e79240abd64e4c657325aec5c4e4374a5450c74cc44d6c462c1473",
+        "bytes": 2059711
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE head/torso of SAME old puppet, source x~169..433 of654, white hair begins at8% height, upright front-facing face and staring eyes. Keep its original angular painted cheek lines, broad white moustache, beard and folded light costume. Torso finishes at curtain top edge91% height; black curtain is a thin bottom band and the lower robe fold rests against its edge. Source has NO lettering. Gray tile/eaves in upper third, dark wood doors/pillars behind. Do not shift the figure to match frame05 or zoom out.",
+      "visual_review": "원본의 인형 위치와 원근, 막의 노출 및 글자 유무를 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE head/torso of SAME old puppet, source x~169..433 of654, white hair begins at8% height, upright front-facing face and staring eyes. Keep its original angular painted cheek lines, broad white moustache, beard and folded light costume. Torso finishes at curtain top edge91% height; black curtain is a thin bottom band and the lower robe fold rests against its edge. Source has NO lettering. Gray tile/eaves in upper third, dark wood doors/pillars behind. Do not shift the figure to match frame05 or zoom out.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-dbfa0f19-2aa4-4d68-85ba-aaa809ba6623.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_16.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_16.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "e4e80e987a92f9d3c7e392fa7310b1da4534ed7be38c423e238a87e2c6a66c42",
+        "bytes": 2067706
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_11.png",
+          "role": "same puppet close detail/color reference; not pose",
+          "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP of the SAME old wooden puppet with its head angled toward IMAGE-LEFT, source head/hair x~152..451 of654 starting y~45 of480. Preserve the head tilt, slightly askew eyes, forehead and cheek grooves and worried painted expression; large ears, thin long nose, thick white moustache, beard. Light shoulders extend to bottom-right and are cut by frame. The head is large, do not zoom out. Gray tiles/eaves softly blurred behind the crown with dark wood lower background. NO curtain edge, NO lettering, no complete torso.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.",
+      "visual_review": "원본의 얼굴 방향과 근접 촬영, 화면 아래에서 잘리는 수염과 어깨를 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP of the SAME old wooden puppet with its head angled toward IMAGE-LEFT, source head/hair x~152..451 of654 starting y~45 of480. Preserve the head tilt, slightly askew eyes, forehead and cheek grooves and worried painted expression; large ears, thin long nose, thick white moustache, beard. Light shoulders extend to bottom-right and are cut by frame. The head is large, do not zoom out. Gray tiles/eaves softly blurred behind the crown with dark wood lower background. NO curtain edge, NO lettering, no complete torso.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_11.png",
+              "role": "same puppet close detail/color reference; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-f8fb6671-f539-4224-91a4-47dfa17c9a13.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_17.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_17.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "34d1579b42fbbf2ad1e2ca6c8141de28daf6963bfa1ee1e21724a869ecfe1f0d",
+        "bytes": 2279485
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: WIDE medium shot of SAME old puppet, source x~271..378 of654,y~34..195 of480, front-facing, upright, centered (source center x~322). Keep its original size and white hair/beard/ivory shoulders. Source roof tiles and turned LEFT roof corner occupy top fifth, dark doors below. Curtain edge41% height, black cloth fills rest and continues outside bottom, NO ground. Preserve original white hand-painted \"남 사 당\" low on cloth at about86% height and original uneven spacing. NO other puppet or human.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+      "visual_review": "원본의 인형 크기와 자세, 막의 노출과 글자 유무, 같은 인형의 색 및 배경 재질을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: WIDE medium shot of SAME old puppet, source x~271..378 of654,y~34..195 of480, front-facing, upright, centered (source center x~322). Keep its original size and white hair/beard/ivory shoulders. Source roof tiles and turned LEFT roof corner occupy top fifth, dark doors below. Curtain edge41% height, black cloth fills rest and continues outside bottom, NO ground. Preserve original white hand-painted \"남 사 당\" low on cloth at about86% height and original uneven spacing. NO other puppet or human.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-d05bc6b9-1749-461b-ade9-78fc32cbb5f7.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_18.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_18.png",
+        "size": [
+          1672,
+          940
+        ],
+        "mode": "RGB",
+        "sha256": "449d07c3bae7c0bee5ae91b804474873f0235b1a270bb00f99073b0da655c6bf",
+        "bytes": 2047174
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_11.png",
+          "role": "same puppet close detail/color reference; not pose",
+          "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE frontal SAME old wooden puppet with very tall swept WHITE hair starting about2% height and large carved face centered slightly left (head source x~140..408 of654). Keep the exact sourcelike eye direction and expression, moustache and long white beard. Ivory shoulders end at curtain edge90% height; beard tip dips just over edge. Only a thin blank BLACK curtain bottom band, NO lettering. Source shows large tile ends along very top, muted dancheong and dark doors/pillars below. Do not lower the curtain edge or zoom out to match Image3.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+      "visual_review": "원본의 인형 크기와 자세, 막의 노출과 글자 유무, 같은 인형의 색 및 배경 재질을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: CLOSE frontal SAME old wooden puppet with very tall swept WHITE hair starting about2% height and large carved face centered slightly left (head source x~140..408 of654). Keep the exact sourcelike eye direction and expression, moustache and long white beard. Ivory shoulders end at curtain edge90% height; beard tip dips just over edge. Only a thin blank BLACK curtain bottom band, NO lettering. Source shows large tile ends along very top, muted dancheong and dark doors/pillars below. Do not lower the curtain edge or zoom out to match Image3.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_11.png",
+              "role": "same puppet close detail/color reference; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-127dcb4d-e90a-4902-a1fd-0ef161a3ea3e.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_19.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_19.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "a9bc9c47b3a2f496208630470996e369bfb937e0444a8394457a942a606089e1",
+        "bytes": 1995996
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_11.png",
+          "role": "same puppet close detail/color reference; not pose",
+          "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP SAME old puppet front-facing with source slight lean. Source head/hair x~175..466 of654 beginning at y~89 of480, carved cheeks and forehead, staring painted eyes, white moustache, long white beard partly cut by BOTTOM frame, ivory shoulders also cropped. Preserve source's distinct hair direction and eye/gaze rather than reproducing frame11's pose. Roof tiles soft behind upper quarter with dark wood/eave below. NO curtain or lettering. Do not zoom out.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.",
+      "visual_review": "원본의 얼굴 방향과 근접 촬영, 화면 아래에서 잘리는 수염과 어깨를 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: EXTREME CLOSE-UP SAME old puppet front-facing with source slight lean. Source head/hair x~175..466 of654 beginning at y~89 of480, carved cheeks and forehead, staring painted eyes, white moustache, long white beard partly cut by BOTTOM frame, ivory shoulders also cropped. Preserve source's distinct hair direction and eye/gaze rather than reproducing frame11's pose. Roof tiles soft behind upper quarter with dark wood/eave below. NO curtain or lettering. Do not zoom out.\nImage4 is the same puppet's restored close-up11. Use its wood/hair detail and painted face identity consistently but source1's tilt, hair silhouette, pose and framing remain absolute priority.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_11.png",
+              "role": "same puppet close detail/color reference; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-67fe9d97-2923-4116-995b-a7045671a719.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_20.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_20.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "9f4632af751b8ef06e51465ce0a317a9e98efdc415935a17157ac390e490144b",
+        "bytes": 2146204
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: MEDIUM shot SAME old puppet around source x~267..412 of654,y~109..300 of480. It is frontal, centered slightly right, white beard tip falls OVER curtain edge. Keep specific eye expression, hair and posture; not the pose in Image3. Gray tile roof fills top quarter, turned LEFT roof corner visible, muted eave and dark doors below. Curtain edge62% height, blank black cloth covers bottom38%, NO lettering. No people or second puppet.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+      "visual_review": "원본의 인형 크기와 자세, 막의 노출과 글자 유무, 같은 인형의 색 및 배경 재질을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: MEDIUM shot SAME old puppet around source x~267..412 of654,y~109..300 of480. It is frontal, centered slightly right, white beard tip falls OVER curtain edge. Keep specific eye expression, hair and posture; not the pose in Image3. Gray tile roof fills top quarter, turned LEFT roof corner visible, muted eave and dark doors below. Curtain edge62% height, blank black cloth covers bottom38%, NO lettering. No people or second puppet.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-bc37b1f4-2cba-4ddc-8be9-d541aaee5051.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_21.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_21.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "7370e503cb28b82a297e6c4128cc3f9db6c8d87234a255473d56a521d9175ed5",
+        "bytes": 2035739
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+          "role": "edit target; exact source geometry and pose",
+          "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "whole-space color and materials",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_05.png",
+          "role": "same puppet color/material identity; not pose",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: MEDIUM shot SAME old puppet centered slightly right around source x~279..424 of654,y~129..308 of480, front-facing with original slight head tilt and vertical tuft of hair. Keep source eye direction, moustache and beard; small ivory shoulders cut by curtain. Gray tile roof upper quarter, turned LEFT roof corner, muted eave and dark doors below. Curtain top edge65% height, blank black bottom35%, NO lettering. Preserve exact pose change from source20; don't reproduce Image3's pose.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+      "visual_review": "원본의 인형 크기와 자세, 막의 노출과 글자 유무, 같은 인형의 색 및 배경 재질을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage 3 is the restored SAME OLD WOODEN PUPPET from frame 05. Use it only for consistent identity, warm tan carved/painted face, ivory-white hair/eyebrows/moustache/fiber beard, and ivory cotton costume. Its pose, expression, scale and camera framing do NOT override Image 1.\nSource-specific lock: MEDIUM shot SAME old puppet centered slightly right around source x~279..424 of654,y~129..308 of480, front-facing with original slight head tilt and vertical tuft of hair. Keep source eye direction, moustache and beard; small ivory shoulders cut by curtain. Gray tile roof upper quarter, turned LEFT roof corner, muted eave and dark doors below. Curtain top edge65% height, blank black bottom35%, NO lettering. Preserve exact pose change from source20; don't reproduce Image3's pose.\nTop-border constraint: the source tightly crops the roof tiles at the top. Do NOT add open sky or extra vertical headroom; only widen horizontal sides.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+              "role": "edit target; exact source geometry and pose"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "whole-space color and materials"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_05.png",
+              "role": "same puppet color/material identity; not pose"
+            }
+          ],
+          "generated_cache_filename": "exec-5c674670-7bf2-4783-a84d-426b1eb094fc.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_22.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_22.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "7389a7ef9db1c7221368229db0fb76e757222566b8deeee7bd68b352a281f279"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_22.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "c3a7b5819125c93231dcf4b1621ec4c277e3eb3321d685422dfd0edbb19bcc07",
+        "bytes": 2157909
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_22.png",
+          "role": "edit target; tighter source camera, expressions and all hand positions",
+          "sha256": "7389a7ef9db1c7221368229db0fb76e757222566b8deeee7bd68b352a281f279"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_산받이.png",
+          "role": "musician clothing, faces, instrument and yard color/material reference",
+          "sha256": "cb93427ceda016f78fb218bb36fd3791bd56c0ab380dd08ef014dd1edcfc9529"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "shared spatial/material reference",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_12.png",
+          "role": "same people, colors and textures; NOT pose or framing",
+          "sha256": "c6a88239207b36e61ab94a337ccd71634742dbac0bcf4153a6fe6de0da8a8242"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nEDIT Image1 the monochrome source frame22 into ONE detailed natural-color 16:9 landscape photograph, highest available native resolution (aim1920x1080). This is a CLOSER view than frame12. Image1 is the absolute geometry/pose/identity/camera master. Image2 is the musician color/material reference, Image3 the shared whole-space palette, Image4 the restored SAME people in frame12, consistency reference only. Never copy a reference composition.\nKeep EXACTLY THREE seated real men and source occlusions. Front-right short combed dark-haired man in white short-sleeved cotton shirt and white trousers, face in LEFT profile; large drum cropped at bottom-left, his near hand open flat on the drumhead at source lower-left, far hand holding the dark drumstick horizontally across the smaller drum. Back-left straw wide-brim hat/glasses man in white long-sleeved shirt looking toward CAMERA with source slightly open mouth; his hand/wristwatch near smaller drum rim at image center. Third man white shirt behind-right partly hidden by front man's head and shoulders. Preserve source fingers/arms, head tilt, direction of gaze, mouth shape, drum sizes and crop, and all actual visible sticks. NO extra person, NO puppets, NO new instruments, NO new hands.\nSource background is a low dark timber rail across about20% height, pale diagonal guyline from top-left down toward hat, muted grass, raised warm-brown wooden building cropped tightly above. Do NOT introduce a complete roof or open up the stage area absent from Image1. Same palette as references: warm natural skin, clean ivory-white cotton, pale straw, beige drum hides with brown shells/ivory rope, charcoal curtain if visible at side, dull grass and beige earth; soft natural daylight.\nRestore clean photographic detail, remove scan noise/artifacts/border. Keep original full top-to-bottom content and original subject scale relative to height. Widen LEFT and RIGHT only so the original sits in central approximately77% of final16:9 canvas; do not crop vertically, zoom out, recenter group, stretch anatomy or shift positions to match references. Drums remain cropped at bottom like the source. No text, subtitles, logos or watermark.",
+      "visual_review": "12번 및 산받이 레퍼런스와 인물, 의상과 북의 색을 대조하고 원본의 가까운 구도와 얼굴 방향을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nEDIT Image1 the monochrome source frame22 into ONE detailed natural-color 16:9 landscape photograph, highest available native resolution (aim1920x1080). This is a CLOSER view than frame12. Image1 is the absolute geometry/pose/identity/camera master. Image2 is the musician color/material reference, Image3 the shared whole-space palette, Image4 the restored SAME people in frame12, consistency reference only. Never copy a reference composition.\nKeep EXACTLY THREE seated real men and source occlusions. Front-right short combed dark-haired man in white short-sleeved cotton shirt and white trousers, face in LEFT profile; large drum cropped at bottom-left, his near hand open flat on the drumhead at source lower-left, far hand holding the dark drumstick horizontally across the smaller drum. Back-left straw wide-brim hat/glasses man in white long-sleeved shirt looking toward CAMERA with source slightly open mouth; his hand/wristwatch near smaller drum rim at image center. Third man white shirt behind-right partly hidden by front man's head and shoulders. Preserve source fingers/arms, head tilt, direction of gaze, mouth shape, drum sizes and crop, and all actual visible sticks. NO extra person, NO puppets, NO new instruments, NO new hands.\nSource background is a low dark timber rail across about20% height, pale diagonal guyline from top-left down toward hat, muted grass, raised warm-brown wooden building cropped tightly above. Do NOT introduce a complete roof or open up the stage area absent from Image1. Same palette as references: warm natural skin, clean ivory-white cotton, pale straw, beige drum hides with brown shells/ivory rope, charcoal curtain if visible at side, dull grass and beige earth; soft natural daylight.\nRestore clean photographic detail, remove scan noise/artifacts/border. Keep original full top-to-bottom content and original subject scale relative to height. Widen LEFT and RIGHT only so the original sits in central approximately77% of final16:9 canvas; do not crop vertically, zoom out, recenter group, stretch anatomy or shift positions to match references. Drums remain cropped at bottom like the source. No text, subtitles, logos or watermark.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_22.png",
+              "role": "edit target; tighter source camera, expressions and all hand positions"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_산받이.png",
+              "role": "musician clothing, faces, instrument and yard color/material reference"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "shared spatial/material reference"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_12.png",
+              "role": "same people, colors and textures; NOT pose or framing"
+            }
+          ],
+          "generated_cache_filename": "exec-7092ad04-7265-4b3e-bd9b-ff5a433c90be.png",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "filename": "박첨지거리_23.png",
+      "source": {
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_23.png",
+        "size": [
+          654,
+          480
+        ],
+        "sha256": "ef2030ee3b94d5fd38911692f6321151a90be7de70b51d3639f4de833d9e56fc"
+      },
+      "output": {
+        "path": "assets/영상/덜미/박첨지거리_23.png",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB",
+        "sha256": "d1808be07c65ef0c72715688ec4781219527010d4ae28b98f851422cd863b562",
+        "bytes": 2273759
+      },
+      "inputs": [
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_23.png",
+          "role": "edit target; cloth crop, fold shapes and lettering",
+          "sha256": "ef2030ee3b94d5fd38911692f6321151a90be7de70b51d3639f4de833d9e56fc"
+        },
+        {
+          "path": "assets/영상/덜미/레퍼런스_전체.png",
+          "role": "charcoal curtain material and white lettering color only",
+          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66"
+        },
+        {
+          "path": "assets/영상/덜미/박첨지거리_01.png",
+          "role": "matching restored curtain material and handwriting",
+          "sha256": "ce0c2691100bfba6fd15c29737b1961682132f71e134d1e73aef7c5f2f70c1a3"
+        }
+      ],
+      "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage3 is only a matching charcoal curtain/material/white handwriting reference, not a composition reference.\nSource-specific lock: This shot contains ONLY the BLACK fabric curtain and three hand-painted WHITE Korean characters \"남 사 당\". NO stage architecture, roof, wood posts, yard, people, puppets, curtain top edge or ground. All canvas is close photographic matte charcoal cloth with source broad diagonal sag/folds. Preserve original white letter shapes/spacing around source x~110,345,570 of654, and source line at about55% height. Match reference curtain weave and charcoal color only. Do not turn this into a full-stage shot. Widen left/right solely by continuing same fabric and folds, keep entire source's vertical field.",
+      "visual_review": "검은 천과 남 사 당 글자만 보이는 원본 구성 및 다른 막 장면의 재질을 대조함.",
+      "generation_attempts": [
+        {
+          "attempt": 1,
+          "prompt": "Use case: identity-preserve.\nAsset type: one restored endpoint frame from Korean Namsadang wooden puppet performance footage.\nPrimary request: EDIT Image 1, the low-resolution monochrome ORIGINAL, into a clean detailed natural-color photographic restoration, widescreen 16:9. Deliver one landscape image, not a collage. Aim for 1920x1080 or the highest available native 16:9 resolution.\nInput priority: Image 1 alone controls camera framing, perspective, subject scale, exact pose, expression, visible objects, cloth edge height, and architectural layout. Image 2 is the whole-space COLOR/MATERIAL reference, NOT a replacement composition. Match its warm weathered timber, gray roof tiles, muted dark green and rust dancheong, matte charcoal black curtain, soft natural daylight and exposure.\nComposition invariants: retain the original full top-to-bottom field of view. Widen only left and right to 16:9 with coherent continuation at the original camera angle. The original image occupies the central approximately 77% of the wider canvas. Do not crop vertically, zoom out, recenter the subject, stretch geometry, or substitute the panoramic reference shot. Respect the existing camera close-up or wide shot.\nRestoration: remove scan noise, compression artifacts and the thin dark scan border. Resolve plausible wood grain, woven cloth and roof detail while preserving silhouettes and expressions. Puppets remain visibly carved/painted wooden heads with cloth costumes, never human faces. No new characters, hands, bodies, props, logos or subtitles. Keep all architecture at its original location.\nImage3 is only a matching charcoal curtain/material/white handwriting reference, not a composition reference.\nSource-specific lock: This shot contains ONLY the BLACK fabric curtain and three hand-painted WHITE Korean characters \"남 사 당\". NO stage architecture, roof, wood posts, yard, people, puppets, curtain top edge or ground. All canvas is close photographic matte charcoal cloth with source broad diagonal sag/folds. Preserve original white letter shapes/spacing around source x~110,345,570 of654, and source line at about55% height. Match reference curtain weave and charcoal color only. Do not turn this into a full-stage shot. Widen left/right solely by continuing same fabric and folds, keep entire source's vertical field.",
+          "inputs": [
+            {
+              "path": "assets/영상/덜미/원본이미지/박첨지거리_23.png",
+              "role": "edit target; cloth crop, fold shapes and lettering"
+            },
+            {
+              "path": "assets/영상/덜미/레퍼런스_전체.png",
+              "role": "charcoal curtain material and white lettering color only"
+            },
+            {
+              "path": "assets/영상/덜미/박첨지거리_01.png",
+              "role": "matching restored curtain material and handwriting"
+            }
+          ],
+          "generated_cache_filename": "exec-11712511-f9c4-4054-bf77-fde8d81749ee.png",
+          "selected": true
+        }
+      ]
+    }
+  ]
+}
