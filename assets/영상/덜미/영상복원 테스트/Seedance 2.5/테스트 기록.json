@@ -294,6 +294,13 @@
         2
       ],
       "text": "원본과 물체 및 인형 얼굴, 건축, 천 주름과 글자 세부에 차이가 남음."
+    },
+    {
+      "id": "TEMPORAL-01",
+      "clips": [
+        1
+      ],
+      "text": "24fps 생성 원본의 끝부분에 글자 겹침과 배경 및 인형 전환이 남음. 참조 프레임률과 종료 이미지 조건의 영향 및 정확한 원인은 미확인임."
     }
   ],
   "storage": {
@@ -301,5 +308,44 @@
     "local_mp4_files": 4,
     "git_tracked_support_files": 9,
     "video_tracking_policy": ".gitignore:25의 *.mp4 제외 규칙에 따라 영상 4개는 로컬 assets 폴더에 보관하고 기록, 프롬프트, 미리보기와 비교 화면 9개를 Git에 보존함."
+  },
+  "clip1_temporal_diagnosis": {
+    "date": "2026-10-02",
+    "user_report": "1번 영상의 9.23초, 마지막 전 프레임에서 튄다는 보고임. 사용자의 시각 표기를 원문대로 보존하며 초와 프레임을 합친 타임코드인지 단정하지 않음.",
+    "scope": "1번의 24fps 생성 원본 241프레임, 30fps 테스트 300프레임과 30fps 원본 참조 300프레임을 디코딩함. 마지막 1초의 생성 원본 25프레임과 변화량이 큰 구간의 인접 프레임을 육안 대조함.",
+    "method": "각 영상 내부의 인접 프레임 변화는 320×180 밝기 영상의 평균 절대 차이로 측정함. 테스트 프레임은 예상 시각 주변의 생성 원본 프레임과 같은 방법으로 대응시킴. 압축된 영상의 픽셀 일치 검사나 영상 간 품질 점수로 해석하지 않음.",
+    "observations": [
+      "생성 원본의 약 9.5~9.8초에서 천의 글자가 겹치고 배경 및 인형이 전환되는 모습을 확인함. 변환 전 생성 원본에 이미 존재하는 현상임.",
+      "생성 원본에서 인접 프레임 변화량이 크게 나타난 시각은 9.1667초와 9.3333초이며, 30fps 테스트에서도 같은 시각에 큰 변화가 나타남.",
+      "테스트의 300프레임을 생성 원본의 근접 프레임에 대응시킨 결과 순서는 역전되지 않았으며 동일 생성 프레임에 연속 대응한 횟수는 60회임."
+    ],
+    "conversion_mapping": {
+      "monotonic": true,
+      "consecutive_repeated_native_frames": 60,
+      "max_luma_MAD_to_best_native_frame": 1.020520806312561
+    },
+    "native_frame_count": 241,
+    "test_frame_count": 300,
+    "conclusion": "확인한 것은 24fps 생성 원본의 끝부분에 글자 겹침과 배경 및 인형 전환이 있다는 점임. 이를 30fps 사본과 대조해도 30fps 참조 입력과 24fps 생성 출력의 차이가 원인인지 확인하거나 배제할 수 없음. 해당 차이의 영향과 종료 이미지 조건의 영향은 모두 미확인임.",
+    "proposed_comparison": "종료 이미지 조건만 먼저 제외하자는 앞선 비교 우선순위 제안은 원인이 확인된 판단이 아니므로 철회함. 참조 프레임률과 종료 이미지 조건의 영향은 각각 다른 조건을 유지한 비교 실험으로 구분해야 함. 이번 질의에서는 재생성하지 않음.",
+    "earlier_review_limit": "앞선 대표 프레임 검수에서 끝부분의 연속성 문제를 놓침. 이어 24fps 생성 원본과 작성자가 만든 30fps 사본의 대조를 원인 판단 근거처럼 설명해 사용자의 질문 범위를 잘못 짚음. 사용자는 24fps 생성본의 문제가 30fps 사본에서도 나타나는 것은 당연하다고 지적함. 사용자가 본 힉스필드 결과는 24fps이며 입력 참조 30fps와 생성 출력 24fps의 차이가 영향을 줬는지는 확인하지 못했다고 정정함.",
+    "independent_readability": {
+      "initial_rounds": 1,
+      "initial_findings": 1,
+      "severity": "low",
+      "applied_findings": 1,
+      "corrected_sentences": 2,
+      "impact_recheck_rounds": 1,
+      "new_findings": 0,
+      "scope": "초기 진단 텍스트의 가독성 검토와 변화가 나타난 시각을 설명하는 두 문장의 영향 범위 재검토임. 이후 사용자 지적에 따른 원인 검증 범위 정정은 해당 독립 검토의 대상이 아님."
+    },
+    "automatic_checks": {
+      "numbering_errors": 0,
+      "lint_errors": 0,
+      "lint_warnings": 27,
+      "baseline_lint_warnings": 27,
+      "quote_mismatches": 0,
+      "numbered_quotes": 0
+    }
   }
 }
