@@ -1,0 +1,9 @@
+도구: 내장 image_gen
+입력 이미지 1: assets/시범콘텐츠/꼭두각시/마무리_결과화면_예시_v1.png (편집 대상)
+출력: 마무리_결과화면_인형_투명_v1.png
+투명 배경: true
+
+실행 프롬프트:
+Use case: background-extraction.
+Asset type: transparent full-body puppet PNG layer for a Korean traditional puppet theater result screen.
+Input image 1 is the EDIT TARGET. Isolate ONLY the single wooden puppet standing on the left side of the input. Preserve its exact identity, carved wooden face and grain, center-parted dark hair, painted eyebrows and eyes, neutral mouth, indigo-blue patterned hanbok jacket with white collar, ochre-gold fabric waist tie and hanging ends, ivory baggy trousers, bare wooden toes and woven sandals. Preserve the original front-facing pose, with the arm on the image-left raised and its open palm waving, and the other arm down. Maintain the same limb proportions, clothing folds, colors, texture, and warm painterly/wooden rendering as the reference. Show the COMPLETE puppet from hair to both sandals and every fingertip with a small clean margin, centered in a portrait canvas. Remove the entire backdrop, stage floor, any floor/contact shadow, all curtains, decorations, text, panels, title, button and UI. The puppet silhouette must have clean natural edges, including the gaps between the raised arm and body and between the legs. Use actual transparent alpha, no opaque background, no checkerboard drawn into the image, no white outline, no extra puppets, no new accessories, no redesign. Output one isolated puppet only.

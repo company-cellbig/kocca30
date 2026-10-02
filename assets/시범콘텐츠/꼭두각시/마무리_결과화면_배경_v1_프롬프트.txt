@@ -1,0 +1,10 @@
+도구: 내장 image_gen
+입력 이미지 1: assets/시범콘텐츠/꼭두각시/마무리_결과화면_예시_v1.png (편집 대상)
+출력: 마무리_결과화면_배경_v1.png
+투명 배경: false
+
+실행 프롬프트:
+Use case: precise-object-edit.
+Asset type: clean landscape stage background PNG for a Korean traditional puppet theater result screen.
+Input image 1 is the EDIT TARGET. Create ONLY its empty stage backdrop. Remove the wooden puppet on the left including both sandals and its contact shadow. Remove ALL user interface foreground elements: the top title plaque reading 나만의 꼭두각시 and both ornaments belonging to that title plaque; the entire large rectangular result card on the right, including its border, corner ornaments, all boxes, separator lines, icons and every Korean word and numeral; and the entire bottom 마치기 button including its border and decorations. Reconstruct the areas they covered as a seamless continuation of the EXISTING background.
+Preserve the original landscape composition and original camera viewpoint, warm pale ochre/gold paper texture, delicate cloud motifs, symmetrical draped curtains at the extreme upper/side edges with navy/red/gold trim, the hanging decorative knots and tassels on both sides, faint ink-wash mountain scenery across the lower backdrop, pine trees and foliage near both lower edges, tall red/navy/gold flags near the lower sides, the existing traditional drums at both lower corners, and the wooden stage floor and decorated front fascia extending horizontally across the bottom. Fill the newly revealed broad central background with the same lightly textured pale gold and soft cloud/mountain painting, leaving the center open. Preserve the stage floor's perspective and height. No puppet, no human or animal figures, no text, no plaques, no buttons, no frames, no UI, no logos, no watermarks, no newly invented props. Retain the original painterly illustration/wood-texture style, palette, scale and placement of the visible background elements. One continuous landscape image, approximately 16:9, opaque full background.
