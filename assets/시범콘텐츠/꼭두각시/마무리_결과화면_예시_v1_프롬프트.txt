@@ -1,0 +1,32 @@
+생성 도구: 내장 image_gen
+용도: 나만의 꼭두각시 마무리 결과 화면 예시
+출력 파일: assets/시범콘텐츠/꼭두각시/마무리_결과화면_예시_v1.png
+생성일: 2026-10-02
+
+Use case: ui-mockup.
+Asset type: 한국 전통 인형극 체험 게임 '나만의 꼭두각시'의 마무리 결과 화면 예시, 가로 16:9, 화면 자체만 보이는 완성된 고품질 게임 UI 이미지.
+Primary request: 첫 번째 이미지의 시작 화면을 마무리 결과 화면으로 편집하여 새 시안으로 만든다. 기존 게임의 시각적 정체성을 유지하면서 종료 결과 내용을 새로 배치한다.
+Input images:
+Image 1 is the edit target and main background/style reference: warm cream hanji paper, subtle ink-painted mountains and clouds, traditional draped side curtains and tassels, carved wooden bottom border, dark navy UI with thin antique-gold accents. Preserve this decorative background family and readable high-contrast design.
+Image 2 is a supporting visual reference for the same game's wooden puppet-theatre framing and navy/gold UI identity. Do not include the real person, pose-detection silhouette, home icon, or dialogue box from Image 2.
+Image 3 is the user puppet character reference: preserve the recognizable carved wooden face, center-parted black hair, dark navy hanbok jacket, ochre sash, cream trousers and straw sandals. Use this same puppet as the featured character, with a welcoming gently raised hand. Do not add any other characters.
+Composition: Flat full-screen interface, no monitor/device mockup. Spacious left region with the full-body wooden user puppet standing on the wooden stage and a soft warm stage spotlight. Right region contains a single large cream-paper result card with a thin dark-navy outline, restrained gold detailing and generous whitespace. Top small game title, then the very large result trait name as the strongest text. Under it a short two-line explanation, then a row of three clean compact count cells, then a short list of representative actions. One large navy finishing button centered along the bottom. Traditional curtain decorations stay at the outer edges and never overlap text. No charts, percentages, ranking stars, trophies, QR codes, language flags or side navigation.
+Exact text, rendered verbatim in clear large Korean typography:
+Top game title: "나만의 꼭두각시"
+Result-card small heading: "나의 한마당 결과"
+Main trait, very large: "적극 해결사"
+Description: "다툼을 진정시키고 필요한 도움을 건넸어요."
+Count-row heading: "내가 한 선택 10건"
+Three equally sized count cells, in this order:
+"해결 7건"
+"중립 3건"
+"혼란 0건"
+Subheading: "기억에 남는 행동"
+Three short lines, each with a simple small decorative marker:
+"찬물을 건네 싸움을 진정시켰어요."
+"꼭두각시에게 재산과 노잣돈을 건넸어요."
+"우는 박첨지를 다독였어요."
+Bottom button: "마치기"
+Typography: crisp, clean contemporary Korean sans-serif, accurately formed Hangul, dark ink/navy body copy on light cream, very large trait heading with navy coloring, avoid calligraphic body text. Main trait must read exactly 적-극 해-결-사. Keep every supplied word legible and spelled exactly.
+Meaning of sample data: This is an example play with ten total choices: seven solution, three neutral, zero chaos. '적극 해결사' is correct because ten choices means high intervention and seven is the largest count. Do not display this explanation or any math, R/M/H variable names, scoring formulas, implementation notes, placeholder Latin text, or extra invented copy in the image.
+Style: polished tactile Korean puppet-theatre interface; warm hanji paper texture, carefully carved wooden puppet, navy and muted gold accents, restrained ornament, luminous inviting theatre atmosphere. Preserve the mature handcrafted look of the references rather than turning it into cartoon mobile-game art.
