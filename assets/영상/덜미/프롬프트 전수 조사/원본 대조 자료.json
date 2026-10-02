@@ -1,0 +1,2080 @@
+[
+  {
+    "clip": 1,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_1.mp4",
+    "sha256": "9dadf231f462e8361102b3481d5bb3459d3f8307997633bd349d6259807fdd5d",
+    "fps": "24/1",
+    "frames": 240,
+    "decoded_frames": 240,
+    "duration": 10.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      239
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      9.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/01번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 1,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_01.png",
+        "sha256": "73d0493c88ab8f83738ba7b376237443ab0917a1d8c861dbbf7cb3d434a4e7c7",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 1,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_01.png",
+        "sha256": "135125e817c4f1a3a509da64e4a2176157398463f80129b804db427656e0a51a",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 2,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_02.png",
+        "sha256": "a9260449321b1752c86bc61a1c139eeeaee3aa8331e157cefc091f8f80dbf0f6",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 2,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+        "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 2,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_2.mp4",
+    "sha256": "ebf3c0a6a39ee021d778b088e8bafe130b27831fcd0114de7446c391a2f83621",
+    "fps": "24/1",
+    "frames": 264,
+    "decoded_frames": 264,
+    "duration": 11.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      263
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      10.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/02번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 2,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_02.png",
+        "sha256": "a9260449321b1752c86bc61a1c139eeeaee3aa8331e157cefc091f8f80dbf0f6",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 2,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+        "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 3,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+        "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 3,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
+        "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 3,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_3.mp4",
+    "sha256": "595d8bda162383471114d97329d8888cf536479ac7701566bb18d4b76d50efc7",
+    "fps": "24/1",
+    "frames": 288,
+    "decoded_frames": 288,
+    "duration": 12.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      287
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      11.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/03번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 3,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+        "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 3,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
+        "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 4,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_04.png",
+        "sha256": "59ea17f96ab4e0c48779b7e59be4d770bccc0e09a3e5e84450edd71e2757016b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 4,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_04.png",
+        "sha256": "d88064a7c7b277cac84ab6a9da762ee3c1d426a30dde509854cc74a2df8f5edb",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 4,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_4.mp4",
+    "sha256": "7ce952658cc29910f4d906968f1035bdad2b21514fd921f1a825398966e62551",
+    "fps": "24/1",
+    "frames": 312,
+    "decoded_frames": 312,
+    "duration": 13.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      311
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      12.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/04번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 4,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_04.png",
+        "sha256": "59ea17f96ab4e0c48779b7e59be4d770bccc0e09a3e5e84450edd71e2757016b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 4,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_04.png",
+        "sha256": "d88064a7c7b277cac84ab6a9da762ee3c1d426a30dde509854cc74a2df8f5edb",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 5,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+        "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 5,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_05.png",
+        "sha256": "ac21b265baa2abde5fe0df79189f9fbd919ea6748c7c7d530977fb25b87e4b61",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 5,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_5.mp4",
+    "sha256": "c4d2e2a476bc3cab991760783f7d9caab91a8d70d84ce3faa488232da874572a",
+    "fps": "24/1",
+    "frames": 216,
+    "decoded_frames": 216,
+    "duration": 9.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      215
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      8.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/05번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 5,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+        "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 5,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_05.png",
+        "sha256": "ac21b265baa2abde5fe0df79189f9fbd919ea6748c7c7d530977fb25b87e4b61",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 6,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+        "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 6,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_06.png",
+        "sha256": "ab271979c8fba7331a7713413b78f1075bdf25713c22375da67f23c0eb44cc99",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 6,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_6.mp4",
+    "sha256": "e9916c5fdf351528658a1cc0c3f5ae1c7fda576981c0f93318578cf764590381",
+    "fps": "24/1",
+    "frames": 456,
+    "decoded_frames": 456,
+    "duration": 19.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      455
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      18.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/06번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 6,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+        "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 6,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_06.png",
+        "sha256": "ab271979c8fba7331a7713413b78f1075bdf25713c22375da67f23c0eb44cc99",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 7,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+        "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 7,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_07.png",
+        "sha256": "0ff5fd6b5f599f962f98ce69935b7a0b1c13d26fe4b88d8cdbc7b1a7036de4ae",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 7,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_7.mp4",
+    "sha256": "85c399c6a9a6cd8ad1602fc7a3f261b529a81893580c936719bf0f4aec866492",
+    "fps": "24/1",
+    "frames": 384,
+    "decoded_frames": 384,
+    "duration": 16.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      383
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      15.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/07번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 7,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+        "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 7,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_07.png",
+        "sha256": "0ff5fd6b5f599f962f98ce69935b7a0b1c13d26fe4b88d8cdbc7b1a7036de4ae",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 8,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+        "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 8,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_08.png",
+        "sha256": "56a30e56da883e67e6928281c8622335e1bad344f5f7f8e599f572c7da399d71",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 8,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_8.mp4",
+    "sha256": "7e9df20aba758d8267e021f808da8f740a178635a4739c6813a27d04af01597e",
+    "fps": "24/1",
+    "frames": 360,
+    "decoded_frames": 360,
+    "duration": 15.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      359
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      14.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/08번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 8,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+        "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 8,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_08.png",
+        "sha256": "56a30e56da883e67e6928281c8622335e1bad344f5f7f8e599f572c7da399d71",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 9,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+        "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 9,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_09.png",
+        "sha256": "2b51fc09170b420ddfc4974c1e61ac60d2d937689e06a1e995e4ecff970e21bb",
+        "size": [
+          1671,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 9,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_9.mp4",
+    "sha256": "a0863ffda33c8f19ac78acde08aa8c4845b3d70cd424e24e219c727cf8004624",
+    "fps": "24/1",
+    "frames": 480,
+    "decoded_frames": 480,
+    "duration": 20.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      456,
+      479
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      19.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/09번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 9,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+        "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 9,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_09.png",
+        "sha256": "2b51fc09170b420ddfc4974c1e61ac60d2d937689e06a1e995e4ecff970e21bb",
+        "size": [
+          1671,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 10,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+        "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 10,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_10.png",
+        "sha256": "7ef1674e36d331977e20ead0c664f75a2e70bd1af993880433c7446a93b6b5fc",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 10,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_10.mp4",
+    "sha256": "9cdd75d4e607ec36c765a98a4b1e25bd91b1df20bcbc8e68cf3284bc08fe50b2",
+    "fps": "24/1",
+    "frames": 432,
+    "decoded_frames": 432,
+    "duration": 18.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      431
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      17.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/10번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 10,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+        "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 10,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_10.png",
+        "sha256": "7ef1674e36d331977e20ead0c664f75a2e70bd1af993880433c7446a93b6b5fc",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 11,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+        "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 11,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+        "sha256": "f2eba05d33bdd367cb4b669f018b9de14c92826d046d56ec0e8be4913365c84e",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 11,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_11.mp4",
+    "sha256": "6ea5405c1f5d62272370b396d34d2407cb68f43b646b644d68dba58db8ee547a",
+    "fps": "24/1",
+    "frames": 216,
+    "decoded_frames": 216,
+    "duration": 9.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      215
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      8.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/11번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 11,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+        "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 11,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+        "sha256": "f2eba05d33bdd367cb4b669f018b9de14c92826d046d56ec0e8be4913365c84e",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 12,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_12.png",
+        "sha256": "8082db64f732727757c2abac7b1b30ceaa40314f8e4eea858a61f688aa868bcf",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 12,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_12.png",
+        "sha256": "88d4604283497af5a04d58b3d1d05287d5e5b98d255136ba13389f99369557af",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 12,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_12.mp4",
+    "sha256": "7ad009ee8aefda1b070ef37577d9b3cce46efb890e8c612980535b5b520f4d66",
+    "fps": "24/1",
+    "frames": 480,
+    "decoded_frames": 480,
+    "duration": 20.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      456,
+      479
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      19.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/12번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 12,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_12.png",
+        "sha256": "8082db64f732727757c2abac7b1b30ceaa40314f8e4eea858a61f688aa868bcf",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 12,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_12.png",
+        "sha256": "88d4604283497af5a04d58b3d1d05287d5e5b98d255136ba13389f99369557af",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 13,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+        "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 13,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_13.png",
+        "sha256": "b1ea418ce6c409b47e5f3658019ef18c45f629f99aa85a28ff766304c9554f93",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 13,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_13.mp4",
+    "sha256": "64fa658144b4c751c9eb025c2b537b54a4cf8ff3a68bed8a568ca0b03dec0217",
+    "fps": "24/1",
+    "frames": 288,
+    "decoded_frames": 288,
+    "duration": 12.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      287
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      11.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/13번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 13,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+        "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 13,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_13.png",
+        "sha256": "b1ea418ce6c409b47e5f3658019ef18c45f629f99aa85a28ff766304c9554f93",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 14,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+        "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 14,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_14.png",
+        "sha256": "89d3ed8f51d7d13c0121fd91d019393a40e6aa94f40b7fdbf3468f780e9cb6b6",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 14,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_14.mp4",
+    "sha256": "87b76765293a9be97a8a03584188a7399e28ccf80046994cbb7e6a65341085a7",
+    "fps": "24/1",
+    "frames": 336,
+    "decoded_frames": 336,
+    "duration": 14.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      335
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      13.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/14번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 14,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+        "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 14,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_14.png",
+        "sha256": "89d3ed8f51d7d13c0121fd91d019393a40e6aa94f40b7fdbf3468f780e9cb6b6",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 15,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+        "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 15,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_15.png",
+        "sha256": "2016fa81181759883e01eed7b95b0b10ff9864db5152c712f66207c60d2e1f3e",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 15,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_15.mp4",
+    "sha256": "418482c8058d52e15e77008f2a1ba93354353383e5a2191ca253c5f13024f676",
+    "fps": "24/1",
+    "frames": 288,
+    "decoded_frames": 288,
+    "duration": 12.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      287
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      11.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/15번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 15,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+        "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 15,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_15.png",
+        "sha256": "2016fa81181759883e01eed7b95b0b10ff9864db5152c712f66207c60d2e1f3e",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 16,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+        "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 16,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_16.png",
+        "sha256": "e5da359734ad554233cd717abdab0b0dfbf1dada3e12d4e3eb26e6e6827d6875",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 16,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_16.mp4",
+    "sha256": "ca31d3ce44b8f16e835124063f67fe6bd94729cf4d7f8c37817aaa662a3c8780",
+    "fps": "24/1",
+    "frames": 360,
+    "decoded_frames": 360,
+    "duration": 15.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      359
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      14.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/16번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 16,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+        "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 16,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_16.png",
+        "sha256": "e5da359734ad554233cd717abdab0b0dfbf1dada3e12d4e3eb26e6e6827d6875",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 17,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+        "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 17,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_17.png",
+        "sha256": "a636c2ef86a02526c64f47f760fec1ecf5be02dba6e7a143335f8e083632e514",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 17,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_17.mp4",
+    "sha256": "56e01a508be128bbab4ac71fb64376b72f06f46898325499f07447551693124d",
+    "fps": "24/1",
+    "frames": 360,
+    "decoded_frames": 360,
+    "duration": 15.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      359
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      14.958333333333334
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/17번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 17,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+        "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 17,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_17.png",
+        "sha256": "a636c2ef86a02526c64f47f760fec1ecf5be02dba6e7a143335f8e083632e514",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 18,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+        "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 18,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_18.png",
+        "sha256": "27aea2417e399333ea8d3f8bc1d1101a4927e035623651c73e41b28209b70f4a",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 18,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_18.mp4",
+    "sha256": "42677810457206ccf1744f0bd4e8ba0a6bac344cca598ce75b00b9d7fa0beaba",
+    "fps": "24/1",
+    "frames": 456,
+    "decoded_frames": 456,
+    "duration": 19.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      455
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      18.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/18번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 18,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+        "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 18,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_18.png",
+        "sha256": "27aea2417e399333ea8d3f8bc1d1101a4927e035623651c73e41b28209b70f4a",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 19,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+        "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 19,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_19.png",
+        "sha256": "5000c0671a08b0f5510e786b272e761169c5eda7c9b5cc0be10ff8aba16ef9a9",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 19,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_19.mp4",
+    "sha256": "58bb7f03b1607eeb7c7bb82f3d24fcdf63916c1bcc5840e46b6bc5976a0f729a",
+    "fps": "24/1",
+    "frames": 672,
+    "decoded_frames": 672,
+    "duration": 28.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      456,
+      480,
+      504,
+      528,
+      552,
+      576,
+      600,
+      624,
+      648,
+      671
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      20.0,
+      21.0,
+      22.0,
+      23.0,
+      24.0,
+      25.0,
+      26.0,
+      27.0,
+      27.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/19번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 19,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+        "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 19,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_19.png",
+        "sha256": "5000c0671a08b0f5510e786b272e761169c5eda7c9b5cc0be10ff8aba16ef9a9",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 20,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+        "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 20,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_20.png",
+        "sha256": "e4a7b1e2694d125e20cb2f90e52b65908a92ff05edbf58a12e2bf707ddba0b99",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 20,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_20.mp4",
+    "sha256": "38eb6283229d56072a9b44bf7f0e4afabada78d3574ac0c22fae46dda8354c08",
+    "fps": "24/1",
+    "frames": 480,
+    "decoded_frames": 480,
+    "duration": 20.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      456,
+      479
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      19.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/20번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 20,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+        "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 20,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_20.png",
+        "sha256": "e4a7b1e2694d125e20cb2f90e52b65908a92ff05edbf58a12e2bf707ddba0b99",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 21,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+        "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 21,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_21.png",
+        "sha256": "cfa9824fbf8689c2b2913645e8fa1ccf26e22622d741335f5ed7a74fbc328336",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 21,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_21.mp4",
+    "sha256": "70d3a3ce7a988957b6e3a85a766cc229e076de1858a8b1405cdb3505e68e84a0",
+    "fps": "24/1",
+    "frames": 480,
+    "decoded_frames": 480,
+    "duration": 20.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      456,
+      479
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      19.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/21번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 21,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+        "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 21,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_21.png",
+        "sha256": "cfa9824fbf8689c2b2913645e8fa1ccf26e22622d741335f5ed7a74fbc328336",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 22,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_22.png",
+        "sha256": "7389a7ef9db1c7221368229db0fb76e757222566b8deeee7bd68b352a281f279",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 22,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_22.png",
+        "sha256": "868e5a5acc76bea88db5d24b610ac5d3ac8338bcfff7a4014c109c93656fbb55",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "clip": 22,
+    "path": "assets/영상/덜미/원본영상/박첨지거리_22.mp4",
+    "sha256": "d155c3c1a2cedc3edd534885881284be5c9284293616552540632d3b2eaf7ba7",
+    "fps": "24/1",
+    "frames": 456,
+    "decoded_frames": 456,
+    "duration": 19.0,
+    "size": [
+      654,
+      480
+    ],
+    "audio_streams": 1,
+    "sample_frames": [
+      0,
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168,
+      192,
+      216,
+      240,
+      264,
+      288,
+      312,
+      336,
+      360,
+      384,
+      408,
+      432,
+      455
+    ],
+    "sample_times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      18.958333333333332
+    ],
+    "contact": "assets/영상/덜미/프롬프트 전수 조사/22번_원본과_입력이미지.jpg",
+    "images": [
+      {
+        "role": "original",
+        "index": 22,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_22.png",
+        "sha256": "7389a7ef9db1c7221368229db0fb76e757222566b8deeee7bd68b352a281f279",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 22,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_22.png",
+        "sha256": "868e5a5acc76bea88db5d24b610ac5d3ac8338bcfff7a4014c109c93656fbb55",
+        "size": [
+          1672,
+          941
+        ]
+      },
+      {
+        "role": "original",
+        "index": 23,
+        "path": "assets/영상/덜미/원본이미지/박첨지거리_23.png",
+        "sha256": "ef2030ee3b94d5fd38911692f6321151a90be7de70b51d3639f4de833d9e56fc",
+        "size": [
+          654,
+          480
+        ]
+      },
+      {
+        "role": "color",
+        "index": 23,
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_23.png",
+        "sha256": "e6e1251256ed1fec498c30f56da4c10f6240a6dd213a830fd97dc6ed99eb96c1",
+        "size": [
+          1672,
+          941
+        ]
+      }
+    ]
+  }
+]

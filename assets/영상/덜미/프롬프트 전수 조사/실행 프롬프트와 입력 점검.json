@@ -1,0 +1,276 @@
+{
+  "executions": [
+    {
+      "clip": 1,
+      "run": "Seedance 2.5",
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_1_프롬프트.txt",
+      "file_sha256": "1c1a5fd4d09157aa051441038e72b4ceac06a3913ef57bb079a231c722daaa48",
+      "normalized_text_sha256": "9e89a40ebaa0cabf84052227d8df88c163ba83154debd9d5f5eb064620f950ac",
+      "record_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/테스트 기록.json",
+      "record_file_sha256": "966596fc36a6048e4e2ca2e207829421472d4af4c548d8e3170b5a88b6f931ee",
+      "prompt_equals_record": true,
+      "text": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 1, exactly 10 seconds. Start on the empty wide frontal stage of start_image (박첨지거리_01). Follow the supplied 박첨지거리_1 video frame timing: about 0–0.5 seconds empty stage; throughout about 0.5–8.5 seconds small heads intermittently rise very low just over the black cloth, bob, move briefly sideways and sink behind it. Never raise full puppets into view. Near the end a small rounded form on image-left and a narrow upright face-like rectangular form on image-right are simultaneously visible. From about 8.5 seconds, follow the source camera's gradual enlargement toward the stage opening: building and cloth lettering enlarge together with the heads. Finish at end_image (박첨지거리_02), preserving those two low forms and its camera crop. Do not reveal full faces or bodies that are not visible in the source.",
+      "job_id": "f29ee7e9-5c04-426b-bb24-4119b25d5bec"
+    },
+    {
+      "clip": 2,
+      "run": "Seedance 2.5",
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_2_프롬프트.txt",
+      "file_sha256": "f133ae38aebf5615bfe0b615cda76b3459750e97300c0a1e459bc793efc2a34b",
+      "normalized_text_sha256": "dbe58caeaf4aab9aabd17eca53c2a9d9199ea2180bbe27d5f0fc9dc546b4e9a3",
+      "record_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/테스트 기록.json",
+      "record_file_sha256": "966596fc36a6048e4e2ca2e207829421472d4af4c548d8e3170b5a88b6f931ee",
+      "prompt_equals_record": true,
+      "text": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 2, exactly 11 seconds. Start exactly at start_image (박첨지거리_02), the same color endpoint as clip 1. Follow supplied 박첨지거리_2 video at its original pace. About 0–3.5 seconds: camera continues enlarging the stage opening; the rounded low form leaves the visible image-left crop while the narrow rectangular face-like object remains above the black cloth. About 3.5–8.8 seconds: the small rectangular object bobs and tilts in the close view, without becoming a human or receiving a body or limbs. About 8.8–10.1 seconds: a different rigid puppet with large ears, round fixed eyes, a black moustache and pale cloth clothing enters from image-left and inclines its head near the rectangular object. They briefly overlap by normal occlusion; the rectangular object then lowers behind the cloth. About 10.1–11 seconds: the moustached puppet shifts toward image-right and holds the tilted head direction in corrected end_image (박첨지거리_03). Its pale cheek/shoulder contour remains simple cloth-like material, with NO invented hand, palm, wrist or individual fingers. Do not invent a cheek-touching gesture. Match the final puppet scale, position, head tilt, clothing silhouette and background to end_image.",
+      "job_id": "bfb92646-e1e9-4f07-b8dd-3a3f23b5e2c9"
+    },
+    {
+      "clip": 1,
+      "run": "24fps 참조 재생성",
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_1_프롬프트.txt",
+      "file_sha256": "1c1a5fd4d09157aa051441038e72b4ceac06a3913ef57bb079a231c722daaa48",
+      "normalized_text_sha256": "9e89a40ebaa0cabf84052227d8df88c163ba83154debd9d5f5eb064620f950ac",
+      "record_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/재생성 기록.json",
+      "record_file_sha256": "edc301c3dd3b94917d250fb5c5a1064d546aafb5594bdb802a40616469379b7f",
+      "prompt_equals_record": true,
+      "text": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 1, exactly 10 seconds. Start on the empty wide frontal stage of start_image (박첨지거리_01). Follow the supplied 박첨지거리_1 video frame timing: about 0–0.5 seconds empty stage; throughout about 0.5–8.5 seconds small heads intermittently rise very low just over the black cloth, bob, move briefly sideways and sink behind it. Never raise full puppets into view. Near the end a small rounded form on image-left and a narrow upright face-like rectangular form on image-right are simultaneously visible. From about 8.5 seconds, follow the source camera's gradual enlargement toward the stage opening: building and cloth lettering enlarge together with the heads. Finish at end_image (박첨지거리_02), preserving those two low forms and its camera crop. Do not reveal full faces or bodies that are not visible in the source.",
+      "job_id": "ac2cebf6-2f78-42c5-b593-e84afbf15052"
+    },
+    {
+      "clip": 2,
+      "run": "24fps 참조 재생성",
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_2_프롬프트.txt",
+      "file_sha256": "f133ae38aebf5615bfe0b615cda76b3459750e97300c0a1e459bc793efc2a34b",
+      "normalized_text_sha256": "dbe58caeaf4aab9aabd17eca53c2a9d9199ea2180bbe27d5f0fc9dc546b4e9a3",
+      "record_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/재생성 기록.json",
+      "record_file_sha256": "edc301c3dd3b94917d250fb5c5a1064d546aafb5594bdb802a40616469379b7f",
+      "prompt_equals_record": true,
+      "text": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 2, exactly 11 seconds. Start exactly at start_image (박첨지거리_02), the same color endpoint as clip 1. Follow supplied 박첨지거리_2 video at its original pace. About 0–3.5 seconds: camera continues enlarging the stage opening; the rounded low form leaves the visible image-left crop while the narrow rectangular face-like object remains above the black cloth. About 3.5–8.8 seconds: the small rectangular object bobs and tilts in the close view, without becoming a human or receiving a body or limbs. About 8.8–10.1 seconds: a different rigid puppet with large ears, round fixed eyes, a black moustache and pale cloth clothing enters from image-left and inclines its head near the rectangular object. They briefly overlap by normal occlusion; the rectangular object then lowers behind the cloth. About 10.1–11 seconds: the moustached puppet shifts toward image-right and holds the tilted head direction in corrected end_image (박첨지거리_03). Its pale cheek/shoulder contour remains simple cloth-like material, with NO invented hand, palm, wrist or individual fingers. Do not invent a cheek-touching gesture. Match the final puppet scale, position, head tilt, clothing silhouette and background to end_image.",
+      "job_id": "20776a93-3581-4a54-8de2-e24aae4a080d"
+    }
+  ],
+  "paths": {
+    "obsolete_color": [
+      {
+        "path": "assets/영상/덜미/박첨지거리_01.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_02.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_03.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_04.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_05.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_06.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_07.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_08.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_09.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_10.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_11.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_12.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_13.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_14.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_15.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_16.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_17.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_18.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_19.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_20.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_21.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_22.png",
+        "exists": false
+      },
+      {
+        "path": "assets/영상/덜미/박첨지거리_23.png",
+        "exists": false
+      }
+    ],
+    "current_color": [
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_01.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_04.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_05.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_06.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_07.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_08.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_09.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_10.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_12.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_13.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_14.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_15.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_16.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_17.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_18.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_19.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_20.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_21.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_22.png",
+        "exists": true
+      },
+      {
+        "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_23.png",
+        "exists": true
+      }
+    ],
+    "references": [
+      {
+        "path": "assets/영상/덜미/레퍼런스_전체.png",
+        "exists": true,
+        "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
+        "size": [
+          2172,
+          724
+        ]
+      },
+      {
+        "path": "assets/영상/덜미/레퍼런스_산받이.png",
+        "exists": true,
+        "sha256": "cb93427ceda016f78fb218bb36fd3791bd56c0ab380dd08ef014dd1edcfc9529",
+        "size": [
+          1672,
+          940
+        ]
+      }
+    ]
+  },
+  "absolute_second_instructions_in_note_blocks": [],
+  "counts": {
+    "blocks": 23,
+    "paragraph_units": 74,
+    "videos": 22,
+    "duration_seconds": 346.0,
+    "decoded_frames": 8304,
+    "basic_frame_occurrences": 368,
+    "dense_frame_occurrences": 150,
+    "unique_visual_source_frames": 499,
+    "execution_files": 4,
+    "unique_execution_prompts": 2
+  },
+  "image_center_comparison": "각 컬러 이미지의 높이를 유지하고 원본 이미지와 같은 종횡비의 중앙 영역을 잘라 동일한 327×240 화면에 비교함. 크롭 기준은 기하 비교를 위한 분석용 가정이며 생성 모델의 실제 내부 대응 방식은 아님."
+}

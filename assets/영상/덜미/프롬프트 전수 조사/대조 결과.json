@@ -1,0 +1,897 @@
+{
+  "report": "07_작업노트/덜미/박첨지거리 영상 프롬프트 전수 조사.md",
+  "findings": [
+    {
+      "id": "F1",
+      "category": "actual_submission_changed",
+      "source_units": [
+        "common-P01",
+        "common-P02",
+        "common-P04",
+        "common-P05",
+        "common-P06",
+        "clip01-P02",
+        "clip01-P03",
+        "clip02-P02",
+        "clip02-P03"
+      ],
+      "status": "user_decision_pending",
+      "cause_of_jump": "unconfirmed"
+    },
+    {
+      "id": "F2",
+      "category": "ambiguous_anatomy_asserted",
+      "source_units": [
+        "clip02-P03"
+      ],
+      "status": "user_decision_pending",
+      "hand_absence_claim": false
+    },
+    {
+      "id": "F3",
+      "category": "competing_geometry_anchors",
+      "source_units": [
+        "common-P02",
+        "common-P05",
+        "common-P06"
+      ],
+      "status": "user_decision_pending",
+      "cause_of_jump": "unconfirmed"
+    },
+    {
+      "id": "F4",
+      "category": "stale_fps_description",
+      "source_location": "work note line 57, input guide 1.2",
+      "status": "user_decision_pending",
+      "current_fps": "24/1",
+      "described_fps": 30
+    },
+    {
+      "id": "F5",
+      "category": "stale_color_folder",
+      "source_location": "work note line 22, input guide 1.1",
+      "status": "user_decision_pending",
+      "old_files_present": 0,
+      "current_files_present": 23
+    }
+  ],
+  "per_video": [
+    {
+      "clip": 1,
+      "images": "01→02",
+      "observed_flow": "낮은 머리 등장과 하강과 좌우 이동, 후반 두 형태, 끝부분 확대",
+      "assessment": "한국어 지시 유지 후보. 실행본의 시간 추가는 F1"
+    },
+    {
+      "clip": 2,
+      "images": "02→03",
+      "observed_flow": "초반 확대, 직사각형 물체의 상하 움직임, 후반 왼쪽 인형 등장, 겹침, 오른쪽 이동",
+      "assessment": "손 단정 F2. 실행본 변경 F1"
+    },
+    {
+      "clip": 3,
+      "images": "03→04",
+      "observed_flow": "콧수염 인형 → 긴 얼굴 인형 → 모자와 무늬 옷 인형, 잠시 빈 무대",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 4,
+      "images": "04→05",
+      "observed_flow": "모자 인형 → 밝은 옷 인형 → 흰 머리와 수염 인형, 오른쪽 이동과 복귀",
+      "assessment": "유지 후보. 팔처럼 보이는 밝은 돌출부를 상세 대조함"
+    },
+    {
+      "clip": 5,
+      "images": "05→06",
+      "observed_flow": "다른 흰 머리 인형 등장과 겹침, 기존 인형 하강, 남은 인형과 끝부분 축소",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 6,
+      "images": "06→07",
+      "observed_flow": "초반 축소, 왼쪽 낮은 머리의 반복 등장, 상체 상승과 겹침, 작은 인형 하강",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 7,
+      "images": "07→08",
+      "observed_flow": "혼자 움직임, 중반 확대, 후반 긴 밝은 천 상승, 끝부분 축소와 왼쪽 기울기",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 8,
+      "images": "08→09",
+      "observed_flow": "몸 세우기, 밝은 천을 머리 위로 올렸다 내리기와 반복, 상체 흔들림",
+      "assessment": "유지 후보. 천의 정체를 확정하지 않는 표현을 유지함"
+    },
+    {
+      "clip": 9,
+      "images": "09→10",
+      "observed_flow": "고개와 상체의 불규칙한 상하 움직임, 낮아졌다 다시 상승",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 10,
+      "images": "10→11",
+      "observed_flow": "잠시 왼쪽 옆얼굴, 상하 움직임, 후반 얼굴 확대",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 11,
+      "images": "11→12",
+      "observed_flow": "얼굴 근접 → 오른쪽 아래 이동 → 천과 줄, 난간 → 사람과 북",
+      "assessment": "유지 후보. 상세 프레임에서 연속 카메라 이동을 확인함"
+    },
+    {
+      "clip": 12,
+      "images": "12→13",
+      "observed_flow": "앉은 사람과 북과 뒤쪽 통행, 반응, 끝부분 왼쪽 위로 무대 복귀",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 13,
+      "images": "13→14",
+      "observed_flow": "초반 작은 축소와 확대 조정, 가까운 인형의 상하 움직임",
+      "assessment": "유지 후보. 원문은 초반 크기 조정을 포괄해 표현함"
+    },
+    {
+      "clip": 14,
+      "images": "14→15",
+      "observed_flow": "같은 근접 구도에서 고개와 상체 움직임",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 15,
+      "images": "15→16",
+      "observed_flow": "상하 움직임과 기울기, 중반 얼굴 확대",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 16,
+      "images": "16→17",
+      "observed_flow": "얼굴 근접 움직임, 끝부분 축소해 지붕과 천 표시",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 17,
+      "images": "17→18",
+      "observed_flow": "초반 작은 크기 조정, 넓은 무대의 인형, 끝부분 빠른 확대",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 18,
+      "images": "18→19",
+      "observed_flow": "같은 근접 구도, 고개 기울기와 회복, 왼쪽 큰 기울기",
+      "assessment": "유지 후보. 초반에도 왼쪽 기울기가 보이며, 원문의 중간 이후 지시가 초반 기울기를 금지하지는 않음"
+    },
+    {
+      "clip": 19,
+      "images": "19→20",
+      "observed_flow": "초반 축소와 오른쪽 이동, 관악기 상승과 연주 자세, 끝부분 무대 복귀",
+      "assessment": "큰 흐름 유지 후보. ‘잠시 내렸다 다시 올림’의 동작 폭은 추가 확인 필요"
+    },
+    {
+      "clip": 20,
+      "images": "20→21",
+      "observed_flow": "일정한 중간 거리, 고개와 상체의 상하 움직임",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 21,
+      "images": "21→22",
+      "observed_flow": "무대 움직임 → 오른쪽 아래 이동 → 사람과 북",
+      "assessment": "유지 후보"
+    },
+    {
+      "clip": 22,
+      "images": "22→23",
+      "observed_flow": "모자 쓴 사람의 기립, 왼쪽 위로 무대 복귀, 인형 움직임, 끝부분 천 글자 컷",
+      "assessment": "유지 후보. 24fps 원본 F436→F437, 약 18.17→18.21초에 실제 컷이 있음"
+    }
+  ],
+  "unit_to_report_mapping": [
+    {
+      "source_unit": "common-P01",
+      "source_line": 76,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P01",
+      "finding_ids": [
+        "F1"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "common-P02",
+      "source_line": 78,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P02",
+      "finding_ids": [
+        "F1",
+        "F3"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "common-P03",
+      "source_line": 80,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P03",
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "common-P04",
+      "source_line": 82,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P04",
+      "finding_ids": [
+        "F1"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "common-P05",
+      "source_line": 84,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P05",
+      "finding_ids": [
+        "F1",
+        "F3"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "common-P06",
+      "source_line": 86,
+      "report_section": "공통 프롬프트 단락 대조",
+      "report_row": "common-P06",
+      "finding_ids": [
+        "F1",
+        "F3"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip01-P01",
+      "source_line": 97,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 1,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip01-P02",
+      "source_line": 99,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 1,
+      "finding_ids": [
+        "F1"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip01-P03",
+      "source_line": 101,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 1,
+      "finding_ids": [
+        "F1"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip02-P01",
+      "source_line": 108,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 2,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip02-P02",
+      "source_line": 110,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 2,
+      "finding_ids": [
+        "F1"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip02-P03",
+      "source_line": 112,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 2,
+      "finding_ids": [
+        "F1",
+        "F2"
+      ],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip03-P01",
+      "source_line": 119,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 3,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip03-P02",
+      "source_line": 121,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 3,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip03-P03",
+      "source_line": 123,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 3,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip04-P01",
+      "source_line": 130,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 4,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip04-P02",
+      "source_line": 132,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 4,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip04-P03",
+      "source_line": 134,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 4,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip05-P01",
+      "source_line": 141,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 5,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip05-P02",
+      "source_line": 143,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 5,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip05-P03",
+      "source_line": 145,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 5,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip06-P01",
+      "source_line": 152,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 6,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip06-P02",
+      "source_line": 154,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 6,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip06-P03",
+      "source_line": 156,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 6,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip07-P01",
+      "source_line": 163,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 7,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip07-P02",
+      "source_line": 165,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 7,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip07-P03",
+      "source_line": 167,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 7,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip08-P01",
+      "source_line": 174,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 8,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip08-P02",
+      "source_line": 176,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 8,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip08-P03",
+      "source_line": 178,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 8,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip09-P01",
+      "source_line": 185,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 9,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip09-P02",
+      "source_line": 187,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 9,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip09-P03",
+      "source_line": 189,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 9,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip10-P01",
+      "source_line": 196,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 10,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip10-P02",
+      "source_line": 198,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 10,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip10-P03",
+      "source_line": 200,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 10,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip11-P01",
+      "source_line": 208,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 11,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip11-P02",
+      "source_line": 210,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 11,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip11-P03",
+      "source_line": 212,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 11,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip12-P01",
+      "source_line": 220,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 12,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip12-P02",
+      "source_line": 222,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 12,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip12-P03",
+      "source_line": 224,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 12,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip13-P01",
+      "source_line": 231,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 13,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip13-P02",
+      "source_line": 233,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 13,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip13-P03",
+      "source_line": 235,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 13,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip14-P01",
+      "source_line": 242,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 14,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip14-P02",
+      "source_line": 244,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 14,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip14-P03",
+      "source_line": 246,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 14,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip15-P01",
+      "source_line": 253,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 15,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip15-P02",
+      "source_line": 255,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 15,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip15-P03",
+      "source_line": 257,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 15,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip16-P01",
+      "source_line": 264,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 16,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip16-P02",
+      "source_line": 266,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 16,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip16-P03",
+      "source_line": 268,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 16,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip17-P01",
+      "source_line": 275,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 17,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip17-P02",
+      "source_line": 277,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 17,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip17-P03",
+      "source_line": 279,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 17,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip18-P01",
+      "source_line": 286,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 18,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip18-P02",
+      "source_line": 288,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 18,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip18-P03",
+      "source_line": 290,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 18,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip19-P01",
+      "source_line": 298,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 19,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip19-P02",
+      "source_line": 300,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 19,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip19-P03",
+      "source_line": 302,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 19,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip19-P04",
+      "source_line": 304,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 19,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip20-P01",
+      "source_line": 311,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 20,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip20-P02",
+      "source_line": 313,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 20,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip20-P03",
+      "source_line": 315,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 20,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip21-P01",
+      "source_line": 323,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 21,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip21-P02",
+      "source_line": 325,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 21,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip21-P03",
+      "source_line": 327,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 21,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip22-P01",
+      "source_line": 335,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 22,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip22-P02",
+      "source_line": 337,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 22,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip22-P03",
+      "source_line": 339,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 22,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    },
+    {
+      "source_unit": "clip22-P04",
+      "source_line": 341,
+      "report_section": "영상별 프롬프트 22개 대조",
+      "report_row": 22,
+      "finding_ids": [],
+      "disposition": "included",
+      "excluded": false
+    }
+  ],
+  "merge_split_history": [],
+  "excluded_units": [],
+  "design_additions": "F1~F5의 수정 제안과 다음 제출의 문자열 동일 대조 제안은 이번 감사에서 작성한 제안이며 원문 근거나 실제 수행 결과로 취급하지 않음.",
+  "uncertainties": [
+    {
+      "clip": 19,
+      "issue": "잠시 내렸다 다시 올리는 관악기 동작의 폭",
+      "status": "not_confirmed"
+    },
+    {
+      "scope": "all",
+      "issue": "모든 원본 프레임의 육안 검수와 생성 내부 원인",
+      "status": "not_performed"
+    }
+  ]
+}
