@@ -1,0 +1,346 @@
+{
+  "date": "2026-10-02",
+  "status": "test_candidates_G1_pending",
+  "request": "사용자가 새로 만든 24fps 원본 영상으로 1번과 2번을 다시 생성하도록 요청함.",
+  "controlled_settings": "이전의 시작 및 종료 이미지, 프롬프트, 모델, 모드, 길이와 화질 설정을 유지하고 참조 영상 2개를 새 24fps 파일로 교체함.",
+  "delivery": "생성 파일의 바이트와 출력 프레임률을 그대로 보존함. 별도의 프레임률 변환, 재인코딩, 길이 절삭이나 음향 결합은 하지 않음.",
+  "interpretation": "동일 조건의 재생성에도 결과가 달라질 수 있어 이번 두 편만으로 프레임률 차이가 원인이었는지 확정하지 않음.",
+  "records": [
+    {
+      "clip": 1,
+      "status": "completed",
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "duration": 10,
+        "resolution": "1080p",
+        "aspect_ratio": "16:9",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "prompt": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 1, exactly 10 seconds. Start on the empty wide frontal stage of start_image (박첨지거리_01). Follow the supplied 박첨지거리_1 video frame timing: about 0–0.5 seconds empty stage; throughout about 0.5–8.5 seconds small heads intermittently rise very low just over the black cloth, bob, move briefly sideways and sink behind it. Never raise full puppets into view. Near the end a small rounded form on image-left and a narrow upright face-like rectangular form on image-right are simultaneously visible. From about 8.5 seconds, follow the source camera's gradual enlargement toward the stage opening: building and cloth lettering enlarge together with the heads. Finish at end_image (박첨지거리_02), preserving those two low forms and its camera crop. Do not reveal full faces or bodies that are not visible in the source.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "6ad51b32-f500-4ecd-bb76-cf1f57ee40fa"
+          },
+          {
+            "role": "end_image",
+            "value": "e9c8cd63-3172-4b47-920e-21fec6000439"
+          },
+          {
+            "role": "video",
+            "value": "39cabc8a-1633-4b3d-a247-a42897c94cf8"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "role": "start_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_01.png",
+          "sha256": "135125e817c4f1a3a509da64e4a2176157398463f80129b804db427656e0a51a",
+          "media_id": "6ad51b32-f500-4ecd-bb76-cf1f57ee40fa",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "end_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+          "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+          "media_id": "e9c8cd63-3172-4b47-920e-21fec6000439",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "video",
+          "path": "assets/영상/덜미/원본영상/박첨지거리_1.mp4",
+          "sha256": "9dadf231f462e8361102b3481d5bb3459d3f8307997633bd349d6259807fdd5d",
+          "media_id": "39cabc8a-1633-4b3d-a247-a42897c94cf8",
+          "upload": "exact file bytes; HTTP 200; confirmed",
+          "prior_30fps_sha256": "2cbf7eb3953e4ca75d8ba5e4c07d51fa111449f37091c1a4a0f0a1c8e0175789",
+          "probe": {
+            "size": [
+              654,
+              480
+            ],
+            "fps": "24/1",
+            "duration": 10.0,
+            "frames": 240
+          }
+        }
+      ],
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_1_프롬프트.txt",
+      "output_path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_1_재생성.mp4",
+      "job_id": "ac2cebf6-2f78-42c5-b593-e84afbf15052",
+      "server_adjustments": {
+        "medias[2].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      },
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AVM1cFdhum7PAQOPk1ppvsBBQR/hf_20261002_060042_ac2cebf6-2f78-42c5-b593-e84afbf15052.mp4",
+      "output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_1_재생성.mp4",
+        "sha256": "ce39a03481dee6f044d2261fea7bcd0a1d36aa3b677ae0f536c21dee941428ea",
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "24/1",
+        "frames": 241,
+        "video_duration": 10.041667,
+        "container_duration": 10.041667,
+        "audio_streams": 0,
+        "decoded_frames": 241,
+        "delivery": "downloaded generation bytes preserved"
+      },
+      "temporal_measurement": {
+        "method": "320×180 밝기 영상의 인접 프레임 평균 절대 차이임. 원인 판별이나 영상 간 품질 점수가 아님.",
+        "largest_changes": [
+          {
+            "frame": 224,
+            "time": 9.333333333333334,
+            "MAD": 9.211580276489258
+          },
+          {
+            "frame": 220,
+            "time": 9.166666666666666,
+            "MAD": 9.180781364440918
+          },
+          {
+            "frame": 216,
+            "time": 9.0,
+            "MAD": 8.065329551696777
+          },
+          {
+            "frame": 228,
+            "time": 9.5,
+            "MAD": 8.04684066772461
+          },
+          {
+            "frame": 232,
+            "time": 9.666666666666666,
+            "MAD": 7.504860877990723
+          },
+          {
+            "frame": 212,
+            "time": 8.833333333333334,
+            "MAD": 6.956822872161865
+          },
+          {
+            "frame": 222,
+            "time": 9.25,
+            "MAD": 6.734010219573975
+          },
+          {
+            "frame": 236,
+            "time": 9.833333333333334,
+            "MAD": 6.608437538146973
+          }
+        ]
+      },
+      "visual_inspection": {
+        "scope": "전체 구간의 대표 프레임 6개와 끝 2초의 연속 프레임 49개를 살펴봄. 모든 프레임의 동작이나 원본과의 동일성을 확인한 검사가 아님.",
+        "observations": [
+          "낮은 머리의 출몰과 후반 무대 확대 흐름이 보임.",
+          "약 8.3~8.8초 구간에 천의 글자가 겹치는 전환 흔적이 남음."
+        ],
+        "remaining": "글자 겹침과 생성 세부 차이가 있어 프레임률을 맞췄다는 이유로 연속성 문제가 해결됐다고 판정하지 않음."
+      }
+    },
+    {
+      "clip": 2,
+      "status": "completed",
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "duration": 11,
+        "resolution": "1080p",
+        "aspect_ratio": "16:9",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "prompt": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 2, exactly 11 seconds. Start exactly at start_image (박첨지거리_02), the same color endpoint as clip 1. Follow supplied 박첨지거리_2 video at its original pace. About 0–3.5 seconds: camera continues enlarging the stage opening; the rounded low form leaves the visible image-left crop while the narrow rectangular face-like object remains above the black cloth. About 3.5–8.8 seconds: the small rectangular object bobs and tilts in the close view, without becoming a human or receiving a body or limbs. About 8.8–10.1 seconds: a different rigid puppet with large ears, round fixed eyes, a black moustache and pale cloth clothing enters from image-left and inclines its head near the rectangular object. They briefly overlap by normal occlusion; the rectangular object then lowers behind the cloth. About 10.1–11 seconds: the moustached puppet shifts toward image-right and holds the tilted head direction in corrected end_image (박첨지거리_03). Its pale cheek/shoulder contour remains simple cloth-like material, with NO invented hand, palm, wrist or individual fingers. Do not invent a cheek-touching gesture. Match the final puppet scale, position, head tilt, clothing silhouette and background to end_image.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "e9c8cd63-3172-4b47-920e-21fec6000439"
+          },
+          {
+            "role": "end_image",
+            "value": "f653dfb8-ffcb-4577-bc74-a9854ca8ae11"
+          },
+          {
+            "role": "video",
+            "value": "38f18ecf-15a4-4b90-88fb-ed3da7e4d84f"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "role": "start_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+          "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+          "media_id": "e9c8cd63-3172-4b47-920e-21fec6000439",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "end_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
+          "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
+          "media_id": "f653dfb8-ffcb-4577-bc74-a9854ca8ae11",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "video",
+          "path": "assets/영상/덜미/원본영상/박첨지거리_2.mp4",
+          "sha256": "ebf3c0a6a39ee021d778b088e8bafe130b27831fcd0114de7446c391a2f83621",
+          "media_id": "38f18ecf-15a4-4b90-88fb-ed3da7e4d84f",
+          "upload": "exact file bytes; HTTP 200; confirmed",
+          "prior_30fps_sha256": "b81d525559805c0f0cde562d15e8a574d0b464978d7e0fc44eadae3669b1e142",
+          "probe": {
+            "size": [
+              654,
+              480
+            ],
+            "fps": "24/1",
+            "duration": 11.0,
+            "frames": 264
+          }
+        }
+      ],
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_2_프롬프트.txt",
+      "output_path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_2_재생성.mp4",
+      "job_id": "20776a93-3581-4a54-8de2-e24aae4a080d",
+      "server_adjustments": {
+        "medias[2].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      },
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AVM1cFdhum7PAQOPk1ppvsBBQR/hf_20261002_060044_20776a93-3581-4a54-8de2-e24aae4a080d.mp4",
+      "output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/24fps 참조 재생성/박첨지거리_2_재생성.mp4",
+        "sha256": "c94717f95e2d2dbef09bd9ab6118f7d3fd11279e4b51d9114ac44776de0e2025",
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "24/1",
+        "frames": 265,
+        "video_duration": 11.041667,
+        "container_duration": 11.041667,
+        "audio_streams": 0,
+        "decoded_frames": 265,
+        "delivery": "downloaded generation bytes preserved"
+      },
+      "temporal_measurement": {
+        "method": "320×180 밝기 영상의 인접 프레임 평균 절대 차이임. 원인 판별이나 영상 간 품질 점수가 아님.",
+        "largest_changes": [
+          {
+            "frame": 237,
+            "time": 9.875,
+            "MAD": 16.31467056274414
+          },
+          {
+            "frame": 234,
+            "time": 9.75,
+            "MAD": 12.627344131469727
+          },
+          {
+            "frame": 233,
+            "time": 9.708333333333334,
+            "MAD": 11.905607223510742
+          },
+          {
+            "frame": 13,
+            "time": 0.5416666666666666,
+            "MAD": 10.695816040039062
+          },
+          {
+            "frame": 214,
+            "time": 8.916666666666666,
+            "MAD": 10.319375038146973
+          },
+          {
+            "frame": 213,
+            "time": 8.875,
+            "MAD": 10.237378120422363
+          },
+          {
+            "frame": 235,
+            "time": 9.791666666666666,
+            "MAD": 10.06553840637207
+          },
+          {
+            "frame": 221,
+            "time": 9.208333333333334,
+            "MAD": 9.810087203979492
+          }
+        ]
+      },
+      "visual_inspection": {
+        "scope": "전체 구간의 대표 프레임 6개와 끝 2초의 연속 프레임 49개를 살펴봄. 모든 프레임의 동작이나 원본과의 동일성을 확인한 검사가 아님.",
+        "observations": [
+          "초반 확대와 직사각형 물체의 출몰 및 후반 콧수염 인형의 등장 흐름이 보임.",
+          "끝 2초의 프레임에서는 구체적인 손바닥과 손가락을 발견하지 못함."
+        ],
+        "remaining": "얼굴과 물체, 천 및 건물 세부의 생성 표현은 원본과의 정확한 일치를 확인한 결과가 아님."
+      }
+    }
+  ],
+  "checks": {
+    "input_images_unchanged": true,
+    "source_videos_24fps": true,
+    "all_input_hashes_unchanged": true,
+    "other_generation_params_unchanged": true,
+    "image_media_ids_unchanged": true,
+    "prompt_files_match_requests": true,
+    "all_output_frames_decoded": true,
+    "output_fps": [
+      "24/1",
+      "24/1"
+    ],
+    "independent_readability": {
+      "initial_rounds": 1,
+      "initial_findings": 2,
+      "severity": "low",
+      "applied_findings": 1,
+      "retained_findings": 1,
+      "impact_recheck_rounds": 1,
+      "new_findings": 0,
+      "retained_reason": "공통 영어 문장의 역할 설명이 어색하다는 발견 1건은 두 실행 프롬프트에 있음. 실제 실행 기록과 이전 비교 조건을 보존하기 위해 사후 수정하지 않음."
+    },
+    "automatic_checks": {
+      "numbering_errors": 0,
+      "lint_errors": 0,
+      "lint_warnings": 27,
+      "baseline_lint_warnings": 27,
+      "quote_mismatches": 0,
+      "numbered_quotes": 0
+    }
+  },
+  "billing": {
+    "expected_credits": [
+      120,
+      132
+    ],
+    "expected_total": 252,
+    "balance_before": 33317.07,
+    "generation_submissions": 2,
+    "automatic_regenerations": 0,
+    "balance_after": 32952.82,
+    "observed_balance_difference": 364.25,
+    "interpretation": "계정 잔액 변화는 364.25크레딧으로 두 요청의 사전 예상 합계 252크레딧과 다름. 이 잔액 변화를 이번 두 건의 실제 청구액으로 전부 귀속하지 않음."
+  },
+  "storage": "MP4는 기존 .gitignore 규칙에 따라 로컬 자산 폴더에 보관하고 프롬프트와 생성 기록을 Git에 보존함.",
+  "remaining_findings": [
+    {
+      "id": "TEMPORAL-01",
+      "clips": [
+        1
+      ],
+      "text": "약 8.3~8.8초에 천의 글자가 겹치는 전환 흔적이 남음."
+    }
+  ]
+}
