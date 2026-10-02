@@ -1,0 +1,305 @@
+{
+  "date": "2026-10-02",
+  "status": "test_candidates_G1_pending",
+  "kind": "two test clips, not approved restoration masters",
+  "selection": "current corrected 컬러복원 v2: 01→02 for clip 1; 02→03 for clip 2",
+  "estimate_total_credits": 252,
+  "project_preference": {
+    "auto_create_project": false,
+    "folder_id_omitted": true
+  },
+  "source_note": "07_작업노트/덜미/박첨지거리 AI 복원 작업 노트.md",
+  "scope": "원본 영상 1번 10초와 2번 11초의 동작을 참조하는 Seedance 2.5 테스트임. 원본과 현재 v2 이미지는 수정하지 않음.",
+  "prompt_correction": "작업 노트 3.2의 손을 뺨에 둔다는 지시는 이번 실행 프롬프트에서 제외함. 수정된 03번을 종료 이미지로 사용하고 불분명한 흰 형상에 손바닥과 손가락을 추가하지 않도록 지시함.",
+  "analysis": "기존 원본 영상 1번의 0.5초 간격 대표 프레임과 2번의 0.5초 간격 대표 프레임 및 후반 0.1초 간격 대표 프레임을 대조함. 추출표 E001~E007의 순서를 참고하되 E007의 손 해석은 채택하지 않음.",
+  "design_additions": "복원 색, 16:9 좌우 영역과 고해상도 세부는 생성 표현임. 원본의 실제 색이나 완전한 동작 재현을 확인한 결과로 표현하지 않음.",
+  "audio_plan": "새 음향 생성을 끄고 완성된 테스트 파일에는 해당 원본 영상의 음향을 사용함.",
+  "records": [
+    {
+      "clip": 1,
+      "job_id": "f29ee7e9-5c04-426b-bb24-4119b25d5bec",
+      "status": "completed",
+      "model": "seedance_2_5",
+      "requested_duration": 10,
+      "estimate_credits": 120,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "duration": 10,
+        "resolution": "1080p",
+        "aspect_ratio": "16:9",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "prompt": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 1, exactly 10 seconds. Start on the empty wide frontal stage of start_image (박첨지거리_01). Follow the supplied 박첨지거리_1 video frame timing: about 0–0.5 seconds empty stage; throughout about 0.5–8.5 seconds small heads intermittently rise very low just over the black cloth, bob, move briefly sideways and sink behind it. Never raise full puppets into view. Near the end a small rounded form on image-left and a narrow upright face-like rectangular form on image-right are simultaneously visible. From about 8.5 seconds, follow the source camera's gradual enlargement toward the stage opening: building and cloth lettering enlarge together with the heads. Finish at end_image (박첨지거리_02), preserving those two low forms and its camera crop. Do not reveal full faces or bodies that are not visible in the source.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "6ad51b32-f500-4ecd-bb76-cf1f57ee40fa"
+          },
+          {
+            "role": "end_image",
+            "value": "e9c8cd63-3172-4b47-920e-21fec6000439"
+          },
+          {
+            "role": "video",
+            "value": "3b7f36de-7e44-4583-bf29-b289bc02dde7"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "role": "start_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_01.png",
+          "sha256": "135125e817c4f1a3a509da64e4a2176157398463f80129b804db427656e0a51a",
+          "media_id": "6ad51b32-f500-4ecd-bb76-cf1f57ee40fa",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "end_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+          "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+          "media_id": "e9c8cd63-3172-4b47-920e-21fec6000439",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "video",
+          "path": "assets/영상/덜미/원본영상/박첨지거리_1.mp4",
+          "sha256": "2cbf7eb3953e4ca75d8ba5e4c07d51fa111449f37091c1a4a0f0a1c8e0175789",
+          "media_id": "3b7f36de-7e44-4583-bf29-b289bc02dde7",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        }
+      ],
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_1_프롬프트.txt",
+      "server_adjustment": "canonical video role mapped to backend video_references",
+      "output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_1_테스트.mp4",
+        "sha256": "7f3c5802d601ead9499ec31611892c7653622ba57dd56874bd80bef8fa38fa3e",
+        "duration": 10.005333,
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "30/1",
+        "audio": "source audio stream copied; generated audio discarded",
+        "preparation": "separate H.264 CRF17 30 fps test copy; source audio copied; raw generation retained"
+      },
+      "visual_comparison": {
+        "method": "원본과 30fps 테스트 파일에서 같은 시각의 대표 프레임을 나란히 대조함. 전체 프레임의 동일성 검사가 아님.",
+        "samples": 11,
+        "observations": [
+          "낮은 머리의 출몰과 후반 무대 입구 확대 흐름을 확인함.",
+          "원본보다 지붕 상단과 주변이 더 보이며 천 주름, 글자와 머리 위치에도 편차가 남음."
+        ],
+        "remaining": "동작 순서와 카메라 흐름을 참고한 생성 결과이며 프레임별 정확한 재현이나 종료 이미지와의 픽셀 일치를 뜻하지 않음."
+      },
+      "native_output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_1_생성원본.mp4",
+        "sha256": "4e84dc2a90139f8fdf8b5c01eaa7d7bccb2e1af1d7dc06875c7f621e6e46d528",
+        "duration": 10.041667,
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "24/1",
+        "audio_streams": 0
+      },
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AVM1cFdhum7PAQOPk1ppvsBBQR/hf_20261002_045320_f29ee7e9-5c04-426b-bb24-4119b25d5bec.mp4",
+      "audio_packet_hash_check": {
+        "source": "SHA256=ed3b7d2205d7c556fd8be0910957f0e6f503380ff212f3d36a12767b6ae77ced",
+        "test": "SHA256=ed3b7d2205d7c556fd8be0910957f0e6f503380ff212f3d36a12767b6ae77ced",
+        "equal": true
+      }
+    },
+    {
+      "clip": 2,
+      "job_id": "bfb92646-e1e9-4f07-b8dd-3a3f23b5e2c9",
+      "status": "completed",
+      "model": "seedance_2_5",
+      "requested_duration": 11,
+      "estimate_credits": 132,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "duration": 11,
+        "resolution": "1080p",
+        "aspect_ratio": "16:9",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "prompt": "Restore the supplied black-and-white Korean traditional puppet-stage footage as a high-quality 16:9 color video. The start_image is the exact first-frame COLOR and framing guide. The end_image is the exact last-frame COLOR and framing guide. The video reference is ONLY the authoritative choreography, object visibility, occlusions, camera motion and event timing. Do not reproduce its black-and-white appearance, scratches, dust, flicker, black borders or film artifacts. Keep the temporal pace and duration of the reference; do not compress the action or add slow motion.\nUse the start and end color images consistently for tiled roof, wooden building, dancheong paint, black stage cloth, daylight, costumes and puppet colors. Preserve one stable stage space, with the source central field of view and lateral extension for 16:9. Maintain the original cloth height and the small visible head/upper-body heights throughout. Keep the white Korean lettering 남 사 당 where visible, without invented letters or overlays. Puppets have rigid painted carved faces and cloth clothing, with source-like short vertical bobs, tilts and pauses. No human skin, face morphs, new facial expressions, moving lips or independently animated eyes. Preserve actual entrance and disappearance order and occlusion, not dissolving or shape morphing. Do not add palms, fingers, articulated arms, torso, legs or other anatomy where the source only shows an unclear pale shape or an occluded head. Do not fill uncertain shapes with imagined anatomy. No new people, objects, scenes, music, narration, dialogue, subtitles, logo or watermark. End on the supplied end_image without an added freeze.\n\nCLIP 2, exactly 11 seconds. Start exactly at start_image (박첨지거리_02), the same color endpoint as clip 1. Follow supplied 박첨지거리_2 video at its original pace. About 0–3.5 seconds: camera continues enlarging the stage opening; the rounded low form leaves the visible image-left crop while the narrow rectangular face-like object remains above the black cloth. About 3.5–8.8 seconds: the small rectangular object bobs and tilts in the close view, without becoming a human or receiving a body or limbs. About 8.8–10.1 seconds: a different rigid puppet with large ears, round fixed eyes, a black moustache and pale cloth clothing enters from image-left and inclines its head near the rectangular object. They briefly overlap by normal occlusion; the rectangular object then lowers behind the cloth. About 10.1–11 seconds: the moustached puppet shifts toward image-right and holds the tilted head direction in corrected end_image (박첨지거리_03). Its pale cheek/shoulder contour remains simple cloth-like material, with NO invented hand, palm, wrist or individual fingers. Do not invent a cheek-touching gesture. Match the final puppet scale, position, head tilt, clothing silhouette and background to end_image.",
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "e9c8cd63-3172-4b47-920e-21fec6000439"
+          },
+          {
+            "role": "end_image",
+            "value": "f653dfb8-ffcb-4577-bc74-a9854ca8ae11"
+          },
+          {
+            "role": "video",
+            "value": "16269a1b-e620-4396-8025-e2e45153d294"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "role": "start_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_02.png",
+          "sha256": "26c1cca94d9b5f4457c95d60faf71fd07f51713db24368e089850128d6f91be8",
+          "media_id": "e9c8cd63-3172-4b47-920e-21fec6000439",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "end_image",
+          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
+          "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
+          "media_id": "f653dfb8-ffcb-4577-bc74-a9854ca8ae11",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        },
+        {
+          "role": "video",
+          "path": "assets/영상/덜미/원본영상/박첨지거리_2.mp4",
+          "sha256": "b81d525559805c0f0cde562d15e8a574d0b464978d7e0fc44eadae3669b1e142",
+          "media_id": "16269a1b-e620-4396-8025-e2e45153d294",
+          "upload": "exact original file bytes; HTTP 200; confirmed"
+        }
+      ],
+      "prompt_file": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_2_프롬프트.txt",
+      "server_adjustment": "canonical video role mapped to backend video_references",
+      "output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_2_테스트.mp4",
+        "sha256": "8d81604c2c8170ef3db0970f5e4e26dfe4262d78901468aa9334ec60f75f0217",
+        "duration": 11.008,
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "30/1",
+        "audio": "source audio stream copied; generated audio discarded",
+        "preparation": "separate H.264 CRF17 30 fps test copy; source audio copied; raw generation retained"
+      },
+      "visual_comparison": {
+        "method": "원본과 30fps 테스트 파일에서 같은 시각의 대표 프레임을 나란히 대조함. 전체 프레임의 동일성 검사가 아님.",
+        "samples": 12,
+        "observations": [
+          "초반 확대, 직사각형 물체의 기울기와 후반 콧수염 인형의 등장 순서를 확인함.",
+          "최종 프레임을 수정된 03번과 별도로 대조했으며 구체적인 손바닥과 손가락은 발견하지 못함.",
+          "직사각형 물체와 인형 얼굴의 세부, 무대 천과 건물 표현은 원본과 차이가 남음."
+        ],
+        "remaining": "동작 순서와 카메라 흐름을 참고한 생성 결과이며 프레임별 정확한 재현이나 종료 이미지와의 픽셀 일치를 뜻하지 않음."
+      },
+      "native_output": {
+        "path": "assets/영상/덜미/영상복원 테스트/Seedance 2.5/박첨지거리_2_생성원본.mp4",
+        "sha256": "9fb1b86c7a35234a5d937065b43304f8d763ebb848ac41e199597a7277a905fc",
+        "duration": 11.041667,
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": "24/1",
+        "audio_streams": 0
+      },
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AVM1cFdhum7PAQOPk1ppvsBBQR/hf_20261002_045321_bfb92646-e1e9-4f07-b8dd-3a3f23b5e2c9.mp4",
+      "audio_packet_hash_check": {
+        "source": "SHA256=e258d7fe9e3b77dccffa5a7c5caca6e5cad47bc460d18cf49f7f9774f0915089",
+        "test": "SHA256=e258d7fe9e3b77dccffa5a7c5caca6e5cad47bc460d18cf49f7f9774f0915089",
+        "equal": true
+      }
+    }
+  ],
+  "checks": {
+    "input_integrity": {
+      "unique_files": 5,
+      "reference_uses": 6,
+      "all_unchanged": true,
+      "upload": "original PNG and MP4 files uploaded directly, HTTP 200 and confirmed; prepared compressed copies were not used"
+    },
+    "independent_readability": {
+      "rounds": 1,
+      "findings": 1,
+      "severity": "low",
+      "locations": [
+        "박첨지거리_1_프롬프트.txt:1",
+        "박첨지거리_2_프롬프트.txt:1"
+      ],
+      "finding": "실행 프롬프트의 The video reference is ONLY the authoritative choreography 문장이 참조 영상의 역할을 설명하는 문법으로 어색함.",
+      "applied": 0,
+      "disposition": "실제로 실행한 프롬프트를 보존하기 위해 사후 수정하지 않음. 같은 문장이 두 실행 프롬프트에 있으며 낮은 심각도의 표현 발견으로 남김."
+    },
+    "wiki_number": {
+      "errors": 0,
+      "command": "node scripts/wiki_number.mjs --write"
+    },
+    "wiki_lint": {
+      "errors": 0,
+      "warnings": 27,
+      "baseline_warnings": 27
+    },
+    "quote_check": {
+      "mismatches": 0,
+      "numbered_quotes": 0
+    },
+    "output_integrity": {
+      "raw_videos": 2,
+      "test_videos": 2,
+      "size": [
+        1920,
+        1080
+      ],
+      "test_fps": 30,
+      "video_frame_counts": [
+        300,
+        330
+      ],
+      "source_audio_packet_hashes_equal": true,
+      "unique_input_files": 5,
+      "reference_uses": 6,
+      "input_hashes_unchanged": true,
+      "missing_links": 0,
+      "clip_boundary_color_image": "same input file/hash"
+    },
+    "comparison_page": {
+      "static_paths": "pass",
+      "browser_render": "not run; no enabled browser surface",
+      "javascript_syntax": "pass: node --check on extracted inline script"
+    }
+  },
+  "billing": {
+    "estimated_credits": [
+      120,
+      132
+    ],
+    "estimate_total": 252,
+    "balance_before": 33700.57,
+    "balance_after": 33448.57,
+    "observed_balance_difference": 252,
+    "generation_submissions": 2,
+    "automatic_regenerations": 0
+  },
+  "remaining_findings": [
+    {
+      "id": "GEOMETRY-01",
+      "clips": [
+        1,
+        2
+      ],
+      "text": "원본과 지붕 및 천의 시야, 대상의 크기와 위치에 편차가 남음."
+    },
+    {
+      "id": "DETAIL-01",
+      "clips": [
+        1,
+        2
+      ],
+      "text": "원본과 물체 및 인형 얼굴, 건축, 천 주름과 글자 세부에 차이가 남음."
+    }
+  ],
+  "storage": {
+    "created_files": 13,
+    "local_mp4_files": 4,
+    "git_tracked_support_files": 9,
+    "video_tracking_policy": ".gitignore:25의 *.mp4 제외 규칙에 따라 영상 4개는 로컬 assets 폴더에 보관하고 기록, 프롬프트, 미리보기와 비교 화면 9개를 Git에 보존함."
+  }
+}

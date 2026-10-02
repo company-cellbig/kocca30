@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>박첨지거리 Seedance 2.5 영상 테스트</title>
+<style>
+body{margin:0;background:#17191c;color:#eee;font-family:"Malgun Gothic",sans-serif}main{max-width:1280px;margin:auto;padding:24px}h1{font-size:25px}h2{font-size:20px}p{line-height:1.7;color:#c6cbd2}a{color:#9acdff}section{padding:18px;background:#24282e;border-radius:8px;margin:22px 0}.videos{display:grid;grid-template-columns:1fr 1fr;gap:16px}figure{margin:0}video{width:100%;aspect-ratio:16/9;background:black}figcaption{margin:8px 0;color:#c6cbd2}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}button{font:inherit;padding:8px 14px;background:#374353;color:white;border:1px solid #657386;border-radius:6px;cursor:pointer}.finding{color:#eac18a}.links{display:flex;gap:18px;flex-wrap:wrap}@media(max-width:720px){main{padding:14px}.videos{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>박첨지거리 Seedance 2.5 영상 테스트</h1>
+<p>현재 컬러복원 v2의 시작·끝 이미지와 각 원본 영상을 함께 입력해 만든 두 편입니다. 동작과 구도를 확인하기 위한 테스트이며, 확정 복원본은 아닙니다.</p>
+<p>‘함께 재생’을 누르면 같은 시점에서 비교합니다. 음향은 오른쪽 테스트 파일에서만 재생합니다. 테스트 파일의 음향은 해당 원본에서 가져왔습니다. 원본과 생성본의 화면 비율이 달라 좌우 범위는 다르게 보입니다.</p>
+<section data-clip="1"><h2>1번 · 10초 · 컬러 이미지 01 → 02</h2>
+<div class="videos"><figure><video class="source" controls muted playsinline preload="metadata" src="../../원본영상/박첨지거리_1.mp4"></video><figcaption>흑백 원본 1번</figcaption></figure><figure><video class="test" controls playsinline preload="metadata" src="박첨지거리_1_테스트.mp4" poster="박첨지거리_1_start.jpg"></video><figcaption>Seedance 2.5 테스트 1번</figcaption></figure></div>
+<div class="controls"><button class="play" type="button">함께 재생</button><button class="pause" type="button">함께 정지</button><button class="restart" type="button">처음으로</button></div>
+<p class="finding" id="finding1">작은 머리의 등장·가림과 후반 카메라 확대의 시점 및 천 높이를 확인하세요.</p>
+<div class="links"><a href="박첨지거리_1_테스트.mp4">테스트 MP4</a><a href="박첨지거리_1_생성원본.mp4">도구 생성 원본</a><a href="박첨지거리_1_프롬프트.txt">실행 프롬프트</a><a href="../../컬러복원 v2/박첨지거리_01.png">시작 이미지 01</a><a href="../../컬러복원 v2/박첨지거리_02.png">종료 이미지 02</a></div></section>
+<section data-clip="2"><h2>2번 · 11초 · 컬러 이미지 02 → 03</h2>
+<div class="videos"><figure><video class="source" controls muted playsinline preload="metadata" src="../../원본영상/박첨지거리_2.mp4"></video><figcaption>흑백 원본 2번</figcaption></figure><figure><video class="test" controls playsinline preload="metadata" src="박첨지거리_2_테스트.mp4" poster="박첨지거리_2_start.jpg"></video><figcaption>Seedance 2.5 테스트 2번</figcaption></figure></div>
+<div class="controls"><button class="play" type="button">함께 재생</button><button class="pause" type="button">함께 정지</button><button class="restart" type="button">처음으로</button></div>
+<p class="finding" id="finding2">직사각형 물체의 움직임, 후반 콧수염 인형의 등장과 가림 및 종료 프레임에서 손이 추가됐는지 확인하세요.</p>
+<div class="links"><a href="박첨지거리_2_테스트.mp4">테스트 MP4</a><a href="박첨지거리_2_생성원본.mp4">도구 생성 원본</a><a href="박첨지거리_2_프롬프트.txt">실행 프롬프트</a><a href="../../컬러복원 v2/박첨지거리_02.png">시작 이미지 02</a><a href="../../컬러복원 v2/박첨지거리_03.png">수정한 종료 이미지 03</a></div></section>
+<p>색, 좌우 확장 영역과 저화질 원본에 없는 세부는 생성한 표현입니다. 1번과 2번을 이을 때의 화면 연결도 함께 확인해야 합니다.</p>
+<p class="links"><a href="테스트 기록.json">입력·설정·결과 기록</a><a href="테스트 안내.txt">테스트 안내</a></p>
+</main><script>
+for(const section of document.querySelectorAll('section[data-clip]')){
+ const source=section.querySelector('.source'),test=section.querySelector('.test');
+ const stop=()=>{source.pause();test.pause()};
+ section.querySelector('.play').addEventListener('click',async()=>{source.currentTime=test.currentTime;await Promise.allSettled([source.play(),test.play()])});
+ section.querySelector('.pause').addEventListener('click',stop);
+ section.querySelector('.restart').addEventListener('click',()=>{stop();source.currentTime=0;test.currentTime=0});
+ test.addEventListener('seeking',()=>{source.currentTime=test.currentTime});
+ test.addEventListener('pause',()=>source.pause());
+ test.addEventListener('ended',()=>source.pause());
+}
+</script></body></html>
