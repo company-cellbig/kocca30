@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>박첨지거리 원본과 컬러복원 v2 비교</title>
+<style>
+:root{color-scheme:dark;font-family:"Malgun Gothic",system-ui,sans-serif;background:#17191c;color:#eceef1}
+*{box-sizing:border-box}body{margin:0}main{max-width:1340px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 12px}h2{font-size:17px;margin:16px 0 10px}p{line-height:1.7;margin:8px 0;color:#cbd0d6}a{color:#95cafa;text-underline-offset:3px}
+.notice{border-left:3px solid #e7bb76;padding:8px 16px;background:#252421;margin:14px 0 20px}.toolbar,.overlay-controls,.links{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.toolbar{margin:12px 0}button,select{font:inherit;color:inherit;background:#2e333a;border:1px solid #545b65;border-radius:6px;padding:9px 14px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}button:hover:not(:disabled){background:#414956}select{min-width:145px}input[type=range]{width:min(460px,65vw);accent-color:#95cafa}label{line-height:1.6}.badge{color:#f1cf8e;font-size:14px}.viewer{position:relative;background:#000;overflow:hidden;border-radius:6px;margin:12px 0}.base{display:block;width:100%;height:auto}.original-overlay{position:absolute;top:0;left:50%;height:100%;width:auto;max-width:none;transform:translateX(-50%);opacity:.35;pointer-events:none}.guide{position:absolute;top:0;left:50%;height:100%;width:76.6795%;transform:translateX(-50%);border:1px solid #efaa83;pointer-events:none}.caption{font-size:14px;color:#b7bdc6}.panel{background:#21252b;border:1px solid #373d45;border-radius:8px;padding:15px;margin-top:18px}.reference-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.reference-grid img{display:block;max-width:100%;max-height:350px;margin:auto}.frame-box{height:350px;display:flex;align-items:center;background:#121416;border-radius:4px}figure{margin:0}figcaption{margin:8px 0;color:#bec5ce;font-size:14px}.finding{color:#f1cf8e}details{margin-top:16px}summary{cursor:pointer;padding:8px 0}#context{width:100%;height:auto;display:block}footer{padding:20px 0;font-size:13px;color:#aab2bd}
+@media(max-width:700px){main{padding:14px}h1{font-size:21px}.reference-grid{grid-template-columns:1fr}.frame-box{height:auto;min-height:180px}.toolbar{gap:8px}button,select{padding:8px 10px}.reference-grid img{max-height:300px}}
+</style>
+</head>
+<body><main>
+<h1>박첨지거리 원본과 컬러복원 v2 비교</h1>
+<p>인접 영상의 끝·시작 2초 구간을 참고해 생성한 23장을 원본과 대조합니다.</p>
+<div class="notice"><strong>비교용 후보입니다.</strong><p>천 높이, 인형의 크기·위치와 외형, 글자 배치에 차이가 남아 있습니다. 색과 좌우 확장 영역은 생성한 표현입니다. PNG 23장은 모두 도구의 원래 출력인 1672×941px이며, 정확한 16:9로 별도 자르거나 리사이즈하지 않았습니다.</p></div>
+<div class="toolbar">
+<button id="previous" type="button">이전</button>
+<label for="frame">이미지 번호</label><select id="frame"></select>
+<button id="next" type="button">다음</button>
+<label for="version">비교할 생성본</label><select id="version"><option value="v2">컬러복원 v2</option><option value="v1">1차 컬러 이미지</option></select>
+<span class="badge" id="regenerated"></span>
+</div>
+<div class="viewer">
+<img class="base" id="base" alt="선택한 컬러 복원 이미지">
+<img class="original-overlay" id="overlay" alt="같은 순간의 흑백 원본 이미지">
+<div class="guide" id="guide" aria-hidden="true"></div>
+</div>
+<div class="overlay-controls">
+<label for="opacity">원본 겹침 <output id="opacity-value" for="opacity">35%</output></label>
+<input id="opacity" type="range" min="0" max="100" value="35">
+<button id="show-color" type="button">생성본만</button>
+<button id="show-half" type="button">50% 겹침</button>
+<button id="show-original" type="button">원본 100% 겹침</button>
+<label><input id="show-guide" type="checkbox" checked> 원본 영역선</label>
+</div>
+<p class="caption">원본의 세로 시야를 유지하고 가운데에 겹칩니다. 영역선은 좌우만 확장했을 때의 기준이며, 생성 결과가 원본과 정렬됐다는 뜻은 아닙니다. 100%에서도 원본 밖 좌우에는 생성본이 보입니다.</p>
+<section class="panel"><h2 id="image-title">이미지</h2><p id="windows"></p><p id="finding" class="finding"></p>
+<div class="links"><a id="output-link" href="#">v2 PNG 열기</a><a id="source-link" href="#">원본 PNG 열기</a><a id="prompt-link" href="#">최종 프롬프트</a></div></section>
+<section class="panel"><h2>원본과 1차 컬러 이미지</h2><div class="reference-grid">
+<figure><div class="frame-box"><img id="source-preview" alt="흑백 원본 단독 보기"></div><figcaption>원본 기준 이미지</figcaption></figure>
+<figure><div class="frame-box"><img id="v1-preview" alt="기존 1차 컬러 복원 이미지"></div><figcaption>Backup/1차 컬러 이미지</figcaption></figure>
+</div></section>
+<details class="panel"><summary>인접 영상의 대표 프레임 보기</summary><p class="caption">첫 행은 기준 원본을 반복해 놓았습니다. 다음 행은 이전 영상 끝 2초, 마지막 행은 다음 영상 시작 2초입니다. 01번에는 다음 영상 행만, 23번에는 이전 영상 행만 있습니다. 각 행은 구간의 0, 0.5, 1, 1.5, 약 1.967초 프레임입니다.</p><a id="context-link" href="#"><img id="context" alt="원본과 인접 영상 대표 프레임 접촉 시트"></a></details>
+<footer><div class="links"><a href="복원 기록.json">입력·프롬프트·출력 기록</a><a href="복원 안내.txt">복원 안내</a><a href="../레퍼런스_전체.png">전체 레퍼런스</a><a href="../레퍼런스_산받이.png">산받이 레퍼런스</a></div><p>02·04·07·21번은 구도 차이를 줄이기 위해 추가 생성했습니다. 모든 이미지의 채택 여부는 원본과 겹쳐 확인해야 합니다.</p></footer>
+<noscript><p>비교 도구를 사용하려면 브라우저의 JavaScript를 켜야 합니다. PNG와 복원 안내.txt를 직접 열어 확인할 수도 있습니다.</p></noscript>
+</main>
+<script>
+const frame=document.getElementById('frame'),version=document.getElementById('version'),opacity=document.getElementById('opacity');
+for(let i=1;i<=23;i++){const o=document.createElement('option');o.value=i;o.textContent=String(i).padStart(2,'0')+'번';frame.appendChild(o)}
+const regenerated=new Set([2,4,7,21]),priority=new Set([2,3,8,13,15,17]);
+const letters=new Set([1,2,7,13,17,23]);
+function render(){
+ const i=Number(frame.value),id=String(i).padStart(2,'0'),filename='박첨지거리_'+id+'.png';
+ const source='../원본이미지/'+filename,v1='../Backup/1차 컬러 이미지/'+filename,v2=filename,context='분석자료/context_'+id+'.jpg';
+ const chosen=version.value==='v2'?v2:v1;
+ const base=document.getElementById('base');base.src=chosen;base.alt=id+'번 '+(version.value==='v2'?'컬러복원 v2':'1차 컬러 이미지');
+ base.onload=()=>{const fraction=(654/480)/(base.naturalWidth/base.naturalHeight);document.getElementById('guide').style.width=(fraction*100)+'%'};
+ document.getElementById('overlay').src=source;document.getElementById('overlay').alt=id+'번 흑백 원본';
+ document.getElementById('source-preview').src=source;document.getElementById('v1-preview').src=v1;
+ document.getElementById('context').src=context;document.getElementById('context-link').href=context;
+ document.getElementById('output-link').href=v2;document.getElementById('source-link').href=source;
+ document.getElementById('prompt-link').href='박첨지거리_'+id+' 프롬프트.txt';
+ document.getElementById('image-title').textContent=id+'번 확인';
+ const parts=[];if(i>1)parts.push('영상 '+(i-1)+'의 끝 2초');if(i<23)parts.push('영상 '+i+'의 시작 2초');
+ document.getElementById('windows').textContent='참조 구간: '+parts.join(' + ')+'. 원본 기준 이미지가 복원할 순간을 결정합니다.';
+ const notes=[];if(priority.has(i))notes.push('천 높이 또는 인형 크기와 위치 차이를 우선 확인하세요.');if(letters.has(i))notes.push('남 사 당 글자의 위치와 크기를 확인하세요.');
+ notes.push('인형·인물 얼굴, 건축 세부와 천 주름은 원본과 편차가 남을 수 있습니다.');
+ document.getElementById('finding').textContent=notes.join(' ');
+ document.getElementById('regenerated').textContent=regenerated.has(i)?'v2 추가 생성 적용':'';
+ document.getElementById('previous').disabled=i===1;document.getElementById('next').disabled=i===23;
+ location.hash='frame-'+id;
+}
+function setOpacity(value){opacity.value=value;document.getElementById('overlay').style.opacity=Number(value)/100;document.getElementById('opacity-value').textContent=value+'%'}
+frame.addEventListener('change',render);version.addEventListener('change',render);
+document.getElementById('previous').addEventListener('click',()=>{frame.value=Number(frame.value)-1;render()});
+document.getElementById('next').addEventListener('click',()=>{frame.value=Number(frame.value)+1;render()});
+opacity.addEventListener('input',()=>setOpacity(opacity.value));
+document.getElementById('show-color').addEventListener('click',()=>setOpacity(0));document.getElementById('show-half').addEventListener('click',()=>setOpacity(50));document.getElementById('show-original').addEventListener('click',()=>setOpacity(100));
+document.getElementById('show-guide').addEventListener('change',e=>{document.getElementById('guide').hidden=!e.target.checked});
+const start=location.hash.match(/^#frame-(\d{2})$/);if(start&&Number(start[1])>=1&&Number(start[1])<=23)frame.value=Number(start[1]);render();setOpacity(opacity.value);
+</script>
+</body></html>
