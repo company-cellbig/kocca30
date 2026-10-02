@@ -14,12 +14,12 @@
 <body><main>
 <h1>박첨지거리 원본과 컬러복원 v2 비교</h1>
 <p>인접 영상의 끝·시작 2초 구간을 참고해 생성한 23장을 원본과 대조합니다.</p>
-<div class="notice"><strong>비교용 후보입니다.</strong><p>천 높이, 인형의 크기·위치와 외형, 글자 배치에 차이가 남아 있습니다. 색과 좌우 확장 영역은 생성한 표현입니다. PNG 23장은 모두 도구의 원래 출력인 1672×941px이며, 정확한 16:9로 별도 자르거나 리사이즈하지 않았습니다.</p></div>
+<div class="notice"><strong>비교용 후보입니다.</strong><p>천 높이, 인형의 크기·위치와 외형, 글자 배치에 차이가 남아 있습니다. 색과 좌우 확장 영역은 생성한 표현입니다. PNG는 도구의 원래 출력을 유지했습니다. 09번은 1671×941px, 나머지 22장은 1672×941px이며, 정확한 16:9로 별도 자르거나 리사이즈하지 않았습니다.</p></div>
 <div class="toolbar">
 <button id="previous" type="button">이전</button>
 <label for="frame">이미지 번호</label><select id="frame"></select>
 <button id="next" type="button">다음</button>
-<label for="version">비교할 생성본</label><select id="version"><option value="v2">컬러복원 v2</option><option value="v1">1차 컬러 이미지</option></select>
+<label for="version">비교할 생성본</label><select id="version"><option value="v2">수정한 컬러복원 v2</option><option value="before">수정 전 v2</option><option value="v1">1차 컬러 이미지</option></select>
 <span class="badge" id="regenerated"></span>
 </div>
 <div class="viewer">
@@ -42,21 +42,26 @@
 <figure><div class="frame-box"><img id="source-preview" alt="흑백 원본 단독 보기"></div><figcaption>원본 기준 이미지</figcaption></figure>
 <figure><div class="frame-box"><img id="v1-preview" alt="기존 1차 컬러 복원 이미지"></div><figcaption>Backup/1차 컬러 이미지</figcaption></figure>
 </div></section>
-<details class="panel"><summary>인접 영상의 대표 프레임 보기</summary><p class="caption">첫 행은 기준 원본을 반복해 놓았습니다. 다음 행은 이전 영상 끝 2초, 마지막 행은 다음 영상 시작 2초입니다. 01번에는 다음 영상 행만, 23번에는 이전 영상 행만 있습니다. 각 행은 구간의 0, 0.5, 1, 1.5, 약 1.967초 프레임입니다.</p><a id="context-link" href="#"><img id="context" alt="원본과 인접 영상 대표 프레임 접촉 시트"></a></details>
-<footer><div class="links"><a href="복원 기록.json">입력·프롬프트·출력 기록</a><a href="복원 안내.txt">복원 안내</a><a href="../레퍼런스_전체.png">전체 레퍼런스</a><a href="../레퍼런스_산받이.png">산받이 레퍼런스</a></div><p>02·04·07·21번은 구도 차이를 줄이기 위해 추가 생성했습니다. 모든 이미지의 채택 여부는 원본과 겹쳐 확인해야 합니다.</p></footer>
+<details class="panel"><summary>인접 영상의 대표 프레임 보기</summary><p class="caption">첫 행은 기준 원본을 반복해 놓았습니다. 다음 행은 이전 영상 끝 2초, 마지막 행은 다음 영상 시작 2초입니다. 01번에는 다음 영상 행만, 23번에는 이전 영상 행만 있습니다. 인접 영상의 각 행은 해당 구간의 0, 0.5, 1, 1.5, 약 1.967초 프레임입니다.</p><a id="context-link" href="#"><img id="context" alt="원본과 인접 영상 대표 프레임 접촉 시트"></a></details>
+<footer><div class="links"><a href="복원 기록.json">입력·프롬프트·출력 기록</a><a href="복원 안내.txt">복원 안내</a><a href="../레퍼런스_전체.png">전체 레퍼런스</a><a href="../레퍼런스_산받이.png">산받이 레퍼런스</a></div><p>03번에서 추가된 손을 제거하고, 05~11번과 13~21번의 얼굴을 기존 1차 이미지에 가까운 밝은 황갈색으로 수정했습니다. ‘수정 전 v2’를 선택하면 변경 전 결과와 비교할 수 있습니다. 나머지 번호에는 이 선택 항목이 비활성화됩니다. 모든 이미지의 채택 여부는 원본과 겹쳐 확인해야 합니다.</p></footer>
 <noscript><p>비교 도구를 사용하려면 브라우저의 JavaScript를 켜야 합니다. PNG와 복원 안내.txt를 직접 열어 확인할 수도 있습니다.</p></noscript>
 </main>
 <script>
 const frame=document.getElementById('frame'),version=document.getElementById('version'),opacity=document.getElementById('opacity');
 for(let i=1;i<=23;i++){const o=document.createElement('option');o.value=i;o.textContent=String(i).padStart(2,'0')+'번';frame.appendChild(o)}
 const regenerated=new Set([2,4,7,21]),priority=new Set([2,3,8,13,15,17]);
+const repaired=new Set([3,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21]);
 const letters=new Set([1,2,7,13,17,23]);
 function render(){
  const i=Number(frame.value),id=String(i).padStart(2,'0'),filename='박첨지거리_'+id+'.png';
  const source='../원본이미지/'+filename,v1='../Backup/1차 컬러 이미지/'+filename,v2=filename,context='분석자료/context_'+id+'.jpg';
- const chosen=version.value==='v2'?v2:v1;
- const base=document.getElementById('base');base.src=chosen;base.alt=id+'번 '+(version.value==='v2'?'컬러복원 v2':'1차 컬러 이미지');
+ const beforeOption=version.querySelector('option[value="before"]');beforeOption.disabled=!repaired.has(i);
+ if(version.value==='before'&&!repaired.has(i))version.value='v2';
+ const chosen=version.value==='v1'?v1:version.value==='before'?'수정 전/'+filename:v2;
+ const labels={v2:'수정한 컬러복원 v2',before:'수정 전 v2',v1:'1차 컬러 이미지'};
+ const base=document.getElementById('base');base.alt=id+'번 '+labels[version.value];
  base.onload=()=>{const fraction=(654/480)/(base.naturalWidth/base.naturalHeight);document.getElementById('guide').style.width=(fraction*100)+'%'};
+ base.src=chosen;
  document.getElementById('overlay').src=source;document.getElementById('overlay').alt=id+'번 흑백 원본';
  document.getElementById('source-preview').src=source;document.getElementById('v1-preview').src=v1;
  document.getElementById('context').src=context;document.getElementById('context-link').href=context;
@@ -68,7 +73,7 @@ function render(){
  const notes=[];if(priority.has(i))notes.push('천 높이 또는 인형 크기와 위치 차이를 우선 확인하세요.');if(letters.has(i))notes.push('남 사 당 글자의 위치와 크기를 확인하세요.');
  notes.push('인형·인물 얼굴, 건축 세부와 천 주름은 원본과 편차가 남을 수 있습니다.');
  document.getElementById('finding').textContent=notes.join(' ');
- document.getElementById('regenerated').textContent=regenerated.has(i)?'v2 추가 생성 적용':'';
+ document.getElementById('regenerated').textContent=version.value==='before'?'이번 수정 이전 결과':version.value==='v1'?'1차 컬러 참고 이미지':repaired.has(i)?(i===3?'손 추가 오류 수정':'얼굴 색 수정'):regenerated.has(i)?'v2 추가 생성 적용':'';
  document.getElementById('previous').disabled=i===1;document.getElementById('next').disabled=i===23;
  location.hash='frame-'+id;
 }

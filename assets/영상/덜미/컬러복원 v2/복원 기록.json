@@ -478,34 +478,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_03.png",
+          "sha256": "f75d3064cd88fb4d3e0d03af32ae9d042e14717c57181cbf86d2c0ce30cd6b80",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
           "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
           "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_03.jpg",
           "sha256": "b539c23766ca1a1ff2dbd60d2b05f4ca98e825915f2e09a12186801e2abd90d8",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "role": "adjacent original video representative frames as contextual evidence only"
         }
       ],
-      "visual_target_notes": "TARGET 03: ONE carved puppet on the far right of the ORIGINAL framing, with large protruding ears, rounded eyes, black curled moustache, small ridged cap, pale warm wooden face and off-white cloth shoulders. He tilts his head and touches his right cheek with the hand on image-right, exactly as the target. Original head is x=0.78-1.00, y=0.13-0.46, screen top y=0.48. For central-preserving 16:9 extension put this head at output x approximately 0.72-0.88, NOT center. Keep the original camera magnification. Background is dark timber doors and vertical posts, no visible tiled roof, no lettering, no ground. Do NOT resurrect the narrow object seen in earlier context frames: it has already descended.",
+      "visual_target_notes": "TARGET03: Keep this frame composition. Remove unsupported explicit palm, wrist and fingers beside image-right cheek. The pale source shape is ambiguous; retain a simple pale contour without asserting that the original puppet had no hand.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_03 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nTARGET 03: ONE carved puppet on the far right of the ORIGINAL framing, with large protruding ears, rounded eyes, black curled moustache, small ridged cap, pale warm wooden face and off-white cloth shoulders. He tilts his head and touches his right cheek with the hand on image-right, exactly as the target. Original head is x=0.78-1.00, y=0.13-0.46, screen top y=0.48. For central-preserving 16:9 extension put this head at output x approximately 0.72-0.88, NOT center. Keep the original camera magnification. Background is dark timber doors and vertical posts, no visible tiled roof, no lettering, no ground. Do NOT resurrect the narrow object seen in earlier context frames: it has already descended.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b307f968-bcd8-4540-9392-a6940a942611.png",
-      "was_regenerated": false,
+      "prompt": "Edit INPUT1 color restoration with a very small local correction ONLY around the puppet's image-right cheek and shoulder. Remove the invented hand, palm, wrist and ALL finger shapes beside the cheek. The source does not establish a hand here. Replace that hand-shaped region with the simple pale cloth/collar contour visible in INPUT2, the exact original still. There must be NO flesh-colored or wooden hand, fingers, articulated arm or human anatomy anywhere. INPUT3 is adjacent original video evidence, not a different target instant. Keep the original uncertain pale shape as simple off-white fabric, not an anatomical object. Preserve the existing puppet face, ears, moustache, cap, head tilt, face color, eye shapes, all other clothing, camera crop, subject scale and position, architectural background and black screen exactly as INPUT1. Keep all material textures and lighting outside the repaired hand region unchanged. Single 16:9 landscape restoration; no added text or objects, no montage, no watermark.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-e418469f-8d25-48eb-8f09-12dbe7133d2f.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_03.png",
-        "sha256": "f75d3064cd88fb4d3e0d03af32ae9d042e14717c57181cbf86d2c0ce30cd6b80",
+        "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 03: ONE carved puppet on the far right of the ORIGINAL framing, with large protruding ears, rounded eyes, black curled moustache, small ridged cap, pale warm wooden face and off-white cloth shoulders. He tilts his head and touches his right cheek with the hand on image-right, exactly as the target. Original head is x=0.78-1.00, y=0.13-0.46, screen top y=0.48. For central-preserving 16:9 extension put this head at output x approximately 0.72-0.88, NOT center. Keep the original camera magnification. Background is dark timber doors and vertical posts, no visible tiled roof, no lettering, no ground. Do NOT resurrect the narrow object seen in earlier context frames: it has already descended.",
+      "current_revision": "remove invented hand",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_03.png",
+        "sha256": "f75d3064cd88fb4d3e0d03af32ae9d042e14717c57181cbf86d2c0ce30cd6b80",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_03 프롬프트.txt"
       }
     },
     {
@@ -651,34 +658,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_05.png",
+          "sha256": "69e53dbef23efc44010907f23f68029150e653643ba84286c3f674a239963bea",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
           "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_05.jpg",
-          "sha256": "44805e4883812dde184d25186daf38143882ad6ba55c1dbd798c1b70ba077e70",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_05.png",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 05: exactly ONE elderly carved puppet with a LONG narrow deeply lined dark gray-brown wooden face, short fluffy white hair, drooping white moustache and long pointed white beard, off-white robe. Near image-right, original center x=.70, widened center x=.655. Head starts y=.08, torso ends behind cloth at y=.64; screen top y=.64. Keep its unusually long narrow facial shape, thin angular nose and fixed eyes; no invented eyeglasses. Roof tile ENDS and painted eaves touch the upper edge, no complete roof or sky. The different white-haired puppet entering in later context frames must NOT appear yet. No lettering.",
+      "visual_target_notes": "TARGET05: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_05 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nTARGET 05: exactly ONE elderly carved puppet with a LONG narrow deeply lined dark gray-brown wooden face, short fluffy white hair, drooping white moustache and long pointed white beard, off-white robe. Near image-right, original center x=.70, widened center x=.655. Head starts y=.08, torso ends behind cloth at y=.64; screen top y=.64. Keep its unusually long narrow facial shape, thin angular nose and fixed eyes; no invented eyeglasses. Roof tile ENDS and painted eaves touch the upper edge, no complete roof or sky. The different white-haired puppet entering in later context frames must NOT appear yet. No lettering.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-a91ffae0-1735-45cd-9ba1-565e2cbecb20.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 05: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-fa0edfe4-35a2-40fa-829b-5a7afeabf927.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_05.png",
-        "sha256": "69e53dbef23efc44010907f23f68029150e653643ba84286c3f674a239963bea",
+        "sha256": "ac21b265baa2abde5fe0df79189f9fbd919ea6748c7c7d530977fb25b87e4b61",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 05: exactly ONE elderly carved puppet with a LONG narrow deeply lined dark gray-brown wooden face, short fluffy white hair, drooping white moustache and long pointed white beard, off-white robe. Near image-right, original center x=.70, widened center x=.655. Head starts y=.08, torso ends behind cloth at y=.64; screen top y=.64. Keep its unusually long narrow facial shape, thin angular nose and fixed eyes; no invented eyeglasses. Roof tile ENDS and painted eaves touch the upper edge, no complete roof or sky. The different white-haired puppet entering in later context frames must NOT appear yet. No lettering.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_05.png",
+        "sha256": "69e53dbef23efc44010907f23f68029150e653643ba84286c3f674a239963bea",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_05 프롬프트.txt"
       }
     },
     {
@@ -740,34 +754,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_06.png",
+          "sha256": "592f33f126dbc2a33f1bf7fde80d3fbc4e18464dba7cc170e80487d33316b521",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
           "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_06.jpg",
-          "sha256": "6c3e4e6d41c43977e0dd7682ff47e66382b898a20f3a6b75922091dbfb7798c9",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_06.png",
+          "sha256": "6dec8f0b62e56594c727b474d2ce1d697b6d8855c9676d423437f3eea6fc44c0",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 06: exactly ONE elderly carved puppet, shorter rounded wrinkled gray-brown wooden face, fluffy white hair, wide white moustache, beard and off-white robe. Original center x=.68 (widened x=.638), head top y=.33, shoulders end at screen top y=.59. This target follows a camera zoom OUT: preserve the small puppet, approximately .26 of frame height including torso; do not match the previous close-up scale. Visible tiled roof fills y=0-.28 and eaves y=.28-.36, then timber doors. Black cloth continues to bottom without lettering. No second head appearing later in the next clip, no ground, no whole stage.",
+      "visual_target_notes": "TARGET06: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_06 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nTARGET 06: exactly ONE elderly carved puppet, shorter rounded wrinkled gray-brown wooden face, fluffy white hair, wide white moustache, beard and off-white robe. Original center x=.68 (widened x=.638), head top y=.33, shoulders end at screen top y=.59. This target follows a camera zoom OUT: preserve the small puppet, approximately .26 of frame height including torso; do not match the previous close-up scale. Visible tiled roof fills y=0-.28 and eaves y=.28-.36, then timber doors. Black cloth continues to bottom without lettering. No second head appearing later in the next clip, no ground, no whole stage.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-ed8c9190-2f61-47d1-acf3-937a2071c5e1.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 06: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-03f6d004-6edc-4f0f-b705-a985abee35f1.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_06.png",
-        "sha256": "592f33f126dbc2a33f1bf7fde80d3fbc4e18464dba7cc170e80487d33316b521",
+        "sha256": "ab271979c8fba7331a7713413b78f1075bdf25713c22375da67f23c0eb44cc99",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 06: exactly ONE elderly carved puppet, shorter rounded wrinkled gray-brown wooden face, fluffy white hair, wide white moustache, beard and off-white robe. Original center x=.68 (widened x=.638), head top y=.33, shoulders end at screen top y=.59. This target follows a camera zoom OUT: preserve the small puppet, approximately .26 of frame height including torso; do not match the previous close-up scale. Visible tiled roof fills y=0-.28 and eaves y=.28-.36, then timber doors. Black cloth continues to bottom without lettering. No second head appearing later in the next clip, no ground, no whole stage.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_06.png",
+        "sha256": "592f33f126dbc2a33f1bf7fde80d3fbc4e18464dba7cc170e80487d33316b521",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_06 프롬프트.txt"
       }
     },
     {
@@ -829,34 +850,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_07.png",
+          "sha256": "6aede1176a11ce053790132857bb4cd17d92ace010b202c2403d5b49a538ef44",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
           "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_07.jpg",
-          "sha256": "666da83c2d0a96314aca3e49fb3c5591f694c97b1c74b5b4153c218ddcb69af7",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_07.png",
+          "sha256": "37e4b6a5d1022c0b23ce092a0a81dec9e2548ef643642f9ce70060a446d39fcc",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 07: ONE elderly carved gray-brown puppet with fluffy asymmetric white hair, moustache and pointed beard, off-white robe. Wider stage view, puppet leans head and torso toward image-left, original center x=.32, widened center x=.36. Hair top y=.20 and torso ends at screen y=.455; only about a quarter of frame height. Sloping left roof corner and the diagonal tiled roof stay in their exact target perspective. Black cloth fills bottom 55%, with '남 사 당' very low at y=.88, not centered. Do not enlarge or recenter the puppet. No second puppet.",
+      "visual_target_notes": "TARGET07: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_07 프롬프트.txt",
-      "prompt": "Faithfully colorize, upscale and horizontally outpaint FIRST black-and-white source frame to landscape16:9. First image controls exact geometry. Keep vertical field of view unchanged, map source654x480 to central76.64% of canvas. SECOND is nearby original video contact sheet for interpreting forms, not a montage output. THIRD is ONLY the gray-brown carved old puppet's white hair, white beard, robe and material/color reference; ignore its closeup camera framing. Exactly ONE small old white-haired, white-bearded wooden puppet in off-white robe leaning his head and torso towards image-left. Head top y=20%, figure center output x=36%. Screen upper edge y=45.5%. Cloth letters '남 사 당' near y=88% with original mapped horizontal positions. Gray tiled roof FILLS the upper image and touches top border. NO SKY BAND and no trees above the roof. The FIRST input's roof slope, top crop and figure size must be copied exactly. Only lateral extension, no zoom out. Muted old gray roof tiles, aged brown wood, dark green red ochre painted eaves, matte black cotton. Keep original leaning posture and original cloth folds. DO NOT show any sky, green treetops or new vertical scenery. Whole upper border must be roof tiles/sloping eaves just like FIRST source. No additional puppets, ground, captions or watermark. Outputone natural coherent restoration frame.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-83874305-5aee-4918-ac25-49b551158f41.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 07: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-d70af1f5-cdb4-4703-8780-c9902bc93d39.png",
       "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_07.png",
-        "sha256": "6aede1176a11ce053790132857bb4cd17d92ace010b202c2403d5b49a538ef44",
+        "sha256": "0ff5fd6b5f599f962f98ce69935b7a0b1c13d26fe4b88d8cdbc7b1a7036de4ae",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 07: ONE elderly carved gray-brown puppet with fluffy asymmetric white hair, moustache and pointed beard, off-white robe. Wider stage view, puppet leans head and torso toward image-left, original center x=.32, widened center x=.36. Hair top y=.20 and torso ends at screen y=.455; only about a quarter of frame height. Sloping left roof corner and the diagonal tiled roof stay in their exact target perspective. Black cloth fills bottom 55%, with '남 사 당' very low at y=.88, not centered. Do not enlarge or recenter the puppet. No second puppet.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_07.png",
+        "sha256": "6aede1176a11ce053790132857bb4cd17d92ace010b202c2403d5b49a538ef44",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_07 프롬프트.txt"
       }
     },
     {
@@ -918,34 +946,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_08.png",
+          "sha256": "909eb2bbd13cd038d8eb5f5be543bbe6b2bcb8b1a92ed16532cdfb572a242ebf",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
           "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_08.jpg",
-          "sha256": "5e8c314ad87a00b0d88bfbd416a77d5e8b242b822e59469aa4c6fea0efe3ba21",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_08.png",
+          "sha256": "16e332d8ba7930a6cbeda114af946d40a2988f9ed9e35646cbb5792d68a1980e",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 08: ONE elderly carved gray-brown wooden puppet with swept fluffy white hair, white moustache/beard and off-white loose robe, leaning strongly toward image-left about 30 degrees. Its head spans original x=.10-.40, y=.27-.62; widened x=.19-.42. The torso and long pale sleeve sweep toward lower-left, with a loose part of cloth behind the left head. This is an actual sleeve/cloth, not new hair, veil, hat or another puppet. Preserve the exact sleeve silhouette rather than straighten the body. Screen edge is y=.82, so cloth occupies ONLY lower 18%. Diagonally sloping tile roof fills top 37%, dark eaves and timber doors beneath; no lettering, no ground.",
+      "visual_target_notes": "TARGET08: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_08 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 08: ONE elderly carved gray-brown wooden puppet with swept fluffy white hair, white moustache/beard and off-white loose robe, leaning strongly toward image-left about 30 degrees. Its head spans original x=.10-.40, y=.27-.62; widened x=.19-.42. The torso and long pale sleeve sweep toward lower-left, with a loose part of cloth behind the left head. This is an actual sleeve/cloth, not new hair, veil, hat or another puppet. Preserve the exact sleeve silhouette rather than straighten the body. Screen edge is y=.82, so cloth occupies ONLY lower 18%. Diagonally sloping tile roof fills top 37%, dark eaves and timber doors beneath; no lettering, no ground.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-dc6db3a7-2ed1-4951-9360-1d03291a0090.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 08: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-1f4fb1e1-6e29-4006-8eb9-59784875718d.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_08.png",
-        "sha256": "909eb2bbd13cd038d8eb5f5be543bbe6b2bcb8b1a92ed16532cdfb572a242ebf",
+        "sha256": "56a30e56da883e67e6928281c8622335e1bad344f5f7f8e599f572c7da399d71",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 08: ONE elderly carved gray-brown wooden puppet with swept fluffy white hair, white moustache/beard and off-white loose robe, leaning strongly toward image-left about 30 degrees. Its head spans original x=.10-.40, y=.27-.62; widened x=.19-.42. The torso and long pale sleeve sweep toward lower-left, with a loose part of cloth behind the left head. This is an actual sleeve/cloth, not new hair, veil, hat or another puppet. Preserve the exact sleeve silhouette rather than straighten the body. Screen edge is y=.82, so cloth occupies ONLY lower 18%. Diagonally sloping tile roof fills top 37%, dark eaves and timber doors beneath; no lettering, no ground.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_08.png",
+        "sha256": "909eb2bbd13cd038d8eb5f5be543bbe6b2bcb8b1a92ed16532cdfb572a242ebf",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_08 프롬프트.txt"
       }
     },
     {
@@ -1007,34 +1042,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_09.png",
+          "sha256": "a62a1b517fd654617884ef4829a1cb35c09756aa4c71b46fed895d58e0dbb795",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
           "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_09.jpg",
-          "sha256": "4555f9ea4ef8ca01d72a634e2d710e163a1202a6fa5112a3d39f13f74df70865",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_09.png",
+          "sha256": "4149d4fbe0063add19c604b09752f137494a78af14f30243753512356d16ec97",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 09: ONE elderly carved puppet with expressive deeply cut gray-brown face, asymmetric swept white hair and brow tufts, long nose, white moustache and pointed beard, off-white robe. Original head center x=.28, widened x=.33, head top y=.19; face tilted slightly image-left, torso visible down to y=.80. Keep this close-up with the puppet on the LEFT THIRD, not center. Screen top y=.80, only lower fifth black cloth, no letters. Diagonal tiled roof in upper third, painted eaves then dark timber doors. No sleeve above the head at this target instant, no second puppet.",
+      "visual_target_notes": "TARGET09: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_09 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 09: ONE elderly carved puppet with expressive deeply cut gray-brown face, asymmetric swept white hair and brow tufts, long nose, white moustache and pointed beard, off-white robe. Original head center x=.28, widened x=.33, head top y=.19; face tilted slightly image-left, torso visible down to y=.80. Keep this close-up with the puppet on the LEFT THIRD, not center. Screen top y=.80, only lower fifth black cloth, no letters. Diagonal tiled roof in upper third, painted eaves then dark timber doors. No sleeve above the head at this target instant, no second puppet.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-cfde5485-8154-48af-bba0-79fb78d50de0.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 09: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-cd716262-3fba-44c9-97e9-b9818b575b7c.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_09.png",
-        "sha256": "a62a1b517fd654617884ef4829a1cb35c09756aa4c71b46fed895d58e0dbb795",
+        "sha256": "2b51fc09170b420ddfc4974c1e61ac60d2d937689e06a1e995e4ecff970e21bb",
         "size": [
-          1672,
+          1671,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 09: ONE elderly carved puppet with expressive deeply cut gray-brown face, asymmetric swept white hair and brow tufts, long nose, white moustache and pointed beard, off-white robe. Original head center x=.28, widened x=.33, head top y=.19; face tilted slightly image-left, torso visible down to y=.80. Keep this close-up with the puppet on the LEFT THIRD, not center. Screen top y=.80, only lower fifth black cloth, no letters. Diagonal tiled roof in upper third, painted eaves then dark timber doors. No sleeve above the head at this target instant, no second puppet.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_09.png",
+        "sha256": "a62a1b517fd654617884ef4829a1cb35c09756aa4c71b46fed895d58e0dbb795",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_09 프롬프트.txt"
       }
     },
     {
@@ -1096,34 +1138,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_10.png",
+          "sha256": "7c9e1947d0b071875c99e305fb896ed08249f2f02ad348681a010f13707a0494",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
           "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_10.jpg",
-          "sha256": "0f97785bfc9361b69c5b78bf892aa9b52d45c37ef92ee5d101d3e431394b38dd",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_10.png",
+          "sha256": "8add2ac1dac361be2577ede5e4a5e13070c39c378865f74ce1f0af274204eb02",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 10: ONE elderly gray-brown carved puppet with swept fluffy white hair, thick white eyebrow tufts, fixed round eyes, prominent long angular nose, white moustache and beard, off-white robe. Upright nearly front-on, original center x=.37, widened center x=.40. Hair top y=.19, torso ends y=.80 with a small robe flap hanging just over the screen. Black cloth top y=.80, only lower fifth. Preserve original face carving and shoulder silhouette. Roof diagonal tile courses and eaves occupy upper .45; dark doors behind. No letters.",
+      "visual_target_notes": "TARGET10: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_10 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 10: ONE elderly gray-brown carved puppet with swept fluffy white hair, thick white eyebrow tufts, fixed round eyes, prominent long angular nose, white moustache and beard, off-white robe. Upright nearly front-on, original center x=.37, widened center x=.40. Hair top y=.19, torso ends y=.80 with a small robe flap hanging just over the screen. Black cloth top y=.80, only lower fifth. Preserve original face carving and shoulder silhouette. Roof diagonal tile courses and eaves occupy upper .45; dark doors behind. No letters.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b1fdb432-cc17-438f-8700-6d2b8de1e2ee.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 10: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-20c25a80-9242-4388-bf9d-376d08427131.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_10.png",
-        "sha256": "7c9e1947d0b071875c99e305fb896ed08249f2f02ad348681a010f13707a0494",
+        "sha256": "7ef1674e36d331977e20ead0c664f75a2e70bd1af993880433c7446a93b6b5fc",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 10: ONE elderly gray-brown carved puppet with swept fluffy white hair, thick white eyebrow tufts, fixed round eyes, prominent long angular nose, white moustache and beard, off-white robe. Upright nearly front-on, original center x=.37, widened center x=.40. Hair top y=.19, torso ends y=.80 with a small robe flap hanging just over the screen. Black cloth top y=.80, only lower fifth. Preserve original face carving and shoulder silhouette. Roof diagonal tile courses and eaves occupy upper .45; dark doors behind. No letters.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_10.png",
+        "sha256": "7c9e1947d0b071875c99e305fb896ed08249f2f02ad348681a010f13707a0494",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_10 프롬프트.txt"
       }
     },
     {
@@ -1185,34 +1234,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
+          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
           "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_11.jpg",
-          "sha256": "51bb9abd134b983bf2c3bb2325c4b666b0d4ef118062e8b29f38124772155988",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_11.png",
+          "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 11: EXTREME FACE CLOSE-UP of ONE elderly wooden puppet, not a medium shot. Original face/hair fills x=.24-.69, y=.18-1.00; widened x=.30-.65 at exactly the same HEIGHT. Swept white hair, pale brow tufts, dark gray-brown carved cheeks, very round fixed eyes, large angular nose, white split moustache and long white beard cut off at the bottom of the frame. Only tiny off-white shoulders at the lower edge. NO BLACK SCREEN EDGE is visible, no lettering, no arms, no ground. Keep roof tile ends near top y=.25 and blurred painted eaves behind. Do not pull the camera back to show torso.",
+      "visual_target_notes": "TARGET11: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_11 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 11: EXTREME FACE CLOSE-UP of ONE elderly wooden puppet, not a medium shot. Original face/hair fills x=.24-.69, y=.18-1.00; widened x=.30-.65 at exactly the same HEIGHT. Swept white hair, pale brow tufts, dark gray-brown carved cheeks, very round fixed eyes, large angular nose, white split moustache and long white beard cut off at the bottom of the frame. Only tiny off-white shoulders at the lower edge. NO BLACK SCREEN EDGE is visible, no lettering, no arms, no ground. Keep roof tile ends near top y=.25 and blurred painted eaves behind. Do not pull the camera back to show torso.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-6e129991-1253-4619-a141-f890cc85434b.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 11: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-eaa2b385-2925-45c7-85ab-2380cead859f.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-        "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
+        "sha256": "f2eba05d33bdd367cb4b669f018b9de14c92826d046d56ec0e8be4913365c84e",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 11: EXTREME FACE CLOSE-UP of ONE elderly wooden puppet, not a medium shot. Original face/hair fills x=.24-.69, y=.18-1.00; widened x=.30-.65 at exactly the same HEIGHT. Swept white hair, pale brow tufts, dark gray-brown carved cheeks, very round fixed eyes, large angular nose, white split moustache and long white beard cut off at the bottom of the frame. Only tiny off-white shoulders at the lower edge. NO BLACK SCREEN EDGE is visible, no lettering, no arms, no ground. Keep roof tile ends near top y=.25 and blurred painted eaves behind. Do not pull the camera back to show torso.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
+        "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11 프롬프트.txt"
       }
     },
     {
@@ -1368,39 +1424,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_13.png",
+          "sha256": "561f472a293da2dd56eefcc4d4c0025f646174d026a68b8ec05cadb043225e6d",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
           "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_13.jpg",
-          "sha256": "a343f06af321c2478ddcfe8d9ea430044123855a60508ed2f7fbb302a5b2dc4e",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_13.png",
+          "sha256": "ba0f10eb97bee236f9bc061ae5eae279cfd47f2c490524dcaeeefca480fe4e5a",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 13: ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. WIDE view after camera returns from musicians: original center x=.41, widened x=.43, hair top y=.20, torso ends y=.455. Keep puppet SMALL, total height only .255. Black cloth starts y=.455 and extends beyond bottom with '남 사 당' near y=.83. Tile roof and left sloping eave across upper part, no added sky band or dirt ground. Musicians are already outside this framing, do not copy them from contact-sheet history. Input 4 (restored frame 11) is ONLY consistent puppet carving/color reference, not pose or camera framing.",
+      "visual_target_notes": "TARGET13: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_13 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 13: ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. WIDE view after camera returns from musicians: original center x=.41, widened x=.43, hair top y=.20, torso ends y=.455. Keep puppet SMALL, total height only .255. Black cloth starts y=.455 and extends beyond bottom with '남 사 당' near y=.83. Tile roof and left sloping eave across upper part, no added sky band or dirt ground. Musicians are already outside this framing, do not copy them from contact-sheet history. Input 4 (restored frame 11) is ONLY consistent puppet carving/color reference, not pose or camera framing.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-f84c6de1-c21d-4ec2-9bfe-e4c0693a5514.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 13: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-28ccf7c8-edac-4773-a751-daba693fb839.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_13.png",
-        "sha256": "561f472a293da2dd56eefcc4d4c0025f646174d026a68b8ec05cadb043225e6d",
+        "sha256": "b1ea418ce6c409b47e5f3658019ef18c45f629f99aa85a28ff766304c9554f93",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 13: ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. WIDE view after camera returns from musicians: original center x=.41, widened x=.43, hair top y=.20, torso ends y=.455. Keep puppet SMALL, total height only .255. Black cloth starts y=.455 and extends beyond bottom with '남 사 당' near y=.83. Tile roof and left sloping eave across upper part, no added sky band or dirt ground. Musicians are already outside this framing, do not copy them from contact-sheet history. Input 4 (restored frame 11) is ONLY consistent puppet carving/color reference, not pose or camera framing.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_13.png",
+        "sha256": "561f472a293da2dd56eefcc4d4c0025f646174d026a68b8ec05cadb043225e6d",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_13 프롬프트.txt"
       }
     },
     {
@@ -1462,39 +1520,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_14.png",
+          "sha256": "288db5d60fdf93b477429cb3db1138096b08ef1696c0b8e9937159f05ec20c2f",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
           "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_14.jpg",
-          "sha256": "7fe9ae08bacd4d6a9f6796a9f29cebbada2faaab9aa763d99185c1cd44350534",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_14.png",
+          "sha256": "326e8fae380e5dcae7066ac89934d83eaaff315e09e2059a11bd8e939f8b3d8a",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 14: ONE elderly gray-brown carved puppet with swept white hair and brow tufts, fixed round eyes, large angular nose, split moustache and long white beard, off-white robe. Original center x=.47, widened x=.477. Head top y=.21, torso descends to y=.93. BLACK SCREEN ONLY THE BOTTOM 7%, upper edge at y=.93; tiny pale flap hangs over near center. Preserve this CLOSE VIEW with most of the torso visible, do not insert screen midway. Tile roof upper third and dark timber backdrop. No lettering. Input 4 is ONLY same puppet carving and palette reference, target controls pose and scale.",
+      "visual_target_notes": "TARGET14: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_14 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 14: ONE elderly gray-brown carved puppet with swept white hair and brow tufts, fixed round eyes, large angular nose, split moustache and long white beard, off-white robe. Original center x=.47, widened x=.477. Head top y=.21, torso descends to y=.93. BLACK SCREEN ONLY THE BOTTOM 7%, upper edge at y=.93; tiny pale flap hangs over near center. Preserve this CLOSE VIEW with most of the torso visible, do not insert screen midway. Tile roof upper third and dark timber backdrop. No lettering. Input 4 is ONLY same puppet carving and palette reference, target controls pose and scale.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-19456f9e-d090-41f7-8ed4-c006dd5b181c.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 14: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-72bff76d-4376-4a39-8e12-6bcfb46a2da2.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_14.png",
-        "sha256": "288db5d60fdf93b477429cb3db1138096b08ef1696c0b8e9937159f05ec20c2f",
+        "sha256": "89d3ed8f51d7d13c0121fd91d019393a40e6aa94f40b7fdbf3468f780e9cb6b6",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 14: ONE elderly gray-brown carved puppet with swept white hair and brow tufts, fixed round eyes, large angular nose, split moustache and long white beard, off-white robe. Original center x=.47, widened x=.477. Head top y=.21, torso descends to y=.93. BLACK SCREEN ONLY THE BOTTOM 7%, upper edge at y=.93; tiny pale flap hangs over near center. Preserve this CLOSE VIEW with most of the torso visible, do not insert screen midway. Tile roof upper third and dark timber backdrop. No lettering. Input 4 is ONLY same puppet carving and palette reference, target controls pose and scale.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_14.png",
+        "sha256": "288db5d60fdf93b477429cb3db1138096b08ef1696c0b8e9937159f05ec20c2f",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_14 프롬프트.txt"
       }
     },
     {
@@ -1556,39 +1616,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_15.png",
+          "sha256": "454956444c14a679db3c44b93fec6f4e249c1bc1f3ad0a0dfd4f233fdfd2fe69",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
           "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_15.jpg",
-          "sha256": "86791d69fa0b040439a308f92639b9224eccbcfef853634ea541b7dd6f573e77",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_15.png",
+          "sha256": "22ed7e60b9e79240abd64e4c657325aec5c4e4374a5450c74cc44d6c462c1473",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 15: ONE elderly gray-brown carved puppet, swept fluffy white hair high at y=.06, pale brow tufts, round fixed eyes, angular nose, white moustache and long beard; off-white broad robe shoulders to y=.91. Original center x=.45, widened x=.462. Upright front-on slight head tilt to image-left, as exact target. BLACK SCREEN ONLY LOWER 9%, top y=.91; small robe tip drapes over it. Roof tile ends at y=.29, eaves then timber doors. No letters, no ground. Input 4 is only puppet identity and palette reference, not its extreme close-up.",
+      "visual_target_notes": "TARGET15: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_15 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 15: ONE elderly gray-brown carved puppet, swept fluffy white hair high at y=.06, pale brow tufts, round fixed eyes, angular nose, white moustache and long beard; off-white broad robe shoulders to y=.91. Original center x=.45, widened x=.462. Upright front-on slight head tilt to image-left, as exact target. BLACK SCREEN ONLY LOWER 9%, top y=.91; small robe tip drapes over it. Roof tile ends at y=.29, eaves then timber doors. No letters, no ground. Input 4 is only puppet identity and palette reference, not its extreme close-up.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-193ec9da-6391-4ca2-8bfa-76c1321250fd.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 15: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-891c8586-7eba-4803-ad7c-0ad93c50fd0f.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_15.png",
-        "sha256": "454956444c14a679db3c44b93fec6f4e249c1bc1f3ad0a0dfd4f233fdfd2fe69",
+        "sha256": "2016fa81181759883e01eed7b95b0b10ff9864db5152c712f66207c60d2e1f3e",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 15: ONE elderly gray-brown carved puppet, swept fluffy white hair high at y=.06, pale brow tufts, round fixed eyes, angular nose, white moustache and long beard; off-white broad robe shoulders to y=.91. Original center x=.45, widened x=.462. Upright front-on slight head tilt to image-left, as exact target. BLACK SCREEN ONLY LOWER 9%, top y=.91; small robe tip drapes over it. Roof tile ends at y=.29, eaves then timber doors. No letters, no ground. Input 4 is only puppet identity and palette reference, not its extreme close-up.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_15.png",
+        "sha256": "454956444c14a679db3c44b93fec6f4e249c1bc1f3ad0a0dfd4f233fdfd2fe69",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_15 프롬프트.txt"
       }
     },
     {
@@ -1650,39 +1712,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_16.png",
+          "sha256": "5a911eae63793863eaf6acd73e5a1cd16264a0c487725ecb5ed3b2597da1a453",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
           "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_16.jpg",
-          "sha256": "a8d25bce3f427931a11b94882bb8f14233ca319a154e4a9405dd633ebbfcf855",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_16.png",
+          "sha256": "e4e80e987a92f9d3c7e392fa7310b1da4534ed7be38c423e238a87e2c6a66c42",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 16: ONE elderly gray-brown carved puppet in a tight tilted FACE AND UPPER SHOULDER CLOSE-UP. Original head center x=.46, widened x=.469, white hair top y=.08, large fixed eyes and angular nose with face tilted toward image-left; shoulder on image-right sits higher. Long white moustache/beard and off-white robe are CUT OFF BY BOTTOM. NO BLACK SCREEN, letters, ground or full torso. Sloping tiled roof and painted eaves across upper .47, dark timber below. Input 4 is ONLY same wooden face design and palette; preserve the target's exact tilt and camera magnification.",
+      "visual_target_notes": "TARGET16: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_16 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 16: ONE elderly gray-brown carved puppet in a tight tilted FACE AND UPPER SHOULDER CLOSE-UP. Original head center x=.46, widened x=.469, white hair top y=.08, large fixed eyes and angular nose with face tilted toward image-left; shoulder on image-right sits higher. Long white moustache/beard and off-white robe are CUT OFF BY BOTTOM. NO BLACK SCREEN, letters, ground or full torso. Sloping tiled roof and painted eaves across upper .47, dark timber below. Input 4 is ONLY same wooden face design and palette; preserve the target's exact tilt and camera magnification.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-4daf1cdb-3fc7-4c1f-8993-8b9a45ab4c3d.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 16: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b6f405b9-010a-4f61-b581-5d7dad87576a.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_16.png",
-        "sha256": "5a911eae63793863eaf6acd73e5a1cd16264a0c487725ecb5ed3b2597da1a453",
+        "sha256": "e5da359734ad554233cd717abdab0b0dfbf1dada3e12d4e3eb26e6e6827d6875",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 16: ONE elderly gray-brown carved puppet in a tight tilted FACE AND UPPER SHOULDER CLOSE-UP. Original head center x=.46, widened x=.469, white hair top y=.08, large fixed eyes and angular nose with face tilted toward image-left; shoulder on image-right sits higher. Long white moustache/beard and off-white robe are CUT OFF BY BOTTOM. NO BLACK SCREEN, letters, ground or full torso. Sloping tiled roof and painted eaves across upper .47, dark timber below. Input 4 is ONLY same wooden face design and palette; preserve the target's exact tilt and camera magnification.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_16.png",
+        "sha256": "5a911eae63793863eaf6acd73e5a1cd16264a0c487725ecb5ed3b2597da1a453",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_16 프롬프트.txt"
       }
     },
     {
@@ -1744,39 +1808,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_17.png",
+          "sha256": "afbc10ac9a5c3f178fe3065c3c217314de4bbba7398077dfacb8db4d0b72042e",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
           "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_17.jpg",
-          "sha256": "6206a133c86ee12a0e56f16dd69c9d01fbae52919c1e58cf490039febbda8869",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_17.png",
+          "sha256": "34d1579b42fbbf2ad1e2ca6c8141de28daf6963bfa1ee1e21724a869ecfe1f0d",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 17: WIDE stage view after zooming OUT from close-up. ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. Original center x=.50, widened x=.50, hair top y=.07, torso to screen y=.41, total height .34. Screen fills bottom 59%, exact '남 사 당' at y=.85. Sloped roof corner on left, gray tiled roof across upper fifth, eaves and dark timber bays behind. No ground, no musicians, do not copy the extreme scale of input 4, which is only the same face/color reference.",
+      "visual_target_notes": "TARGET17: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_17 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 17: WIDE stage view after zooming OUT from close-up. ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. Original center x=.50, widened x=.50, hair top y=.07, torso to screen y=.41, total height .34. Screen fills bottom 59%, exact '남 사 당' at y=.85. Sloped roof corner on left, gray tiled roof across upper fifth, eaves and dark timber bays behind. No ground, no musicians, do not copy the extreme scale of input 4, which is only the same face/color reference.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-37b53d00-57c0-4b84-b464-6930f289d53b.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 17: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-58f39218-6dfb-4e10-81f4-eb54035530c4.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_17.png",
-        "sha256": "afbc10ac9a5c3f178fe3065c3c217314de4bbba7398077dfacb8db4d0b72042e",
+        "sha256": "a636c2ef86a02526c64f47f760fec1ecf5be02dba6e7a143335f8e083632e514",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 17: WIDE stage view after zooming OUT from close-up. ONE elderly gray-brown carved puppet with swept white hair, moustache and beard, off-white robe. Original center x=.50, widened x=.50, hair top y=.07, torso to screen y=.41, total height .34. Screen fills bottom 59%, exact '남 사 당' at y=.85. Sloped roof corner on left, gray tiled roof across upper fifth, eaves and dark timber bays behind. No ground, no musicians, do not copy the extreme scale of input 4, which is only the same face/color reference.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_17.png",
+        "sha256": "afbc10ac9a5c3f178fe3065c3c217314de4bbba7398077dfacb8db4d0b72042e",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_17 프롬프트.txt"
       }
     },
     {
@@ -1838,39 +1904,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_18.png",
+          "sha256": "675ab3a176050a7e2745328a98c1c666144d3e995bec8ea88060c317338ca306",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
           "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_18.jpg",
-          "sha256": "a5171cb00284930bb25ed3da3087311ce10360a37ebbdeab7c29b41fececbad2",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_18.png",
+          "sha256": "449d07c3bae7c0bee5ae91b804474873f0235b1a270bb00f99073b0da655c6bf",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 18: CLOSE-UP of ONE elderly gray-brown wooden puppet with white swept hair touching and nearly cropped by the TOP EDGE, original face center x=.42, widened x=.439. Slight downward-facing head, preserve eyes and brow positions exactly. Long white moustache/beard and off-white shoulders down to screen edge y=.90; the beard tip slightly overlaps the edge. BLACK CLOTH ONLY BOTTOM 10%, no letters. Roof tile ends are narrowly cropped at very top, decorative eaves/dark timber doors behind. Do not show full roof or reduce puppet size. Input 4 only identity/palette.",
+      "visual_target_notes": "TARGET18: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_18 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 18: CLOSE-UP of ONE elderly gray-brown wooden puppet with white swept hair touching and nearly cropped by the TOP EDGE, original face center x=.42, widened x=.439. Slight downward-facing head, preserve eyes and brow positions exactly. Long white moustache/beard and off-white shoulders down to screen edge y=.90; the beard tip slightly overlaps the edge. BLACK CLOTH ONLY BOTTOM 10%, no letters. Roof tile ends are narrowly cropped at very top, decorative eaves/dark timber doors behind. Do not show full roof or reduce puppet size. Input 4 only identity/palette.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-41ecc899-7d55-4a5a-8930-982012ed315c.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 18: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-e41dbd94-23b2-4196-8d7b-7ce18daf5a3a.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_18.png",
-        "sha256": "675ab3a176050a7e2745328a98c1c666144d3e995bec8ea88060c317338ca306",
+        "sha256": "27aea2417e399333ea8d3f8bc1d1101a4927e035623651c73e41b28209b70f4a",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 18: CLOSE-UP of ONE elderly gray-brown wooden puppet with white swept hair touching and nearly cropped by the TOP EDGE, original face center x=.42, widened x=.439. Slight downward-facing head, preserve eyes and brow positions exactly. Long white moustache/beard and off-white shoulders down to screen edge y=.90; the beard tip slightly overlaps the edge. BLACK CLOTH ONLY BOTTOM 10%, no letters. Roof tile ends are narrowly cropped at very top, decorative eaves/dark timber doors behind. Do not show full roof or reduce puppet size. Input 4 only identity/palette.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_18.png",
+        "sha256": "675ab3a176050a7e2745328a98c1c666144d3e995bec8ea88060c317338ca306",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_18 프롬프트.txt"
       }
     },
     {
@@ -1932,39 +2000,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_19.png",
+          "sha256": "190a191399f13e2644b77e3f0e69de4b5997e73ad27a551a0d7e8cbdaa89b301",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
           "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_19.jpg",
-          "sha256": "af60831783bcb04ca0e26d3687e9c92e7facf82cb37ad15e4741793b7368507d",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_19.png",
+          "sha256": "a9bc9c47b3a2f496208630470996e369bfb937e0444a8394457a942a606089e1",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 19: EXTREME CLOSE-UP of ONE elderly carved gray-brown wooden face with swept fluffy white hair, bright round fixed eyes, very angular long nose, split white moustache, beard cut by bottom edge. Original center x=.49, widened x=.492; hair top y=.18 and shoulder fragments at bottom. NO BLACK SCREEN EDGE, no letters. Tiled roof ends near upper y=.24 and painted eaves, timber shadows. Maintain the exact target straight-on pose and head scale. The courtyard revealed in subsequent context frames has not appeared yet; no musicians, rope or drums. Input 4 only consistent face/color design.",
+      "visual_target_notes": "TARGET19: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_19 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 19: EXTREME CLOSE-UP of ONE elderly carved gray-brown wooden face with swept fluffy white hair, bright round fixed eyes, very angular long nose, split white moustache, beard cut by bottom edge. Original center x=.49, widened x=.492; hair top y=.18 and shoulder fragments at bottom. NO BLACK SCREEN EDGE, no letters. Tiled roof ends near upper y=.24 and painted eaves, timber shadows. Maintain the exact target straight-on pose and head scale. The courtyard revealed in subsequent context frames has not appeared yet; no musicians, rope or drums. Input 4 only consistent face/color design.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-7b3e72ea-6609-4e6b-8bd8-6a8218172490.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 19: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-a84ee6d2-aa63-4e5f-a810-48586dd6d400.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_19.png",
-        "sha256": "190a191399f13e2644b77e3f0e69de4b5997e73ad27a551a0d7e8cbdaa89b301",
+        "sha256": "5000c0671a08b0f5510e786b272e761169c5eda7c9b5cc0be10ff8aba16ef9a9",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 19: EXTREME CLOSE-UP of ONE elderly carved gray-brown wooden face with swept fluffy white hair, bright round fixed eyes, very angular long nose, split white moustache, beard cut by bottom edge. Original center x=.49, widened x=.492; hair top y=.18 and shoulder fragments at bottom. NO BLACK SCREEN EDGE, no letters. Tiled roof ends near upper y=.24 and painted eaves, timber shadows. Maintain the exact target straight-on pose and head scale. The courtyard revealed in subsequent context frames has not appeared yet; no musicians, rope or drums. Input 4 only consistent face/color design.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_19.png",
+        "sha256": "190a191399f13e2644b77e3f0e69de4b5997e73ad27a551a0d7e8cbdaa89b301",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_19 프롬프트.txt"
       }
     },
     {
@@ -2026,39 +2096,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_20.png",
+          "sha256": "b9d98813e355423203a1f5ee9ef5a8787f49666160f9e69840e3eb8129ef4368",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
           "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_20.jpg",
-          "sha256": "ea7e595ae6535756c49145af15c252465409b005a9310f21b39cc4b51e4e66cd",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/레퍼런스_전체.png",
-          "sha256": "e270dc556b9720cc5d131bde42e7ab5516b5404e96675462f8c1284387769b66",
-          "role": "whole-stage colors and materials only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_20.png",
+          "sha256": "9f4632af751b8ef06e51465ce0a317a9e98efdc415935a17157ac390e490144b",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 20: MEDIUM stage view after return from the courtyard. ONE elderly gray-brown carved puppet with swept white hair, white moustache and long beard, off-white robe. Original center x=.52, widened x=.515; hair top y=.24, shoulders down to screen edge y=.63, beard tip hangs just over edge. Black cloth bottom 37%, NO letters visible. Diagonally sloping tiled roof and left corner occupy upper .30, painted eaves and dark timber doors. Musicians and drums visible only in preceding frames are out of this target framing. Input 4 only face identity/color, do not use close-up camera scale.",
+      "visual_target_notes": "TARGET20: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_20 프롬프트.txt",
-      "prompt": "Use case: identity-preserve. Deliver ONE high-resolution landscape 16:9 COLOR restoration frame for a Korean traditional puppet-performance film. Input 1 is the EXACT BLACK-AND-WHITE TARGET FRAME: preserve its moment, vertical field of view, camera scale, perspective, subject count, silhouette, pose, occlusion and relative geometry. Input 2 is a labeled contact sheet of adjacent original video frames: supporting evidence of shape and camera context only; do not substitute a neighboring moment and do not output a contact sheet. Input 3 is the color whole-stage reference: use its consistent gray roof tiles, weathered brown wood, subdued traditional painted eaves, black cotton screen and warm daylight MATERIALS AND COLORS; its wider camera framing is not the composition template. Extend the target horizontally to 16:9 while keeping the original visible area geometrically consistent: do not zoom out to fit a complete roof or make puppets smaller, do not stretch widths, do not reveal extra ground vertically. Reconstruct detail carefully; wooden puppet faces stay carved wood, not living skin. Preserve the folds and top edge of the black screen. Only include Korean lettering when actually visible in the target, with the exact characters '남 사 당' and matching relative positions. Remove archival damage and black edge borders. No captions, watermark, new figures, duplicate puppets, extra props, modern objects or decorative additions. Output a single coherent natural photograph-like restored frame, not a diagram.\nGEOMETRY LOCK: original frame 654x480 maps at the same vertical scale to the CENTRAL 76.64% of the 16:9 output, between x=11.68% and x=88.32%; only side margins are added. All y coordinates are unchanged. Match the specified screen top y accurately; do not move the screen edge down to show more puppet torso. When numbers below are provided, they define the target framing rather than a suggestion.\nTARGET 20: MEDIUM stage view after return from the courtyard. ONE elderly gray-brown carved puppet with swept white hair, white moustache and long beard, off-white robe. Original center x=.52, widened x=.515; hair top y=.24, shoulders down to screen edge y=.63, beard tip hangs just over edge. Black cloth bottom 37%, NO letters visible. Diagonally sloping tiled roof and left corner occupy upper .30, painted eaves and dark timber doors. Musicians and drums visible only in preceding frames are out of this target framing. Input 4 only face identity/color, do not use close-up camera scale.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-f45f2077-1d49-4529-a01a-7000fb560caa.png",
-      "was_regenerated": false,
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 20: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b38fea65-bb3f-4eee-92b1-deba44bec633.png",
+      "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_20.png",
-        "sha256": "b9d98813e355423203a1f5ee9ef5a8787f49666160f9e69840e3eb8129ef4368",
+        "sha256": "e4a7b1e2694d125e20cb2f90e52b65908a92ff05edbf58a12e2bf707ddba0b99",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 20: MEDIUM stage view after return from the courtyard. ONE elderly gray-brown carved puppet with swept white hair, white moustache and long beard, off-white robe. Original center x=.52, widened x=.515; hair top y=.24, shoulders down to screen edge y=.63, beard tip hangs just over edge. Black cloth bottom 37%, NO letters visible. Diagonally sloping tiled roof and left corner occupy upper .30, painted eaves and dark timber doors. Musicians and drums visible only in preceding frames are out of this target framing. Input 4 only face identity/color, do not use close-up camera scale.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_20.png",
+        "sha256": "b9d98813e355423203a1f5ee9ef5a8787f49666160f9e69840e3eb8129ef4368",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_20 프롬프트.txt"
       }
     },
     {
@@ -2120,34 +2192,41 @@
       ],
       "generation_inputs_in_order": [
         {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_21.png",
+          "sha256": "548ff600cc867a10088ff00b30b8491d70c1463a48133453f36b9a4dd365a9f1",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
           "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
           "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128",
-          "role": "exact target instant and original geometry"
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_21.jpg",
-          "sha256": "0a992c90f769d780f9723cc5573b3271cb73da95fc3cb9428a475120bd7ac4e3",
-          "role": "neighboring original video sample frames; contextual evidence only"
-        },
-        {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
-          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
-          "role": "elder puppet face and materials only; ignore closeup framing"
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_21.png",
+          "sha256": "7370e503cb28b82a297e6c4128cc3f9db6c8d87234a255473d56a521d9175ed5",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
         }
       ],
-      "visual_target_notes": "TARGET 21: ONE elderly gray-brown carved puppet with asymmetric swept white hair, fixed round eyes, angular nose, white moustache/beard and off-white robe. Original center x=.53, widened x=.523; hair top y=.27, shoulders ending y=.65; head slightly turned/tilted as exact target, low enough that beard comes close to screen edge. Black cloth fills bottom 35% with NO letters. Diagonal gray tile roof and left sloping corner across upper .30, painted eaves and timber doors. Input 4 only face/color reference. No impending courtyard elements.",
+      "visual_target_notes": "TARGET21: Keep this frame puppet geometry and composition. Lighten exposed carved face toward the same-frame first color image warm tan/ochre palette. This is a color design correction, not verification of actual historical hue.",
       "prompt_file": "assets/영상/덜미/컬러복원 v2/박첨지거리_21 프롬프트.txt",
-      "prompt": "Colorize, upscale and horizontally outpaint FIRST original black-and-white source frame to16:9. It controls exact camera crop, positions and object sizes. Keep the entire source at same height in central76.64% of output; only narrow margins left and right are new. SECOND is original neighboring frames, use for interpretation without changing the target instant. THIRD is the same elder puppet ONLY for face and gray-brown carved-wood, white-hair and beard material/color, ignore its closeup framing. Exactly ONE gray-brown old white-haired and white-bearded wooden puppet in off-white robe. Center output x=52.3%, hair top y=27%. Shoulders disappear behind screen at y=65%. The screen upper edge MUST sit exactly at y=65%. Black cloth fills bottom35%, NO lettering. Same head tilt as FIRST input. Gray diagonal roof tiles including left corner occupy top30% and fill top border. NO SKY BAND, no trees over roof. Match exact FIRST input's scale, doors and eave positions. No courtyard or musicians. Every y coordinate must follow FIRSTsource. Aged gray tiles, muted red-green-ochre eaves, dark brown doors and columns, matte black cotton cloth. NO SKY OR TREES at top border, the roof fills the upper border. No people, extra puppets, new lettering, montage, caption or watermark.",
-      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-428e7e7b-feb5-40d5-b185-b6142616b1e0.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 21: preserve this frame's specific puppet, not a generic replacement.",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-800eedd2-a61c-4070-9538-5c43cc47387e.png",
       "was_regenerated": true,
       "output": {
         "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_21.png",
-        "sha256": "548ff600cc867a10088ff00b30b8491d70c1463a48133453f36b9a4dd365a9f1",
+        "sha256": "cfa9824fbf8689c2b2913645e8fa1ccf26e22622d741335f5ed7a74fbc328336",
         "size": [
           1672,
           941
         ],
         "mode": "RGB"
+      },
+      "previous_visual_target_notes": "TARGET 21: ONE elderly gray-brown carved puppet with asymmetric swept white hair, fixed round eyes, angular nose, white moustache/beard and off-white robe. Original center x=.53, widened x=.523; hair top y=.27, shoulders ending y=.65; head slightly turned/tilted as exact target, low enough that beard comes close to screen edge. Black cloth fills bottom 35% with NO letters. Diagonal gray tile roof and left sloping corner across upper .30, painted eaves and timber doors. Input 4 only face/color reference. No impending courtyard elements.",
+      "current_revision": "face palette lightening",
+      "previous_output": {
+        "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_21.png",
+        "sha256": "548ff600cc867a10088ff00b30b8491d70c1463a48133453f36b9a4dd365a9f1",
+        "prompt_file": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_21 프롬프트.txt"
       }
     },
     {
@@ -2642,7 +2721,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2672,7 +2751,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2702,7 +2781,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2732,7 +2811,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2762,7 +2841,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2792,7 +2871,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2822,7 +2901,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2852,7 +2931,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -2882,7 +2961,7 @@
           "role": "whole-stage colors and materials only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -3008,7 +3087,7 @@
           "role": "neighboring original video sample frames; contextual evidence only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -3033,7 +3112,7 @@
           "role": "neighboring original video sample frames; contextual evidence only"
         },
         {
-          "path": "assets/영상/덜미/컬러복원 v2/박첨지거리_11.png",
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
           "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
           "role": "elder puppet colors and face only"
         }
@@ -3058,9 +3137,451 @@
           "role": "neighboring original video sample frames; contextual evidence only"
         }
       ]
+    },
+    {
+      "image": 3,
+      "pass": "user_feedback_local_correction",
+      "sequence": 29,
+      "kind": "remove invented hand",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-e418469f-8d25-48eb-8f09-12dbe7133d2f.png",
+      "prompt": "Edit INPUT1 color restoration with a very small local correction ONLY around the puppet's image-right cheek and shoulder. Remove the invented hand, palm, wrist and ALL finger shapes beside the cheek. The source does not establish a hand here. Replace that hand-shaped region with the simple pale cloth/collar contour visible in INPUT2, the exact original still. There must be NO flesh-colored or wooden hand, fingers, articulated arm or human anatomy anywhere. INPUT3 is adjacent original video evidence, not a different target instant. Keep the original uncertain pale shape as simple off-white fabric, not an anatomical object. Preserve the existing puppet face, ears, moustache, cap, head tilt, face color, eye shapes, all other clothing, camera crop, subject scale and position, architectural background and black screen exactly as INPUT1. Keep all material textures and lighting outside the repaired hand region unchanged. Single 16:9 landscape restoration; no added text or objects, no montage, no watermark.",
+      "sha256": "c53c4876b59dc229deda67bd40d1adeca0f500af977c02a0ba7a5858d32fa40a",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_03.png",
+          "sha256": "f75d3064cd88fb4d3e0d03af32ae9d042e14717c57181cbf86d2c0ce30cd6b80",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_03.png",
+          "sha256": "91bebea5f670424963007b31b6fda941bc0e770c0846d45c7742005d34408bf3",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/분석자료/context_03.jpg",
+          "sha256": "b539c23766ca1a1ff2dbd60d2b05f4ca98e825915f2e09a12186801e2abd90d8",
+          "role": "adjacent original video representative frames as contextual evidence only"
+        }
+      ]
+    },
+    {
+      "image": 11,
+      "pass": "user_feedback_local_correction",
+      "sequence": 30,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-eaa2b385-2925-45c7-85ab-2380cead859f.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 11: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "f2eba05d33bdd367cb4b669f018b9de14c92826d046d56ec0e8be4913365c84e",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_11.png",
+          "sha256": "d3953f25a0c8419c0b7faf8c153c923434ec714fa3ef9853187a75b6b89973b9",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_11.png",
+          "sha256": "98a05160d3d2c9447b0f9aa1d6591f54f82b001dcb4f026ae7c748b869e1a080",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_11.png",
+          "sha256": "4067ca2bbec6ff157deda6a062f32bbda3df427614866bc0380e50be352c76fe",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 5,
+      "pass": "user_feedback_local_correction",
+      "sequence": 31,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-fa0edfe4-35a2-40fa-829b-5a7afeabf927.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 05: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "ac21b265baa2abde5fe0df79189f9fbd919ea6748c7c7d530977fb25b87e4b61",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_05.png",
+          "sha256": "69e53dbef23efc44010907f23f68029150e653643ba84286c3f674a239963bea",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_05.png",
+          "sha256": "c72dd63bc89698b914ac2f92c94ecd9356d7b75df9b22be7ac0c948cd828631b",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_05.png",
+          "sha256": "499d60ff38ac38a9bd56f5f25d3e7d9f93f2a2b27dc16a2def61bf19b2352558",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 6,
+      "pass": "user_feedback_local_correction",
+      "sequence": 32,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-03f6d004-6edc-4f0f-b705-a985abee35f1.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 06: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "ab271979c8fba7331a7713413b78f1075bdf25713c22375da67f23c0eb44cc99",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_06.png",
+          "sha256": "592f33f126dbc2a33f1bf7fde80d3fbc4e18464dba7cc170e80487d33316b521",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_06.png",
+          "sha256": "70d8090f638eb13e68e0f7955feb95135f2d7567a766c3c19338e4056993b9b3",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_06.png",
+          "sha256": "6dec8f0b62e56594c727b474d2ce1d697b6d8855c9676d423437f3eea6fc44c0",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 7,
+      "pass": "user_feedback_local_correction",
+      "sequence": 33,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-d70af1f5-cdb4-4703-8780-c9902bc93d39.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 07: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "0ff5fd6b5f599f962f98ce69935b7a0b1c13d26fe4b88d8cdbc7b1a7036de4ae",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_07.png",
+          "sha256": "6aede1176a11ce053790132857bb4cd17d92ace010b202c2403d5b49a538ef44",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_07.png",
+          "sha256": "c6ff03c1a0ac7f0a1986de74bb08b1acdf25e7d6097c8fb96c4779817fe2e409",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_07.png",
+          "sha256": "37e4b6a5d1022c0b23ce092a0a81dec9e2548ef643642f9ce70060a446d39fcc",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 8,
+      "pass": "user_feedback_local_correction",
+      "sequence": 34,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-1f4fb1e1-6e29-4006-8eb9-59784875718d.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 08: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "56a30e56da883e67e6928281c8622335e1bad344f5f7f8e599f572c7da399d71",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_08.png",
+          "sha256": "909eb2bbd13cd038d8eb5f5be543bbe6b2bcb8b1a92ed16532cdfb572a242ebf",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_08.png",
+          "sha256": "1b8a3102c9e4bbecc8cb7acf0afbf5c0447a42f277722ded1efb6e28e8a2bc02",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_08.png",
+          "sha256": "16e332d8ba7930a6cbeda114af946d40a2988f9ed9e35646cbb5792d68a1980e",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 9,
+      "pass": "user_feedback_local_correction",
+      "sequence": 35,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-cd716262-3fba-44c9-97e9-b9818b575b7c.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 09: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "2b51fc09170b420ddfc4974c1e61ac60d2d937689e06a1e995e4ecff970e21bb",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_09.png",
+          "sha256": "a62a1b517fd654617884ef4829a1cb35c09756aa4c71b46fed895d58e0dbb795",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_09.png",
+          "sha256": "fcde3759c965b6a5be50da236d5758a97bfc268ca994c0f97bfddb5138bb57df",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_09.png",
+          "sha256": "4149d4fbe0063add19c604b09752f137494a78af14f30243753512356d16ec97",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 10,
+      "pass": "user_feedback_local_correction",
+      "sequence": 36,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-20c25a80-9242-4388-bf9d-376d08427131.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 10: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "7ef1674e36d331977e20ead0c664f75a2e70bd1af993880433c7446a93b6b5fc",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_10.png",
+          "sha256": "7c9e1947d0b071875c99e305fb896ed08249f2f02ad348681a010f13707a0494",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_10.png",
+          "sha256": "5a4a95837f8244f2ccba9fb13e80623fa17e2ff84fce8c3dbb12a643c0e8b233",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_10.png",
+          "sha256": "8add2ac1dac361be2577ede5e4a5e13070c39c378865f74ce1f0af274204eb02",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 13,
+      "pass": "user_feedback_local_correction",
+      "sequence": 37,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-28ccf7c8-edac-4773-a751-daba693fb839.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 13: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "b1ea418ce6c409b47e5f3658019ef18c45f629f99aa85a28ff766304c9554f93",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_13.png",
+          "sha256": "561f472a293da2dd56eefcc4d4c0025f646174d026a68b8ec05cadb043225e6d",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_13.png",
+          "sha256": "6e93f538e4668e207c82bf7573b285297df1b88f0c1bdec1399ce62559d9158b",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_13.png",
+          "sha256": "ba0f10eb97bee236f9bc061ae5eae279cfd47f2c490524dcaeeefca480fe4e5a",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 14,
+      "pass": "user_feedback_local_correction",
+      "sequence": 38,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-72bff76d-4376-4a39-8e12-6bcfb46a2da2.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 14: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "89d3ed8f51d7d13c0121fd91d019393a40e6aa94f40b7fdbf3468f780e9cb6b6",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_14.png",
+          "sha256": "288db5d60fdf93b477429cb3db1138096b08ef1696c0b8e9937159f05ec20c2f",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_14.png",
+          "sha256": "2b1f6e1addad8e33e2982b22bb358a77c0f608144a93af2164d6b4e9050ecedb",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_14.png",
+          "sha256": "326e8fae380e5dcae7066ac89934d83eaaff315e09e2059a11bd8e939f8b3d8a",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 15,
+      "pass": "user_feedback_local_correction",
+      "sequence": 39,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-891c8586-7eba-4803-ad7c-0ad93c50fd0f.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 15: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "2016fa81181759883e01eed7b95b0b10ff9864db5152c712f66207c60d2e1f3e",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_15.png",
+          "sha256": "454956444c14a679db3c44b93fec6f4e249c1bc1f3ad0a0dfd4f233fdfd2fe69",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_15.png",
+          "sha256": "98d0e0c0263f88c467fa9d33857c663903efdeb1ff23840eef34baa70822c3e9",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_15.png",
+          "sha256": "22ed7e60b9e79240abd64e4c657325aec5c4e4374a5450c74cc44d6c462c1473",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 16,
+      "pass": "user_feedback_local_correction",
+      "sequence": 40,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b6f405b9-010a-4f61-b581-5d7dad87576a.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 16: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "e5da359734ad554233cd717abdab0b0dfbf1dada3e12d4e3eb26e6e6827d6875",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_16.png",
+          "sha256": "5a911eae63793863eaf6acd73e5a1cd16264a0c487725ecb5ed3b2597da1a453",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_16.png",
+          "sha256": "a737af56a607213714f61b99908489f85bc37c18c6b5794d40f943c2ed2e0db5",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_16.png",
+          "sha256": "e4e80e987a92f9d3c7e392fa7310b1da4534ed7be38c423e238a87e2c6a66c42",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 17,
+      "pass": "user_feedback_local_correction",
+      "sequence": 41,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-58f39218-6dfb-4e10-81f4-eb54035530c4.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 17: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "a636c2ef86a02526c64f47f760fec1ecf5be02dba6e7a143335f8e083632e514",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_17.png",
+          "sha256": "afbc10ac9a5c3f178fe3065c3c217314de4bbba7398077dfacb8db4d0b72042e",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_17.png",
+          "sha256": "343c3302c72530b086c9d1105620072a64ea12c3204553529104173616ceafae",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_17.png",
+          "sha256": "34d1579b42fbbf2ad1e2ca6c8141de28daf6963bfa1ee1e21724a869ecfe1f0d",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 18,
+      "pass": "user_feedback_local_correction",
+      "sequence": 42,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-e41dbd94-23b2-4196-8d7b-7ce18daf5a3a.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 18: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "27aea2417e399333ea8d3f8bc1d1101a4927e035623651c73e41b28209b70f4a",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_18.png",
+          "sha256": "675ab3a176050a7e2745328a98c1c666144d3e995bec8ea88060c317338ca306",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_18.png",
+          "sha256": "b0ba6dcb3ae0593389bb754bc5f54d7a2ace083318a8b3905f18d3434d7d84d6",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_18.png",
+          "sha256": "449d07c3bae7c0bee5ae91b804474873f0235b1a270bb00f99073b0da655c6bf",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 19,
+      "pass": "user_feedback_local_correction",
+      "sequence": 43,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-a84ee6d2-aa63-4e5f-a810-48586dd6d400.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 19: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "5000c0671a08b0f5510e786b272e761169c5eda7c9b5cc0be10ff8aba16ef9a9",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_19.png",
+          "sha256": "190a191399f13e2644b77e3f0e69de4b5997e73ad27a551a0d7e8cbdaa89b301",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_19.png",
+          "sha256": "56ac82936f657e11b3171e3476972e920fe74513757c2a8c2a20eb6bcd0b1527",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_19.png",
+          "sha256": "a9bc9c47b3a2f496208630470996e369bfb937e0444a8394457a942a606089e1",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 20,
+      "pass": "user_feedback_local_correction",
+      "sequence": 44,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-b38fea65-bb3f-4eee-92b1-deba44bec633.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 20: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "e4a7b1e2694d125e20cb2f90e52b65908a92ff05edbf58a12e2bf707ddba0b99",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_20.png",
+          "sha256": "b9d98813e355423203a1f5ee9ef5a8787f49666160f9e69840e3eb8129ef4368",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_20.png",
+          "sha256": "1d718a218fe6c3d97bc52bc95e51fa63858863edf78c54e17155734a3f9bf6dc",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_20.png",
+          "sha256": "9f4632af751b8ef06e51465ce0a317a9e98efdc415935a17157ac390e490144b",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
+    },
+    {
+      "image": 21,
+      "pass": "user_feedback_local_correction",
+      "sequence": 45,
+      "kind": "face palette lightening",
+      "native_generation_path": "C:\\Users\\cellbig\\.codex\\generated_images\\01a0fa5b-a123-75c0-837b-c6da34ca0327\\exec-800eedd2-a61c-4070-9538-5c43cc47387e.png",
+      "prompt": "Make a minimal LOCAL FACE-COLOR correction to INPUT1, the current color restoration. Keep the existing face's exact carved shapes, expression, fixed eyes, brows, nose, moustache, beard, hair, posture, size, location and all framing. Recolor only the exposed carved face surfaces from dull charcoal/gray-brown to a noticeably LIGHTER warm natural tan/ochre painted wooden tone, comparable in brightness and warmth to INPUT3 (earlier color restoration). Preserve the black painted facial lines and genuine sculpted creases, but remove the muddy gray cast and exaggerated burnt-wood mottling. Do not turn the face into living skin, do not bleach it white, and do not invent new wrinkles, cracks, stains or wood grain. The puppet should look like a painted stage prop, evenly readable in natural daylight. INPUT2 is the exact black-and-white source: use to preserve original pose and silhouette, never infer literal face hue from grayscale. INPUT3 is ONLY a palette reference, not another face shape, camera framing or pose. Do not replace this puppet with the palette reference puppet. Keep background, architectural details, black stage cloth, letters, white hair/beard, robe and all non-face pixels visually unchanged. No hands, fingers or additional anatomy. Single landscape image with same composition as INPUT1. No new objects, text, crop, zoom, watermark or montage. TARGET 21: preserve this frame's specific puppet, not a generic replacement.",
+      "sha256": "cfa9824fbf8689c2b2913645e8fa1ccf26e22622d741335f5ed7a74fbc328336",
+      "generation_inputs_in_order": [
+        {
+          "path": "assets/영상/덜미/컬러복원 v2/수정 전/박첨지거리_21.png",
+          "sha256": "548ff600cc867a10088ff00b30b8491d70c1463a48133453f36b9a4dd365a9f1",
+          "role": "pre-repair color image as local-edit base; preserve this frame composition"
+        },
+        {
+          "path": "assets/영상/덜미/원본이미지/박첨지거리_21.png",
+          "sha256": "09b284fa1c8ec585f9cf130c87f6d2e7e96e4b603ff766925ce6c716d7fe6128",
+          "role": "exact original still as pose and silhouette evidence; grayscale does not identify hue"
+        },
+        {
+          "path": "assets/영상/덜미/Backup/1차 컬러 이미지/박첨지거리_21.png",
+          "sha256": "7370e503cb28b82a297e6c4128cc3f9db6c8d87234a255473d56a521d9175ed5",
+          "role": "same-frame first color image as brightness and warm palette reference only; ignore shape differences"
+        }
+      ]
     }
   ],
-  "generation_call_count": 28,
+  "generation_call_count": 45,
   "remaining_findings": [
     {
       "id": "GEO-01",
@@ -3158,21 +3679,108 @@
       "source_assets_unchanged": 47,
       "outputs": 23,
       "unique_outputs": 23,
-      "context_sheets": 23,
-      "decoded_video_frames": 2640,
-      "all_outputs_size": [
-        1672,
-        941
-      ],
+      "changed_outputs": 17,
+      "unchanged_outputs": 6,
+      "archive_images": 17,
+      "archive_prompts": 17,
+      "output_sizes_by_image": {
+        "1": [
+          1672,
+          941
+        ],
+        "2": [
+          1672,
+          941
+        ],
+        "3": [
+          1672,
+          941
+        ],
+        "4": [
+          1672,
+          941
+        ],
+        "5": [
+          1672,
+          941
+        ],
+        "6": [
+          1672,
+          941
+        ],
+        "7": [
+          1672,
+          941
+        ],
+        "8": [
+          1672,
+          941
+        ],
+        "9": [
+          1671,
+          941
+        ],
+        "10": [
+          1672,
+          941
+        ],
+        "11": [
+          1672,
+          941
+        ],
+        "12": [
+          1672,
+          941
+        ],
+        "13": [
+          1672,
+          941
+        ],
+        "14": [
+          1672,
+          941
+        ],
+        "15": [
+          1672,
+          941
+        ],
+        "16": [
+          1672,
+          941
+        ],
+        "17": [
+          1672,
+          941
+        ],
+        "18": [
+          1672,
+          941
+        ],
+        "19": [
+          1672,
+          941
+        ],
+        "20": [
+          1672,
+          941
+        ],
+        "21": [
+          1672,
+          941
+        ],
+        "22": [
+          1672,
+          941
+        ],
+        "23": [
+          1672,
+          941
+        ]
+      },
       "all_outputs_mode": "RGB",
+      "generation_calls": 45,
       "missing_inputs_or_links": 0,
-      "generation_calls": 28
-    },
-    "independent_readability": {
-      "rounds": 1,
-      "findings": 0,
-      "applied": 0,
-      "scope": "Korean guide and comparison page text, final prompt input roles and single log entry. No image evaluation or fact review."
+      "historical_input_hashes": "pass"
     },
     "wiki_number": {
       "errors": 0
@@ -3191,6 +3799,98 @@
       "static_paths": "pass",
       "browser_render": "not run; no enabled browser surface",
       "javascript_syntax": "pass"
+    },
+    "independent_readability_previous_generation": {
+      "rounds": 1,
+      "findings": 0,
+      "applied": 0,
+      "scope": "Korean guide and comparison page text, final prompt input roles and single log entry. No image evaluation or fact review."
+    },
+    "independent_readability": {
+      "rounds": 1,
+      "findings": 3,
+      "applied": 2,
+      "preserved_as_executed_prompt": 1,
+      "impact_recheck_rounds": 1,
+      "impact_recheck_new_findings": 0,
+      "scope": "Korean guide and comparison page text, repair summary/input roles, used prompt input roles and single repair log entry; no image or fact evaluation.",
+      "notes": "Two expression findings corrected. Missing 'it' in the executed INPUT2 sentence is retained to preserve actual tool input. Three initial findings were low severity; zero new findings in changed sentences."
     }
+  },
+  "repair_summary": {
+    "date": "2026-10-02",
+    "request": "03번에 추가된 손과 거무튀튀한 박첨지 인형 얼굴 수정",
+    "images": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "face_palette_images": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "local_edit_calls": 17,
+    "before_snapshot_commit": "612b03f",
+    "hand_error_cause": "불분명한 원본 흰 형상을 손으로 잘못 해석하고 03번 초기 프롬프트에 손으로 오른쪽 뺨을 만진다는 지시를 넣음. 생성된 손바닥과 손가락을 검수에서 걸러내지 못함.",
+    "face_error_cause": "회갈색 목각 얼굴이라는 생성 지시와 어두운 11번 생성본의 얼굴 참조가 여러 장의 얼굴색을 어둡게 만듦.",
+    "correction": "03번의 구체적인 손바닥과 손가락을 제거함. 16장의 얼굴색은 각 장의 1차 컬러 이미지를 색조 참조로 사용해 밝은 황갈색으로 조정함.",
+    "source_uncertainty": "03번 귀 옆 흰 형상은 원본과 인접 대표 프레임에서 분명하지 않음. 손 제거는 원래 손이 없었다는 증명이 아님. 실제 얼굴색도 흑백 원본만으로 확인할 수 없음.",
+    "scope_limit": "요청한 손 형상과 얼굴색을 수정한 결과임. 기존 구도, 외형, 글자 배치와 출력 비율의 잔류 차이는 별도 채택 판정 대상으로 유지함. 생성 편집으로 미세한 질감과 세부가 함께 달라질 수 있음.",
+    "archive": {
+      "image_count": 17,
+      "prompt_count": 17,
+      "directory": "assets/영상/덜미/컬러복원 v2/수정 전",
+      "manifest": "assets/영상/덜미/컬러복원 v2/분석자료/수정 전 생성 기록.json"
+    },
+    "independent_source_comparison": {
+      "rounds": 1,
+      "scope": "03번과 11번의 원본, 수정 전, 수정 후 및 인접 대표 프레임 또는 1차 컬러 이미지 대조",
+      "observations": [
+        "03번 원본은 인형 머리와 흰 의상 상부를 보여주며 대부분의 몸과 팔은 천 뒤에 가려져 있음.",
+        "03번 귀 옆 흰 형상은 손바닥과 손가락이 분명하지 않음. 수정 전의 구체적인 손 형상은 근거가 부족하며 수정 후 제거됨.",
+        "11번 수정 후 얼굴은 1차 생성본에 가까운 밝고 따뜻한 황토색임. 흑백 원본으로 실제 색을 확인한 결과는 아님.",
+        "11번 수정 전후의 얼굴과 귀, 코, 눈 및 수염의 큰 윤곽과 위치는 시각적으로 대체로 유지됨. 표면의 검은 얼룩과 그림자가 줄었으며 완전한 형태 동일성을 뜻하지 않음."
+      ],
+      "edits_applied_from_review": 0
+    },
+    "independent_readability": {
+      "rounds": 1,
+      "findings": 3,
+      "applied": 2,
+      "preserved_as_executed_prompt": 1,
+      "impact_recheck_rounds": 1,
+      "impact_recheck_new_findings": 0,
+      "scope": "Korean guide and comparison page text, repair summary/input roles, used prompt input roles and single repair log entry; no image or fact evaluation.",
+      "notes": "Two expression findings corrected. Missing 'it' in the executed INPUT2 sentence is retained to preserve actual tool input. Three initial findings were low severity; zero new findings in changed sentences."
+    },
+    "G1": "기존 컬러복원 v2의 잔류 차이에 대한 사용자 채택 판정은 계속 대기함."
   }
 }
